@@ -5,8 +5,6 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { AuthService } from './auth.service';
 import { LoginGuard } from '../../login.guard';
 const routes = [
-
-  
     {
         path: 'dashboards/analytics',
         loadChildren: './dashboards/analytics/analytics.module#AnalyticsDashboardModule',
@@ -117,9 +115,6 @@ const routes = [
         path: 'theme-management/mobile-color',
         loadChildren: './theme-management/mobile-color/mobile-color.module#MobileColorModule'
     },
-
-
-
     {
         path: 'mail',
         loadChildren: './mail/mail.module#MailModule'
@@ -160,6 +155,19 @@ const routes = [
         path: 'scrumboard',
         loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
     },
+
+
+    {path: '** ',redirectTo:'/apps/admin/login'}
+];
+
+@NgModule({
+    imports: [
+        RouterModule.forChild(routes),
+        FuseSharedModule
+    ]
+})
+export class AppsModule {
+}
 
     ///////////////////////////////////////////////////
     // {
@@ -210,14 +218,3 @@ const routes = [
     //     path        : 'scrumboard',
     //     loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
     // }
-    // {path: '** ',redirectTo:'/apps/admin/login'}
-];
-
-@NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        FuseSharedModule
-    ]
-})
-export class AppsModule {
-}

@@ -1,8 +1,8 @@
 
 /*homepage*/
-header{position: relative;}
+/* header{position: relative;}
 header .row {padding: 0 35px;}
-header .top_sec .button_con{padding: 15px 0;}
+header .top_sec .button_con{padding: 15px 0;} */
 .white_button{background-color: #fff;color: #3E3E3F;text-align: center;padding: 10px 20px;font-size: 13px;border-radius: 3px;display: inline-block;transition: all ease 0.3s;border: 1.5px solid #fff;}
 .white_button:hover{color: #9FBA3A;}
 .green_button{background-color: #9FBA3A;color: #fff;text-align: center;padding: 10px 20px;font-size: 13px;border-radius: 3px;display: inline-block;transition: all ease 0.3s;border: 1.5px solid #9FBA3A;}
@@ -62,10 +62,10 @@ header .bottom_sec{background-color: #fff;padding-left: 280px;}
 .homepage_new .swiper-button-next,.homepage_new .swiper-button-prev{width: 50px;}
 .homepage_new .swiper-button-next:after,.homepage_new .swiper-button-prev:after{display: none;}
 .homepage_new .swiper-button-next i,.homepage_new .swiper-button-prev i{background-color: #fff;width: 45px;height: 45px;border-radius: 100%;display: flex;justify-content: center;align-items: center;border: 1px solid #efefef;color: #3E3E3F;box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);}
-.simple_language_slider{padding: 0 50px;position: relative;}
-/* .simple_language_slider:before{content: "";z-index: 2;width: 50px;top: 0;bottom: 0;background-color: #fff;left: 0;display: block;position: absolute;}
-.simple_language_slider:after{content: "";z-index: 2;width: 50px;top: 0;bottom: 0;background-color: #fff;right: 0;display: block;position: absolute;} */
-/* .simple_language_slider .swiper-slide:nth-child(odd) .language_box{background-color: #9FBA3A;}
+/* .simple_language_slider{padding: 0 50px;position: relative;}
+.simple_language_slider:before{content: "";z-index: 2;width: 50px;top: 0;bottom: 0;background-color: #fff;left: 0;display: block;position: absolute;}
+.simple_language_slider:after{content: "";z-index: 2;width: 50px;top: 0;bottom: 0;background-color: #fff;right: 0;display: block;position: absolute;}
+.simple_language_slider .swiper-slide:nth-child(odd) .language_box{background-color: #9FBA3A;}
 .simple_language_slider .swiper-slide:nth-child(even) .language_box{background-color: #0295C9;}
 .simple_language_slider .language_box{border-radius: 5px;overflow: hidden;}
 .simple_language_slider .language_box .image_container{position: relative;}

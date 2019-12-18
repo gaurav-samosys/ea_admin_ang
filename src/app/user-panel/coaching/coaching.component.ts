@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgImageSliderComponent } from 'ng-image-slider';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { FuseConfigService } from '@fuse/services/config.service';
+import { fuseAnimations } from '@fuse/animations';
 @Component({
   selector: 'app-coaching',
   templateUrl: './coaching.component.html',
-  styleUrls: ['./coaching.component.css']
+  styleUrls: ['./coaching.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  animations   : fuseAnimations
 })
 export class CoachingComponent implements OnInit {
   coachingForm: FormGroup;
@@ -37,8 +40,30 @@ export class CoachingComponent implements OnInit {
   sliderAnimationSpeed: any = 1;
   imageObject: Array<object> = [];
   submitted = false;
-
-  constructor(private fb: FormBuilder) {
+ /**
+     * Constructor
+     *
+     * @param {FuseConfigService} _fuseConfigService
+     * @param {FormBuilder} _formBuilder
+     */
+  constructor(private fb: FormBuilder,
+    private _fuseConfigService: FuseConfigService,) {
+    this._fuseConfigService.config = {
+      layout: {
+          navbar   : {
+              hidden: true
+          },
+          toolbar  : {
+              hidden: true
+          },
+          footer   : {
+              hidden: true
+          },
+          sidepanel: {
+              hidden: true
+          }
+      }
+  };
     this.setImageObject();
     this.coachingForm = this.fb.group({
       name: ['',Validators.required],

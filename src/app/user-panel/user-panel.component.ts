@@ -38,17 +38,7 @@ export class UserPanelComponent implements OnInit {
       }
   };
    }
-  // user_id:boolean=false
   ngOnInit() {
-  //   if (localStorage) {
-  //     let user_id = localStorage.getItem("user_id");
-  //     if (user_id == '1') {
-  //         console.log("admin==========id=======", user_id)
-  //         // this.router.navigate(['apps/admin/login']);
-  //         this.user_id  = false;
-  //     }
-     
-  // }
   }
 
 }

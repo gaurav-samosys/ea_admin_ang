@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgImageSliderComponent } from 'ng-image-slider';
 // import { NgImageSliderComponent } from 'projects/ng-image-slider/src/lib/ng-image-slider.component';
-
+import { FuseConfigService } from '@fuse/services/config.service';
+import { fuseAnimations } from '@fuse/animations';
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
-  styleUrls: ['./about-us.component.css']
+  styleUrls: ['./about-us.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  // animations   : fuseAnimations
 })
 export class AboutUsComponent implements OnInit {
   mySlideOptions={items: 1, dots: true, nav: false ,loop: true };
@@ -33,9 +36,37 @@ export class AboutUsComponent implements OnInit {
   sliderAnimationSpeed: any = 1;
   imageObject: Array<object> = [];
 
-  constructor() {
-      this.setImageObject();
-  }
+  /**
+     * Constructor
+     *
+     * @param {FuseConfigService} _fuseConfigService
+     * @param {FormBuilder} _formBuilder
+     */
+    constructor(
+      private _fuseConfigService: FuseConfigService,
+  
+    ) {
+      // Configure the layout
+      this._fuseConfigService.config = {
+        layout: {
+            navbar   : {
+                hidden: true
+            },
+            toolbar  : {
+                hidden: true
+            },
+            footer   : {
+                hidden: true
+            },
+            sidepanel: {
+                hidden: true
+            }
+        }
+    };
+    this.setImageObject();
+
+     }
+  
 
   onChangeHandler() {
       this.setImageObject();

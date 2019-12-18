@@ -52,14 +52,14 @@ const appRoutes: Routes = [
         path: 'angular-material-elements',
         loadChildren: './main/angular-material-elements/angular-material-elements.module#AngularMaterialElementsModule'
     },
-    // {
-    //     path      : '**',
-    //     redirectTo: 'apps/admin/login'
-    // }
     {
-        path: '**',
-        redirectTo: '/user/home'
-    }
+        path      : '**',
+        redirectTo: 'apps/admin/login'
+    },
+    // {
+    //     path: '',
+    //     redirectTo: '/user/home',pathMatch:'full'
+    // }
 ];
 
 @NgModule({

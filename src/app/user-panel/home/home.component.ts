@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgImageSliderComponent } from 'ng-image-slider';
-
+import { FuseConfigService } from '@fuse/services/config.service';
+import { fuseAnimations } from '@fuse/animations';
 import {
   SwiperComponent, SwiperDirective, SwiperConfigInterface,
   SwiperScrollbarInterface, SwiperPaginationInterface
@@ -11,10 +12,18 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations   : fuseAnimations
+
 
 })
 export class HomeComponent implements OnInit {
+  /**
+     * Constructor
+     *
+     * @param {FuseConfigService} _fuseConfigService
+     * @param {FormBuilder} _formBuilder
+     */
   @ViewChild('nav', { static: false }) ds: NgImageSliderComponent;
   title = 'Ng Image Slider';
   showSlider = true;
@@ -193,7 +202,26 @@ export class HomeComponent implements OnInit {
   @ViewChild(SwiperComponent, { static: true }) componentRef: SwiperComponent;
   @ViewChild(SwiperDirective, { static: true }) directiveRef: SwiperDirective;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private _fuseConfigService: FuseConfigService,
+    ) {
+      // Configure the layout
+    this._fuseConfigService.config = {
+      layout: {
+          navbar   : {
+              hidden: true
+          },
+          toolbar  : {
+              hidden: true
+          },
+          footer   : {
+              hidden: true
+          },
+          sidepanel: {
+              hidden: true
+          }
+      }
+  };
     this.setImageObject();
     this.emailForm = this.fb.group({
       name: '',

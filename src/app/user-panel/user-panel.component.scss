@@ -2,9 +2,11 @@
     color: #9fba3a;
     text-decoration: none;
   }
-
-/*homepage*/
-header{position: relative;}
+  header {
+    position: absolute;
+    width: 1300px;
+}
+header{position: absolute;}
 header .row {padding: 0 35px;}
 header .top_sec .button_con{padding: 15px 0;}
 .white_button{background-color: #fff;color: #3E3E3F;text-align: center;padding: 10px 20px;font-size: 13px;border-radius: 3px;display: inline-block;transition: all ease 0.3s;border: 1.5px solid #fff;}
@@ -28,7 +30,11 @@ header .top_sec .button_con{padding: 15px 0;}
 .green_button span{color: inherit;}
 header .logo_nav{position: absolute;z-index: 9;width: 220px;height: 118px;background-color: #fff;text-align: center;left: 35px;padding: 10px;box-shadow: 0 0px 13px rgba(0, 0, 0, 0.35);}
 header .logo_nav img{height: 92px;width: auto;object-fit: contain;}
-header .top_sec{background-color: #3e3e40;padding-left: 280px;}
+header .top_sec {
+  width: 1300px;
+  background-color: #3e3e40;
+  padding-left: 280px;
+} 
 header .bottom_sec{background-color: #fff;padding-left: 280px;}
 .man_nav li{display: inline-block;font-size: 14px;position: relative;font-weight: bold;}
 .man_nav li a{color: #000;text-transform: uppercase;position: relative;z-index: 1;padding: 16px 10px;}

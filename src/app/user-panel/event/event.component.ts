@@ -1,14 +1,17 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { FormControl } from '@angular/forms';
 import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '@ngx-gallery/core';
 // import { Lightbox } from '@ngx-gallery/lightbox';
 // import { map } from 'rxjs/operators';
-
+import { FuseConfigService } from '@fuse/services/config.service';
+import { fuseAnimations } from '@fuse/animations';
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['./event.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  animations   : fuseAnimations
 })
 export class EventComponent implements OnInit {
   mySlideOptions = { items: 1, dots: true, nav: false };
@@ -27,9 +30,32 @@ export class EventComponent implements OnInit {
 
   // constructor(public gallery: Gallery, public lightbox: Lightbox, private renderer: Renderer2) {
   // }
+ /**
+     * Constructor
+     *
+     * @param {FuseConfigService} _fuseConfigService
+     * @param {FormBuilder} _formBuilder
+     */
+  constructor(
+    private _fuseConfigService: FuseConfigService,
 
-  constructor() {
-
+  ) {
+    this._fuseConfigService.config = {
+      layout: {
+          navbar   : {
+              hidden: true
+          },
+          toolbar  : {
+              hidden: true
+          },
+          footer   : {
+              hidden: true
+          },
+          sidepanel: {
+              hidden: true
+          }
+      }
+  };
   }
   tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
     console.log('tabChangeEvent => ', tabChangeEvent);

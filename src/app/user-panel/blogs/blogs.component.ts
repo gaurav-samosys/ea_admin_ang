@@ -1,9 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgImageSliderComponent } from 'ng-image-slider';
+import { FuseConfigService } from '@fuse/services/config.service';
+import { fuseAnimations } from '@fuse/animations';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
-  styleUrls: ['./blogs.component.css']
+  styleUrls: ['./blogs.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  animations   : fuseAnimations
 })
 export class BlogsComponent implements OnInit {
   @ViewChild('nav',{static:true}) slider: NgImageSliderComponent;
@@ -109,7 +113,34 @@ myCarouselImages = [
   '../assets/images/banner.png'
 
 ]
-  constructor() { }
+   /**
+     * Constructor
+     *
+     * @param {FuseConfigService} _fuseConfigService
+     * @param {FormBuilder} _formBuilder
+     */
+    constructor(
+      private _fuseConfigService: FuseConfigService,
+  
+    ) {
+      // Configure the layout
+      this._fuseConfigService.config = {
+        layout: {
+            navbar   : {
+                hidden: true
+            },
+            toolbar  : {
+                hidden: true
+            },
+            footer   : {
+                hidden: true
+            },
+            sidepanel: {
+                hidden: true
+            }
+        }
+    };
+     }
 
   ngOnInit() {
   }

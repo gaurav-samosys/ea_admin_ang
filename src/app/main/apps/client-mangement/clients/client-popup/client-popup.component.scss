@@ -1,0 +1,31 @@
+.div_width{
+	    width: 600px;
+    height: 339px;
+
+}
+.margin{
+	    margin-left: 151px;
+}
+
+.button{
+	    margin-left: 466px;
+    margin-top: 27px;
+}
+
+.btn-dialog-close{
+    width: 45px;
+    min-width: 0px !important;
+    height: 40px;
+    padding: 0px !important;
+  }
+
+  .fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+
+   form.normal-form{
+    margin: 10px;
+}
+

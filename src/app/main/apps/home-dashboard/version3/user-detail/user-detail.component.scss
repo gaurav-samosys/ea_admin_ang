@@ -1,0 +1,50 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }.example-button-row button,
+  .example-button-row a {
+    margin-right: 8px;
+  }
+
+  .example-h2 {
+    margin: 10px;
+  }
+
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+ 
+
+  .mat-dialog-container{
+      scroll-margin-left: 167px !important;
+      margin-right: -185px !important;
+  }
+  .example-viewport {
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+  }
+  
+  .example-item {
+    height: 50px;
+  }
+:host {.content {form {width: 100%; max-width: 800px !important; } .form-errors-model {flex: 1; code {background: none !important; } } .horizontal-stepper-wrapper, .vertical-stepper-wrapper {max-width: 800px; } } }
+
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }

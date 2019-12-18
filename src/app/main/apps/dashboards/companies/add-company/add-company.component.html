@@ -1,0 +1,144 @@
+<div class="dialog-content-wrapper">
+       <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Add Company</span>
+            <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+  <!--      <div class="h1">
+ Add Company
+        </div> -->
+  <!--       <mat-toolbar>
+  <span> Add Company </span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar> -->
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+ 
+
+
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+
+            <!-- REACTIVE FORM EXAMPLE -->
+
+            <form  fxLayout="column" fxLayoutAlign="start"
+                  fxFlex="1 0 auto" name="form" [formGroup]="form" (ngSubmit)="updateForm()">
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                        <mat-label>First name</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                        <mat-error *ngIf="hasError('firstName', 'required')"> First Name is required! </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                        <mat-label>Last name</mat-label>
+                        <input matInput formControlName="lastName" required>
+                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                        <mat-error *ngIf="hasError('lastName', 'required')">Last Name is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                        <mat-label>Company Name</mat-label>
+                        <input matInput formControlName="companyname" required>
+                        <mat-error *ngIf="hasError('companyname', 'required')">Company Name is required!</mat-error>
+                    </mat-form-field>
+
+                          <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" required>
+                        <mat-error *ngIf="hasError('email', 'required')">Email  is required!</mat-error>
+                        <mat-error *ngIf="hasError('email', 'email')">Please enter valid email!</mat-error>
+                    </mat-form-field>
+                </div>
+
+                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="phone" required>
+                        <mat-error *ngIf="hasError('phone', 'required')">Phone  is required!</mat-error>
+                    </mat-form-field>
+
+
+                                <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                        <mat-select  formControlName="country" (selectionChange)="getState($event.value)" required>
+                        	  <mat-option selected="" disabled="" value=""  >
+                                Please select country
+                            </mat-option>
+                             <mat-option *ngFor="let data of country" value="{{data.id}}" >
+                                {{data.name}}
+                            </mat-option>
+                            
+                        </mat-select>
+                        <mat-error *ngIf="hasError('country', 'required')">Please select country </mat-error>
+                    </mat-form-field>
+                </div>
+                          <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                             <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                        <mat-select  formControlName="state"  required>
+                        	  <mat-option selected="" disabled="" value=""  >
+                                Please select state
+                            </mat-option>
+                             <mat-option *ngFor="let data of states" value="{{data.id}}" >
+                                {{data.state_name}}
+                            </mat-option>
+                            
+                        </mat-select>
+                        <mat-error *ngIf="hasError('state', 'required')">Please select state </mat-error>
+                    </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                        <mat-label>City</mat-label>
+                        <input matInput formControlName="city" required>
+                        <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                        <mat-error *ngIf="hasError('city', 'required')">City is required!</mat-error>
+                    </mat-form-field>
+                </div>
+                      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                     <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-select  formControlName="industry"  required>
+                        	  <mat-option selected="" disabled="" value=""  >
+                                Please select industry
+                            </mat-option>
+                             <mat-option *ngFor="let data of industry" value="{{data.id}}" >
+                                {{data.name}}
+                            </mat-option>
+                            
+                        </mat-select>
+                        <mat-error *ngIf="hasError('industry', 'required')">Please select industry </mat-error>
+                    </mat-form-field>
+                </div>
+
+
+           
+
+
+                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-top: 16px">
+
+                       <button mat-raised-button  type="submit" class="button">Save </button>
+
+                        <button mat-raised-button mat-button mat-dialog-close   class="button cancel">Close</button>
+                 </div>
+
+
+            </form>
+
+
+        </div>
+
+     </div> 
+</div>       
+
+        

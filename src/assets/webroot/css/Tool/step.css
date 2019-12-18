@@ -1,0 +1,588 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+/*basic reset*/
+
+/*form styles*/
+#msform {
+/*width: 400px;*/
+/*margin: 50px auto;*/
+text-align: center;
+position: relative;
+
+}
+#msform fieldset {
+border: 0 none;
+border-radius: 3px;
+box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+padding:0;
+box-sizing: border-box;
+width:100%;
+margin: 0;
+/*stacking fieldsets above each other*/
+position: absolute;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+display: none;
+}
+/*inputs*/
+#msform input, #msform textarea {
+padding: 15px;
+border: 1px solid #ccc;
+border-radius: 3px;
+margin-bottom: 10px;
+width: 100%;
+box-sizing: border-box;
+font-family: montserrat;
+color: #2C3E50;
+font-size: 13px;
+}
+/*buttons*/
+#msform .action-button {
+width: 100px;
+background: #98b239 ;
+font-weight: bold;
+color: white;
+border: 0 none;
+border-radius: 1px;
+cursor: pointer;
+padding: 10px 5px;
+margin: 10px 1px;
+float:left;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+box-shadow: 0 0 0 2px white, 0 0 0 3px #98b239;
+}
+/*headings*/
+.fs-title {
+font-size: 15px;
+text-transform: uppercase;
+color: #2C3E50;
+margin-bottom: 10px;
+}
+.fs-subtitle {
+font-weight: normal;
+font-size: 13px;
+color: #666;
+margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+margin-bottom: 30px;
+overflow: hidden;
+margin-top:0px;
+/*CSS counters to number the steps*/
+counter-reset: step;
+}
+#progressbar li {
+list-style-type: none;
+color: white;
+text-transform: uppercase;
+font-size: 9px;
+float: left;
+position: relative;
+}
+#progressbar li:before {
+content: counter(step);
+counter-increment: step;
+width: 20px;
+line-height: 20px;
+display: block;
+font-size: 10px;
+color: #333;
+background: white;
+border-radius: 3px;
+margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+content: '';
+width: 100%;
+height: 2px;
+background: white;
+position: absolute;
+left: -50%;
+top: 9px;
+z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+/*connector not needed before the first step*/
+content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+background: #27AE60;
+color: white;
+}
+
+/*popup*/
+
+#pop_form {
+width:100%;
+height:100%;
+opacity:1;
+top:0;
+left:0;
+display:none;
+position:fixed;
+background:rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+overflow:auto
+}
+img#close {
+cursor: pointer;
+    height: 8%;
+    position: absolute;
+    right: 3px;
+    top: 4px;
+    width: 10%;
+}
+/*#pop_form .modal-lg {
+  width: 1065px!important;
+}*/
+div#popup_show {
+top:17%;
+/*font-family:'Raleway',sans-serif*/
+}
+#form_data_show {
+width:100%;
+border-radius:5px;
+/*font-family:raleway;*/
+background-color:#fff
+}
+#submit {
+text-decoration:none;
+text-align:center;
+display:block;
+background-color:#27ae60;
+color:#fff;
+border:1px solid #27ae60;
+padding:10px 0;
+font-size:20px;
+cursor:pointer;
+border-radius:5px
+}
+#show_text{
+	color:red;
+}
+#error{
+	color:red;
+	border:2px solid red;
+}
+p.error {
+  color: #ee4041;
+  margin: 4px 0 0;
+  font-family: 'nexa_lightregular';
+}
+/*end popup*/
+.flash_message_success {
+  color: white;
+  background: none repeat scroll 0 0 #66cc66;
+  clear: both;
+  font-size: 140%;
+  font-weight: bold;
+  width: 630px;
+  margin: 0 0 1em 6px;
+  padding: 5px;
+  padding-left: 0.4em;
+}
+.flash_message_error {
+  color: white;
+  background: none repeat scroll 0 0 red;
+  clear: both;
+  font-size: 140%;
+  font-weight: bold;
+  width: 630px;
+  margin: 0 0 1em 6px;
+  padding: 5px;
+  padding-left: 0.4em;
+}
+/*tooltip*/
+
+/* Add this attribute to the element that needs a tooltip */
+[data-tooltip] {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Hide the tooltip content by default */
+[data-tooltip]:before,
+[data-tooltip]:after {
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Position tooltip above the element */
+[data-tooltip]:before {
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  margin-bottom: 5px;
+  margin-left: -80px;
+  padding: 7px;
+  width: 160px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: black;
+  color: #fff;
+  content: attr(data-tooltip);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* Triangle hack to make tooltip look like a speech bubble */
+[data-tooltip]:after {
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -5px;
+  width: 0;
+  border-top: 5px solid  black;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0;
+}
+
+/* Show tooltip content on hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+/*end tooltip*/
+/*slider*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);  
+
+
+
+#slider_third_step {
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto 0 auto;
+  border-radius: 4px;
+  width:auto!important;
+  height:420px!important;
+}
+
+#slider_third_step ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height:85%!important;
+  width:100%!important;
+  list-style: none;
+  margin-top: 45px;
+  margin-left:0px!important;
+  background-color:#e4e8e6;
+  padding:15px;
+}
+#slider_third_step ul li {
+  background: #ffffff none repeat scroll 0 0;
+  display: block;
+  float: left;
+  height: 410px;
+  margin: 0 20px 0 20px;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  width: 500px;
+  height:100%!important;
+}
+#new_slide canvas {
+height:280px!important;
+}
+a.control_prev_third_step, a.control_next_third_step {
+  position: absolute;
+ /* top: 40%;*/
+  z-index: 999;
+  display: block;
+ /* padding: 4% 3%;*/
+  width: auto;
+  height: auto;
+  background: #27ae60;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+a.control_prev_third_step:hover, a.control_next_third_step:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+
+a.control_prev_third_step {
+  border-radius: 0 2px 2px 0;
+}
+
+a.control_next_third_step {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+.slider_option_third_step {
+  position: relative;
+  margin: 10px auto;
+  width: 160px;
+  font-size: 18px;
+}
+
+
+#slider_second_step {
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto 0 auto;
+  border-radius: 4px;
+}
+
+#slider_second_step ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  list-style: none;
+}
+
+#slider_second_step ul li {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  height: 300px;
+  background: white;
+  text-align: center;
+  
+}
+
+a.control_prev_second_step, a.control_next_second_step {
+  position: absolute;
+  top: 40%;
+  z-index: 999;
+  display: block;
+  padding: 4% 3%;
+  width: auto;
+  height: auto;
+  background: #27ae60;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+a.control_prev_second_step:hover, a.control_next_second_step:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+
+a.control_prev_second_step {
+  border-radius: 0 2px 2px 0;
+}
+
+a.control_next_second_step {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+.slider_option_second_step {
+  position: relative;
+  margin: 10px auto;
+  width: 160px;
+  font-size: 18px;
+}
+
+
+
+
+/*loader*/
+
+#loading {
+   width: 100%;
+   height: 100%;
+   margin: 0px auto 0px 28%;
+   position: fixed;
+   display: block;
+   opacity: 0.7;
+   background-color: #fff;
+   z-index: 99;
+   text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+  top:40%;
+  left:48%;
+  z-index: 100;
+}
+
+
+#slider_second_step1 {
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto 0 auto;
+  border-radius: 4px;
+  width: 100%!important;
+}
+
+#slider_second_step1 ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  list-style: none;
+}
+
+#slider_second_step1 ul li {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  height: 300px;
+  background: white;
+  text-align: center;
+  
+}
+
+a.control_prev_second_step1, a.control_next_second_step1 {
+  position: absolute;
+  top: 40%;
+  z-index: 999;
+  display: block;
+  padding: 4% 3%;
+  width: auto;
+  height: auto;
+  background: #27ae60;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+a.control_prev_second_step1:hover, a.control_next_second_step1:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+
+a.control_prev_second_step1 {
+  border-radius: 0 2px 2px 0;
+}
+
+a.control_next_second_step1 {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+.slider_option_second_step1 {
+  position: relative;
+  margin: 10px auto;
+  width: 160px;
+  font-size: 18px;
+}
+#pop_form .modal-lg {
+font-family: 'nexa_boldregular';
+}
+/*media queries 30/11 */
+@media screen and (max-width: 1199px) {
+  #new_slide canvas {
+  height: 270px !important;
+}
+#slider_third_step ul {
+  height: 80% !important;
+  width: 100% !important;
+}
+#slider_third_step {
+  height:400px!important;
+}
+#slider_third_step ul li {
+  height: 100% !important;
+  margin: 0 20px;
+  width: 400px!important;
+}
+}
+@media screen and (max-width:991px) {
+  #new_slide canvas {
+  height: 200px !important;
+}
+   #slider_third_step ul li {
+  height: 100% !important;
+  margin: 0 20px;
+  width: 290px !important;
+}
+#slider_third_step ul {
+  height: 80% !important;
+  width: 100% !important;
+}
+#slider_third_step {
+  height:330px!important;
+}
+div#popup_show {
+  top: 30%;
+}
+}
+@media screen and (min-width:992px) {
+#pop_form .modal-lg {
+/*width: 970px !important;*/
+font-family: "nexa_lightregular";
+}
+}
+@media screen and (min-width:1200px) {
+/*#pop_form .modal-lg {
+width: 1050px !important;
+}*/
+  }
+@media screen and (max-width:767px) {
+   #new_slide canvas {
+  height:270px!important;
+}
+#slider_third_step {
+  height: 800px !important;
+}
+#slider_third_step ul {
+  height: 90% !important;
+  width: 100% !important;
+}
+#slider_third_step ul li {
+  height: 45% !important;
+  margin: 20px;
+  width: 94% !important;
+}
+}
+  @media screen and (max-width:700px) {
+div#popup_show {
+  top: 35%;
+}
+}
+@media screen and (max-width:400px) {
+div#popup_show {
+  top: 30%;
+}
+#slider_third_step ul li {
+  margin: 20px 5px;
+}
+#new_slide canvas {
+  height: 210px !important;
+}
+#slider_third_step ul {
+  height: 75% !important;
+  width: 100% !important;
+  clear:both;
+}
+}

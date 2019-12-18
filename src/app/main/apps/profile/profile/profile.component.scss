@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+
+.p10{
+	padding : 10px;
+}
+
+.style{
+	cursor:pointer;
+}
+
+$border-color: #3D315B;
+$background-color: #266DD3;
+$list-background-color: #444B6E;
+$active-list-background-color: #9AB87A;
+$border-radius: 5px;
+
+* {
+  font-family: 'Poppins';
+}
+body {
+  background-color: $background-color;
+  margin: 0;
+}
+a:hover {
+  cursor: pointer;
+}

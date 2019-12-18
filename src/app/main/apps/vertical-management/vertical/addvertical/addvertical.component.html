@@ -1,0 +1,69 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column">
+
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title"> Add Vertical </span>
+            <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+        <!-- <mat-toolbar> -->
+  <!-- <span> Add Vertical </span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar> -->
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+ 
+
+
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+
+            <!-- REACTIVE FORM EXAMPLE -->
+
+            <form  fxLayout="column" fxLayoutAlign="start"
+                  fxFlex="1 0 auto" name="adduserForm" [formGroup]="addverticalForm" (ngSubmit)="addVertical()">
+
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <mat-label style=" width: 36%;margin-bottom: 10px">Title*</mat-label>
+                    <mat-form-field appearance="outline" fxFlex="100">
+                       <input matInput formControlName="title"  required>
+                        <mat-error *ngIf="hasError('title', 'required')">Please enter title! </mat-error>
+                    </mat-form-field>
+
+                          <mat-label style=" width: 36%;margin-bottom: 10px">Description</mat-label>
+                         <mat-form-field appearance="outline" fxFlex="100">
+                           <textarea matInput  formControlName="description" ></textarea>
+                    </mat-form-field>
+                     
+                     <mat-label style=" width: 36%;margin-bottom: 10px">Image*</mat-label>
+
+                     <!--  <input   type="file" formControlName="upload_file" #fileInput id="avatar" class="hidden-input" accept="image/*" ngf-max-size="3MB" (change)="selectFile($event)" required> -->
+                     <input type="file" id="avatar" accept="image/*" required ngf-max-size="3MB" (change)="selectFile($event)" #fileInput>
+                     <div *ngIf="value == 0">
+                    <mat-error >This field is required! </mat-error>
+
+                    </div>
+                      <mat-hint>Image size must be less than 3MB and image type must be JPG,PNG,GIF</mat-hint>
+                </div>
+
+
+                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-top: 21px;">
+
+                       <button mat-raised-button  type="submit" class="button">Save </button>
+
+                        <button mat-raised-button mat-button mat-dialog-close  class="button cancel">Close</button>
+                 </div>
+
+
+            </form>
+
+
+        </div>
+
+     </div> 
+</div>       
+
+        

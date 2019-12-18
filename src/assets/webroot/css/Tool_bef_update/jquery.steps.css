@@ -1,0 +1,508 @@
+﻿/*
+    Common 
+*/
+
+.wizard,
+.tabcontrol
+{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.wizard a,
+.tabcontrol a
+{
+    outline: 0;
+}
+
+.wizard ul,
+.tabcontrol ul
+{
+    list-style: none !important;
+    padding: 0;
+    /*margin: 0;*/
+}
+
+.wizard ul > li,
+.tabcontrol ul > li
+{
+    display: block;
+    padding: 0;
+}
+
+/* Accessibility */
+.wizard > .steps .current-info,
+.tabcontrol > .steps .current-info
+{
+    position: absolute;
+    left: -999em;
+}
+
+.wizard > .content > .title,
+.tabcontrol > .content > .title
+{
+    position: absolute;
+    left: -999em;
+}
+
+
+
+/*
+    Wizard
+*/
+
+.wizard > .steps
+{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.wizard.vertical > .steps
+{
+    display: inline;
+    float: left;
+    width: 30%;
+}
+
+.wizard > .steps .number
+{
+    font-size: 1.429em;
+}
+
+.wizard > .steps > ul > li
+{
+    width: 25%;
+}
+
+.wizard > .steps > ul > li,
+.wizard > .actions > ul > li
+{
+    float: left;
+}
+
+.wizard.vertical > .steps > ul > li
+{
+    float: none;
+    width: 100%;
+}
+
+.wizard > .steps a,
+.wizard > .steps a:hover,
+.wizard > .steps a:active
+{
+    display: block;
+    width: auto;
+    /*margin: 0 0.5em 0.5em;*/
+    /*padding: 1em 1em;*/
+    text-decoration: none;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    /*border-radius: 5px;*/
+}
+
+.wizard > .steps .disabled a,
+.wizard > .steps .disabled a:hover,
+.wizard > .steps .disabled a:active
+{
+    background: #eee;
+    color: #aaa;
+    cursor: default;
+}
+
+.wizard > .steps .current a,
+.wizard > .steps .current a:hover,
+.wizard > .steps .current a:active
+{
+    background: #2184be;
+    color: #fff;
+    cursor: default;
+}
+
+.wizard > .steps .done a,
+.wizard > .steps .done a:hover,
+.wizard > .steps .done a:active
+{
+    background: #9dc8e2;
+    color: #fff;
+}
+
+.wizard > .steps .error a,
+.wizard > .steps .error a:hover,
+.wizard > .steps .error a:active
+{
+    background: #ff3111;
+    color: #fff;
+}
+
+.wizard > .content
+{
+    background: #fff;
+    display: block;
+    /*margin: 0.5em;*/
+    /*min-height: 35em;*/
+    overflow: hidden;
+   /* position: relative;*/
+    width: auto;
+    font-family: 'nexa_boldregular';
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    /*border-radius: 5px;*/
+}
+
+.wizard.vertical > .content
+{
+    display: inline;
+    float: left;
+    margin: 0 2.5% 0.5em 2.5%;
+    width: 65%;
+}
+
+.wizard > .content > .body
+{
+    float: left;
+    background-color:#f5f5f5;
+    width: 100%;
+    height: 95%;
+}
+
+.wizard > .content > .body ul
+{
+    list-style: disc !important;
+}
+
+.wizard > .content > .body ul > li
+{
+    display: list-item;
+}
+
+.wizard > .content > .body > iframe
+{
+    border: 0 none;
+    width: 100%;
+    height: 100%;
+}
+
+.wizard > .content > .body input
+{
+    display: block;
+    border: 1px solid #ccc;
+}
+
+.wizard > .content > .body input[type="checkbox"]
+{
+    display: inline-block;
+}
+
+.wizard > .content > .body input.error
+{
+    background: rgb(251, 227, 228);
+    border: 1px solid #fbc2c4;
+    color: #8a1f11;
+}
+
+.wizard > .content > .body label
+{
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+.wizard > .content > .body label.error
+{
+    color: #8a1f11;
+    display: inline-block;
+    margin-left: 1.5em;
+}
+
+.wizard > .actions {
+  display: block;
+  position: absolute;
+  right: 9%;
+  /*margin: 20px 0 0;*/
+  text-align: right;
+  top:677px;
+  width: 100%;
+}
+
+.wizard.vertical > .actions
+{
+    display: inline;
+    float: right;
+    margin: 0 2.5%;
+    width: 95%;
+}
+
+.wizard > .actions > ul
+{
+    display: inline-block;
+    text-align: right;
+}
+
+/*.wizard > .actions > ul > li
+{
+    margin: 0 0.5em;
+}*/
+.actions ul li:nth-child(1) a {
+  border-bottom-left-radius: 5px!important;
+  border-right:solid 1px #879c39;
+}
+.actions ul li:nth-child(2) a, .actions ul li:nth-child(2) a:hover {
+  background-image: url("../../img/previous.png");
+  background-position: 90% center;
+  background-repeat: no-repeat;
+  border-right: 1px solid #879c39;
+  text-align: left;
+}
+.actions ul li:nth-child(1) a {
+  background-image: url("../../img/previous.png")!important;
+  background-position:10%!important;
+  background-repeat: no-repeat!important;
+}
+.actions ul li:nth-child(3) a, .actions ul li:nth-child(3) a:hover {
+  background-image: url("../../img/next.png");
+  border-bottom-right-radius: 5px;
+  background-position: 90%;
+  background-repeat: no-repeat!important;
+}
+.actions ul li:nth-child(4) a {
+  border-bottom-right-radius: 5px !important;
+}
+#edit_56 .add #edit_submit_56 {
+  background-image: url("../../img/reset.png");
+  background-position: 85%;
+  background-repeat: no-repeat;
+  width: 100px!important;
+  text-align: left;
+}
+.action-button {
+  /*position: absolute;
+  right: 15%;
+  top: 107.5%;
+  z-index:2;*/
+  width: 100px;
+  background-color: #98b239 !important;
+  height:40px;
+  padding: 10px;
+  /*font-weight: bold;*/
+  color:#fff;
+
+}
+.actions ul li a  {
+  background-color: #98b239 !important;
+  color: #fff;
+  height:40px;
+  padding: 10px;
+  font-weight: bold;
+}
+.wizard.vertical > .actions > ul > li
+{
+    margin: 0 0 0 1em;
+}
+
+.wizard > .actions a,
+.wizard > .actions a:hover,
+.wizard > .actions a:active
+{
+    background: #2184be;
+    color: #fff;
+    display: block;
+    padding: 0.7em 1.5em;
+    text-decoration: none;
+    width:100px;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    /*border-radius: 5px;*/
+    font-weight:lighter!important;
+}
+
+.wizard > .actions .disabled a,
+.wizard > .actions .disabled a:hover,
+.wizard > .actions .disabled a:active
+{
+    background: #eee;
+    color: #aaa;
+}
+
+.wizard > .loading
+{
+}
+
+.wizard > .loading .spinner
+{
+}
+
+
+
+/*
+    Tabcontrol
+*/
+
+.tabcontrol > .steps
+{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.tabcontrol > .steps > ul
+{
+    position: relative;
+    margin: 6px 0 0 0;
+    top: 1px;
+    z-index: 1;
+}
+
+.tabcontrol > .steps > ul > li
+{
+    float: left;
+    margin: 5px 2px 0 0;
+    padding: 1px;
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.tabcontrol > .steps > ul > li:hover
+{
+    background: #edecec;
+    border: 1px solid #bbb;
+    padding: 0;
+}
+
+.tabcontrol > .steps > ul > li.current
+{
+    background: #fff;
+    border: 1px solid #bbb;
+    border-bottom: 0 none;
+    padding: 0 0 1px 0;
+    margin-top: 0;
+}
+
+.tabcontrol > .steps > ul > li > a
+{
+    color: #5f5f5f;
+    display: inline-block;
+    border: 0 none;
+    margin: 0;
+    padding: 10px 30px;
+    text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li > a:hover
+{
+    text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li.current > a
+{
+    padding: 15px 30px 10px 30px;
+}
+
+.tabcontrol > .content
+{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 35em;
+    overflow: hidden;
+    border-top: 1px solid #bbb;
+    padding-top: 20px;
+}
+
+.tabcontrol > .content > .body
+{
+    float: left;
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    padding: 2.5%;
+}
+
+.tabcontrol > .content > .body ul
+{
+    list-style: disc !important;
+}
+
+.tabcontrol > .content > .body ul > li
+{
+    display: list-item;
+}
+ .four_pager li:nth-child(1) input {
+        border-bottom-left-radius:6px!important;
+        }
+        .four_pager li:nth-child(4) input {
+        border-bottom-right-radius:6px!important;
+        }
+        .onenext a, .onenext a:hover {
+  background-image: url("../../img/next.png") !important;
+  background-position: 90% center !important;
+  background-repeat: no-repeat !important;
+  border-bottom-right-radius: 5px !important;
+  border-bottom-left-radius:5px!important;
+}
+/*media queries 28/11/2015 */
+
+@media screen and (max-width:1024px) {
+  .details > img, .understand > img{display: none;}
+  .banner p {width: 100%;}
+}
+@media screen and (max-width:991px) {
+.wizard > .steps > ul > li {
+width:50%;
+}
+
+}
+@media screen and (max-width:767px) {
+.four_pager li:nth-child(1) input {
+border-bottom-left-radius: 0px !important;
+}
+.four_pager li:nth-child(3) input {
+  border-bottom-left-radius: 6px !important;
+}
+.wizard > .steps > ul > li {
+width:100%;
+}
+.actions.clearfix {
+  display: table !important;
+  left: 0;
+  margin: 0 auto;
+  right: 0;
+  width: auto !important;
+}
+
+
+}
+
+/*@media screen and (max-width:480px) {
+.actions.clearfix {
+top:1582px;
+right:16%;
+}
+}*/
+/*@media screen and (max-width:384px) {
+.actions.clearfix {
+  left: auto;
+  right:13%;
+  top: 1642px;
+}
+}*/
+/*@media screen and (max-width:360px) {
+.actions.clearfix {
+top:1662px;
+right:3%;
+}
+}*/
+/*@media screen and (max-width:320px) {
+.actions.clearfix {
+top:1682px;
+}
+}*/
+
+/*media queries 28/11/2015 ends */

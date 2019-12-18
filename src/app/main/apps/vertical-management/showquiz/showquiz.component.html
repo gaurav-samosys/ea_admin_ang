@@ -1,0 +1,238 @@
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+
+    <!-- CENTER -->
+    <div class="center show-quiz" fusePerfectScrollbar>
+
+        <div class="mat__box mat__box2 mt-20 mr-28">
+          <div class="row" fxLayoutAlign="space-between center">
+           
+            <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
+             <button mat-stroked-button color="primary" (click)="addQuestion()">
+                  <mat-icon>add_circle_outline</mat-icon>Add more</button>
+            </div>
+            <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+          </div>
+      </div>
+
+
+
+        <!-- START SECOND ROW -->
+              <!-- START DIV -->
+     <div class="mat__box mt-20 mr-28">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <!-- <div class="h2 mb-8">User Search</div> -->
+              <div style="margin-top: 25px;">
+                    <h2>Quiz Information</h2>
+                    <span class="fill-remaining-space"></span>
+                </div>
+
+            <div class="row">
+              <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" [formGroup]="dummy" (ngSubmit)="dummy()">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label required>Category Name</mat-label>
+                  <input matInput formControlName="category" placeholder="category">
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Passing Score</mat-label>
+                    <input matInput formControlName="passing" placeholder="passing">
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Quiz Name</mat-label>
+                    <input matInput formControlName="quiz" placeholder="Quiz Name">
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Description</mat-label>
+                    <input matInput formControlName="desc" placeholder="Description">
+                </mat-form-field>
+              </div> 
+              </form>     
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END DIV -->
+        <!-- END SECOND ROW -->
+
+
+   <!--   <div class="mat__box mt-20 mr-28">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row" style="margin-top: 4px;">
+        <div class="row" style="width: 100%;">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+              <div style="margin-top: 25px;">
+                    <h2>{{name}}</h2>
+                    <span class="fill-remaining-space"></span>
+                </div>
+
+            <div class="row">
+            
+               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+                  <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Show Entries</mat-label>
+                     <mat-select matNativeControl  (change)="changelimit($event.target.value)">
+                        <mat-option value="10">10</mat-option>
+                        <mat-option value="25">25</mat-option>
+                        <mat-option value="50">50</mat-option>
+                        <mat-option value="100">100</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                 
+                </div>
+              
+            </div>
+          </div>
+        </div>
+        
+     
+          
+          </div>
+        </div>   -->
+
+         <div class="mat__box mt-20 mr-28">
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row" style="margin-top: 4px;">
+
+            <div fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
+               
+                  <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+
+              <div style="margin-top: 25px;">
+                    <h2>{{name}}</h2>
+                    <span class="fill-remaining-space"></span>
+                </div>
+              </div>
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 mb-12"></div>
+                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <input matInput placeholder="Search by question" (keyup)="Search($event.target.value)">
+                            </mat-form-field>
+
+                        </div>
+           </div>
+                <!-- CONTENT -->
+               <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      
+                            <table mat-table [dataSource]="dataSource">
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="question">
+                                    <th mat-header-cell *matHeaderCellDef> Questions </th>
+                                    <td class="style" mat-cell *matCellDef="let element;" matTooltip="{{element.question}}"> {{element.question | limit:30}}</td>
+                                </ng-container>
+
+                                <!-- Weight Column -->
+                                <ng-container matColumnDef="points">
+                                    <th mat-header-cell *matHeaderCellDef> Points </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.points}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="questionType">
+                                    <th mat-header-cell *matHeaderCellDef> Question Type </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.questionType}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="created">
+                                    <th mat-header-cell *matHeaderCellDef> Create date </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.created|date}} </td>
+                                </ng-container>
+
+                                <!-- Symbol Column -->
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                                    <td mat-cell *matCellDef="let element">
+
+                                        <button mat-icon-button>
+                                            <mat-icon matTooltip="Edit" (click)="openDialog(element)">edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button>
+                                            <mat-icon matTooltip="Delete" (click)="confirmDialog(element)">delete</mat-icon>
+                                        </button>
+
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+
+                                <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems"   [pageIndex]="currentPage"
+                [pageSize]="pageSize"  [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons (page)="handlePage($event)"></mat-paginator>
+                            <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+
+                       <!--      <div>
+                                <div class="container">
+
+                                    <div class="text-center">
+                                  
+
+
+                                        <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+                                            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                                <a (click)="setPage(1)">First</a>
+                                            </li>
+                                            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                                <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                            </li>
+                                            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                                <a (click)="setPage(page)">{{page}}</a>
+                                            </li>
+                                            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                                <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                            </li>
+                                            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                                <a (click)="setPage(pager.totalPages)">Last</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                  <div class="row">
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                   <div>Showing {{start}} to {{end}} of {{allItems}} entries</div>
+                                 </div>
+                                </div>
+
+                            </div> -->
+
+                      
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+</div>
+
+<style type="text/css">
+    .inline_list {
+        list-style-type: none;
+    }
+    
+    .inline_list li {
+        display: inline-block;
+    }
+    
+    .inline_list li a {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+</style>

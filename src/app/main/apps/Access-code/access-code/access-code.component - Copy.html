@@ -1,0 +1,226 @@
+<div id="AccessCode-access-code" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 40px;margin-top: 20px;margin-right: 40px;">
+
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+
+
+				 <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+
+            <!-- REACTIVE FORM EXAMPLE -->
+
+            <form class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+                  fxFlex="1 0 auto" name="form" [formGroup]="form" (ngSubmit)="accessForm()">
+
+                <div class="h2 mb-24">Generate Access Code</div>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                     <mat-label style="margin-right: 10px; width: 14%">Select Company </mat-label>
+                    <mat-form-field appearance="outline" fxFlex="60">
+                        <mat-select    formControlName="company" (selectionChange)="getClient($event.value)" >
+                        	  <mat-option selected="" disabled="" value=""  >
+                                Please select company
+                            </mat-option>
+                             <mat-option *ngFor="let data of companiesData" value="{{data.id}}" >
+                                {{data.company_name}}
+                            </mat-option>
+                            
+                        </mat-select>
+                        <mat-error *ngIf="hasError('company', 'required')">Please select comapny </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                     <mat-label style="margin-right: 10px; width: 14%">Select Client </mat-label>
+                    <mat-form-field appearance="outline" fxFlex="60">
+                        <mat-select    formControlName="client" required>
+                        	  <mat-option selected="" disabled="" value=""  >
+                                Please select client
+                            </mat-option>
+                            <mat-option *ngFor="let data of clientData" value="{{data.id}}"  >
+                                {{data.client_name}}
+                            </mat-option>
+
+                        </mat-select>
+                        <mat-error *ngIf="hasError('client', 'required')">Please select client</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                          <mat-label style="margin-right: 10px; width: 14%" required>Select Limit </mat-label>
+                	 <mat-form-field appearance="outline" fxFlex="60">
+                          <input matInput formControlName="limit" type="number">
+                        <mat-error *ngIf="hasError('limit', 'required')">Please select limit</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                       <button mat-raised-button color="primary" type="submit" class="button" >Generate And Download Access Code  </button>
+
+                        <a mat-raised-button mat-button mat-dialog-close color="primary"  class="button cancel" routerLink="/apps/dashboards/analytics">Cancel</a>
+                 </div>
+
+            </form>
+
+
+        </div>
+
+        <br>
+
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+        	<div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+                  fxFlex="1 0 auto">
+						                  <mat-toolbar>
+											  <span>Access Code Search</span>
+											  <span class="fill-remaining-space"></span>
+						                    </mat-toolbar>
+						                    <br>
+
+                          <mat-label style="width: 14%;margin-bottom: -22px;" required>Company Name : </mat-label>  <mat-label style="margin-bottom: 10px; width: 14%;    margin-left: 448px;">Client Name : </mat-label>
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                          
+                	 <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                          <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'cname')">
+                    </mat-form-field>
+
+                    	 <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                          <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'clientname')">
+                    </mat-form-field>
+
+                </div>
+                        <mat-label style="margin-bottom: 10px; width: 14%;">Access Code :</mat-label>
+                  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                          
+                	 <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                          <input matInput placeholder="Search Access Code" (keyup)="Search($event.target.value,'code')">
+                    </mat-form-field>
+                </div>
+                <br>
+
+                     <mat-divider></mat-divider>
+                     <br>
+
+                      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <mat-label >Show</mat-label>
+                    <mat-form-field  appearance="outline" fxFlex="10">
+  <select matNativeControl (change)="changelimit($event.target.value)">
+    <option value="10">10</option>
+    <option value="25">25</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+</mat-form-field>
+<mat-label >entries</mat-label>
+
+                </div>
+
+                 <div class="content">
+          <div class="p10">
+            
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource">
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="company_name">
+                  <th mat-header-cell *matHeaderCellDef> Company Name </th>
+                  <td class="style text-align" mat-cell *matCellDef="let element" > {{element.company_name}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="client_name">
+                  <th mat-header-cell *matHeaderCellDef> Client Name </th>
+                  <td class="text-align" mat-cell *matCellDef="let element"> {{element.client_name}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="created_date">
+                  <th mat-header-cell *matHeaderCellDef> Create Date </th>
+                  <td class="text-align" mat-cell *matCellDef="let element"> {{element.created_date|date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalAccessCodes">
+                  <th mat-header-cell *matHeaderCellDef> Generate Code Count </th>
+                  <td class="text-align" mat-cell *matCellDef="let element"> {{element.totalAccessCodes}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td class="text-align" mat-cell *matCellDef="let element"> 
+                  <button mat-raised-button color="primary" type="submit" class="button" (click)="downloadAccessData(element.client_id,element.random_code)">Download </button>
+                 </td>
+                </ng-container>
+
+                  <ng-container matColumnDef="view">
+                  <th mat-header-cell *matHeaderCellDef> View </th>
+                 <td class="text-align" mat-cell *matCellDef="let element">
+                       <button mat-raised-button color="primary" type="submit" class="button" [routerLink]="['/apps/Access-code/viewdetails', element.client_id,element.random_code]">View </button>
+                      </td>
+                  </ng-container>
+
+            <!--     <ng-container matColumnDef="nodata">
+                  
+                </ng-container> -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+              <div *ngIf="access_data == '' " style="text-align: center">No data available in table</div>
+
+                                         <div>
+    <div class="container">
+
+        <div class="text-center">
+          <div>Showing {{start}} to {{end}} of {{allItems}} entries</div> 
+
+            <!-- pager -->
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(1)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.totalPages)">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+
+
+              </div>
+        </div>
+	
+
+</div>
+</div>
+
+
+
+<style type="text/css">
+    .inline_list{list-style-type: none;}
+    .inline_list li{display: inline-block;}
+    .inline_list li a{    position: relative;
+    float: left;padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #337ab7; text-decoration: none; background-color: #fff; border: 1px solid #ddd;} 
+</style>

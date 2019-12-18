@@ -1,0 +1,51 @@
+/**
+ * File Name: Common Css
+ * Description: This file used only for Common Css
+ * Created Date: 27-march-2019;
+ * @version: 0.1;
+ */
+
+/* Custom Popup */
+.dcrfModalWrapper {position: fixed;top: 12%;left: 0;right: 0;margin: 0 auto;width: 50%;z-index: 106; display: none; }
+.dcrfModalWrapper .modal-Inner {background: #fff;box-shadow: 1px 1px 4px 0px #444; border-radius: 5px}
+.dcrfModalWrapper .modal-Inner .signupModalHead {padding: 10px;background: #dfe8bd;text-align: center; position: relative;}
+.dcrfModalWrapper .modal-Inner .signupModalHead h2 {font-weight: 600;color: #404041;padding-top: 8px;}
+.dcrfModalWrapper .modal-Inner .signupBody {background: #f9fbf3;padding: 20px;}
+.dcrfModalWrapper .modal-Inner .signupBody .flex-wrapper {display: flex;margin-bottom: 20px;}
+.dcrfModalWrapper .modal-Inner .signupBody .flex-wrapper .inputController {max-width: 50%; flex-basis: 50%}
+.dcrfModalWrapper .modal-Inner .signupBody .inputController input, .dcrfModalWrapper .modal-Inner .signupBody .inputController textarea {padding: 9px;width: 95%;margin: 0 auto;border: 1px solid #999;border-radius: 5px;}
+.dcrfModalWrapper .modal-Inner .signupBody .inputController textarea {width: 98%; resize: vertical;}
+.dcrfModalWrapper .modal-Inner .signupBody .inputController label {color: #404041; font-weight: 500;}
+.dcrfModalWrapper .modal-Inner .signupBody .inputSubmitter {margin: 30px 0;}
+.dcrfModalWrapper .modal-Inner .signupBody .inputController input::placeholder, .dcrfModalWrapper .modal-Inner .signupBody .inputController textarea {color: #333;}
+.dcrfModalWrapper .modal-Inner .signupBody .inputSubmitter input {border: none;color: #fff;width: 150px;height: 44px;}
+.closeSignup {width: 4%;position: absolute;right: 20px;top: 13px;cursor: pointer;}
+.signupOverlay {position: fixed;top: 0;right: 0;left: 0;bottom: 0;height: 100%;background: rgba(0, 0, 0, 0.70);width: 100%;z-index: 105; display: none;}
+html.dcrfPopUp {overflow: hidden;}
+html.dcrfPopUp .dcrfModalWrapper{display: inherit;}
+html.dcrfPopUp .signupOverlay{display: inherit;}
+.dcrfModalWrapper .error{color: red !important;}
+.free_user_contact_enriched .contact-form-msg { display: none;background-color: #dbefb3;text-align: left;padding: 10px;border-radius: 10px;margin-bottom: 15px; }
+
+
+@media (max-width: 1024px)  {
+.dcrfModalWrapper { top: 0;}
+}
+
+ @media (max-width: 768px) {
+ 	.dcrfModalWrapper .modal-Inner .signupBody{ height: 420px;overflow:auto; }
+ }
+
+ @media (max-width: 630px) {
+ 	.dcrfModalWrapper {width: 90%;}
+ }
+
+@media (max-width: 414px) {
+ .dcrfModalWrapper .modal-Inner .signupBody .flex-wrapper {display: block;margin-bottom: 20px;}
+ .dcrfModalWrapper .modal-Inner .signupBody .flex-wrapper .inputController {max-width: 100%;flex-basis: 100%;margin-bottom: 22px;}
+ .sweet-alert {top: 10% !important; left: 0 !important; right: 0 !important; margin: 0 auto !important;}
+}
+@media (min-width: 479px ) AND (max-width: 630px) {
+    .dcrfModalWrapper .modal-Inner .signupBody .flex-wrapper {display:block}
+    .dcrfModalWrapper .modal-Inner .signupBody .flex-wrapper .inputController {max-width: 100%;flex-basis: 100%;}
+}

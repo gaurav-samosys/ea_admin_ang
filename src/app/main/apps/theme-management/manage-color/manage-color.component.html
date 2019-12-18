@@ -1,0 +1,113 @@
+<div class="container-fluid">
+        <div class="row">
+          <div class="title-left mt-20">
+            <h2>Theme Management </h2>
+          </div>
+        </div>
+        <!--Row End-->
+        <div class="row">
+          <div class="col-4 primset" style="padding-right: 0px;">
+            <div class="" style="padding: 0;text-align: center !important;margin-bottom: 0;border-bottom: 1px solid #ccc;">
+              <h2>Set Custom Theme</h2>
+            </div>
+            <div class="left-sidebar" style="width: 320px;">
+              <form>
+                <mat-form-field class="example-chip-list" appearance="outline" style="width: 320px;">
+                  <mat-label>Select client*</mat-label>
+                  <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let item of dataArray;let indx=index;" [selectable]="selectable" [removable]="removable" (removed)="remove(item,indx)">
+                      {{item.company_name}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Select Client Search" #manageInput  [(ngModel)]="company_name" [formControl]="select_client" [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                  </mat-chip-list>
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let item of allData | customerEmailFilter:company_name ;let i = index " [value]="item">
+                      {{item.company_name}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+      
+                
+                <h3>Color Setting</h3>
+                <div class="prim">
+                  <div class="primary-color mb-20">
+                    <mat-label>Primary Color (Numbers)</mat-label>
+                    <div class="picker-wrapper">
+                      <lib-ngx-ttitan-color-picker [color]="color1" id="demo1">
+                      </lib-ngx-ttitan-color-picker>
+                    </div>
+                   
+                  </div>
+               
+      
+                <div class="secondary-color mb-20">
+                  <mat-label>Secondary Color (Labels)</mat-label>
+                  <div class="picker-wrapper">
+                    <lib-ngx-ttitan-color-picker [color]="color2" id="demo2"  >
+                    </lib-ngx-ttitan-color-picker>
+                  </div>
+                  <div class="detail-wrapper">
+      
+                  </div>
+                </div>
+      
+      
+      
+                <div class="Tertiary Color (Sub Text) mb-20">
+                  <mat-label>Tertiary Color (Sub Text)</mat-label>
+                  <div class="picker-wrapper">
+                    <lib-ngx-ttitan-color-picker [color]="color3" id="demo3" >
+                    </lib-ngx-ttitan-color-picker>
+                  </div>
+                  <div class="detail-wrapper">
+      
+                  </div>
+                </div>
+      
+              </div>
+      
+      
+      
+                <!-- <div class="file-upload-wrapper">
+                  <mat-label>Upload Logo</mat-label>
+                  <div class="uploadlogo">
+                    
+                  </div>
+                </div> -->
+                <div class="">
+                    <div class="mt-10 mb-20">
+                            <button mat-raised-button color="accent" (click)="SaveDetail()">Save Deatils</button>
+
+                    </div>
+                    <div class="mt-20">
+                            <button mat-raised-button color="accent" (click)="setThemeSubmit()">Set Theme For Mobile App</button>
+
+                        </div>
+                </div>
+
+      
+              </form>
+            </div>
+          </div>
+        
+      
+      
+        <div class="">
+          <div class="select_app_con">
+            <!-- <h4>Please select App</h4>
+            <mat-form-field appearance="outline" style="width: 250px;">
+              <mat-label>Dashboards</mat-label>
+              <mat-select>
+                  <input style="margin-top: 20px; width: 100%; margin-bottom: 15px;" placeholder ="Select client Search" (keyup)="onKeyDash($event.target.value)">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+       -->
+          </div>
+        </div>
+      </div>
+      </div>

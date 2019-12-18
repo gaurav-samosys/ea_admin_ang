@@ -1,0 +1,132 @@
+.example-viewport {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+}
+
+.example-dt {
+  height: 30px;
+  font-weight: bold;
+}
+
+.example-dd {
+  height: 30px;
+}
+
+.mat-list{max-height:155px;overflow-y: auto;}
+
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+#container {
+  min-width: 310px;
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto
+}
+
+         a {
+    cursor: pointer;
+}
+
+
+    .pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+ .pagination ul {
+     list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+ }
+
+  ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  li {
+    color: #fff;
+    display: flex;
+    a {
+      background-color: #444B6E;
+      padding: 5px 10px;
+    }
+  }
+}
+
+.example-card {
+  max-width: 500px;
+}
+
+ li.disabled {
+  pointer-events: none;
+    opacity: 0.6;
+}
+.tabbing_container .tabs {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between;
+  color: #323759;
+  font-size: 16px;
+  /* border-bottom: 2px solid #f1f1f3; */
+  margin-bottom: 0;
+}
+.tabbing_container .tabs li {
+  padding: 6px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #ffffff;
+  /* box-shadow: 0 0 6px rgba(32, 176, 242, 0.2); */
+  border: 1px solid #e6e7ee;
+  padding-right: 0;
+  width: calc(19% - 10px);
+  display: block !important;
+  cursor: pointer;
+}
+.tabbing_container .tabs li p {
+  margin: 0;
+  display: inline-block;
+  line-height: 36px;
+  vertical-align: middle;
+  /* width: 70px; */
+  color: rgba(0, 0, 0, 0.87);
+}
+.tabbing_container .tabs li span {
+    margin-left: 5px;
+    background-color: #3195c2;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(32, 176, 242, 0.40);
+    font-size: 14px;
+    padding: 8px 15px;
+    color: #fff;
+    float: right;
+    margin-right: -10px;
+    max-width: 120px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+    min-width: 56px;
+}
+
+.mt_cls{
+  height:54px !important;
+
+}

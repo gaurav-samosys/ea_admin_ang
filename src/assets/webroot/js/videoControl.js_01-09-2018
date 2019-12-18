@@ -1,0 +1,106 @@
+// JavaScript Document 
+//$(document).ready(function(){
+$(function() {
+    var flag = 0;
+    //var pauseFlag = 0;
+	var iframe = $('#vimeo-player')[0];
+    var player = $f(iframe);
+    var status = $('.status');
+    var flagInit = 0;
+	
+	
+	setInterval(function(){ 
+		
+			initVideo();
+		}, 7000);
+	
+	function initVideo() { 
+		//pauseFlag = $("#pauseFlag").val();
+		var iframe2 = $('#vimeo-player')[0];
+		var player = $f(iframe2);
+		var status = $('.status');
+		
+		if(flag == 0) {
+			player.addEvent('ready', function() {
+				status.text('ready');
+				/*if(pauseFlag == 1)
+				{
+					player.api('pause');
+				}
+				else
+				{
+					player.api('play');
+				}*/
+				player.api('play');
+				
+				player.addEvent('pause', onPause);
+				player.addEvent('play', onPlay);
+				player.addEvent('finish', onFinish);
+				player.addEvent('playProgress', onPlayProgress);
+				flag = 1;
+			});
+		}
+		else
+		{
+			player.addEvent('pause', onPause);
+			player.addEvent('play', onPlay);
+			player.addEvent('finish', onFinish);
+			player.addEvent('playProgress', onPlayProgress);
+		}
+		
+		
+	}
+
+    /*function onPause(id) {
+        
+        $("#pauseFlag").val('1');
+        var iframe2 = $('#vimeo-player')[0];
+			var player = $f(iframe2);
+			var status = $('.status');
+			player.addEvent('ready', function() {
+				//status.text('paused');
+				player.api('pause');
+			});
+        
+    } */
+    
+     function onPause(id) {
+        status.text('paused');
+    }
+    
+    function onPlay(id) {
+        
+        //$("#pauseFlag").val('0');
+        var iframe2 = $('#vimeo-player')[0];
+			var player = $f(iframe2);
+			var status = $('.status');
+			player.addEvent('ready', function() {
+				
+				player.api('play');
+			});
+        
+    }
+
+    function onFinish(id) 
+    {
+		status.text('finished');
+        var a = 0;
+		var res = 0;
+		setInterval(function()
+		{
+			if(a==0)
+			{
+				res = after_finish(a);
+				if(res == 1)
+					initVideo();
+				a=1;
+				//initVideo();
+			}
+		},4000);
+    }
+   
+    function onPlayProgress(data, id){
+		status.text(data.seconds + 's played');
+    }     
+});
+//});

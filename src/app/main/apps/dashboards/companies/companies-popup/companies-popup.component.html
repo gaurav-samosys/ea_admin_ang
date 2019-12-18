@@ -1,0 +1,50 @@
+<!-- <div id="cover-spin" *ngIf="showLoader == true"></div> -->
+<mat-toolbar>
+  <span>{{res_data.first_name}}  {{res_data.last_name}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<div class="normal-form" >
+   <label class="padding=pt-4">
+    <div><b>Full Name </b>  <span class="margin">{{res_data.first_name}}  {{res_data.last_name}}</span> </div>
+
+   </label>
+<br>
+      <label class="padding=pt-4">
+    <div><b>Email</b>   <span class="margin">{{res_data.email}}</span> </div>
+
+   </label>
+   <br>
+
+      <label class="padding=pt-4">
+    <div><b>Progress</b>   <span class="margin">{{res_data.progress_status}}</span> </div>
+
+   </label>
+   <br>
+
+      <label class="padding=pt-4">
+    <div><b>Access Code </b>  <span class="margin">{{res_data.access_code}}</span> </div>
+
+   </label>
+
+      <br>
+
+      <label class="padding=pt-4">
+    <div><b>Status</b>  <span class="margin">{{res_data.status}}</span> </div>
+
+   </label>
+
+       <br>
+
+      <label class="padding=pt-4">
+    <div><b>Register</b>  <span class="margin">{{res_data.created_on}}</span> </div>
+
+   </label>
+   </div>
+
+   <hr style="margin-top: 10px;">
+ 
+
+<div mat-dialog-actions class="button">
+  <button mat-button mat-dialog-close>Close</button>
+</div>

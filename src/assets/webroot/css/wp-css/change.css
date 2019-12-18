@@ -1,0 +1,93 @@
+.grt-hnd-cntct{
+    background-color: #1B83AF;
+    color:#fff;
+    width:120px;
+    margin: 0 auto;
+    text-align: center;}
+
+    .grt-hnd-cntct a:hover{
+    background-color: #1b83af;
+    color:#fff !important;
+    }
+
+    .btn-border {
+        border: 1px solid #ddd;
+        border-radius: 2px;
+    }
+    .btn-border1 {
+        border: 1px solid #1B83AF;
+        border-radius: 2px;
+        padding: 10px;
+        color: #1B83AF;
+        margin: 0 0 0 15px;
+    }
+    .btn-border1:hover,
+    .btn-border:hover {
+        border: 1px solid #1B83AF;
+        background-color: #1B83AF;
+        border-radius: 2px;
+        padding: 10px;
+        color: #fff;
+    }
+
+.clnt-accss-btn1{
+background-color: #1B83AF;
+color:#fff;
+width:120px;
+text-align:center;
+margin-top: 10px;
+margin-left: 23px;
+float:right;
+font-family:"Antic Slab", Arial, Helvetica, sans-serif;
+font-size: 14px}
+
+.clnt-accss-btn1:hover{ background: #1b83af none repeat scroll 0 0 !important;    color: #fff !important;}
+
+
+.clnt-accss-btn1 a{
+color:#fff !important;
+padding:6px 12px;
+text-decoration:none;
+display:block;}
+
+.clnt-accss-btn1 a:hover{
+background-color: #1b83af;
+}
+
+.read-more{
+background-color: #1B83AF; 
+color:#fff !important;
+width:120px;
+margin: 26px auto !important;
+padding: 4px 0px;
+}
+
+
+.read-more:hover{
+color:#fff !important;
+background:#1b83af !important;
+}
+
+#contact{
+width:18% !Important;
+margin-top:15px;
+background-color: #1B83AF;
+}
+.experience_section .col-lg-10 .swiper-slide.active_date {
+    background-color: #9FBA3A;
+}
+
+/*New Home Page CSS Start*/
+.green_button {background-color: #9FBA3A; color: #fff; border: 1.5px solid #9FBA3A;}
+.next_webinar_section p {color: #9FBA3A;}
+.experience_section .experience_slider .top .green {color: #9FBA3A;}
+.button_transparent span {color: #9FBA3A;}
+.homepage_new .date_counter_slider .swiper-button-next i, .homepage_new .date_counter_slider .swiper-button-prev i 
+{background-color: #9FBA3A;}
+.popular_courses_section .flex-item .rating {background-color: #9FBA3A;}
+.arrow_button span i {background-color: #9FBA3A;}
+.blog_section .date {color: #9FBA3A;}
+.faq_section .set > .question.active {background-color: #9FBA3A;}
+.green_button:hover {background-color: #fff; color: #9FBA3A;}
+.experience_now_section .main_section .section_content .right_sec h6 {color: #9FBA3A;}
+/*New Home Page CSS END*/

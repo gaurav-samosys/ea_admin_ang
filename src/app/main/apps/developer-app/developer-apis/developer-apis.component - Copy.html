@@ -1,0 +1,121 @@
+
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+
+
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+    	<div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+          <div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+                  fxFlex="1 0 auto">
+    	         <mat-toolbar style="margin-top: 25px;">
+                        <span>Developer App Listing</span>
+                        <span class="fill-remaining-space"></span>
+                                </mat-toolbar>
+                                <br>
+
+    	                     <mat-divider></mat-divider>
+
+                      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <mat-label >Show</mat-label>
+                    <mat-form-field  appearance="outline" fxFlex="10">
+							  <select matNativeControl  (change)="changelimit($event.target.value)">
+							    <option value="10">10</option>
+							    <option value="25">25</option>
+							    <option value="50">50</option>
+							    <option value="100">100</option>
+							  </select>
+                    </mat-form-field>
+                   <mat-label >entries</mat-label>
+
+                </div>
+    	      <!-- CONTENT -->
+        <div class="content">
+          <div class="p10">
+            
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource">
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="first_name">
+                  <th mat-header-cell *matHeaderCellDef> First Name </th>
+                  <td class="style" mat-cell *matCellDef="let element" (click)="openDialog(element)"> {{element.first_name}} {{element.last_name}}</td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef> Email </th>
+                  <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="app_id">
+                  <th mat-header-cell *matHeaderCellDef> app_id </th>
+                  <td mat-cell *matCellDef="let element"> {{element.app_id}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="app_secret">
+                  <th mat-header-cell *matHeaderCellDef> app_secret </th>
+                  <td mat-cell *matCellDef="let element"> {{element.app_secret}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="website">
+                  <th mat-header-cell *matHeaderCellDef> Domain </th>
+                  <td mat-cell *matCellDef="let element"> {{element.website}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let element"> <ui-switch [checked]="element.status == '1' ? true : false" (change)="onChange($event,element.id)"></ui-switch></td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+
+                                         <div>
+    <div class="container">
+
+        <div class="text-center">
+          <div>Showing {{start}} to {{end}} of {{allItems}} entries</div> 
+
+            <!-- pager -->
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(1)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.totalPages)">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+          </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<style type="text/css">
+    .inline_list{list-style-type: none;}
+    .inline_list li{display: inline-block;}
+    .inline_list li a{    position: relative;
+    float: left;padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #337ab7; text-decoration: none; background-color: #fff; border: 1px solid #ddd;} 
+</style>

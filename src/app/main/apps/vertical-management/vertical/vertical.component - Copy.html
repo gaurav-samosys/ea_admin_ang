@@ -1,0 +1,55 @@
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+ <mat-label style="margin-top: 20px;margin-bottom: 40px;font-size: 21px;font-weight: 500;">Verticals</mat-label>
+  
+<div fxLayout="row" fxLayoutAlign="end end" fxFlex="1 0 auto" style="margin-right: 32px;margin-bottom: 5px;">
+   <button mat-stroked-button color="primary" (click)="addVertical()" ><mat-icon>add_circle_outline</mat-icon>Add more</button> 
+
+      </div>
+
+
+          <mat-grid-list cols="3"  style="overflow: hidden; ">
+           <!--  <ng-container> -->
+  <mat-grid-tile    *ngFor="let data of vertical_data;let i=index">
+
+      <div class="fuse-card" >
+
+                  <mat-icon style="margin-top: 20px;cursor: pointer;" (click)="show_li(i)" (clickElsewhere)="hide(i)">build</mat-icon>
+
+                   <mat-list class="displayNone" id="show_list{{i}}">
+                   <mat-list-item style="cursor: pointer;" (click)="editVertical(data)"> edit</mat-list-item>
+                   <mat-list-item style="cursor: pointer;" (click)="deleteVertical(data.id)"> delete</mat-list-item>
+                                 </mat-list>
+              
+                        <img style="max-width: 200px !important;" src="http://192.168.0.31/enrichedacademy_live/app/webroot/img/verticals/{{data.img}}">
+
+                        <div class="p-16">
+                            <div class="h1">{{data.name}}</div>
+                        </div>
+
+                        <div class="p-16 pt-0 line-height-1.75">
+                            {{data.description}}
+                        </div>
+
+                         <button mat-stroked-button color="primary" (click)="name(data.name,data.id)" >Manage vertical</button> 
+
+                    </div>
+
+      
+  </mat-grid-tile>
+<!-- </ng-container> -->
+
+</mat-grid-list>
+
+
+    
+     
+</div>
+
+<style type="text/css">
+  .displayNone{
+    display: none;
+  }
+  </style>

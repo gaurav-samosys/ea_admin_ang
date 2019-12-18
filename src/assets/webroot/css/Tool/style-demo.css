@@ -1,0 +1,421 @@
+#jcl-demo .carousel {
+    /*border: 1px solid #bababa;
+    border-radius: 10px;
+    background-color: ghostwhite;*/
+    float: left;
+    /*padding-left: 10px;*/
+
+    /* Needed for rendering without flicker */
+    position: relative;
+    visibility: hidden;
+    right: -5000px;
+    width:1078px!important;
+}
+
+    /* Styling for image based carousel content. Only width and height are mandatory */
+    #jcl-demo .carousel>ul>li {
+        width: 270px;
+        height: 250px!important;
+        vertical-align:middle;
+        padding:15px 0;
+        /* optional */
+        margin: 10px 0px 10px 0;
+        /*border-radius: 5px;*/
+    }
+
+    /* Styling for text based carousel content. Only width and height are mandatory */
+    #jcl-demo .carousel>ul>li>p {
+        width: 130px;
+        height: 98px;
+
+        margin: 10px 10px 10px 0;
+        border: 1px solid #808080;
+        border-radius: 5px;
+        line-height: normal;
+        background-color: #fff;
+        padding: 10px;
+    }
+
+/* Styles for PREV and NEXT anchor buttons */
+#jcl-demo a.prev, #jcl-demo a.next, #jcl-demo a.go {
+    display: block;
+    width: 26px;
+    height: 30px;
+    line-height: 1;
+
+    background-color: #333333;
+    color: ghostwhite;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+
+    border-radius: 8px;
+    float: left;
+}
+    #jcl-demo a.prev.disabled, #jcl-demo a.next.disabled,
+    #jcl-demo a.prev.disabled:hover, #jcl-demo a.next.disabled:hover {
+        background-color: #8d8d8d;
+        cursor: default;
+    }
+    #jcl-demo a.go.highlight {
+        background-color: #dedede;
+        color: #000;
+    }
+    #jcl-demo a.prev:hover, #jcl-demo a.next:hover {
+        background-color: #fff!important;
+    }
+    #div_left {
+  margin: 20px 0 0;
+  position: relative;
+}
+.prev-item a.prev {
+  background-color: #fff;
+  border: 2px solid #edeae0;
+  border-radius: 5px;
+  color: #0893cd;
+  height: 30px;
+  width: 30px;
+}
+/*     .flex-viewport .slides {
+      width:100%!important;
+      display: inline-flex !important;
+     }*/
+     .flex_two {
+  background-color: #e4e8e6 !important;
+  background-image: url("../../img/graph-border.png") !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  border: 0 none rgba(0, 0, 0, 0) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+  padding: 20px !important;
+}
+     .flex_two .slides {
+  height: 325px !important;
+  overflow: hidden !important;
+}
+#slider_test_val .slides canvas {
+height: 420px;
+   /* width: 100%;*/
+}
+     .flex_two .slides li {
+      width: 52% !important;
+      }
+      .flex_two ul li:nth-child(2n+1) {
+    margin-right: auto !important;
+    }
+   .flex_two ul li {
+      opacity:1!important;
+    }
+      .flex_two {
+      background-color:#e4e8e6!important;
+      border-width:0px!important;
+      padding: 5px 10px;
+      margin: 0 0 30px!important;
+      }
+    #jcl-demo a.prev {
+      position: absolute;
+      right: 98px !important;
+      text-indent:9px;
+      top:20px;
+      background-color: #fff;
+      border:2px solid #edeae0;
+      width: 30px;
+      color:#0893cd;
+      border-radius:5px;
+      height:30px;
+      opacity:1!important;
+      text-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+    }
+
+.next-item a.prev {
+  background-color: #fff;
+  border: 2px solid #edeae0;
+  border-radius: 5px;
+  color: #0893cd;
+  height: 30px;
+  width: 30px;
+}
+    #new_slide a.prev {
+      text-indent:9px;
+      background-color: #fff;
+      border:2px solid #edeae0;
+      width: 30px;
+      color:#0893cd;
+      border-radius:5px;
+      height:30px;
+      opacity:1!important;
+      text-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+    }
+    #jcl-demo a.next {
+      border-radius:5px;
+      background-color: #fff;
+      border:2px solid #edeae0;
+      position: absolute;
+      right:60px;
+      text-indent:10px;
+      top: 20px;
+      color: #0893cd;
+      width: 30px;
+      height:30px;
+      opacity:1!important;
+      text-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+    }
+    #new_slide a.next {
+    border-radius:5px;
+    background-color: #fff;
+    border:2px solid #edeae0;
+    text-indent:10px;
+    color: #0893cd;
+    width: 30px;
+    height:30px;
+    opacity:1!important;
+    text-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+    }
+        #jcl-demo a.prev:hover, #jcl-demo a.next:hover, #jcl-demo a.go:hover {
+            background-color: #666666;
+        }
+
+/* Additional carousel styles for external controls, slider, widget, mid etc. */
+
+#jcl-demo .externalControl button,
+#jcl-demo .imageSliderExt button {
+    margin: 5px 5px 0 0;
+}
+#jcl-demo .externalControl a.next, #jcl-demo .externalControl a.prev, #jcl-demo .externalControl a.go,
+#jcl-demo .imageSliderExt a.next, #jcl-demo .imageSliderExt a.prev, #jcl-demo .imageSliderExt a.go
+{
+    margin: 0 5px 0 0;
+    padding: 7px 5px 0 5px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+#jcl-demo .widget img {
+    cursor: pointer;
+}
+#jcl-demo .mid {
+    margin-left: 50px;
+    width: 400px;
+    height: 300px;
+}
+#jcl-demo .vertical {
+    margin-left: 170px;
+}
+
+#jcl-demo .imageSlider .carousel>ul>li>img,
+#jcl-demo .imageSliderExt .carousel>ul>li>img {
+    width: 400px;
+    height: 300px;
+}
+#jcl-demo .imageSlider .carousel>ul>li>p,
+#jcl-demo .imageSliderExt .carousel>ul>li>p {
+    width: 380px;
+    height: 280px;
+}
+
+/* Other common styles */
+
+.clear {
+    clear: both;
+}
+
+#carousel_test_val {
+  background: transparent none repeat scroll 0 0 !important;
+  border: medium none !important;
+  box-shadow: none !important;
+  display: table;
+  margin: 0;
+  min-width: 100%;
+  padding: 0 10px;
+}
+
+#carousel_test_val .prev-item, #carousel_test_val .next-item, #carousel_test_val .flex-viewport {
+  display: table-cell;
+}
+
+
+#div_left ul.demo {
+  display: table;
+  list-style: outside none none;
+  min-width: 300px;
+  float: right;
+}
+#div_left ul.demo li {
+  list-style: outside none none;
+  display: table-cell;
+}
+
+.prevbutton .prev, .prevbutton .next {
+  background-color: #ffffff;
+  border: 3px solid #edeae0;
+  border-radius: 10px;
+  color: #0893cd;
+  display: block;
+  font-size: 23px;
+  padding: 0 2px;
+  text-align: center;
+  width: 40px;
+}
+
+
+
+
+/*media queries 30/11 */
+@media screen and (max-width:1199px) {
+#jcl-demo .carousel {
+  width:100% !important;
+}
+}
+@media screen and (max-width:991px) {
+.flexslider {
+  height: 315px;
+}
+  /*.flex_two .slides {
+  height: 275px !important;
+  overflow: hidden !important;
+}*/
+#slider_test_val .slides canvas {
+  height: 270px;
+  width: 100%;
+}
+ #jcl-demo a.prev, #jcl-demo a.next {
+top:0px;
+}
+}
+@media screen and (max-width:767px) {
+  #slider_val .slides canvas {
+  height: 380px !important;
+  width: 100% !important;
+}
+#slider_val .slides li {
+  float: none !important;
+  margin-bottom: 20px;
+  overflow: hidden;
+  width: 100% !important;
+}
+#slider_val .slides {
+  height: 800px !important;
+  overflow: hidden !important;
+}
+#jcl-demo a.prev {
+  right: 60px !important;
+  top: 0;
+ }
+ #jcl-demo a.next {
+right: 20px;
+top: 0;
+}
+}
+@media screen and (max-width:640px) {
+/*.flex_two .slides {
+  height: 650px !important;
+  overflow: hidden !important;
+}
+.flex_two .slides li {
+  float: none !important;
+  width: 100% !important;
+}*/
+#slider_test_val .slides canvas {
+  height: 275px;
+  margin-top: -25px;
+  width: 100%;
+}
+#slider_test_val .slides li div  {
+  margin-bottom: 25px!important;
+}
+}
+@media screen and (max-width:384px) {
+  #div_left ul.demo {
+  min-width: 100%;
+}
+/*.flex_two .slides {
+  height: 580px !important;
+  overflow: hidden !important;
+}*/
+#slider_test_val .slides li div {
+  margin-bottom: 10px !important;
+}
+#slider_test_val .slides canvas {
+  height: 275px;
+  width: 100%;
+  margin-top: -10px;
+}
+  }
+
+/*media queries 30/11 ends */
+.demo_ul{
+  display: inline-block;
+}
+.demo_ul li{
+  list-style: none;
+  display: inline-block;
+}
+/*slider changes*/
+/*.canvasnavs-items a.prev2 {
+    position: absolute;
+      right: 98px !important;
+      text-indent:9px;
+      top:20px;
+      background-color: #fff;
+      border:2px solid #edeae0;
+      width: 30px;
+      color:#0893cd;
+      border-radius:5px;
+      height:30px;
+      opacity:1!important;
+      text-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+    }
+    .canvasnavs-items a.next2 {
+      border-radius:5px;
+      background-color: #fff;
+      border:2px solid #edeae0;
+      position: absolute;
+      right:60px;
+      text-indent:10px;
+      top: 20px;
+      color: #0893cd;
+      width: 30px;
+      height:30px;
+      opacity:1!important;
+      text-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+    }*/
+    .prev.flex-prev-button.prev {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      height: 30px;
+      width: 30px;
+      opacity:1!important;
+      color: #0893cd;
+      text-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+      padding:5px 10px;
+    }
+    .next.flex-next-button.next {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      height: 30px;
+      width: 30px;
+      opacity:1!important;
+      color: #0893cd;
+      text-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+      padding:5px 10px;
+    }
+    .canvasnavs {
+  display: inline-block;
+  float: right;
+  overflow: hidden;
+  width: 500px;
+  text-align:right;
+}
+.canvasnavs-items {
+  display: inline-block;
+  vertical-align: middle;
+}
+.canvasnavs .canvasnavs-items:nth-child(2){width: 440px;}
+#carousel_test_val li span {
+  display: inline-block;
+  width: 48%;
+}

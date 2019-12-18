@@ -1,0 +1,610 @@
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;" >
+	<div class="center" fusePerfectScrollbar>
+		
+		<div class="mat__box mt-20 mr-28">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+						<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
+							<input matInput placeholder="All Industries">
+							<span (click)="show_li('industries')" (clickElsewhere)="hide('industries')" class="drop-down-arrow-custom">
+								<mat-icon style="cursor: pointer;">arrow_drop_down</mat-icon>
+							</span>
+							<mat-list class="displayNone" id="show_industries">
+								<mat-list-item *ngFor="let data of industry"> <mat-checkbox   [checked]="checked" (change)="onIndustryclick($event)" value="{{data.id}}">{{data.name}} </mat-checkbox></mat-list-item>
+							</mat-list>
+						</mat-form-field>
+					</div>
+					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+						<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
+							<input matInput placeholder="All Companies">
+							<span (click)="show_li('companies')" (clickElsewhere)="hide('companies')" class="drop-down-arrow-custom">
+								<mat-icon style="cursor: pointer;">arrow_drop_down</mat-icon>
+							</span>
+						
+							<mat-list class="displayNone" id="show_companies">
+								<mat-list-item *ngFor="let data of company"> <mat-checkbox [checked]="checked" (change)="onCompanyclick($event)" value="{{data.id}}"> {{data.company_name}}</mat-checkbox></mat-list-item>
+							</mat-list>
+						</mat-form-field>
+					</div>
+					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+						<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
+							<input matInput placeholder="All Clients">
+								<span (click)="show_li('clients')" (clickElsewhere)="hide('clients')" class="drop-down-arrow-custom">
+									<mat-icon style="cursor: pointer;">arrow_drop_down</mat-icon>
+								</span>
+								<mat-list class="displayNone" id="show_clients">
+									<mat-list-item *ngFor="let data of client"> <mat-checkbox [checked]="checked" (change)="onClientclick($event)" value="{{data.id}}"> {{data.client_name}}</mat-checkbox></mat-list-item>
+								</mat-list>
+						</mat-form-field>
+					</div>
+					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+						<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
+							<input matInput placeholder="All Verticals"><span (click)="show_li('vertical')" (clickElsewhere)="hide('vertical')" class="drop-down-arrow-custom"><mat-icon style="cursor: pointer;">arrow_drop_down</mat-icon></span>
+						
+							<mat-list class="displayNone" id="show_vertical">
+								<mat-list-item *ngFor="let data of vertical"> <mat-checkbox [checked]="checked" (change)="onVerticalclick($event)" value="{{data.id}}"> {{data.name}}</mat-checkbox></mat-list-item>
+							</mat-list>
+						</mat-form-field>
+					</div>
+					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+						<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
+							<input matInput placeholder="All Locations"><span (click)="show_li('location')" (clickElsewhere)="hide('location')" class="drop-down-arrow-custom"><mat-icon style="cursor: pointer;">arrow_drop_down</mat-icon></span>
+							<mat-list class="displayNone" id="show_location">
+								<mat-list-item *ngFor="let data of location"> <mat-checkbox [checked]="checked" (change)="onLocationclick($event)" value="{{data.id}}">  {{data.locationName}}</mat-checkbox></mat-list-item>
+							</mat-list>
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="widget-group mat__box mat__box2 mt-28 mr-28">
+            <div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="tabbing_container">
+						<ul class="tabs dash_main_tabs">
+							<li class="tab-link" (click)=getData(1)>
+								<p>Industries</p>
+								<span class="accent">{{industry_total}}</span>
+							</li>
+							<li class="tab-link" (click)=getData(2)>
+								<p>Companies</p>
+								<span class="accent">{{company_total}}</span>
+							</li>
+							<li class="tab-link" (click)=getData(3)>
+								<p>Clients</p>
+								<span class="accent">{{client_total}}</span>
+							</li>
+							<li class="tab-link" (click)=getData(4)>
+								<p>Users</p>
+								<span class="accent">{{user_total}}</span>
+							</li>
+							<li class="tab-link" (click)=getData(5)>
+								<p>Verticals</p>
+								<span class="accent">{{vertical_total}}</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+
+
+		<div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+			<!-- REACTIVE FORM EXAMPLE -->
+
+			<div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+				fxFlex="1 0 auto">
+
+				<mat-divider></mat-divider>
+				<div fxLayout="row wrap" fxLayoutAlign="start" fxFlex="1 0 auto">
+					<mat-list appearance="outline" fxFlex="15" class="pl-4">
+					<mat-list-item (click)=getData(1) style="cursor: pointer;"> Industries <span style="color: #05b5ef;margin-bottom: 13px;">{{industry_total}}</span></mat-list-item>
+					</mat-list>
+					<mat-list appearance="outline" fxFlex="15" class="pl-4">
+					<mat-list-item (click)=getData(2) style="cursor: pointer;"> Companies <span style="color: #05b5ef;margin-bottom: 13px;">{{company_total}}</span></mat-list-item>
+					</mat-list>
+					<mat-list appearance="outline" fxFlex="15" class="pl-4">
+					<mat-list-item (click)=getData(3) style="cursor: pointer;"> Clients <span style="color: #05b5ef;margin-bottom: 13px;">{{client_total}}</span></mat-list-item>
+					</mat-list>
+					<mat-list appearance="outline" fxFlex="15" class="pl-4">
+					<mat-list-item (click)=getData(4) style="cursor: pointer;"> Users <span style="color: #05b5ef;margin-bottom: 13px;">{{user_total}}</span></mat-list-item>
+					</mat-list>
+					<mat-list appearance="outline" fxFlex="15" class="pl-4">
+					<mat-list-item (click)=getData(5) style="cursor: pointer;"> Verticals <span style="color: #05b5ef;margin-bottom: 13px;">{{vertical_total}}</span></mat-list-item>
+					</mat-list>
+				</div>
+				
+				<mat-divider></mat-divider>
+				<br>
+				<div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row" *ngIf="table == 1">
+					<div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+						fxFlex="1 0 auto">
+						
+						<div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+							<p fxFlex="50" class="pr-4">Data Showing For Industries {{industry_total}}</p>
+							<mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+							<input matInput (keyup)="Search($event.target.value,'industry')" placeholder="Search here">
+							</mat-form-field>
+						</div>
+						
+						<div class="content">
+							<div class="p10">
+								
+								<div class="mat-elevation-z8">
+									<table mat-table [dataSource]="dataSource">
+										<!-- Name Column -->
+										<ng-container matColumnDef="0">
+										<th mat-header-cell *matHeaderCellDef> Name </th>
+										<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
+										</ng-container>
+										<!-- Weight Column -->
+										<ng-container matColumnDef="1">
+										<th mat-header-cell *matHeaderCellDef> Total Companies </th>
+										<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+										</ng-container>
+										<!-- Symbol Column -->
+										<ng-container matColumnDef="2">
+										<th mat-header-cell *matHeaderCellDef> Total Clients </th>
+										<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+										</ng-container>
+										<ng-container matColumnDef="3">
+										<th mat-header-cell *matHeaderCellDef> Total Users </th>
+										<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
+										</ng-container>
+									<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+								<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+							</table>
+							<mat-card *ngIf="showloader==true" style="display: flex; justify-content: center; align-items: center">
+							<mat-progress-spinner
+							color="primary"
+							mode="indeterminate">
+							</mat-progress-spinner>
+							</mat-card>
+							<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+							<div class="container">
+								<div>Showing {{start}} to {{end}} of {{allItems}} entries</div>
+								<div class="text-center">
+									<!-- pager -->
+									<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+										<li [ngClass]="{disabled:pager.currentPage === 1}">
+											<a (click)="setPage(1)">First</a>
+										</li>
+										<li [ngClass]="{disabled:pager.currentPage === 1}">
+											<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+										</li>
+										<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+											<a (click)="setPage(page)">{{page}}</a>
+										</li>
+										<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+											<a (click)="setPage(pager.currentPage + 1)">Next</a>
+										</li>
+										<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+											<a (click)="setPage(pager.totalPages)">Last</a>
+										</li>
+									</ul>
+								</div>
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row" *ngIf="table == 2">
+			<div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+				fxFlex="1 0 auto">
+				<div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+					<p fxFlex="50" class="pr-4">Data Showing For Companies {{company_total}}</p>
+					<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+					<input matInput  type="text" placeholder="Select Date range" ngxDaterangepickerMd [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}" startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="model" [showCustomRangeLabel]="true"  (datesUpdated)="datesUpdated($event,'company')" readonly="">
+					</mat-form-field>
+					<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+					<input matInput (keyup)="Search($event.target.value,'company')" placeholder="Search here">
+					</mat-form-field>
+				</div>
+				<div class="content" >
+					<div class="p10">
+						
+						<div class="mat-elevation-z8">
+							<table mat-table [dataSource]="dataSource">
+								<!-- Name Column -->
+								<ng-container matColumnDef="0">
+								<th mat-header-cell *matHeaderCellDef> Name </th>
+								<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
+								</ng-container>
+								<!-- Weight Column -->
+								<ng-container matColumnDef="1">
+								<th mat-header-cell *matHeaderCellDef> Industries </th>
+								<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+								</ng-container>
+								<!-- Symbol Column -->
+								<ng-container matColumnDef="2">
+								<th mat-header-cell *matHeaderCellDef> Total Clients </th>
+								<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+								</ng-container>
+								<ng-container matColumnDef="3">
+								<th mat-header-cell *matHeaderCellDef> Total Users </th>
+								<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
+								</ng-container>
+								<ng-container matColumnDef="4">
+								<th mat-header-cell *matHeaderCellDef> Status </th>
+								<td mat-cell *matCellDef="let element"> {{element[4]}} </td>
+								</ng-container>
+								<ng-container matColumnDef="5">
+								<th mat-header-cell *matHeaderCellDef>Registered</th>
+								<td mat-cell *matCellDef="let element">{{element[5]}}</td>
+								</ng-container>
+							<tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+						<tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+					</table>
+					<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+					<div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+					<div>
+						<div class="container">
+							<div>Showing {{start}} to {{end}} of {{allItems}} entries</div>
+							<div class="text-center">
+								<!-- pager -->
+								<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+									<li [ngClass]="{disabled:pager.currentPage === 1}">
+										<a (click)="setPage(1)">First</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === 1}">
+										<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+									</li>
+									<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+										<a (click)="setPage(page)">{{page}}</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+										<a (click)="setPage(pager.currentPage + 1)">Next</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+										<a (click)="setPage(pager.totalPages)">Last</a>
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row" *ngIf="table == 3">
+	<div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+		fxFlex="1 0 auto">
+		<div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+			<p fxFlex="50" class="pr-4">Data Showing For Clients {{client_total}}</p>
+			<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+			
+			<input matInput  type="text" placeholder="Select Date range" ngxDaterangepickerMd [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}" startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="model" [showCustomRangeLabel]="true"  (datesUpdated)="datesUpdated($event,'client')" readonly="">
+			</mat-form-field>
+			<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+			<input matInput (keyup)="Search($event.target.value,'client')" placeholder="Search here">
+			</mat-form-field>
+		</div>
+		<div class="content" >
+			<div class="p10">
+				
+				<div class="mat-elevation-z8">
+					<table mat-table [dataSource]="dataSource">
+						<!-- Name Column -->
+						<ng-container matColumnDef="0">
+						<th mat-header-cell *matHeaderCellDef> Name </th>
+						<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
+						</ng-container>
+						<!-- Weight Column -->
+						<ng-container matColumnDef="1">
+						<th mat-header-cell *matHeaderCellDef> Industries </th>
+						<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+						</ng-container>
+						<!-- Symbol Column -->
+						<ng-container matColumnDef="2">
+						<th mat-header-cell *matHeaderCellDef> Companies </th>
+						<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+						</ng-container>
+						<ng-container matColumnDef="3">
+						<th mat-header-cell *matHeaderCellDef> Vertical </th>
+						<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
+						</ng-container>
+						<ng-container matColumnDef="4">
+						<th mat-header-cell *matHeaderCellDef> Users </th>
+						<td mat-cell *matCellDef="let element"> {{element[4]}} </td>
+						</ng-container>
+						<ng-container matColumnDef="5">
+						<th mat-header-cell *matHeaderCellDef> Status </th>
+						<td mat-cell *matCellDef="let element"> {{element[5]}} </td>
+						</ng-container>
+						<ng-container matColumnDef="6">
+						<th mat-header-cell *matHeaderCellDef>Registered</th>
+						<td mat-cell *matCellDef="let element">{{element[6]}}</td>
+						</ng-container>
+					<tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+			</table>
+			<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+			<div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+			<div>
+				<div class="container">
+					<div>Showing {{start}} to {{end}} of {{allItems}} entries</div>
+					<div class="text-center">
+						<!-- pager -->
+						<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+							<li [ngClass]="{disabled:pager.currentPage === 1}">
+								<a (click)="setPage(1)">First</a>
+							</li>
+							<li [ngClass]="{disabled:pager.currentPage === 1}">
+								<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+							</li>
+							<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+								<a (click)="setPage(page)">{{page}}</a>
+							</li>
+							<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+								<a (click)="setPage(pager.currentPage + 1)">Next</a>
+							</li>
+							<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+								<a (click)="setPage(pager.totalPages)">Last</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row" *ngIf="table == 4">
+<div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+fxFlex="1 0 auto">
+<div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+	<p fxFlex="50" class="pr-4">Data Showing For Users {{user_total}}</p>
+	<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+	
+	<input matInput  type="text" placeholder="Select Date range" ngxDaterangepickerMd [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}" startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="model" [showCustomRangeLabel]="true"  (datesUpdated)="datesUpdated($event,'user')" readonly="">
+	</mat-form-field>
+	<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+	<input matInput (keyup)="Search($event.target.value,'user')" placeholder="Search here">
+	</mat-form-field>
+</div>
+<div class="content" >
+	<div class="p10">
+		
+		<div class="mat-elevation-z8">
+			<table mat-table [dataSource]="dataSource">
+				<!-- Name Column -->
+				<ng-container matColumnDef="0">
+				<th mat-header-cell *matHeaderCellDef> Name </th>
+				<td class="style" mat-cell *matCellDef="let element"> <div [innerHtml]="element[0]"></div> </td>
+				</ng-container>
+				<!-- Weight Column -->
+				<ng-container matColumnDef="1">
+				<th mat-header-cell *matHeaderCellDef> Email </th>
+				<td mat-cell *matCellDef="let element"> <div [innerHtml]="element[1]"></div> </td>
+				</ng-container>
+				<!-- Symbol Column -->
+				<ng-container matColumnDef="2">
+				<th mat-header-cell *matHeaderCellDef> Video </th>
+				<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+				</ng-container>
+				<ng-container matColumnDef="3">
+				<th mat-header-cell *matHeaderCellDef><mat-icon>cloud_download</mat-icon></th>
+				<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
+				</ng-container>
+				<ng-container matColumnDef="4">
+				<th mat-header-cell *matHeaderCellDef>Certificate</th>
+				<td mat-cell *matCellDef="let element"> {{element[4]}} </td>
+				</ng-container>
+				<ng-container matColumnDef="5">
+				<th mat-header-cell *matHeaderCellDef>Progress</th>
+				<td mat-cell *matCellDef="let element"> {{element[5]}} </td>
+				</ng-container>
+				<ng-container matColumnDef="6">
+				<th mat-header-cell *matHeaderCellDef> % </th>
+				<td mat-cell *matCellDef="let element"> {{element[6]}} </td>
+				</ng-container>
+				<ng-container matColumnDef="7">
+				<th mat-header-cell *matHeaderCellDef> Status </th>
+				<td mat-cell *matCellDef="let element"> {{element[7]}} </td>
+				</ng-container>
+				<ng-container matColumnDef="8">
+				<th mat-header-cell *matHeaderCellDef>Registered</th>
+				<td mat-cell *matCellDef="let element">{{element[8]}}</td>
+				</ng-container>
+			<tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+	</table>
+	<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+	<div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+	<div>
+		<div class="container">
+			<div>Showing {{start}} to {{end}} of {{allItems}} entries</div>
+			<div class="text-center">
+				<!-- pager -->
+				<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+					<li [ngClass]="{disabled:pager.currentPage === 1}">
+						<a (click)="setPage(1)">First</a>
+					</li>
+					<li [ngClass]="{disabled:pager.currentPage === 1}">
+						<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+					</li>
+					<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+						<a (click)="setPage(page)">{{page}}</a>
+					</li>
+					<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+						<a (click)="setPage(pager.currentPage + 1)">Next</a>
+					</li>
+					<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+						<a (click)="setPage(pager.totalPages)">Last</a>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row" *ngIf="table == 5">
+<div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+fxFlex="1 0 auto">
+<div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+<p fxFlex="50" class="pr-4">Data Showing For Verticals {{vertical_total}}</p>
+<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+
+<input matInput  type="text" placeholder="Select Date range" ngxDaterangepickerMd [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}" startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="model" [showCustomRangeLabel]="true"  (datesUpdated)="datesUpdated($event,'vertical')" readonly="">
+</mat-form-field>
+<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+<input matInput (keyup)="Search($event.target.value,'vertical')" placeholder="Search here">
+</mat-form-field>
+</div>
+<div class="content" >
+<div class="p10">
+
+<div class="mat-elevation-z8">
+	<table mat-table [dataSource]="dataSource">
+		<!-- Name Column -->
+		<ng-container matColumnDef="0">
+		<th mat-header-cell *matHeaderCellDef> Name </th>
+		<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
+		</ng-container>
+		<!-- Weight Column -->
+		<ng-container matColumnDef="1">
+		<th mat-header-cell *matHeaderCellDef> Total Vedios </th>
+		<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+		</ng-container>
+		<!-- Symbol Column -->
+		<ng-container matColumnDef="2">
+		<th mat-header-cell *matHeaderCellDef> Total Quiz  </th>
+		<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+		</ng-container>
+		<ng-container matColumnDef="3">
+		<th mat-header-cell *matHeaderCellDef>Total Questions</th>
+		<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
+		</ng-container>
+		<ng-container matColumnDef="4">
+		<th mat-header-cell *matHeaderCellDef>Created Date</th>
+		<td mat-cell *matCellDef="let element"> {{element[4]}} </td>
+		</ng-container>
+		<ng-container matColumnDef="5">
+		<th mat-header-cell *matHeaderCellDef>Action</th>
+		<td mat-cell *matCellDef="let element">  <button mat-raised-button color="primary" type="submit" class="button" (click)="Manage()">Manage </button> </td>
+		</ng-container>
+	<tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+</table>
+<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+<div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+<div>
+<div class="container">
+	<div>Showing {{start}} to {{end}} of {{allItems}} entries</div>
+	<div class="text-center">
+		<!-- pager -->
+		<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+			<li [ngClass]="{disabled:pager.currentPage === 1}">
+				<a (click)="setPage(1)">First</a>
+			</li>
+			<li [ngClass]="{disabled:pager.currentPage === 1}">
+				<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+			</li>
+			<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+				<a (click)="setPage(page)">{{page}}</a>
+			</li>
+			<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+				<a (click)="setPage(pager.currentPage + 1)">Next</a>
+			</li>
+			<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+				<a (click)="setPage(pager.totalPages)">Last</a>
+			</li>
+		</ul>
+	</div>
+	
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<mat-grid-list cols="2" >
+<mat-grid-tile>
+<mat-card class="example-card">
+
+<div id="users">
+</div>
+</mat-card>
+</mat-grid-tile>
+
+
+<mat-grid-tile>
+<mat-card class="example-card">
+
+<div id="download"></div>
+</mat-card>
+</mat-grid-tile>
+
+<mat-grid-tile>
+<mat-card class="example-card">
+<div id="video"></div>
+</mat-card>
+</mat-grid-tile>
+<mat-grid-tile>
+<mat-card class="example-card">
+<div id="certificate"></div>
+</mat-card>
+</mat-grid-tile>
+
+</mat-grid-list>
+<mat-grid-list cols="2" style="overflow: hidden; ">
+<mat-grid-tile>
+<mat-card class="example-card">
+<div id="completion"></div>
+</mat-card>
+</mat-grid-tile>
+<mat-grid-tile>
+<mat-card class="example-card">
+<div id="access"></div>
+</mat-card>
+</mat-grid-tile>
+</mat-grid-list>
+<div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+<div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+fxFlex="1 0 auto">
+<div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+<p>Year Over Year Comparison</p>
+<br>
+<p fxFlex="50" class="pr-4">Total Users {{comparisiongraph_total}}</p>
+<mat-form-field appearance="outline" fxFlex="25" class="pr-4">
+<input matInput  type="text" placeholder="Select Date range" ngxDaterangepickerMd [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}" startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="model" [showCustomRangeLabel]="true"  (datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly="">
+</mat-form-field>
+</div>
+<div id="comparison"></div>
+</div>
+</div>
+
+
+</div>
+</div>
+
+</div>
+</div>
+<style type="text/css">
+	.displayNone{
+		display: none;
+	}
+	.inline_list{list-style-type: none;}
+.inline_list li{display: inline-block;}
+.inline_list li a{    position: relative;
+float: left;padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #337ab7; text-decoration: none; background-color: #fff; border: 1px solid #ddd;}
+</style>

@@ -1,0 +1,213 @@
+<div class="dialog-content-wrapper">
+       <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Add Question and Answers</span>
+            <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="content p-24">
+
+ 
+
+
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+
+
+       <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form" [formGroup]="addQuestionform" (ngSubmit)="addQuestion()">
+  
+
+<!--     <div><h2>Questions</h2></div>
+    <div fxLayout="column" name="adduserForm"> -->
+         <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                 <mat-label fxFlex="50" class="pr-4">Question Type*
+                <mat-icon matTooltip="*Multiple choice-: Offering several answers from which the correct one is to be chosen.
+                *True/False-: Offering two answers from which the correct one is to be chosen.
+                *Multiple answer-: Questions that allow multiple answers,
+                User can select multiple answers from the list of choices.">contact_support</mat-icon>
+            </mat-label>
+                   <mat-label fxFlex="50" class="pr-4">Question*
+                <mat-icon matTooltip="Input for Question.Here you can write Question(Max character length is 250). ">contact_support</mat-icon>
+            </mat-label>
+         </div>
+        
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+       
+            <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                <select matNativeControl formControlName="question_type" (change)="Type($event.target.value)">
+                    <option selected="" value=""> Select Type</option>
+                    <option value="0">Multiple Choice</option>
+                    <option value="1">True/False</option>
+                    <option value="2">Multiple Answer</option>
+
+                </select>
+                <mat-error *ngIf="hasError('question_type', 'required')">This field is required! </mat-error>
+            </mat-form-field>
+
+           
+            <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                <textarea matInput formControlName="question" required></textarea>
+                <mat-error *ngIf="hasError('question', 'required')">This field is required! </mat-error>
+            </mat-form-field>
+
+        </div>
+         <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+            <mat-label>Points</mat-label>
+                <input matInput formControlName="points" required>
+                <mat-error *ngIf="hasError('points', 'required')">This field is required!</mat-error>
+            </mat-form-field>
+
+              <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                  <mat-label>Order</mat-label>
+                <input matInput formControlName="order" required>
+                <mat-error *ngIf="hasError('order', 'required')">This field is required!</mat-error>
+            </mat-form-field>
+        </div>
+
+         <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex="1 0 auto" >
+            <h2>Answers</h2>
+         </div>
+
+
+              <!-- Multiple answer -->
+          <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex="1 0 auto"  *ngIf="hide == 1">
+              <mat-form-field appearance="outline" fxFlex="90" class="pr-4 mx_wd_full">
+                <mat-label>Option 1</mat-label>
+                <input matInput formControlName="options">
+            </mat-form-field><span class="radio-addon"><input type="radio" value="1" formControlName="radio_ans" ></span> 
+          </div>
+
+          <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex="1 0 auto"  *ngIf="hide == 1">
+
+
+              <div formArrayName="questions" class="width_fill">
+                <div *ngFor="let item of Question_ans.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                <mat-form-field appearance="outline" fxFlex="90" class="pr-4 mx_wd_full" >
+                <mat-label>Option {{pointIndex + 2}}</mat-label>
+                <input matInput formControlName="option">
+            </mat-form-field><span class="radio-addon btn_right_side"><mat-icon *ngIf="pointIndex > 0" (click)="remove_fields(pointIndex)">maximize</mat-icon><input type="radio" value="{{pointIndex+2}}" formControlName="radio_ans1" ></span>
+           </div>
+          </div>
+           </div>
+<!-- End multiple answer -->
+
+
+      
+         <!-- start multiple -->
+
+          <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex="1 0 auto"  *ngIf="hide == 3">
+              <mat-form-field appearance="outline" fxFlex="90" class="pr-4 mx_wd_full">
+                <mat-label>Option 1</mat-label>
+                <input matInput formControlName="multiple" >
+            </mat-form-field><span class="radio-addon"><input type="radio" value="1" formControlName="multiple_radio"></span> 
+          </div>
+
+          <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex="1 0 auto"  *ngIf="hide == 3">
+
+
+              <div formArrayName="multiples_question" class="width_fill">
+                <div *ngFor="let item of Question_ans.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                <mat-form-field appearance="outline" fxFlex="90" class="pr-4 mx_wd_full" >
+                <mat-label>Option {{pointIndex + 2}}</mat-label>
+                <input matInput formControlName="multiples">
+            </mat-form-field><span class="radio-addon btn_right_side"><mat-icon *ngIf="pointIndex > 0" (click)="remove_fields(pointIndex)">maximize</mat-icon><input type="radio" value="{{pointIndex+2}}" formControlName="multiple_radio1"></span>
+           </div>
+          </div>
+           </div>
+
+           <!-- End multiple -->
+   
+       <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex="1 0 auto" *ngIf="hide == 1 || hide == 3">
+            <a mat-raised-button color="primary" (click)="addQuestions()">Add More Option</a>
+          </div>
+
+
+
+    <!-- True false row -->
+             <div fxLayout="row wrap" fxLayoutAlign=" start center" fxFlex="1 0 auto"  *ngIf="hide == 2">
+              <mat-form-field appearance="outline" fxFlex="90" class="pr-4 mx_wd_full">
+                <mat-label>Option 1</mat-label>
+                <input matInput formControlName="true1" readonly>
+            </mat-form-field><span class="radio-addon"><input type="radio" value="1" formControlName="radio_true"></span> 
+
+                <mat-form-field appearance="outline" fxFlex="90" class="pr-4 mx_wd_full">
+                <mat-label>Option 2</mat-label>
+                <input matInput formControlName="true2" readonly>
+            </mat-form-field><span class="radio-addon"><input type="radio" value="2" formControlName="radio_true"></span> 
+          </div>
+
+         <!-- End true false -->
+
+
+          <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex="1 0 auto" *ngIf="hide != 0">
+                    <mat-label fxFlex="100" class="pr-4">Solution:
+                <mat-icon matTooltip="Input for solution.Here you can write solution of question(Max character length is 30).">contact_support</mat-icon>
+            </mat-label>
+          </div>
+
+          <div fxLayout="row wrap" fxLayoutAlign="center" fxFlex="1 0 auto" *ngIf="hide != 0">
+             <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                <textarea matInput formControlName="solution"></textarea>
+                <mat-error *ngIf="hasError('solution', 'required')">This field is required!</mat-error>
+            </mat-form-field>
+          </div>
+
+
+        <div fxLayout="row" style="margin-top: 21px;">
+
+            <button mat-raised-button color="primary" type="submit" class="button">Save</button>
+
+            <button mat-raised-button mat-button mat-dialog-close color="primary" class="button cancel" style="margin-left: 40px;">Close</button>
+        </div>
+
+
+
+
+
+
+
+</form>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<h1>Edit Product</h1>
+
+<form [formGroup]="productForm">
+
+  <label>
+    Title: <input formControlName="title" />
+  </label>
+  <h2>Selling Points</h2>
+
+  <div formArrayName="selling_points">
+    <div *ngFor="let item of sellingPoints.controls; let pointIndex=index" [formGroupName]="pointIndex">
+    <label>
+      Selling Point:   <input matInput formControlName="point" >
+    </label>
+    <button type="button" (click)="deleteSellingPoint(pointIndex)">Delete Selling Point</button>
+    </div>
+    <button type="button" (click)="addSellingPoint()">Add Selling Point</button>
+  </div>
+
+</form>
+
+{{ this.productForm.value | json }} -->

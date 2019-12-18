@@ -1,0 +1,78 @@
+.prim{
+    position: relative;
+        width: 320px;
+        margin-bottom: 10px;
+        padding: 10px 17px;
+        display: inline-block;
+        background: #fff;
+        border: 1px solid #E6E9ED;
+        -webkit-column-break-inside: avoid;
+        -moz-column-break-inside: avoid;
+        column-break-inside: avoid;
+        opacity: 1;
+        transition: all .2s ease;
+}
+
+.select_app_con{
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.primset{
+    position: relative;
+        width: 338px;
+        margin-bottom: 10px;
+        padding: 10px 17px;
+        display: inline-block;
+        background: #fff;
+        border: 1px solid #E6E9ED;
+        -webkit-column-break-inside: avoid;
+        -moz-column-break-inside: avoid;
+        column-break-inside: avoid;
+        opacity: 1;
+        transition: all .2s ease;
+}
+.input-group-addon{
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+.uploadlogo{
+    opacity: 1;
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    padding-right: 65px;
+}
+
+
+
+.title {
+    text-align: center;
+  }
+  
+  .picker-wrapper {
+    flex: 0 0 250px;
+    opacity: 1;
+    border: 1 solid black;
+  }
+  .detail-wrapper {
+    flex: auto;
+  }

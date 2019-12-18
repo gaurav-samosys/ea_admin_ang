@@ -1,0 +1,212 @@
+<div id="AccessCode-access-code" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+
+        <div class="mat__box mt-20 mr-28">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="h2 mb-8">Generate Access Code</div>
+              <form [formGroup]="form" (ngSubmit)="accessForm()">
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" fxLayoutGap="20px">
+
+
+                    <mat-form-field appearance="outline" fxFlex="100" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
+                      <mat-label>Select Company</mat-label>
+                        <mat-select   formControlName="company" (selectionChange)="getClient($event.value)">
+                           <input style="margin-top: 20px; width: 230px;  margin-bottom: 15px;" placeholder ="Select Search company" (keyup)="onKey($event.target.value)">
+                         
+                           <!-- <mat-option selected=""  value=""  >Please select company</mat-option> -->
+                             <mat-option *ngFor="let data of  dataArray" value="{{data.id}}" >{{data.company_name}}</mat-option>
+                        </mat-select>
+                         <mat-error *ngIf="hasError('company', 'required')">Please select comapny </mat-error>
+                    </mat-form-field>
+
+
+                    <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
+                <!-- </div> -->
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"> -->
+                    <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Select Client </mat-label>
+                      <mat-select formControlName="client" required>
+                          <!-- <mat-option selected=""  value=""  >Please select client</mat-option> -->
+                          <input style="margin-top: 25px; width: 100%;margin-bottom: 15px;" placeholder ="Select  client Search" (keyup)="onClientKey($event.target.value)">
+                          <mat-option *ngFor="let data of clientDataArray" value="{{data.id}}">{{data.client_name}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="hasError('client', 'required')">Please select client</mat-error>
+                  </mat-form-field>
+                  <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
+                <!-- </div> -->
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"> -->
+                  <mat-form-field appearance="outline" fxFlex="100">
+                      <mat-label required>Select Limit </mat-label>
+                      <input matInput formControlName="limit" type="number"  id="number" min="1" >
+                      <mat-error *ngIf="hasError('limit', 'required')">Please select limit</mat-error>
+                  </mat-form-field>
+                  <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
+                </div>
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              </div>
+              <!-- END OF ROW -->
+              <div class="row mt-20">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                      <button mat-raised-button color="primary" type="submit" class="button" >Generate And Download Access Code  </button>
+                      <a mat-raised-button mat-button mat-dialog-close color="primary"  class="button cancel" (click)="Reset()">Reset</a>
+                  </div>
+                </div>
+              </div>
+              <!-- END OF ROW -->
+            </form>
+            </div>
+            <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+          </div>
+          <!-- END OF ROW -->
+        </div>
+        <!-- END OF MAT__BOX MT-20 MR-28 -->
+
+        <div class="mat__box mt-20 mr-28">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="h2 mb-8">Access Code Search</div>
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" fxLayoutGap="20px">
+                  <mat-form-field appearance="outline" fxFlex="100">
+                      <mat-label required>Company Name </mat-label>
+                      <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'cname')">
+                  </mat-form-field>
+                  <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
+                <!-- </div> -->
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"> -->
+                  <mat-form-field appearance="outline" fxFlex="100">
+                      <mat-label required>Client Name</mat-label>
+                      <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'clientname')">
+                  </mat-form-field>
+                  <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
+                <!-- </div> -->
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"> -->
+                  <mat-form-field appearance="outline" fxFlex="100">
+                      <mat-label required>Access Code</mat-label>
+                      <input matInput placeholder="Search Access Code" (keyup)="Search($event.target.value,'code')">
+                  </mat-form-field>
+                  <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
+                </div>
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              </div>
+              <!-- END OF ROW -->
+              <mat-divider class="mt-20 mb-20"></mat-divider>
+         <!--      <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+                  <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Show Entries</mat-label>
+                    <select matNativeControl (change)="changelimit($event.target.value)">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                  </mat-form-field>
+              
+                </div>
+             
+              </div> -->
+              <!-- END OF ROW -->
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <table mat-table [dataSource]="dataSource">
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="company_name">
+                      <th mat-header-cell *matHeaderCellDef> Company Name </th>
+                      <td class="style text-align" mat-cell *matCellDef="let element" > {{element.company_name}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="client_name">
+                      <th mat-header-cell *matHeaderCellDef> Client Name </th>
+                      <td class="text-align" mat-cell *matCellDef="let element"> {{element.client_name}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="created_date">
+                      <th mat-header-cell *matHeaderCellDef> Create Date </th>
+                      <td class="text-align" mat-cell *matCellDef="let element"> {{element.created_date|date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="totalAccessCodes">
+                      <th mat-header-cell *matHeaderCellDef> Generate Code Count </th>
+                      <td class="text-align" mat-cell *matCellDef="let element"> {{element.totalAccessCodes}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef> Action </th>
+                      <td class="text-align" mat-cell *matCellDef="let element"> 
+                      <button mat-raised-button color="primary" type="submit" class="button" (click)="downloadAccessData(element.client_id,element.random_code)">Download </button>
+                     </td>
+                    </ng-container>
+
+                      <ng-container matColumnDef="view">
+                      <th mat-header-cell *matHeaderCellDef> View </th>
+                     <td class="text-align" mat-cell *matCellDef="let element">
+                         <button mat-raised-button color="primary" type="submit" class="button" [routerLink]="['/apps/Access-code/viewdetails', element.client_id,element.code]">View </button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                                  <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems"   [pageIndex]="currentPage"
+                [pageSize]="pageSize"  [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons (page)="handlePage($event)"></mat-paginator>
+                 <div *ngIf="access_data == '' " style="text-align: center">No data available in table</div>
+                </div>
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              </div>
+              <!-- END OF ROW -->
+              <!-- <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <p fxFlex="50" class="pr-4">Showing {{start}} to {{end}} of {{allItems}} entries</p>
+                </div> -->
+                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+               <!--  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                  <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(1)">First</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a (click)="setPage(page)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.totalPages)">Last</a>
+                    </li>
+                </ul>
+                </div> -->
+                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+            <!--   </div> -->
+              <!-- END OF ROW -->
+            </div>
+            <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+          </div>
+          <!-- END OF ROW -->
+        </div>
+        <!-- END OF MAT__BOX MT-20 MR-28 -->
+        
+</div>
+</div>
+
+
+
+<style type="text/css">
+    .inline_list{list-style-type: none;}
+    .inline_list li{display: inline-block;}
+    .inline_list li a{    position: relative;
+    float: left;padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #337ab7; text-decoration: none; background-color: #fff; border: 1px solid #ddd;} 
+</style>

@@ -1,0 +1,47 @@
+.refreshmain .orange-button,.refreshmain .sweet-alert::after,.refreshmain .sweet-alert button,.refreshmain .popover_buttons li a.popover_button ,.refreshmain .popover_main_content .icon_popover {background:#56C271; /* Old browsers */ color: #fff;}
+.refreshmain .orange-button:hover{ background: #489f5e; /* Old browsers */}
+.refreshmain .notification-icon[data-badge]::after{background: rgba(119,194,117, 0.8) none repeat scroll 0 0;}
+.refreshmain .user-name-wrap a span.name{color: #888;}
+.refreshmain .orange-button-light,.all-disabled .box-inner ul li:hover .check.check-selected:hover,.refreshmain .wh-q-box .box-inner ul li:hover .check:hover,.refreshmain .wh-q-box .box-inner ul li .check-selected,.refreshmain .wh-q-box .box-inner ul li .check-selected,.refreshmain .limits-list ul li a.orange-bar,.refreshmain .wh-q-box .box-inner ul li .check-selected:hover {background: #f05666; /* Old browsers */ color: #fff;}
+.refreshmain .orange-button-light:hover,.refreshmain .all-disabled .box-inner ul li:hover .check.check-selected:hover{background: #da4b5a; /* Old browsers */ color: #fff;}
+.refreshmain .completed-inner p:nth-child(2),.refreshmain .available-certificare h6 span ,.refreshmain .all-courses-title span,.refreshmain .overlay-title-small{ color:#56C271;}
+.refreshmain  .debt-free h1,.refreshmain .video-title-wrap .video-title .mins ,.refreshmain .wh-content-title ,.refreshmain  .q-title-orange,.refreshmain .breadcumbs-quiz ul li a ,.refreshmain .wh-content-title2 span,.refreshmain .course-options-wrap ul li.current .course-options-content h1 ,.refreshmain .register-form .box h1 span  { color:#2E4D58;}  /* Dark Blue Text */
+.refreshmain .la-ball-fall div{background-color:#2E4D58;}
+.refreshmain a {color:#56C271;}
+.refreshmain a:hover,.refreshmain .financial-health-title {color: #2e4d58 ;}
+.refreshmain .gray-button,.refreshmain .wh-q-box .box-inner ul li:hover p,.check:hover,.refreshmain .wh-q-box .box-inner ul li .check-selected p {color:#fff;}  /* White Text */
+.refreshmain .correct_answer {background:#f8cbd0 !important;}
+.refreshmain .pace .pace-progress, .refreshmain .progress-bar-inner,.refreshmain .lock-icon { background-color: #56c271;}
+.refreshmain .progress-0 ,.refreshmain .progress-o ,.refreshmain .statistics-title h1{color: #2e4d58;}
+.refreshmain .gdb-couse-detail-wrap > .gdb-course-title {background: #a4e7b5 none repeat scroll 0 0; color: #686867;}
+.refreshmain a.orange-button:hover{color: #fff;}
+.refreshmain .health-card-wrap .card.a:hover .card-popover {background: rgba(86, 194, 113, 0.7) none repeat scroll 0 0;box-shadow: 0px 1px 1px rgba(0, 1, 1, 0.2);color: #2e4d58;display: block;font-size: 12px;left: 56px;padding: 12px 10px;position: absolute;width: 149px;z-index: 10;}
+.refreshmain .health-card-wrap .card.a:hover .card-popover::before {border-bottom: 10px solid rgba(0, 0, 0, 0);border-right: 10px solid rgba(86, 194, 113, 0.7);border-top: 10px solid rgba(0, 0, 0, 0);content: " ";height: 0;left: -10px;position: absolute;width: 0;}
+.refreshmain .health-card-wrap .card.b:hover .card-popover {background: rgba(86, 194, 113, 0.7) none repeat scroll 0 0;box-shadow: 0px 1px 1px rgba(0, 1, 1, 0.2);color: #2e4d58;display: block;font-size: 12px;left: 36px;padding: 12px 10px;position: absolute;width: 149px;z-index: 10;}
+.refreshmain .health-card-wrap .card.b:hover .card-popover::before {border-bottom: 10px solid rgba(0, 0, 0, 0);border-right: 10px solid rgba(86, 194, 113, 0.7);border-top: 10px solid rgba(0, 0, 0, 0);content: " ";height: 0;left: -10px;position: absolute;width: 0;}
+.refreshmain .health-card-wrap .card.c:hover .card-popover {background: rgba(86, 194, 113, 0.7) none repeat scroll 0 0;box-shadow: 0px 1px 1px rgba(0, 1, 1, 0.2);color: #2e4d58;display: block;font-size: 12px;left: 56px;padding: 12px 10px;position: absolute;width: 149px;z-index: 10;}
+.refreshmain .health-card-wrap .card.c:hover .card-popover::before {border-bottom: 10px solid rgba(0, 0, 0, 0);border-right: 10px solid rgba(86, 194, 113, 0.7);border-top: 10px solid rgba(0, 0, 0, 0); content: " "; height: 0;left: -10px;position: absolute;width: 0;}
+.refreshmain .health-card-wrap .card.d:hover .card-popover {background: rgba(86, 194, 113, 0.7) none repeat scroll 0 0;box-shadow: 0px 1px 1px rgba(0, 1, 1, 0.2);color: #2e4d58;display: block;font-size: 12px;left: 36px;padding: 12px 10px;position: absolute;width: 149px;z-index: 10;}
+.refreshmain .health-card-wrap .card.d:hover .card-popover::before {border-bottom: 10px solid rgba(0, 0, 0, 0);border-right: 10px solid rgba(86, 194, 113, 0.7);border-top: 10px solid rgba(0, 0, 0, 0);content: " ";height: 0;left: -10px;position: absolute;width: 0;}
+.refreshmain .pace .pace-activity{border-color: #2e4d58 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #2e4d58;}
+.refreshmain .debt-free .icon {background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -396px -190px;}
+.refreshmain .credit-score .icon {background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -286px 3px;}
+.refreshmain .your-workbook .icon { background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -269px -220px;}
+.refreshmain .user-name-wrap a span.name::before { background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -131px -39px;}
+.refreshmain .gdb-course-detail::before {background: rgba(0, 0, 0, 0) linear-gradient(to right, #56c271 0%, #ffffff 100%) repeat scroll 0 0;}
+.refreshmain .gdb-couse-detail-wrap > .widget > .gdb-course-title::before {background: rgba(0, 0, 0, 0) linear-gradient(to right, #56c271 0%, #ffffff 100%) repeat scroll 0 0;}
+.refreshmain .course-title::before { background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll 0 -162px;}
+.refreshmain .course-options-wrap ul li.current::before { background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -242px -240px;}
+.refreshmain .course-options-wrap ul li.unlock {background-color:rgba(86,194,113,0.5); background-image: none;}
+.refreshmain .course-options-wrap ul li.completed {background-color:rgba(240,86,102,0.3); background-image: none;}
+.refreshmain .q-title-orange::before {background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll 6px -115px;}
+.refreshmain .wh-q-box .box-inner ul li:hover .check::after {background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -49px -40px;}
+.refreshmain .breadcumbs-quiz ul li a.breadcumbs-qw-arrow { background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -114px -69px;}
+.refreshmain .sweet-alert .confirm ,.refreshmain  .sweet-alert button{ background-color: #56c271 !important;}
+.refreshmain .sweet-alert::after {background:#56c271 none repeat scroll 0 0 !important;}
+.refreshmain .pending-icon { background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -325px -312px;}
+.refreshmain .health-card-wrap .card.card-active {background:#56c271 none repeat scroll 0 0;}
+.refreshmain .score-grade,.refreshmain .score-detail .scores-wrap .scores,.refreshmain .stat-section1 .avarage-score-box .score-box h2,.refreshmain .stat-section1 .avarage-score-box .score-box span{ color:#56c271; }
+.refreshmain .health-progress > span,.refreshmain .level-wrap .average-level .level-progress span span,.refreshmain  .level-wrap .average-level .grade span{background-color: #f05666;}
+.refreshmain .health-progress,.refreshmain .level-wrap .average-level .level-progress{background: rgba(240, 86,102, 0.4) none repeat scroll 0 0;}
+.refreshmain .statistics-title h1::before { background: rgba(0, 0, 0, 0) url("../img/home/sprites_refreshfit.png") no-repeat scroll -114px -68px;}

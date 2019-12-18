@@ -1,0 +1,30 @@
+/*============================================================   master responsive.css    ============================================================*/
+@media(max-width:979px){
+	.blue_main{width: 100% !important;}
+}
+
+@media(max-width: 799px){
+	.left_section{clear: both;margin: 0px auto;width: 50% !important; float: none !important;}
+	.right_sec{clear: both;margin: 0 !important;width: 100% !important; float: none !important;}
+	.login-main {margin-bottom: 45px;}
+	.frgt-pswrd-frm {margin-bottom: 35px;}
+	/*.right_sec{width: 100% !important;}*/
+	.alredy-acnt-frm.user_form {border-top: 3px solid;}
+}
+@media(max-width: 550px){
+	.left_section {	width: 100% !important;}
+	.right_sec{clear: both;float: none;margin: 0 !important;text-align: center;width: 100% !important;background: transparent !important;box-shadow: none !important;}
+	.alrdy-acnt-inpt label{width: 100% !important;text-align: left !important;}
+	.alrdy-acnt-inpt input{width: 100% !important;}
+}
+@media(max-width: 480px){
+	.copyright {font-size: 11px !important; }
+	.ftr-menu li {padding: 0 5px 0 0px !important;}
+}
+@media(max-width: 360px){
+	.logo {width: 100% !important;text-align: center;}
+	.header_q {	width: 100%;}
+	#nav {width: 100% !important;}
+	.header_q_content {width: 100%;text-align: center;margin-left: 0px !important;}
+	#nav > ul > li{width: 100%;text-align: center;}
+}

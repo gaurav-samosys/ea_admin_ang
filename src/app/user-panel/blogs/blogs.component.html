@@ -1,0 +1,489 @@
+<!-- <ng-image-slider [images]="imageObject" #nav>
+    </ng-image-slider>
+    <button (click)="prevImageClick()">Prev</button>
+    <button (click)="nextImageClick()">Next</button> -->
+
+<main class="homepage_new blog_page">
+  <!-- <section class="banner_section">
+    <div class="image_container">
+
+      <div class="carousel-section">
+        <owl-carousel [options]="myCarouselOptions" [items]="images">
+          <div class="item" *ngFor="let image of myCarouselImages;let i = index">
+            <div>
+              <img src={{image}} />
+            </div>
+          </div>
+        </owl-carousel>
+      </div>
+    </div>
+  </section> -->
+
+
+
+  <section class="banner_section blog_banner">
+    <div class="swiper-container blog_slider">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="outer">
+            <div class="row banner_content">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h1>Popular Articles</h1>
+                <h5 class="blog_name">Wealth Mastery Bootcamp Calgary</h5>
+                <h5 class="author_name">By Alanna Abramsky</h5>
+              </div>
+
+            </div>
+            <div class="image_container">
+              <div class="overlayer"></div>
+              <img class="banner_image" src="assets/images/blog_banner.png">
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="swiper-slide">
+          <div class="outer">
+            <div class="row banner_content">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h1>Popular Articles</h1>
+                <h5 class="blog_name">Enriched Academy Coquitlam</h5>
+                <h5 class="author_name">Kevin Cochran</h5>
+              </div>
+
+            </div>
+            <div class="image_container">
+              <div class="overlayer"></div>
+              <img class="banner_image" src="assets/images/banner02.png">
+            </div>
+          </div>
+        </div> -->
+
+      </div>
+      <!-- <div class="swiper-button-next"><img src="assets/images/right_arrow_slider.png"></div>
+      <div class="swiper-button-prev"><img src="assets/images/left_arrow_slider.png"></div> -->
+    </div>
+  </section>
+  <!-- banner_section -->
+
+  <section class="blogs_listing section">
+    <div class="outer">
+      <div class="row align-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left heading_div">
+          <h2>Blogs</h2>
+        </div>
+      </div>
+      <div class="row align-left">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left">
+          <div class="blog_list_item">
+            <div class="image_container">
+              <img class="blog_item_preview" src="assets/images/blog_01.png">
+            </div>
+            <div class="content_con">
+              <h4>Enriched Academy Coquitlam</h4>
+              <p class="info_text"><span class="author_name">Alanna Abramsky, 2 days Ago</span> | <span
+                  class="all_comments"><i class=" fa-fw fa-comment fas"></i> 1 comment </span><br><span
+                  class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+              <p class="desc">Over the past 10 years, Enriched Academy has been on a relentless mission to make
+                financial freedom accessible to all Canadians. We’ve conducted thousands of presentations for Students,
+                Entrepreneurs and Professional Athletes teaching financial mastery in a transparent and entertaining
+                manner.</p>
+            </div>
+            <div class="button_con">
+              <a class="learnmore_button" href="">Read More <i class="fa-fw fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+        </div>
+        <!-- col-lg-4 -->
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left">
+          <div class="blog_list_item">
+            <div class="image_container">
+              <img class="blog_item_preview" src="assets/images/blog_02.png">
+            </div>
+            <div class="content_con">
+              <h4>Enriched Academy Markham </h4>
+              <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                  class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                  class="read_time"><i class=" fa-fw fa-clock fas"></i> 2 minutes read</span></p>
+              <p class="desc">How to overcome the psychological barriers that prevent financial abundance. Gain a
+                complete understanding of credit including credit cards, mortgages, lines of credit and how to use debt
+                to your advantage. For those in debt, we’ll help you create a plan to get out of it.</p>
+            </div>
+            <div class="button_con">
+              <a class="learnmore_button" href="">Read More <i class="fa-fw fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+        </div>
+        <!-- col-lg-4 -->
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left">
+          <div class="blog_list_item">
+            <div class="image_container">
+              <img class="blog_item_preview" src="assets/images/blog_03.png">
+            </div>
+            <div class="content_con">
+              <h4>Enriched Academy Bootcamp Calgary</h4>
+              <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                  class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                  class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+              <p class="desc">Look at the key personal financial metrics that will give you control and change your
+                financial future. Learn a powerful system that can help generate better returns while lowering fees and
+                protecting you from market downturns. You’ll also learn about the emergence of Robo Advisors and how to
+                use them to your advantage.</p>
+            </div>
+            <div class="button_con">
+              <a class="learnmore_button" href="">Read More <i class="fa-fw fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- col-lg-4 -->
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left">
+          <div class="blog_list_item">
+            <div class="image_container">
+              <img class="blog_item_preview" src="assets/images/blog_04.png">
+            </div>
+            <div class="content_con">
+              <h4>Understanding the Financial Industry</h4>
+              <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                  class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                  class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+              <p class="desc"> Please bring your investment statements to the event! We will dissect the fees you’re
+                paying as well as the quality of your current investments. You will also learn how to find the right
+                Financial Advisor. Many Canadians do not understand the true power of these investing vehicles (RRSP,
+                TFSA, RESP, RDSP)! You will walk away with knowing how to put them to work for you.</p>
+            </div>
+            <div class="button_con">
+              <a class="learnmore_button" href="">Read More <i class="fa-fw fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- col-lg-4 -->
+
+        <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left">
+          <div class="blog_list_item">
+            <div class="image_container">
+              <img class="blog_item_preview" src="assets/images/blog_05.png">
+            </div>
+            <div class="content_con">
+              <h4>Investing in The Stock Market</h4>
+              <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                  class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                  class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+              <p class="desc"> Learn a powerful system that can help generate better returns while lowering fees and
+                protecting you from market downturns. You’ll also learn about the emergence of Robo Advisors and how to
+                use them to your advantage.</p>
+            </div>
+          </div>
+        </div> -->
+        <!-- col-lg-4 -->
+
+        <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left">
+          <div class="blog_list_item">
+            <div class="image_container">
+              <img class="blog_item_preview" src="assets/images/blog_06.png">
+            </div>
+            <div class="content_con">
+              <h4>Teaching Children About Money</h4>
+              <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                  class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                  class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+              <p class="desc">How to leave a legacy for your kids/grandkids and best practices for teaching them
+                financial literacy.</p>
+            </div>
+          </div>
+        </div> -->
+        <!-- col-lg-4 -->
+      </div>
+      <!-- row -->
+      <!-- <div class="row align-left">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+          <div class="pagination_con">
+            <!-- <div class="pagination_button"><a class="green_button" href=""><i class="fa-fw fas fa-arrow-left"></i>  <span>Prev</span></a></div> 
+            <div class="pagination_element active_pagination"><a href="">1</a></div>
+            <div class="pagination_element"><a href="">2</a></div>
+            <div class="pagination_button"><a class="green_button" href=""><span>Next</span> <i
+                  class="fa-fw fas fa-arrow-right"></i> </a></div>
+          </div>
+        </div>
+      </div> -->
+      <!-- row -->
+    </div>
+  </section>
+
+  <section class="editors_pick_section section">
+    <div class="outer">
+      <div class="row align-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center heading_div">
+          <h1>Editors Pick</h1>
+        </div>
+        <!-- col-12 -->
+      </div>
+      <!-- row -->
+      <div class="row align-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+          <div class="swiper-container editors_pick_slider">
+
+              <!-- <owl-carousel
+              [items]="images"
+              [options]="myCarouselOptionsBlog"
+              [carouselClasses]="['owl-theme', 'sliding']"
+          >
+              <div class="item">
+                <img class="slide_item" src="assets/images/editors_pick_01.png">
+              </div>
+              <div class="item">
+                <img class="slide_item" src="assets/images/editors_pick_01.png">
+              </div>
+              <div class="item">
+                <img class="slide_item" src="assets/images/editors_pick_01.png">
+              </div>
+              <div class="item">
+                <img class="slide_item" src="assets/images/editors_pick_01.png">
+              </div>
+            </owl-carousel> -->
+
+
+
+            <div class="swiper-wrapper">
+              <div class="carousel-section ">
+                <owl-carousel [options]="myCarouselOptionsBlog" [items]="images"
+                    [carouselClasses]="['owl-theme', 'sliding']">
+
+                <div class="item" style="margin: 10px;">
+                  <div class="swiper-slide item">
+                    <a href="" class="inner_con">
+                      <div class="content">
+                        <h6>Understanding the Financial Industry</h6>
+                        <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                            class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                            class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+                      </div>
+                      <div class="image_con">
+                        <img class="slide_item" src="assets/images/editors_pick_01.png">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class="item" style="margin: 10px;">
+                  <div class="swiper-slide item">
+                    <a href="" class="inner_con">
+                      <div class="content">
+                        <h6>Understanding the Financial Industry</h6>
+                        <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                            class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                            class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+                      </div>
+                      <div class="image_con">
+                        <img class="slide_item" src="assets/images/editors_pick_02.png">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class="item" style="margin: 10px;">
+                  <div class="swiper-slide item">
+                    <a href="" class="inner_con">
+                      <div class="content">
+                        <h6>Financial Metrics You Need to <br> Be Aware.</h6>
+                        <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                            class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                            class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+                      </div>
+                      <div class="image_con">
+                        <img class="slide_item" src="assets/images/editors_pick_03.png">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class="item" style="margin: 10px;">
+                  <div class="swiper-slide item">
+                    <a href="" class="inner_con">
+                      <div class="content">
+                        <h6>Understanding the Financial Industry</h6>
+                        <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                            class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                            class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+                      </div>
+                      <div class="image_con">
+                        <img class="slide_item" src="assets/images/editors_pick_01.png">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class="item" style="margin: 10px;">
+                  <div class="swiper-slide item">
+                    <a href="" class="inner_con">
+                      <div class="content">
+                        <h6>Financial Metrics You Need to <br> Be Aware.</h6>
+                        <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                            class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                            class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+                      </div>
+                      <div class="image_con">
+                        <img class="slide_item" src="assets/images/editors_pick_02.png">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class="item" style="margin: 10px;">
+                  <div class="swiper-slide item">
+                    <a href="" class="inner_con">
+                      <div class="content">
+                        <h6>How to Turbocharge <br>Registered Accounts</h6>
+                        <p class="info_text"><span class="author_name">Alanna Abramsky, 5 days Ago</span> | <span
+                            class="all_comments"><i class=" fa-fw fa-comment fas"></i> 2 comments </span><br><span
+                            class="read_time"><i class=" fa-fw fa-clock fas"></i> 3 minutes read</span></p>
+                      </div>
+                      <div class="image_con">
+                        <img class="slide_item" src="assets/images/editors_pick_03.png">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+
+                </owl-carousel>
+              </div>
+            </div>
+            <!-- swiper wrapper -->
+            <!-- <div class="swiper-button-next"><i class="fa-fw fas fa-arrow-right"></i></div>
+              <div class="swiper-button-prev"><i class="fa-fw fas fa-arrow-left"></i></div>
+              <div class="swiper-pagination"></div> -->
+          </div>
+        </div>
+        <!-- col-12 -->
+      </div>
+      <!-- row -->
+
+    </div>
+  </section>
+
+  <section class="stay_touch_section section">
+    <div class="outer">
+      <div class="row align-center justify-center">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 text-center">
+          <h1>Stay in Touch</h1>
+          <h6>You will receive the latest news and updates on our Upcoming blogs and articles!</h6>
+          <div class="form_con">
+            <div class="form-group">
+              <input type="email" name="" class="form-control" placeholder="Your email address here">
+            </div>
+            <a class="green_button button_large" href=""><span>Submit</span></a>
+          </div>
+        </div>
+        <!-- col-12 -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="bottom_footer">
+    <div class="outer">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="footer_about-box">
+            <div class="footer_logo"><a routerLink="#"><img src="assets/images/footer_logo.png"></a></div>
+
+          </div>
+        </div>
+
+
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="footer_about-text">
+            <div class="footer_nav-heading">
+              <!-- <h6>Top Courses</h6> -->
+            </div>
+
+
+            <div class="footer_about-text">
+              <ul>
+                <li>410-2059 Chesterfield Ave.</li>
+                <li>North Vancouver, BC V7M2P4</li>
+              </ul>
+              <ul>
+                <li>Phone: 1-800-892-9228</li>
+                <li>Email: support@enrichedacademy.com</li>
+              </ul>
+              <ul>
+                <li>
+                  <a class="green_button button_large" href="https://enrichedacademytraining.com/"
+                    target="_blank"><span>Free&nbsp;Webinar?</span></a>
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="footer_link-box">
+            <div class="footer_nav-heading">
+              <h6>@Follow Us</h6>
+            </div>
+            <div class="footer_about-text">
+              <ul class="tweet_feed">
+                <li>
+                  <a routerLink=""><i class="fab fa-twitter"></i>
+                    <div>
+                      <!-- Facebook
+                                                    Twitter -->
+
+                      <span> Facebook</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink=""><i class="fab fa-twitter"></i>
+                    <div>
+                      <span>Twitter</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink=""><i class="fab fa-twitter"></i>
+                    <div>
+                      <span> LinkedIn</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="outer">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="" style="text-align: left;">
+            <span style="text-align: left;">Privacy Policy
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+              &nbsp;&nbsp;&nbsp;&nbsp;Legal</span>
+
+            <!-- <p style="text-align: left;">Legal</p> -->
+            <p style="text-align: right;     margin-top: -18px;">Copyright 2015 Enriched Academy | 2019 Right Reserved
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+</main>

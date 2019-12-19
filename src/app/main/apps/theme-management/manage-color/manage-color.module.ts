@@ -162,3 +162,6 @@ const routes: Routes = [
     ],
 })
 export class ManageColorModule { }
+
+
+// https://stackblitz.com/edit/angular-tbkqbt

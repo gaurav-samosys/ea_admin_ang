@@ -762,7 +762,7 @@
 			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="mat__box">
-					<div class="row" fxLayoutAlign="space-between">
+					<div class="row" style="margin-top:15px;" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							Total Downloads <span class="color_value">{{totaldownloadgraph}}</span>
 						</div>
@@ -772,7 +772,7 @@
 
 
 
-								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+								<input matInput class="daterange" type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[showCancel]="true"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									[alwaysShowCalendars]="true" [opens]="'left'" class="cursor-pointer"
@@ -826,7 +826,7 @@
 
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="mat__box">
-					<div class="row" fxLayoutAlign="space-between">
+					<div class="row" style="margin-top: 15px;" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							Certificates Claimed <span
 								class="color_value">{{totalcertificategraph}}/{{totalpendinggraph}}</span>

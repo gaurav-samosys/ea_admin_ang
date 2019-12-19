@@ -134,15 +134,22 @@ navbar {
                     height: 24px;
                 }
 
+                // .logo-text {
+                //     margin-left: 12px;
+                //     font-size: 16px;
+                //     font-weight: 300;
+                //     letter-spacing: 0.4px;
+                //     line-height: normal;
+                // }
                 .logo-text {
-                    margin-left: 12px;
-                    font-size: 16px;
+                    margin-left: 32px;
+                    font-size: 15px;
                     font-weight: 300;
-                    letter-spacing: 0.4px;
+                    letter-spacing: 3.4px;
                     line-height: normal;
                 }
             }
-
+         
             .buttons {
                 display: flex;
                 align-items: center;
@@ -197,3 +204,4 @@ navbar {
         }
     }
 }
+

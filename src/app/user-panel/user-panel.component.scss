@@ -61,3 +61,35 @@ ul {
   display: inline-block;
   padding: 15px 0;
 }
+.desktop_header .man_nav{width: 75%;float: left;}
+.desktop_header .social_nav{width: 25%; float: left;}
+.man_nav li {
+  display: inline-block;
+  padding: 0px 0;
+  font-size: 14px;
+  margin-right: 20px;
+  position: relative;
+}
+.man_nav li a {
+  color: #000;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  padding: 13px 10px;
+}
+
+.social_nav ul li a i {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  font-size: 11px;
+  color: #fff;
+  background: #4064AD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// .fab {
+//   font-family: "Font Awesome 5 Brands";
+// }

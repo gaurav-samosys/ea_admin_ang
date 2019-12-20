@@ -1236,6 +1236,7 @@ export class Version3Component implements OnInit {
 
     this.v3Service.POST(this.getUsersWithData, { clients_ids: this.clients_data.toString(), verticals: id_vertical.toString(), location: location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search_type: searchtype, search: search_data, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
       this.common = res
+      console.log("user data=================",this.common)
       this.date_range = '';
       this.data = this.common.data
       this.desserts = this.data;
@@ -1244,6 +1245,7 @@ export class Version3Component implements OnInit {
       this.name = this.data[0]
       this.allItems = this.common.recordsTotal;
       this.user_total = this.allItems;
+      console.log("userTotal==============",this.allItems)
       //this.client_total=this.allItems;
       this.dataSource = this.data;
       this.URL = this.getUsersWithData;
@@ -1622,6 +1624,7 @@ export class Version3Component implements OnInit {
 
   }
   getData(value) {
+    console.log("get id user==========",value)
     this.table = value;
     if (this.table == 1) {
       this.getIndustrywithData(this.search_data, this.industry_id);

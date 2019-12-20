@@ -24,10 +24,10 @@ import { ToastrModule } from 'ngx-toastr';
 // import { AuthGuard } from './auth.guard';
 // import { UserPanelComponent } from './user-panel/user-panel.component';
 const appRoutes: Routes = [
-    {
-        path        : 'user',
-        loadChildren: './user-panel/user-panel.module#UserPanelModule'
-    },
+    // {
+    //     path        : 'user',
+    //     loadChildren: './user-panel/user-panel.module#UserPanelModule'
+    // },
     // {
     //     path: 'admin',
     //     loadChildren: './admin/admin.module#AdminModule'

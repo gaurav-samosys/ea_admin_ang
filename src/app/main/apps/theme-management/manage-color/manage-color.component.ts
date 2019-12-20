@@ -19,7 +19,7 @@ export class ManageColorComponent implements OnInit {
   common: any;
   country: any;
   colorForm: any;
-  company_name="";
+  company_name = "";
   @ViewChild('manageInput', { static: true }) manageInput: ElementRef;
 
   visible = true;
@@ -33,7 +33,7 @@ export class ManageColorComponent implements OnInit {
   clientArray;
   allData: any = []
 
- 
+
 
   constructor(private http: HttpClient, public service: ManagecolorService, private rt: Router, public _formBuilder: FormBuilder) {
     this.filteredArray = this.select_client.valueChanges.pipe(
@@ -98,41 +98,43 @@ export class ManageColorComponent implements OnInit {
   saveColor() {
     console.log(this.colorForm.value)
   }
-
+ 
 
   color = '#753434';
+  color1 = '#f5961e';
+  primChange(color: string) {
+    this.color1 = color;
+    console.log('=primary=',  this.color1 )
 
-  prim
-  color1 = '#753434';
-  // primChange(color: string) {
-  //   this.color1 = color;
-  //   this.prim = this.color1
-  //   console.log(this.prim)
-  // }
-  color2 = '#6e946a';
-  sec
-  // secChange(color: string) {
-  //   this.color2 = color;
-  //   this.sec = this.color2
+  }
+  color2 = '#ffffff';
+  // color2
+  secChange(color: string) {
+    this.color2 = color;
+    console.log('=secondary=',  this.color2 )
 
-  // }
-  color3 = '#ff0000'
-  ternary
-  // ternChange(color: string) {
-  //   this.color3 = color;
-  //   this.ternary = this.color3
-  //   console.log(this.ternary)
-  // }
+  }
+  color3 = '#4c4c4c'
+  // color3
+  ternChange(color: string) {
+    this.color3 = color;
+    console.log('=ternary=',  this.color3 )
+
+  }
+
 
   type = "save Detail"
+  primary
+  secondary
+  ternary
   SaveDetail() {
-    this.prim = document.getElementById('demo1').getAttribute("ng-reflect-color");
-    this.sec = document.getElementById('demo2').getAttribute("ng-reflect-color");
+    this.primary = document.getElementById('demo1').getAttribute("ng-reflect-color");
+    this.secondary = document.getElementById('demo2').getAttribute("ng-reflect-color");
     this.ternary = document.getElementById('demo3').getAttribute("ng-reflect-color");
-    console.log('=a=', this.prim)
-    console.log('=b=', this.sec)
+    console.log('=a=', this.primary)
+    console.log('=b=', this.secondary)
     console.log('=c=', this.ternary)
-   
+
 
     if (this.ids == null && this.ids == undefined) {
       Swal.fire({
@@ -143,8 +145,8 @@ export class ManageColorComponent implements OnInit {
       })
     } else {
       this.service.Post('http://192.168.0.40/enrichedacademy_live/api/admin/save_client_color_v2', {
-        type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.prim,
-        secondary_color: this.sec, another_color: this.ternary
+        type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
+        secondary_color: this.secondary, another_color: this.ternary
       }).subscribe(res => {
         console.log(res)
       })
@@ -160,18 +162,18 @@ export class ManageColorComponent implements OnInit {
 
   }
 
-  type1="set theme for mobile App"
+  type1 = "set theme for mobile App"
   setThemeSubmit() {
 
-    this.prim = document.getElementById('demo1').getAttribute("ng-reflect-color");
-    this.sec = document.getElementById('demo2').getAttribute("ng-reflect-color");
+    this.primary = document.getElementById('demo1').getAttribute("ng-reflect-color");
+    this.secondary = document.getElementById('demo2').getAttribute("ng-reflect-color");
     this.ternary = document.getElementById('demo3').getAttribute("ng-reflect-color");
-    console.log('=a=', this.prim)
-    console.log('=b=', this.sec)
+    console.log('=a=', this.primary)
+    console.log('=b=', this.secondary)
     console.log('=c=', this.ternary)
-   
 
-    if (this.ids == null && this.ids == undefined) {
+
+    if (this.ids == null && this.ids == undefined) {  
       Swal.fire({
         title: 'Warning',
         text: 'Please select client code',
@@ -180,8 +182,8 @@ export class ManageColorComponent implements OnInit {
       })
     } else {
       this.service.Post('http://192.168.0.40/enrichedacademy_live/api/admin/save_client_color_v2', {
-        type: this.type1, client: this.idsArray, token: 'LIVESITE', primary_color: this.prim,
-        secondary_color: this.sec, another_color: this.ternary
+        type: this.type1, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
+        secondary_color: this.secondary, another_color: this.ternary
       }).subscribe(res => {
         console.log(res)
       })

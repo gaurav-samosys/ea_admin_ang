@@ -122,7 +122,7 @@ export class ManageColorComponent implements OnInit {
 
   }
 
-  
+    
 
   type = "save Detail"
   primary

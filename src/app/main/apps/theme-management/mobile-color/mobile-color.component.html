@@ -36,7 +36,9 @@
           <div class="prim">
             <div class="primary-color mb-20">
               <mat-label>Primary Color (Numbers)</mat-label>
+              <!-- [color]="color1" -->
               <div class="picker-wrapper">
+                <!-- <input type="color" id="demo1"  (Change)="primChange($event)"> -->
                 <lib-ngx-ttitan-color-picker id="demo1" [color]="color1" (colorChange)="primChange($event)">
                 </lib-ngx-ttitan-color-picker>
               </div>
@@ -207,6 +209,7 @@
             </div>
           </div><!-- OUTER_MOB -->
         </div>
+
         <div id="mymagicnumber" *ngIf="magicNumber" class="ret_screens drop_content">
           <div class="outer_mob">
             <div class="mob_app_html_container mob_con_03">
@@ -1204,6 +1207,7 @@
             </div>
           </div><!-- OUTER_MOB -->
         </div>
+
         <div id="networth" *ngIf="netWorth" class="networh_screens drop_content">
           <div class="outer_mob">
             <div class="mob_app_html_container mob_con_01 assests_screen">
@@ -1593,6 +1597,7 @@
           </div>
           <!-- OUTER_MOB -->
         </div>
+
         <div id="student" *ngIf="loadCalculator" class="student_screens drop_content">
           <div class="outer_mob outer_mob_center">
             <div class="mob_app_html_container mob_con_02 ">
@@ -2149,3 +2154,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field> -->
+
+          <!-- [options]="{
+            'availPallets': []
+          }" -->

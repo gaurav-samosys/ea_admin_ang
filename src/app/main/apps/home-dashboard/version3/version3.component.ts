@@ -1371,6 +1371,9 @@ export class Version3Component implements OnInit {
       this.date_range = '';
       this.vertical_id = [];
       this.clients_id = [];
+      console.log("this.common.labelName=======>",this.common.labelName)
+
+
       this.graph.users.xAxis.categories = this.common.labelName;
       this.usergraph_total = this.common.total_users;
       //this.graph.users.title.text= this.graph.users.title.text + " " +  this.common.total_users

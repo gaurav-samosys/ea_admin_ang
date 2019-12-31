@@ -3,69 +3,10 @@ import { FuseNavigation } from '@fuse/types';
 export const navigation: FuseNavigation[] = [
 
 
-    /*=====================================================================
-   
-   User
-   =====================================================================*/
-
-    // {
-    //     id: 'applications',
-    //     title: 'Applications',
-    //     translate: 'USER',
-    //     type: 'group',
-    //     icon: 'user',
-    //     children: [
-
-    //         {
-    //             id: 'user',
-    //             title: 'User',
-    //             type: 'item',
-    //             icon: 'user',
-    //             url: 'user'
-    //         },
-
-    //         {
-    //             id: 'home',
-    //             title: 'Home',
-    //             type: 'item',
-    //             icon: 'home',
-    //             url: 'home'
-    //         },
-    //         {
-    //             id: 'blogs',
-    //             title: 'Blogs',
-    //             type: 'item',
-    //             icon: 'blog',
-    //             url: 'blog'
-    //         },
-
-    //     ]
- 
-    // },
-
-
+  
 
    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*=====================================================================
-   
-   Home
-   =====================================================================*/
 
     {
         id: 'applications',
@@ -104,7 +45,7 @@ export const navigation: FuseNavigation[] = [
                         id: 'Report',
                         title: 'Report',
                         type: 'item',
-                        url: '/apps/homes/report'
+                        url: '/apps/home-dashboard/report'
                     },
                 ]
             },

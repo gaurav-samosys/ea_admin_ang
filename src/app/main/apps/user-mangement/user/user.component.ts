@@ -1,20 +1,21 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as myGlobals from '../../../../global';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserPopupComponent } from './user-popup/user-popup.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import { UserConfirmboxComponent, ConfirmDialogModel } from './user-confirmbox/user-confirmbox.component';
 import { map } from 'rxjs/operators';
 import { PagerService } from 'app/main/apps/dashboards/pager.service';
-import { UserService }    from './user.service';
-import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { UserService } from './user.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 import { ExcelService } from 'app/main/apps/Access-code/access-code/excel.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatSort } from '@angular/material';
 
 
 
@@ -25,7 +26,7 @@ export interface PeriodicElement {
   email: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] =[]
+const ELEMENT_DATA: PeriodicElement[] = []
 
 @Component({
   selector: 'app-user',
@@ -34,76 +35,78 @@ const ELEMENT_DATA: PeriodicElement[] =[]
   providers: [DatePipe]
 })
 export class UserComponent implements OnInit {
-           public pageSize = 10;
-public currentPage = 0;
-public totalSize = 0;
-      startIndex=1
-      endIndex=10;
-      value='';
-     name:any;
-  showLoader=false;
-  data:any;
-  response:any;
-  common:any;
-  country:any;
-  states:any;
-  export_data:any;
-  result:any;
-   getUsers=myGlobals.getUsers;
-   exportUser=myGlobals.exportUser;
-   getCountry=myGlobals.getCountry;
-   getStates=myGlobals.getState;
-   changeUserStatus=myGlobals.changeUserStatus;
-    pageNumber:number=0;
-    size:number=10;
-    rows:any;
-    start:any;
-    end:any;
-    // array of all items to be paged
-    allItems: any;
-    fullname:any;
-    email:any;
-    clientname:any;
-    companyname:any;
-    country1:any;
-    state:any;
-    city:any;
-    status:any;
-    access_code:any;
-    startDate:Date;
-    endDate:Date;
-    sdate:any;
-    edate:any;
+  public pageSize = 10;
+  public currentPage = 0;
+  public totalSize = 0;
+  startIndex = 1
+  endIndex = 10;
+  value = '';
+  name: any;
+  showLoader = false;
+  data: any;
+  response: any;
+  common: any;
+  country: any;
+  states: any;
+  export_data: any;
+  result: any;
+  getUsers = myGlobals.getUsers;
+  exportUser = myGlobals.exportUser;
+  getCountry = myGlobals.getCountry;
+  getStates = myGlobals.getState;
+  changeUserStatus = myGlobals.changeUserStatus;
+  pageNumber: number = 0;
+  size: number = 10;
+  rows: any;
+  start: any;
+  end: any;
+  // array of all items to be paged
+  allItems: any;
+  fullname: any;
+  email: any;
+  clientname: any;
+  companyname: any;
+  country1: any;
+  state: any;
+  city: any;
+  status: any;
+  access_code: any;
+  startDate: Date;
+  endDate: Date;
+  sdate: any;
+  edate: any;
 
-    // pager object
-    pager: any = {};
+  // pager object
+  pager: any = {};
 
-    // paged items
-    pagedItems: any[];
-  displayedColumns: string[] = ['first_name', 'company_name', 'client_name','created_on','certificate_downloaded','status','action'];
-dataSource = new MatTableDataSource<PeriodicElement>(this.data);
- horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  // paged items
+  pagedItems: any[];
+  @ViewChild(MatSort, { static: true }) MatSort: MatSort;
+
+  displayedColumns: string[] = ['first_name', 'company_name', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action'];
+  dataSource = new MatTableDataSource<PeriodicElement>(this.data);
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private toastr: ToastrService,
 
-    private excelService:ExcelService,private datePipe: DatePipe,private _snackBar: MatSnackBar,private http: HttpClient,public dialog: MatDialog,private pagerService: PagerService,public user:UserService){
-     if( localStorage.getItem('status') == 'true'){
+    private excelService: ExcelService, private datePipe: DatePipe, private _snackBar: MatSnackBar, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public user: UserService) {
+    if (localStorage.getItem('status') == 'true') {
       this.openSnackBar();
       localStorage.removeItem('status');
-     }
-     else if( localStorage.getItem('useradded_status') == 'true'){
+    }
+    else if (localStorage.getItem('useradded_status') == 'true') {
       this.openuserSnackBar();
       localStorage.removeItem('useradded_status');
-     }
+    }
 
-     else if( localStorage.getItem('useradded_status') == 'false'){
+    else if (localStorage.getItem('useradded_status') == 'false') {
       this.openusererrorSnackBar();
       localStorage.removeItem('useradded_status');
-     }
+    }
   }
 
   ngOnInit() {
@@ -114,81 +117,81 @@ dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   }
 
 
-    openDialog(value) {
-    let dialog= this.dialog.open(UserPopupComponent,{
-      data:value,
-       width: '900px',height:'600px'
+  openDialog(value) {
+    let dialog = this.dialog.open(UserPopupComponent, {
+      data: value,
+      width: '900px', height: '600px'
     });
 
   }
 
   confirmDialog(value): void {
     const message = `Are you sure you want to delete this user detail?`;
-    let id =value
-    const dialogData = new ConfirmDialogModel("Confirm Action", message,id);
- 
+    let id = value
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+
     const dialogRef = this.dialog.open(UserConfirmboxComponent, {
       maxWidth: "400px",
       data: dialogData
     });
- 
+
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
     });
   }
 
-    editDialog(value): void { 
+  editDialog(value): void {
     const dialogRef = this.dialog.open(UserEditComponent, {
-      width: '600px',height:'500px',
+      width: '600px', height: '500px',
       data: value
     });
   }
 
-  FetchUser()
-  {
-      this.user.POST(this.getUsers,{offset:this.pageNumber, limit : this.pageSize ,token:'LIVESITE'}).subscribe(res => {
-        this.showLoader=false;
-         this.response=res
-         this.data=this.response.data
+  FetchUser() {
+    this.user.POST(this.getUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showLoader = false;
+      this.response = res
+      this.data = this.response.data
       this.allItems = this.response.total_data;
-       this.dataSource = new MatTableDataSource(this.data);
-        this.dataSource.paginator = this.paginator;
-               //this.setPage(1);
-          })
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.MatSort;
+
+      //this.setPage(1);
+    })
   }
 
-    public handlePage(e: any) {
+  public handlePage(e: any) {
     console.log(e)
-  this.currentPage = e.pageIndex;
-  this.pageSize = e.pageSize;
-    this.startIndex =(this.currentPage * e.pageSize)+1; 
-    this.endIndex = this.startIndex < e.length ? Math.min(this.startIndex + e.pageSize, e.length) : this.startIndex ;
-  if(this.value != '' )
-  {
-    console.log(this.value,this.name)
-   this.Search(this.value,this.name)
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.startIndex = (this.currentPage * e.pageSize) + 1;
+    this.endIndex = this.startIndex < e.length ? Math.min(this.startIndex + e.pageSize, e.length) : this.startIndex;
+    if (this.value != '') {
+      console.log(this.value, this.name)
+      this.Search(this.value, this.name)
+    }
+    else {
+      this.iterator();
+
+    }
   }
-  else{
-  this.iterator();
 
+  private iterator() {
+    let part;
+
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    this.pageNumber = start
+    /* this.showloader=true;*/
+    this.user.POST(this.getUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      //this.showloader=false;
+      this.data = this.response.data;
+      this.dataSource = this.data;
+
+    })
   }
-}
-
-private iterator() {
-let part;
-
-  const end = (this.currentPage + 1) * this.pageSize;
-  const start = this.currentPage * this.pageSize;
-  this.pageNumber=start
- /* this.showloader=true;*/
-        this.user.POST(this.getUsers,{offset:this.pageNumber, limit : this.pageSize ,token:'LIVESITE'}).subscribe(res => {
-        this.response=res
-        //this.showloader=false;
-        this.data=this.response.data;
-       this.dataSource = this.data;
-
- })
-}
 
 
   /* setPage(page: number) {
@@ -217,65 +220,65 @@ let part;
        
     }*/
 
-      addUser(){
-          let dialog= this.dialog.open(AdduserComponent, {
-      width: '600px',height:'400px'
+  addUser() {
+    let dialog = this.dialog.open(AdduserComponent, {
+      width: '600px', height: '400px'
     });
-    }
+  }
 
-    fetchCountry(){
+  fetchCountry() {
 
 
-   this.user.POST(this.getCountry,{token:'LIVESITE'})
-            .subscribe(res => {
-                this.common=res
-                this.country=this.common.data;
+    this.user.POST(this.getCountry, { token: 'LIVESITE' })
+      .subscribe(res => {
+        this.common = res
+        this.country = this.common.data;
 
-            })
-}
-getState(value,name){
-  this.country1='';
-  this.state='';
-  this.Search(value,name);
-   this.user.POST(this.getStates,{countries_id:value,token:'LIVESITE'}).subscribe(res=>{
-     this.common=res
-     this.states=this.common.data
-   })
-}
+      })
+  }
+  getState(value, name) {
+    this.country1 = '';
+    this.state = '';
+    this.Search(value, name);
+    this.user.POST(this.getStates, { countries_id: value, token: 'LIVESITE' }).subscribe(res => {
+      this.common = res
+      this.states = this.common.data
+    })
+  }
 
-onChange(value,id){
-  console.log(value,id)
-   let status;
-      if(value == false){
-      status =0;
+  onChange(value, id) {
+    console.log(value, id)
+    let status;
+    if (value == false) {
+      status = 0;
       this.toastr.success('Status Inactive Successfully');
 
-      }
-      else{
-        status =1;
-        this.toastr.success('Status Active Successfully');
+    }
+    else {
+      status = 1;
+      this.toastr.success('Status Active Successfully');
 
-      }
-  this.user.POST(this.changeUserStatus,{token:"LIVESITE",id:id, status:status}).subscribe(res=>{
-    console.log(res)
-  })
-}
+    }
+    this.user.POST(this.changeUserStatus, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
+      console.log(res)
+    })
+  }
 
- openSnackBar() {
+  openSnackBar() {
     this._snackBar.open('User details updated successfully!!', 'End now', {
       duration: 4000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
   }
-   openuserSnackBar() {
+  openuserSnackBar() {
     this._snackBar.open('User added successfully!!', 'End now', {
       duration: 4000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
-  } 
-    openusererrorSnackBar() {
+  }
+  openusererrorSnackBar() {
     this._snackBar.open('User not added successfully!!', 'End now', {
       duration: 4000,
       horizontalPosition: this.horizontalPosition,
@@ -283,143 +286,140 @@ onChange(value,id){
     });
   }
 
-    Search(value,name){
- console.log(value,name)
-     if(this.value != value)
-    {
-      this.currentPage=0;
+  Search(value, name) {
+    console.log(value, name)
+    if (this.value != value) {
+      this.currentPage = 0;
     }
-         this.value=value;
-        this.name=name;
-        if(value.length == 0 || value == '')
-        {
-            if(name == 'fullname'){
-        this.fullname ='';
-        }
-        else if(name == 'email'){
-          this.email =''
-        }
-
-          else if(name == 'email'){
-          this.email =''
-        }
-
-          else if(name == 'clientname'){
-          this.clientname =''
-        }
-            else if(name == 'companyname'){
-          this.companyname =''
-        }
-            else if(name == 'country'){
-          this.country1 =''
-        }
-            else if(name == 'state'){
-          this.state =''
-
-        }
-            else if(name == 'city'){
-          this.city =''
-          
-        }
-             else if(name == 'status'){
-          this.status =''
-          
-        }
-             else if(name == 'access_code'){
-          this.access_code =''
-          
-        }
-              else if(name == 'start'){
-          this.sdate =''
-        }
-            else if(name == 'end'){
-          this.edate =''
-        }
-        }
-      
-        if(name == 'fullname'){
-        this.fullname =value;
-        }
-        else if(name == 'email'){
-          this.email =value
-        }
-
-          else if(name == 'email'){
-          this.email =value
-        }
-
-          else if(name == 'clientname'){
-          this.clientname =value
-        }
-            else if(name == 'companyname'){
-          this.companyname =value
-        }
-            else if(name == 'country'){
-          this.country1 =value
-        }
-            else if(name == 'state'){
-          this.state =value
-
-        }
-            else if(name == 'city'){
-          this.city =value
-          
-        }
-             else if(name == 'status'){
-          this.status =value
-          
-        }
-             else if(name == 'access_code'){
-          this.access_code =value
-          
-        }
-              else if(name == 'start'){
-          this.sdate =value
-        }
-            else if(name == 'end'){
-          this.edate =value
-        }
-           const end = (this.currentPage + 1) * this.pageSize;
-  const start = this.currentPage * this.pageSize;
-  this.pageNumber=start
-       this.user.POST(this.getUsers,{full_name:this.fullname,client_name:this.clientname,company_name:this.companyname,country:this.country1,state:this.state,city:this.city,status:this.status,access_code:this.access_code,start_date:this.sdate,end_date:this.edate,offset:this.pageNumber,limit : this.size,token:'LIVESITE' })
-            .subscribe(res => {
-                this.response=res
-                this.allItems=this.response.total_data;
-               this.rows=this.response.data
-               this.data=this.rows.slice(0, this.size);
-             this.dataSource=this.data
-              this.allItems = this.response.total_data;
-
-            });
+    this.value = value;
+    this.name = name;
+    if (value.length == 0 || value == '') {
+      if (name == 'fullname') {
+        this.fullname = '';
+      }
+      else if (name == 'email') {
+        this.email = ''
       }
 
+      else if (name == 'email') {
+        this.email = ''
+      }
 
-        MyDate(newDate,name) {
+      else if (name == 'clientname') {
+        this.clientname = ''
+      }
+      else if (name == 'companyname') {
+        this.companyname = ''
+      }
+      else if (name == 'country') {
+        this.country1 = ''
+      }
+      else if (name == 'state') {
+        this.state = ''
+
+      }
+      else if (name == 'city') {
+        this.city = ''
+
+      }
+      else if (name == 'status') {
+        this.status = ''
+
+      }
+      else if (name == 'access_code') {
+        this.access_code = ''
+
+      }
+      else if (name == 'start') {
+        this.sdate = ''
+      }
+      else if (name == 'end') {
+        this.edate = ''
+      }
+    }
+
+    if (name == 'fullname') {
+      this.fullname = value;
+    }
+    else if (name == 'email') {
+      this.email = value
+    }
+
+    else if (name == 'email') {
+      this.email = value
+    }
+
+    else if (name == 'clientname') {
+      this.clientname = value
+    }
+    else if (name == 'companyname') {
+      this.companyname = value
+    }
+    else if (name == 'country') {
+      this.country1 = value
+    }
+    else if (name == 'state') {
+      this.state = value
+
+    }
+    else if (name == 'city') {
+      this.city = value
+
+    }
+    else if (name == 'status') {
+      this.status = value
+
+    }
+    else if (name == 'access_code') {
+      this.access_code = value
+
+    }
+    else if (name == 'start') {
+      this.sdate = value
+    }
+    else if (name == 'end') {
+      this.edate = value
+    }
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    this.pageNumber = start
+    this.user.POST(this.getUsers, { full_name: this.fullname, client_name: this.clientname, company_name: this.companyname, country: this.country1, state: this.state, city: this.city, status: this.status, access_code: this.access_code, start_date: this.sdate, end_date: this.edate, offset: this.pageNumber, limit: this.size, token: 'LIVESITE' })
+      .subscribe(res => {
+        this.response = res
+        this.allItems = this.response.total_data;
+        this.rows = this.response.data
+        this.data = this.rows.slice(0, this.size);
+        this.dataSource = this.data
+        this.allItems = this.response.total_data;
+
+      });
+  }
+
+
+  MyDate(newDate, name) {
     let date;
-    if(name == 'start'){
+    if (name == 'start') {
 
-    this.startDate = newDate;
-    date=this.startDate
+      this.startDate = newDate;
+      date = this.startDate
     }
-     else if(name == 'end'){
+    else if (name == 'end') {
 
-    this.endDate = newDate;
-    date=this.endDate
+      this.endDate = newDate;
+      date = this.endDate
     }
-   
-    if(date != null){
 
-     this.Search(this.datePipe.transform(date,"yyyy-MM-dd"),name);
+    if (date != null) {
+
+      this.Search(this.datePipe.transform(date, "yyyy-MM-dd"), name);
     }
-    else{
-      this.Search(date ='',name)
+    else {
+      this.Search(date = '', name)
     }
   }
 
-  changelimit(value)
-  {
-    this.size=parseInt(value);
+  changelimit(value) {
+    this.size = parseInt(value);
     this.FetchUser();
   }
 
@@ -440,7 +440,7 @@ onChange(value,id){
   // }
 
   exportData() {
-    this.user .exportAsExcelFile(this.data, 'sample');
+    this.user.exportAsExcelFile(this.data, 'sample');
 
   }
 

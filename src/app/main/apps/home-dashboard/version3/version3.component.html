@@ -14,7 +14,7 @@
 								<mat-list-item *ngFor="let data of industry"> <mat-checkbox   [checked]="checked" (change)="onIndustryclick($event)" value="{{data.id}}">{{data.name}} </mat-checkbox></mat-list-item>
 							</mat-list>
 						</mat-form-field> -->
-						<ng-multiselect-dropdown [placeholder]="'All Industries'" [data]="industrydropdownList"
+						<ng-multiselect-dropdown  [placeholder]="'All Industries'" [data]="industrydropdownList"
 							[(ngModel)]="industryselectedItems" [settings]="industrydropdownSettings"
 							(onSelect)="onIndustryclick($event)" (onDeSelect)="onIndustrydelselect($event)">
 						</ng-multiselect-dropdown>
@@ -87,7 +87,10 @@
 
 					<!-- END OF P-4 SELECTABLE_BOXES -->
 					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
-						<mat-icon style="cursor: pointer;" (click)="refreshFilter()">refresh</mat-icon>
+							<mat-icon (click)="refreshFilter();openSnackBar('Filter clear successfully.', 'Done' )" mat-button
+							style="margin-left: 19px !important; font-size: 35px;cursor:pointer;" mat-raised-button color="accent"
+							class="submit-button" aria-label="Submit">refresh</mat-icon>
+						<!-- <mat-icon style="cursor: pointer;" (click)="refreshFilter()">refresh</mat-icon> -->
 					</div>
 				</div>
 				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
@@ -846,6 +849,12 @@
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
 					<div id="certificate"></div>
+					<!-- <highcharts-chart
+  style="display: block"
+  [Highcharts]="Highcharts"
+  [constructorType]="'chart'"
+  [options]="chartOptions"
+></highcharts-chart> -->
 					<ul class="course_status_ul">
 						<li><span class="black_status"></span> Downloaded {{downloaded}}</li>
 						<li><span class="blue_status"></span> Download Pending {{download_pending}}</li>

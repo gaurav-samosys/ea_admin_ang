@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
 import { delay, filter, take, takeUntil } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { Sort } from '@angular/material/sort';
 
@@ -79,6 +79,7 @@ export interface Dessert {
 export class Version3Component implements OnInit {
   sortedData: Dessert[];
 
+  search_status_value:any=''
 
   // chartOptions = {
   //   credits: {
@@ -262,7 +263,9 @@ export class Version3Component implements OnInit {
   }
 
 
-  constructor(public dialog: MatDialog, private _router: Router, private _fuseSidebarService: FuseSidebarService, private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
+  constructor(public dialog: MatDialog, 
+    private _snackBar: MatSnackBar
+    ,private _router: Router, private _fuseSidebarService: FuseSidebarService, private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
     /*    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     
         // Assign the data to the data source for the table to render
@@ -300,7 +303,7 @@ export class Version3Component implements OnInit {
     console.log(abc)
     for (let index = 0; index < abc.length; index++) {
       // abc[index].classList.add('displayNone')
-      document.getElementById('innerHTML').style.display = "none";
+      // document.getElementById('innerHTML').style.display = "none";
     }
 
     this.getClientwithData(this.date_range, this.search_data, this.client_id);
@@ -575,6 +578,17 @@ export class Version3Component implements OnInit {
   resetIndustry() {
     this.industryselectedItems = [];
   }
+  openSnackBar(message: string, action: string) {
+    // if (this.search_status_value == '' ) {
+    //   this._snackBar.open('Nothing to clear.', 'Warning', {
+    //     duration: 2000,
+    //   });
+    // } else {
+    //   this._snackBar.open(message, action, {
+    //     duration: 2000,
+    //   });
+    // }
+  }
   refreshFilter() {
     this.resetLocation();
     this.resetVertical();
@@ -596,6 +610,7 @@ export class Version3Component implements OnInit {
     this.industry_disable = 0;
     this.ngOnInit();
   }
+
   show_li(value) {
     document.getElementById('show_' + value).classList.toggle('displayNone')
   }
@@ -1431,6 +1446,7 @@ export class Version3Component implements OnInit {
   getCertificateGraph(date_range, client_id, vertical_id, location_data) {
     this.v3Service.POST(this.getCertificationGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res
+      console.log(this.common)
       this.vertical_id = [];
       this.clients_id = [];
       this.graph.certificate.xAxis.categories = this.common.labelName;
@@ -1443,7 +1459,17 @@ export class Version3Component implements OnInit {
 
       this.downloaded = this.common.total_certified_users;
       this.download_pending = this.common.total_pending_users;
-      Highcharts.chart('certificate', this.graph.certificate);
+      Highcharts.chart('certificate', this.graph.certificate),{
+      
+       
+          credits: {
+            enabled: false
+          },
+      
+       
+        
+    
+      };
 
     })
   }

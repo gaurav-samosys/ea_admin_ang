@@ -51,6 +51,8 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { CommonModule } from '@angular/common';
+// import { HighchartsChartModule } from "highcharts-angular";
+
 const routes: Routes = [
     {
         path: '**',
@@ -69,6 +71,7 @@ const routes: Routes = [
     ],
     imports: [
         CommonModule,
+        // HighchartsChartModule,
         // NgMultiSelectDropDownModule,
         NgMultiSelectDropDownModule.forRoot(),
         RouterModule.forChild(routes),

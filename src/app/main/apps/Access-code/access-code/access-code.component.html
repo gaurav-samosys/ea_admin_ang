@@ -18,7 +18,7 @@
                            <input style="margin-top: 20px; width: 100%;  margin-bottom: 15px;" placeholder ="Select Search company" (keyup)="onKey($event.target.value)">
                          
                            <!-- <mat-option selected=""  value=""  >Please select company</mat-option> -->
-                             <mat-option *ngFor="let data of  dataArray" value="{{data.id}}" >{{data.company_name}}</mat-option>
+                             <mat-option *ngFor="let data of dataArray" value="{{data.id}}" >{{data.company_name}}</mat-option>
                         </mat-select>
                          <mat-error *ngIf="hasError('company', 'required')">Please select comapny </mat-error>
                     </mat-form-field>

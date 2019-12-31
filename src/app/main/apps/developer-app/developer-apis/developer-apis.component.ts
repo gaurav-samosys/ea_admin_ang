@@ -9,6 +9,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PagerService } from 'app/main/apps/dashboards/pager.service';
 import { DeveloperapiService } from './developerapi.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatSort } from '@angular/material';
 
 
 @Component({
@@ -17,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./developer-apis.component.scss']
 })
 export class DeveloperApisComponent implements OnInit {
+  @ViewChild(MatSort, { static: true }) MatSort: MatSort;
+
   displayedColumns: string[] = ['first_name', 'email', 'app_id', 'app_secret', 'website', 'status'];
   data: any;
   response: any;
@@ -88,6 +91,8 @@ export class DeveloperApisComponent implements OnInit {
         this.data = this.common.data
         this.dataSource.data = this.data
         this.allItems = this.common.total_data;
+        this.dataSource.sort = this.MatSort;
+
         this.setPage(1)
       })
   }

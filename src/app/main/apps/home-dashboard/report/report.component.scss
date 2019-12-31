@@ -1,0 +1,44 @@
+.container{
+    // margin-left: 20px;
+}
+
+    .row {
+        margin-right: 20px;
+        margin-left:  20px;
+    
+}
+.second_row{
+    margin-bottom: 20px;
+    background-color: rgba(49,149,194,0.8);
+    border-radius: 3px!important;
+    width: 300px;
+    /* margin-left: 20px; */
+    padding: 0 0 2px 14px;
+}
+
+.md-drppicker.double {
+    width: 734px !important;
+}
+
+// .input_label{
+//         margin-left: 0px !important;
+//     margin-right: -111px !important;
+// }
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+  background-color:  rgba(49, 149, 194, 0.8)
+//   #039be5;
+}   
+.third_row{
+    // border: 1px solid black ;
+    padding: 22px;
+    opacity: 1;
+    background: #fff;
+}
+
+
+.calendar.right.ng-star-inserted {
+    margin-left: -18px !important;
+}

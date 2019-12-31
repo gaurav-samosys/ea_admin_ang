@@ -94,6 +94,10 @@ const routes = [
         path: 'home-dashboard/version3',
         loadChildren: './home-dashboard/version3/version3.module#Version3Module', canActivate: [LoginGuard]
     },
+    {
+        path: 'home-dashboard/report',
+        loadChildren: './home-dashboard/report/report.module#ReportModule', canActivate: [LoginGuard]
+    },
 
     {
         path: 'profile/profile',
@@ -164,7 +168,8 @@ const routes = [
     imports: [
         RouterModule.forChild(routes),
         FuseSharedModule
-    ]
+    ],
+    declarations: []
 })
 export class AppsModule {
 }

@@ -44,6 +44,7 @@ import { MobileColorComponent } from 'app/main/apps/theme-management/mobile-colo
 import { MobilecolorService } from 'app/main/apps/theme-management/mobile-color/mobilecolor.service';
 // import { ColorSketchModule } from 'ngx-color/sketch';
 import { NgxTTitanColorPickerModule } from 'ngx-ttitan-color-picker';
+
 import { SearchPipe } from './mobile-search pipe';
 const routes: Routes = [
     {

@@ -2577,3 +2577,60 @@
 
 
  
+.select2-search__field .multiselect-dropdown .dropdown-btn{
+    display: inline-block;
+    border: none !important;
+    width: 100%;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.52857143;
+    text-align: left;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-top: 0;
+    padding: 7px 14px;
+    color: #fff;
+    font-size: 19px;
+    cursor: pointer;
+    background-image: none;
+    border-radius: 10px !important;
+    color: #3195c2;
+}
+.select2-search__field .multiselect-dropdown .dropdown-btn:hover{color: #ffffff;}
+.select2-search__field .multiselect-dropdown .dropdown-btn .dropdown-down {
+    display: inline-block;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #3195c2 !important;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+.select2-search__field .multiselect-dropdown .dropdown-btn .dropdown-down:hover{border-top: 10px solid #fff !important;}
+
+
+.course_status_ul { text-align: right; padding-top: 8px; }
+.course_status_ul li{color: #a0bb3a !important; margin-right: 12px;}
+.course_status_ul li:nth-child(2){color: #1976a1 !important; margin-right: 12px;}
+.course_status_ul li:nth-child(3){color: #e64a19 !important; margin-right: 12px;}
+
+text.highcharts-credits { display: none; }
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    display: flex;
+    position: absolute;
+    top: .25em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    height: 34px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 10px !important;
+}
+.mat-form-field-infix {
+    padding: 0.5em 0;
+    border-top: 0 !important;
+}

@@ -6,6 +6,7 @@ export const exportManageCompanies="http://192.168.0.18/enrichedacademy_live/api
 export const exportManageClient="http://192.168.0.18/enrichedacademy_live/api/admin/exportManageClient"
 
 export const downloadAccessCodesFile="http://192.168.0.18/enrichedacademy_live/api/admin/downloadAccessCodesFile"
+export const downloadUserReport="http://192.168.0.18/enrichedacademy_live/api/admin/downloadUserReport"
 
 export const getCompanies=" https://staging.enrichedacademy.com/api/admin/getCompanies";
 export const getAccessCode=" https://staging.enrichedacademy.com/api/admin/getAccessCode";
@@ -13,6 +14,7 @@ export const getCountry=" https://staging.enrichedacademy.com/api/admin/getCount
 export const getIndustry=" https://staging.enrichedacademy.com/api/admin/getIndustries";
 export const getState=" https://staging.enrichedacademy.com/api/admin/getStates";
 export const generateAccessCodes=" https://staging.enrichedacademy.com/api/admin/generateAccessCodes";
+
 export const downloadAccessCodes=" https://staging.enrichedacademy.com/api/admin/downloadAccessCodes";
 export const subAccessCodeListShow=" https://staging.enrichedacademy.com/api/admin/subAccessCodeListShow";
 export const editCompany=" https://staging.enrichedacademy.com/api/admin/editCompany";

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as myGlobals from '../../../../global';
+
 export interface Food {
   value: string;
   viewValue: string;
@@ -12,6 +14,7 @@ export interface Food {
 
 export class ReportComponent implements OnInit {
   selected=''
+  downloadUserReport=myGlobals.downloadUserReport
   constructor() { }
   foods: Food[] = [
     {value: 'steak-0', viewValue: 'Steak'},
@@ -20,5 +23,7 @@ export class ReportComponent implements OnInit {
   ];
   ngOnInit() {
   }
-
+  downloadReport(){
+    
+  }
 }

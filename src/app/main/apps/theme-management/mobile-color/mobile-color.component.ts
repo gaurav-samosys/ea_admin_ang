@@ -219,7 +219,7 @@ export class MobileColorComponent implements OnInit {
     }
     // https://staging.enrichedacademy.com/api/admin/getCompaniesWithData http://192.168.0.40/enrichedacademy_live/api/admin/save_mobile_app_color
     else {
-      this.service.Post('http://192.168.0.40/enrichedacademy_live/api/admin/save_mobile_app_color ', {
+      this.service.Post('http://192.168.0.18/enrichedacademy_live/api/admin/save_mobile_app_color ', {
         type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
         secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
       }).subscribe(res => {

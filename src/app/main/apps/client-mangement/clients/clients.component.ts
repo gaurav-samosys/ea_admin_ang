@@ -92,8 +92,8 @@ export class ClientsComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  public show: boolean = false;
-  public buttonName: any = 'More Option';
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
   constructor(
     private toastr: ToastrService,
 
@@ -127,9 +127,9 @@ export class ClientsComponent implements OnInit {
     this.show = !this.show;
     // CHANGE THE NAME OF THE BUTTON.
     if (this.show)
-      this.buttonName = "Less Option";
+      this.buttonName = "keyboard_arrow_up";
     else
-      this.buttonName = "More Option";
+      this.buttonName = "keyboard_arrow_down";
   }
   FetchClient() {
     this.client_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {

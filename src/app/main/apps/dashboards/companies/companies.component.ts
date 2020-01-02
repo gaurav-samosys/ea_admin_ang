@@ -73,6 +73,7 @@ export class CompaniesComponent implements OnInit {
   // paged items
   pagedItems: any[];
   getCompanies = myGlobals.getCompanies;
+  exportManageCompanies = myGlobals.exportManageCompanies;
   getCountry = myGlobals.getCountry;
   getStates = myGlobals.getState;
   getIndustry = myGlobals.getIndustry;
@@ -116,28 +117,21 @@ export class CompaniesComponent implements OnInit {
     this.getCompany();
 
   }
-
+  tempArr = []
   getCompany() {
     this.showloader = true;
     this.companyService.Post(this.getCompanies, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      console.log('=res=======>',res);
+      console.log('=res=======>', res);
 
-      var tempArr = res['data'];
-      console.log('========>',tempArr);
-
-      
-      // tempArr.sort((a, b) => {
-      //   return (b.id) - (a.id);
-      // });
-      // console.log('=aaaa=======>',tempArr);
-     
+      this.tempArr = res['data'];
+      console.log('========>', this.tempArr);
       this.response = res
       this.showloader = false;
       this.allItems = this.response.total_data;
       this.data = this.response.data;
       console.log(this.data)
 
-      this.dataSource = new MatTableDataSource(tempArr);
+      this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.MatSort;
 
@@ -214,11 +208,7 @@ export class CompaniesComponent implements OnInit {
           this.pager = this.pagerService.getPager(this.allItems, page,this.size);
              this.start=this.pager.startIndex + 1;
           this.end=this.pager.endIndex + 1;
-         
-  
                     this.pageNumber=this.pager.startIndex;
-  
-  
      this.companyService.Post(this.getCompanies,{ offset:this.pageNumber,limit : this.size ,token:'LIVESITE'})
               .subscribe(res => {
                 this.showloader=false;
@@ -251,7 +241,6 @@ export class CompaniesComponent implements OnInit {
       })
   }
   getState(value, name) {
-
     this.country1 = '';
     this.state1 = '';
     this.Search(value, name)
@@ -365,8 +354,6 @@ export class CompaniesComponent implements OnInit {
 
     else {
 
-
-
       if (name == 'company') {
         this.company = value;
       }
@@ -447,9 +434,52 @@ export class CompaniesComponent implements OnInit {
       this.Search(date = '', name)
     }
   }
+  // company_name
+  // full_name
+  // user_email
+  // country      
+  // state,city,industry,start_date,end_date,user_type,excel,pdf,search_keyword
 
+
+  //   city: "knw"
+  // company_name: "samosys tech"
+  // countries_name: "Canada"
+  // id: 171
+  // industries_name: "Consumer Goods / Manufacturing"
+  // state_name: "Alberta"
+  // status: "Active"
+  // totalClients: 0
   exportData() {
-    this.companyService.exportAsExcelFile(this.data, 'sample');
+    for (let index = 0; index < this.tempArr.length; index++) {
+      var element = this.tempArr[index];
+      var company_name= element.company_name
+      var countries_name=element.countries_name
+      var industries_name= element.industries_name
+      var state_name=element.state_name
+      var status= element.status
+      var city=element.city
+    }
+    this.companyService.Post(this.exportManageCompanies, {
+      company_name: '',
+      full_name: '',
+      user_email:'',
+      country: '',
+      state:'',
+      city: '',
+      industry: '',
+      start_date: '',
+      end_date: '',
+      status: '',
+      user_type: '',
+      excel: '', 
+      pdf: '',
+       search_keyword: '',
+      token: 'LIVESITE'
+    })
+      .subscribe(res => {
+        console.log(res)
+      })
+    // this.companyService.exportAsExcelFile(this.data, 'sample');
 
   }
 

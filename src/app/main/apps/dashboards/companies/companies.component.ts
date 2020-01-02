@@ -450,36 +450,32 @@ export class CompaniesComponent implements OnInit {
   // status: "Active"
   // totalClients: 0
   exportData() {
-    for (let index = 0; index < this.tempArr.length; index++) {
-      var element = this.tempArr[index];
-      var company_name= element.company_name
-      var countries_name=element.countries_name
-      var industries_name= element.industries_name
-      var state_name=element.state_name
-      var status= element.status
-      var city=element.city
-    }
     this.companyService.Post(this.exportManageCompanies, {
-      company_name: '',
-      full_name: '',
-      user_email:'',
-      country: '',
-      state:'',
-      city: '',
-      industry: '',
-      start_date: '',
-      end_date: '',
-      status: '',
+      company_name: this.company ? this.company : '',
+      full_name: this.fullname ? this.fullname : '',
+      user_email: this.email ? this.email : '',
+      country: this.country1 ? this.country1 : '',
+      state: this.state1 ? this.state1 : '',
+      city: this.city ? this.city : '',
+      industry: this.industry1 ? this.industry1 : '',
+      start_date: this.sdate ? this.sdate : '',
+      end_date: this.edate ? this.edate : '',
       user_type: '',
-      excel: '', 
+      status_check: '',
+      excel: '',
       pdf: '',
-       search_keyword: '',
+      search_keyword: '',
       token: 'LIVESITE'
     })
       .subscribe(res => {
         console.log(res)
+        if (res['success'] == true) {
+          console.log(this.data)
+          // this.companyService.exportAsExcelFile(res['data'], 'sample');
+          this.companyService.exportAsExcelFile(this.data, 'sample');
+        }
+
       })
-    // this.companyService.exportAsExcelFile(this.data, 'sample');
 
   }
 

@@ -3,6 +3,10 @@ export const getClients="https://staging.enrichedacademy.com/api/admin/getClient
 // export const getClients="http://192.168.0.126/enrichedacademy_live/api/admin/editClient";
 export const editClient="http://192.168.0.126/enrichedacademy_live/api/admin/editClient";
 export const exportManageCompanies="http://192.168.0.18/enrichedacademy_live/api/admin/exportManageCompanies";
+export const exportManageClient="http://192.168.0.18/enrichedacademy_live/api/admin/exportManageClient"
+
+export const downloadAccessCodesFile="http://192.168.0.18/enrichedacademy_live/api/admin/downloadAccessCodesFile"
+
 export const getCompanies=" https://staging.enrichedacademy.com/api/admin/getCompanies";
 export const getAccessCode=" https://staging.enrichedacademy.com/api/admin/getAccessCode";
 export const getCountry=" https://staging.enrichedacademy.com/api/admin/getCountry";

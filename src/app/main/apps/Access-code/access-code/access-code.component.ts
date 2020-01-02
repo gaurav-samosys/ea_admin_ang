@@ -29,6 +29,7 @@ export class AccessCodeComponent implements OnInit {
   getAccessCode = myGlobals.getAccessCode;
   generateAccessCodes = myGlobals.generateAccessCodes;
   downloadAccessCodes = myGlobals.downloadAccessCodes;
+  downloadAccessCodesFile=myGlobals.downloadAccessCodesFile
   companiesData = [];
   common: any;
   clientData = [];
@@ -54,7 +55,7 @@ export class AccessCodeComponent implements OnInit {
 
   ngOnInit() {
     var number = document.getElementById('number');
-    console.log(number)
+    // console.log(number)
     number.onkeydown = function (e) {
       if (!((e.keyCode > 95 && e.keyCode < 106)
         || (e.keyCode > 47 && e.keyCode < 58)
@@ -87,7 +88,7 @@ export class AccessCodeComponent implements OnInit {
 
       if (option.company_name.toLowerCase().indexOf(filter) > -1) {
         this.dataArray.push(option);
-        console.log("dataArray search ===============", option)
+        // console.log("dataArray search ===============", option)
 
       }
     }
@@ -99,10 +100,11 @@ export class AccessCodeComponent implements OnInit {
     this.service.Post(this.getCompanies, { token: 'LIVESITE' }).subscribe(res => {
       // this.common = res
       this.companiesData = res['data']
-      console.log(this.companiesData)
+      // console.log(this.companiesData)
 
       for (let i = 0; i < this.companiesData.length; i++) {
         this.dataArray.push(this.companiesData[i]);
+        this.ngOnInit();
       }
     })
   }
@@ -118,11 +120,11 @@ export class AccessCodeComponent implements OnInit {
     let filter = value.toLowerCase();
     for (let i = 0; i < this.clientData.length; i++) {
       let option = this.clientData[i];
-      console.log("option ===============", option)
+      // console.log("option ===============", option)
 
       if (option.company_name.toLowerCase().indexOf(filter) > -1) {
         this.clientDataArray.push(option);
-        console.log("dataArray search ===============", option)
+        // console.log("dataArray search ===============", option)
 
       }
     }
@@ -133,9 +135,10 @@ export class AccessCodeComponent implements OnInit {
     this.service.Post(this.getClients, { company_id: value, token: 'LIVESITE' }).subscribe(res => {
       // this.common = res;
       this.clientData = res['data']
-      console.log(this.clientData)
+      // console.log(this.clientData)
       for (let i = 0; i < this.clientData.length; i++) {
         this.clientDataArray.push(this.clientData[i]);
+        this.ngOnInit();
       }
     })
   }
@@ -174,9 +177,9 @@ export class AccessCodeComponent implements OnInit {
   getAccessCodedata() {
     this.service.Post(this.getAccessCode, { token: 'LIVESITE', offset: this.pageNumber, limit: this.pageSize }).subscribe(res => {
       this.common = res;
-      console.log(this.common)
+      // console.log(this.common)
       this.access_data = this.common.data;
-      console.log(this.access_data)
+      // console.log(this.access_dat                                                                                                                                                                                                                                                                              a)
       this.allItems = this.common.total_data;
 
       this.dataSource = new MatTableDataSource(this.access_data);
@@ -247,17 +250,27 @@ export class AccessCodeComponent implements OnInit {
 
 
   downloadAccessData(client_id, random_code) {
-    this.service.Post(this.downloadAccessCodes, { client_id: client_id, random_code: random_code, token: 'LIVESITE', fields: 'companies.company_name,users.client_name,client_access_codes.code' }).subscribe(res => {
+    // fields: 'companies.company_name,users.client_name,client_access_codes.code' 
+    this.service.Post(this.downloadAccessCodes, { client_id: client_id, random_code: random_code, token: 'LIVESITE',
+    }).subscribe(res => {
       this.common = res;
+      console.log(this.common)
       this.xldata = this.common.data;
-      this.exportAsXLSX(this.xldata)
+
+      if (res['success'] == true) {
+        // console.log(this.data)
+        this.excelService.exportAsExcelFile(this.xldata, 'sample');
+
+      }
+      // this.xldata = this.common.data;
+      // this.exportAsXLSX(this.xldata)
     })
   }
 
-  exportAsXLSX(data) {
-    console.log(data[0].company_name)
-    this.excelService.exportAsExcelFile(data, '' + data[0].company_name + '');
-  }
+  // exportAsXLSX(data) {
+  //   console.log(data[0].company_name)
+  //   this.excelService.exportAsExcelFile(data, '' + data[0].company_name + '');
+  // }
 
 
   Search(value, name) {

@@ -1,6 +1,6 @@
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
 
-
+  <!-- <ng-container *ngIf="show"></ng-container> -->
   <!-- CENTER -->
   <div class="center" fusePerfectScrollbar>
     <div class="mat__box mat__box2 mt-20 mr-28">
@@ -25,7 +25,9 @@
     <div class="mat__box mt-20 mr-28">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button mat-raised-button color="accent" (click)="buttontoggle()" id="bt"> {{buttonName}}</button>
           <div class="h2 mb-8">Client Search</div>
+          <ng-container *ngIf="!show">
           <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
               <mat-form-field appearance="outline" fxFlex="100">
@@ -161,6 +163,7 @@
             <!-- </div> -->
             <!-- END OF ROW -->
           </div>
+          </ng-container>
           <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
         </div>
         <!-- END OF ROW -->

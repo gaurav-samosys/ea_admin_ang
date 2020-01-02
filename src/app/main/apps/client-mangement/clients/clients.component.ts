@@ -77,6 +77,7 @@ export class ClientsComponent implements OnInit {
   pagedItems: any[];
   getClients = myGlobals.getClients;
   getCountry = myGlobals.getCountry;
+  exportManageClient = myGlobals.exportManageClient;
   getStates = myGlobals.getState;
   getClientVertical = myGlobals.getClientVertical;
   statusChangeApiUser = myGlobals.statusChangeApiUser;
@@ -91,10 +92,11 @@ export class ClientsComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-
+  public show: boolean = false;
+  public buttonName: any = 'More Option';
   constructor(
     private toastr: ToastrService,
-    
+
     private _snackBar: MatSnackBar, private datePipe: DatePipe, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public client_service: ClientsService) {
     if (localStorage.getItem('clientadded_status') == 'true') {
       this.openclientaddedSnackBar();
@@ -121,7 +123,14 @@ export class ClientsComponent implements OnInit {
     this.FetchClient();
     this.ClientVertical();
   }
-
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "Less Option";
+    else
+      this.buttonName = "More Option";
+  }
   FetchClient() {
     this.client_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
@@ -450,11 +459,46 @@ export class ClientsComponent implements OnInit {
     }
   }
 
+
+  
   exportData() {
-    this.client_service.exportAsExcelFile(this.data, 'sample');
+    this.client_service.Post(this.exportManageClient, {
+      company_id: '',
+      client_name: this.clientname ? this.clientname : '',
+      comp_name: this.companyname ? this.companyname : '',
+      first_client: this.first_name ? this.first_name : '',
+      client_email: this.email ? this.email : '',
+      portal_view: this.portal ? this.portal : '',
+      client_vertical: this.vertical1 ? this.vertical1 : '',
+
+      country: this.country1 ? this.country1 : '',
+      state: this.state ? this.state : '',
+      city: this.city ? this.city : '',
+      start_date: this.sdate ? this.sdate : '',
+      end_date: this.edate ? this.edate : '',
+      status_check: '',
+
+      user_type: '',
+      excel: '',
+      pdf: '',
+      search_keyword: '',
+      token: 'LIVESITE'
+    })
+      .subscribe(res => {
+        console.log(res)
+        if (res['success'] == true) {
+          console.log(this.data)
+          this.client_service.exportAsExcelFile(this.data, 'sample');
+
+        }
+
+      })
 
   }
 
 }
 
+    // this.client_service.exportAsExcelFile(this.data, 'sample');
 
+// company_id,client_name,comp_name,first_client,client_email,portal_view,client_vertical,
+  // country,state,city,status_check,start_date,end_date

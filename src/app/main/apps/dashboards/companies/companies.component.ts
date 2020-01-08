@@ -83,7 +83,8 @@ export class CompaniesComponent implements OnInit {
   public totalSize = 0;
   startIndex = 1
   endIndex = 10
-
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
   displayedColumns: string[] = ['company_name', 'countries_name', 'state_name', 'industries_name', 'totalClients', 'status', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
@@ -117,14 +118,22 @@ export class CompaniesComponent implements OnInit {
     this.getCompany();
 
   }
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
   tempArr = []
   getCompany() {
     this.showloader = true;
     this.companyService.Post(this.getCompanies, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       console.log('=res=======>', res);
 
-      this.tempArr = res['data'];
-      console.log('========>', this.tempArr);
+      // this.tempArr = res['data'];
+      // console.log('========>', this.tempArr);
       this.response = res
       this.showloader = false;
       this.allItems = this.response.total_data;

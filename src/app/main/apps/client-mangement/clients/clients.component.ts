@@ -22,7 +22,7 @@ export interface PeriodicElement {
   client_name: any,
   company_name: any,
   client_vertical: any,
-  portal_name: any,
+  portal_name: any, 
   created_on: any,
   totalUsers: any
 }
@@ -117,6 +117,7 @@ export class ClientsComponent implements OnInit {
     }
   }
 
+  
   ngOnInit() {
 
     this.fetchCountry();

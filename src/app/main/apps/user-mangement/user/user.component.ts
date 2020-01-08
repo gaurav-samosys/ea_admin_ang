@@ -78,7 +78,8 @@ export class UserComponent implements OnInit {
 
   // pager object
   pager: any = {};
-
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
   // paged items
   pagedItems: any[];
   @ViewChild(MatSort, { static: true }) MatSort: MatSort;
@@ -95,7 +96,7 @@ export class UserComponent implements OnInit {
 
     private excelService: ExcelService, private datePipe: DatePipe, private _snackBar: MatSnackBar, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public user: UserService) {
     if (localStorage.getItem('status') == 'true') {
-      this.openSnackBar();
+      // this.openSnackBar();
       localStorage.removeItem('status');
     }
     else if (localStorage.getItem('useradded_status') == 'true') {
@@ -115,7 +116,14 @@ export class UserComponent implements OnInit {
 
 
   }
-
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
 
   openDialog(value) {
     let dialog = this.dialog.open(UserPopupComponent, {
@@ -264,13 +272,13 @@ export class UserComponent implements OnInit {
     })
   }
 
-  openSnackBar() {
-    this._snackBar.open('User details updated successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  // openSnackBar() {
+  //   this._snackBar.open('User details updated successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
   openuserSnackBar() {
     this._snackBar.open('User added successfully!!', 'End now', {
       duration: 4000,

@@ -22,22 +22,24 @@
 
     <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
      
-        <mat-form-field appearance="outline" style="width:439px;">
+      <form [formGroup]="reportForm">
+     
+        <mat-form-field appearance="outline"  style="width:439px;">
           <mat-label>Please select Client</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{food.viewValue}}
+          <mat-select formControlName="client_id" (selectionChange)="onSelection($event.value)">
+            <mat-option *ngFor="let item of companyListArray" [value]="item.id">
+              {{item.company_name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
     
         <mat-form-field appearance="outline" style="width:560px;">
           <mat-label>Please select Date Range:</mat-label>
-          <input style="left: -11px; width: 600px;" type="text" matInput ngxDaterangepickerMd
+          <input  formControlName="dateRange" style="left: -11px; width: 600px;" type="text"  matInput ngxDaterangepickerMd
           [locale]="{applyLabel: 'Apply', format: 'DD-MM-YYYY'}" startKey="start" endKey="end"
-            name="daterange" />
+            name="daterange" (datesUpdated)="datesUpdated($event)" />
         </mat-form-field>
-     
+      </form>
     </div>
     <div class="example-button-row">
       <button mat-raised-button type="button" (click)="downloadReport()">Download Report</button>

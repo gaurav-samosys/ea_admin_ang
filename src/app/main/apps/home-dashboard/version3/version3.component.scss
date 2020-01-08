@@ -17,6 +17,24 @@
 //     overflow: hidden;
 // }
 
+.pointer{
+  cursor: pointer;
+}
+
+.sort_column_active {
+  font-weight: 600;
+  font-size: 14px !important;
+  cursor: pointer;
+  color: #1a73e8;
+}
+.sort_column {
+  font-weight: 600;
+  font-size: 14px !important;
+  cursor: pointer;
+  // visibility: hidden;
+  // color: #999;
+  color: #1a73e8;
+}
 
 .example-dt {
   height: 30px;

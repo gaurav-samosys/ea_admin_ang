@@ -21,10 +21,15 @@
     </div>
 
     <!-- START DIV -->
+    <div class="h2 mb-8">
+        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
+        Manage User
+      </div>
     <div class="mat__box mt-20 mr-28">
+        <ng-container *ngIf="show">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="h2 mb-8">User Search</div>
+          <!-- <div class="h2 mb-8">Manage User</div> -->
           <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
               <mat-form-field appearance="outline" fxFlex="100">
@@ -115,7 +120,7 @@
           </div>
         </div>
       </div>
-    </div>
+   
     <!-- END DIV -->
     <div class="mat__box mt-20 mr-28">
 
@@ -148,41 +153,102 @@
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-              <mat-table [dataSource]="dataSource" matSort>
+              <mat-table [dataSource]="dataSource">
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="first_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Full Name
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('first_name','ASC')"
+                            [class]='(this.sort_column=="first_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('first_name','DESC')"
+                            [class]='(this.sort_column=="first_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span>  </mat-header-cell>
                   <mat-cell class="style" *matCellDef="let element"> {{element.first_name}} {{element.last_name}}
                   </mat-cell>
                 </ng-container>
 
                 <!-- Weight Column -->
                 <ng-container matColumnDef="company_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Company Name 
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('company_name','ASC')"
+                            [class]='(this.sort_column=="company_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('company_name','DESC')"
+                            [class]='(this.sort_column=="company_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span> 
+                  </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.company_name}}    </mat-cell>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="client_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Client Name </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Client Name
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('client_name','ASC')"
+                            [class]='(this.sort_column=="client_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('client_name','DESC')"
+                            [class]='(this.sort_column=="client_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span>  </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.client_name}}    </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="created_on">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Sign Up </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Sign Up 
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('created_on','ASC')"
+                            [class]='(this.sort_column=="created_on" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('created_on','DESC')"
+                            [class]='(this.sort_column=="created_on" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span> 
+                  </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.created_on}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="certificate_downloaded">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Course Progress </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Course Progress
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('certificate_downloaded','ASC')"
+                            [class]='(this.sort_column=="certificate_downloaded" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('certificate_downloaded','DESC')"
+                            [class]='(this.sort_column=="certificate_downloaded" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span>  </mat-header-cell>
                   <mat-cell *matCellDef="let element"> <span
                       *ngIf="element.certificate_downloaded == 0">Certification Pending</span> <span
                       *ngIf="element.certificate_downloaded != 0">Certification Download</span> </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="status">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Status  <span class="pointer">
+                      <i (click)="updateSortingOrderUser('status','ASC')"
+                        [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderUser('status','DESC')"
+                        [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span> </mat-header-cell>
                   <mat-cell *matCellDef="let element">
                     <ui-switch [checked]="element.status == 'Active' ? true : false"
                       (change)="onChange($event,element.id)"></ui-switch>
@@ -234,7 +300,8 @@
         </div>
       </div>
     </div>
-
+    </ng-container>
+  </div>
     <style type="text/css">
       .inline_list {
         list-style-type: none;

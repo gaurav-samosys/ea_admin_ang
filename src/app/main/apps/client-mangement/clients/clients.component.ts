@@ -182,6 +182,18 @@ export class ClientsComponent implements OnInit {
 
     })
   }
+  sort_column
+  ASC
+  sort_order = "DESC";
+
+  updateSortingOrderClient(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.client_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      this.dataSource=this.common.data
+    });
+  }
 
   openDialog(value) {
     let dialog = this.dialog.open(ClientPopupComponent, {

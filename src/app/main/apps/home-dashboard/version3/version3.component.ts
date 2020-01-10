@@ -38,6 +38,14 @@ export interface Dessert {
   total_client: number,
   total_company: number
 
+  // name:string,
+  // industry: string;
+  // total_client: number,
+  // total_user: string,
+
+  // status: number;
+
+  register_date:string
   //client
   name: string;
   industry: string;
@@ -61,10 +69,10 @@ export interface Dessert {
 
   //vertical
   // name: string;
-  total_vedio:number,
-  total_quiz:number,
-  total_question:number,
-  create_date:number,
+  total_vedio: number,
+  total_quiz: number,
+  total_question: number,
+  create_date: number,
 
 }
 
@@ -79,14 +87,9 @@ export interface Dessert {
 export class Version3Component implements OnInit {
   sortedData: Dessert[];
 
-  search_status_value:any=''
+  search_status_value: any = ''
 
-  // chartOptions = {
-  //   credits: {
-  //     enabled: false
-  //   },
-  // };
-
+ 
   desserts = []
 
 
@@ -217,8 +220,8 @@ export class Version3Component implements OnInit {
   common: any;
   name = [];
   final_name = [];
-  displayedColumns: string[] = ['name', 'total_client', 'total_user', 'total_company'];
-  displayedColumns1: string[] = ['name', 'total_client', 'total_user', 'total_company'];
+  displayedColumns: string[] = ['name', 'total_company','total_client', 'total_user'];
+  displayedColumns1: string[] = ['name', 'industry','total_client', 'total_user', 'status','register_date'];
   // displayedColumns1: string[] = ['0', '1', '2', '3', '4', '5'];
   // displayedColumns2: string[] = ['0', '1', '2', '3', '4', '5', '6'];
 
@@ -228,7 +231,11 @@ export class Version3Component implements OnInit {
   // displayedColumns: string[] = ['client_name', 'company_name', 'client_vertical', 'portal_name', 'created_on', 'totalUsers', 'status', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
+  sort_column_active: boolean = false;
+  // sort_column = "date_created";
+  sort_column
+  sort_order = "DESC";
+  ASC;
   public pageSize = 10;
   public currentPage = 0;
   public totalSize = 0;
@@ -263,9 +270,9 @@ export class Version3Component implements OnInit {
   }
 
 
-  constructor(public dialog: MatDialog, 
+  constructor(public dialog: MatDialog,
     private _snackBar: MatSnackBar
-    ,private _router: Router, private _fuseSidebarService: FuseSidebarService, private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
+    , private _router: Router, private _fuseSidebarService: FuseSidebarService, private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
     /*    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     
         // Assign the data to the data source for the table to render
@@ -435,6 +442,7 @@ export class Version3Component implements OnInit {
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
     this.getCompanywithData(this.date_range, this.search_data, this.industry_id, this.company_id);
   }
+
   onCompanydeselect(event) {
     this.table = 2
     for (var obj in this.company_id) {
@@ -449,6 +457,7 @@ export class Version3Component implements OnInit {
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
     this.getCompanywithData(this.date_range, this.search_data, this.industry_id, this.company_id);
   }
+
   onClientclick(event) {
     this.id_vertical = [];
 
@@ -477,6 +486,7 @@ export class Version3Component implements OnInit {
     this.getClientwithData(this.date_range, this.search_data, this.client_id);
 
   }
+
   onClientdeselect(event) {
     this.table = 3;
     for (var obj in this.client_id) {
@@ -492,6 +502,7 @@ export class Version3Component implements OnInit {
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
     this.getClientwithData(this.date_range, this.search_data, this.client_id);
   }
+
   onVerticalclick(event) {
     this.location_data = []
 
@@ -515,6 +526,7 @@ export class Version3Component implements OnInit {
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
     this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
   }
+
   onVerticaldeselect(event) {
     this.table = 4;
     for (var obj in this.id_vertical) {
@@ -526,6 +538,7 @@ export class Version3Component implements OnInit {
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
     this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
   }
+
   onLocationclick(event) {
     this.industry_disable = 1;
     this.company_disable = 1;
@@ -563,21 +576,26 @@ export class Version3Component implements OnInit {
     this.getAllUser(this.industry_id, this.company_id, this.clients_id, this.id_vertical, this.location_data);
     this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
   }
+
   resetLocation() {
     this.locationselectedItems = [];
   }
   resetVertical() {
     this.verticalsselectedItems = [];
   }
+
   resetClient() {
     this.clientsselectedItems = [];
   }
+
   resetCompany() {
     this.companyselectedItems = [];
   }
+
   resetIndustry() {
     this.industryselectedItems = [];
   }
+
   openSnackBar(message: string, action: string) {
     // if (this.search_status_value == '' ) {
     //   this._snackBar.open('Nothing to clear.', 'Warning', {
@@ -950,9 +968,9 @@ export class Version3Component implements OnInit {
       this.common = res
       this.data = this.common.data
 
-      this.desserts = this.data;
-      console.log(this.desserts)
-      this.sortedData = this.desserts.slice();
+      // this.desserts = this.data;
+      // console.log(this.desserts)
+      // this.sortedData = this.desserts.slice();
 
       this.allItems = this.common.recordsTotal;
       this.industry_total = this.allItems
@@ -1004,6 +1022,32 @@ export class Version3Component implements OnInit {
     })
   }
 
+
+  updateSortingOrderIndustry(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.v3Service.POST(this.getIndustriesWithData, {column:this.sort_column,dir:this.ASC, id: this.industry_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', search: this.search_data }).subscribe(res => {
+      this.common = res
+      this.dataSource=this.common.data
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getCompanywithData(date_range, search_data, industry_id, company_ids) {
     if (company_ids == '' && industry_id != '') {
       for (var i = 0; i < this.company.length; i++) {
@@ -1015,10 +1059,10 @@ export class Version3Component implements OnInit {
       this.common = res
       this.date_range = '';
       this.data = this.common.data
-
-      this.desserts = this.data;
-      console.log(this.desserts)
-      this.sortedData = this.desserts.slice();
+ console.log(this.data)
+      // this.desserts = this.data;
+      // console.log(this.desserts)
+      // this.sortedData = this.desserts.slice();
 
       this.allItems = this.common.recordsTotal;
       this.dataSource = this.data;
@@ -1071,98 +1115,46 @@ export class Version3Component implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // ===========================================================================================================
-
-  //  client with data
-
-  // ===========================================================================================================
-
-  sortData(sort: Sort) {
-    console.log(sort)
-    const data = this.sortedData.slice();
-    if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
-      return;
-    }
-
-    this.sortedData = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'total_user': return compare(a.total_user, b.total_user, isAsc);
-        case 'total_client': return compare(a.total_client, b.total_client, isAsc);
-        case 'total_company': return compare(a.total_company, b.total_company, isAsc);
-
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'industry': return compare(a.industry, b.industry, isAsc);
-        case 'company': return compare(a.company, b.company, isAsc);
-        case 'vertical': return compare(a.vertical, b.vertical, isAsc);
-        case 'user': return compare(a.user, b.user, isAsc);
-        case 'status': return compare(a.status, b.status, isAsc);
-        case 'register': return compare(a.register, b.register, isAsc);
-
-
-
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'email': return compare(a.email, b.email, isAsc);
-        case 'vedio': return compare(a.vedio, b.vedio, isAsc);
-        case 'cloud': return compare(a.cloud, b.cloud, isAsc);
-        case 'certificate': return compare(a.certificate, b.certificate, isAsc);
-        case 'progress': return compare(a.progress, b.progress, isAsc);
-        case 'percent': return compare(a.percent, b.percent, isAsc);
-        case 'status': return compare(a.status, b.status, isAsc);
-        case 'register': return compare(a.register, b.register, isAsc);
-
-
-
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'total_vedio': return compare(a.total_vedio, b.total_vedio, isAsc);
-        case 'total_quiz': return compare(a.total_quiz, b.total_quiz, isAsc);
-        case 'total_question': return compare(a.total_question, b.total_question, isAsc);
-        case 'create_date': return compare(a.create_date, b.create_date, isAsc);
-
-
-
- 
-
-        default: return 0;
-      }
+  updateSortingOrderCompany(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.v3Service.POST(this.getCompaniesWithData, {column:this.sort_column,dir:this.ASC,  industries_ids: this.industry_id.toString(), id: this.company_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
+      this.common = res
+      this.dataSource=this.common.data
     });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1172,17 +1164,15 @@ export class Version3Component implements OnInit {
       this.common = res;
       this.date_range = '';
       this.data = this.common.data
+      this.dataSource = this.data;
+
       // this.dataSource.sort = this.sort;
 
-      this.desserts = this.data;
-      console.log(this.desserts)
-      this.sortedData = this.desserts.slice();
-      // for (let index = 0; index <  this.sortedData.length; index++) {
-      //   const element =  this.sortedData[index];
-      //   console.log(element)
-
-      // }
-      // this.dataSource = new MatTableDataSource(this.sortedData);
+      // this.desserts = this.data;
+      // console.log(this.desserts)
+      // this.sortedData = this.desserts.slice();
+     
+      this.dataSource = new MatTableDataSource(this.data);
 
       this.allItems = this.common.recordsTotal;
       this.client_total = this.allItems;
@@ -1231,6 +1221,27 @@ export class Version3Component implements OnInit {
     })
   }
 
+
+
+  updateSortingOrderClient(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.v3Service.POST(this.getClientsWithData, {column:this.sort_column,dir:this.ASC, id: this.client_id.toString(), verticals_ids: this.client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, location: this.location_id }).subscribe(res => {
+      this.common = res
+      this.dataSource=this.common.data
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
   getUserwithData(date_range, search_data, id_vertical, location_data, searchtype) {
     let vid;
     if (id_vertical.length > 0 || location_data.length > 0) {
@@ -1251,16 +1262,16 @@ export class Version3Component implements OnInit {
 
     this.v3Service.POST(this.getUsersWithData, { clients_ids: this.clients_data.toString(), verticals: id_vertical.toString(), location: location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search_type: searchtype, search: search_data, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
       this.common = res
-      console.log("user data=================",this.common)
+      console.log("user data=================", this.common)
       this.date_range = '';
       this.data = this.common.data
-      this.desserts = this.data;
-      console.log(this.desserts)
-      this.sortedData = this.desserts.slice();
+      // this.desserts = this.data;
+      // console.log(this.desserts)
+      // this.sortedData = this.desserts.slice();
       this.name = this.data[0]
       this.allItems = this.common.recordsTotal;
       this.user_total = this.allItems;
-      console.log("userTotal==============",this.allItems)
+      console.log("userTotal==============", this.allItems)
       //this.client_total=this.allItems;
       this.dataSource = this.data;
       this.URL = this.getUsersWithData;
@@ -1292,9 +1303,9 @@ export class Version3Component implements OnInit {
 
     }
   }
-
+  vid
   private iterator3() {
-    let part, vid;
+    let part;
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
@@ -1307,12 +1318,13 @@ export class Version3Component implements OnInit {
       }
     }
     if (this.id_vertical.length == 0) {
-      vid = this.location_id
+      this.vid = this.location_id
     }
     else {
-      vid = this.id_vertical
+      this.vid = this.id_vertical
     }
-    this.v3Service.POST(this.getUsersWithData, { clients_ids: this.clients_data.toString(), verticals: vid.toString(), location: this.location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
+    this.v3Service.POST(this.getUsersWithData,
+       { clients_ids: this.clients_data.toString(), verticals: this.vid.toString(), location: this.location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
       this.common = res
       this.allItems = this.common.recordsTotal;
       this.user_total = this.allItems;
@@ -1324,15 +1336,29 @@ export class Version3Component implements OnInit {
     })
   }
 
+
+
+  updateSortingOrderUser(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.v3Service.POST(this.getUsersWithData, {column:this.sort_column,dir:this.ASC, clients_ids: this.clients_data, verticals: this.vid, location: this.location_data, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
+      this.common = res
+      this.dataSource=this.common.data
+    });
+  }
+
+
+
+
   getVerticalwithData(date_range, search_data) {
     this.v3Service.POST(this.getVerticalsWithData, { start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data }).subscribe(res => {
       this.common = res
       //this.date_range='';
       this.data = this.common.data
 
-      this.desserts = this.data;
-      console.log(this.desserts)
-      this.sortedData = this.desserts.slice();
+      // this.desserts = this.data;
+      // console.log(this.desserts)
+      // this.sortedData = this.desserts.slice();
 
       this.allItems = this.common.recordsTotal;
       this.dataSource = this.data;
@@ -1379,14 +1405,39 @@ export class Version3Component implements OnInit {
       this.dataSource = this.data;
 
     })
+  } 
+
+
+
+  updateSortingOrderVertical(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.v3Service.POST(this.getVerticalsWithData, {column:this.sort_column,dir:this.ASC,  start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
+      this.common = res
+      this.dataSource=this.common.data
+    });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getUserGraph(date_range, client_id, vertical_id, location_data) {
     this.v3Service.POST(this.getUserGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res
       this.date_range = '';
       this.vertical_id = [];
       this.clients_id = [];
-      console.log("this.common.labelName=======>",this.common.labelName)
+      console.log("this.common.labelName=======>", this.common.labelName)
 
 
       this.graph.users.xAxis.categories = this.common.labelName;
@@ -1459,16 +1510,16 @@ export class Version3Component implements OnInit {
 
       this.downloaded = this.common.total_certified_users;
       this.download_pending = this.common.total_pending_users;
-      Highcharts.chart('certificate', this.graph.certificate),{
-      
-       
-          credits: {
-            enabled: false
-          },
-      
-       
-        
-    
+      Highcharts.chart('certificate', this.graph.certificate), {
+
+
+        credits: {
+          enabled: false
+        },
+
+
+
+
       };
 
     })
@@ -1653,7 +1704,7 @@ export class Version3Component implements OnInit {
 
   }
   getData(value) {
-    console.log("get id user==========",value)
+    console.log("get id user==========", value)
     this.table = value;
     if (this.table == 1) {
       this.getIndustrywithData(this.search_data, this.industry_id);
@@ -1863,6 +1914,71 @@ export class Version3Component implements OnInit {
 
 }
 
-function compare(a: number | string, b: number | string, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}
+// function compare(a: number | string, b: number | string, isAsc: boolean) {
+//   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+// }
+
+  // ===========================================================================================================
+
+  //  client with data
+
+  // ===========================================================================================================
+
+  // sortData(sort: Sort) {
+  //   console.log(sort)
+  //   const data = this.sortedData.slice();
+  //   if (!sort.active || sort.direction === '') {
+  //     this.sortedData = data;
+  //     return;
+  //   }
+
+  //   this.sortedData = data.sort((a, b) => {
+  //     const isAsc = sort.direction === 'asc';
+  //     switch (sort.active) {
+  //       case 'name': return compare(a.name, b.name, isAsc);
+  //       case 'total_user': return compare(a.total_user, b.total_user, isAsc);
+  //       case 'total_client': return compare(a.total_client, b.total_client, isAsc);
+  //       case 'total_company': return compare(a.total_company, b.total_company, isAsc);
+
+  //       case 'name': return compare(a.name, b.name, isAsc);
+  //       case 'industry': return compare(a.industry, b.industry, isAsc);
+  //       case 'company': return compare(a.company, b.company, isAsc);
+  //       case 'vertical': return compare(a.vertical, b.vertical, isAsc);
+  //       case 'user': return compare(a.user, b.user, isAsc);
+  //       case 'status': return compare(a.status, b.status, isAsc);
+  //       case 'register': return compare(a.register, b.register, isAsc);
+
+
+
+  //       case 'name': return compare(a.name, b.name, isAsc);
+  //       case 'email': return compare(a.email, b.email, isAsc);
+  //       case 'vedio': return compare(a.vedio, b.vedio, isAsc);
+  //       case 'cloud': return compare(a.cloud, b.cloud, isAsc);
+  //       case 'certificate': return compare(a.certificate, b.certificate, isAsc);
+  //       case 'progress': return compare(a.progress, b.progress, isAsc);
+  //       case 'percent': return compare(a.percent, b.percent, isAsc);
+  //       case 'status': return compare(a.status, b.status, isAsc);
+  //       case 'register': return compare(a.register, b.register, isAsc);
+
+
+
+  //       case 'name': return compare(a.name, b.name, isAsc);
+  //       case 'total_vedio': return compare(a.total_vedio, b.total_vedio, isAsc);
+  //       case 'total_quiz': return compare(a.total_quiz, b.total_quiz, isAsc);
+  //       case 'total_question': return compare(a.total_question, b.total_question, isAsc);
+  //       case 'create_date': return compare(a.create_date, b.create_date, isAsc);
+
+
+
+
+
+  //       default: return 0;
+  //     }
+  //   });
+  // }
+
+ // chartOptions = {
+  //   credits: {
+  //     enabled: false
+  //   },
+  // };

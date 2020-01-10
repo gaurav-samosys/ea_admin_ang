@@ -78,7 +78,9 @@ export class UserComponent implements OnInit {
 
   // pager object
   pager: any = {};
-
+  sort_column
+  ASC
+  sort_order='DESC'
   // paged items
   pagedItems: any[];
   @ViewChild(MatSort, { static: true }) MatSort: MatSort;
@@ -115,8 +117,23 @@ export class UserComponent implements OnInit {
 
 
   }
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
 
-
+ /**
+   * =========================================
+   *      open dialog popup
+   * =========================================
+   */
+ 
   openDialog(value) {
     let dialog = this.dialog.open(UserPopupComponent, {
       data: value,
@@ -124,7 +141,12 @@ export class UserComponent implements OnInit {
     });
 
   }
-
+ /**
+   * =========================================
+   *        Confirm dialog
+   * =========================================
+   */
+ 
   confirmDialog(value): void {
     const message = `Are you sure you want to delete this user detail?`;
     let id = value
@@ -139,14 +161,24 @@ export class UserComponent implements OnInit {
       this.result = dialogResult;
     });
   }
-
+ /**
+   * =========================================
+   *        Update Dialog user 
+   * =========================================
+   */
+ 
   editDialog(value): void {
     const dialogRef = this.dialog.open(UserEditComponent, {
       width: '600px', height: '500px',
       data: value
     });
   }
-
+ /**
+   * =========================================
+   *        Fetch user 
+   * =========================================
+   */
+ 
   FetchUser() {
     this.user.POST(this.getUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showLoader = false;
@@ -192,6 +224,20 @@ export class UserComponent implements OnInit {
 
     })
   }
+ /**
+   * =========================================
+   *        Update sorting 
+   * =========================================
+   */
+ 
+  updateSortingOrderUser(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+        this.user.POST(this.getUsers, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+          this.response = res
+      this.dataSource=this.common.data
+    });
+  }
 
 
   /* setPage(page: number) {
@@ -219,13 +265,23 @@ export class UserComponent implements OnInit {
             });
        
     }*/
-
+ /**
+   * =========================================
+   *        Add user
+   * =========================================
+   */
+ 
   addUser() {
     let dialog = this.dialog.open(AdduserComponent, {
       width: '600px', height: '400px'
     });
   }
-
+ /**
+   * =========================================
+   *      fetch country
+   * =========================================
+   */
+ 
   fetchCountry() {
 
 
@@ -236,6 +292,12 @@ export class UserComponent implements OnInit {
 
       })
   }
+   /**
+   * =========================================
+   *        Get state
+   * =========================================
+   */
+ 
   getState(value, name) {
     this.country1 = '';
     this.state = '';
@@ -245,7 +307,12 @@ export class UserComponent implements OnInit {
       this.states = this.common.data
     })
   }
-
+ /**
+   * =========================================
+   *        OnSelection change
+   * =========================================
+   */
+ 
   onChange(value, id) {
     console.log(value, id)
     let status;
@@ -263,7 +330,12 @@ export class UserComponent implements OnInit {
       console.log(res)
     })
   }
-
+ /**
+   * =========================================
+   *        Open Snackbar
+   * =========================================
+   */
+ 
   openSnackBar() {
     this._snackBar.open('User details updated successfully!!', 'End now', {
       duration: 4000,
@@ -285,7 +357,12 @@ export class UserComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
-
+ /**
+   * =========================================
+   *        Searching
+   * =========================================
+   */
+ 
   Search(value, name) {
     console.log(value, name)
     if (this.value != value) {
@@ -395,7 +472,12 @@ export class UserComponent implements OnInit {
       });
   }
 
-
+ /**
+   * =========================================
+   *       Date range Selection
+   * =========================================
+   */
+ 
   MyDate(newDate, name) {
     let date;
     if (name == 'start') {
@@ -423,7 +505,12 @@ export class UserComponent implements OnInit {
     this.FetchUser();
   }
 
-
+ /**
+   * =========================================
+   *       Export Data And Download 
+   * =========================================
+   */
+ 
   exportData() {
     this.user.exportAsExcelFile(this.data, 'sample');
 

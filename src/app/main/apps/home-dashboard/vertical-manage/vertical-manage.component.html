@@ -1,0 +1,341 @@
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+
+  <!-- <ng-container *ngIf="show"></ng-container> -->
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+    <div class="mat__box mat__box2 mt-20 mr-28">
+      <div class="row" fxLayoutAlign="space-between center">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="h2 mb-8">12 Months Test Vertical</div>
+        </div>
+        <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+            <!-- routerLink="/apps/add-vertical" (click)="openDialog()"-->
+          <button mat-raised-button  routerLink="/apps/add-vertical" >
+            <mat-icon>add_circle_outline</mat-icon>Add More
+          </button>
+
+        </div>
+      </div>
+      <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+
+      <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
+      <div class="h2 mb-8">
+        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
+        12 Months Test Vertical
+      </div>
+      <div class="mat__box mt-20 mr-28">
+
+        <ng-container *ngIf="show">
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+
+              <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+            margin-right: 20px; ">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Search title" (keyup)="Search($event.target.value,'title')">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+             ">
+                <mat-label>Desciption</mat-label>
+                <input matInput placeholder="Search description" (keyup)="Search($event.target.value,'description')">
+              </mat-form-field>
+
+            </div>
+
+          </div>
+
+
+
+          <mat-divider></mat-divider>
+          <br>
+          <div class="mat__box mt-20 mr-28">
+
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-bottom: 25px;">
+                <!-- <button mat-raised-button type="button" (click)="toggle()"> Show/Hide Column</button> -->
+
+                <button mat-raised-button type="button" mat-button (click)="toggle()"
+                  [matMenuTriggerFor]="menu">Show/Hide Column</button>
+                <mat-menu #menu="matMenu">
+                  <div style=" width: 185px;" *ngFor="let item of displayedColumns">
+                    <div class="">
+                      <span (change)="onchange($event.value)"><input mat-menu-item type="checkbox" style=" margin-left: 15px;">
+                        <span style=" margin-left: 45px;">
+                          {{item}}
+                        </span></span>
+                      <!-- <button mat-menu-item type="checkbox">{{item.value}}</button> -->
+                    </div>
+
+                  </div>
+
+                </mat-menu>
+
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                <mat-table [dataSource]="dataSource">
+                  <ng-container [matColumnDef]="columnName"  *ngFor="let columnName of displayedColumns">
+                    <mat-header-cell *matHeaderCellDef> {{columnName}}
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderVerical('title','ASC')"
+                          [class]='(this.sort_column=="title" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderVerical('title','DESC')"
+                          [class]='(this.sort_column=="title" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell class="style" *matCellDef="let element"
+                      [routerLink]="['/apps/client-mangement/client-detail', element.id]"> {{element.Title}}
+                    </mat-cell>
+                  </ng-container>
+                  
+                  <!-- <ng-container [matColumnDef]="columnName" >
+                    <mat-header-cell *matHeaderCellDef> {{Title}}
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderVerical('title','ASC')"
+                          [class]='(this.sort_column=="title" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderVerical('title','DESC')"
+                          [class]='(this.sort_column=="title" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell class="style" *matCellDef="let element"
+                      [routerLink]="['/apps/client-mangement/client-detail', element.id]"> {{element.Title}}
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container [matColumnDef]="columnName" >
+                    <mat-header-cell *matHeaderCellDef> {{columnName}}
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderVerical('image','ASC')"
+                          [class]='(this.sort_column=="image" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderVerical('image','DESC')"
+                          [class]='(this.sort_column=="image" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.image}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container [matColumnDef]="columnName" >
+                    <mat-header-cell *matHeaderCellDef> {{columnName}}
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderVerical('video','ASC')"
+                          [class]='(this.sort_column=="video" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderVerical('video','DESC')"
+                          [class]='(this.sort_column=="video" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.video}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container [matColumnDef]="columnName" >
+                    <mat-header-cell *matHeaderCellDef> {{columnName}}
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderVerical('quizzes','ASC')"
+                          [class]='(this.sort_column=="quizzes" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderVerical('quizzes','DESC')"
+                          [class]='(this.sort_column=="quizzes" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.quizzes}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container [matColumnDef]="columnName" >
+                    <mat-header-cell *matHeaderCellDef>{{columnName}}
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderVerical('question','ASC')"
+                          [class]='(this.sort_column=="question" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderVerical('question','DESC')"
+                          [class]='(this.sort_column=="question" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.question}} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container [matColumnDef]="columnName" >
+                    <mat-header-cell *matHeaderCellDef> {{columnName}}
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderVerical('status','ASC')"
+                          [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderVerical('status','DESC')"
+                          [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      <ui-switch [checked]="element.status == 'Active' ? true : false"
+                        (change)="onChange($event,element.id)"></ui-switch>
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container [matColumnDef]="columnName" >
+                    <mat-header-cell *matHeaderCellDef>{{columnName}}</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
+                      <mat-menu #belowMenu="matMenu" yPosition="below">
+                        <button mat-menu-item matTooltip="Edit"
+                          [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">video</button>
+                        <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">quizzes</button>
+                      </mat-menu>
+                      <mat-menu #belowMenu="matMenu" yPosition="below">
+                        <button mat-menu-item matTooltip="Edit"
+                          [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">Edit</button>
+                        <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
+                      </mat-menu>
+
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container [matColumnDef]="columnName" >
+                    <mat-header-cell *matHeaderCellDef> {{columnName}}
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderVerical('created_on','ASC')"
+                          [class]='(this.sort_column=="created_on" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderVerical('created_on','DESC')"
+                          [class]='(this.sort_column=="created_on" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.created_on|date}} </mat-cell>
+                  </ng-container> -->
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns" style="width: 1008px;"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                  [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+                  (page)="handlePage($event)"></mat-paginator>
+                <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+              </div>
+              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            </div>
+            <!-- END OF ROW -->
+            <!--   <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <p fxFlex="50" class="pr-4">Showing {{start}} to {{end}} of {{allItems}} entries</p>
+                  </div>
+  
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                    <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+                      <li [ngClass]="{disabled:pager.currentPage === 1}">
+                          <a (click)="setPage(1)">First</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === 1}">
+                          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                      </li>
+                      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                          <a (click)="setPage(page)">{{page}}</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                          <a (click)="setPage(pager.totalPages)">Last</a>
+                      </li>
+                  </ul>
+                  </div>
+  
+                </div> -->
+            <!-- END OF ROW -->
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
+    <!-- END OF ROW -->
+  </div>
+</div>
+
+
+
+<style type="text/css">
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+</style>
+
+<!-- <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker]="picker" (click)="picker.open()" placeholder="Start date"
+                      [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field> -->
+
+<!-- <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>End Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" (click)="picker1.open()" placeholder="End date"
+                      [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field> -->
+
+
+                <!-- <div class="" *ngIf="!toggle_menu1">
+                    <ng-container *ngFor="let item of checkList" >
+                      <span>
+                          {{item.value}}
+                      </span>
+                    </ng-container>
+                  </div> -->
+
+                <!-- <mat-form-field>
+                        <mat-select [formControl]="checklist" multiple>
+                          <mat-option *ngFor="let item of checkList" [value]="item">{{item.value}}</mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+
+                <!-- <div class="">
+                     <mat-form-field  *ngIf="!toggle_menu1">
+                      <mat-select [formControl]="checklist" multiple>
+                        <mat-option *ngFor="let item of checkList" [value]="item">{{item.value}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div> -->
+

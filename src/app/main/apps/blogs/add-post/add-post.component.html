@@ -1,0 +1,148 @@
+
+
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+
+  <!-- <ng-container *ngIf="show"></ng-container> -->
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+    <div class="mat__box mat__box2 mt-20 mr-28">
+
+      <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+
+      <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
+      <div class="h2 mb-8">
+        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
+        Add Post
+      </div>
+      <div class="mat__box mt-20 mr-28">
+
+        <ng-container *ngIf="show">
+
+          <div class="row">
+            <form [formGroup]="AddPostForm" (ngSubmit)="submit()">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+
+                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+              margin-right: 20px; ">
+                  <mat-label>Post Title*</mat-label>
+                  <input matInput formControlName="title" placeholder="Search post title"
+                     required>
+                    <mat-error>Title is required</mat-error>
+                  </mat-form-field>
+
+
+                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+              margin-right: 20px;">
+                  <mat-label>Categary*</mat-label>
+                  <mat-select formControlName="categary">
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                      {{food.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>Categary is required</mat-error>
+
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+              margin-right: 20px; ">
+                  <mat-label>Author*</mat-label>
+                  <mat-select formControlName="author">
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                      {{food.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>Author is required</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+               ">
+                  <mat-label>Video Id</mat-label>
+                  <input matInput formControlName="vedio_id" placeholder="Search categary"
+                  >
+                </mat-form-field>
+
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+
+                <h2>Post Cover Image *</h2>
+                <input type="file" (change)="image_upload($event)" name="file" accept="image/*">
+                <input type="hidden" formControlName="image_upload">
+              </div>
+              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8">
+
+              <h2>Post Description *</h2>
+              <angular-editor (input)="showHTML()" [config]="config"></angular-editor>
+              <div id="htmlDiv" style="display:none;" class="html" [innerHTML]="htmlContent"></div>
+              <!-- <angular-editor id="editor1"  [config]="editorConfig"></angular-editor> -->
+              </div>
+              <button type="submit " matTooltip="update banner" mat-raised-button color="accent" 
+              >Upload</button>
+            </form>
+
+          </div>
+
+
+
+
+        </ng-container>
+
+      </div>
+    </div>
+    <!-- END OF ROW -->
+  </div>
+
+
+  <!-- <angular-editor [config]="editorConfig"></angular-editor> -->
+
+</div>
+
+
+
+<style type="text/css">
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+</style>
+<!-- [id]="id"
+[uploadUrl]="config.uploadUrl"
+[showToolbar]="config.showToolbar !== undefined ? config.showToolbar : true"
+[fonts]="getFonts()"
+[customClasses]="config.customClasses"
+[defaultFontName]="config.defaultFontName"
+[defaultFontSize]="config.defaultFontSize"
+[hiddenButtons]="config.toolbarHiddenButtons"
+(execute)="executeCommand($event)"></angular-editor-toolbar> -->
+<!-- <mat-form-field appearance="outline" fxFlex="100">
+                      <mat-label>Start Date</mat-label>
+                      <input matInput [matDatepicker]="picker" (click)="picker.open()" placeholder="Start date"
+                        [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field> -->
+
+<!-- <mat-form-field appearance="outline" fxFlex="100">
+                      <mat-label>End Date</mat-label>
+                      <input matInput [matDatepicker]="picker1" (click)="picker1.open()" placeholder="End date"
+                        [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field> -->

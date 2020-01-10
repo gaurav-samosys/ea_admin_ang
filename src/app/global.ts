@@ -22,16 +22,20 @@ export const editUsers=" https://staging.enrichedacademy.com/api/admin/editUsers
 export const accessCodeStatus=" https://staging.enrichedacademy.com/api/admin/accessCodeStatus";
 export const getClientVertical=" https://staging.enrichedacademy.com/api/admin/getClientVertical";
 //export const getEaAllUsersList="http://192.168.0.21/enrichedacademy_live/api/admin/getEaAllUsersList";
-export const getEaAllUsersList=" https://staging.enrichedacademy.com/api/admin/getEaAllUsersList";
-export const getIndustriesWithData=" https://staging.enrichedacademy.com/api/admin/getIndustriesWithData";
-export const getCompaniesWithData=" https://staging.enrichedacademy.com/api/admin/getCompaniesWithData";
-
+export const getEaAllUsersList="http://192.168.0.18/enrichedacademy_live/api/admin/getEaAllUsersList";
+export const getIndustriesWithData="http://192.168.0.18/enrichedacademy_live/api/admin/getIndustriesWithDataApi";
+export const getCompaniesWithData="http://192.168.0.18/enrichedacademy_live/api/admin/getCompaniesWithDataApi";
+export const getClientsWithData="http://192.168.0.18/enrichedacademy_live/api/admin/getClientsWithDataApi";
+export const getUsersWithData="http://192.168.0.18/enrichedacademy_live/api/admin/getUsersWithDataApi";
+export const getVerticalsWithData="http://192.168.0.18/enrichedacademy_live/api/admin/getVerticalsAPi";
 
 // 18/11 jeevan
-export const getClientsWithData="https://staging.enrichedacademy.com/api/admin/getClientsWithData";
+// export const getIndustriesWithData=" https://staging.enrichedacademy.com/api/admin/getIndustriesWithData";
+// export const getCompaniesWithData=" https://staging.enrichedacademy.com/api/admin/getCompaniesWithData";
+// export const getClientsWithData="https://staging.enrichedacademy.com/api/admin/getClientsWithData";
+// export const getUsersWithData=" https://staging.enrichedacademy.com/api/admin/getUsersWithData";
+// export const getVerticalsWithData=" https://staging.enrichedacademy.com/api/admin/getVerticalsWithData";
 
-export const getUsersWithData=" https://staging.enrichedacademy.com/api/admin/getUsersWithData";
-export const getVerticalsWithData=" https://staging.enrichedacademy.com/api/admin/getVerticalsWithData";
 export const getUserGraphData=" https://staging.enrichedacademy.com/api/admin/getUserGraphData";
 export const getDownloadsGraphData=" https://staging.enrichedacademy.com/api/admin/getDownloadsGraphData";
 export const getVideoViewsGraphData=" https://staging.enrichedacademy.com/api/admin/getVideoViewsGraphData";

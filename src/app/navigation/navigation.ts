@@ -215,6 +215,30 @@ export const navigation: FuseNavigation[] = [
                     },
                 ]
             },
+            {
+                id: 'Blogs',
+                title: 'Blogs',
+                translate: 'Blogs',
+                type: 'collapsable',
+                icon: 'adjust',
+                children: [
+
+                    {
+                        id: 'Blogs',
+                        title: 'Blogs',
+                        type: 'item',
+                        url: '/apps/blogs/blog'
+                    },
+                    {
+                        id: 'comment',
+                        title: 'Comment',
+                        type: 'item',
+                        url: '/apps/blogs/comment'
+
+                    },
+                   
+                ]
+            },
         ]
     },
 

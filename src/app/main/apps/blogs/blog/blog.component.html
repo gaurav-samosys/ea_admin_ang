@@ -37,19 +37,18 @@
                 <input matInput placeholder="Search post title" (keyup)="Search($event.target.value,'title')">
               </mat-form-field>
 
-              <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+              <mat-form-field appearance="outline" fxFlex="100" style="width: 345px;
              ">
                 <mat-label>Categary</mat-label>
                 <input matInput placeholder="Search categary" (keyup)="Search($event.target.value,'categary')">
               </mat-form-field>
-
             </div>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8">
 
               <mat-form-field class="example-full-width" appearance="outline" style="width: 345px;
-              margin-right: 20px;
-          ">
+              margin-right: 20px; ">
+
                 <mat-label>Start Date</mat-label>
                 <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -72,9 +71,23 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-                <!-- <button mat-stroked-button color="primary" routerLink="/apps/client-mangement/addclient"><mat-icon>add_circle_outline</mat-icon>Add Client</button> -->
-                <button mat-raised-button type="button"> Show/Hide Column</button>
+                <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
+                  class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (change)="columnClick('Post_Title')"><label><input value="Post_Title"
+                        type="checkbox" checked><span class="ml">Post_Title</span></label></button>
+                  <button mat-menu-item (change)="columnClick('Author')"><label><input value="Author" type="checkbox"
+                        checked><span class="ml">Author</span></label></button>
+                  <button mat-menu-item (change)="columnClick('Categary')"><label><input value="Categary"
+                        type="checkbox" checked><span class="ml">Categary</span></label></button>
+                  <button mat-menu-item (change)="columnClick('Created_Date')"><label><input value="Created_Date"
+                        type="checkbox" checked><span class="ml">Created Date</span></label></button>
+                  <button mat-menu-item (change)="columnClick('Action')"><label><input value="Action" type="checkbox"
+                        checked><span class="ml">Action</span></label> </button>
+                </mat-menu>
               </div>
+
+              <!-- *ngIf="Post_Title ? hide_column == 1:  hide_column == 0"  -->
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <mat-table [dataSource]="dataSource">
                   <ng-container matColumnDef="post_title">
@@ -145,18 +158,13 @@
                     <mat-cell *matCellDef="let element"> {{element.created_date}} </mat-cell>
                   </ng-container>
 
-
-
-
-
                   <ng-container matColumnDef="action">
                     <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                     <mat-cell *matCellDef="let element">
                       <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
-
+                      <!-- [routerLink]="['/apps/blog-post', element.id,element]" -->
                       <mat-menu #belowMenu="matMenu" yPosition="below">
-                        <button mat-menu-item matTooltip="Edit"
-                          [routerLink]="['/apps/blog-post', element.id]">Edit</button>
+                        <button mat-menu-item matTooltip="Edit" (click)="EditPost(element)">Edit</button>
                         <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
                       </mat-menu>
                       <!-- <button mat-icon-button>
@@ -214,6 +222,12 @@
       </div>
     </div>
     <!-- END OF ROW -->
+
+
+
+
+
+
   </div>
 </div>
 
@@ -256,3 +270,42 @@
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field> -->
+
+<!-- <button mat-raised-button type="button" class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+             <ul style="    display: block;
+             opacity: 1;
+             position: absolute;
+             top: 465px;
+             left: 1116px;" class="ColVis_collection">
+               <li><label><input type="checkbox"><span>Post_Title</span></label></li>
+               <li><label><input type="checkbox"><span>Author</span></label></li>
+               <li><label><input type="checkbox"><span>Categary</span></label>      </li>
+               <li><label><input type="checkbox"><span>Created Date</span></label>   </li>
+               <li><label><input type="checkbox"><span>Action</span></label>           </li>
+
+             </ul>
+             
+             <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button" class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                  <mat-menu #menu="matMenu"><mat-button-toggle-group [multiple]="true" #group="matButtonToggleGroup">
+                      <mat-button-toggle value="1">
+                          <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('1')"><label><input  type="checkbox" checked><span class="ml">Post_Title</span></label></button>
+
+                      </mat-button-toggle>
+                        <mat-button-toggle value="2">
+                            <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('2')"><label><input  type="checkbox" checked><span class="ml">Author</span></label></button>
+
+                      </mat-button-toggle>
+                      <mat-button-toggle value="3">
+                          <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('3')"><label><input  type="checkbox" checked><span class="ml">Categary</span></label></button>
+
+                      </mat-button-toggle>
+                      <mat-button-toggle value="4">
+                          <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('4')"><label><input  type="checkbox" checked><span class="ml">Created Date</span></label></button>
+
+                      </mat-button-toggle>
+                      <mat-button-toggle value="5">
+                          <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('4')"><label><input  type="checkbox" checked><span class="ml">Created Date</span></label></button>
+
+                      </mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </mat-menu>-->

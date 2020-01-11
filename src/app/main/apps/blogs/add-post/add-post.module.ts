@@ -27,6 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 const routes:Routes=[{
   
         path: '**',
@@ -53,6 +54,7 @@ const routes:Routes=[{
         MatButtonModule,
         MatButtonToggleModule,
         MatCardModule,
+        AngularFontAwesomeModule,
         MatDatepickerModule,
         MatDialogModule,
         MatDividerModule,

@@ -31,7 +31,7 @@ export const getVerticalDataList="http://192.168.0.18/enrichedacademy_live/api/a
 export const getDeveloperApiListing="http://192.168.0.18/enrichedacademy_live/api/admin/getDeveloperApiListing";
 export const getBlogWithDataApi="http://192.168.0.18/enrichedacademy_live/api/admin/getBlogWithDataApi"
 export const getCommentWithDataApi="http://192.168.0.18/enrichedacademy_live/api/admin/getCommentWithDataApi"
-
+export const addEditBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/addEditBlogApi"
 
 export const downloadAccessCodes=" https://staging.enrichedacademy.com/api/admin/downloadAccessCodes";
 export const subAccessCodeListShow=" https://staging.enrichedacademy.com/api/admin/subAccessCodeListShow";

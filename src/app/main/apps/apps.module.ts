@@ -116,11 +116,11 @@ const routes = [
         loadChildren: './theme-management/mobile-color/mobile-color.module#MobileColorModule'
     },
     {
-        path: 'blogs/blog',
+        path: 'blogs',
         loadChildren: './blogs/blog/blog.module#BlogModule'
     },
     {
-        path: 'blogs/comment',
+        path: 'comment',
         loadChildren: './blogs/comment/comment.module#CommentModule'
     },
     {

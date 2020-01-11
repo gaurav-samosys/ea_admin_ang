@@ -57,48 +57,75 @@ export class BlogComponent implements OnInit {
   ASC
   allItems: any;
   value = '';
-
+  hide_column: number = 0
   sort_order = "DESC";
   rows: any;
-  constructor(private router:Router,
+  private shown: string = 'Post_Title';
+  constructor(private router: Router,
     private toastr: ToastrService,
     private _snackBar: MatSnackBar, private http: HttpClient,
     public dialog: MatDialog, private pagerService: PagerService, public blog_service: BlogService) {
   }
 
   ngOnInit() {
+
+
     this.dataSource.paginator = this.paginator;
 
     this.getBlogList()
   }
+  // column
+  // onclick(value) {
+  //   this.column = value
+  //   console.log(this.column)
+  //   // this.displayedColumns.push(this.column)
+  //   this.hide_column = 1
+  //   if (this.column == 'Post_Title') {
+
+  //   } else if (this.column == 'Author') {
+
+  //   } else if (this.column == 'Categary') {
+
+  //   } else if (this.column == 'Created_Date') {
+
+  //   } else if (this.column == 'Action') {
+     
+  //   }else{
+
+  //   }
+
+  // }
+  columnClick(colName: string) {
+    const colIndex = this.displayedColumns.findIndex(col => col === colName);
+    
+    if (colIndex > 0) {
+      // column is currently shown in the table, so we remove it
+      this.displayedColumns.splice(colIndex, 1);
+    } else {
+      // column is not in the table, so we add it
+      this.displayedColumns.push(colName);
+    }
+  }
+
+
+
+
+
   getBlogList() {
     this.blog_service.Post(this.getBlogWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      console.log(res)
+      // console.log(res)
       this.data = this.response['data']
-      console.log(this.data)
+      // console.log(this.data)
 
       this.dataSource = this.data
       this.dataSource = new MatTableDataSource(this.data);
       this.allItems = this.response['recordsTotal'];
-      console.log(this.allItems)
+      // console.log(this.allItems)
       this.dataSource.paginator = this.paginator;
 
     });
   }
-  // routerLink="/apps/blog-post/:id"
-  navigateAddPost(){
-    this.router.navigate(['/apps/blog-post','add-post'])
-  }
-  buttontoggle() {
-    this.show = !this.show;
-    // CHANGE THE NAME OF THE BUTTON.
-    if (this.show)
-      this.buttonName = "keyboard_arrow_up";
-    else
-      this.buttonName = "keyboard_arrow_down";
-  }
-
 
 
   public handlePage(e: any) {
@@ -111,7 +138,7 @@ export class BlogComponent implements OnInit {
       if (this.value != this.value) {
         this.currentPage = 0;
       }
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
       this.Search(this.value, this.name)
     }
     else {
@@ -134,6 +161,27 @@ export class BlogComponent implements OnInit {
 
     })
   }
+  // routerLink="/apps/blog-post/:id"
+  navigateAddPost() {
+    this.router.navigate(['/apps/blog-post', 'add-post'])
+    // this.router.navigate(['/apps/blog-post'], { queryParams: { order: 'popular' } });
+  }
+
+  EditPost(element) {
+    // console.log(element)
+    this.router.navigate(['/apps/blog-post', element.id]);
+
+  }
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
+
+
   /**
     * =========================================
     *        Update sorting 
@@ -151,7 +199,7 @@ export class BlogComponent implements OnInit {
 
 
   Search(value, name) {
- console.log(value,name)
+    //  console.log(value,name)
     if (this.value != value) {
       this.currentPage = 0;
     }
@@ -183,9 +231,9 @@ export class BlogComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.blog_service.Post(this.getBlogWithDataApi, { post_title: this.titleName, category: this.categaryName,  offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
+    this.blog_service.Post(this.getBlogWithDataApi, { post_title: this.titleName, category: this.categaryName, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
       .subscribe(res => {
-        console.log(res)
+        // console.log(res)
         this.response = res
         this.allItems = this.response['recordsTotal'];
         this.rows = this.response['data']

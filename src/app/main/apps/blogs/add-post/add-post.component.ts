@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddPostService } from './add-post.service';
 import * as myGlobals from '../../../../global';
-
-export interface Food {
+import { ToastrService } from 'ngx-toastr';
+export interface AddPost {
   value: string;
-  viewValue: string;
+  id: number;
 }
 
 @Component({
@@ -18,46 +18,81 @@ export interface Food {
 export class AddPostComponent implements OnInit {
   htmlContent = '';
   add_button: number = 0
-
+  name: number = 0
   htmlContentWithoutStyles = '';
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
+  addEditBlogApi = myGlobals.addEditBlogApi
+  CategoryArray: AddPost[] = [
+    { value: 'Financial Updates', id: 1 },
+    { value: 'Live Events', id: 2 },
+    { value: 'Webinar Events', id: 3 }
   ];
+  authorArray = [
+    { value: 'Admin', id: 1 }
+  ]
   AddPostForm: FormGroup
   getBlogWithDataApi = myGlobals.getBlogWithDataApi
   response: Object;
-
-  constructor(private fb: FormBuilder, public rout: ActivatedRoute, private addpost_service: AddPostService) {
+  authorValue: any;
+  categoryValue: any;
+  post_title = ''
+  category = ''
+  author = ''
+  video_id = ''
+  description = ''
+  cover_img = ''
+  filesToUpload: Array<File> = [];
+  constructor(public router: Router, private fb: FormBuilder, public rout: ActivatedRoute, private addpost_service: AddPostService, public toastr: ToastrService) {
     this.AddPostForm = this.fb.group({
-      title: new FormControl('', [Validators.required]),
-      categary: new FormControl('', [Validators.required]),
+      post_title: new FormControl('', [Validators.required]),
+      category: new FormControl('', [Validators.required]),
       author: new FormControl('', [Validators.required]),
-      vedio_id: '',
-      image_upload: '',
-      htmlContent: ''
+      video_id: '',
+      cover_img: '',
+      description: ''
     })
   }
   prodId
   ngOnInit() {
-
     this.prodId = this.rout.snapshot.paramMap.get('id');
     console.log(this.prodId)
+    // if (this.prodId) {
+    //   this.name = 1
+    // } else {
+    //   this.name = 0
+    // }
+    this.editPost()
+  }
 
-    this.addpost_service.Post(this.getBlogWithDataApi, { token: 'LIVESITE' }).subscribe(res => {
+  editPost() {
+    this.addpost_service.Post(this.addEditBlogApi, { id: this.prodId, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      console.log(this.response['data'])
-      var data = this.response['data']
-      console.log("data=============Array", data)
-      for (let index = 0; index < data.length; index++) {
-        const id = data[index]['id'];
-        console.log(id)
-        if (id == this.prodId) {
-          //  this.AddPostForm.controls['title'].setValue(id.)
-        }
+      console.log(this.response)
+      this.name = 1
+      this.add_button = 1
+      if (this.response['success'] == true && this.response['status_code'] == 200) {
+        this.response = this.response['data']
+        console.log(this.response)
+        this.AddPostForm.controls['post_title'].setValue(this.response['post_title']),
+          this.AddPostForm.controls['category'].setValue(this.response['category'])
+        this.AddPostForm.controls['author'].setValue(this.response['author'])
+        this.AddPostForm.controls['video_id'].setValue(this.response['video_id'].toString())
+        this.AddPostForm.controls['cover_img'].setValue(this.response['cover_img'].toString())
+        this.AddPostForm.controls['description'].setValue(this.response['description'])
+      } else {
+        this.name = 0
+        this.add_button = 0
+
       }
     });
+  }
+  update() {
+
+  }
+  authorChange(value) {
+    this.authorValue = value
+  }
+  categoryChange(value) {
+    this.categoryValue = value
   }
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
@@ -69,19 +104,39 @@ export class AddPostComponent implements OnInit {
     else
       this.buttonName = "keyboard_arrow_down";
   }
+
   submit() {
     let item = {
-      title: this.AddPostForm.controls['title'].value,
-      categary: this.AddPostForm.controls['categary'].value,
+      post_title: this.AddPostForm.controls['post_title'].value,
+      category: this.AddPostForm.controls['category'].value,
       author: this.AddPostForm.controls['author'].value,
-      vedio_id: this.AddPostForm.controls['vedio_id'].value,
-      htmlContent: this.AddPostForm.controls['htmlContent'].value,
+      video_id: this.AddPostForm.controls['video_id'].value,
+      description: this.AddPostForm.controls['description'].value,
+      cover_img: this.AddPostForm.controls['cover_img'].value
+      // cover_img:this.AddPostForm.value.cover_img = this.filesToUpload
     }
+
     if (this.AddPostForm.invalid == true) {
       return false;
     }
-    console.log(this.AddPostForm.value);
+
+    // console.log(this.AddPostForm.value);
+    this.addpost_service.Post(this.addEditBlogApi, {
+      post_title: item.post_title, category: item.category, author: item.author, video_id: item.video_id, description: item.description, cover_img: item.cover_img,
+      token: 'LIVESITE'
+    }).subscribe(res => {
+      // console.log(res)
+     this.AddSubmitForm(res)
+    });
   }
+AddSubmitForm(res){
+  if (res['success'] == true && res['status_code'] == 200) {
+    this.toastr.success('Blog Add Successfully')
+    this.router.navigate(['/apps/blogs/blog'])
+  } else {
+    this.toastr.warning('There Are some Issue')
+  }
+}
   //image upload
   image_upload(event) {
     let reader = new FileReader();
@@ -90,7 +145,7 @@ export class AddPostComponent implements OnInit {
 
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.AddPostForm.get('image_upload').setValue({
+      this.AddPostForm.get('cover_img').setValue({
         filename: file.name,
         filetype: file.type,
         filesize: file.size,
@@ -98,35 +153,13 @@ export class AddPostComponent implements OnInit {
       })
     };
   }
-  config: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '15rem',
-    minHeight: '5rem',
-    placeholder: 'Enter text here...',
-    translate: 'no',
-    customClasses: [
-      {
-        name: "quote",
-        class: "quote",
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: "titleText",
-        class: "titleText",
-        tag: "h1",
-      },
-    ]
-  }
+
 
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: 'auto',
-    minHeight: '0',
+    height: '15rem',
+    minHeight: '5rem',
     maxHeight: 'auto',
     width: 'auto',
     minWidth: '0',
@@ -171,30 +204,48 @@ export class AddPostComponent implements OnInit {
     this.htmlContentWithoutStyles = document.getElementById("htmlDiv").innerHTML;
 
   }
-  getId
-  edit_user(data, id) {
-    console.log(data)
-    // this.image_path = data.image_url
-    this.getId = data.Id
-    console.log("id", this.getId)
-    this.add_button = 1
-    // if (this.open_add_industry == 1 || this.add_ind == 0 ) {
-    //   this.animationState = 'in';
-    //   this.bannerForm.controls['banner_start_date'].setValue(data.banner_start_date)
-    //   this.bannerForm.controls['banner_end_date'].setValue(data.banner_end_date)
-    //   this.bannerForm.controls['description'].setValue(data.description)
-    //   this.bannerForm.controls['title'].setValue(data.title)
-    //   this.bannerForm.controls['status'].setValue(data.status.toString())
 
-    // } else {
-    //   this.animationState = 'out';
-    // }
-  }
+
+  // config: AngularEditorConfig = {
+  //   editable: true,
+  //   spellcheck: true,
+  //   height: '15rem',
+  //   minHeight: '5rem',
+  //   placeholder: 'Enter text here...',
+  //   translate: 'no',
+  //   defaultParagraphSeparator: 'p',
+  //   defaultFontName: 'Arial',
+  //   toolbarHiddenButtons: [
+  //     ['bold']
+  //     ],
+  //   customClasses: [
+  //     {
+  //       name: "quote",
+  //       class: "quote",
+  //     },
+  //     {
+  //       name: 'redText',
+  //       class: 'redText'
+  //     },
+  //     {
+  //       name: "titleText",
+  //       class: "titleText",
+  //       tag: "h1",
+  //     },
+  //   ]
+  // };
+}
+
+
   // update() {
   //   console.log(this.bannerForm.value.Id)
   //   console.log(this.bannerForm.value.createdDate)
   //   console.log(this.getId);
+  // fileChangeEvent(fileInput: any) {
+  //   this.filesToUpload = <Array<File>>fileInput.target.files;
+  //   console.log(" this.filesToUpload==========", this.filesToUpload)
 
+  // }
 
   //   let item = {
   //     Id:this.getId,
@@ -229,4 +280,49 @@ export class AddPostComponent implements OnInit {
   //   }
   //   this.bannerForm.reset();
   // }
-}
+
+ //   console.log(this.response['data'])
+    //   var data = this.response['data']
+    //   console.log("data=============Array", data)
+    //   for (let index = 0; index < data.length; index++) {
+    //     const id = data[index]['id'];
+    //     console.log(id)
+    //     if (id == this.prodId) {
+    //       //  this.AddPostForm.controls['title'].setValue(id.)
+    //     }
+    //   }
+
+
+    // author: 
+  // category: 
+  // cover_img:
+  // created_date:
+  // description: 
+  // id: 30
+  // likes: 0
+  // post_title: "test ankit"
+  // video_id:
+
+   // config: AngularEditorConfig = {
+  //   editable: true,
+  //   spellcheck: true,
+  //   height: '15rem',
+  //   minHeight: '5rem',
+  //   placeholder: 'Enter text here...',
+  //   translate: 'no',
+  //   customClasses: [
+  //     {
+  //       name: "quote",
+  //       class: "quote",
+  //     },
+  //     {
+  //       name: 'redText',
+  //       class: 'redText'
+  //     },
+  //     {
+  //       name: "titleText",
+  //       class: "titleText",
+  //       tag: "h1",
+  //     },
+  //   ]
+  // }

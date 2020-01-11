@@ -227,13 +227,13 @@ export const navigation: FuseNavigation[] = [
                         id: 'Blogs',
                         title: 'Blogs',
                         type: 'item',
-                        url: '/apps/blogs/blog'
+                        url: '/apps/blogs'
                     },
                     {
                         id: 'comment',
                         title: 'Comment',
                         type: 'item',
-                        url: '/apps/blogs/comment'
+                        url: '/apps/comment'
 
                     },
                                     

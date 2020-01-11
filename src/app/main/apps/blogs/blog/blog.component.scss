@@ -39,7 +39,7 @@ table {
     margin: 0;
     display: flex;
     li {
-      color: #fff;
+      // color: #fff;
       display: flex;
       a {
         background-color: #444B6E;
@@ -111,3 +111,37 @@ table {
     // color: #1a73e8;
   }
   
+
+
+
+
+  button.ColVis_Button {
+    height: 38px;
+    margin-bottom: 15px;
+}
+
+// ul.ColVis_collection {
+//   list-style: none;
+//   width: 150px;
+//   padding: 8px 8px 4px 8px;
+//   margin: 0;
+//   background-color: #fff;
+//   overflow: hidden;
+//   z-index: 2002;
+// }
+
+// ul.ColVis_collection li {
+//   text-align: left;
+// }
+
+// .ColVis_collection label {
+//   font-weight: normal;
+// }
+
+// ul.ColVis_collection li span {
+//   display: inline-block;
+//   padding-left: 0.5em;
+//   cursor: pointer;
+//   position: absolute;
+//   top: 1px;
+// }

@@ -9,9 +9,9 @@
           <div class="h2 mb-8">Manage Post</div>
         </div>
         <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: -36px;">
           <!-- <button mat-stroked-button color="primary" routerLink="/apps/client-mangement/addclient"><mat-icon>add_circle_outline</mat-icon>Add Client</button> -->
-          <button mat-raised-button routerLink="/apps/blog-post">
+          <button mat-raised-button (click)="navigateAddPost()">
             <mat-icon>add_circle_outline</mat-icon>Add Post
           </button>
 
@@ -20,7 +20,7 @@
       <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
 
       <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
-      <div class="h2 mb-8">
+      <div class="h2 mb-8" style="margin-top: 13px;">
         <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
         Manage post
       </div>
@@ -70,7 +70,6 @@
           <br>
           <div class="mat__box mt-20 mr-28">
 
-
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
                 <!-- <button mat-stroked-button color="primary" routerLink="/apps/client-mangement/addclient"><mat-icon>add_circle_outline</mat-icon>Add Client</button> -->
@@ -78,21 +77,21 @@
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <mat-table [dataSource]="dataSource">
-                  <ng-container matColumnDef="title">
-                    <mat-header-cell *matHeaderCellDef> Title
+                  <ng-container matColumnDef="post_title">
+                    <mat-header-cell *matHeaderCellDef> Post_Title
                       <span class="pointer">
-                        <i (click)="updateSortingOrderClient('title','ASC')"
-                          [class]='(this.sort_column=="title" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        <i (click)="updateSortingOrderBlog('post_title','ASC')"
+                          [class]='(this.sort_column=="post_title" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_upward
                         </i>
-                        <i (click)="updateSortingOrderClient('title','DESC')"
-                          [class]='(this.sort_column=="title" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        <i (click)="updateSortingOrderBlog('post_title','DESC')"
+                          [class]='(this.sort_column=="post_title" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
                       </span>
                     </mat-header-cell>
                     <mat-cell class="style" *matCellDef="let element"
-                      [routerLink]="['/apps/client-mangement/client-detail', element.id]"> {{element.client_name}}
+                      [routerLink]="['/apps/client-mangement/client-detail', element.id]"> {{element.post_title}}
                     </mat-cell>
                   </ng-container>
 
@@ -100,64 +99,50 @@
                   <ng-container matColumnDef="author">
                     <mat-header-cell *matHeaderCellDef> Author
                       <span class="pointer">
-                        <i (click)="updateSortingOrderClient('author','ASC')"
+                        <i (click)="updateSortingOrderBlog('author','ASC')"
                           [class]='(this.sort_column=="author" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_upward
                         </i>
-                        <i (click)="updateSortingOrderClient('author','DESC')"
+                        <i (click)="updateSortingOrderBlog('author','DESC')"
                           [class]='(this.sort_column=="author" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
                       </span>
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
+                    <mat-cell *matCellDef="let element"> {{element.author}} </mat-cell>
                   </ng-container>
 
                   <!-- Symbol Column -->
-                  <ng-container matColumnDef="categary">
+                  <ng-container matColumnDef="category">
                     <mat-header-cell *matHeaderCellDef> Categary
                       <span class="pointer">
-                        <i (click)="updateSortingOrderClient('categary','ASC')"
-                          [class]='(this.sort_column=="categary" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        <i (click)="updateSortingOrderBlog('category','ASC')"
+                          [class]='(this.sort_column=="category" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_upward
                         </i>
-                        <i (click)="updateSortingOrderClient('categary','DESC')"
-                          [class]='(this.sort_column=="categary" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        <i (click)="updateSortingOrderBlog('category','DESC')"
+                          [class]='(this.sort_column=="category" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
                       </span>
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.client_vertical}} </mat-cell>
+                    <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
                   </ng-container>
 
-                  <ng-container matColumnDef="portal_name">
-                    <mat-header-cell *matHeaderCellDef> Portal View
+
+                  <ng-container matColumnDef="created_date">
+                    <mat-header-cell *matHeaderCellDef> Created Date
                       <span class="pointer">
-                        <i (click)="updateSortingOrderClient('portal_name','ASC')"
-                          [class]='(this.sort_column=="portal_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        <i (click)="updateSortingOrderBlog('created_date','ASC')"
+                          [class]='(this.sort_column=="created_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_upward
                         </i>
-                        <i (click)="updateSortingOrderClient('portal_name','DESC')"
-                          [class]='(this.sort_column=="portal_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        <i (click)="updateSortingOrderBlog('created_date','DESC')"
+                          [class]='(this.sort_column=="created_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
                       </span> </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.portal_name}} </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="created_on">
-                    <mat-header-cell *matHeaderCellDef> Signup Date
-                      <span class="pointer">
-                        <i (click)="updateSortingOrderClient('created_on','ASC')"
-                          [class]='(this.sort_column=="created_on" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                          arrow_upward
-                        </i>
-                        <i (click)="updateSortingOrderClient('created_on','DESC')"
-                          [class]='(this.sort_column=="created_on" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                          arrow_downward
-                        </i>
-                      </span> </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.created_on|date}} </mat-cell>
+                    <mat-cell *matCellDef="let element"> {{element.created_date}} </mat-cell>
                   </ng-container>
 
 
@@ -171,7 +156,7 @@
 
                       <mat-menu #belowMenu="matMenu" yPosition="below">
                         <button mat-menu-item matTooltip="Edit"
-                          [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">Edit</button>
+                          [routerLink]="['/apps/blog-post', element.id]">Edit</button>
                         <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
                       </mat-menu>
                       <!-- <button mat-icon-button>
@@ -187,8 +172,9 @@
                   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                 </mat-table>
+
                 <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-                  [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+                  [pageSize]="pageSize" [pageSizeOptions]="[2,5,10, 25, 50,100]" showFirstLastButtons
                   (page)="handlePage($event)"></mat-paginator>
                 <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
               </div>

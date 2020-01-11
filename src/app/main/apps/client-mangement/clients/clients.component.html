@@ -47,7 +47,7 @@
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
                 <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
                 <mat-form-field appearance="outline" fxFlex="100">
-                  <mat-label>Company Name</mat-label>
+                   <mat-label>Company Name</mat-label>
                   <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'company')">
                 </mat-form-field>
                 <!-- </div> -->
@@ -322,8 +322,10 @@
                         </span>
                       </mat-header-cell>
                       <mat-cell *matCellDef="let element">
-                        <ui-switch [checked]="element.status == 'Active' ? true : false"
-                          (change)="onChange($event,element.id)"></ui-switch>
+                          <mat-slide-toggle [checked]="element.status == 'Active' ? true : false"
+                          (change)="onChange($event,element.id)"></mat-slide-toggle>
+                        <!-- <ui-switch [checked]="element.status == 'Active' ? true : false"
+                          (change)="onChange($event,element.id)"></ui-switch> -->
                       </mat-cell>
                     </ng-container>
 

@@ -52,6 +52,10 @@ export class ManagementComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  id: any;
+  sort_order:'DESC'
+  sort_column
+  ASC
   constructor(
     private toastr: ToastrService,
     
@@ -93,6 +97,8 @@ export class ManagementComponent implements OnInit {
     this.manage_service.Post(this.getVerticalDataList, { vertical_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.data = this.common.data
+      this.dataSource = this.data;
+
       this.allItems = this.common.total_data;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
@@ -131,7 +137,15 @@ export class ManagementComponent implements OnInit {
 
     })
   }
-
+ 
+  updateSortingOrderVerical(sort_column,sort_order){
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.manage_service.Post(this.getVerticalDataList, {column:this.sort_column,dir:this.ASC, vertical_id:this.id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.common = res
+      this.dataSource=this.common.data
+    });
+  }
   /*setPage(page: number,id) {
         // get pager object from service
         this.pager = this.pagerService.getPager(this.allItems, page,this.size);
@@ -213,7 +227,7 @@ export class ManagementComponent implements OnInit {
 
       });
   }
-
+ 
   confirmDialog(value): void {
     value.vertical_id = this.vertical_id
     const message = `Are you sure you want to delete this topic detail?`;

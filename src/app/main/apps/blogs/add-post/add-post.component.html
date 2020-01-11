@@ -78,8 +78,13 @@
               <div id="htmlDiv" style="display:none;" class="html" [innerHTML]="htmlContent"></div>
               <!-- <angular-editor id="editor1"  [config]="editorConfig"></angular-editor> -->
               </div>
-              <button type="submit " matTooltip="update banner" mat-raised-button color="accent" 
-              >Upload</button>
+              <!-- <button type="submit " matTooltip="update banner" mat-raised-button color="accent" 
+              >Upload</button> -->
+
+              <button type="submit" mat-raised-button color="accent" matTooltip="save banner"
+              *ngIf="add_button == 0 ">Upload</button>
+        <button type="submit " matTooltip="update banner" mat-raised-button color="accent" *ngIf="add_button == 1"
+           (click)="update()">Update</button>
             </form>
 
           </div>

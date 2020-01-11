@@ -81,17 +81,32 @@
 
                                 <!-- Weight Column -->
                                 <ng-container matColumnDef="s_no">
-                                    <mat-header-cell *matHeaderCellDef>S No</mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef>S No
+
+                                    </mat-header-cell>
                                     <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
                                 </ng-container>
 
                                 <ng-container matColumnDef="cat_name">
-                                    <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef>Title
+                                        <span class="pointer">
+                                            <i (click)="updateSortingOrderVerical('cat_name','ASC')"
+                                                [class]='(this.sort_column=="cat_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                                                arrow_upward
+                                            </i>
+                                            <i (click)="updateSortingOrderVerical('cat_name','DESC')"
+                                                [class]='(this.sort_column=="cat_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                                                arrow_downward
+                                            </i>
+                                        </span>
+                                    </mat-header-cell>
                                     <mat-cell *matCellDef="let element"> {{element.cat_name}} </mat-cell>
                                 </ng-container>
 
                                 <ng-container matColumnDef="image">
-                                    <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef>Image
+
+                                    </mat-header-cell>
                                     <mat-cell *matCellDef="let element">
                                         <mat-icon matTooltip="click to see image" style="cursor: pointer;"
                                             (click)="viewEye(element.image)">remove_red_eye</mat-icon>
@@ -180,20 +195,29 @@
                                 </div>
 
                                 <ng-container matColumnDef="created">
-                                    <mat-header-cell *matHeaderCellDef> Created date </mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef> Created date
+                                        <span class="pointer">
+                                            <i (click)="updateSortingOrderVerical('created','ASC')"
+                                                [class]='(this.sort_column=="created" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                                                arrow_upward
+                                            </i>
+                                            <i (click)="updateSortingOrderVerical('created','DESC')"
+                                                [class]='(this.sort_column=="created" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                                                arrow_downward
+                                            </i>
+                                        </span></mat-header-cell>
                                     <mat-cell *matCellDef="let element"> {{element.created}} </mat-cell>
                                 </ng-container>
 
                                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
                             </mat-table>
+                            <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                                [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+                                (page)="handlePage($event)"></mat-paginator>
+                            <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
 
-                                <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems"
-                                    [pageIndex]="currentPage" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]"
-                                    showFirstLastButtons (page)="handlePage($event)"></mat-paginator>
-                                <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
-
-                                <!--    <div>
+                            <!--    <div>
                                 <div class="container">
 
                                     <div class="text-center">

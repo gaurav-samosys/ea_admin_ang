@@ -157,7 +157,6 @@
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <mat-table [dataSource]="dataSource">
-
                 <ng-container matColumnDef="company_name">
                   <mat-header-cell *matHeaderCellDef> Company Name
                     <span class="pointer">
@@ -205,6 +204,20 @@
                     </span> </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.state_name}} </mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="city">
+                    <mat-header-cell *matHeaderCellDef> City
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderCompany('city','ASC')"
+                          [class]='(this.sort_column=="city" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderCompany('city','DESC')"
+                          [class]='(this.sort_column=="city" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+                  </ng-container>
 
                 <ng-container matColumnDef="industries_name">
                   <mat-header-cell *matHeaderCellDef> Industry

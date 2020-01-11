@@ -18,9 +18,10 @@ import { MatSort } from '@angular/material';
   styleUrls: ['./developer-apis.component.scss']
 })
 export class DeveloperApisComponent implements OnInit {
-  @ViewChild(MatSort, { static: true }) MatSort: MatSort;
+  // @ViewChild(MatSort, { static: true }) MatSort: MatSort;
+  toggle_menu1:boolean;
 
-  displayedColumns: string[] = ['first_name', 'email', 'app_id', 'app_secret', 'website', 'status'];
+  displayedColumns: string[] = ['full_name', 'email', 'app_id', 'app_secret', 'website', 'status'];
   data: any;
   response: any;
   html: any;
@@ -35,7 +36,7 @@ export class DeveloperApisComponent implements OnInit {
   // array of all items to be paged
   allItems: any;
   states: any;
-
+  
   // pager object
   pager: any = {};
   getDeveloperApiListing = myGlobals.getDeveloperApiListing;
@@ -46,7 +47,9 @@ export class DeveloperApisComponent implements OnInit {
   getStates = myGlobals.getState;
   statusChangeApiUser = myGlobals.statusChangeApiUser;
   dataSource = new MatTableDataSource<any>(this.data);
-
+  sort_column
+  ASC
+  sort_order:'DESC'
   constructor(private http: HttpClient,
     private toastr: ToastrService,
 
@@ -56,6 +59,9 @@ export class DeveloperApisComponent implements OnInit {
 
   ngOnInit() {
     this.fetchListing();
+  }
+  showHideColumns(value){
+console.log(value)
   }
   setPage(page: number) {
     // get pager object from service
@@ -78,7 +84,26 @@ export class DeveloperApisComponent implements OnInit {
       });
 
   }
+ 
+ /**
+   * =========================================
+   *        Update sorting 
+   * =========================================
+   */
+ 
+  updateSortingOrderDevloperApi(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.developer_service.Post(this.getDeveloperApiListing, {column:sort_column,dir:this.ASC, limit: this.pageNumber, offset: this.size, id: '', token: 'LIVESITE' })
+    .subscribe(res => {
+      this.response=res
+      this.dataSource=this.response.data
+    });
+  }
 
+  toggle(){
+    this.toggle_menu1=!this.toggle_menu1
+   }
   changelimit(value) {
     this.size = parseInt(value);
     this.fetchListing();
@@ -91,15 +116,11 @@ export class DeveloperApisComponent implements OnInit {
         this.data = this.common.data
         this.dataSource.data = this.data
         this.allItems = this.common.total_data;
-        this.dataSource.sort = this.MatSort;
-
         this.setPage(1)
       })
   }
 
   fetchCountry() {
-
-
     this.developer_service.Post(this.getCountry, { token: 'LIVESITE' })
       .subscribe(res => {
         this.common = res

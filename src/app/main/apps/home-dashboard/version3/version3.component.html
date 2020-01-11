@@ -1023,8 +1023,10 @@
 								</ng-container>
 								<ng-container matColumnDef="action">
 									<th mat-header-cell *matHeaderCellDef>Action</th>
+									<!-- /apps/vertical-management/vertical/{{element[0]}} -->
+									
 									<td mat-cell *matCellDef="let element"> <button mat-raised-button 
-											type="submit" class="button" routerLink="/apps/vertical-manage" >Manage </button>
+											type="submit" class="button" routerLink="/apps/vertical-management/management/{{element[0]}}" >Manage </button>
 										 </td>
 								</ng-container>
 								<tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>

@@ -18,13 +18,20 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { DatePipe } from '@angular/common';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
-import { MatSort } from '@angular/material';
+// import { MatSort } from '@angular/material';
 
 export interface PeriodicElement {
   id: number;
   first_name: string;
   last_name: string;
   email: string;
+  company_name:string;
+  countries_name:string;
+  state_name:string;
+  city:string;
+  industries_name:string;
+  totalClients:number;
+  status:string;
 }
 
 @Component({
@@ -87,12 +94,18 @@ export class CompaniesComponent implements OnInit {
   // sort_column = "date_created";
   sort_order = "DESC";
   ASC;
-  displayedColumns: string[] = ['company_name', 'countries_name', 'state_name', 'industries_name', 'totalClients', 'status', 'action'];
+
+  // city: "knw"company_name: "samosys tech"countries_name: "Canada"id: 171
+  // industries_name: "Consumer Goods / Manufacturing"state_name: "Alberta"status: 
+  // "Active"totalClients: 0
+
+
+  displayedColumns: string[] = ['company_name', 'countries_name', 'state_name','city', 'industries_name', 'totalClients', 'status', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) MatSort: MatSort;
+  // @ViewChild(MatSort, { static: true }) MatSort: MatSort;
 
   constructor(
     private toastr: ToastrService,
@@ -130,7 +143,12 @@ export class CompaniesComponent implements OnInit {
     else
       this.buttonName = "keyboard_arrow_down";
   }
-  tempArr = []
+
+
+  // tempArr = []
+
+      // this.tempArr = res['data'];
+      // console.log('========>', this.tempArr);
   /**===========================================================
         get Company
   ===========================================================*/
@@ -139,18 +157,15 @@ export class CompaniesComponent implements OnInit {
     this.companyService.Post(this.getCompanies, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       console.log('=res=======>', res);
 
-      this.tempArr = res['data'];
-      console.log('========>', this.tempArr);
       this.response = res
       this.showloader = false;
       this.allItems = this.response.total_data;
       this.data = this.response.data;
-      console.log(this.data)
-
+      // console.log(this.data)
+      this.dataSource = this.data;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.MatSort;
-
+      // this.dataSource.sort = this.MatSort;
       //console.log(this.paginator.getRangeLabel)
       //this.dataSource.data=this.data;
       //this.setPage(1);
@@ -197,8 +212,10 @@ export class CompaniesComponent implements OnInit {
   updateSortingOrderCompany(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.companyService.Post(this.getCompanies, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.companyService.Post(this.getCompanies, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
+      console.log(this.response.data)
+      this.dataSource=this.response.data
     })
   }
 

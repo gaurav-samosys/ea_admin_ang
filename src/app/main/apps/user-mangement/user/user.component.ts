@@ -184,10 +184,12 @@ export class UserComponent implements OnInit {
       this.showLoader = false;
       this.response = res
       this.data = this.response.data
+      this.dataSource = this.data;
+
       this.allItems = this.response.total_data;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.MatSort;
+      // this.dataSource.sort = this.MatSort;
 
       //this.setPage(1);
     })
@@ -235,7 +237,7 @@ export class UserComponent implements OnInit {
     this.ASC = sort_order
         this.user.POST(this.getUsers, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
           this.response = res
-      this.dataSource=this.common.data
+      this.dataSource=this.response.data
     });
   }
 

@@ -236,7 +236,7 @@ export const navigation: FuseNavigation[] = [
                         url: '/apps/blogs/comment'
 
                     },
-                   
+                                    
                 ]
             },
         ]

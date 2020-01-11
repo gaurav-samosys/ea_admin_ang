@@ -98,14 +98,14 @@ const routes = [
         path: 'home-dashboard/report',
         loadChildren: './home-dashboard/report/report.module#ReportModule', canActivate: [LoginGuard]
     },
-    {
-        path: 'vertical-manage',
-        loadChildren: './home-dashboard/vertical-manage/vertical-manage.module#VerticalManageModule', canActivate: [LoginGuard]
-    },
-    {
-        path: 'add-vertical',
-        loadChildren: './home-dashboard/add-vertical/add-vertical.module#AddVerticalModule', canActivate: [LoginGuard]
-    },
+    // {
+    //     path: 'vertical-manage',
+    //     loadChildren: './home-dashboard/vertical-manage/vertical-manage.module#VerticalManageModule', canActivate: [LoginGuard]
+    // },
+    // {
+    //     path: 'add-vertical',
+    //     loadChildren: './home-dashboard/add-vertical/add-vertical.module#AddVerticalModule', canActivate: [LoginGuard]
+    // },
     
     {
         path: 'theme-management/manage-color',
@@ -124,9 +124,14 @@ const routes = [
         loadChildren: './blogs/comment/comment.module#CommentModule'
     },
     {
-        path: 'blog-post',
+        path: 'blog-post/:id',
         loadChildren: './blogs/add-post/add-post.module#AddPostModule'
     },
+
+
+
+
+
 
 
 

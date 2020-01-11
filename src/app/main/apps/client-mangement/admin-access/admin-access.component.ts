@@ -163,7 +163,7 @@ export class AdminAccessComponent implements OnInit {
     this.ASC = sort_order
       this.admin_service.Post(this.getAdminUsers, { column:this.sort_column,dir:this.ASC,offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
         this.response = res
-      this.dataSource=this.common.data
+      this.dataSource=this.response.data
     });
   }
 

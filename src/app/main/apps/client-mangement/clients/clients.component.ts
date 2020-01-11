@@ -140,7 +140,7 @@ export class ClientsComponent implements OnInit {
       this.dataSource = this.data;
       this.allItems = this.response.total_data;
       this.dataSource = new MatTableDataSource(this.data);
-      this.dataSource.sort = this.sort;
+      // this.dataSource.sort = this.sort;
 
       this.dataSource.paginator = this.paginator;
       //this.setPage(1);
@@ -189,9 +189,9 @@ export class ClientsComponent implements OnInit {
   updateSortingOrderClient(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.client_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.client_service.Post(this.getClients, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      this.dataSource=this.common.data
+      this.dataSource=this.response.data
     });
   }
 

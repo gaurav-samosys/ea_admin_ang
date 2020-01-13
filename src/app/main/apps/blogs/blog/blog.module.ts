@@ -25,6 +25,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { ReactiveFormsModule } from '@angular/forms';
+
 const routes: Routes = [
   {
       path: '**',
@@ -46,6 +48,7 @@ const routes: Routes = [
         MatMenuModule,
         MatSelectModule,
         MatTableModule,
+        ReactiveFormsModule,
         MatTabsModule,
         MatBottomSheetModule,
         MatButtonModule,

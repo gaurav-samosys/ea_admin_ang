@@ -72,7 +72,7 @@
               </div>
               <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8">
 
-                <h2>Post Description *</h2>
+                 <h2>Post Description *</h2>
                 <!-- <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
                 ">
                    <mat-label>Description</mat-label>
@@ -86,10 +86,10 @@
 
               <button type="submit" mat-raised-button color="accent" matTooltip="save banner"
                 *ngIf="add_button == 0 ">Upload</button>
-              <button type="submit " matTooltip="update banner" mat-raised-button color="accent" *ngIf="add_button == 1"
-                (click)="update()">Update</button>
+            
             </form>
-
+            <button type="submit " matTooltip="update banner" mat-raised-button color="accent" *ngIf="add_button == 1"
+            (click)="update(prodId)">Update</button>
           </div>
 
 

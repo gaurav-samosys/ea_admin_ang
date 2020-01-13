@@ -21,6 +21,7 @@ export class AddPostComponent implements OnInit {
   name: number = 0
   htmlContentWithoutStyles = '';
   addEditBlogApi = myGlobals.addEditBlogApi
+  updateBlogApi=myGlobals.updateBlogApi
   CategoryArray: AddPost[] = [
     { value: 'Financial Updates', id: 1 },
     { value: 'Live Events', id: 2 },
@@ -85,9 +86,36 @@ export class AddPostComponent implements OnInit {
       }
     });
   }
-  update() {
-
+  update(prodId) {
+    console.log(prodId)
+    let item = {
+      post_title: this.AddPostForm.controls['post_title'].value,
+      category: this.AddPostForm.controls['category'].value,
+      author: this.AddPostForm.controls['author'].value,
+      video_id: this.AddPostForm.controls['video_id'].value,
+      description: this.AddPostForm.controls['description'].value,
+      cover_img: this.AddPostForm.controls['cover_img'].value
+      // cover_img:this.AddPostForm.value.cover_img = this.filesToUpload
+    }
+    this.addpost_service.Post(this.updateBlogApi, {id:this.prodId,
+      post_title: item.post_title,
+       category: item.category, 
+       author: item.author, 
+       video_id: item.video_id, 
+       description: item.description, 
+       cover_img: item.cover_img,
+      token: 'LIVESITE'
+    }).subscribe(res => {
+      console.log(res)
+      if (res['success'] == true && res['status_code'] == 200) {
+        this.toastr.success('Blog Update Successfully')
+        this.router.navigate(['/apps/blogs'])
+      } else {
+        this.toastr.warning('There Are some Issue')
+      }
+    });
   }
+
   authorChange(value) {
     this.authorValue = value
   }
@@ -129,6 +157,7 @@ export class AddPostComponent implements OnInit {
      this.AddSubmitForm(res)
     });
   }
+
 AddSubmitForm(res){
   if (res['success'] == true && res['status_code'] == 200) {
     this.toastr.success('Blog Add Successfully')

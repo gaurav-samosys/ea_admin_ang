@@ -46,7 +46,9 @@ export class MobileColorComponent implements OnInit {
   { id: 2, name: 'My Magic Number' },
   { id: 3, name: 'NetWorth Calculator' },
   { id: 4, name: 'Student Loan Calculator' }]
-  constructor(private http: HttpClient, public service: MobilecolorService, private rt: Router, public _formBuilder: FormBuilder) {
+  constructor(private http: HttpClient, 
+    public service: MobilecolorService, private rt: Router,
+     public _formBuilder: FormBuilder) {
     this.filteredArray = this.select_client.valueChanges.pipe(
       startWith(null),
       map((mobileColor: string | null) => mobileColor ? this._filter(mobileColor) : this.allColors.slice()));

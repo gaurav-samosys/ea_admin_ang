@@ -25,8 +25,9 @@
         Manage post
       </div>
       <div class="mat__box mt-20 mr-28">
-
+          <form [formGroup]="blogForm">
         <ng-container *ngIf="show">
+         
 
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
@@ -34,13 +35,13 @@
               <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
             margin-right: 20px; ">
                 <mat-label>Post Title</mat-label>
-                <input matInput placeholder="Search post title" (keyup)="Search($event.target.value,'title')">
+                <input formControlName="post_title" matInput placeholder="Search post title" (keyup)="Search($event.target.value,'title')">
               </mat-form-field>
 
               <mat-form-field appearance="outline" fxFlex="100" style="width: 345px;
              ">
                 <mat-label>Categary</mat-label>
-                <input matInput placeholder="Search categary" (keyup)="Search($event.target.value,'categary')">
+                <input matInput formControlName="category" placeholder="Search categary" (keyup)="Search($event.target.value,'categary')">
               </mat-form-field>
             </div>
 
@@ -50,19 +51,29 @@
               margin-right: 20px; ">
 
                 <mat-label>Start Date</mat-label>
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <!-- [max]="maxDate" -->
+                <input matInput [min]="myDate" [max]="blogForm.controls['end_date'].value"
+                     formControlName="start_date" [matDatepicker]="picker1" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
+
               <mat-form-field class="example-full-width" appearance="outline" style="width: 345px;">
                 <mat-label>End Date</mat-label>
-                <input matInput [matDatepicker]="picker1" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
+                <input matInput formControlName="end_date" readonly
+                     [min]="blogForm.controls['start_date'].value" [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
               </mat-form-field>
+
+
+
+
             </div>
+
           </div>
 
+        
 
 
           <mat-divider></mat-divider>
@@ -165,7 +176,7 @@
                       <!-- [routerLink]="['/apps/blog-post', element.id,element]" -->
                       <mat-menu #belowMenu="matMenu" yPosition="below">
                         <button mat-menu-item matTooltip="Edit" (click)="EditPost(element)">Edit</button>
-                        <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
+                        <button mat-menu-item matTooltip="Delete" (click)="confirmDialogDelete(element.id)">delete</button>
                       </mat-menu>
                       <!-- <button mat-icon-button>
                               <mat-icon matTooltip="Edit" [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">edit</mat-icon>
@@ -218,6 +229,7 @@
             <!-- END OF ROW -->
           </div>
         </ng-container>
+      </form>
 
       </div>
     </div>
@@ -309,3 +321,25 @@
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </mat-menu>-->
+
+
+<!-- 
+              <mat-form-field appearance="outline" fxFlex="150">
+                  <mat-label>Banner start Date</mat-label>
+                    <input matInput [min]="myDate" [max]="bannerForm.controls['banner_end_date'].value"
+                     formControlName="banner_start_date" [matDatepicker]="picker1" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  <mat-error>Banner start Date is required!</mat-error>
+               </mat-form-field>
+
+               <mat-form-field appearance="outline" fxFlex="150">
+                  <mat-label>Banner End date</mat-label>
+                  <input matInput formControlName="banner_end_date" readonly
+                     [min]="bannerForm.controls['banner_start_date'].value" [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                  <mat-error>Banner End date is required!</mat-error>
+
+               </mat-form-field> -->
+

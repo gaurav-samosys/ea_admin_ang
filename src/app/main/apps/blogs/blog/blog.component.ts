@@ -12,6 +12,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material';
 import { BlogService } from './blog.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
 export interface blog {
   post_title: string;
   author: string;
@@ -41,7 +44,7 @@ export class BlogComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   getBlogWithDataApi = myGlobals.getBlogWithDataApi
-
+  deleteBlogApi = myGlobals.deleteBlogApi
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   public show: boolean = true;
@@ -61,15 +64,28 @@ export class BlogComponent implements OnInit {
   sort_order = "DESC";
   rows: any;
   private shown: string = 'Post_Title';
+  endName: string;
+  startDate: string;
+  endDate: string;
+  myDate;
+  blogForm: FormGroup
   constructor(private router: Router,
     private toastr: ToastrService,
-    private _snackBar: MatSnackBar, private http: HttpClient,
+    private _snackBar: MatSnackBar, private http: HttpClient, private fb: FormBuilder,
     public dialog: MatDialog, private pagerService: PagerService, public blog_service: BlogService) {
+
+    this.blogForm = this.fb.group({
+      post_title: '',
+      category: '',
+      start_date: '',
+      end_date: ''
+    })
   }
 
   ngOnInit() {
 
-
+    this.myDate = new Date();
+    console.log(this.myDate)
     this.dataSource.paginator = this.paginator;
 
     this.getBlogList()
@@ -89,7 +105,7 @@ export class BlogComponent implements OnInit {
   //   } else if (this.column == 'Created_Date') {
 
   //   } else if (this.column == 'Action') {
-     
+
   //   }else{
 
   //   }
@@ -97,7 +113,7 @@ export class BlogComponent implements OnInit {
   // }
   columnClick(colName: string) {
     const colIndex = this.displayedColumns.findIndex(col => col === colName);
-    
+
     if (colIndex > 0) {
       // column is currently shown in the table, so we remove it
       this.displayedColumns.splice(colIndex, 1);
@@ -117,7 +133,6 @@ export class BlogComponent implements OnInit {
       // console.log(res)
       this.data = this.response['data']
       // console.log(this.data)
-
       this.dataSource = this.data
       this.dataSource = new MatTableDataSource(this.data);
       this.allItems = this.response['recordsTotal'];
@@ -213,6 +228,12 @@ export class BlogComponent implements OnInit {
       else if (name == 'categary') {
         this.categaryName = ''
       }
+      else if (name == 'start_date') {
+        this.startDate = ''
+      }
+      else if (name == 'end_date') {
+        this.endDate = ''
+      }
 
     }
 
@@ -223,6 +244,12 @@ export class BlogComponent implements OnInit {
       else if (name == 'categary') {
         this.categaryName = value
       }
+      else if (name == 'start_date') {
+        this.startDate = value
+      }
+      else if (name == 'end_date') {
+        this.endDate = value
+      }
 
 
 
@@ -231,7 +258,11 @@ export class BlogComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.blog_service.Post(this.getBlogWithDataApi, { post_title: this.titleName, category: this.categaryName, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
+    this.blog_service.Post(this.getBlogWithDataApi, {
+      post_title: this.titleName, category: this.categaryName,
+      start_date: this.startDate, end_date: this.endDate,
+      offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
+    })
       .subscribe(res => {
         // console.log(res)
         this.response = res
@@ -263,7 +294,28 @@ export class BlogComponent implements OnInit {
     //   this.Search(date = '', name)
     // }
   }
+  confirmDialogDelete(id) {
+    this.blog_service.Post(this.deleteBlogApi, { id: id, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      console.log(this.response)
+      if (this.response['success'] == true && this.response['status_code'] == 200) {
+        Swal.fire({
+          title: 'Success',
+          text: 'Record delete successfully',
+          icon: 'success'
+        })
+      } else {
+        Swal.fire({
+          title: 'Warning',
+          text: 'There Are some issue',
+          icon: 'warning',
 
+        })
+      }
+      this.getBlogList();
+
+    })
+  }
 
 
 }

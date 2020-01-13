@@ -145,6 +145,7 @@
                       <th mat-header-cell *matHeaderCellDef> Action </th>
                       <td class="text-align" mat-cell *matCellDef="let element"> 
                       <button mat-raised-button  type="submit" class="button download_btn" (click)="downloadAccessData(element.client_id,element.random_code)">Download </button>
+
                      </td>
                     </ng-container>
 
@@ -152,6 +153,7 @@
                       <th mat-header-cell *matHeaderCellDef> View </th>
                      <td class="text-align" mat-cell *matCellDef="let element">
                          <button mat-raised-button  type="submit" class="button view_btn" [routerLink]="['/apps/Access-code/viewdetails', element.client_id,element.code]">View </button>
+
                         </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -27,6 +27,7 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="h2 mb-8 company_heading">Company Search</div>
+
           <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
               <mat-form-field appearance="outline" fxFlex="100">
@@ -126,6 +127,7 @@
     </div>
     <!-- END OF MAT__BOX MT-20 MR-28 -->
     <div class="mat__box mr-28">
+
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="row">
@@ -143,8 +145,8 @@
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
-              <button mat-raised-button matTooltip="Download Excel File" (click)="exportData()" class="export_btn">Export Data to
-                Excel</button>
+              <button mat-raised-button matTooltip="Download Excel File" (click)="exportData()" class="export_btn">Export Data to Excel
+
             </div>
 
           </div>
@@ -152,6 +154,7 @@
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <mat-table [dataSource]="dataSource" matSort class="table">
+
 
                 <ng-container matColumnDef="company_name">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </mat-header-cell>
@@ -211,6 +214,7 @@
                             <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon> 
                           </button> -->
                     <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn">Actions</button>
+
 
                     <mat-menu #belowMenu="matMenu" yPosition="below">
                       <button mat-menu-item matTooltip="Edit" (click)="editDialog(element)">Edit</button>

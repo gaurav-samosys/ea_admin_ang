@@ -7,6 +7,7 @@
       <div class="row" fxLayoutAlign="space-between center">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="h2">Client Admin Users</div>
+
         </div>
         <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
@@ -23,6 +24,7 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="h2 company_heading">Admin Search</div>
+
           <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
               <mat-form-field appearance="outline" fxFlex="100">
@@ -136,6 +138,7 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="first_name">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> First Name</mat-header-cell>
+
                   <mat-cell class="style"  *matCellDef="let element"> {{element.first_name}} </mat-cell>
                 </ng-container>
 
@@ -173,6 +176,7 @@
                           </button> -->
 
                     <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn">Actions</button>
+
 
                     <mat-menu #belowMenu="matMenu" yPosition="below">
                       <button mat-menu-item matTooltip="Edit" (click)="editDialog(element)">Edit</button>

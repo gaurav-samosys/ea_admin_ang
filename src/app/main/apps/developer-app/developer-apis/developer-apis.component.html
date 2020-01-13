@@ -28,36 +28,37 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <table mat-table [dataSource]="dataSource" class="table">
+
                     <!-- Name Column -->
                     <ng-container matColumnDef="first_name">
-                      <th mat-header-cell *matHeaderCellDef> First Name </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
                       <td class="style" mat-cell *matCellDef="let element" (click)="openDialog(element)"> {{element.first_name}} {{element.last_name}}</td>
                     </ng-container>
 
                     <!-- Weight Column -->
                     <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef> Email </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
                       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="app_id">
-                      <th mat-header-cell *matHeaderCellDef> app_id </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> app_id </th>
                       <td mat-cell *matCellDef="let element"> {{element.app_id}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="app_secret">
-                      <th mat-header-cell *matHeaderCellDef> app_secret </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> app_secret </th>
                       <td mat-cell *matCellDef="let element"> {{element.app_secret}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="website">
-                      <th mat-header-cell *matHeaderCellDef> Domain </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Domain </th>
                       <td mat-cell *matCellDef="let element"> {{element.website}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="status">
-                      <th mat-header-cell *matHeaderCellDef> Status </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                       <td mat-cell *matCellDef="let element"> <ui-switch [checked]="element.status == '1' ? true : false" (change)="onChange($event,element.id)"></ui-switch></td>
                     </ng-container>
 

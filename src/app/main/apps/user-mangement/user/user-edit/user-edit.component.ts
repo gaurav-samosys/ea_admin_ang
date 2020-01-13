@@ -87,8 +87,12 @@ export class UserEditComponent implements OnInit {
         if (this.status == true) {
 
           localStorage.setItem("status", this.status);
-        }
         this.toastr.success('User Update Successfully');
+
+        }else{
+        this.toastr.warning('There are some field required');
+
+        }
 
         this.rt.navigateByUrl('/apps/dashboards/users', { skipLocationChange: true }).then(() =>
           this.rt.navigate(["/apps/user-mangement/user"]));

@@ -46,7 +46,9 @@ export class MobileColorComponent implements OnInit {
   { id: 2, name: 'My Magic Number' },
   { id: 3, name: 'NetWorth Calculator' },
   { id: 4, name: 'Student Loan Calculator' }]
-  constructor(private http: HttpClient, public service: MobilecolorService, private rt: Router, public _formBuilder: FormBuilder) {
+  constructor(private http: HttpClient, 
+    public service: MobilecolorService, private rt: Router,
+     public _formBuilder: FormBuilder) {
     this.filteredArray = this.select_client.valueChanges.pipe(
       startWith(null),
       map((mobileColor: string | null) => mobileColor ? this._filter(mobileColor) : this.allColors.slice()));
@@ -219,7 +221,7 @@ export class MobileColorComponent implements OnInit {
     }
     // https://staging.enrichedacademy.com/api/admin/getCompaniesWithData http://192.168.0.40/enrichedacademy_live/api/admin/save_mobile_app_color
     else {
-      this.service.Post('http://192.168.0.40/enrichedacademy_live/api/admin/save_mobile_app_color ', {
+      this.service.Post('http://192.168.0.18/enrichedacademy_live/api/admin/save_mobile_app_color ', {
         type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
         secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
       }).subscribe(res => {

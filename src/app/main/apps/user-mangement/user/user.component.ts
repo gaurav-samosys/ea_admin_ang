@@ -78,7 +78,9 @@ export class UserComponent implements OnInit {
 
   // pager object
   pager: any = {};
-
+  sort_column
+  ASC
+  sort_order='DESC'
   // paged items
   pagedItems: any[];
   @ViewChild(MatSort, { static: true }) MatSort: MatSort;
@@ -95,7 +97,7 @@ export class UserComponent implements OnInit {
 
     private excelService: ExcelService, private datePipe: DatePipe, private _snackBar: MatSnackBar, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public user: UserService) {
     if (localStorage.getItem('status') == 'true') {
-      this.openSnackBar();
+      // this.openSnackBar();
       localStorage.removeItem('status');
     }
     else if (localStorage.getItem('useradded_status') == 'true') {
@@ -115,8 +117,23 @@ export class UserComponent implements OnInit {
 
 
   }
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
 
-
+ /**
+   * =========================================
+   *      open dialog popup
+   * =========================================
+   */
+ 
   openDialog(value) {
     let dialog = this.dialog.open(UserPopupComponent, {
       data: value,
@@ -124,7 +141,12 @@ export class UserComponent implements OnInit {
     });
 
   }
-
+ /**
+   * =========================================
+   *        Confirm dialog
+   * =========================================
+   */
+ 
   confirmDialog(value): void {
     const message = `Are you sure you want to delete this user detail?`;
     let id = value
@@ -139,23 +161,35 @@ export class UserComponent implements OnInit {
       this.result = dialogResult;
     });
   }
-
+ /**
+   * =========================================
+   *        Update Dialog user 
+   * =========================================
+   */
+ 
   editDialog(value): void {
     const dialogRef = this.dialog.open(UserEditComponent, {
       width: '600px', height: '500px',
       data: value
     });
   }
-
+ /**
+   * =========================================
+   *        Fetch user 
+   * =========================================
+   */
+ 
   FetchUser() {
     this.user.POST(this.getUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showLoader = false;
       this.response = res
       this.data = this.response.data
+      this.dataSource = this.data;
+
       this.allItems = this.response.total_data;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.MatSort;
+      // this.dataSource.sort = this.MatSort;
 
       //this.setPage(1);
     })
@@ -192,6 +226,20 @@ export class UserComponent implements OnInit {
 
     })
   }
+ /**
+   * =========================================
+   *        Update sorting 
+   * =========================================
+   */
+ 
+  updateSortingOrderUser(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+        this.user.POST(this.getUsers, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+          this.response = res
+      this.dataSource=this.response.data
+    });
+  }
 
 
   /* setPage(page: number) {
@@ -219,13 +267,23 @@ export class UserComponent implements OnInit {
             });
        
     }*/
-
+ /**
+   * =========================================
+   *        Add user
+   * =========================================
+   */
+ 
   addUser() {
     let dialog = this.dialog.open(AdduserComponent, {
       width: '600px', height: '400px'
     });
   }
-
+ /**
+   * =========================================
+   *      fetch country
+   * =========================================
+   */
+ 
   fetchCountry() {
 
 
@@ -236,6 +294,12 @@ export class UserComponent implements OnInit {
 
       })
   }
+   /**
+   * =========================================
+   *        Get state
+   * =========================================
+   */
+ 
   getState(value, name) {
     this.country1 = '';
     this.state = '';
@@ -245,7 +309,12 @@ export class UserComponent implements OnInit {
       this.states = this.common.data
     })
   }
-
+ /**
+   * =========================================
+   *        OnSelection change
+   * =========================================
+   */
+ 
   onChange(value, id) {
     console.log(value, id)
     let status;
@@ -263,7 +332,12 @@ export class UserComponent implements OnInit {
       console.log(res)
     })
   }
-
+ /**
+   * =========================================
+   *        Open Snackbar
+   * =========================================
+   */
+ 
   openSnackBar() {
     this._snackBar.open('User details updated successfully!!', 'End now', {
       duration: 4000,
@@ -285,7 +359,12 @@ export class UserComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
-
+ /**
+   * =========================================
+   *        Searching
+   * =========================================
+   */
+ 
   Search(value, name) {
     console.log(value, name)
     if (this.value != value) {
@@ -341,9 +420,9 @@ export class UserComponent implements OnInit {
     if (name == 'fullname') {
       this.fullname = value;
     }
-    else if (name == 'email') {
-      this.email = value
-    }
+    // else if (name == 'email') {
+    //   this.email = value
+    // }
 
     else if (name == 'email') {
       this.email = value
@@ -395,7 +474,12 @@ export class UserComponent implements OnInit {
       });
   }
 
-
+ /**
+   * =========================================
+   *       Date range Selection
+   * =========================================
+   */
+ 
   MyDate(newDate, name) {
     let date;
     if (name == 'start') {
@@ -423,6 +507,49 @@ export class UserComponent implements OnInit {
     this.FetchUser();
   }
 
+ /**
+   * =========================================
+   *       Export Data And Download 
+   * =========================================
+   */
+ 
+  exportData() {
+    this.user.exportAsExcelFile(this.data, 'sample');
+
+    // this.user.Post(this.exportManageCompanies, {
+    //   company_name: this.company ? this.company : '',
+    //   full_name: this.fullname ? this.fullname : '',
+    //   user_email: this.email ? this.email : '',
+    //   country: this.country1 ? this.country1 : '',
+    //   state: this.state1 ? this.state1 : '',
+    //   city: this.city ? this.city : '',
+    //   industry: this.industry1 ? this.industry1 : '',
+    //   start_date: this.sdate ? this.sdate : '',
+    //   end_date: this.edate ? this.edate : '',
+    //   user_type: '',
+    //   status_check: '',
+    //   excel: '',
+    //   pdf: '',
+    //   search_keyword: '',
+    //   token: 'LIVESITE'
+    // })
+    //   .subscribe(res => {
+    //     console.log(res)
+    //     if (res['success'] == true) {
+    //       console.log(this.data)
+    //       this.user.exportAsExcelFile(this.data, 'sample');
+    //     }
+
+    //   })
+
+  }
+
+}
+
+
+
+
+
   // exportData()
   // {
   //   this.user.POST(this.exportUser,{full_name:'',email:'',client_name:'',company_name:'',access_code:'',created_data:'',status:'',token:'LIVESITE' })
@@ -438,15 +565,3 @@ export class UserComponent implements OnInit {
   // {
   //   this.user.exportAsExcelFile(data, 'Enriched-Acadmey Users');
   // }
-
-  exportData() {
-    this.user.exportAsExcelFile(this.data, 'sample');
-
-  }
-
-}
-
-
-
-
-

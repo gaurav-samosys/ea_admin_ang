@@ -1,0 +1,345 @@
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+
+  <!-- <ng-container *ngIf="show"></ng-container> -->
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+    <div class="mat__box mat__box2 mt-20 mr-28">
+      <div class="row" fxLayoutAlign="space-between center">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="h2 mb-8">Manage Post</div>
+        </div>
+        <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: -36px;">
+          <!-- <button mat-stroked-button color="primary" routerLink="/apps/client-mangement/addclient"><mat-icon>add_circle_outline</mat-icon>Add Client</button> -->
+          <button mat-raised-button (click)="navigateAddPost()">
+            <mat-icon>add_circle_outline</mat-icon>Add Post
+          </button>
+
+        </div>
+      </div>
+      <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+
+      <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
+      <div class="h2 mb-8" style="margin-top: 13px;">
+        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
+        Manage post
+      </div>
+      <div class="mat__box mt-20 mr-28">
+          <form [formGroup]="blogForm">
+        <ng-container *ngIf="show">
+         
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+
+              <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+            margin-right: 20px; ">
+                <mat-label>Post Title</mat-label>
+                <input formControlName="post_title" matInput placeholder="Search post title" (keyup)="Search($event.target.value,'title')">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" fxFlex="100" style="width: 345px;
+             ">
+                <mat-label>Categary</mat-label>
+                <input matInput formControlName="category" placeholder="Search categary" (keyup)="Search($event.target.value,'categary')">
+              </mat-form-field>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8">
+
+              <mat-form-field class="example-full-width" appearance="outline" style="width: 345px;
+              margin-right: 20px; ">
+
+                <mat-label>Start Date</mat-label>
+                <!-- [max]="maxDate" -->
+                <input matInput [min]="myDate" [max]="blogForm.controls['end_date'].value"
+                     formControlName="start_date" [matDatepicker]="picker1" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" appearance="outline" style="width: 345px;">
+                <mat-label>End Date</mat-label>
+                <input matInput formControlName="end_date" readonly
+                     [min]="blogForm.controls['start_date'].value" [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
+              </mat-form-field>
+
+
+
+
+            </div>
+
+          </div>
+
+        
+
+
+          <mat-divider></mat-divider>
+          <br>
+          <div class="mat__box mt-20 mr-28">
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
+                  class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (change)="columnClick('Post_Title')"><label><input value="Post_Title"
+                        type="checkbox" checked><span class="ml">Post_Title</span></label></button>
+                  <button mat-menu-item (change)="columnClick('Author')"><label><input value="Author" type="checkbox"
+                        checked><span class="ml">Author</span></label></button>
+                  <button mat-menu-item (change)="columnClick('Categary')"><label><input value="Categary"
+                        type="checkbox" checked><span class="ml">Categary</span></label></button>
+                  <button mat-menu-item (change)="columnClick('Created_Date')"><label><input value="Created_Date"
+                        type="checkbox" checked><span class="ml">Created Date</span></label></button>
+                  <button mat-menu-item (change)="columnClick('Action')"><label><input value="Action" type="checkbox"
+                        checked><span class="ml">Action</span></label> </button>
+                </mat-menu>
+              </div>
+
+              <!-- *ngIf="Post_Title ? hide_column == 1:  hide_column == 0"  -->
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <mat-table [dataSource]="dataSource">
+                  <ng-container matColumnDef="post_title">
+                    <mat-header-cell *matHeaderCellDef> Post_Title
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderBlog('post_title','ASC')"
+                          [class]='(this.sort_column=="post_title" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderBlog('post_title','DESC')"
+                          [class]='(this.sort_column=="post_title" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell class="style" *matCellDef="let element"
+                      [routerLink]="['/apps/client-mangement/client-detail', element.id]"> {{element.post_title}}
+                    </mat-cell>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="author">
+                    <mat-header-cell *matHeaderCellDef> Author
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderBlog('author','ASC')"
+                          [class]='(this.sort_column=="author" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderBlog('author','DESC')"
+                          [class]='(this.sort_column=="author" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.author}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="category">
+                    <mat-header-cell *matHeaderCellDef> Categary
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderBlog('category','ASC')"
+                          [class]='(this.sort_column=="category" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderBlog('category','DESC')"
+                          [class]='(this.sort_column=="category" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="created_date">
+                    <mat-header-cell *matHeaderCellDef> Created Date
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderBlog('created_date','ASC')"
+                          [class]='(this.sort_column=="created_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderBlog('created_date','DESC')"
+                          [class]='(this.sort_column=="created_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.created_date}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
+                      <!-- [routerLink]="['/apps/blog-post', element.id,element]" -->
+                      <mat-menu #belowMenu="matMenu" yPosition="below">
+                        <button mat-menu-item matTooltip="Edit" (click)="EditPost(element)">Edit</button>
+                        <button mat-menu-item matTooltip="Delete" (click)="confirmDialogDelete(element.id)">delete</button>
+                      </mat-menu>
+                      <!-- <button mat-icon-button>
+                              <mat-icon matTooltip="Edit" [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">edit</mat-icon>
+                            </button>
+                    <button mat-icon-button>
+  
+                              <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon> 
+                            </button> -->
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+
+                <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                  [pageSize]="pageSize" [pageSizeOptions]="[2,5,10, 25, 50,100]" showFirstLastButtons
+                  (page)="handlePage($event)"></mat-paginator>
+                <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+              </div>
+              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            </div>
+            <!-- END OF ROW -->
+            <!--   <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <p fxFlex="50" class="pr-4">Showing {{start}} to {{end}} of {{allItems}} entries</p>
+                  </div>
+  
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                    <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+                      <li [ngClass]="{disabled:pager.currentPage === 1}">
+                          <a (click)="setPage(1)">First</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === 1}">
+                          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                      </li>
+                      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                          <a (click)="setPage(page)">{{page}}</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                          <a (click)="setPage(pager.totalPages)">Last</a>
+                      </li>
+                  </ul>
+                  </div>
+  
+                </div> -->
+            <!-- END OF ROW -->
+          </div>
+        </ng-container>
+      </form>
+
+      </div>
+    </div>
+    <!-- END OF ROW -->
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+<style type="text/css">
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+</style>
+
+<!-- <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker]="picker" (click)="picker.open()" placeholder="Start date"
+                      [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field> -->
+
+<!-- <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>End Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" (click)="picker1.open()" placeholder="End date"
+                      [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field> -->
+
+<!-- <button mat-raised-button type="button" class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+             <ul style="    display: block;
+             opacity: 1;
+             position: absolute;
+             top: 465px;
+             left: 1116px;" class="ColVis_collection">
+               <li><label><input type="checkbox"><span>Post_Title</span></label></li>
+               <li><label><input type="checkbox"><span>Author</span></label></li>
+               <li><label><input type="checkbox"><span>Categary</span></label>      </li>
+               <li><label><input type="checkbox"><span>Created Date</span></label>   </li>
+               <li><label><input type="checkbox"><span>Action</span></label>           </li>
+
+             </ul>
+             
+             <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button" class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                  <mat-menu #menu="matMenu"><mat-button-toggle-group [multiple]="true" #group="matButtonToggleGroup">
+                      <mat-button-toggle value="1">
+                          <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('1')"><label><input  type="checkbox" checked><span class="ml">Post_Title</span></label></button>
+
+                      </mat-button-toggle>
+                        <mat-button-toggle value="2">
+                            <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('2')"><label><input  type="checkbox" checked><span class="ml">Author</span></label></button>
+
+                      </mat-button-toggle>
+                      <mat-button-toggle value="3">
+                          <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('3')"><label><input  type="checkbox" checked><span class="ml">Categary</span></label></button>
+
+                      </mat-button-toggle>
+                      <mat-button-toggle value="4">
+                          <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('4')"><label><input  type="checkbox" checked><span class="ml">Created Date</span></label></button>
+
+                      </mat-button-toggle>
+                      <mat-button-toggle value="5">
+                          <button mat-menu-item #group="matButtonToggleGroup"  (click)="onclick('4')"><label><input  type="checkbox" checked><span class="ml">Created Date</span></label></button>
+
+                      </mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </mat-menu>-->
+
+
+<!-- 
+              <mat-form-field appearance="outline" fxFlex="150">
+                  <mat-label>Banner start Date</mat-label>
+                    <input matInput [min]="myDate" [max]="bannerForm.controls['banner_end_date'].value"
+                     formControlName="banner_start_date" [matDatepicker]="picker1" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  <mat-error>Banner start Date is required!</mat-error>
+               </mat-form-field>
+
+               <mat-form-field appearance="outline" fxFlex="150">
+                  <mat-label>Banner End date</mat-label>
+                  <input matInput formControlName="banner_end_date" readonly
+                     [min]="bannerForm.controls['banner_start_date'].value" [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                  <mat-error>Banner End date is required!</mat-error>
+
+               </mat-form-field> -->
+

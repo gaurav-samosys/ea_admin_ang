@@ -20,7 +20,7 @@
 							class="select2-search__field">
 						</ng-multiselect-dropdown>
 						<!-- END OF MAT-FORM-FIELD -->
-					</div>
+	 				</div>
 					<!-- END OF P-4 SELECTABLE_BOXES -->
 					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
 						<!-- 	<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
@@ -151,7 +151,8 @@
 			<!-- END OF WIDGET-GROUP MAT__BOX MAT__BOX2 MT-28 MR-28 -->
 
 			<div class="mat__box mt-20 mr-28 main_box">
-				<!-- industry -->
+
+
 				<div *ngIf="table == 1">
 					<div class="row table_heading" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -170,87 +171,77 @@
 					</div>
 					<!-- END OF ROW -->
 					<div class="row">
-						<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-							<mat-table [dataSource]="dataSource">
+							<table mat-table [dataSource]="dataSource">
 								<!-- Name Column -->
 								<ng-container matColumnDef="name">
-									<mat-header-cell *matHeaderCellDef> Name
-
+									<th mat-header-cell *matHeaderCellDef> Name
 										<span class="pointer">
-											<i (click)="updateSortingOrderIndustry('name','ASC','1')"
+											<i (click)="updateSortingOrderIndustry('name','ASC')"
 												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderIndustry('name','DESC','1')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderIndustry('name','DESC')"
+												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
-
-									</mat-header-cell>
-									<mat-cell class="style" *matCellDef="let element"> {{element[0]}} </mat-cell>
+									</th>
+									<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
 								</ng-container>
 								<!-- Weight Column -->
 								<ng-container matColumnDef="total_company">
-									<mat-header-cell *matHeaderCellDef> Total Companies
+									<th mat-header-cell *matHeaderCellDef> Total Companies
 										<span class="pointer">
-											<i (click)="updateSortingOrderIndustry('total_company','ASC','1')"
+											<i (click)="updateSortingOrderIndustry('total_company','ASC')"
 												[class]='(this.sort_column=="total_company" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderIndustry('total_company','DESC','1')"
-												[class]='(this.sort_column=="total_company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderIndustry('total_company','DESC')"
+												[class]='(this.sort_column=="total_company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[1]}} </mat-cell>
+										</span> </th>
+									<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
 								</ng-container>
 								<!-- Symbol Column -->
 								<ng-container matColumnDef="total_client">
-									<mat-header-cell *matHeaderCellDef> Total Clients
+									<th mat-header-cell *matHeaderCellDef> Total Clients
+
 										<span class="pointer">
-											<i (click)="updateSortingOrderIndustry('total_client','ASC','1')"
+											<i (click)="updateSortingOrderIndustry('total_client','ASC')"
 												[class]='(this.sort_column=="total_client" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderIndustry('total_client','DESC','1')"
-												[class]='(this.sort_column=="total_client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderIndustry('total_client','DESC')"
+												[class]='(this.sort_column=="total_client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
+									</th>
+									<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
 								</ng-container>
-
 								<ng-container matColumnDef="total_user">
-									<mat-header-cell *matHeaderCellDef> Total Users
+									<th mat-header-cell *matHeaderCellDef> Total Users
 										<span class="pointer">
-											<i (click)="updateSortingOrderIndustry('total_user','ASC','1')"
+											<i (click)="updateSortingOrderIndustry('total_user','ASC')"
 												[class]='(this.sort_column=="total_user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderIndustry('total_user','DESC','1')"
-												[class]='(this.sort_column=="total_user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderIndustry('total_user','DESC')"
+												[class]='(this.sort_column=="total_user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
-								</ng-container>
 
-								<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-								<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-							</mat-table>
+										</span></th>
+									<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
+								</ng-container>
+								<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+								<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+							</table>
 							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-								[pageSize]="pageSize" [pageSizeOptions]="[5,10, 25, 50,100]" showFirstLastButtons
-								(page)="handlePageIndustry($event)"></mat-paginator>
+								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+								(page)="handlePage($event)"></mat-paginator>
 							<div *ngIf="data == '' " style="text-align: center">No data available in table</div>
 						</div>
 						<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
@@ -293,7 +284,14 @@
 
 
 
-				<!-- company -->
+
+
+
+
+
+
+
+
 				<div *ngIf="table == 2" class="table__Companies">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -328,117 +326,111 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-							<mat-table [dataSource]="dataSource">
+							<table mat-table [dataSource]="dataSource">
 								<!-- Name Column -->
 								<ng-container matColumnDef="name">
-									<mat-header-cell *matHeaderCellDef> Name
+									<th mat-header-cell *matHeaderCellDef> Name
 										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('name','ASC','2')"
+											<i (click)="updateSortingOrderCompany('name','ASC')"
 												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderCompany('name','DESC','2')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span></mat-header-cell>
-									<mat-cell class="style" *matCellDef="let element"> {{element.name}} </mat-cell>
-								</ng-container>
-
-								<ng-container matColumnDef="industry">
-									<mat-header-cell *matHeaderCellDef> Industry
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('industry','ASC','2')"
-												[class]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-
-											<i (click)="updateSortingOrderCompany('industry','DESC','2')"
-												[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderCompany('name','DESC')"
+												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element.industry}} </mat-cell>
+									</th>
+									<td class="style" mat-cell *matCellDef="let row"> {{row.name}} </td>
+							</ng-container>
+
+							<ng-container matColumnDef="industry">
+									<th mat-header-cell *matHeaderCellDef > Industry 
+											<span class="pointer">
+													<i (click)="updateSortingOrderCompany('industry','ASC')"
+														[class]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_upward
+													</i>
+													<i (click)="updateSortingOrderCompany('industry','DESC')"
+														[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_downward
+													</i>
+												</span>
+									</th>
+									<td class="style" mat-cell *matCellDef="let row"> {{row.industry}} </td>
 								</ng-container>
-								<!-- Weight Column -->
+								<!-- Symbol Column -->
 								<ng-container matColumnDef="total_client">
-									<mat-header-cell *matHeaderCellDef> Total Clients
+									<th mat-header-cell *matHeaderCellDef> Total Clients
 										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('total_client','ASC','2')"
+											<i (click)="updateSortingOrderCompany('total_client','ASC')"
 												[class]='(this.sort_column=="total_client" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderCompany('total_client','DESC','2')"
-												[class]='(this.sort_column=="total_client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span> </mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element.total_client}} </mat-cell>
-								</ng-container>
-
-								<!-- Symbol Column -->
-								<ng-container matColumnDef="total_user">
-									<mat-header-cell *matHeaderCellDef> Total Users
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('total_user','ASC','2')"
-												[class]='(this.sort_column=="total_user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-
-											<i (click)="updateSortingOrderCompany('total_user','DESC','2')"
-												[class]='(this.sort_column=="total_user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span> </mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element.total_user}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="status">
-									<mat-header-cell *matHeaderCellDef> Status
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('status','ASC','2')"
-												[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-
-											<i (click)="updateSortingOrderCompany('status','DESC','2')"
-												[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderCompany('total_client','DESC')"
+												[class]='(this.sort_column=="total_client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+									</th>
+									<td mat-cell *matCellDef="let row"> {{row.total_client}} </td>
 								</ng-container>
 
-								<ng-container matColumnDef="register_date">
-									<mat-header-cell *matHeaderCellDef> Registered
+								<!-- Weight Column -->
+								<ng-container matColumnDef="total_user">
+									<th mat-header-cell *matHeaderCellDef> Total User
 										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('register_date','ASC','2')"
-												[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											<i (click)="updateSortingOrderCompany('total_user','ASC')"
+												[class]='(this.sort_column=="total_user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderCompany('register_date','DESC','2')"
-												[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderCompany('total_user','DESC')"
+												[class]='(this.sort_column=="total_user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span> </mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element.register_date}} </mat-cell>
+										</span>
+									</th>
+									<td mat-cell *matCellDef="let row"> {{row.total_user}} </td>
 								</ng-container>
 
-								<mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
-								<mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
-							</mat-table>
+
+								<ng-container matColumnDef="status">
+									<th mat-header-cell *matHeaderCellDef> Status 
+									<span class="pointer">
+										<i (click)="updateSortingOrderCompany('status','ASC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderCompany('status','DESC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span></th>
+									<td mat-cell *matCellDef="let row"> {{row.status}} </td>
+								</ng-container>
+								<ng-container matColumnDef="register_date">
+									<th mat-header-cell *matHeaderCellDef> Registered
+										<span class="pointer">
+											<i (click)="updateSortingOrderCompany('register_date','ASC')"
+												[class]='(this.sort_column=="register_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+												arrow_upward
+											</i>
+											<i (click)="updateSortingOrderCompany('register_date','DESC')"
+												[class]='(this.sort_column=="register_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+												arrow_downward
+											</i>
+										</span>
+									</th>
+									<td mat-cell *matCellDef="let row"> {{row.register_date}} </td>
+								</ng-container>
+
+								<tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+								<tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+							</table>
 							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
 								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
 								(page)="handlePage1($event)"></mat-paginator>
-							<!-- <mat-paginator  #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"
-								[showFirstLastButtons]="true" >
-							</mat-paginator> -->
 						</div>
-
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
 							available in table</div>
 
@@ -495,7 +487,14 @@
 
 
 
-				<!-- client -->
+
+
+
+
+
+
+
+
 
 				<div *ngIf="table == 3" class="table__Companies">
 					<div class="row" fxLayoutAlign="space-between">
@@ -533,19 +532,18 @@
 
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<!-- (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="ASC" matSortDisableClear -->
+							<!-- (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear -->
 							<mat-table [dataSource]="dataSource">
 								<!-- Name Column -->
 								<ng-container matColumnDef="name">
 									<mat-header-cell *matHeaderCellDef> Name
 										<span class="pointer">
-											<i (click)="updateSortingOrderClient('name','ASC','3')"
+											<i (click)="updateSortingOrderClient('name','ASC')"
 												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderClient('name','DESC','3')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderClient('name','DESC')"
+												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
@@ -557,29 +555,28 @@
 								<ng-container matColumnDef="industry">
 									<mat-header-cell *matHeaderCellDef> Industries
 										<span class="pointer">
-											<i (click)="updateSortingOrderClient('industry','ASC','3')"
+											<i (click)="updateSortingOrderClient('industry','ASC')"
 												[class]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderClient('industry','DESC','3')"
-												[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderClient('industry','DESC')"
+												[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span> </mat-header-cell>
+										</span>
+									</mat-header-cell>
 									<mat-cell *matCellDef="let element"> {{element[1]}} </mat-cell>
 								</ng-container>
 								<!-- Symbol Column -->
 								<ng-container matColumnDef="company">
 									<mat-header-cell *matHeaderCellDef> Companies
 										<span class="pointer">
-											<i (click)="updateSortingOrderClient('company','ASC','3')"
-												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											<i (click)="updateSortingOrderClient('company','ASC')"
+												[class]='(this.sort_column=="company" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderClient('company','DESC','3')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderClient('company','DESC')"
+												[class]='(this.sort_column=="company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span> </mat-header-cell>
@@ -588,61 +585,57 @@
 								<ng-container matColumnDef="vertical">
 									<mat-header-cell *matHeaderCellDef> Vertical
 										<span class="pointer">
-											<i (click)="updateSortingOrderClient('vertical','ASC','3')"
+											<i (click)="updateSortingOrderClient('vertical','ASC')"
 												[class]='(this.sort_column=="vertical" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderClient('vertical','DESC','3')"
-												[class]='(this.sort_column=="vertical" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderClient('vertical','DESC')"
+												[class]='(this.sort_column=="vertical" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span>
-									</mat-header-cell>
+										</span> </mat-header-cell>
 									<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
 								</ng-container>
 								<ng-container matColumnDef="user">
 									<mat-header-cell *matHeaderCellDef> Users
 										<span class="pointer">
-											<i (click)="updateSortingOrderClient('user','ASC','3')"
+											<i (click)="updateSortingOrderClient('user','ASC')"
 												[class]='(this.sort_column=="user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderClient('user','DESC','3')"
-												[class]='(this.sort_column=="user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderClient('user','DESC')"
+												[class]='(this.sort_column=="user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span>
-									</mat-header-cell>
+										</span> </mat-header-cell>
 									<mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
 								</ng-container>
-								<ng-container matColumnDef="status">
-									<mat-header-cell *matHeaderCellDef> Status
-										<span class="pointer">
-											<i (click)="updateSortingOrderClient('status','ASC','3')"
-												[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
 
-											<i (click)="updateSortingOrderClient('status','DESC','3')"
-												[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
+								<ng-container matColumnDef="status">
+									<mat-header-cell *matHeaderCellDef> Status 
+									<span class="pointer">
+										<i (click)="updateSortingOrderClient('status','ASC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderClient('status','DESC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
 									<mat-cell *matCellDef="let element"> {{element[5]}} </mat-cell>
 								</ng-container>
+
 								<ng-container matColumnDef="register">
 									<mat-header-cell *matHeaderCellDef>Registered
 										<span class="pointer">
-											<i (click)="updateSortingOrderClient('register','ASC','3')"
+											<i (click)="updateSortingOrderClient('register','ASC')"
 												[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderClient('register','DESC','3')"
-												[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderClient('register','DESC')"
+												[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
@@ -699,7 +692,6 @@
 
 
 
-				<!-- user -->
 
 				<div *ngIf="table == 4" class="table__Companies">
 					<div class="row" fxLayoutAlign="space-between">
@@ -782,18 +774,19 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<mat-table [dataSource]="dataSource">
 								<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
 								<ng-container matColumnDef="name">
 									<mat-header-cell *matHeaderCellDef> Name
 										<span class="pointer">
-											<i (click)="updateSortingOrderUser('name','ASC','4')"
+											<i (click)="updateSortingOrderUser('name','ASC')"
 												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderUser('name','DESC','4')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderUser('name','DESC')"
+												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
@@ -806,66 +799,40 @@
 								<ng-container matColumnDef="email">
 									<mat-header-cell *matHeaderCellDef> Email
 										<span class="pointer">
-											<i (click)="updateSortingOrderUser('email','ASC','4')"
+											<i (click)="updateSortingOrderUser('email','ASC')"
 												[class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderUser('email','DESC','4')"
-												[class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderUser('email','DESC')"
+												[class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span> </mat-header-cell>
+										</span>
+									</mat-header-cell>
 									<mat-cell *matCellDef="let element">
 										<div [innerHtml]="element[1]"></div>
 									</mat-cell>
 								</ng-container>
 								<!-- Symbol Column -->
 								<ng-container matColumnDef="vedio">
-									<mat-header-cell *matHeaderCellDef> Video
-										<!-- <span class="pointer">
-											<i (click)="updateSortingOrderUser('vedio','ASC','4')"
-												[class]='(this.sort_column=="vedio" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-
-											<i (click)="updateSortingOrderUser('vedio','DESC','4')"
-												[class]='(this.sort_column=="vedio" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span> -->
-									</mat-header-cell>
+									<mat-header-cell *matHeaderCellDef> Video </mat-header-cell>
 									<mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
 								</ng-container>
 								<ng-container matColumnDef="cloud">
 									<mat-header-cell *matHeaderCellDef>
-										<mat-icon>cloud_download
-											</mat-icon>
-
-											<!-- <span class="pointer">
-												<i (click)="updateSortingOrderUser('cloud','ASC','4')"
-													[class]='(this.sort_column=="cloud" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-													arrow_upward
-												</i>
-
-												<i (click)="updateSortingOrderUser('cloud','DESC','4')"
-													[class]='(this.sort_column=="cloud" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-													arrow_downward
-												</i>
-											</span> -->
+										<mat-icon>cloud_download</mat-icon>
 									</mat-header-cell>
 									<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
 								</ng-container>
 								<ng-container matColumnDef="certificate">
 									<mat-header-cell *matHeaderCellDef>Certificate
 										<span class="pointer">
-											<i (click)="updateSortingOrderUser('certificate','ASC','4')"
+											<i (click)="updateSortingOrderUser('certificate','ASC')"
 												[class]='(this.sort_column=="certificate" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderUser('certificate','DESC','4')"
-												[class]='(this.sort_column=="certificate" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderUser('certificate','DESC')"
+												[class]='(this.sort_column=="certificate" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
@@ -875,13 +842,12 @@
 								<ng-container matColumnDef="progress">
 									<mat-header-cell *matHeaderCellDef>Progress
 										<span class="pointer">
-											<i (click)="updateSortingOrderUser('progress','ASC','4')"
+											<i (click)="updateSortingOrderUser('progress','ASC')"
 												[class]='(this.sort_column=="progress" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderUser('progress','DESC','4')"
-												[class]='(this.sort_column=="progress" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderUser('progress','DESC')"
+												[class]='(this.sort_column=="progress" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
@@ -891,28 +857,27 @@
 								<ng-container matColumnDef="percent">
 									<mat-header-cell *matHeaderCellDef> %
 										<span class="pointer">
-											<i (click)="updateSortingOrderUser('percent','ASC','4')"
+											<i (click)="updateSortingOrderUser('percent','ASC')"
 												[class]='(this.sort_column=="percent" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderUser('percent','DESC','4')"
-												[class]='(this.sort_column=="percent" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderUser('percent','DESC')"
+												[class]='(this.sort_column=="percent" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span> </mat-header-cell>
+										</span>
+									</mat-header-cell>
 									<mat-cell *matCellDef="let element"> {{element[6]}} </mat-cell>
 								</ng-container>
 								<ng-container matColumnDef="status">
 									<mat-header-cell *matHeaderCellDef> Status
 										<span class="pointer">
-											<i (click)="updateSortingOrderUser('status','ASC','4')"
+											<i (click)="updateSortingOrderUser('status','ASC')"
 												[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderUser('status','DESC','4')"
-												[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderUser('status','DESC')"
+												[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
@@ -922,13 +887,12 @@
 								<ng-container matColumnDef="register">
 									<mat-header-cell *matHeaderCellDef>Registered
 										<span class="pointer">
-											<i (click)="updateSortingOrderUser('register','ASC','4')"
+											<i (click)="updateSortingOrderUser('register','ASC')"
 												[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderUser('register','DESC','4')"
-												[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderUser('register','DESC')"
+												[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
 										</span>
@@ -982,7 +946,11 @@
 
 
 
-				<!-- //vertical -->
+
+
+
+
+
 				<div *ngIf="table == 5" class="table__Companies">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -1019,102 +987,52 @@
 					<!-- END OF ROW -->
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<mat-table [dataSource]="dataSource">
+							<table mat-table [dataSource]="dataSource">
 								<!-- Name Column -->
 								<ng-container matColumnDef="name">
-									<mat-header-cell *matHeaderCellDef> Name
+									<th mat-header-cell *matHeaderCellDef> Name
 										<span class="pointer">
-											<i (click)="updateSortingOrderVertical('name','ASC','5')"
+											<i (click)="updateSortingOrderVertical('name','ASC')"
 												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_upward
 											</i>
-
-											<i (click)="updateSortingOrderVertical('name','DESC','5')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
+											<i (click)="updateSortingOrderVertical('name','DESC')"
+												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 												arrow_downward
 											</i>
-										</span> </mat-header-cell>
-									<mat-cell class="style" *matCellDef="let element"> {{element[0]}} </mat-cell>
+										</span>
+									</th>
+									<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
 								</ng-container>
 								<!-- Weight Column -->
 								<ng-container matColumnDef="total_vedio">
-									<mat-header-cell *matHeaderCellDef> Total Vedios
-										<!-- <span class="pointer">
-											<i (click)="updateSortingOrderVertical('total_vedio','ASC','5')"
-												[class]='(this.sort_column=="total_vedio" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-
-											<i (click)="updateSortingOrderVertical('total_vedio','DESC','5')"
-												[class]='(this.sort_column=="total_vedio" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span> -->
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[1]}} </mat-cell>
+									<th mat-header-cell *matHeaderCellDef> Total Vedios </th>
+									<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
 								</ng-container>
 								<!-- Symbol Column -->
 								<ng-container matColumnDef="total_quiz">
-									<mat-header-cell *matHeaderCellDef> Total Quiz
-										<!-- <span class="pointer">
-											<i (click)="updateSortingOrderVertical('total_quiz','ASC','5')"
-												[class]='(this.sort_column=="total_quiz" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-
-											<i (click)="updateSortingOrderVertical('total_quiz','DESC','5')"
-												[class]='(this.sort_column=="total_quiz" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span>  -->
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
+									<th mat-header-cell *matHeaderCellDef> Total Quiz </th>
+									<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
 								</ng-container>
-
 								<ng-container matColumnDef="total_question">
-									<mat-header-cell *matHeaderCellDef>Total Questions
-										<!-- <span class="pointer">
-											<i (click)="updateSortingOrderVertical('total_question','ASC','5')"
-												[class]='(this.sort_column=="total_question" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-
-											<i (click)="updateSortingOrderVertical('total_question','DESC','5')"
-												[class]='(this.sort_column=="total_question" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span> -->
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
+									<th mat-header-cell *matHeaderCellDef>Total Questions</th>
+									<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
 								</ng-container>
-
 								<ng-container matColumnDef="create_date">
-									<mat-header-cell *matHeaderCellDef>Created Date
-										<!-- <span class="pointer">
-											<i (click)="updateSortingOrderVertical('create_date','ASC','4')"
-												[class]='(this.sort_column=="create_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-
-											<i (click)="updateSortingOrderVertical('create_date','DESC','5')"
-												[class]='(this.sort_column=="create_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column  material-icons"'>
-												arrow_downward
-											</i>
-										</span> -->
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
+									<th mat-header-cell *matHeaderCellDef>Created Date</th>
+									<td mat-cell *matCellDef="let element"> {{element[4]}} </td>
 								</ng-container>
-
 								<ng-container matColumnDef="action">
-									<mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-									<mat-cell *matCellDef="let element"> <button mat-raised-button 
-											type="submit" class="button" (click)="Manage()">Manage </button>
-									</mat-cell>
+									<th mat-header-cell *matHeaderCellDef>Action</th>
+									<!-- /apps/vertical-management/vertical/{{element[0]}} -->
+									
+									<td mat-cell *matCellDef="let element"> <button mat-raised-button 
+											type="submit" class="button" routerLink="/apps/vertical-management/management/{{element[0]}}" >Manage </button>
+										 </td>
 								</ng-container>
-								<mat-header-row *matHeaderRowDef="displayedColumns4"></mat-header-row>
-								<mat-row *matRowDef="let row; columns: displayedColumns4;"></mat-row>
-							</mat-table>
-
+								<tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
+								<tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+							</table>
 							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
 								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
 								(page)="handlePage4($event)"></mat-paginator>
@@ -1153,25 +1071,20 @@
 					<!-- END OF ROW -->
 				</div>
 				<!-- END OF *NGIF="TABLE == 4" -->
+
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 			<!-- END OF MAT__BOX MT-20 MR-28 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			<div class="row mt-20 mr-28" style="display: flex;">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
@@ -1187,12 +1100,15 @@
 							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
 								<mat-form-field appearance="outline">
 
+
 									<input matInput readonly type="text" ngxDaterangepickerMd
 										placeholder="Select Date range" [(ngModel)]="usergraph" [showCancel]="true"
 										class="cursor-pointer input_date" [alwaysShowCalendars]="true" [opens]="'left'"
 										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 										startKey="start" endKey="end" [ranges]="ranges" [showCustomRangeLabel]="true"
 										(datesUpdated)="datesUpdated($event,'usergraph')">
+
+
 
 									<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
@@ -1218,6 +1134,8 @@
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
 								<mat-form-field appearance="outline">
+
+
 
 									<input matInput class="daterange" type="text" placeholder="Select Date range"
 										ngxDaterangepickerMd [showCancel]="true"
@@ -1282,6 +1200,9 @@
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
 								<mat-form-field appearance="outline">
+
+
+
 									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 										[showCancel]="true" class="cursor-pointer input_date"
 										[alwaysShowCalendars]="true" [opens]="'left'"

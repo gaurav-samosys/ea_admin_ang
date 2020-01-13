@@ -18,13 +18,20 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { DatePipe } from '@angular/common';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
-import { MatSort } from '@angular/material';
+// import { MatSort } from '@angular/material';
 
 export interface PeriodicElement {
   id: number;
   first_name: string;
   last_name: string;
   email: string;
+  company_name:string;
+  countries_name:string;
+  state_name:string;
+  city:string;
+  industries_name:string;
+  totalClients:number;
+  status:string;
 }
 
 @Component({
@@ -83,14 +90,22 @@ export class CompaniesComponent implements OnInit {
   public totalSize = 0;
   startIndex = 1
   endIndex = 10
-  public show: boolean = true;
-  public buttonName: any = 'keyboard_arrow_down';
-  displayedColumns: string[] = ['company_name', 'countries_name', 'state_name', 'industries_name', 'totalClients', 'status', 'action'];
+  sort_column
+  // sort_column = "date_created";
+  sort_order = "DESC";
+  ASC;
+
+  // city: "knw"company_name: "samosys tech"countries_name: "Canada"id: 171
+  // industries_name: "Consumer Goods / Manufacturing"state_name: "Alberta"status: 
+  // "Active"totalClients: 0
+
+
+  displayedColumns: string[] = ['company_name', 'countries_name', 'state_name','city', 'industries_name', 'totalClients', 'status', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) MatSort: MatSort;
+  // @ViewChild(MatSort, { static: true }) MatSort: MatSort;
 
   constructor(
     private toastr: ToastrService,
@@ -118,6 +133,8 @@ export class CompaniesComponent implements OnInit {
     this.getCompany();
 
   }
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
   buttontoggle() {
     this.show = !this.show;
     // CHANGE THE NAME OF THE BUTTON.
@@ -126,24 +143,29 @@ export class CompaniesComponent implements OnInit {
     else
       this.buttonName = "keyboard_arrow_down";
   }
-  tempArr = []
+
+
+  // tempArr = []
+
+      // this.tempArr = res['data'];
+      // console.log('========>', this.tempArr);
+  /**===========================================================
+        get Company
+  ===========================================================*/
   getCompany() {
     this.showloader = true;
     this.companyService.Post(this.getCompanies, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       console.log('=res=======>', res);
 
-      // this.tempArr = res['data'];
-      // console.log('========>', this.tempArr);
       this.response = res
       this.showloader = false;
       this.allItems = this.response.total_data;
       this.data = this.response.data;
-      console.log(this.data)
-
+      // console.log(this.data)
+      this.dataSource = this.data;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.MatSort;
-
+      // this.dataSource.sort = this.MatSort;
       //console.log(this.paginator.getRangeLabel)
       //this.dataSource.data=this.data;
       //this.setPage(1);
@@ -182,6 +204,24 @@ export class CompaniesComponent implements OnInit {
     })
   }
 
+
+  /**===========================================================
+        sorting using Assending and dissending order
+  ===========================================================*/
+
+  updateSortingOrderCompany(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.companyService.Post(this.getCompanies, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      console.log(this.response.data)
+      this.dataSource=this.response.data
+    })
+  }
+
+  /**===========================================================
+        open Dialog
+  ===========================================================*/
   openDialog(value) {
     let dialog = this.dialog.open(CompaniesPopupComponent, {
       data: value,
@@ -190,6 +230,9 @@ export class CompaniesComponent implements OnInit {
 
   }
 
+  /**===========================================================
+        confirm dialog
+  ===========================================================*/
   confirmDialog(value): void {
     console.log(value)
     const message = `Are you sure you want to delete this company detail?`;
@@ -204,7 +247,9 @@ export class CompaniesComponent implements OnInit {
       this.result = dialogResult;
     });
   }
-
+  /**===========================================================
+          edit dialog
+    ===========================================================*/
   editDialog(value): void {
     const dialogRef = this.dialog.open(CompanyEditComponent, {
       width: '600px', height: '500px',
@@ -230,7 +275,9 @@ export class CompaniesComponent implements OnInit {
             }
   */
 
-
+  /**===========================================================
+        add company
+    ===========================================================*/
   addCompany() {
     let dialog = this.dialog.open(AddCompanyComponent, {
       width: '600px', height: '500px'
@@ -241,7 +288,9 @@ export class CompaniesComponent implements OnInit {
     this.getCompany();
   }
 
-
+  /**===========================================================
+          fetch country
+    ===========================================================*/
   fetchCountry() {
     this.companyService.Post(this.getCountry, { token: 'LIVESITE' })
       .subscribe(res => {
@@ -249,6 +298,9 @@ export class CompaniesComponent implements OnInit {
         this.country = this.common.data;
       })
   }
+  /**===========================================================
+        get state using api call
+  ===========================================================*/
   getState(value, name) {
     this.country1 = '';
     this.state1 = '';
@@ -259,12 +311,19 @@ export class CompaniesComponent implements OnInit {
 
     })
   }
+  /**===========================================================
+             get industry using api call
+  ===========================================================*/
   getIndustries() {
     this.companyService.Post(this.getIndustry, { token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.industry = this.common.data;
     })
   }
+
+  /**===========================================================
+           on selction change status 
+     ===========================================================*/
   onChange(value, id) {
     console.log(value, id)
     let status;
@@ -282,19 +341,9 @@ export class CompaniesComponent implements OnInit {
     })
   }
 
-  // onChange(status, id) {
-  //   console.log(status, id);
-  //   this.companyService.Post(this.companyActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-  //     console.log(res)
-  //     if (res['status'] == true) {
-  //       this.toastr.success("Status changed successfully");
-  //       this.ngOnInit();
-  //     }
-  //     else {
-  //       this.toastr.success('Somthing went Wrong');
-  //     }
-  //   })
-  // }
+  /**===========================================================
+             open snackbar
+       ===========================================================*/
   openSnackBar() {
     this._snackBar.open('Company details updated successfully!!', 'End now', {
       duration: 4000,
@@ -316,7 +365,9 @@ export class CompaniesComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
-
+  /**===========================================================
+             search in input field
+       ===========================================================*/
   Search(value, name) {
     if (this.value != value) {
       this.currentPage = 0;
@@ -422,7 +473,9 @@ export class CompaniesComponent implements OnInit {
   /*  Filter(value,ev,name){
       this.Search(value,name);
     }*/
-
+  /**===========================================================
+             date range input field
+       ===========================================================*/
   MyDate(newDate, name) {
     let date;
     if (name == 'start') {
@@ -443,21 +496,9 @@ export class CompaniesComponent implements OnInit {
       this.Search(date = '', name)
     }
   }
-  // company_name
-  // full_name
-  // user_email
-  // country      
-  // state,city,industry,start_date,end_date,user_type,excel,pdf,search_keyword
-
-
-  //   city: "knw"
-  // company_name: "samosys tech"
-  // countries_name: "Canada"
-  // id: 171
-  // industries_name: "Consumer Goods / Manufacturing"
-  // state_name: "Alberta"
-  // status: "Active"
-  // totalClients: 0
+  /**===========================================================
+          Export data and download
+  ===========================================================*/
   exportData() {
     this.companyService.Post(this.exportManageCompanies, {
       company_name: this.company ? this.company : '',
@@ -489,3 +530,34 @@ export class CompaniesComponent implements OnInit {
   }
 
 }
+
+
+  // onChange(status, id) {
+  //   console.log(status, id);
+  //   this.companyService.Post(this.companyActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
+  //     console.log(res)
+  //     if (res['status'] == true) {
+  //       this.toastr.success("Status changed successfully");
+  //       this.ngOnInit();
+  //     }
+  //     else {
+  //       this.toastr.success('Somthing went Wrong');
+  //     }
+  //   })
+  // }
+
+  // company_name
+  // full_name
+  // user_email
+  // country      
+  // state,city,industry,start_date,end_date,user_type,excel,pdf,search_keyword
+
+
+  //   city: "knw"
+  // company_name: "samosys tech"
+  // countries_name: "Canada"
+  // id: 171
+  // industries_name: "Consumer Goods / Manufacturing"
+  // state_name: "Alberta"
+  // status: "Active"
+  // totalClients: 0

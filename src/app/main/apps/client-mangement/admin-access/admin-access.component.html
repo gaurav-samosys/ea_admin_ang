@@ -59,8 +59,7 @@
               <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto"> -->
 
 
-
-              <!--                     <mat-label >Show</mat-label>
+              <!--   <mat-label >Show</mat-label>
                     <mat-form-field  appearance="outline" fxFlex="10">
   <select matNativeControl  (change)="changelimit($event.target.value)">
     <option value="10">10</option>
@@ -132,33 +131,87 @@
           <!-- END OF ROW -->
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <mat-table [dataSource]="dataSource" matSort>
+              <mat-table [dataSource]="dataSource">
                 <!-- Name Column -->
                 <ng-container matColumnDef="first_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> First Name             </mat-header-cell>
-                  <mat-cell class="style"  *matCellDef="let element"> {{element.first_name}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> First Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('first_name','ASC')"
+                        [class]='(this.sort_column=="first_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('first_name','DESC')"
+                        [class]='(this.sort_column=="first_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </mat-header-cell>
+                  <mat-cell class="style" *matCellDef="let element"> {{element.first_name}} </mat-cell>
                 </ng-container>
 
                 <!-- Weight Column -->
                 <ng-container matColumnDef="last_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.last_name}}    </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Last Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('last_name','ASC')"
+                        [class]='(this.sort_column=="last_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('last_name','DESC')"
+                        [class]='(this.sort_column=="last_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.last_name}}</mat-cell>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="email">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.email}}    </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Email
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('email','ASC')"
+                        [class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('email','DESC')"
+                        [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="client_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Client Name </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.client_name}}    </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Client Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('client_name','ASC')"
+                        [class]='(this.sort_column=="client_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('client_name','DESC')"
+                        [class]='(this.sort_column=="client_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.client_name}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="company_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.company_name}}    </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Company Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('company_name','ASC')"
+                        [class]='(this.sort_column=="company_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('company_name','DESC')"
+                        [class]='(this.sort_column=="company_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span> </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="action">

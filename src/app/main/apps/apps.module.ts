@@ -98,6 +98,42 @@ const routes = [
         path: 'home-dashboard/report',
         loadChildren: './home-dashboard/report/report.module#ReportModule', canActivate: [LoginGuard]
     },
+    // {
+    //     path: 'vertical-manage',
+    //     loadChildren: './home-dashboard/vertical-manage/vertical-manage.module#VerticalManageModule', canActivate: [LoginGuard]
+    // },
+    // {
+    //     path: 'add-vertical',
+    //     loadChildren: './home-dashboard/add-vertical/add-vertical.module#AddVerticalModule', canActivate: [LoginGuard]
+    // },
+    
+    {
+        path: 'theme-management/manage-color',
+        loadChildren: './theme-management/manage-color/manage-color.module#ManageColorModule'
+    },
+    {
+        path: 'theme-management/mobile-color',
+        loadChildren: './theme-management/mobile-color/mobile-color.module#MobileColorModule'
+    },
+    {
+        path: 'blogs',
+        loadChildren: './blogs/blog/blog.module#BlogModule'
+    },
+    {
+        path: 'comment',
+        loadChildren: './blogs/comment/comment.module#CommentModule'
+    },
+    {
+        path: 'blog-post/:id',
+        loadChildren: './blogs/add-post/add-post.module#AddPostModule'
+    },
+
+
+
+
+
+
+
 
     {
         path: 'profile/profile',
@@ -111,14 +147,7 @@ const routes = [
         path: 'admin/forgot',
         loadChildren: './admin/forgot/forgot.module#ForgotModule'
     },
-    {
-        path: 'theme-management/manage-color',
-        loadChildren: './theme-management/manage-color/manage-color.module#ManageColorModule'
-    },
-    {
-        path: 'theme-management/mobile-color',
-        loadChildren: './theme-management/mobile-color/mobile-color.module#MobileColorModule'
-    },
+
     {
         path: 'mail',
         loadChildren: './mail/mail.module#MailModule'

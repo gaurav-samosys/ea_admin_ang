@@ -204,3 +204,27 @@ table {
     }
   }
 }
+
+/*start new css*/
+.x_panel {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 10px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    opacity: 1;
+    transition: all .2s ease;
+}
+
+.mb-8 {
+    margin-bottom: 8px !important;
+    height: 50px !important;
+}
+.export_data{background-color: #7da843!important; color: #fff!important;}
+.action_btn{background-color: #1D4A69 !important; color: #ffffff !important;}
+.company_heading{width:160px;color:#fff;background-color:#3195C2;border:1px solid #3195c2!important;text-align:center;padding-top:6px;padding-bottom:6px;border-radius:4px 4px 0 0;font-size:20px;margin-bottom:25px!important;}
+.table { background: white; border: 1px solid #e0e0e0; }

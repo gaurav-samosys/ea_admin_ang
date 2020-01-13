@@ -5,7 +5,7 @@
     <div class="mat__box mat__box2 mt-20 mr-28">
       <div class="row" fxLayoutAlign="space-between center">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-          <div class="h2 mb-8">Manage User</div>
+          <div class="h2">Manage User</div>
         </div>
         <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
@@ -21,10 +21,10 @@
     </div>
 
     <!-- START DIV -->
-    <div class="mat__box mt-20 mr-28">
+    <div class="mat__box mt-20 mr-28 x_panel">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="h2 mb-8">User Search</div>
+          <div class="h2 company_heading">User Search</div>
           <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
               <mat-form-field appearance="outline" fxFlex="100">
@@ -117,7 +117,7 @@
       </div>
     </div>
     <!-- END DIV -->
-    <div class="mat__box mt-20 mr-28">
+    <div class="mat__box mr-28">
 
       <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
         <div fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
@@ -136,7 +136,7 @@
                 </div> -->
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
 
-              <button mat-raised-button matTooltip="Download Excel File" (click)="exportData()">Export Data to
+              <button mat-raised-button matTooltip="Download Excel File" (click)="exportData()" class="export_data">Export Data to
                 Excel</button>
               <!-- <button  mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> -->
             </div>
@@ -148,7 +148,7 @@
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-              <mat-table [dataSource]="dataSource" matSort>
+              <mat-table [dataSource]="dataSource" matSort class="table">
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="first_name">
@@ -199,7 +199,7 @@
 
                                             <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon>
                                         </button> -->
-                    <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
+                    <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn">Actions</button>
 
                     <mat-menu #belowMenu="matMenu" yPosition="below">
                       <button mat-menu-item matTooltip="Edit" (click)="editDialog(element)">Edit</button>

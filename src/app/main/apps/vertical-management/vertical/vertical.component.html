@@ -30,23 +30,25 @@
 
                 <div class="fuse-card fuse-card-box boxes_verticals">
 
-                    <mat-icon style="margin-top: 20px;cursor: pointer;" (click)="show_li(i)"  matTooltip="Action" (clickElsewhere)="hide(i)">build</mat-icon>
+                    <mat-icon (click)="show_li(i)"  matTooltip="Action" (clickElsewhere)="hide(i)" class="setting_iocn">build</mat-icon>
 
                     <mat-list class="displayNone btn_bxs_vertical" id="show_list{{i}}">  
-                        <mat-list-item style="cursor: pointer;" (click)="editVertical(data)"  matTooltip="Edit"> edit</mat-list-item>
-                        <mat-list-item style="cursor: pointer;" (click)="deleteVertical(data.id)"  matTooltip="Delete"> delete</mat-list-item>
+                        <mat-list-item style="cursor: pointer;" (click)="editVertical(data)"  matTooltip="Edit">Edit</mat-list-item>
+                        <mat-list-item style="cursor: pointer;" (click)="deleteVertical(data.id)"  matTooltip="Delete"> Delete</mat-list-item>
                     </mat-list>
-
-                    <img style="max-width: 200px !important;" src="https://staging.enrichedacademy.com/app/webroot/img/verticals/{{data.img}}">
+                    <div class="vertical_images">
+                        <img src="https://staging.enrichedacademy.com/app/webroot/img/verticals/{{data.img}}">
+                    </div>
+                    
 
                     <div class="p-16">
-                        <div class="h1">{{data.name}}</div>
+                        <div class="count-verticalname">{{data.name}}</div>
                     </div>
 
-                    <div class="p-16 pt-0 line-height-1.75">
+                    <div class="p-16 pt-0 line-height-1.75 tile-stats">
                         {{data.description}}
                     </div>
-                    <button  mat-raised-button  (click)="name(data.name,data.id)">Manage vertical</button>
+                    <button  mat-raised-button  (click)="name(data.name,data.id)" class="manage_vertical_btn">Manage vertical</button>
 
                     <!-- <button mat-stroked-button color="primary" (click)="name(data.name,data.id)">Manage vertical</button> -->
 

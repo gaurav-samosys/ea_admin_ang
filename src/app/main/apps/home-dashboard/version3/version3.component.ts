@@ -311,7 +311,7 @@ export class Version3Component implements OnInit {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
-      itemsShowLimit: 3,
+      itemsShowLimit: 1,
       allowSearchFilter: true,
       enableCheckAll: false
     };

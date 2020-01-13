@@ -1,18 +1,18 @@
 <div class="container-fluid">
   <div class="row">
     <div class="title-left mt-20">
-      <h2> Mobile Theme Management </h2>
+      <h2 style="margin-left: 15px;"> Mobile Theme Management </h2>
     </div>
   </div>
   <!--Row End-->
   <div class="row">
-    <div class="col-4 primset" style="padding-right: 0px;">
-      <div class="" style="padding: 0;text-align: center !important;margin-bottom: 0;border-bottom: 1px solid #ccc;">
+    <div class="col-4 primset">
+      <div>
         <h2>Set Custom Theme</h2>
       </div>
-      <div class="left-sidebar" style="width: 320px;">
+      <div class="left-sidebar">
         <form [formGroup]="mobileColorForm">
-          <mat-form-field class="example-chip-list" appearance="outline" style="width: 320px;">
+          <mat-form-field class="example-chip-list" appearance="outline" style="width: 100%;">
             <mat-label>Select client*</mat-label>
             <mat-chip-list #chipList>
               <mat-chip *ngFor="let mobileColor of mobileColors;let indx=index;" [selectable]="selectable"
@@ -143,7 +143,7 @@
 
     <div class="col-8 lleft">
       <div class="select_app_con">
-        <h2>Please Select App</h2>
+        <h2 class="slect_app">Please Select App</h2>
         <mat-form-field appearance="outline" class="field">
           <mat-select [(value)]="selecte">
             <mat-option value="option1" (click)="dashboardTheme()">Dashboard </mat-option>

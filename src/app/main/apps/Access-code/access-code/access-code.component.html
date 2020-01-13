@@ -11,9 +11,8 @@
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" fxLayoutGap="20px">
 
-
                     <mat-form-field appearance="outline" fxFlex="100" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
-                      <mat-label>Select Company</mat-label>
+                        <mat-label>Select Company</mat-label>
                         <mat-select   formControlName="company" (selectionChange)="getClient($event.value)">
                            <input style="margin-top: 20px; width: 100%;  margin-bottom: 15px;" placeholder ="Select Search company" (keyup)="onKey($event.target.value)">
                          
@@ -29,7 +28,7 @@
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
                 <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"> -->
                     <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Select Client </mat-label>
+                      <mat-label>Select Client </mat-label>
                       <mat-select formControlName="client" required>
                           <!-- <mat-option selected=""  value=""  >Please select client</mat-option> -->
                           <input style="margin-top: 25px; width: 100%;margin-bottom: 15px;" placeholder ="Select  client Search" (keyup)="onClientKey($event.target.value)">
@@ -51,7 +50,7 @@
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
               </div>
               <!-- END OF ROW -->
-              <div class="row mt-20">
+              <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
                       <button mat-raised-button color="accent" type="submit" class="button" >Generate And Download Access Code  </button>
@@ -71,10 +70,10 @@
         <div class="mat__box mt-20 mr-28">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="h2 mb-8">Access Code Search</div>
+              <div class="h2 mb-8 company_heading">Access Code Search</div>
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" fxLayoutGap="20px">
-                  <mat-form-field appearance="outline" fxFlex="100">
+                  <mat-form-field appearance="outline" fxFlex="100" style="height: 55px;">
                       <mat-label required>Company Name </mat-label>
                       <input matInput placeholder="Search company name" style="width: 100%;" (keyup)="Search($event.target.value,'cname')">
                   </mat-form-field>
@@ -82,7 +81,7 @@
                 <!-- </div> -->
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
                 <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"> -->
-                  <mat-form-field appearance="outline" fxFlex="100">
+                  <mat-form-field appearance="outline" fxFlex="100" style="height: 55px;">
                       <mat-label required>Client Name</mat-label>
                       <input matInput placeholder="Search client name"  style="width: 100%;" (keyup)="Search($event.target.value,'clientname')">
                   </mat-form-field>
@@ -90,7 +89,7 @@
                 <!-- </div> -->
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
                 <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"> -->
-                  <mat-form-field appearance="outline" fxFlex="100">
+                  <mat-form-field appearance="outline" fxFlex="100" style="height: 55px;">
                       <mat-label required>Access Code</mat-label>
                       <input matInput placeholder="Search Access Code"  style="width: 100%;" (keyup)="Search($event.target.value,'code')">
                   </mat-form-field>
@@ -99,7 +98,7 @@
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
               </div>
               <!-- END OF ROW -->
-              <mat-divider class="mt-20 mb-20"></mat-divider>
+             <!--  <mat-divider class="mt-20 mb-20"></mat-divider> -->
          <!--      <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
                   <mat-form-field appearance="outline" fxFlex="100">
@@ -118,7 +117,7 @@
               <!-- END OF ROW -->
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <table mat-table [dataSource]="dataSource">
+                  <table mat-table [dataSource]="dataSource" class="table">
                     <!-- Name Column -->
                     <ng-container matColumnDef="company_name">
                       <th mat-header-cell *matHeaderCellDef> Company Name </th>
@@ -145,14 +144,14 @@
                     <ng-container matColumnDef="status">
                       <th mat-header-cell *matHeaderCellDef> Action </th>
                       <td class="text-align" mat-cell *matCellDef="let element"> 
-                      <button mat-raised-button  type="submit" class="button" (click)="downloadAccessData(element.client_id,element.random_code)">Download </button>
+                      <button mat-raised-button  type="submit" class="button download_btn" (click)="downloadAccessData(element.client_id,element.random_code)">Download </button>
                      </td>
                     </ng-container>
 
                       <ng-container matColumnDef="view">
                       <th mat-header-cell *matHeaderCellDef> View </th>
                      <td class="text-align" mat-cell *matCellDef="let element">
-                         <button mat-raised-button  type="submit" class="button" [routerLink]="['/apps/Access-code/viewdetails', element.client_id,element.code]">View </button>
+                         <button mat-raised-button  type="submit" class="button view_btn" [routerLink]="['/apps/Access-code/viewdetails', element.client_id,element.code]">View </button>
                         </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

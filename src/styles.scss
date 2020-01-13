@@ -7,7 +7,11 @@
 @import "app/app.theme";
 @import '~ngx-toastr/toastr.css';
 
+<<<<<<< HEAD
 
+=======
+@import "~font-awesome/css/font-awesome.css";
+>>>>>>> master
 /* ////////////////////////////////////////////////////////////// */
 
 // html, body { height: 100%; }
@@ -2576,7 +2580,10 @@
 // }
 
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> master
 .select2-search__field .multiselect-dropdown .dropdown-btn{
     display: inline-block;
     border: none !important;
@@ -2597,7 +2604,11 @@
     border-radius: 10px !important;
     color: #3195c2;
 }
+<<<<<<< HEAD
 /*.select2-search__field .multiselect-dropdown .dropdown-btn:hover{color: #ffffff;}*/
+=======
+.select2-search__field .multiselect-dropdown .dropdown-btn:hover{color: #ffffff;}
+>>>>>>> master
 .select2-search__field .multiselect-dropdown .dropdown-btn .dropdown-down {
     display: inline-block;
     top: 10px;
@@ -2627,6 +2638,7 @@ text.highcharts-credits { display: none; }
     height: 34px;
 }
 
+<<<<<<< HEAD
 /*.mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 10px !important;
 }*/
@@ -2675,3 +2687,12 @@ text.highcharts-credits { display: none; }
     text-overflow: ellipsis;
     display: flex;
 }*/
+=======
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 10px !important;
+}
+.mat-form-field-infix {
+    padding: 0.5em 0;
+    border-top: 0 !important;
+}
+>>>>>>> master

@@ -18,7 +18,7 @@
                            <input style="margin-top: 20px; width: 100%;  margin-bottom: 15px;" placeholder ="Select Search company" (keyup)="onKey($event.target.value)">
                          
                            <!-- <mat-option selected=""  value=""  >Please select company</mat-option> -->
-                             <mat-option *ngFor="let data of  dataArray" value="{{data.id}}" >{{data.company_name}}</mat-option>
+                             <mat-option *ngFor="let data of dataArray" value="{{data.id}}" >{{data.company_name}}</mat-option>
                         </mat-select>
                          <mat-error *ngIf="hasError('company', 'required')">Please select comapny </mat-error>
                     </mat-form-field>
@@ -54,8 +54,8 @@
               <div class="row mt-20">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                      <button mat-raised-button color="primary" type="submit" class="button" >Generate And Download Access Code  </button>
-                      <a mat-raised-button mat-button mat-dialog-close color="primary"  class="button cancel" (click)="Reset()">Reset</a>
+                      <button mat-raised-button color="accent" type="submit" class="button" >Generate And Download Access Code  </button>
+                      <a mat-raised-button mat-button mat-dialog-close  color="accent" class="button cancel" (click)="Reset()">Reset</a>
                   </div>
                 </div>
               </div>
@@ -118,46 +118,46 @@
               <!-- END OF ROW -->
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <table mat-table [dataSource]="dataSource">
+                  <mat-table [dataSource]="dataSource">
                     <!-- Name Column -->
                     <ng-container matColumnDef="company_name">
-                      <th mat-header-cell *matHeaderCellDef> Company Name </th>
-                      <td class="style text-align" mat-cell *matCellDef="let element" > {{element.company_name}} </td>
+                      <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
+                      <mat-cell class="style text-align" *matCellDef="let element" > {{element.company_name}} </mat-cell>
                     </ng-container>
 
                     <!-- Weight Column -->
                     <ng-container matColumnDef="client_name">
-                      <th mat-header-cell *matHeaderCellDef> Client Name </th>
-                      <td class="text-align" mat-cell *matCellDef="let element"> {{element.client_name}} </td>
+                      <mat-header-cell *matHeaderCellDef> Client Name </mat-header-cell>
+                      <mat-cell class="text-align"  *matCellDef="let element"> {{element.client_name}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="created_date">
-                      <th mat-header-cell *matHeaderCellDef> Create Date </th>
-                      <td class="text-align" mat-cell *matCellDef="let element"> {{element.created_date|date}} </td>
+                      <mat-header-cell *matHeaderCellDef> Create Date </mat-header-cell>
+                      <mat-cell class="text-align" *matCellDef="let element"> {{element.created_date|date}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="totalAccessCodes">
-                      <th mat-header-cell *matHeaderCellDef> Generate Code Count </th>
-                      <td class="text-align" mat-cell *matCellDef="let element"> {{element.totalAccessCodes}} </td>
+                      <mat-header-cell *matHeaderCellDef> Generate Code Count </mat-header-cell>
+                      <mat-cell class="text-align" *matCellDef="let element"> {{element.totalAccessCodes}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="status">
-                      <th mat-header-cell *matHeaderCellDef> Action </th>
-                      <td class="text-align" mat-cell *matCellDef="let element"> 
-                      <button mat-raised-button color="primary" type="submit" class="button" (click)="downloadAccessData(element.client_id,element.random_code)">Download </button>
-                     </td>
+                      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                      <mat-cell class="text-align" *matCellDef="let element"> 
+                      <button mat-raised-button  type="submit" class="button" (click)="downloadAccessData(element.client_id,element.random_code)">Download </button>
+                      </mat-cell>
                     </ng-container>
 
                       <ng-container matColumnDef="view">
-                      <th mat-header-cell *matHeaderCellDef> View </th>
-                     <td class="text-align" mat-cell *matCellDef="let element">
-                         <button mat-raised-button color="primary" type="submit" class="button" [routerLink]="['/apps/Access-code/viewdetails', element.client_id,element.code]">View </button>
-                        </td>
+                      <mat-header-cell *matHeaderCellDef> View </mat-header-cell>
+                     <mat-cell class="text-align" *matCellDef="let element">
+                         <button mat-raised-button  type="submit" class="button" [routerLink]="['/apps/Access-code/viewdetails', element.client_id,element.code]">View </button>
+                     </mat-cell>
                     </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  </table>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
                                   <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems"   [pageIndex]="currentPage"
                 [pageSize]="pageSize"  [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons (page)="handlePage($event)"></mat-paginator>
                  <div *ngIf="access_data == '' " style="text-align: center">No data available in table</div>

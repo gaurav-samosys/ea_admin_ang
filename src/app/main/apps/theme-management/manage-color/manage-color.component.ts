@@ -122,6 +122,7 @@ export class ManageColorComponent implements OnInit {
 
   }
 
+    
 
   type = "save Detail"
   primary
@@ -196,8 +197,3 @@ export class ManageColorComponent implements OnInit {
   }
 }
 
-// let item = {
-  // type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.prim,
-  // secondary_color: this.sec, another_color: this.ternary
-// }
-// console.log(item)

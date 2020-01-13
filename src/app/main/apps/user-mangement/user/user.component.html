@@ -1,125 +1,139 @@
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
 
-    <!-- CENTER -->
-    <div class="center" fusePerfectScrollbar>
-       <div class="mat__box mat__box2 mt-20 mr-28">
-        <div class="row" fxLayoutAlign="space-between center">
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="h2 mb-8">Manage User</div>
-          </div>
-          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-           <!-- <button mat-stroked-button color="primary" (click)="addUser()"> -->
-              <button  mat-raised-button  (click)="addUser()">
-          
-            <mat-icon>add_circle_outline</mat-icon>Add User</button>
-          </div>
-          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+    <div class="mat__box mat__box2 mt-20 mr-28">
+      <div class="row" fxLayoutAlign="space-between center">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="h2 mb-8">Manage User</div>
         </div>
-        <!-- END OF ROW -->
+        <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+          <!-- <button mat-stroked-button color="primary" (click)="addUser()"> -->
+          <button mat-raised-button (click)="addUser()">
+
+            <mat-icon>add_circle_outline</mat-icon>Add User
+          </button>
+        </div>
+        <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+      </div>
+      <!-- END OF ROW -->
+    </div>
+
+    <!-- START DIV -->
+    <div class="h2 mb-8">
+        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
+        Manage User
       </div>
 
-      <!-- START DIV -->
-     <div class="mat__box mt-20 mr-28">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="h2 mb-8">User Search</div>
-            <div class="row">
+    <div class="mat__box mt-20 mr-28">
+        <ng-container *ngIf="show">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <!-- <div class="h2 mb-8">Manage User</div> -->
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label required>Full Name</mat-label>
+                <input matInput placeholder="Search full name" (keyup)="Search($event.target.value,'fullname')">
+              </mat-form-field>
+              <!-- </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
+                <mat-form-field appearance="outline" fxFlex="100">
+                  <mat-label>Email</mat-label>
+                  <input matInput placeholder="Search email" (keyup)="Search($event.target.value,'email')">
+                </mat-form-field>
+                <!-- </div>
+               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
+                <mat-form-field appearance="outline" fxFlex="100">
+                  <mat-label>Client Name</mat-label>
+                  <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'clientname')">
+                </mat-form-field>
+              </div>
+
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label required>Full Name</mat-label>
-                    <input matInput placeholder="Search full name" (keyup)="Search($event.target.value,'fullname')">
+                  <mat-label required>Company Name</mat-label>
+                  <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'companyname')">
                 </mat-form-field>
-              <!-- </div>
+                <!-- </div>
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Email</mat-label>
-                    <input matInput placeholder="Search email" (keyup)="Search($event.target.value,'email')">
+                  <mat-label>Country</mat-label>
+                  <mat-select matNativeControl (selectionChange)="getState($event.value,'country')">
+                    <mat-option selected="" value="">Please select country</mat-option>
+                    <mat-option *ngFor="let data of country" value="{{data.id}}">{{data.name}}</mat-option>
+                  </mat-select>
                 </mat-form-field>
-              <!-- </div>
+                <!-- </div>
                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Client Name</mat-label>
-                    <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'clientname')">
-                </mat-form-field>
-              </div>
- 
-               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label required>Company Name</mat-label>
-                    <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'companyname')">
-                </mat-form-field>
-              <!-- </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Country</mat-label>
-                    <mat-select matNativeControl   (selectionChange)="getState($event.value,'country')" >
-                        <mat-option selected=""  value="">Please select country</mat-option>
-                        <mat-option *ngFor="let data of country" value="{{data.id}}" >{{data.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-              <!-- </div>
-               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>State</mat-label>
-                    <mat-select matNativeControl (selectionChange)="Search($event.value,'state')" >
-                        <mat-option selected=""  value="">Please select state</mat-option>
-                        <mat-option *ngFor="let data of states" value="{{data.id}}" >{{data.state_name}}</mat-option>
-                    </mat-select>
+                  <mat-label>State</mat-label>
+                  <mat-select matNativeControl (selectionChange)="Search($event.value,'state')">
+                    <mat-option selected="" value="">Please select state</mat-option>
+                    <mat-option *ngFor="let data of states" value="{{data.id}}">{{data.state_name}}</mat-option>
+                  </mat-select>
                 </mat-form-field>
               </div>
 
-               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>City</mat-label>
-                    <input matInput placeholder="Search city" (keyup)="Search($event.target.value,'city')">
+                  <mat-label>City</mat-label>
+                  <input matInput placeholder="Search city" (keyup)="Search($event.target.value,'city')">
                 </mat-form-field>
-              <!-- </div>
+                <!-- </div>
                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Status</mat-label>
-                    <mat-select matNativeControl   (selectionChange)="Search($event.value,'status')" >
-                        <mat-option selected="" value="">Please select status</mat-option>
-                        <mat-option value="Active" >Active</mat-option>
-                        <mat-option value="Inactive" >Inactive</mat-option>
-                    </mat-select>
+                  <mat-label>Status</mat-label>
+                  <mat-select matNativeControl (selectionChange)="Search($event.value,'status')">
+                    <mat-option selected="" value="">Please select status</mat-option>
+                    <mat-option value="Active">Active</mat-option>
+                    <mat-option value="Inactive">Inactive</mat-option>
+                  </mat-select>
                 </mat-form-field>
-              <!-- </div>
+                <!-- </div>
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Access Code</mat-label>
-                      <input matInput placeholder="Search Access Code" (keyup)="Search($event.target.value,'access_code')">
+                  <mat-label>Access Code</mat-label>
+                  <input matInput placeholder="Search Access Code" (keyup)="Search($event.target.value,'access_code')">
                 </mat-form-field>
               </div>
 
-               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex="32">
-                    <mat-label>Start Date</mat-label>
-                        <input matInput [matDatepicker]="picker" placeholder="Start date" [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                  <mat-label>Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker" placeholder="Start date" [ngModel]="startDate"
+                    (ngModelChange)="MyDate($event,'start')">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-              <!-- </div>
+                <!-- </div>
               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
                 <mat-form-field appearance="outline" fxFlex="32">
-                    <mat-label>End Date</mat-label>
-                   <input matInput [matDatepicker]="picker1" placeholder="End date" [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
+                  <mat-label>End Date</mat-label>
+                  <input matInput [matDatepicker]="picker1" placeholder="End date" [ngModel]="endDate"
+                    (ngModelChange)="MyDate($event,'end')">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
               </div>
-              
+
             </div>
           </div>
         </div>
-      </div>
-      <!-- END DIV -->
-      <div class="mat__box mt-20 mr-28">
         
-        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+      
+   
+    <!-- END DIV -->
+    <div class="mat__box mt-20 mr-28">
+
+        <!-- END DIV -->
+        <div class="mat__box mt-20 mr-28">
+
+          <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
             <div fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
-                 <div class="row">
-       <!--        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+              <div class="row">
+                <!--        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
                   <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Show Entries</mat-label>
                      <mat-select matNativeControl  (change)="changelimit($event.target.value)">
@@ -131,119 +145,192 @@
                   </mat-form-field>
                
                 </div> -->
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
-                 
-                    <button  mat-raised-button matTooltip="Download Excel File" (click)="exportData()">Export Data to Excel</button>
-                    <!-- <button  mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> -->
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-            </div>     
-                
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
 
-                <!-- CONTENT -->    
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      
-                            <table mat-table [dataSource]="dataSource">
+              <button mat-raised-button matTooltip="Download Excel File" (click)="exportData()">Export Data to
+                Excel</button>
+              <!-- <button  mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> -->
+            </div>
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          </div>
 
-                                <!-- Name Column -->
-                                <ng-container matColumnDef="first_name">
-                                    <th mat-header-cell *matHeaderCellDef> Full Name </th>
-                                    <td class="style" mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}} </td>
-                                </ng-container>
 
-                                <!-- Weight Column -->
-                                <ng-container matColumnDef="company_name">
-                                    <th mat-header-cell *matHeaderCellDef> Company Name </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.company_name}} </td>
-                                </ng-container>
+          <!-- CONTENT -->
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                                <!-- Symbol Column -->
-                                <ng-container matColumnDef="client_name">
-                                    <th mat-header-cell *matHeaderCellDef> Client Name </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.client_name}} </td>
-                                </ng-container>
+              <mat-table [dataSource]="dataSource">
 
-                                <ng-container matColumnDef="created_on">
-                                    <th mat-header-cell *matHeaderCellDef> Sign Up </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.created_on}} </td>
-                                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="first_name">
+                  <mat-header-cell *matHeaderCellDef> Full Name
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('first_name','ASC')"
+                            [class]='(this.sort_column=="first_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('first_name','DESC')"
+                            [class]='(this.sort_column=="first_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span>  </mat-header-cell>
+                  <mat-cell class="style" *matCellDef="let element"> {{element.first_name}} {{element.last_name}}
+                  </mat-cell>
+                </ng-container>
 
-                                <ng-container matColumnDef="certificate_downloaded">
-                                    <th mat-header-cell *matHeaderCellDef> Course Progress </th>
-                                    <td mat-cell *matCellDef="let element"> <span *ngIf="element.certificate_downloaded == 0">Certification Pending</span> <span *ngIf="element.certificate_downloaded != 0">Certification Download</span> </td>
-                                </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="company_name">
+                  <mat-header-cell *matHeaderCellDef> Company Name 
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('company_name','ASC')"
+                            [class]='(this.sort_column=="company_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('company_name','DESC')"
+                            [class]='(this.sort_column=="company_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span> 
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.company_name}}    </mat-cell>
+                </ng-container>
 
-                                <ng-container matColumnDef="status">
-                                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                                    <td mat-cell *matCellDef="let element">
-                                        <ui-switch [checked]="element.status == 'Active' ? true : false" (change)="onChange($event,element.id)"></ui-switch>
-                                    </td>
-                                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="client_name">
+                  <mat-header-cell *matHeaderCellDef> Client Name
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('client_name','ASC')"
+                            [class]='(this.sort_column=="client_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('client_name','DESC')"
+                            [class]='(this.sort_column=="client_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span>  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.client_name}}    </mat-cell>
+                </ng-container>
 
-                                <ng-container matColumnDef="action">
-                                    <th mat-header-cell *matHeaderCellDef>Action</th>
-                                    <td mat-cell *matCellDef="let element">
-                                        <!-- <button mat-icon-button>
+                <ng-container matColumnDef="created_on">
+                  <mat-header-cell *matHeaderCellDef> Sign Up 
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('created_on','ASC')"
+                            [class]='(this.sort_column=="created_on" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('created_on','DESC')"
+                            [class]='(this.sort_column=="created_on" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span> 
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.created_on}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="certificate_downloaded">
+                  <mat-header-cell *matHeaderCellDef> Course Progress
+                      <span class="pointer">
+                          <i (click)="updateSortingOrderUser('certificate_downloaded','ASC')"
+                            [class]='(this.sort_column=="certificate_downloaded" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderUser('certificate_downloaded','DESC')"
+                            [class]='(this.sort_column=="certificate_downloaded" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span>  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> <span
+                      *ngIf="element.certificate_downloaded == 0">Certification Pending</span> <span
+                      *ngIf="element.certificate_downloaded != 0">Certification Download</span> </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef> Status  <span class="pointer">
+                      <i (click)="updateSortingOrderUser('status','ASC')"
+                        [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderUser('status','DESC')"
+                        [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span> </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <ui-switch [checked]="element.status == 'Active' ? true : false"
+                      (change)="onChange($event,element.id)"></ui-switch>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <!-- <button mat-icon-button>
                                             <mat-icon matTooltip="Edit" (click)="editDialog(element)">edit</mat-icon>
                                         </button>
                                         <button mat-icon-button>
 
                                             <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon>
                                         </button> -->
-                                        <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
-                                  
-                                        <mat-menu #belowMenu="matMenu" yPosition="below">
-                                          <button mat-menu-item matTooltip="Edit" (click)="editDialog(element)">Edit</button>
-                                       
-                                           <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
-                                        </mat-menu> 
-                                    </td>
-                                </ng-container>
+                        <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
 
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>
-                            <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems"   [pageIndex]="currentPage"
-                [pageSize]="pageSize"  [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons (page)="handlePage($event)"></mat-paginator>
-                 <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
-                          </div>
-                        </div>
+                        <mat-menu #belowMenu="matMenu" yPosition="below">
+                          <button mat-menu-item matTooltip="Edit" (click)="editDialog(element)">Edit</button>
 
-                            <!--  <mat-paginator  [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons></mat-paginator> -->
-                          
+                          <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
+                        </mat-menu>
+                      </mat-cell>
+                    </ng-container>
 
-                            <div>
-                            </div>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                  <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                    [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+                    (page)="handlePage($event)"></mat-paginator>
+                  <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+                </div>
+              </div>
 
-                      
-                  
+              <!--  <mat-paginator  [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons></mat-paginator> -->
 
-               
-                <!-- / CONTENT -->
+
+              <div>
+              </div>
+
+
+
+
+
+              <!-- / CONTENT -->
 
             </div>
           </div>
         </div>
+      </div>
+   
+        
+    </ng-container>
+  </div>
+  </div>
+  </div>
+    <style type="text/css">
+      .inline_list {
+        list-style-type: none;
+      }
 
-        <style type="text/css">
-            .inline_list {
-                list-style-type: none;
-            }
-            
-            .inline_list li {
-                display: inline-block;
-            }
-            
-            .inline_list li a {
-                position: relative;
-                float: left;
-                padding: 6px 12px;
-                margin-left: -1px;
-                line-height: 1.42857143;
-                color: #337ab7;
-                text-decoration: none;
-                background-color: #fff;
-                border: 1px solid #ddd;
-            }
-        </style>
+      .inline_list li {
+        display: inline-block;
+      }
+
+      .inline_list li a {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+      }
+    </style>

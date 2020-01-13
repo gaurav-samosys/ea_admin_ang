@@ -1,66 +1,65 @@
-
-
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
 
 
-    <!-- CENTER -->
-    <div class="center" fusePerfectScrollbar>
-      <div class="mat__box mat__box2 mt-20 mr-28">
-        <div class="row" fxLayoutAlign="space-between center">
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="h2 mb-8">Client Admin Users</div>
-          </div>
-          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-            <button mat-raised-button  (click)="openDialog()"><mat-icon>add_circle_outline</mat-icon>Add Admin User</button>
-          </div>
-          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+    <div class="mat__box mat__box2 mt-20 mr-28">
+      <div class="row" fxLayoutAlign="space-between center">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="h2 mb-8">Client Admin Users</div>
         </div>
-        <!-- END OF ROW -->
+        <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+          <button mat-raised-button (click)="openDialog()">
+            <mat-icon>add_circle_outline</mat-icon>Add Admin User
+          </button>
+        </div>
+        <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
       </div>
-      <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
-      <div class="mat__box mt-20 mr-28">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="h2 mb-8">Admin Search</div>
-            <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label required>Client Name</mat-label>
-                      <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'client')">
-                  </mat-form-field>
-                <!-- </div> -->
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>Company Name</mat-label>
-                      <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'company')">
-                  </mat-form-field>
-                <!-- </div> -->
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>First Name</mat-label>
-                      <input matInput placeholder="Search first name" (keyup)="Search($event.target.value,'fname')">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-                  <mat-form-field appearance="outline" fxFlex="32">
-                      <mat-label>Last Name</mat-label>
-                      <input matInput placeholder="Search last name" (keyup)="Search($event.target.value,'1name')">
-                  </mat-form-field>
-                <!-- </div> -->
-                <!-- <br>
+      <!-- END OF ROW -->
+    </div>
+    <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
+    <div class="mat__box mt-20 mr-28">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="h2 mb-8">Admin Search</div>
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label required>Client Name</mat-label>
+                <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'client')">
+              </mat-form-field>
+              <!-- </div> -->
+              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Company Name</mat-label>
+                <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'company')">
+              </mat-form-field>
+              <!-- </div> -->
+              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="Search first name" (keyup)="Search($event.target.value,'fname')">
+              </mat-form-field>
+            </div>
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+              <mat-form-field appearance="outline" fxFlex="32">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Search last name" (keyup)="Search($event.target.value,'1name')">
+              </mat-form-field>
+              <!-- </div> -->
+              <!-- <br>
 
                      <mat-divider></mat-divider>
                      <br> -->
 
-                      <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto"> -->
+              <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto"> -->
 
 
-
-<!--                     <mat-label >Show</mat-label>
+              <!--   <mat-label >Show</mat-label>
                     <mat-form-field  appearance="outline" fxFlex="10">
   <select matNativeControl  (change)="changelimit($event.target.value)">
     <option value="10">10</option>
@@ -70,21 +69,21 @@
   </select>
 </mat-form-field>
 <mat-label >entries</mat-label> -->
-<!-- 
+              <!-- 
  <div fxLayout="row" fxLayoutAlign="end end" fxFlex="1 0 auto">
                    <button mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> 
                 </div> -->
 
 
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
-                  <mat-form-field appearance="outline" fxFlex="32">
-                      <mat-label>Email</mat-label>
-                      <input matInput placeholder="Search email" (keyup)="Search($event.target.value,'email')">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
+              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
+              <mat-form-field appearance="outline" fxFlex="32">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Search email" (keyup)="Search($event.target.value,'email')">
+              </mat-form-field>
+            </div>
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
                   <mat-form-field appearance="outline" fxFlex="100">
                       <mat-label>Start Date</mat-label>
                       <input matInput [matDatepicker] = "picker" placeholder = "Start date" [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
@@ -92,8 +91,8 @@
                        <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
                 </div> -->
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
                   <mat-form-field appearance="outline" fxFlex="100">
                       <mat-label>End Date</mat-label>
                       <input matInput [matDatepicker] = "picker1" placeholder = "End date" [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
@@ -101,21 +100,21 @@
                      <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field>
                 </div> -->
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-            </div>
-            <!-- END OF ROW -->
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
           </div>
-          <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+          <!-- END OF ROW -->
         </div>
-        <!-- END OF ROW -->
+        <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
       </div>
-      <!-- END OF MAT__BOX MT-20 MR-28 -->
+      <!-- END OF ROW -->
+    </div>
+    <!-- END OF MAT__BOX MT-20 MR-28 -->
 
-      <div class="mat__box mt-20 mr-28">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="row">
-              <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+    <div class="mat__box mt-20 mr-28">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+            <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
                   <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Show Entries</mat-label>
                      <mat-select matNativeControl  (change)="changelimit($event.target.value)">
@@ -127,44 +126,98 @@
                   </mat-form-field>
                  
                 </div> -->
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-            </div>
-            <!-- END OF ROW -->
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <table mat-table [dataSource]="dataSource">
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="first_name">
-                      <th mat-header-cell *matHeaderCellDef> First Name </th>
-                      <td class="style" mat-cell *matCellDef="let element" > {{element.first_name}} </td>
-                    </ng-container>
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          </div>
+          <!-- END OF ROW -->
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <mat-table [dataSource]="dataSource">
+                <!-- Name Column -->
+                <ng-container matColumnDef="first_name">
+                  <mat-header-cell *matHeaderCellDef> First Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('first_name','ASC')"
+                        [class]='(this.sort_column=="first_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('first_name','DESC')"
+                        [class]='(this.sort_column=="first_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </mat-header-cell>
+                  <mat-cell class="style" *matCellDef="let element"> {{element.first_name}} </mat-cell>
+                </ng-container>
 
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="last_name">
-                      <th mat-header-cell *matHeaderCellDef> Last Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
-                    </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="last_name">
+                  <mat-header-cell *matHeaderCellDef> Last Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('last_name','ASC')"
+                        [class]='(this.sort_column=="last_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('last_name','DESC')"
+                        [class]='(this.sort_column=="last_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.last_name}}</mat-cell>
+                </ng-container>
 
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef> Email </th>
-                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef> Email
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('email','ASC')"
+                        [class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('email','DESC')"
+                        [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="client_name">
-                      <th mat-header-cell *matHeaderCellDef> Client Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.client_name}} </td>
-                    </ng-container>
+                <ng-container matColumnDef="client_name">
+                  <mat-header-cell *matHeaderCellDef> Client Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('client_name','ASC')"
+                        [class]='(this.sort_column=="client_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('client_name','DESC')"
+                        [class]='(this.sort_column=="client_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.client_name}} </mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="company_name">
-                      <th mat-header-cell *matHeaderCellDef> Company Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.company_name}} </td>
-                    </ng-container>
+                <ng-container matColumnDef="company_name">
+                  <mat-header-cell *matHeaderCellDef> Company Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderAdminAccess('company_name','ASC')"
+                        [class]='(this.sort_column=="company_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderAdminAccess('company_name','DESC')"
+                        [class]='(this.sort_column=="company_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span> </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
+                </ng-container>
 
-                      <ng-container matColumnDef="action">
-                      <th mat-header-cell *matHeaderCellDef>Action</th>
-                     <td mat-cell *matCellDef="let element">
-                          <!-- <button mat-icon-button>
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <!-- <button mat-icon-button>
                             <mat-icon matTooltip="Edit" (click)="editDialog(element)">edit</mat-icon>
                           </button>
                   <button mat-icon-button>
@@ -172,32 +225,33 @@
                             <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon> 
                           </button> -->
 
-                          <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
-                                  
-                                        <mat-menu #belowMenu="matMenu" yPosition="below">
-                                          <button mat-menu-item matTooltip="Edit"(click)="editDialog(element)">Edit</button>
-                                       
-                                           <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
-                                        </mat-menu> 
-                          </td>
-                      </ng-container>
+                    <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  </table>
-                    <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems"   [pageIndex]="currentPage"
-                [pageSize]="pageSize"  [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons (page)="handlePage($event)"></mat-paginator>
-                  <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-              </div>
-              <!-- END OF ROW -->
-             <!--  <div class="row">
+                    <mat-menu #belowMenu="matMenu" yPosition="below">
+                      <button mat-menu-item matTooltip="Edit" (click)="editDialog(element)">Edit</button>
+
+                      <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
+                    </mat-menu>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+                (page)="handlePage($event)"></mat-paginator>
+              <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+            </div>
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          </div>
+          <!-- END OF ROW -->
+          <!--  <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                   <p fxFlex="50" class="pr-4">Showing {{start}} to {{end}} of {{allItems}} entries</p>
                 </div> -->
-                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-           <!--      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+          <!--      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
                   <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
                       <li [ngClass]="{disabled:pager.currentPage === 1}">
                           <a (click)="setPage(1)">First</a>
@@ -216,23 +270,38 @@
                       </li>
                   </ul>
                 </div> -->
-                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-             <!--  </div> -->
-              <!-- END OF ROW -->
-          </div>
-          <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+          <!--  </div> -->
+          <!-- END OF ROW -->
         </div>
-        <!-- END OF ROW -->
+        <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
       </div>
-      <!-- END OF MAT__BOX MT-20 MR-28 -->
-</div>
+      <!-- END OF ROW -->
+    </div>
+    <!-- END OF MAT__BOX MT-20 MR-28 -->
+  </div>
 </div>
 
 
 
 <style type="text/css">
-    .inline_list{list-style-type: none;}
-    .inline_list li{display: inline-block;}
-    .inline_list li a{    position: relative;
-    float: left;padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #337ab7; text-decoration: none; background-color: #fff; border: 1px solid #ddd;} 
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
 </style>

@@ -65,7 +65,6 @@ const routes: Routes = [
         AddadminComponent,
         EditAdminComponent,
         ConfirmBoxComponent,
-
     ],
     imports     : [
         RouterModule.forChild(routes),

@@ -22,6 +22,10 @@ export class MobileColorComponent implements OnInit {
   common: any;
   country: any;
   colorForm: any;
+  dashboard: boolean = false
+  magicNumber: boolean = false
+  netWorth: boolean = false
+  loadCalculator: boolean = false
   @ViewChild('mobileInput', { static: true }) mobileInput: ElementRef;
   mobileColorForm: FormGroup
   visible = true;
@@ -35,27 +39,76 @@ export class MobileColorComponent implements OnInit {
   clientArray;
   allColors: any = []
   company_name: "";
-
-  prim
-  color1 = '#753434';
-  
-  color2 = '#6e946a';
-  sec
- 
-  color3 = '#ff0000'
-  ternary
-  
-  constructor(private http: HttpClient, public service: MobilecolorService, private rt: Router, public _formBuilder: FormBuilder) {
+  selecte = 'option1';
+  public show: boolean = false;
+  public buttonName: any = 'More Option';
+  mobileColorArray = [{ id: 1, name: 'Dashboard' },
+  { id: 2, name: 'My Magic Number' },
+  { id: 3, name: 'NetWorth Calculator' },
+  { id: 4, name: 'Student Loan Calculator' }]
+  constructor(private http: HttpClient, 
+    public service: MobilecolorService, private rt: Router,
+     public _formBuilder: FormBuilder) {
     this.filteredArray = this.select_client.valueChanges.pipe(
       startWith(null),
       map((mobileColor: string | null) => mobileColor ? this._filter(mobileColor) : this.allColors.slice()));
   }
 
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "Less Option";
+    else
+      this.buttonName = "More Option";
+  }
   ngOnInit() {
     this.mobileColorForm = this._formBuilder.group({
       image_upload: ''
     })
     this.getClient();
+    this.dashboardTheme();
+  }
+
+  color = '#753434';
+  color1 = '#549cb6';
+  primChange(color: string) {
+    this.color1 = color;
+    console.log('=primary=', this.color1)
+
+  }
+  color2 = '#404041';
+  secChange(color: string) {
+    this.color2 = color;
+    console.log('=secondary=', this.color2)
+
+  }
+  color3 = '#727375'
+  ternChange(color: string) {
+    this.color3 = color;
+    console.log('=ternary=', this.color3)
+
+  }
+  color4 = '#a0ba3a'
+
+  iconChange(color: string) {
+    this.color4 = color;
+    console.log('=icon=', this.color4)
+  }
+  headColor = '#a3bb39'
+  headerChange(color: string) {
+    this.headColor = color;
+    console.log('=headColor=', this.headColor)
+  }
+  graph1 = '#549cb6'
+  graphChange1(color: string) {
+    this.graph1 = color;
+    console.log('=graph1=', this.graph1)
+  }
+  graph2 = '#cde0ea'
+  graphChange2(color: string) {
+    this.graph2 = color;
+    console.log('=graph2=', this.graph2)
   }
   add(event: MatChipInputEvent): void {
     debugger
@@ -96,7 +149,31 @@ export class MobileColorComponent implements OnInit {
 
 
 
+  dashboardTheme() {
+    this.dashboard = true;
+    this.magicNumber = false
+    this.netWorth = false
+    this.loadCalculator = false
 
+  }
+  magicNumberTheme() {
+    this.dashboard = false;
+    this.magicNumber = true
+    this.netWorth = false
+    this.loadCalculator = false
+  }
+  netWorthTheme() {
+    this.dashboard = false;
+    this.magicNumber = false
+    this.netWorth = true
+    this.loadCalculator = false
+  }
+  studentTheme() {
+    this.dashboard = false;
+    this.magicNumber = false
+    this.netWorth = false
+    this.loadCalculator = true
+  }
   getClient() {
     this.http.get('http://192.168.0.40/enrichedacademy_live/api/admin/client_color2?token=LIVESITE').subscribe(res => {
       console.log(res)
@@ -111,25 +188,26 @@ export class MobileColorComponent implements OnInit {
   }
 
 
+  primary
+  secondary
+  ternary
+
   dataArray = []
-
-
-
   type = "save Detail"
   image_name;
   SaveDetail() {
 
-    this.prim = document.getElementById('demo1').getAttribute("ng-reflect-color");
-    this.sec = document.getElementById('demo2').getAttribute("ng-reflect-color");
+    this.primary = document.getElementById('demo1').getAttribute("ng-reflect-color");
+    this.secondary = document.getElementById('demo2').getAttribute("ng-reflect-color");
     this.ternary = document.getElementById('demo3').getAttribute("ng-reflect-color");
-    console.log('=a=', this.prim)
-    console.log('=b=', this.sec)
+    console.log('=a=', this.primary)
+    console.log('=b=', this.secondary)
     console.log('=c=', this.ternary)
 
-    this.image_name= this.mobileColorForm.controls['image_upload'].value
+    this.image_name = this.mobileColorForm.controls['image_upload'].value
     let item = {
-      type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.prim,
-      secondary_color: this.sec, another_color: this.ternary, image_name: this.image_name
+      type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
+      secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
     }
     console.log(item)
 
@@ -140,12 +218,12 @@ export class MobileColorComponent implements OnInit {
         icon: 'warning',
 
       })
-    } 
+    }
     // https://staging.enrichedacademy.com/api/admin/getCompaniesWithData http://192.168.0.40/enrichedacademy_live/api/admin/save_mobile_app_color
     else {
-      this.service.Post('http://192.168.0.40/enrichedacademy_live/api/admin/save_mobile_app_color ', {
-        type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.prim,
-        secondary_color: this.sec, another_color: this.ternary,image_name: this.image_name  
+      this.service.Post('http://192.168.0.18/enrichedacademy_live/api/admin/save_mobile_app_color ', {
+        type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
+        secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
       }).subscribe(res => {
         console.log(res)
       })
@@ -176,7 +254,33 @@ export class MobileColorComponent implements OnInit {
       })
     };
   }
-  // type1="set theme for mobile App"
+
+}
+
+
+
+ // mobileThemeChanged(value) {
+  //   console.log(value)
+  //   if (value == 1) { 
+  //     this.dashboard = !this.dashboard;
+  //     this.magicNumber == false
+  //     this.netWorth == false
+  //     this.loadCalculator == false
+
+  //    }
+
+  //   if (value == 2) {this.magicNumber = !this.magicNumber;
+
+  //     console.log( this.magicNumber)
+
+  //    }
+  //   if (value == 3) {  this.netWorth = !this.netWorth; } 
+  //   if (value == 4) {  this.loadCalculator = !this.loadCalculator;  }
+
+
+  // }
+
+   // type1="set theme for mobile App"
   // setThemeSubmit() {
 
   //   this.prim = document.getElementById('demo1').getAttribute("ng-reflect-color");
@@ -213,4 +317,3 @@ export class MobileColorComponent implements OnInit {
   //     })
   //   }
   // }
-}

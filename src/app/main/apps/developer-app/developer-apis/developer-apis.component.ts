@@ -19,7 +19,7 @@ import { MatSort } from '@angular/material';
 })
 export class DeveloperApisComponent implements OnInit {
   // @ViewChild(MatSort, { static: true }) MatSort: MatSort;
-  toggle_menu1:boolean;
+  toggle_menu1: boolean;
 
   displayedColumns: string[] = ['full_name', 'email', 'app_id', 'app_secret', 'website', 'status'];
   data: any;
@@ -36,7 +36,7 @@ export class DeveloperApisComponent implements OnInit {
   // array of all items to be paged
   allItems: any;
   states: any;
-  
+
   // pager object
   pager: any = {};
   getDeveloperApiListing = myGlobals.getDeveloperApiListing;
@@ -49,7 +49,7 @@ export class DeveloperApisComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(this.data);
   sort_column
   ASC
-  sort_order:'DESC'
+  sort_order: 'DESC'
   constructor(private http: HttpClient,
     private toastr: ToastrService,
 
@@ -60,8 +60,8 @@ export class DeveloperApisComponent implements OnInit {
   ngOnInit() {
     this.fetchListing();
   }
-  showHideColumns(value){
-console.log(value)
+  showHideColumns(value) {
+    console.log(value)
   }
   setPage(page: number) {
     // get pager object from service
@@ -84,26 +84,60 @@ console.log(value)
       });
 
   }
- 
- /**
-   * =========================================
-   *        Update sorting 
-   * =========================================
+  /**
+   * column toggle show hide
+   * @param colName 
+   * @param evt 
    */
- 
+  columnClick(colName: string, evt) {
+    console.log('-0-----', evt.target.checked)
+    const colIndex = this.displayedColumns.findIndex(col => col === colName);
+    if (evt.target.checked == false) {
+      this.displayedColumns.splice(colIndex, 1);
+    } else {
+      this.displayedColumns.push(colName);
+    }
+    // if (colIndex > 0) {
+    //   // column is currently shown in the table, so we remove it
+    //   this.displayedColumns.splice(colIndex, 1);
+    // } else {
+    //   // column is not in the table, so we add it
+    //   this.displayedColumns.push(colName);
+    // }
+  }
+
+  /**
+   * button toggle
+   */
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
+  /**
+    * =========================================
+    *        Update sorting 
+    * =========================================
+    */
+
   updateSortingOrderDevloperApi(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.developer_service.Post(this.getDeveloperApiListing, {column:sort_column,dir:this.ASC, limit: this.pageNumber, offset: this.size, id: '', token: 'LIVESITE' })
-    .subscribe(res => {
-      this.response=res
-      this.dataSource=this.response.data
-    });
+    this.developer_service.Post(this.getDeveloperApiListing, { column: sort_column, dir: this.ASC, limit: this.pageNumber, offset: this.size, id: '', token: 'LIVESITE' })
+      .subscribe(res => {
+        this.response = res
+        this.dataSource = this.response.data
+      });
   }
 
-  toggle(){
-    this.toggle_menu1=!this.toggle_menu1
-   }
+  toggle() {
+    this.toggle_menu1 = !this.toggle_menu1
+  }
   changelimit(value) {
     this.size = parseInt(value);
     this.fetchListing();
@@ -151,6 +185,7 @@ console.log(value)
       console.log(res)
     })
   }
+}
 
   // status(id, status) {
   //   this.login_service.post(this.base_url + 'update_status_provider/' + id, { status: status }).subscribe(res => {
@@ -174,4 +209,3 @@ console.log(value)
   //   this.getProviderList();
 
   // }
-}

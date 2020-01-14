@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-confirm-box',
@@ -19,6 +20,7 @@ export class ConfirmBoxComponent {
   
   onConfirm(): void {
     // Close the dialog, return true
+  
     this.dialogRef.close(true);
   }
  

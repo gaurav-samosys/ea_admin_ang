@@ -66,7 +66,7 @@ export class AdminAccessComponent implements OnInit {
   getAdminUsers = myGlobals.getAdminUsers;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  displayedColumns: string[] = ['email', 'first_name', 'last_name', 'client_name', 'company_name', 'action'];
+  displayedColumns: string[] = ['id','email', 'first_name', 'last_name', 'client_name', 'company_name', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -371,7 +371,14 @@ export class AdminAccessComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.admin_service.Post(this.getAdminUsers, { company_name: this.companyname, client_name: this.clientname, first_name: this.firstname, last_name: this.lastname, email: this.email, start_date: this.sdate, end_date: this.edate, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
+    this.admin_service.Post(this.getAdminUsers, {
+       company_name: this.companyname,
+       client_name: this.clientname, 
+       first_name: this.firstname,
+      //  full_name: this.firstname, 
+       last_name: this.lastname,
+        email: this.email,
+         start_date: this.sdate, end_date: this.edate, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
       .subscribe(res => {
         this.common = res
         this.allItems = this.common.total_data;

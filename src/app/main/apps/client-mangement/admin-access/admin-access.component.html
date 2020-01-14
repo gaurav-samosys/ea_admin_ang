@@ -48,7 +48,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
               <mat-form-field appearance="outline" fxFlex="32">
                 <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Search last name" (keyup)="Search($event.target.value,'1name')">
+                <input matInput placeholder="Search last name" (keyup)="Search($event.target.value,'lname')">
               </mat-form-field>
               <!-- </div> -->
               <!-- <br>
@@ -133,6 +133,21 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <mat-table [dataSource]="dataSource">
                 <!-- Name Column -->
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef> Id
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderAdminAccess('id','ASC')"
+                          [class]='(this.sort_column=="id" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderAdminAccess('id','DESC')"
+                          [class]='(this.sort_column=="id" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </mat-header-cell>
+                    <mat-cell class="style" *matCellDef="let element"> {{element.id}} </mat-cell>
+                  </ng-container>
                 <ng-container matColumnDef="first_name">
                   <mat-header-cell *matHeaderCellDef> First Name
                     <span class="pointer">
@@ -241,7 +256,9 @@
               <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
                 [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
                 (page)="handlePage($event)"></mat-paginator>
-              <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+              <div *ngIf="data == '' " style="text-align: center;
+              margin-bottom: 20px;
+              margin-top: 20px;">No data available in table</div>
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
           </div>

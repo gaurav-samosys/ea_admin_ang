@@ -1,202 +1,252 @@
-
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
 
 
-    <!-- CENTER -->
-    <div class="center" fusePerfectScrollbar>
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+    <div class="mat__box mat__box2 mt-20 mr-28">
+      <div class="row" fxLayoutAlign="space-between center">
 
-      <div class="mat__box mt-20 mr-28">
+        <div class="">
+
+          <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+          <a routerLink="/apps/developer-app/developer-apis"
+            style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Manage User</a>
+
+        </div>
+        <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+      </div>
+      <!-- END OF ROW -->
+    </div>
+    <div class="mat__box mt-20 mr-28">
+      <div class="h2 mb-8">
+        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>Developer App Listing
+      </div>
+      <ng-container *ngIf="show">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="h2 mb-8">Developer App Listing</div>
-            <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
-                  <mat-form-field appearance="outline" fxFlex="30">
-                     <mat-label>Show Entries</mat-label>
-                     <mat-select matNativeControl  (change)="changelimit($event.target.value)">
-                      <mat-option value="10">10</mat-option>
-                      <mat-option value="25">25</mat-option>
-                      <mat-option value="50">50</mat-option>
-                      <mat-option value="100">100</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            <div class="row" style="display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;">
+
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  mb-12" style="flex-basis: 420px;
+              max-width: 420px; display: block;">
+                <mat-form-field appearance="outline" style="max-width: 55%;
+                display: block;
+                flex: 1 1 100%;
+                box-sizing: border-box;">
+                  <mat-label>Show Entries</mat-label>
+                  <mat-select matNativeControl (change)="changelimit($event.target.value)">
+                    <mat-option value="10">10</mat-option>
+                    <mat-option value="25">25</mat-option>
+                    <mat-option value="50">50</mat-option>
+                    <mat-option value="100">100</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="flex-basis: 400px;
+                max-width: 400px;">
+
+                <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
+                  class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <label>
+                      <input value="Post_Title" type="checkbox" (change)="columnClick('full_name',$event)" checked><span
+                        class="ml">Full Name</span></label>
+
+                  </button>
+                  <button mat-menu-item><label><input (change)="columnClick('email',$event)" value="Author"
+                        type="checkbox" checked><span class="ml">Email</span></label>
+                      </button>
+                  <button mat-menu-item><label><input (change)="columnClick('app_id',$event)" value="Categary"
+                        type="checkbox" checked><span class="ml">App Id</span></label>
+                      </button>
+                  <button mat-menu-item><label><input  type="checkbox"
+                        (change)="columnClick('app_secret',$event)" checked><span class="ml">App
+                        Secret</span></label>
+                      </button>
+                  <button mat-menu-item><label><input (change)="columnClick('status',$event)" value="Action"
+                        type="checkbox" checked><span class="ml">Status</span></label> 
+                      </button>
+                </mat-menu>
+              </div>
+
+              <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
+
+              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             </div>
             <!-- END OF ROW -->
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-bottom: 25px;">
-                        <!-- <button mat-raised-button type="button" (click)="toggle()"> Show/Hide Column</button> -->
-        
-                        <button mat-raised-button type="button" mat-button (click)="toggle()"
-                          [matMenuTriggerFor]="menu">Show/Hide Column</button>
-                        <mat-menu #menu="matMenu">
-                          <div style=" width: 185px;" *ngFor="let item of displayedColumns">
-                            <div class="">
-                              <span (change)="onchange($event.value)"><input mat-menu-item type="checkbox" style=" margin-left: 15px;">
-                                <span style=" margin-left: 45px;">
-                                  {{item}}
-                                </span></span>
-                            </div>
-                          </div>
-                        </mat-menu>
-                        
-                        <!-- <mat-form-field appearance='outline'>
-                             <button mat-raised-button type="button" (click)="toggle()"> Show/Hide Column</button>
-                            <mat-select *ngIf="!toggle_menu1" placeholder="Show/Hide columns" multiple>
-                              <mat-option  *ngFor="let item of displayedColumns" [value]="item">{{item}}</mat-option>
-                            </mat-select>
-                          </mat-form-field> -->
-        
-                      </div>
-                  <table mat-table [dataSource]="dataSource">
-                    <!-- Name Column -->
-                    <ng-container  matColumnDef="full_name">
-                      <th mat-header-cell *matHeaderCellDef> Full Name 
-                          <span class="pointer">
-                              <i (click)="updateSortingOrderDevloperApi('full_name','ASC')"
-                                  [class]='(this.sort_column=="full_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                              </i>
-                              <i (click)="updateSortingOrderDevloperApi('full_name','DESC')"
-                                  [class]='(this.sort_column=="full_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                              </i>
-                          </span>
-                      </th>
-                      <td class="style" mat-cell *matCellDef="let element" (click)="openDialog(element)"> {{element.first_name}} {{element.last_name}}</td>
-                    </ng-container>
+                <table mat-table [dataSource]="dataSource">
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="full_name">
+                    <th mat-header-cell *matHeaderCellDef> Full Name
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderDevloperApi('full_name','ASC')"
+                          [class]='(this.sort_column=="full_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderDevloperApi('full_name','DESC')"
+                          [class]='(this.sort_column=="full_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span>
+                    </th>
+                    <td class="style" mat-cell *matCellDef="let element" (click)="openDialog(element)">
+                      {{element.first_name}} {{element.last_name}}</td>
+                  </ng-container>
 
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef> Email
-                          <span class="pointer">
-                              <i (click)="updateSortingOrderDevloperApi('email','ASC')"
-                                  [class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                              </i>
-                              <i (click)="updateSortingOrderDevloperApi('email','DESC')"
-                                  [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                              </i>
-                          </span> </th>
-                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderDevloperApi('email','ASC')"
+                          [class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderDevloperApi('email','DESC')"
+                          [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                  </ng-container>
 
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="app_id">
-                      <th mat-header-cell *matHeaderCellDef > App_Id
-                          <span class="pointer">
-                              <i (click)="updateSortingOrderDevloperApi('app_id','ASC')"
-                                  [class]='(this.sort_column=="app_id" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                              </i>
-                              <i (click)="updateSortingOrderDevloperApi('app_id','DESC')"
-                                  [class]='(this.sort_column=="app_id" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                              </i>
-                          </span> </th>
-                      <td mat-cell *matCellDef="let element"> {{element.app_id}} </td>
-                    </ng-container>
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="app_id">
+                    <th mat-header-cell *matHeaderCellDef> App_Id
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderDevloperApi('app_id','ASC')"
+                          [class]='(this.sort_column=="app_id" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderDevloperApi('app_id','DESC')"
+                          [class]='(this.sort_column=="app_id" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.app_id}} </td>
+                  </ng-container>
 
-                    <ng-container matColumnDef="app_secret">
-                      <th mat-header-cell *matHeaderCellDef> App_Secret
-                          <span class="pointer">
-                              <i (click)="updateSortingOrderDevloperApi('app_secret','ASC')"
-                                  [class]='(this.sort_column=="app_secret" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                              </i>
-                              <i (click)="updateSortingOrderDevloperApi('app_secret','DESC')"
-                                  [class]='(this.sort_column=="app_secret" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                              </i>
-                          </span> </th>
-                      <td mat-cell *matCellDef="let element"> {{element.app_secret}} </td>
-                    </ng-container>
+                  <ng-container matColumnDef="app_secret">
+                    <th mat-header-cell *matHeaderCellDef> App_Secret
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderDevloperApi('app_secret','ASC')"
+                          [class]='(this.sort_column=="app_secret" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderDevloperApi('app_secret','DESC')"
+                          [class]='(this.sort_column=="app_secret" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.app_secret}} </td>
+                  </ng-container>
 
-                    <ng-container matColumnDef="website">
-                      <th mat-header-cell *matHeaderCellDef> Domain
-                          <span class="pointer">
-                              <i (click)="updateSortingOrderDevloperApi('website','ASC')"
-                                  [class]='(this.sort_column=="website" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                              </i>
-                              <i (click)="updateSortingOrderDevloperApi('website','DESC')"
-                                  [class]='(this.sort_column=="website" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                              </i>
-                          </span> </th>
-                      <td mat-cell *matCellDef="let element"> {{element.website}} </td>
-                    </ng-container>
+                  <ng-container matColumnDef="website">
+                    <th mat-header-cell *matHeaderCellDef> Domain
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderDevloperApi('website','ASC')"
+                          [class]='(this.sort_column=="website" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderDevloperApi('website','DESC')"
+                          [class]='(this.sort_column=="website" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.website}} </td>
+                  </ng-container>
 
-                    <ng-container matColumnDef="status">
-                      <th mat-header-cell *matHeaderCellDef> Status
-                          <span class="pointer">
-                              <i (click)="updateSortingOrderDevloperApi('status','ASC')"
-                                  [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                              </i>
-                              <i (click)="updateSortingOrderDevloperApi('status','DESC')"
-                                  [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                              </i>
-                          </span> </th>
-                      <td mat-cell *matCellDef="let element"> <ui-switch [checked]="element.status == '1' ? true : false" (change)="onChange($event,element.id)"></ui-switch></td>
-                    </ng-container>
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status
+                      <span class="pointer">
+                        <i (click)="updateSortingOrderDevloperApi('status','ASC')"
+                          [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_upward
+                        </i>
+                        <i (click)="updateSortingOrderDevloperApi('status','DESC')"
+                          [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          arrow_downward
+                        </i>
+                      </span> </th>
+                    <td mat-cell *matCellDef="let element">
+                      <ui-switch [checked]="element.status == '1' ? true : false"
+                        (change)="onChange($event,element.id)"></ui-switch>
+                    </td>
+                  </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  </table>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
               </div>
-              <!-- END OF ROW -->
-              <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                  <p fxFlex="50" class="pr-4">Showing {{start}} to {{end}} of {{allItems}} entries</p>
-                </div>
-                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-                  <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
-                      <li [ngClass]="{disabled:pager.currentPage === 1}">
-                          <a (click)="setPage(1)">First</a>
-                      </li>
-                      <li [ngClass]="{disabled:pager.currentPage === 1}">
-                          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-                      </li>
-                      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                          <a (click)="setPage(page)">{{page}}</a>
-                      </li>
-                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                          <a (click)="setPage(pager.currentPage + 1)">Next</a>
-                      </li>
-                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                          <a (click)="setPage(pager.totalPages)">Last</a>
-                      </li>
-                  </ul>
-                </div>
-                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            </div>
+            <!-- END OF ROW -->
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p fxFlex="50" class="pr-4">Showing {{start}} to {{end}} of {{allItems}} entries</p>
               </div>
-              <!-- END OF ROW -->
+              <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+                  <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(1)">First</a>
+                  </li>
+                  <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                  </li>
+                  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page)">{{page}}</a>
+                  </li>
+                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                  </li>
+                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.totalPages)">Last</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+            </div>
+            <!-- END OF ROW -->
           </div>
           <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
         </div>
         <!-- END OF ROW -->
-      </div>
-      <!-- END OF MAT__BOX MT-20 MR-28 -->
+      </ng-container>
+    </div>
+    <!-- END OF MAT__BOX MT-20 MR-28 -->
 
-</div>
+  </div>
 </div>
 
 
 <style type="text/css">
-    .inline_list{list-style-type: none;}
-    .inline_list li{display: inline-block;}
-    .inline_list li a{    position: relative;
-    float: left;padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #337ab7; text-decoration: none; background-color: #fff; border: 1px solid #ddd;} 
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
 </style>
 
 
@@ -207,7 +257,7 @@
 
 <!-- <mat-form-field appearance='outline'>
     <!-- *ngIf="!toggle_menu1" <button mat-raised-button type="button" (click)="toggle()"> Show/Hide Column</button> -->
-    <!-- <mat-select placeholder="Show/Hide columns" multiple>
+<!-- <mat-select placeholder="Show/Hide columns" multiple>
       <mat-option  *ngFor="let item of displayedColumns" [value]="item">{{item}}</mat-option>
     </mat-select> 
     

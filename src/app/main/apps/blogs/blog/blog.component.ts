@@ -111,16 +111,21 @@ export class BlogComponent implements OnInit {
   //   }
 
   // }
-  columnClick(colName: string) {
+  columnClick(colName: string,evt) {
+    console.log('-0-----', evt.target.checked)
     const colIndex = this.displayedColumns.findIndex(col => col === colName);
-
-    if (colIndex > 0) {
-      // column is currently shown in the table, so we remove it
+    if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
     } else {
-      // column is not in the table, so we add it
       this.displayedColumns.push(colName);
     }
+    // if (colIndex > 0) {
+    //   // column is currently shown in the table, so we remove it
+    //   this.displayedColumns.splice(colIndex, 1);
+    // } else {
+    //   // column is not in the table, so we add it
+    //   this.displayedColumns.push(colName);
+    // }
   }
 
 

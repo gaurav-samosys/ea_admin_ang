@@ -179,20 +179,20 @@
                 </ng-container>
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="company_name">
-                  <mat-header-cell *matHeaderCellDef> Company Name 
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef>Email
                       <span class="pointer">
-                          <i (click)="updateSortingOrderUser('company_name','ASC')"
-                            [class]='(this.sort_column=="company_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          <i (click)="updateSortingOrderUser('email','ASC')"
+                            [class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                             arrow_upward
                           </i>
-                          <i (click)="updateSortingOrderUser('company_name','DESC')"
-                            [class]='(this.sort_column=="company_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                          <i (click)="updateSortingOrderUser('email','DESC')"
+                            [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                             arrow_downward
                           </i>
                         </span> 
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.company_name}}    </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{element.email}}    </mat-cell>
                 </ng-container>
 
                 <!-- Symbol Column -->
@@ -287,7 +287,7 @@
                   <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
                     [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
                     (page)="handlePage($event)"></mat-paginator>
-                  <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+                  <div *ngIf="data == '' " style="text-align: center;margin-top: 20px;margin-bottom: 20px;">No data available in table</div>
                 </div>
               </div>
 

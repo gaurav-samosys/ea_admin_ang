@@ -6,7 +6,9 @@
         <div class="mat__box mt-20 mr-28">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="h2 mb-8">Generate Access Code</div>
+              <div class="h2 mb-8">
+                  <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
+                  Generate Access Code</div>
               <form [formGroup]="form" (ngSubmit)="accessForm()">
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" fxLayoutGap="20px">
@@ -20,7 +22,7 @@
                            <!-- <mat-option selected=""  value=""  >Please select company</mat-option> -->
                              <mat-option *ngFor="let data of dataArray" value="{{data.id}}" >{{data.company_name}}</mat-option>
                         </mat-select>
-                         <mat-error *ngIf="hasError('company', 'required')">Please select comapny </mat-error>
+                         <mat-error *ngIf="hasError('company', 'required')">Please select company </mat-error>
                     </mat-form-field>
 
 

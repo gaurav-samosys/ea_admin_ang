@@ -1,19 +1,22 @@
 <div class="container">
   <div class="row first_row">
     <div class="">
-      <h2>Report</h2>
+      <h1>&nbsp;&nbsp;&nbsp;Report</h1>
     </div>
-    <div class="">
-      <a routerLink=""> Dashboard/Report </a>
+    <div class="" >
+ 
+        <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+        <a routerLink="/apps/home-dashboard/report" style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Report</a>
+     
     </div>
   </div>
 
-  <div class="row second_row">
+  <div class="row second_row report_div">
     <div class="">
-      <h2>Reports</h2>
+      <h4><span style="text-color:white">Reports</span></h4>
     </div>
     <div class="" style="margin-top: 50px;margin-bottom: 10px;">
-      <a routerLink=""> More Info </a>
+      <a routerLink="" class="more_info"> More Info </a>
     </div>
   </div>
 
@@ -24,7 +27,7 @@
      
       <form [formGroup]="reportForm">
      
-        <mat-form-field appearance="outline"  style="width:439px;">
+        <mat-form-field appearance="outline"  style="width:400px; margin-right: 20px;">
           <mat-label>Please select Client</mat-label>
           <mat-select formControlName="client_id" (selectionChange)="onSelection($event.value)">
             <mat-option *ngFor="let item of companyListArray" [value]="item.id">
@@ -33,7 +36,7 @@
           </mat-select>
         </mat-form-field>
     
-        <mat-form-field appearance="outline" style="width:560px;">
+        <mat-form-field appearance="outline" style="width:400px;">
           <mat-label>Please select Date Range:</mat-label>
           <input  formControlName="dateRange" style="left: -11px; width: 600px;" type="text"  matInput ngxDaterangepickerMd
           [locale]="{applyLabel: 'Apply', format: 'DD-MM-YYYY'}" startKey="start" endKey="end"
@@ -42,8 +45,17 @@
       </form>
     </div>
     <div class="example-button-row">
-      <button mat-raised-button type="button" (click)="downloadReport()">Download Report</button>
+      <button mat-raised-button type="button"  class="download_btn" (click)="downloadReport()">Download Report</button>
     </div>
   </div>
 
 </div>
+
+
+
+
+
+
+
+
+

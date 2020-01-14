@@ -322,10 +322,10 @@
                         </span>
                       </mat-header-cell>
                       <mat-cell *matCellDef="let element">
-                          <mat-slide-toggle [checked]="element.status == 'Active' ? true : false"
-                          (change)="onChange($event,element.id)"></mat-slide-toggle>
-                        <!-- <ui-switch [checked]="element.status == 'Active' ? true : false"
-                          (change)="onChange($event,element.id)"></ui-switch> -->
+                          <!-- <mat-slide-toggle [checked]="element.status == 'Active' ? true : false"
+                          (change)="onChange($event,element.id)"></mat-slide-toggle> -->
+                        <ui-switch [checked]="element.status == 'Active' ? true : false"
+                          (change)="onChange($event,element.id)"></ui-switch>
                       </mat-cell>
                     </ng-container>
 
@@ -355,7 +355,9 @@
                   <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
                     [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
                     (page)="handlePage($event)"></mat-paginator>
-                  <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+                  <div *ngIf="data == '' " style="margin-bottom: 20px;
+                  text-align: center;
+                  margin-top: 20px;">No data available in table</div>
                 </div>
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
               </div>

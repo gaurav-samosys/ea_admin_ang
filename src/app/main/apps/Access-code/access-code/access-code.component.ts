@@ -272,7 +272,16 @@ export class AccessCodeComponent implements OnInit {
   //   this.excelService.exportAsExcelFile(data, '' + data[0].company_name + '');
   // }
 
-
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
   Search(value, name) {
     if (this.value != value) {
       this.currentPage = 0;
@@ -303,13 +312,13 @@ export class AccessCodeComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.service.Post(this.getAccessCode, { token: 'LIVESITE', company_name: this.companyname, client_name: this.clientname, access_code: this.code, offset: this.pageNumber, limit: this.size }).subscribe(res => {
-      this.common = res
+    // this.service.Post(this.getAccessCode, { token: 'LIVESITE', company_name: this.companyname, client_name: this.clientname, access_code: this.code, offset: this.pageNumber, limit: this.size }).subscribe(res => {
+    //   this.common = res
       this.allItems = this.common.total_data;;
       this.rows = this.common.data
       this.access_data = this.rows.slice(0, this.size);
       this.dataSource = this.access_data
-    });
+    // });
   }
 
   Reset() {

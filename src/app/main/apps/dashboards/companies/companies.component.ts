@@ -19,6 +19,7 @@ import { DatePipe } from '@angular/common';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
 // import { MatSort } from '@angular/material';
+import Swal from 'sweetalert2';
 
 export interface PeriodicElement {
   id: number;
@@ -245,6 +246,17 @@ export class CompaniesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
+      console.log(this.result)
+      if(this.result){
+        // Swal.fire({
+        //   title: 'Success!',
+        //   text: ' File successfully deleted!',
+        //   icon: 'success',
+        //   // showCancelButton: true,
+        //   confirmButtonText: 'Ok',
+        //   // cancelButtonText: 'No, keep it'
+        // })
+      }
     });
   }
   /**===========================================================

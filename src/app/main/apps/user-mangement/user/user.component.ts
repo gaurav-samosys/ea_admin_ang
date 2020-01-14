@@ -85,7 +85,7 @@ export class UserComponent implements OnInit {
   pagedItems: any[];
   @ViewChild(MatSort, { static: true }) MatSort: MatSort;
 
-  displayedColumns: string[] = ['first_name', 'company_name', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action'];
+  displayedColumns: string[] = ['first_name', 'email', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -380,9 +380,9 @@ export class UserComponent implements OnInit {
         this.email = ''
       }
 
-      else if (name == 'email') {
-        this.email = ''
-      }
+      // else if (name == 'email') {
+      //   this.email = ''
+      // }
 
       else if (name == 'clientname') {
         this.clientname = ''
@@ -462,7 +462,17 @@ export class UserComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.user.POST(this.getUsers, { full_name: this.fullname, client_name: this.clientname, company_name: this.companyname, country: this.country1, state: this.state, city: this.city, status: this.status, access_code: this.access_code, start_date: this.sdate, end_date: this.edate, offset: this.pageNumber, limit: this.size, token: 'LIVESITE' })
+    this.user.POST(this.getUsers, { full_name: this.fullname,
+      email:this.email,
+       client_name: this.clientname,
+        company_name: this.companyname, 
+        country: this.country1, state: this.state,
+         city: this.city, status: this.status,
+          access_code: this.access_code,
+           start_date: this.sdate, 
+           end_date: this.edate, 
+           offset: this.pageNumber, 
+           limit: this.size, token: 'LIVESITE' })
       .subscribe(res => {
         this.response = res
         this.allItems = this.response.total_data;

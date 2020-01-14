@@ -1,6 +1,7 @@
 
 // export const getClients="http://192.168.0.126/enrichedacademy_live/api/admin/editClient";
 export const editClient="http://192.168.0.126/enrichedacademy_live/api/admin/editClient";
+
 export const exportManageCompanies="http://192.168.0.18/enrichedacademy_live/api/admin/exportManageCompanies";
 export const exportManageClient="http://192.168.0.18/enrichedacademy_live/api/admin/exportManageClient"
 export const downloadAccessCodesFile="http://192.168.0.18/enrichedacademy_live/api/admin/downloadAccessCodesFile"
@@ -9,11 +10,11 @@ export const getCompanyList = "http://192.168.0.18/enrichedacademy_live/api/admi
 
 
 
-export const getAccessCode=" https://staging.enrichedacademy.com/api/admin/getAccessCode";
-export const getCountry=" https://staging.enrichedacademy.com/api/admin/getCountry";
-export const getIndustry=" https://staging.enrichedacademy.com/api/admin/getIndustries";
-export const getState=" https://staging.enrichedacademy.com/api/admin/getStates";
-export const generateAccessCodes=" https://staging.enrichedacademy.com/api/admin/generateAccessCodes";
+export const getAccessCode="http://192.168.0.18/enrichedacademy_live/api/admin/getAccessCode";
+export const getCountry="http://192.168.0.18/enrichedacademy_live/api/admin/getCountry";
+export const getIndustry="http://192.168.0.18/enrichedacademy_live/api/admin/getIndustries";
+export const getState="http://192.168.0.18/enrichedacademy_live/api/admin/getStates";
+export const generateAccessCodes="http://192.168.0.18/enrichedacademy_live/api/admin/generateAccessCodes";
 
 export const getEaAllUsersList="http://192.168.0.18/enrichedacademy_live/api/admin/getEaAllUsersList";
 export const getIndustriesWithData="http://192.168.0.18/enrichedacademy_live/api/admin/getIndustriesWithDataApi";
@@ -37,11 +38,11 @@ export const deleteBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/d
 export const updateBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/updateBlogApi"
 
 
+export const editUsers="http://192.168.0.18/enrichedacademy_live/api/admin/editUsers";
 
 export const downloadAccessCodes=" https://staging.enrichedacademy.com/api/admin/downloadAccessCodes";
 export const subAccessCodeListShow=" https://staging.enrichedacademy.com/api/admin/subAccessCodeListShow";
 export const editCompany=" https://staging.enrichedacademy.com/api/admin/editCompany";
-export const editUsers=" https://staging.enrichedacademy.com/api/admin/editUsers";
 export const accessCodeStatus=" https://staging.enrichedacademy.com/api/admin/accessCodeStatus";
 export const getClientVertical=" https://staging.enrichedacademy.com/api/admin/getClientVertical";
 //export const getEaAllUsersList="http://192.168.0.21/enrichedacademy_live/api/admin/getEaAllUsersList";
@@ -54,6 +55,7 @@ export const getCertificationGraphData=" https://staging.enrichedacademy.com/api
 export const getCompletionGraphData=" https://staging.enrichedacademy.com/api/admin/getCompletionGraphData";
 export const getAccessCodeGraphData=" https://staging.enrichedacademy.com/api/admin/getAccessCodeGraphData";
 export const getComparisonGraphData=" https://staging.enrichedacademy.com/api/admin/getComparisonGraphData";
+
 export const addUser=" https://staging.enrichedacademy.com/api/admin/addUser";
 export const addClient="https://staging.enrichedacademy.com/api/admin/addClient";
 export const addCompany=" https://staging.enrichedacademy.com/api/admin/addCompany";

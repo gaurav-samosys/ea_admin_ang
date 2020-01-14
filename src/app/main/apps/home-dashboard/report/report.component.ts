@@ -8,10 +8,10 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 // declare var moment: any
 
-export interface Food {
-  value: string;
-  viewValue: string;
-}
+// export interface Food {
+//   value: string;
+//   viewValue: string;
+// }
 
 @Component({
   selector: 'app-report',

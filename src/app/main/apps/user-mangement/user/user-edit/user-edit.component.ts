@@ -77,7 +77,13 @@ export class UserEditComponent implements OnInit {
       this.dialog.open(EditdialogComponent);
       return false;
     }
-    this.user.POST(this.editUsers, { id: this.res_data.id, First_name: this.form.value.firstName, last_name: this.form.value.lastName, email: this.form.value.email, phone_no: this.form.value.phone, Password: this.form.value.password, token: 'LIVESITE' })
+    this.user.POST(this.editUsers, { id: this.res_data.id, 
+      First_name: this.form.value.firstName,
+       last_name: this.form.value.lastName,
+        email: this.form.value.email, 
+        phone_no: this.form.value.phone,
+         Password: this.form.value.password,
+          token: 'LIVESITE' })
       .subscribe(res => {
         console.log(res)
 

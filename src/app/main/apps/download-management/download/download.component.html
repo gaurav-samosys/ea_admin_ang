@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="mat__box mt-20 mr-28" style="    background-color: white;">
+    <div class="mat__box mt-20 mr-28" style="background-color: white;">
       <div class="h2 mb-8">
         <mat-icon (click)="buttontoggle1()" style="cursor: pointer;">{{buttonName1}}</mat-icon>
         Uploaded Files
@@ -38,7 +38,7 @@
             <!-- END OF ROW -->
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <table mat-table [dataSource]="dataSource">
+                <table mat-table [dataSource]="dataSource" class="table">
                   <!-- Name Column -->
                   <ng-container matColumnDef="s_no">
                     <th mat-header-cell *matHeaderCellDef> S.no </th>
@@ -120,7 +120,7 @@
                        <input type="file" name="image" (change)="onFileChanged($event)" >   
                       <div class="info" *ngIf="filePreview">  
                        <img [src]="sanitize(filePreview)" width="150" height="150"/>   
-                      </div>  
+                       </div>  
                     <!-- <input type="file" id="uploadPicture" class="hidden-input" accept="application/pdf"
                       (change)="selectFile($event.target.files[0])"> -->
                   </div>

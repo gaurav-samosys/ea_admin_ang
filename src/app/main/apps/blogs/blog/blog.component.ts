@@ -63,7 +63,7 @@ export class BlogComponent implements OnInit {
   hide_column: number = 0
   sort_order = "DESC";
   rows: any;
-  private shown: string = 'Post_Title';
+  // private shown: string = 'Post_Title';
   endName: string;
   startDate: string;
   endDate: string;
@@ -111,24 +111,23 @@ export class BlogComponent implements OnInit {
   //   }
 
   // }
-  columnClick(colName: string,evt) {
+  columnClick(colName: string, evt) {
     console.log('-0-----', evt.target.checked)
-    const colIndex = this.displayedColumns.findIndex(col => col === colName);
+    var colIndex = this.displayedColumns.findIndex(col => col === colName);
     if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
     } else {
       this.displayedColumns.push(colName);
     }
-    // if (colIndex > 0) {
-    //   // column is currently shown in the table, so we remove it
-    //   this.displayedColumns.splice(colIndex, 1);
-    // } else {
-    //   // column is not in the table, so we add it
-    //   this.displayedColumns.push(colName);
-    // }
   }
 
-
+  // if (colIndex > 0) {
+  //   // column is currently shown in the table, so we remove it
+  //   this.displayedColumns.splice(colIndex, 1);
+  // } else {
+  //   // column is not in the table, so we add it
+  //   this.displayedColumns.push(colName);
+  // }
 
 
 

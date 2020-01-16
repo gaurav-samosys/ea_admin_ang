@@ -23,12 +23,13 @@
       <!-- END OF ROW -->
     </div>
     <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
-    <div class="h2 mb-8">
+    <div class="h2 mb-8 company_heading">
         <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
         Company Search
       </div>
-    <div class="mat__box mt-20 mr-28">
-        <ng-container *ngIf="show">
+      <ng-container *ngIf="show">
+    <div class="mat__box mt-20 mr-28 x_panel">
+        
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <!-- <div class="h2 mb-8">Company Search</div> -->
@@ -128,9 +129,9 @@
         <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
       </div>
       <!-- END OF ROW -->
-    
-    <!-- END OF MAT__BOX MT-20 MR-28 -->
-    <div class="mat__box mt-20 mr-28">
+    </div>
+    <!-- END OF MAT__BOX MT-20 MR-28  mt-20-->
+    <div class="mat__box mr-28">
         
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -149,7 +150,7 @@
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
-              <button mat-raised-button matTooltip="Download Excel File" (click)="exportData()">Export Data to
+              <button mat-raised-button matTooltip="Download Excel File" (click)="exportData()" class="export_btn">Export Data to
                 Excel</button>
             </div>
 
@@ -157,7 +158,7 @@
           <!-- END OF ROW -->
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <mat-table [dataSource]="dataSource">
+              <mat-table [dataSource]="dataSource" class="table">
                 <ng-container matColumnDef="company_name">
                   <mat-header-cell *matHeaderCellDef> Company Name
                     <span class="pointer">
@@ -319,7 +320,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                   <p fxFlex="50" class="pr-4">Showing {{startIndex}} to {{endIndex}} of {{allItems}} entries</p>
                 </div> -->
-          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+          <!-- END OF COL-LG-6 COL -MD-6 COL-SM-12 COL-XS-12 -->
           <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
                   <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
                       <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -350,7 +351,7 @@
     </div>
   
   </ng-container>
-  </div>
+  
 
   </div>
 </div>

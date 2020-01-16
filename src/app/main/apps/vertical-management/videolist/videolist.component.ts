@@ -15,6 +15,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { ConfirmboxComponent, ConfirmDialogModel } from './confirmbox/confirmbox.component';
 import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-videolist',
   templateUrl: './videolist.component.html',
@@ -53,7 +54,10 @@ public totalSize = 0;
    horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
- constructor(private _snackBar: MatSnackBar,private _Activatedroute:ActivatedRoute,private http: HttpClient,public dialog: MatDialog,private pagerService: PagerService,public video_service:VideolistService) {
+ constructor(private _snackBar: MatSnackBar,
+  private location: Location,private _Activatedroute:ActivatedRoute,
+  private http: HttpClient,public dialog: MatDialog,private router:Router,
+  private pagerService: PagerService,public video_service:VideolistService) {
        if( localStorage.getItem('addvideo_status') == 'true'){
       this.openaddSnackBar();
       localStorage.removeItem('addvideo_status');
@@ -88,7 +92,26 @@ public totalSize = 0;
     console.log(this.topic_id)
    this.getVideoList(this.topic_id)
   }
+// verticalManageId(){
+//   this.router.navigate(["/apps/vertical-management/management/",this.topic_id])
+// }
+back(){
+  this.location.back();
+}
 
+  /**
+   * button toggle
+   */
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
      getVideoList(id)
   {
       this.video_service.Post(this.getVideoListbyTopic,{topic_id:id,offset:this.pageNumber, limit : this.pageSize ,token:'LIVESITE'}).subscribe(res => {

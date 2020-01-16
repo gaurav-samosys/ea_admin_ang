@@ -1,0 +1,285 @@
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+  <div class="center" fusePerfectScrollbar>
+
+    <div class="mat__box mat__box2 mt-20 mr-28">
+      <div class="row" fxLayoutAlign="space-between center">
+        <div class="">
+          <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+          <a routerLink="/apps/webinars" style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Manage
+            Webinars</a>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top:-24px">
+          <button mat-raised-button routerLink="/apps/add_webinar">
+            <mat-icon>add_circle_outline</mat-icon>Add Webinar
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="mat__box mt-20 mr-28 x_panel">
+      <div class="h2">
+        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
+        Manage Webinars
+      </div>
+      <ng-container *ngIf="show">
+
+        <div class="mat__box mt-20 mr-28">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+                  <!-- <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Show Entries</mat-label>
+                         <mat-select matNativeControl  (change)="changelimit($event.target.value)">
+                            <mat-option value="10">10</mat-option>
+                            <mat-option value="25">25</mat-option>
+                            <mat-option value="50">50</mat-option>
+                            <mat-option value="100">100</mat-option>
+                          </mat-select>
+                      </mat-form-field> -->
+
+                </div>
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
+                  <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
+                    class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <label>
+                        <input type="checkbox" (change)="columnClick('webinar_name',$event)" checked><span
+                          class="ml">Webinar Name</span></label>
+                    </button>
+                    <button mat-menu-item>
+                      <label>
+                        <input (change)="columnClick('image',$event)" type="checkbox" checked><span
+                          class="ml">Image</span>
+                        </label>
+                    </button>
+                    <button mat-menu-item><label>
+                      <input (change)="columnClick('day',$event)" type="checkbox"
+                          checked><span class="ml">Day</span>
+                        </label>
+                    </button>
+                    <button mat-menu-item><label>
+                      <input type="checkbox" (change)="columnClick('date',$event)"
+                          checked><span class="ml">Date</span>
+                        </label>
+                    </button>
+                    <button mat-menu-item><label>
+                      <input type="checkbox" (change)="columnClick('start_time',$event)"
+                          checked><span class="ml">Start Time</span>
+                        </label>
+                    </button>
+                    <button mat-menu-item><label>
+                      <input type="checkbox" (change)="columnClick('end_time',$event)"
+                          checked><span class="ml">End Time</span>
+                        </label>
+                    </button>
+                    <button mat-menu-item><label><input type="checkbox" (change)="columnClick('action',$event)"
+                          checked><span class="ml">Action</span></label>
+                    </button>
+                  </mat-menu>
+
+                </div>
+              </div>
+              <!-- END OF ROW -->
+              <!-- webinar_name', 'image', 'day ', 'date','start_time','end_time','action' -->
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <mat-table [dataSource]="dataSource">
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="webinar_name">
+                      <mat-header-cell *matHeaderCellDef> Webinar Name
+                        <span class="pointer">
+                          <i (click)="updateSortingOrderWebinar('webinar_name','ASC')"
+                            [class]='(this.sort_column=="webinar_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderWebinar('webinar_name','DESC')"
+                            [class]='(this.sort_column=="webinar_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span>
+                      </mat-header-cell>
+                      <!-- [routerLink]="['/apps/client-mangement/client-detail', element.id]" -->
+                      <mat-cell class="style" *matCellDef="let element"> {{element.webinar_name}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="image">
+                      <mat-header-cell *matHeaderCellDef> Video
+                        <span class="pointer">
+                          <i (click)="updateSortingOrderWebinar('image','ASC')"
+                            [class]='(this.sort_column=="image" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderWebinar('image','DESC')"
+                            [class]='(this.sort_column=="image" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.image}} </mat-cell>
+                    </ng-container>
+
+
+
+                    <ng-container matColumnDef="day">
+                      <mat-header-cell *matHeaderCellDef> Day
+                        <span class="pointer">
+                          <i (click)="updateSortingOrderWebinar('day','ASC')"
+                            [class]='(this.sort_column=="day" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderWebinar('day','DESC')"
+                            [class]='(this.sort_column=="day" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span> </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.day}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="date">
+                      <mat-header-cell *matHeaderCellDef> Date
+                        <span class="pointer">
+                          <i (click)="updateSortingOrderWebinar('date','ASC')"
+                            [class]='(this.sort_column=="date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderWebinar('date','DESC')"
+                            [class]='(this.sort_column=="date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span> </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="start_time">
+                      <mat-header-cell *matHeaderCellDef> Start Time
+                        <span class="pointer">
+                          <i (click)="updateSortingOrderWebinar('start_time','ASC')"
+                            [class]='(this.sort_column=="day" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderWebinar('start_time','DESC')"
+                            [class]='(this.sort_column=="start_time" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span> </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.start_time}} </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="end_time">
+                      <mat-header-cell *matHeaderCellDef> End_Time
+                        <span class="pointer">
+                          <i (click)="updateSortingOrderWebinar('end_time','ASC')"
+                            [class]='(this.sort_column=="end_time" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_upward
+                          </i>
+                          <i (click)="updateSortingOrderWebinar('end_time','DESC')"
+                            [class]='(this.sort_column=="end_time" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                            arrow_downward
+                          </i>
+                        </span> </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.end_time}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                      <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                        <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
+
+                        <mat-menu #belowMenu="matMenu" yPosition="below">
+                          <button mat-menu-item matTooltip="Edit"
+                            [routerLink]="['/apps/add_expert_interview', element.id]">Edit</button>
+                          <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
+                        </mat-menu>
+                        <!-- <button mat-icon-button>
+                                <mat-icon matTooltip="Edit" [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">edit</mat-icon>
+                              </button>
+                      <button mat-icon-button>
+    
+                                <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon> 
+                              </button> -->
+                      </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                  <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                    [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+                    (page)="handlePage($event)"></mat-paginator>
+                  <div *ngIf="data == '' " style="margin-bottom: 20px;
+                      text-align: center;
+                      margin-top: 20px;">No data available in table</div>
+                </div>
+                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              </div>
+              <!-- END OF ROW -->
+              <!--   <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <p fxFlex="50" class="pr-4">Showing {{start}} to {{end}} of {{allItems}} entries</p>
+                    </div>
+    
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                      <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                            <a (click)="setPage(1)">First</a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                        </li>
+                        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                            <a (click)="setPage(page)">{{page}}</a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                            <a (click)="setPage(pager.totalPages)">Last</a>
+                        </li>
+                    </ul>
+                    </div>
+    
+                  </div> -->
+              <!-- END OF ROW -->
+            </div>
+            <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+          </div>
+          <!-- END OF ROW -->
+        </div>
+        <!-- END OF MAT__BOX MT-20 MR-28 -->
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+
+<style type="text/css">
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+</style>

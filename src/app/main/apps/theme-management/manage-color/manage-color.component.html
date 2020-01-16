@@ -6,19 +6,18 @@
     </div>
     <!--Row End-->
     <div class="row">
-        <div class="col-4 primset" style="padding-right: 0px;">
-            <div class=""
-                style="padding: 0;text-align: center !important;margin-bottom: 0;border-bottom: 1px solid #ccc;">
-                <span class="fnt_size">Set Custom Theme</span>
+        <div class="col-4 primset">
+            <div >
+                <span class="sidbar_heding">Set Custom Theme</span>
             </div>
-            <div class="left-sidebar" style="width: 320px;">
+            <div class="left-sidebar">
                 <form>
 
-                    <mat-form-field class="example-chip-list" appearance="outline" style="width: 320px;">
+                    <mat-form-field class="example-chip-list" appearance="outline" style="width: 100%;">
                         <mat-label>Select client*</mat-label>
                         <mat-chip-list #chipList>
                             <mat-chip *ngFor="let item of dataArray;let indx=index;" [selectable]="selectable"
-                                [removable]="removable" (removed)="remove(item,indx)">
+                                 [removable]="removable" (removed)="remove(item,indx)">
                                 {{item.company_name}}
                                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                             </mat-chip>
@@ -36,7 +35,7 @@
                     </mat-form-field>
 
 
-                    <span class="fnt_size">Color Setting</span>
+                    <span class="sidbar_heding">Color Setting</span>
                     <div class="prim">
                         <div class="primary-color mb-20">
                             <mat-label>Primary Color (Numbers)</mat-label>

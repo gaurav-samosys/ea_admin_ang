@@ -92,7 +92,19 @@ export class ManagementComponent implements OnInit {
     this.vertical_id = this._Activatedroute.snapshot.paramMap.get("id");
     this.getVerticalList(this.vertical_id);
   }
-
+  /**
+   * button toggle
+   */
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
   getVerticalList(id) {
     this.manage_service.Post(this.getVerticalDataList, { vertical_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res

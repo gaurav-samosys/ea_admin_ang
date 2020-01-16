@@ -3,80 +3,69 @@
     <!-- CENTER -->
     <div class="center vertical-management" fusePerfectScrollbar>
         <div class="mat__box mat__box2 mt-20 mr-28">
-            <div class="row" fxLayoutAlign="space-between center" style="float: right !important;">
 
-                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
-                <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right" > -->
-                <button mat-raised-button (click)="addTopic()">
-                    <mat-icon>add_circle_outline</mat-icon>Add more
-                </button>
-                <!-- </div> -->
-                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+            <div class="">
+                <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+                <a routerLink="/apps/vertical-management/vertical"
+                    style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Vertical</a>
+                <a routerLink="/apps/vertical-management/management/{{vertical_id}}"
+                    style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;
+                    {{name}}</a>
+                <!-- <a (click)="verticalManageId()" style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;
+                                {{name}}</a> -->
             </div>
 
+            <div class="row" fxLayoutAlign="space-between center" style="float: right !important;">
+
+                <button style="margin-top: -22px;" mat-raised-button (click)="addTopic()">
+                    <mat-icon>add_circle_outline</mat-icon>Add more
+                </button>
+
+            </div>
+
+        </div>
 
             <!-- START SECOND ROW -->
             <!-- START DIV -->
-            <div class="mat__box mt-20 mr-28">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <!-- <div class="h2 mb-8">User Search</div> -->
-                        <div style="margin-top: 25px;">
-                            <h2>{{name}} Vertical</h2>
-                            <span class="fill-remaining-space"></span>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8" fxLayoutGap="25px">
-                                <mat-form-field appearance="outline" fxFlex="50">
-                                    <mat-label required>Title</mat-label>
-                                    <input matInput placeholder="Search title name"
-                                        (keyup)="Search($event.target.value,'title')">
-                                </mat-form-field>
-                                <!-- </div>
+
+            <div class="mat__box">
+
+                <div>
+                    <h2 class="margin0">
+                        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>{{name}}
+                        Vertical
+                    </h2>
+                    <span class="fill-remaining-space"></span>
+                </div>
+
+                <ng-container *ngIf="show">
+                    <div class="row bg_mat mt-10">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8" fxLayoutGap="25px">
+                            <mat-form-field appearance="outline" fxFlex="50">
+                                <mat-label required>Title</mat-label>
+                                <input matInput placeholder="Search title name"
+                                    (keyup)="Search($event.target.value,'title')">
+                            </mat-form-field>
+                            <!-- </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8"> -->
-                                <mat-form-field appearance="outline" fxFlex="50">
-                                    <mat-label>Description</mat-label>
-                                    <input matInput placeholder="Search description"
-                                        (keyup)="Search($event.target.value,'description')">
-                                </mat-form-field>
-                            </div>
+                            <mat-form-field appearance="outline" fxFlex="50">
+                                <mat-label>Description</mat-label>
+                                <input matInput placeholder="Search description"
+                                    (keyup)="Search($event.target.value,'description')">
+                            </mat-form-field>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- END DIV -->
-        <!-- END SECOND ROW -->
 
 
-        <div class="mat__box mt-20 mr-28">
-            <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                    <!-- </div> -->
+                    <!-- END DIV -->
+                    <!-- END SECOND ROW -->
 
-                <div fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
 
-                    <!--         <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Show Entries</mat-label>
-                     <mat-select matNativeControl  (change)="changelimit($event.target.value)">
-                        <mat-option value="10">10</mat-option>
-                        <mat-option value="25">25</mat-option>
-                        <mat-option value="50">50</mat-option>
-                        <mat-option value="100">100</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-
-                </div>
-             
-        
-            </div>  -->
-
-                    <!-- CONTENT -->
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-
                             <mat-table class="mat-table" [dataSource]="dataSource">
 
                                 <!-- Weight Column -->
@@ -105,7 +94,6 @@
 
                                 <ng-container matColumnDef="image">
                                     <mat-header-cell *matHeaderCellDef>Image
-
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element">
                                         <mat-icon matTooltip="click to see image" style="cursor: pointer;"
@@ -166,7 +154,8 @@
                                             <mat-form-field appearance="outline" fxFlex="40" class="new_manage_bxs">
                                                 <select matNativeControl (change)="change($event.target.value,element)"
                                                     class="new_cls_select_manage">
-                                                    <option value="" selected="" style="display: none; ">Go To</option>
+                                                    <option value="" selected="" style="display: none; ">Go To
+                                                    </option>
                                                     <!-- <option ><a [routerLink]="['/apps/vertical-management/videolist', element.id]">videos</a></option> -->
                                                     <option value="video">videos</option>
                                                     <option value="quize">quizzes</option>
@@ -215,7 +204,8 @@
                             <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
                                 [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
                                 (page)="handlePage($event)"></mat-paginator>
-                            <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+                            <div *ngIf="data == '' " style="text-align: center;margin-top: 20px; margin-bottom:20px;">No
+                                data available in table</div>
 
                             <!--    <div>
                                 <div class="container">
@@ -258,8 +248,27 @@
                         </div>
 
                     </div>
-                </div>
+
+                </ng-container>
             </div>
-        </div>
+
     </div>
 </div>
+
+    <!--         <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+                  <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Show Entries</mat-label>
+                     <mat-select matNativeControl  (change)="changelimit($event.target.value)">
+                        <mat-option value="10">10</mat-option>
+                        <mat-option value="25">25</mat-option>
+                        <mat-option value="50">50</mat-option>
+                        <mat-option value="100">100</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
+            </div>  -->
+
+    <!-- <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                <div fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto"> -->
+    <!-- CONTENT -->

@@ -4,6 +4,10 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { AuthService } from './auth.service';
 import { LoginGuard } from '../../login.guard';
+// import { ExpertInterviewComponent } from './expert-interview/expert-interview/expert-interview.component';
+// import { AddInterviewComponent } from './expert-interview/add-interview/add-interview.component';
+// import { WebinarListComponent } from './webinar/webinar-list/webinar-list.component';
+// import { AddWebinarComponent } from './webinar/add-webinar/add-webinar.component';
 const routes = [
     {
         path: 'dashboards/analytics',
@@ -106,7 +110,7 @@ const routes = [
     //     path: 'add-vertical',
     //     loadChildren: './home-dashboard/add-vertical/add-vertical.module#AddVerticalModule', canActivate: [LoginGuard]
     // },
-    
+
     {
         path: 'theme-management/manage-color',
         loadChildren: './theme-management/manage-color/manage-color.module#ManageColorModule'
@@ -127,10 +131,26 @@ const routes = [
         path: 'blog-post/:id',
         loadChildren: './blogs/add-post/add-post.module#AddPostModule'
     },
+    {
+        path: 'expert_interview',
+        loadChildren: './expert-interview/expert-interview/expert-interview.module#ExpertInterviewModule'
+    },
+
+    {
+        path: 'add_expert_interview',
+        loadChildren: './expert-interview/add-interview/add-interview.module#AddInterviewModule'
+    },
 
 
+    {
+        path: 'add_webinar',
+        loadChildren: './webinar/add-webinar/add-webinar.module#AddWebinarModule'
+    },
 
-
+    {
+        path: 'webinars',
+        loadChildren: './webinar/webinar-list/webinar-list.module#WebinarListModule'
+    },
 
 
 
@@ -190,7 +210,7 @@ const routes = [
     },
 
 
-    {path: '** ',redirectTo:'/apps/admin/login'}
+    { path: '** ', redirectTo: '/apps/admin/login' }
 ];
 
 @NgModule({
@@ -198,7 +218,8 @@ const routes = [
         RouterModule.forChild(routes),
         FuseSharedModule
     ],
-    declarations: []
+    declarations: [
+    ]
 })
 export class AppsModule {
 }

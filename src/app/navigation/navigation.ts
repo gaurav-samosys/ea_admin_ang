@@ -239,6 +239,54 @@ export const navigation: FuseNavigation[] = [
                                     
                 ]
             },
+            {
+                id: 'Expert-Interviews',
+                title: 'Expert Interview',
+                translate: 'Expert-Interview',
+                type: 'collapsable',
+                icon: 'adjust',
+                children: [
+
+                    {
+                        id: 'Expert-Interview',
+                        title: 'Expert Interview',
+                        type: 'item',
+                        url: '/apps/expert_interview'
+                    },
+                    // {
+                    //     id: 'comment',
+                    //     title: 'Comment',
+                    //     type: 'item',
+                    //     url: '/apps/comment'
+
+                    // },
+                                    
+                ]
+            },
+            {
+                id: 'Webinars',
+                title: 'Webinars',
+                translate: 'Webinars',
+                type: 'collapsable',
+                icon: 'adjust',
+                children: [
+
+                    {
+                        id: 'Webinars',
+                        title: 'Webinars',
+                        type: 'item',
+                        url: '/apps/webinars'
+                    },
+                    // {
+                    //     id: 'comment',
+                    //     title: 'Comment',
+                    //     type: 'item',
+                    //     url: '/apps/comment'
+
+                    // },
+                                    
+                ]
+            },
         ]
     },
 

@@ -21,7 +21,9 @@ export class DeveloperApisComponent implements OnInit {
   // @ViewChild(MatSort, { static: true }) MatSort: MatSort;
   toggle_menu1: boolean;
 
-  displayedColumns: string[] = ['full_name', 'email', 'app_id', 'app_secret', 'website', 'status'];
+  displayedColumns
+  : string[] = 
+  ['full_name', 'email', 'app_id', 'app_secret', 'website', 'status'];
   data: any;
   response: any;
   html: any;
@@ -83,7 +85,7 @@ export class DeveloperApisComponent implements OnInit {
 
       });
 
-  }
+  } 
   /**
    * column toggle show hide
    * @param colName 

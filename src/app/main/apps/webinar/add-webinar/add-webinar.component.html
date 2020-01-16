@@ -1,0 +1,126 @@
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+
+  <div class="center" fusePerfectScrollbar>
+    <div class="mat__box mat__box2 mt-20 mr-28 x_panel">
+      <div class="h2 mb-8">
+        <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
+        <span *ngIf="name == 0">Add Webinar</span>
+        <span *ngIf="name == 1">Edit Webinar</span>
+      </div>
+
+      <div class="mat__box mt-20 mr-28">
+        <ng-container *ngIf="show">
+          <div class="row">
+            <form [formGroup]="AddWebinarForm" (ngSubmit)="submit()">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+                margin-left: 20px; ">
+                  <mat-label>Webinar Name</mat-label>
+                  <input matInput formControlName="name" placeholder="Webinar Name" required>
+                  <mat-error>Webinar Name is required</mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+                margin-right: 20px; ">
+                   <mat-label>Webinar Date</mat-label>
+                  <input matInput [matDatepicker]="picker" (click)="picker.open()" placeholder="Start date"
+                    [ngModel]="startDate" formControlName="webinar_date" (dateChange)="startDateChange()" (ngModelChange)="MyDate($event,'start')"
+                    required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error>Webinar Date is required</mat-error>
+                </mat-form-field>
+              </div>
+              <!-- -->
+              <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
+                  margin-right: 20px; ">
+                  <mat-label>Start Time*</mat-label>
+                  <!-- [min]="currentDate" -->
+                  <input matInput [min]="AddWebinarForm.controls['start_time'].value"
+                    [owlDateTimeTrigger]="dt1" formControlName="start_time" [(ngModel)]="dateTime2"
+                    [owlDateTime]="dt1">
+                  <owl-date-time [pickerType]="'timer'" [hour12Timer]="true" style="width: 20px;height: 20px;" #dt1>
+                  </owl-date-time>
+                  <mat-error>Start Time is required</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="100" style="  width: 345px;
+                margin-right: 20px; ">
+                  <mat-label>End Time*</mat-label>
+                  <input matInput [owlDateTimeTrigger]="dt2" formControlName="end_time" [owlDateTime]="dt2">
+                  <owl-date-time [pickerType]="'timer'" [hour12Timer]="true" #dt2></owl-date-time>
+                  <mat-error>End Time is required</mat-error>
+               
+                </mat-form-field>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
+                <h2>Attach Image</h2>
+              
+                <!-- formControlName="image" -->
+
+
+                <!-- selected url *ngIf="message == 1" *ngIf="hide == 1"-->
+                <span>
+                  <input type="file" (change)="onSelectFile($event)" name="file" accept="image/*">
+                  <!-- <img [src]="url"> -->
+                  <span class="" *ngIf="message == 0" style="color:red;">
+                    <span >{{message1}}</span>
+                  </span>
+                </span>
+                <!-- bydefault image-->
+                <img class="file_upload_image" 
+                  [src]="url">
+              </div>
+
+              <button type="submit" mat-raised-button color="accent" matTooltip="save Webinar"
+                *ngIf="add_button == 0">Upload</button>
+
+            </form>
+            <button type="submit " matTooltip="update Webinar" mat-raised-button color="accent" *ngIf="add_button == 1"
+              (click)="update(prodId)">Update</button>
+          </div>
+
+
+
+
+        </ng-container>
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<style type="text/css">
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+</style>
+
+  <!-- <span class="file_upload_button_con">
+                <span class="add_file_button">Select File</span>
+                <span class="inner_text_span">Please select and upload file</span>
+              </span> -->

@@ -85,21 +85,31 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
                   <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
-                    class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                    class="ColVis_Button ColVis_MasterButton">
+                    <span> Show/Hide Column</span>
+                  </button>
                   <mat-menu #menu="matMenu">
-                    <button mat-menu-item><label><input (change)="columnClick('post_Title',$event)" type="checkbox"
-                          checked><span class="ml">Post_Title</span></label>
+                    <button mat-menu-item>
+                      <label>
+                      <input type="checkbox" (change)="columnClick('post_title',$event)" 
+                          checked><span class="ml ">Post_Title</span>
+                        </label>
                     </button>
-                    <button mat-menu-item><label><input (change)="columnClick('Author',$event)" type="checkbox"
-                          checked><span class="ml">Author</span></label>
+                    <button mat-menu-item>
+                      <label><input type="checkbox" (change)="columnClick('author',$event)" 
+                          checked>
+                          <span class="ml">Author</span>
+                        </label>
                     </button>
-                    <button mat-menu-item><label><input type="checkbox" (change)="columnClick('Categary',$event)"
+                    <button mat-menu-item><label>
+                      <input type="checkbox" (change)="columnClick('category',$event)"
                           checked><span class="ml">Categary</span></label>
                     </button>
-                    <button mat-menu-item><label><input type="checkbox" (change)="columnClick('Created_Date',$event)"
+                    <button mat-menu-item><label>
+                      <input type="checkbox" (change)="columnClick('created_date',$event)"
                           checked><span class="ml">Created Date</span></label>
                     </button>
-                    <button mat-menu-item><label><input (change)="columnClick('Action',$event)" type="checkbox"
+                    <button mat-menu-item><label><input  type="checkbox" (change)="columnClick('action',$event)"
                           checked><span class="ml">Action</span></label>
                     </button>
                   </mat-menu>

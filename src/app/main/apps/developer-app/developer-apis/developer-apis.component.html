@@ -10,7 +10,7 @@
 
           <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
-          <a routerLink="/apps/developer-app/developer-apis"
+           <a routerLink="/apps/developer-app/developer-apis"
             style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Manage User</a>
 
         </div>
@@ -46,43 +46,39 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="flex-basis: 400px;
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="flex-basis: 400px;
                 max-width: 400px;">
+                 
+                      <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
+                        class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item >
+                          
+                          <label>
+                            <input 
+                              type="checkbox" (change)="columnClick('full_name',$event)" checked><span class="ml">Full Name</span></label>
+ 
+                            </button>
+                        <button mat-menu-item ><label><input (change)="columnClick('email',$event)" type="checkbox"
+                              checked><span class="ml">Email</span></label></button>
+                        <button mat-menu-item ><label><input (change)="columnClick('app_id',$event)" 
+                              type="checkbox" checked><span class="ml">App Id</span></label></button>
+                        <button mat-menu-item ><label><input 
+                              type="checkbox" (change)="columnClick('app_secret',$event)" checked><span class="ml">App Secret</span></label></button>
+                        <button mat-menu-item ><label><input (change)="columnClick('status',$event)" type="checkbox"
+                              checked><span class="ml">Status</span></label> </button>
+                      </mat-menu>
+                </div>
 
-                <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
-                  class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
-                    <label>
-                      <input value="Post_Title" type="checkbox" (change)="columnClick('full_name',$event)" checked><span
-                        class="ml">Full Name</span></label>
-
-                  </button>
-                  <button mat-menu-item><label><input (change)="columnClick('email',$event)" value="Author"
-                        type="checkbox" checked><span class="ml">Email</span></label>
-                      </button>
-                  <button mat-menu-item><label><input (change)="columnClick('app_id',$event)" value="Categary"
-                        type="checkbox" checked><span class="ml">App Id</span></label>
-                      </button>
-                  <button mat-menu-item><label><input  type="checkbox"
-                        (change)="columnClick('app_secret',$event)" checked><span class="ml">App
-                        Secret</span></label>
-                      </button>
-                  <button mat-menu-item><label><input (change)="columnClick('status',$event)" value="Action"
-                        type="checkbox" checked><span class="ml">Status</span></label> 
-                      </button>
-                </mat-menu>
-              </div>
-
-              <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
-
+                <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
+             
               <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             </div>
             <!-- END OF ROW -->
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <table mat-table [dataSource]="dataSource">
+                <table mat-table [dataSource]="dataSource" class="table">
                   <!-- Name Column -->
                   <ng-container matColumnDef="full_name">
                     <th mat-header-cell *matHeaderCellDef> Full Name

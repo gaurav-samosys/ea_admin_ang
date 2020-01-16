@@ -1,106 +1,112 @@
 .prim{
-    position: relative;
-        width: 320px;
-        margin-bottom: 10px;
-        padding: 10px 17px;
-        display: inline-block;
-        background: #fff;
-        border: 1px solid #E6E9ED;
-        -webkit-column-break-inside: avoid;
-        -moz-column-break-inside: avoid;
-        column-break-inside: avoid;
-        opacity: 1;
-        transition: all .2s ease;
+  position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 17px;
+      display: inline-block;
+      background: #fff;
+      border: 1px solid #E6E9ED;
+      -webkit-column-break-inside: avoid;
+      -moz-column-break-inside: avoid;
+      column-break-inside: avoid;
+      opacity: 1;
+      transition: all .2s ease;
 }
 
 .select_app_con{
-    display: flex;
-    // justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    // width: 50%;
-    // padding: 10px;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  // width: 50%;
+  // padding: 10px;
 }
 .field{
-  display: inline-block;
-    position: relative;
-    text-align: left;
-    padding: 10px;
-    width: 245px;
+display: inline-block;
+  position: relative;
+  text-align: left;
+  padding: 10px;
+  width: 245px;
 }
-.lleft{position: relative;
-  width: 55%;
+.lleft{
+position: relative;
+width: 70%;
+margin-bottom: 10px;
+padding: 10px 17px;
+display: inline-block;
+background: #fff;
+float: right;
+border: 1px solid #E6E9ED;
+-webkit-column-break-inside: avoid;
+-moz-column-break-inside: avoid;
+column-break-inside: avoid;
+opacity: 1;
+transition: all 0.2s ease;
+float: left;
+}
+.primset{
+  position: relative;
+  width:25%;
   margin-bottom: 10px;
   padding: 10px 17px;
   display: inline-block;
   background: #fff;
-  float: right;
   border: 1px solid #E6E9ED;
   -webkit-column-break-inside: avoid;
   -moz-column-break-inside: avoid;
   column-break-inside: avoid;
   opacity: 1;
-  transition: all 0.2s ease;}
-.primset{
-    position: relative;
-        width: 338px;
-        margin-bottom: 10px;
-        padding: 10px 17px;
-        display: inline-block;
-        background: #fff;
-        border: 1px solid #E6E9ED;
-        -webkit-column-break-inside: avoid;
-        -moz-column-break-inside: avoid;
-        column-break-inside: avoid;
-        opacity: 1;
-        transition: all .2s ease;
+  transition: all .2s ease;
+  margin-left: 15px;
+  float: left;
+  margin-right: 15px;
 }
 .input-group-addon{
-    padding: 6px 12px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1;
-    color: #555;
-    text-align: center;
-    background-color: #eee;
-    border: 1px solid #ccc;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
 }
 
 .uploadlogo{
-    opacity: 1;
-    position: relative;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 99;
-    height: 40px;
-    margin: 0;
-    padding: 0;
-    display: block;
-    cursor: pointer;
-    width: 100%;
-    padding-right: 65px;
+  opacity: 1;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  padding-right: 65px;
 }
 
 
 
 .title {
-    text-align: center;
-  }
-  
-  .picker-wrapper {
-    flex: 0 0 250px;
-    opacity: 1;
-    border: 1 solid black;
-  }
-  .detail-wrapper {
-    flex: auto;
-  }
+  text-align: center;
+}
+
+.picker-wrapper {
+  flex: 0 0 250px;
+  opacity: 1;
+  border: 1 solid black;
+}
+.detail-wrapper {
+  flex: auto;
+}
 
 
 
-  
+
 /*============= Mobile view Start====================*/
 
 .app_html_container { text-align: center; margin-bottom: 30px; }
@@ -204,3 +210,6 @@ body .graph-color02-default { stroke: #CDE0EA; }
 body .graph-color01,
 body .graph-color01-default { stroke: #549cb6; }
 /*============= Mobile view End====================*/
+.slect_app{margin-top: 0;margin-left:20%;}
+.field{height: 77px !important;}
+.mat-form-field.mat-form-field-type-mat-select .mat-form-field-infix{padding-top: 12px !important;}

@@ -16,6 +16,7 @@ import { DatePipe } from '@angular/common';
 import { ExcelService } from 'app/main/apps/Access-code/access-code/excel.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSort } from '@angular/material';
+import { Router } from '@angular/router';
 
 
 
@@ -61,6 +62,7 @@ export class UserComponent implements OnInit {
   start: any;
   end: any;
   // array of all items to be paged
+  
   allItems: any;
   fullname: any;
   email: any;
@@ -95,7 +97,12 @@ export class UserComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
 
-    private excelService: ExcelService, private datePipe: DatePipe, private _snackBar: MatSnackBar, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public user: UserService) {
+    private excelService: ExcelService,
+     private datePipe: DatePipe,
+      private _snackBar: MatSnackBar, 
+      private http: HttpClient, public dialog: MatDialog,
+       private pagerService: PagerService, 
+       public user: UserService,private router:Router) {
     if (localStorage.getItem('status') == 'true') {
       // this.openSnackBar();
       localStorage.removeItem('status');
@@ -117,6 +124,12 @@ export class UserComponent implements OnInit {
 
 
   }
+  reload(){location.reload()
+  // this.router.navigate(['/apps/user-mangement/user']);
+}
+  /**
+   * button toggle
+   */
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
   buttontoggle() {
@@ -126,6 +139,21 @@ export class UserComponent implements OnInit {
       this.buttonName = "keyboard_arrow_up";
     else
       this.buttonName = "keyboard_arrow_down";
+  }
+
+  /**
+   * show hide column
+   * @param value 
+   */
+
+  columnClick(colName: string, evt) {
+    console.log('-0-----', evt.target.checked)
+    var colIndex = this.displayedColumns.findIndex(col => col === colName);
+    if (evt.target.checked == false) {
+      this.displayedColumns.splice(colIndex, 1);
+    } else {
+      this.displayedColumns.push(colName);
+    }
   }
 
  /**

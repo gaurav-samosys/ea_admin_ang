@@ -14,6 +14,7 @@ import { QuizzeslistService } from './quizzeslist.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ConfirmboxComponent, ConfirmDialogModel } from './confirmbox/confirmbox.component';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -43,7 +44,10 @@ export class QuizzeslistComponent implements OnInit {
   end: any;
   pager: any = {};
   vertical_id: any;
-  // paged items
+  sort_order = "DESC";
+  ASC;
+  sort_column
+
   pagedItems: any[];
   title: any;
   description: any;
@@ -55,7 +59,13 @@ export class QuizzeslistComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(public rt: Router, private _snackBar: MatSnackBar, private _Activatedroute: ActivatedRoute, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public quize_service: QuizzeslistService) {
+  response: any;
+  constructor(private location: Location,public rt: Router, 
+    private _snackBar: MatSnackBar,
+     private _Activatedroute: ActivatedRoute,
+      private http: HttpClient, public dialog: MatDialog,
+       private pagerService: PagerService, 
+       public quize_service: QuizzeslistService) {
     if (localStorage.getItem('addquiz_status') == 'true') {
       this.openaddSnackBar();
       localStorage.removeItem('addquiz_status');
@@ -85,12 +95,66 @@ export class QuizzeslistComponent implements OnInit {
 
   ngOnInit() {
     this.name = localStorage.getItem('name')
+    this.vertical_id = localStorage.getItem('vertical_id')
+
+    // this.vertical_id = this._Activatedroute.snapshot.paramMap.get("id");
+     console.log(this.vertical_id)
     this.names = localStorage.getItem('names')
     this.topic_id = this._Activatedroute.snapshot.paramMap.get("id");
     console.log(this.topic_id)
     this.getQuizeList(this.topic_id)
   }
 
+  back(){
+    this.location.back();
+  }
+  /**
+ * 
+ * @param colName Show hide column
+ * @param evt 
+ */
+  columnClick(colName: string, evt) {
+    console.log('-0-----', evt.target.checked)
+    var colIndex = this.displayedColumns.findIndex(col => col === colName);
+    if (evt.target.checked == false) {
+      this.displayedColumns.splice(colIndex, 1);
+    } else {
+      this.displayedColumns.push(colName);
+    }
+  }
+
+  /**
+      * =========================================
+      *        Update sorting 
+      * =========================================
+      */
+
+  updateSortingOrderQuiz(sort_column, sort_order) {
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    this.quize_service.Post(this.getQuizzesListbyTopic, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      this.dataSource = this.response['data']
+    });
+  }
+
+  /**
+     * button toggle
+     */
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
+  /**
+   * 
+   * @param id get Quizzes list
+   */
   getQuizeList(id) {
     this.quize_service.Post(this.getQuizzesListbyTopic, { topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
@@ -164,6 +228,9 @@ export class QuizzeslistComponent implements OnInit {
     this.getQuizeList(this.topic_id);
   }
 
+  /**
+   * add Quiz
+   */
   addQuiz() {
     let dialog = this.dialog.open(AddquizComponent, {
       data: this.topic_id,
@@ -179,13 +246,24 @@ export class QuizzeslistComponent implements OnInit {
 
   }
 
+  /**
+   * 
+   * @param value View Action
+   */
   View(value) {
+    var vertical_id=this.vertical_id
+    localStorage.setItem('vertical_id', vertical_id)
+
     localStorage.setItem('title', value.quiz_name)
     localStorage.setItem('data', JSON.stringify(value))
 
     this.rt.navigate(['/apps/vertical-management/showquiz', value.id, this.topic_id])
-  }
+    // this.rt.navigate(['/apps/vertical-management/showquiz', value.id, this.topic_id,vertical_id,])
 
+  }
+  /**
+    * Confirm Dialog For Delete
+    */
   confirmDialog(value): void {
     const message = `Are you sure you want to delete this quiz?`;
     let data = value
@@ -200,6 +278,9 @@ export class QuizzeslistComponent implements OnInit {
       this.result = dialogResult;
     });
   }
+  /**
+  * Open Snack Bar
+  */
   openaddSnackBar() {
     this._snackBar.open('Quiz added successfully!!', 'End now', {
       duration: 4000,
@@ -244,7 +325,9 @@ export class QuizzeslistComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
-
+  /**
+    * Search value in input field
+    */
   Search(value) {
     this.value = value;
     const end = (this.currentPage + 1) * this.pageSize;
@@ -264,7 +347,11 @@ export class QuizzeslistComponent implements OnInit {
       this.dataSource = this.data
     })
   }
-
+  /**
+   * Status change Event
+   * @param value 
+   * @param id 
+   */
   onChange(value, id) {
     console.log(value, id)
     let status;

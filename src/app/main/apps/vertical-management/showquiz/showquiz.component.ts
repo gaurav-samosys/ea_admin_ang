@@ -13,6 +13,7 @@ import { AddquestionComponent } from './addquestion/addquestion.component';
 import { QuestioneditComponent } from './questionedit/questionedit.component';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-showquiz',
@@ -56,7 +57,10 @@ export class ShowquizComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  constructor(private _snackBar: MatSnackBar, public _formBuilder: FormBuilder, private _Activatedroute: ActivatedRoute, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public show_service: ShowquizService) {
+  names: string;
+  title: string;
+  vertical_id: string;
+  constructor(private location: Location,private _snackBar: MatSnackBar, public _formBuilder: FormBuilder, private _Activatedroute: ActivatedRoute, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public show_service: ShowquizService) {
     this.res_data = JSON.parse(localStorage.getItem('data'));
     console.log(this.res_data)
 
@@ -71,11 +75,14 @@ export class ShowquizComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.name = localStorage.getItem('title')
+    this.names = localStorage.getItem('names')
+    this.name = localStorage.getItem('name')
+    this.title = localStorage.getItem('title')
+    this.vertical_id = localStorage.getItem('vertical_id')
+    console.log(this.vertical_id)
     this.id = this._Activatedroute.snapshot.paramMap.get('id')
     this.topic_id = this._Activatedroute.snapshot.paramMap.get('topicid')
-    console.log(this.id);
+    console.log("id==",this.id,"name=====",this.name,"topic id===",this.topic_id,"vertical_id=====",this.vertical_id);
     this.getquestionList(this.id);
 
     this.dummy = this._formBuilder.group({
@@ -98,7 +105,9 @@ export class ShowquizComponent implements OnInit {
     this.dummy.controls['desc'].disable();
 
   }
-
+  back(){
+    this.location.back();
+  }
   getquestionList(id) {
     this.show_service.Post(this.getQuestionsList, { quiz_id: id, token: 'LIVESITE', start: this.pageNumber, length: this.pageSize })
       .subscribe(res => {

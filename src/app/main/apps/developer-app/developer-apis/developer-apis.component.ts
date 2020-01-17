@@ -38,7 +38,13 @@ export class DeveloperApisComponent implements OnInit {
   // array of all items to be paged
   allItems: any;
   states: any;
-
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  public pageSize = 1;
+  public currentPage = 0;
+  public totalSize = 0;
+  startIndex = 1
+  value = '';
+  endIndex = 10;
   // pager object
   pager: any = {};
   getDeveloperApiListing = myGlobals.getDeveloperApiListing;
@@ -54,9 +60,9 @@ export class DeveloperApisComponent implements OnInit {
   sort_order: 'DESC'
   constructor(private http: HttpClient,
     private toastr: ToastrService,
-
-    public dialog: MatDialog, private pagerService: PagerService, public developer_service: DeveloperapiService) {
-
+    public dialog: MatDialog,
+     private pagerService: PagerService, 
+     public developer_service: DeveloperapiService) {
   }
 
   ngOnInit() {
@@ -65,27 +71,27 @@ export class DeveloperApisComponent implements OnInit {
   showHideColumns(value) {
     console.log(value)
   }
-  setPage(page: number) {
-    // get pager object from service
-    this.pager = this.pagerService.getPager(this.allItems, page, this.size);
-    this.start = this.pager.startIndex + 1;
-    this.end = this.pager.endIndex + 1;
-    // get current page of items
+  // setPage(page: number) {
+  //   // get pager object from service
+  //   this.pager = this.pagerService.getPager(this.allItems, page, this.size);
+  //   this.start = this.pager.startIndex + 1;
+  //   this.end = this.pager.endIndex + 1;
+  //   // get current page of items
 
-    this.pageNumber = this.pager.startIndex;
+  //   this.pageNumber = this.pager.startIndex;
 
-    this.developer_service.Post(this.getDeveloperApiListing, { offset: this.pageNumber, limit: this.size, token: 'LIVESITE' })
-      .subscribe(res => {
-        this.common = res
-        this.rows = this.common.data
-        this.data = this.rows.slice(0, this.size);
-        this.dataSource.data = this.data
-        this.allItems = this.common.total_data;
+  //   this.developer_service.Post(this.getDeveloperApiListing, { offset: this.pageNumber, limit: this.size, token: 'LIVESITE' })
+  //     .subscribe(res => {
+  //       this.common = res
+  //       this.rows = this.common.data
+  //       this.data = this.rows.slice(0, this.size);
+  //       this.dataSource.data = this.data
+  //       this.allItems = this.common.total_data;
 
 
-      });
+  //     });
 
-  } 
+  // } 
   /**
    * column toggle show hide
    * @param colName 
@@ -137,6 +143,9 @@ export class DeveloperApisComponent implements OnInit {
       });
   }
 
+  /**
+   * toggle menu
+   */
   toggle() {
     this.toggle_menu1 = !this.toggle_menu1
   }
@@ -145,6 +154,10 @@ export class DeveloperApisComponent implements OnInit {
     this.fetchListing();
   }
 
+  /**
+   * get devloper apis
+   */
+
   fetchListing() {
     this.developer_service.Post(this.getDeveloperApiListing, { limit: this.pageNumber, offset: this.size, id: '', token: 'LIVESITE' })
       .subscribe(res => {
@@ -152,9 +165,43 @@ export class DeveloperApisComponent implements OnInit {
         this.data = this.common.data
         this.dataSource.data = this.data
         this.allItems = this.common.total_data;
-        this.setPage(1)
+        // this.setPage(1)
       })
   }
+
+  public handlePage(e: any) {
+    console.log(e)
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.startIndex = (this.currentPage * e.pageSize) + 1;
+    this.endIndex = this.startIndex < e.length ? Math.min(this.startIndex + e.pageSize, e.length) : this.startIndex;
+    if (this.value != '') {
+      // console.log(this.value, this.name)
+      // this.Search(this.value, this.name)
+    }
+    else {
+      this.iterator();
+
+    }
+  }
+
+  private iterator() {
+    let part;
+
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    this.pageNumber = start
+    /* this.showloader=true;*/
+    this.developer_service.Post(this.getDeveloperApiListing, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      //this.showloader=false;
+      this.data = this.response.data;
+      this.dataSource = this.data;
+      console.log(this.dataSource)
+    })
+  }
+
+
 
   fetchCountry() {
     this.developer_service.Post(this.getCountry, { token: 'LIVESITE' })

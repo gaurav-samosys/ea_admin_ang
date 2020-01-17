@@ -8,10 +8,14 @@
     <div class="mat__box mat__box2 mt-20 mr-28">
       <div class="row" fxLayoutAlign="space-between center">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-          <div class="h2 mb-8">Manage Company</div>
+            <!-- h2 mb-8 -->
+          <div class="mb-8 ">
+            <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+            <a routerLink="/apps/dashboards/companies" style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Company</a>
+         </div>
         </div>
         <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="    margin-top: -12px;">
 
           <button mat-raised-button (click)="addCompany()">
             <mat-icon>add_circle_outline</mat-icon>Add Company
@@ -23,9 +27,9 @@
       <!-- END OF ROW -->
     </div>
     <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
-    <div class="h2 mb-8 company_heading">
+    <div class="h2 mt-8 company_heading">
         <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
-        Company Search
+        Manage Company
       </div>
       <ng-container *ngIf="show">
     <div class="mat__box mt-20 mr-28 x_panel">

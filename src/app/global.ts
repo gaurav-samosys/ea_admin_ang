@@ -37,7 +37,8 @@ export const addEditBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/
 export const deleteBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/deleteBlogApi"
 export const updateBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/updateBlogApi"
 
-
+export const client_color2="http://192.168.0.18/enrichedacademy_live/api/admin/client_color2";
+export const save_client_color_v2="http://192.168.0.18/enrichedacademy_live/api/admin/save_client_color_v2";
 export const editUsers="http://192.168.0.18/enrichedacademy_live/api/admin/editUsers";
 
 export const downloadAccessCodes=" https://staging.enrichedacademy.com/api/admin/downloadAccessCodes";

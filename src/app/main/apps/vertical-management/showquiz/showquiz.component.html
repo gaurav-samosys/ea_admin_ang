@@ -1,4 +1,4 @@
-<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+ <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
 
     <!-- CENTER -->
     <div class="center show-quiz" fusePerfectScrollbar>
@@ -6,12 +6,28 @@
         <div class="mat__box mat__box2 mt-20 mr-28">
           <div class="row" fxLayoutAlign="space-between center">
            
+                <div class="">
+                        <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+                        <a routerLink="/apps/vertical-management/vertical"
+                            style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Vertical</a>
+                        <a  routerLink="/apps/vertical-management/management/{{vertical_id}}"
+                            style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;
+                            {{name}} </a>
+                          
+                            <a routerLink="/apps/vertical-management/quizzeslist/{{id}}"
+                            style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;
+                            {{names}} </a>
+                            <a  routerLink="/apps/vertical-management/showquiz/{{vertical_id}}/{{id}}/{{topic_id}}"
+                            style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;
+                            {{title}} </a>
+                    </div>
             <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
              <button mat-stroked-button color="primary" (click)="addQuestion()">
                   <mat-icon>add_circle_outline</mat-icon>Add more</button>
             </div>
-            <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+             <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT  -->
           </div>
       </div>
 
@@ -19,7 +35,7 @@
 
         <!-- START SECOND ROW -->
               <!-- START DIV -->
-     <div class="mat__box mt-20 mr-28">
+     <div class="mt-20 mr-28">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <!-- <div class="h2 mb-8">User Search</div> -->
@@ -27,9 +43,12 @@
                     <h2>Quiz Information</h2>
                     <span class="fill-remaining-space"></span>
                 </div>
-
-            <div class="row">
-              <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" [formGroup]="dummy" (ngSubmit)="dummy()">
+                <!-- <div class="text-right"  style="margin-top: 25px;">
+                        <button mat-stroked-button color="primary" (click)="addQuestion()">
+                             <mat-icon>add_circle_outline</mat-icon>Add more</button>
+                       </div> -->
+            <div class="row ">
+              <form fxLayout="column" class="mat__box" fxLayoutAlign="start" fxFlex="1 0 auto" [formGroup]="dummy" (ngSubmit)="dummy()">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8">
                 <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label required>Category Name</mat-label>

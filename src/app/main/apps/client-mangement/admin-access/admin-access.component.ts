@@ -100,7 +100,20 @@ export class AdminAccessComponent implements OnInit {
 
     this.fetchAdminaccess();
   }
+  /**
+   * Button Toggle
+   */
 
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
   /**
    * =========================================
    *        Fetch Admin Access

@@ -12,12 +12,9 @@
                 <a routerLink="/apps/vertical-management/management/{{vertical_id}}"
                     style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;
                     {{name}}</a>
-                <!-- <a (click)="verticalManageId()" style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;
-                                {{name}}</a> -->
             </div>
 
             <div class="row" fxLayoutAlign="space-between center" style="float: right !important;">
-
                 <button style="margin-top: -22px;" mat-raised-button (click)="addTopic()">
                     <mat-icon>add_circle_outline</mat-icon>Add more
                 </button>
@@ -31,7 +28,6 @@
 
 
             <div class="mat__box">
-
                 <div>
                     <h2 class="margin0">
                         <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>{{name}}
@@ -151,7 +147,7 @@
                                     <mat-cell *matCellDef="let element" class="action-input">
 
                                         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                                            <mat-form-field appearance="outline" fxFlex="40" class="new_manage_bxs">
+                                            <mat-form-field appearance="outline" fxFlex="20" class="new_manage_bxs">
                                                 <select matNativeControl (change)="change($event.target.value,element)"
                                                     class="new_cls_select_manage">
                                                     <option value="" selected="" style="display: none; ">Go To

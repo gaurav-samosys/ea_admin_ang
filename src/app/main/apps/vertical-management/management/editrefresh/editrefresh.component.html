@@ -39,19 +39,25 @@
                            <textarea matInput  formControlName="description" ></textarea>
                     </mat-form-field>
                      
-                     <mat-label style=" width: 36%;margin-bottom: 10px">Image</mat-label>
+                     <mat-label style=" width: 100%;margin-bottom: 10px">Image*</mat-label>
 
                         <input  type="file" id="avatar" accept="image/*" required ngf-max-size="3MB" (change)="selectFile($event)" #fileInput>
                    <!--   <div *ngIf="value == 0">
                     <mat-error >This field is required! </mat-error>
 
                     </div> -->
-                      <mat-hint>Image size must be less than 3MB and image type must be JPG,PNG,GIF</mat-hint>
+                      <mat-hint style="margin-top: 10px;">Image size must be less than 3MB and image type must be JPG,PNG,GIF</mat-hint>
 
-                      <mat-label style=" width: 36%;margin-bottom: 10px">Course Type</mat-label>
-                      <input type="radio" value="1" name="course" formControlName="course" [checked]="check == 1">
-                      <mat-label class="mr_radio">Regular</mat-label>
-                      <input type="radio" value="2" name="course" formControlName="course" [checked]="check == 2"><mat-label>Bonus</mat-label>
+
+
+                      <div class="" style="margin-top: 10px;">
+                          <mat-label style=" width: 100%;margin-bottom: 10px;margin-top: 10px;">Course Type</mat-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="radio" value="1" name="course" formControlName="course" [checked]="check == 1"> &nbsp;&nbsp;
+                          <mat-label class="mr_radio">Regular</mat-label>&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="radio" value="2" name="course" formControlName="course" [checked]="check == 2"><mat-label>Bonus</mat-label>
+                      </div>
+                    
+                     
                 </div>
 
 

@@ -4,11 +4,16 @@
   <div class="center" fusePerfectScrollbar>
     <div class="mat__box mat__box2 mt-20 mr-28">
       <div class="row" fxLayoutAlign="space-between center">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="h2 mb-8">Manage User</div>
-        </div>
+        </div> -->
+        <div class="mb-8 ">
+            <!-- routerLink="/apps/user-mangement/user" -->
+            <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+            <a  (click)="reload()" style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Manage User</a>
+         </div>
         <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: -17px;">
           <!-- <button mat-stroked-button color="primary" (click)="addUser()"> -->
           <button mat-raised-button (click)="addUser()">
 
@@ -26,7 +31,7 @@
         Manage User
       </div>
       <ng-container *ngIf="show">
-    <div class="mat__box mt-20 mr-28 x_panel">
+    <div class="mat__box mt-10 mr-28 x_panel">
         
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -147,6 +152,46 @@
 
               <button mat-raised-button class="export_data" matTooltip="Download Excel File" (click)="exportData()">Export Data to
                 Excel</button>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <!-- 'first_name', 'email', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action' -->
+                  <button mat-button [matMenuTriggerFor]="menu" matTooltip="Show Hide Column" class="export_data" mat-raised-button type="button"
+                  class="ColVis_Button ColVis_MasterButton">
+                  <span> Show/Hide Column</span>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <label>
+                    <input type="checkbox" (change)="columnClick('first_name',$event)" 
+                        checked><span class="ml ">First Name</span>
+                      </label>
+                  </button>
+                  <button mat-menu-item>
+                    <label><input type="checkbox" (change)="columnClick('email',$event)" 
+                        checked>
+                        <span class="ml">Email</span>
+                      </label>
+                  </button>
+                  <button mat-menu-item><label>
+                    <input type="checkbox" (change)="columnClick('client_name',$event)"
+                        checked><span class="ml">Client Name</span></label>
+                  </button>
+                  <button mat-menu-item><label>
+                    <input type="checkbox" (change)="columnClick('created_on',$event)"
+                        checked><span class="ml">Created Date</span></label>
+                  </button>
+                  <button mat-menu-item><label>
+                      <input type="checkbox" (change)="columnClick('certificate_downloaded',$event)"
+                          checked><span class="ml"> Certificate Downloaded</span></label>
+                    </button>
+                    <button mat-menu-item><label>
+                        <input type="checkbox" (change)="columnClick('status',$event)"
+                            checked><span class="ml">status</span></label>
+                      </button>
+                  <button mat-menu-item><label><input  type="checkbox" (change)="columnClick('action',$event)"
+                        checked><span class="ml">Action</span></label>
+                  </button>
+                </mat-menu>
               <!-- <button  mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> -->
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->

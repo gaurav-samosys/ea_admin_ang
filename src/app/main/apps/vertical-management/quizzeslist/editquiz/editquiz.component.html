@@ -36,7 +36,7 @@
 
                             <mat-label style=" width: 36%;margin-bottom: 10px">Passing Score[%] *</mat-label>
                          <mat-form-field appearance="outline" fxFlex="100">
-                           <textarea matInput  formControlName="passing_score" ></textarea>
+                           <input matInput  formControlName="passing_score" >
                             <mat-error *ngIf="hasError('passing_score', 'required')">This field is required! </mat-error>
                           </mat-form-field>
 

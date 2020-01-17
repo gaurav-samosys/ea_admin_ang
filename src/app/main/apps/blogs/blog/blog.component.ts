@@ -90,27 +90,11 @@ export class BlogComponent implements OnInit {
 
     this.getBlogList()
   }
-  // column
-  // onclick(value) {
-  //   this.column = value
-  //   console.log(this.column)
-  //   // this.displayedColumns.push(this.column)
-  //   this.hide_column = 1
-  //   if (this.column == 'Post_Title') {
-
-  //   } else if (this.column == 'Author') {
-
-  //   } else if (this.column == 'Categary') {
-
-  //   } else if (this.column == 'Created_Date') {
-
-  //   } else if (this.column == 'Action') {
-
-  //   }else{
-
-  //   }
-
-  // }
+/**
+ * 
+ * @param colName Show hide column
+ * @param evt 
+ */
   columnClick(colName: string, evt) {
     console.log('-0-----', evt.target.checked)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);

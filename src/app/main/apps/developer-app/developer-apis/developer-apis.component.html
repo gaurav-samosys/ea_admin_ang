@@ -23,14 +23,14 @@
         <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>Developer App Listing
       </div>
       <ng-container *ngIf="show">
-        <div class="row">
+        <!--<div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="row" style="display: flex;
+             <div class="row" style="display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;">
+            justify-content: space-between;"> -->
 
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  mb-12" style="flex-basis: 420px;
+              <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  mb-12" style="flex-basis: 420px;
               max-width: 420px; display: block;">
                 <mat-form-field appearance="outline" style="max-width: 55%;
                 display: block;
@@ -44,11 +44,11 @@
                     <mat-option value="100">100</mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div>
+              </div> -->
 
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="flex-basis: 400px;
-                max-width: 400px;">
-                 
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="    margin-top: -30px;">
+                    <!-- style="flex-basis: 400px;
+                    max-width: 400px;" -->
                       <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
                         class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
                       <mat-menu #menu="matMenu">
@@ -73,9 +73,9 @@
                 <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
              
               <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-            </div>
+            <!-- </div> -->
             <!-- END OF ROW -->
-            <div class="row">
+            <div class="row mt-20">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                 <table mat-table [dataSource]="dataSource" class="table">
@@ -180,16 +180,21 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                    [pageSize]="pageSize" [pageSizeOptions]="[1,2,3,10, 25, 50,100]" showFirstLastButtons
+                    (page)="handlePage($event)"></mat-paginator>
+                  <div *ngIf="data == '' " style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
+                    No data available in table</div>
               </div>
               <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             </div>
             <!-- END OF ROW -->
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <p fxFlex="50" class="pr-4">Showing {{start}} to {{end}} of {{allItems}} entries</p>
               </div>
-              <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: -30px;">
                 <ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
                   <li [ngClass]="{disabled:pager.currentPage === 1}">
                     <a (click)="setPage(1)">First</a>
@@ -208,12 +213,12 @@
                   </li>
                 </ul>
               </div>
-              <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-            </div>
+
+            </div> -->
             <!-- END OF ROW -->
-          </div>
+          <!-- </div> -->
           <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-        </div>
+        <!-- </div> -->
         <!-- END OF ROW -->
       </ng-container>
     </div>

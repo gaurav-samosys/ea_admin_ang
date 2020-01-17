@@ -98,7 +98,7 @@ editVertical(value)
 
   name(value,id)
   {
-      localStorage.setItem('name',value)
+      localStorage.setItem('name',value,)
 
       this.rt.navigate(['/apps/vertical-management/management',id])
   }

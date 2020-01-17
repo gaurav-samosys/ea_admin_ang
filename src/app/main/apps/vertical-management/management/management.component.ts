@@ -90,6 +90,8 @@ export class ManagementComponent implements OnInit {
   ngOnInit() {
     this.name = localStorage.getItem('name')
     this.vertical_id = this._Activatedroute.snapshot.paramMap.get("id");
+  //  console.log(this.vertical_id)
+   localStorage.setItem('vertical_id',this.vertical_id)
     this.getVerticalList(this.vertical_id);
   }
   /**
@@ -265,13 +267,17 @@ export class ManagementComponent implements OnInit {
   }
   change(type, value) {
     console.log(type, value)
-    localStorage.setItem('names', value.cat_name)
+    localStorage.setItem('names', value.cat_name )
 
     if (type == 'video') {
       this.rt.navigate(['/apps/vertical-management/videolist', value.id])
     }
     else if (type == 'quize') {
-      this.rt.navigate(['/apps/vertical-management/quizzeslist', value.id])
+      this.rt.navigate(['/apps/vertical-management/quizzeslist',
+       value.id,this.vertical_id])
+      //  this.rt.navigate(['/apps/vertical-management/quizzeslist',
+      //  this.vertical_id,value.id])
+
     }
   }
 

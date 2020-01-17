@@ -3,61 +3,63 @@
   <!--      <div class="h1">
  Add Company
         </div> -->
-        <mat-toolbar>
-  <span> Edit Vertical </span>
-  <span class="fill-remaining-space"></span>
-  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
-</mat-toolbar>
-    <!-- CONTENT -->
-    <div class="content p-24">
+  <mat-toolbar style="background-color:  #039be5;">
+    <span> Edit Vertical </span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+  <!-- CONTENT -->
+  <div class="content p-24">
+    <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
 
- 
+      <!-- REACTIVE FORM EXAMPLE -->
 
+      <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="adduserForm" [formGroup]="editverticalForm"
+        (ngSubmit)="updateVertical()">
 
-        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <mat-label style=" width: 36%;margin-bottom: 10px; margin-top: 20px">Title*</mat-label>
+          <mat-form-field appearance="outline" fxFlex="100">
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="hasError('name', 'required')">Please enter title! </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-            <!-- REACTIVE FORM EXAMPLE -->
+          <mat-label style=" width: 36%;margin-bottom: 10px">Description</mat-label>
+          <!-- <mat-form-field appearance="outline" fxFlex="100"> -->
+            <textarea matInput cols="10" rows="10" formControlName="description" style="    border: 1px solid #ebe3e3;
+            border-radius: 4px;
+            margin-bottom: 35px;padding: 1em 1em 1em 1em;"></textarea>
+          <!-- </mat-form-field> -->
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-            <form  fxLayout="column" fxLayoutAlign="start"
-                  fxFlex="1 0 auto" name="adduserForm" [formGroup]="editverticalForm" (ngSubmit)="updateVertical()">
+          <mat-label style=" width: 100%;margin-bottom: 10px">Image*</mat-label>
 
-                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                    <mat-label style=" width: 36%;margin-bottom: 10px">Title*</mat-label>
-                    <mat-form-field appearance="outline" fxFlex="100">
-                       <input matInput formControlName="name"  required>
-                        <mat-error *ngIf="hasError('name', 'required')">Please enter title! </mat-error>
-                    </mat-form-field>
-
-                          <mat-label style=" width: 36%;margin-bottom: 10px">Description</mat-label>
-                         <mat-form-field appearance="outline" fxFlex="100">
-                           <textarea matInput  formControlName="description" ></textarea>
-                    </mat-form-field>
-                     
-                     <mat-label style=" width: 36%;margin-bottom: 10px">Image</mat-label>
-
-                      <input   type="file"  id="uploadPicture" class="hidden-input" accept="image/*" (change)="selectFile($event)">
-                   <!--   <div *ngIf="value == 0">
+          <input type="file" id="uploadPicture" class="hidden-input" accept="image/*" (change)="selectFile($event)">
+          <!--   <div *ngIf="value == 0">
                     <mat-error >This field is required! </mat-error>
 
                     </div> -->
-                      <mat-hint>Image size must be less than 3MB and image type must be JPG,PNG,GIF</mat-hint>
-                </div>
-
-
-                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-top: 21px;">
-
-                       <button mat-raised-button color="primary" type="submit" class="button">Update</button>
-
-                        <button mat-raised-button mat-button mat-dialog-close color="primary"  class="button cancel">Close</button>
-                 </div>
-
-
-            </form>
-
-
+          <mat-hint style="margin-top: 10px">Image size must be less than 3MB and image type must be JPG,PNG,GIF</mat-hint>
         </div>
 
-     </div> 
-</div>       
 
-        
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-top: 21px;">
+
+          <button mat-raised-button color="primary" type="submit" class="button">Update</button>
+
+          <button mat-raised-button mat-button mat-dialog-close color="primary" class="button cancel">Close</button>
+        </div>
+
+
+      </form>
+
+
+    </div>
+
+  </div>
+</div>

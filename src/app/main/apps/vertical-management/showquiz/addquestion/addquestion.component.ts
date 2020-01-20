@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, FormControl, Validators,FormArray } from '@angu
 import { ShowquizService }    from '../showquiz.service';
 import * as myGlobals from '../../../../../global';
 import { Product, Question } from './data';
+import { ConfirmboxComponent, ConfirmDialogModel } from '../../quizzeslist/confirmbox/confirmbox.component';
+// import { ConfirmboxComponent, ConfirmDialogModel } from './confirmbox/confirmbox.component';
 
 @Component({
   selector: 'app-addquestion',
@@ -19,7 +21,8 @@ formData:any;
 ids:any;
 common:any;
 added_status:any;
- constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<AddquestionComponent>,private rt:Router,public _formBuilder: FormBuilder,private show_service:ShowquizService) 
+  result: any;
+ constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,public dialogRef: MatDialogRef<AddquestionComponent>,private rt:Router,public _formBuilder: FormBuilder,private show_service:ShowquizService) 
  {
    this.ids=  this.data;
        console.log(this.ids)
@@ -238,6 +241,8 @@ onClose()
 {
   this.dialogRef.close();
 }
+
+
 
 
 }

@@ -98,3 +98,27 @@ ul {
   margin-top:20px;height: 80px;
   margin-left: 10px;}
 .margin0{margin-bottom:15px;margin-top: 0;}
+
+
+.pointer{
+  cursor: pointer;
+}
+.sort_column {
+  font-weight: 600;
+  font-size: 14px !important;
+  cursor: pointer;
+  // visibility: hidden;
+  color: #999;
+}
+// .table_custom th:hover .sort_column{
+//   visibility: visible
+// }
+
+.sort_column_active {
+  font-weight: 600;
+  font-size: 14px !important;
+  cursor: pointer; 
+  color: #999;
+
+  // color: #1a73e8;
+}

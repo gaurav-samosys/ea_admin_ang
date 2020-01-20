@@ -163,6 +163,6 @@ const routes: Routes = [
     providers   : [
         ShowquizService
     ],
-    entryComponents:[AddquestionComponent,QuestioneditComponent]
+    entryComponents:[AddquestionComponent,QuestioneditComponent,ConfirmboxComponent]
 })
 export class ShowquizModule { }

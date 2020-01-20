@@ -41,6 +41,11 @@ export const client_color2="http://192.168.0.18/enrichedacademy_live/api/admin/c
 export const save_client_color_v2="http://192.168.0.18/enrichedacademy_live/api/admin/save_client_color_v2";
 export const editUsers="http://192.168.0.18/enrichedacademy_live/api/admin/editUsers";
 
+export const getVideoChart="http://192.168.0.18/enrichedacademy_live/api/admin/getVideoChart"
+export const topicsMaster="http://192.168.0.18/enrichedacademy_live/api/admin/topicsMaster"
+export const ClientsList="http://192.168.0.18/enrichedacademy_live/api/admin/ClientsList"
+export const getSurveyChart="http://192.168.0.18/enrichedacademy_live/api/admin/getSurveyChart"
+
 export const downloadAccessCodes=" https://staging.enrichedacademy.com/api/admin/downloadAccessCodes";
 export const subAccessCodeListShow=" https://staging.enrichedacademy.com/api/admin/subAccessCodeListShow";
 export const editCompany=" https://staging.enrichedacademy.com/api/admin/editCompany";

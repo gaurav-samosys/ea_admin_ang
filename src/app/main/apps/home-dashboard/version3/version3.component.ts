@@ -16,7 +16,7 @@ import { delay, filter, take, takeUntil } from 'rxjs/operators';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { Sort } from '@angular/material/sort';
-
+import { MatSelect } from '@angular/material';
 declare var require: any;
 let Boost = require('highcharts/modules/boost');
 let noData = require('highcharts/modules/no-data-to-display');
@@ -45,7 +45,7 @@ export interface Dessert {
 
   // status: number;
 
-  register_date:string
+  register_date: string
   //client
   name: string;
   industry: string;
@@ -89,7 +89,7 @@ export class Version3Component implements OnInit {
 
   search_status_value: any = ''
 
- 
+
   desserts = []
 
 
@@ -203,6 +203,13 @@ export class Version3Component implements OnInit {
   selected: any;
   clients_id = [];
   vertical_id = [];
+  // selectedVideo = ''
+  selectedVideo = 'Money Myths | Refresh'
+
+  ClientsList = myGlobals.ClientsList
+  topicsMaster = myGlobals.topicsMaster
+  getVideoChart = myGlobals.getVideoChart
+  getSurveyChart = myGlobals.getSurveyChart
   getEaAllUsersList = myGlobals.getEaAllUsersList;
   getIndustriesWithData = myGlobals.getIndustriesWithData;
   getCompaniesWithData = myGlobals.getCompaniesWithData;
@@ -220,12 +227,13 @@ export class Version3Component implements OnInit {
   common: any;
   name = [];
   final_name = [];
-  displayedColumns: string[] = ['name', 'total_company','total_client', 'total_user'];
-  displayedColumns1: string[] = ['name', 'industry','total_client', 'total_user', 'status','register_date'];
+  displayedColumns: string[] = ['name', 'total_company', 'total_client', 'total_user'];
+  displayedColumns1: string[] = ['name', 'industry', 'total_client', 'total_user', 'status', 'register_date'];
   displayedColumns2: string[] = ['name', 'industry', 'company', 'vertical', 'user', 'status', 'register'];
   displayedColumns3: string[] = ['name', 'email', 'vedio', 'cloud', 'certificate', 'progress', 'percent', 'status', 'register'];
   displayedColumns4: string[] = ['name', 'total_vedio', 'total_quiz', 'total_question', 'create_date', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
+  @ViewChild('matSelect', { static: true }) matSelect: MatSelect;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   sort_column_active: boolean = false;
   sort_column
@@ -262,6 +270,12 @@ export class Version3Component implements OnInit {
 
 
   }
+  topicList: any;
+  topic_id: any;
+  total_users_video: any;
+  MaxVideo: any;
+  minVideo: any;
+  maxVideo: any;
 
 
   constructor(public dialog: MatDialog,
@@ -297,6 +311,9 @@ export class Version3Component implements OnInit {
 
 
   ngOnInit() {
+    //   this.matSelect.valueChange.subscribe(value => {
+    //     console.log(value);
+    // });
     // this.dataSource.sort = this.sort;
     // document.getElementById('vedio').style.display = "none";
 
@@ -365,9 +382,178 @@ export class Version3Component implements OnInit {
     this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, this.location_data);
     this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, this.location_data, this.company_id, this.dataselected);
 
-    // this.dataSource.sort = this.sort;
+    this.getVideoListDropdown();
+    this.getSurveyListDropdown();
+  }
+
+  catName=[]
+  getVideoListDropdown() {
+    this.v3Service.POST(this.topicsMaster, { token: 'LIVESITE' }).subscribe(res => {
+      this.topicList = res['data']
+      var value_id = res['data'][0]
+      this.changeTopicMaster(value_id)
+    })
+  }
+ 
+
+
+  changeTopicMaster(value_id) {
+    console.log(value_id);
+    this.topic_id = value_id
+    this.getVideoChartGraph(this.clients_id, this.vertical_id, this.location_data)
+  }
+
+
+
+  getVideoChartGraph(client_id, vertical_id, location_data, ) {
+    console.log("client id================", client_id, "ver id============", vertical_id, "location id===============", location_data)
+    this.v3Service.POST(this.getVideoChart, {
+      topic_id: this.topic_id, clients_ids: client_id,
+      verticals_ids: vertical_id, location: location_data, dateRange: '', token: 'LIVESITE'
+    }).subscribe(res => {
+      this.getVideoGraphSuccessHandler(res)
+    })
+  }
+
+
+  getVideoGraphSuccessHandler(res) {
+    this.vertical_id = [];
+    this.clients_id = [];
+    // console.log(res.data)
+    var data = res.data
+    // console.log("data array===", data)
+    for (let index = 0; index < data.length; index++) {
+      var element = data[index].data;
+      console.log("data inside data=====", element)
+
+    }
+
+    var categary = res.category
+    // console.log("categary=======", categary)
+
+    this.total_users_video = res.total_users
+    this.minVideo = res.minVideo
+    this.maxVideo = res.maxVideo
+
+    console.log('vedio ===========', res, res['data'], " this.total_users_video=======", this.total_users_video)
+    this.graph.video.xAxis.categories = categary
+    // this.graph.video.yAxis.categories =  element
+    // this.graph.video.series[0].data = categary
+    this.graph.video.series[0].data = element
+
+    console.log(this.graph.video.xAxis.categories, this.graph.video.yAxis.categories, this.graph.video.series[0].data, this.graph.video.series[1].data)
+
+    Highcharts.chart('videochartGraph', this.graph.video);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  getSurveyListDropdown() {
+    this.v3Service.POST(this.ClientsList, { token: 'LIVESITE' }).subscribe(res => {
+      this.common = res
+      console.log("surwey=====", this.common)
+    })
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   onIndustryclick(event) {
     this.industry_disable = 0;
@@ -1020,9 +1206,9 @@ export class Version3Component implements OnInit {
   updateSortingOrderIndustry(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.v3Service.POST(this.getIndustriesWithData, {column:this.sort_column,dir:this.ASC, id: this.industry_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', search: this.search_data }).subscribe(res => {
+    this.v3Service.POST(this.getIndustriesWithData, { column: this.sort_column, dir: this.ASC, id: this.industry_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', search: this.search_data }).subscribe(res => {
       this.common = res
-      this.dataSource=this.common.data
+      this.dataSource = this.common.data
     });
   }
 
@@ -1053,7 +1239,7 @@ export class Version3Component implements OnInit {
       this.common = res
       this.date_range = '';
       this.data = this.common.data
- console.log(this.data)
+      console.log(this.data)
       // this.desserts = this.data;
       // console.log(this.desserts)
       // this.sortedData = this.desserts.slice();
@@ -1112,9 +1298,9 @@ export class Version3Component implements OnInit {
   updateSortingOrderCompany(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.v3Service.POST(this.getCompaniesWithData, {column:this.sort_column,dir:this.ASC,  industries_ids: this.industry_id.toString(), id: this.company_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
+    this.v3Service.POST(this.getCompaniesWithData, { column: this.sort_column, dir: this.ASC, industries_ids: this.industry_id.toString(), id: this.company_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
       this.common = res
-      this.dataSource=this.common.data
+      this.dataSource = this.common.data
     });
   }
 
@@ -1165,7 +1351,7 @@ export class Version3Component implements OnInit {
       // this.desserts = this.data;
       // console.log(this.desserts)
       // this.sortedData = this.desserts.slice();
-     
+
       this.dataSource = new MatTableDataSource(this.data);
 
       this.allItems = this.common.recordsTotal;
@@ -1220,9 +1406,9 @@ export class Version3Component implements OnInit {
   updateSortingOrderClient(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.v3Service.POST(this.getClientsWithData, {column:this.sort_column,dir:this.ASC, id: this.client_id.toString(), verticals_ids: this.client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, location: this.location_id }).subscribe(res => {
+    this.v3Service.POST(this.getClientsWithData, { column: this.sort_column, dir: this.ASC, id: this.client_id.toString(), verticals_ids: this.client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, location: this.location_id }).subscribe(res => {
       this.common = res
-      this.dataSource=this.common.data
+      this.dataSource = this.common.data
     });
   }
 
@@ -1318,16 +1504,16 @@ export class Version3Component implements OnInit {
       this.vid = this.id_vertical
     }
     this.v3Service.POST(this.getUsersWithData,
-       { clients_ids: this.clients_data.toString(), verticals: this.vid.toString(), location: this.location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
-      this.common = res
-      this.allItems = this.common.recordsTotal;
-      this.user_total = this.allItems;
-      //this.client_total=this.allItems;
-      this.showloader = false;
-      this.data = this.common.data;
-      this.dataSource = this.data;
-      this.clients_data = []
-    })
+      { clients_ids: this.clients_data.toString(), verticals: this.vid.toString(), location: this.location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
+        this.common = res
+        this.allItems = this.common.recordsTotal;
+        this.user_total = this.allItems;
+        //this.client_total=this.allItems;
+        this.showloader = false;
+        this.data = this.common.data;
+        this.dataSource = this.data;
+        this.clients_data = []
+      })
   }
 
 
@@ -1335,9 +1521,9 @@ export class Version3Component implements OnInit {
   updateSortingOrderUser(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.v3Service.POST(this.getUsersWithData, {column:this.sort_column,dir:this.ASC, clients_ids: this.clients_data, verticals: this.vid, location: this.location_data, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
+    this.v3Service.POST(this.getUsersWithData, { column: this.sort_column, dir: this.ASC, clients_ids: this.clients_data, verticals: this.vid, location: this.location_data, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
       this.common = res
-      this.dataSource=this.common.data
+      this.dataSource = this.common.data
     });
   }
 
@@ -1399,16 +1585,16 @@ export class Version3Component implements OnInit {
       this.dataSource = this.data;
 
     })
-  } 
+  }
 
 
 
   updateSortingOrderVertical(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.v3Service.POST(this.getVerticalsWithData, {column:this.sort_column,dir:this.ASC,  start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
+    this.v3Service.POST(this.getVerticalsWithData, { column: this.sort_column, dir: this.ASC, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
       this.common = res
-      this.dataSource=this.common.data
+      this.dataSource = this.common.data
     });
   }
 
@@ -1438,6 +1624,7 @@ export class Version3Component implements OnInit {
       this.usergraph_total = this.common.total_users;
       //this.graph.users.title.text= this.graph.users.title.text + " " +  this.common.total_users
       this.graph.users.series[0].data = this.common.data
+      console.log("user graph==========", this.common.data)
       Highcharts.chart('users', this.graph.users);
 
     })

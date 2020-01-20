@@ -107,6 +107,10 @@ export class ManagementComponent implements OnInit {
     else
       this.buttonName = "keyboard_arrow_down";
   }
+
+    /**
+   * get vertical list
+   */
   getVerticalList(id) {
     this.manage_service.Post(this.getVerticalDataList, { vertical_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
@@ -151,7 +155,11 @@ export class ManagementComponent implements OnInit {
 
     })
   }
- 
+ /**
+  * table sort
+  * @param sort_column 
+  * @param sort_order 
+  */
   updateSortingOrderVerical(sort_column,sort_order){
     this.sort_column = sort_column
     this.ASC = sort_order
@@ -198,14 +206,22 @@ export class ManagementComponent implements OnInit {
 
   }
 
+  /**
+   * open dialog
+   */
   addTopic() {
     let dialog = this.dialog.open(AddtopicComponent, {
       data: this.vertical_id,
-      width: '650px', height: '500px'
+      width: '550px', height: '500px'
     });
 
   }
 
+  /**
+   * search bar 
+   * @param value 
+   * @param type 
+   */
   Search(value, type) {
     this.value = value;
     this.name1 = name;
@@ -242,6 +258,9 @@ export class ManagementComponent implements OnInit {
       });
   }
  
+  /***
+   * confirm dialog box for open delete record
+   */
   confirmDialog(value): void {
     value.vertical_id = this.vertical_id
     const message = `Are you sure you want to delete this topic detail?`;
@@ -258,13 +277,22 @@ export class ManagementComponent implements OnInit {
     });
   }
 
-
+/**
+ * view image dialog
+ * @param value 
+ */
   viewEye(value) {
     let dialog = this.dialog.open(ViewimageComponent, {
       data: value,
       width: '200px', height: '150px'
     });
   }
+
+  /**
+   * change selection on select field
+   * @param type 
+   * @param value 
+   */
   change(type, value) {
     console.log(type, value)
     localStorage.setItem('names', value.cat_name )
@@ -281,7 +309,9 @@ export class ManagementComponent implements OnInit {
     }
   }
 
-
+/**
+ * open snackbar 
+ */
   openaddSnackBar() {
     this._snackBar.open('Topic added successfully!!', 'End now', {
       duration: 4000,
@@ -326,7 +356,11 @@ export class ManagementComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
-
+/**
+ *  status change
+ * @param value
+ * @param id 
+ */
   onChange(value, id) {
     console.log(value, id)
     let status;

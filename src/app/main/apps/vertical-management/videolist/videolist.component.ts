@@ -22,7 +22,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./videolist.component.scss']
 })
 export class VideolistComponent implements OnInit {
-	displayedColumns: string[] = ['title','sort_desc','status','action','user_type','created'];
+	displayedColumns: string[] = ['s_no','title','sort_desc','status','action','user_type','created'];
     getVideoListbyTopic=myGlobals.getVideoListbyTopic;
     statusChangeVideo=myGlobals.statusChangeVideo;
       pageNumber:number=0;
@@ -207,7 +207,7 @@ let part;
   {
        let dialog= this.dialog.open(WatchvideoComponent,{
       data:value,
-       width: '750px',height:'500px'
+       width: '650px',height:'500px'
     });
   }
 

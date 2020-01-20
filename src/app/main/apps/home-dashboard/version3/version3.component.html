@@ -99,8 +99,8 @@
 						
 					</div> -->
 					<div class="p-4 selectable_boxes reload" fxLayoutAlign="space-between start">
-							<mat-icon style="cursor: pointer;" (click)="refreshFilter()">refresh</mat-icon>
-						</div>
+						<mat-icon style="cursor: pointer;" (click)="refreshFilter()">refresh</mat-icon>
+					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 				</div>
 				<!-- END OF ROW -->
@@ -119,366 +119,158 @@
 
 
 
-			<div class="widget-group mat__box mat__box2 mt-28 mr-28">
+		<div class="widget-group mat__box mat__box2 mt-28 mr-28">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="tabbing_container">
+						<ul class="tabs dash_main_tabs">
+							<li class="{{industry_disable == 1 ? 'disabled' : ''}}" (click)=getData(1)>
+								<p>Industries</p>
+								<span class="accent">{{industry_total}}</span>
+							</li>
+							<!-- END OF LI -->
+							<li class="{{company_disable == 1 ? 'disabled' : ''}}" (click)=getData(2)>
+								<p>Companies</p>
+								<span class="accent">{{company_total}}</span>
+							</li>
+							<!-- END OF LI -->
+							<li class="tab-link" (click)=getData(3)>
+								<p>Clients</p>
+								<span class="accent">{{client_total}}</span>
+							</li>
+							<!-- END OF LI -->
+							<li class="tab-link" (click)=getData(4)>
+								<p>Users</p>
+								<span class="accent">{{user_total}}</span>
+							</li>
+							<!-- END OF LI -->
+							<li class="tab-link" (click)=getData(5)>
+								<p>Verticals</p>
+								<span class="accent">{{vertical_total}}</span>
+							</li>
+							<!-- END OF LI -->
+						</ul>
+						<!-- END OF UL -->
+					</div>
+					<!-- END OF TABBING_CONTAINER -->
+				</div>
+				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+			</div>
+			<!-- END OF ROW -->
+		</div>
+		<!-- END OF WIDGET-GROUP MAT__BOX MAT__BOX2 MT-28 MR-28 -->
+
+
+
+
+
+
+
+
+
+
+
+		<div class="mat__box mt-20 mr-28 main_box">
+
+			<div *ngIf="table == 1" class="table__Companies">
+				<div class="row table_heading" fxLayoutAlign="space-between">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Industries
+								{{industry_total}}</span></p>
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+						<mat-form-field appearance="outline" style="margin-top:15px;">
+							<input matInput (keyup)="Search($event.target.value,'industry')" placeholder="Search here"
+								class="search industries_datatable_search">
+						</mat-form-field>
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="tabbing_container">
-							<ul class="tabs dash_main_tabs">
-								<li class="{{industry_disable == 1 ? 'disabled' : ''}}" (click)=getData(1)>
-									<p>Industries</p>
-									<span class="accent">{{industry_total}}</span>
-								</li>
-								<!-- END OF LI -->
-								<li class="{{company_disable == 1 ? 'disabled' : ''}}" (click)=getData(2)>
-									<p>Companies</p>
-									<span class="accent">{{company_total}}</span>
-								</li>
-								<!-- END OF LI -->
-								<li class="tab-link" (click)=getData(3)>
-									<p>Clients</p>
-									<span class="accent">{{client_total}}</span>
-								</li>
-								<!-- END OF LI -->
-								<li class="tab-link" (click)=getData(4)>
-									<p>Users</p>
-									<span class="accent">{{user_total}}</span>
-								</li>
-								<!-- END OF LI -->
-								<li class="tab-link" (click)=getData(5)>
-									<p>Verticals</p>
-									<span class="accent">{{vertical_total}}</span>
-								</li>
-								<!-- END OF LI -->
-							</ul>
-							<!-- END OF UL -->
-						</div>
-						<!-- END OF TABBING_CONTAINER -->
+						<table mat-table [dataSource]="dataSource">
+							<!-- Name Column -->
+							<ng-container matColumnDef="name">
+								<th mat-header-cell *matHeaderCellDef> Name
+									<span class="pointer">
+										<i (click)="updateSortingOrderIndustry('name','ASC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderIndustry('name','DESC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</th>
+								<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
+							</ng-container>
+							<!-- Weight Column -->
+							<ng-container matColumnDef="total_company">
+								<th mat-header-cell *matHeaderCellDef> Total Companies
+									<span class="pointer">
+										<i (click)="updateSortingOrderIndustry('total_company','ASC')"
+											[class]='(this.sort_column=="total_company" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderIndustry('total_company','DESC')"
+											[class]='(this.sort_column=="total_company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span> </th>
+								<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+							</ng-container>
+							<!-- Symbol Column -->
+							<ng-container matColumnDef="total_client">
+								<th mat-header-cell *matHeaderCellDef> Total Clients
+
+									<span class="pointer">
+										<i (click)="updateSortingOrderIndustry('total_client','ASC')"
+											[class]='(this.sort_column=="total_client" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderIndustry('total_client','DESC')"
+											[class]='(this.sort_column=="total_client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</th>
+								<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+							</ng-container>
+							<ng-container matColumnDef="total_user">
+								<th mat-header-cell *matHeaderCellDef> Total Users
+									<span class="pointer">
+										<i (click)="updateSortingOrderIndustry('total_user','ASC')"
+											[class]='(this.sort_column=="total_user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderIndustry('total_user','DESC')"
+											[class]='(this.sort_column=="total_user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+
+									</span></th>
+								<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
+							</ng-container>
+							<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+							<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+						</table>
+						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							(page)="handlePage($event)"></mat-paginator>
+						<div *ngIf="data == '' " style="text-align: center">No data available in table</div>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 				</div>
 				<!-- END OF ROW -->
-			</div>
-			<!-- END OF WIDGET-GROUP MAT__BOX MAT__BOX2 MT-28 MR-28 -->
-
-
-
-
-
-
-
-
-
-
-
-			<div class="mat__box mt-20 mr-28 main_box">
-
-				<div *ngIf="table == 1" class="table__Companies">
-					<div class="row table_heading" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span
-									class="color_value">Industries
-									{{industry_total}}</span></p>
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
-							<mat-form-field appearance="outline" style="margin-top:15px;">
-								<input matInput (keyup)="Search($event.target.value,'industry')"
-									placeholder="Search here" class="search industries_datatable_search">
-							</mat-form-field>
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<table mat-table [dataSource]="dataSource">
-								<!-- Name Column -->
-								<ng-container matColumnDef="name">
-									<th mat-header-cell *matHeaderCellDef> Name
-										<span class="pointer">
-											<i (click)="updateSortingOrderIndustry('name','ASC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderIndustry('name','DESC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</th>
-									<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
-								</ng-container>
-								<!-- Weight Column -->
-								<ng-container matColumnDef="total_company">
-									<th mat-header-cell *matHeaderCellDef> Total Companies
-										<span class="pointer">
-											<i (click)="updateSortingOrderIndustry('total_company','ASC')"
-												[class]='(this.sort_column=="total_company" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderIndustry('total_company','DESC')"
-												[class]='(this.sort_column=="total_company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span> </th>
-									<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
-								</ng-container>
-								<!-- Symbol Column -->
-								<ng-container matColumnDef="total_client">
-									<th mat-header-cell *matHeaderCellDef> Total Clients
-
-										<span class="pointer">
-											<i (click)="updateSortingOrderIndustry('total_client','ASC')"
-												[class]='(this.sort_column=="total_client" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderIndustry('total_client','DESC')"
-												[class]='(this.sort_column=="total_client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</th>
-									<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
-								</ng-container>
-								<ng-container matColumnDef="total_user">
-									<th mat-header-cell *matHeaderCellDef> Total Users
-										<span class="pointer">
-											<i (click)="updateSortingOrderIndustry('total_user','ASC')"
-												[class]='(this.sort_column=="total_user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderIndustry('total_user','DESC')"
-												[class]='(this.sort_column=="total_user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-
-										</span></th>
-									<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
-								</ng-container>
-								<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-								<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-							</table>
-							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-								(page)="handlePage($event)"></mat-paginator>
-							<div *ngIf="data == '' " style="text-align: center">No data available in table</div>
-						</div>
-						<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-					<div class="row" *ngIf="data!= '' ">
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="row" *ngIf="data!= '' ">
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<p fxFlex="50" class="pr-4">Showing {{startIndex}} to {{endIndex}} of {{allItems}} entries</p>
 						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
-								<li [ngClass]="{disabled:pager.currentPage === 1}">
-									<a (click)="setPage(1)">First</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === 1}">
-									<a (click)="setPage(pager.currentPage - 1)">Previous</a>
-								</li>
-								<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-									<a (click)="setPage(page)">{{page}}</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-									<a (click)="setPage(pager.currentPage + 1)">Next</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-									<a (click)="setPage(pager.totalPages)">Last</a>
-								</li>
-							</ul>
-						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-				</div>
-				<!-- END OF *NGIF="TABLE == 1" -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				<div *ngIf="table == 2" class="table__Companies">
-					<div class="row table_heading" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span
-									class="color_value">Companies
-									{{company_total}}</span></p>
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<div class="row" style="display: flex;">
-								<div class="mt-20 mr-20">
-									<mat-form-field appearance="outline">
-										<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-											[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-											startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="companymodel"
-											[showCustomRangeLabel]="true"
-											(datesUpdated)="datesUpdated($event,'company')" readonly="">
-									</mat-form-field>
-								</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-								<div class="mt-20">
-									<mat-form-field appearance="outline">
-										<input matInput (keyup)="Search($event.target.value,'company')"
-											placeholder="Search here">
-									</mat-form-field>
-								</div>
-
-								<div class="mt-20 right_sec">
-										<button id="data_export_btn">Export Data</button>
-									</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-							<table mat-table [dataSource]="dataSource">
-								<!-- Name Column -->
-								<ng-container matColumnDef="name">
-									<th mat-header-cell *matHeaderCellDef> Name
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('name','ASC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderCompany('name','DESC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</th>
-									<td class="style" mat-cell *matCellDef="let row"> {{row.name}} </td>
-								</ng-container>
-
-								<ng-container matColumnDef="industry">
-									<th mat-header-cell *matHeaderCellDef> Industry
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('industry','ASC')"
-												[class]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderCompany('industry','DESC')"
-												[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</th>
-									<td class="style" mat-cell *matCellDef="let row"> {{row.industry}} </td>
-								</ng-container>
-								<!-- Symbol Column -->
-								<ng-container matColumnDef="total_client">
-									<th mat-header-cell *matHeaderCellDef> Total Clients
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('total_client','ASC')"
-												[class]='(this.sort_column=="total_client" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderCompany('total_client','DESC')"
-												[class]='(this.sort_column=="total_client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</th>
-									<td mat-cell *matCellDef="let row"> {{row.total_client}} </td>
-								</ng-container>
-
-								<!-- Weight Column -->
-								<ng-container matColumnDef="total_user">
-									<th mat-header-cell *matHeaderCellDef> Total User
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('total_user','ASC')"
-												[class]='(this.sort_column=="total_user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderCompany('total_user','DESC')"
-												[class]='(this.sort_column=="total_user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</th>
-									<td mat-cell *matCellDef="let row"> {{row.total_user}} </td>
-								</ng-container>
-
-
-								<ng-container matColumnDef="status">
-									<th mat-header-cell *matHeaderCellDef> Status
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('status','ASC')"
-												[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderCompany('status','DESC')"
-												[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span></th>
-									<td mat-cell *matCellDef="let row"> {{row.status}} </td>
-								</ng-container>
-								<ng-container matColumnDef="register_date">
-									<th mat-header-cell *matHeaderCellDef> Registered
-										<span class="pointer">
-											<i (click)="updateSortingOrderCompany('register_date','ASC')"
-												[class]='(this.sort_column=="register_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderCompany('register_date','DESC')"
-												[class]='(this.sort_column=="register_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</th>
-									<td mat-cell *matCellDef="let row"> {{row.register_date}} </td>
-								</ng-container>
-
-								<tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-								<tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
-							</table>
-							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-								(page)="handlePage1($event)"></mat-paginator>
-						</div>
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
-							available in table</div>
-
-						<mat-card *ngIf="showloader==true"
-							style="display: flex; justify-content: center; align-items: center">
-							<mat-progress-spinner color="primary" mode="indeterminate">
-							</mat-progress-spinner>
-						</mat-card>
-
-						<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
-
-					</div>
-					<!-- END OF ROW -->
-					<!-- </div> -->
 					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-
-					<!-- END OF ROW -->
-
-					<!-- END OF ROW -->
-					<div class="row">
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p>Showing {{startIndex}} to {{endIndex}} of {{allItems}} entries</p>
-						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
 							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
 								<li [ngClass]="{disabled:pager.currentPage === 1}">
 									<a (click)="setPage(1)">First</a>
@@ -497,844 +289,1090 @@
 								</li>
 							</ul>
 						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 				</div>
-				<!-- END OF *NGIF="TABLE == 2" -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				<div *ngIf="table == 3" class="table__Companies">
-					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Clients
-									{{client_total}}</span></p>
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<div class="row" style="display: flex;">
-								<div class="mt-20 mr-20">
-									<mat-form-field appearance="outline">
-										<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-											[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-											startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="clientmodel"
-											[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'client')"
-											readonly="">
-									</mat-form-field>
-								</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-								<div class="mt-20">
-									<mat-form-field appearance="outline">
-										<input matInput (keyup)="Search($event.target.value,'client')"
-											placeholder="Search here">
-									</mat-form-field>
-								</div>
-								<div class="mt-20 right_sec" style="margin-right: 10px;">
-										<button id="data_export_btn">Export Data</button>
-									</div>
-							</div>
-							<!-- END OF ROW -->
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-
-
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<!-- (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear -->
-							<mat-table [dataSource]="dataSource">
-								<!-- Name Column -->
-								<ng-container matColumnDef="name">
-									<mat-header-cell *matHeaderCellDef> Name
-										<span class="pointer">
-											<i (click)="updateSortingOrderClient('name','ASC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderClient('name','DESC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell class="style" mat-cell *matCellDef="let element"> {{element[0]}}
-									</mat-cell>
-								</ng-container>
-								<!-- Weight Column -->
-								<ng-container matColumnDef="industry">
-									<mat-header-cell *matHeaderCellDef> Industries
-										<span class="pointer">
-											<i (click)="updateSortingOrderClient('industry','ASC')"
-												[class]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderClient('industry','DESC')"
-												[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[1]}} </mat-cell>
-								</ng-container>
-								<!-- Symbol Column -->
-								<ng-container matColumnDef="company">
-									<mat-header-cell *matHeaderCellDef> Companies
-										<span class="pointer">
-											<i (click)="updateSortingOrderClient('company','ASC')"
-												[class]='(this.sort_column=="company" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderClient('company','DESC')"
-												[class]='(this.sort_column=="company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span> </mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="vertical">
-									<mat-header-cell *matHeaderCellDef> Vertical
-										<span class="pointer">
-											<i (click)="updateSortingOrderClient('vertical','ASC')"
-												[class]='(this.sort_column=="vertical" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderClient('vertical','DESC')"
-												[class]='(this.sort_column=="vertical" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span> </mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="user">
-									<mat-header-cell *matHeaderCellDef> Users
-										<span class="pointer">
-											<i (click)="updateSortingOrderClient('user','ASC')"
-												[class]='(this.sort_column=="user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderClient('user','DESC')"
-												[class]='(this.sort_column=="user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span> </mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
-								</ng-container>
-
-								<ng-container matColumnDef="status">
-									<mat-header-cell *matHeaderCellDef> Status
-										<span class="pointer">
-											<i (click)="updateSortingOrderClient('status','ASC')"
-												[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderClient('status','DESC')"
-												[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[5]}} </mat-cell>
-								</ng-container>
-
-								<ng-container matColumnDef="register">
-									<mat-header-cell *matHeaderCellDef>Registered
-										<span class="pointer">
-											<i (click)="updateSortingOrderClient('register','ASC')"
-												[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderClient('register','DESC')"
-												[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element">{{element[6]}}</mat-cell>
-								</ng-container>
-								<mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
-								<mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
-							</mat-table>
-							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-								(page)="handlePage2($event)"></mat-paginator>
-						</div>
-						<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
-							available in table</div>
-					</div>
-					<!-- END OF ROW -->
-					<div class="row">
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p>Showing {{startIndex}} to {{endIndex}} of {{allItems}} entries</p>
-						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
-								<li [ngClass]="{disabled:pager.currentPage === 1}">
-									<a (click)="setPage(1)">First</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === 1}">
-									<a (click)="setPage(pager.currentPage - 1)">Previous</a>
-								</li>
-								<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-									<a (click)="setPage(page)">{{page}}</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-									<a (click)="setPage(pager.currentPage + 1)">Next</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-									<a (click)="setPage(pager.totalPages)">Last</a>
-								</li>
-							</ul>
-						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-				</div>
-				<!-- END OF *NGIF="TABLE == 3" -->
-
-
-
-
-
-
-
-
-
-
-
-				<div *ngIf="table == 4" class="table__Companies">
-					<div class="row table_heading" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Users
-									{{user_total}}</span></p>
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<div class="row" style="display: flex;">
-								<div class="mt-20 mr-20">
-									<select (change)="searchType($event.target.value)" class="user_name_select" style="margin-top: 5px;">
-										<option selected="" value="name">Name</option>
-										<option value="email">Email</option>
-										<option value="access_code">Access Code</option>
-										<option value="status">Status</option>
-										<option value="course">Course</option>
-										<option value="certificates">Certificates</option>
-									</select>
-								</div>
-								<div class="mt-20 mr-20">
-									<mat-form-field appearance="outline">
-										<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-											[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-											startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="usermodel"
-											[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'user')"
-											readonly="">
-									</mat-form-field>
-								</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-								<div class="mt-20" *ngIf="select_box == 1">
-									<mat-form-field appearance="outline">
-										<input matInput (keyup)="Search($event.target.value,'user')"
-											placeholder="Search here">
-									</mat-form-field>
-								</div>
-
-								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="select_box == 2">
-									<mat-form-field appearance="outline">
-										<select matNativeControl (change)="Status($event.target.value)">
-											<option value="Active" selected="">Active
-											<option>
-											<option value="Inactive">InActive
-											<option>
-										</select>
-									</mat-form-field>
-								</div>
-
-								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="select_box == 3">
-									<mat-form-field appearance="outline">
-										<select matNativeControl (change)="Course($event.target.value)">
-											<option value="notstarted" selected="">Not Started
-											<option>
-											<option value="pending"> Pending
-											<option>
-											<option value="completed">Completed
-											<option>
-										</select>
-									</mat-form-field>
-								</div>
-
-								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngIf="select_box == 4">
-									<mat-form-field appearance="outline">
-										<select matNativeControl (change)="Certificate($event.target.value)">
-											<option selected="" value="completed"> Downloaded </option>
-											<option value="pending"> Pending </option>
-										</select>
-									</mat-form-field>
-								</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							</div>
-							<!-- END OF ROW -->
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-
-
-
-
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<mat-table [dataSource]="dataSource">
-								<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
-								<ng-container matColumnDef="name">
-									<mat-header-cell *matHeaderCellDef> Name
-										<span class="pointer">
-											<i (click)="updateSortingOrderUser('name','ASC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderUser('name','DESC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell class="style" *matCellDef="let element" (click)="openDialog()">
-										<div [innerHtml]="element[0]"></div>
-									</mat-cell>
-								</ng-container>
-								<!-- Weight Column -->
-								<ng-container matColumnDef="email">
-									<mat-header-cell *matHeaderCellDef> Email
-										<span class="pointer">
-											<i (click)="updateSortingOrderUser('email','ASC')"
-												[class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderUser('email','DESC')"
-												[class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element">
-										<div [innerHtml]="element[1]"></div>
-									</mat-cell>
-								</ng-container>
-								<!-- Symbol Column -->
-								<ng-container matColumnDef="vedio">
-									<mat-header-cell *matHeaderCellDef> Video </mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="cloud">
-									<mat-header-cell *matHeaderCellDef>
-										<mat-icon>cloud_download</mat-icon>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="certificate">
-									<mat-header-cell *matHeaderCellDef>Certificate
-										<span class="pointer">
-											<i (click)="updateSortingOrderUser('certificate','ASC')"
-												[class]='(this.sort_column=="certificate" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderUser('certificate','DESC')"
-												[class]='(this.sort_column=="certificate" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="progress">
-									<mat-header-cell *matHeaderCellDef>Progress
-										<span class="pointer">
-											<i (click)="updateSortingOrderUser('progress','ASC')"
-												[class]='(this.sort_column=="progress" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderUser('progress','DESC')"
-												[class]='(this.sort_column=="progress" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[5]}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="percent">
-									<mat-header-cell *matHeaderCellDef> %
-										<span class="pointer">
-											<i (click)="updateSortingOrderUser('percent','ASC')"
-												[class]='(this.sort_column=="percent" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderUser('percent','DESC')"
-												[class]='(this.sort_column=="percent" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[6]}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="status">
-									<mat-header-cell *matHeaderCellDef> Status
-										<span class="pointer">
-											<i (click)="updateSortingOrderUser('status','ASC')"
-												[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderUser('status','DESC')"
-												[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
-								</ng-container>
-								<ng-container matColumnDef="register">
-									<mat-header-cell *matHeaderCellDef>Registered
-										<span class="pointer">
-											<i (click)="updateSortingOrderUser('register','ASC')"
-												[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderUser('register','DESC')"
-												[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</mat-header-cell>
-									<mat-cell *matCellDef="let element">{{element[8]}}</mat-cell>
-								</ng-container>
-								<mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
-								<mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
-							</mat-table>
-							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-								(page)="handlePage3($event)"></mat-paginator>
-						</div>
-						<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
-							available in table</div>
-					</div>
-					<!-- END OF ROW -->
-					<div class="row">
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p>Showing {{startIndex}} to {{endIndex}} of {{allItems}} entries</p>
-						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
-								<li [ngClass]="{disabled:pager.currentPage === 1}">
-									<a (click)="setPage(1)">First</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === 1}">
-									<a (click)="setPage(pager.currentPage - 1)">Previous</a>
-								</li>
-								<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-									<a (click)="setPage(page)">{{page}}</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-									<a (click)="setPage(pager.currentPage + 1)">Next</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-									<a (click)="setPage(pager.totalPages)">Last</a>
-								</li>
-							</ul>
-						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-				</div>
-				<!-- END OF *NGIF="TABLE == 4" -->
-
-
-
-
-
-
-
-
-
-
-
-				<div *ngIf="table == 5" class="table__Companies">
-					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span
-									class="color_value">Verticals
-									{{vertical_total}}</span></p>
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<div class="row"  style="display: flex;">
-								<div class="mt-20 mr-20">
-									<mat-form-field appearance="outline">
-
-										<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-											[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-											startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="verticalmodel"
-											[showCustomRangeLabel]="true" [opens]="'right'"
-											(datesUpdated)="datesUpdated($event,'vertical')" readonly="">
-									</mat-form-field>
-								</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-								<div class="mt-20">
-									<mat-form-field appearance="outline">
-										<input matInput (keyup)="Search($event.target.value,'vertical')"
-											placeholder="Search here">
-									</mat-form-field>
-								</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							</div>
-							<!-- END OF ROW -->
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<table mat-table [dataSource]="dataSource">
-								<!-- Name Column -->
-								<ng-container matColumnDef="name">
-									<th mat-header-cell *matHeaderCellDef> Name
-										<span class="pointer">
-											<i (click)="updateSortingOrderVertical('name','ASC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_upward
-											</i>
-											<i (click)="updateSortingOrderVertical('name','DESC')"
-												[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-												arrow_downward
-											</i>
-										</span>
-									</th>
-									<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
-								</ng-container>
-								<!-- Weight Column -->
-								<ng-container matColumnDef="total_vedio">
-									<th mat-header-cell *matHeaderCellDef> Total Vedios </th>
-									<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
-								</ng-container>
-								<!-- Symbol Column -->
-								<ng-container matColumnDef="total_quiz">
-									<th mat-header-cell *matHeaderCellDef> Total Quiz </th>
-									<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
-								</ng-container>
-								<ng-container matColumnDef="total_question">
-									<th mat-header-cell *matHeaderCellDef>Total Questions</th>
-									<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
-								</ng-container>
-								<ng-container matColumnDef="create_date">
-									<th mat-header-cell *matHeaderCellDef>Created Date</th>
-									<td mat-cell *matCellDef="let element"> {{element[4]}} </td>
-								</ng-container>
-								<ng-container matColumnDef="action">
-									<th mat-header-cell *matHeaderCellDef>Action</th>
-									<!-- /apps/vertical-management/vertical/{{element[0]}} -->
-
-									<td mat-cell *matCellDef="let element"> <button mat-raised-button type="submit"
-											class="button"
-											routerLink="/apps/vertical-management/management/{{element[0]}}">Manage
-										</button>
-									</td>
-								</ng-container>
-								<tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
-								<tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
-							</table>
-							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-								(page)="handlePage4($event)"></mat-paginator>
-						</div>
-						<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
-							available in table</div>
-					</div>
-					<!-- END OF ROW -->
-					<div class="row">
-						<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p>Showing {{start}} to {{end}} of {{allItems}} entries</p>
-						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
-								<li [ngClass]="{disabled:pager.currentPage === 1}">
-									<a (click)="setPage(1)">First</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === 1}">
-									<a (click)="setPage(pager.currentPage - 1)">Previous</a>
-								</li>
-								<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-									<a (click)="setPage(page)">{{page}}</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-									<a (click)="setPage(pager.currentPage + 1)">Next</a>
-								</li>
-								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-									<a (click)="setPage(pager.totalPages)">Last</a>
-								</li>
-							</ul>
-						</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
-				</div>
-				<!-- END OF *NGIF="TABLE == 4" -->
-
-
-
-
-
-
-
-
-
-
-
-
+				<!-- END OF ROW -->
 			</div>
-			<!-- END OF MAT__BOX MT-20 MR-28 -->
-
-			<div class="row mt-20 mr-28" style="display: flex;">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-					style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
+			<!-- END OF *NGIF="TABLE == 1" -->
 
 
-					<div class="mat__box graph_dive">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
-								<p>Total Users <span class="color_value">{{usergraph_total}}</span></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div *ngIf="table == 2" class="table__Companies">
+				<div class="row table_heading" fxLayoutAlign="space-between">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Companies
+								{{company_total}}</span></p>
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="row" style="display: flex;">
+							<div class="mt-20 mr-20">
+								<mat-form-field appearance="outline">
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="companymodel"
+										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'company')"
+										readonly="">
+								</mat-form-field>
 							</div>
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+							<div class="mt-20">
+								<mat-form-field appearance="outline">
+									<input matInput (keyup)="Search($event.target.value,'company')"
+										placeholder="Search here">
+								</mat-form-field>
+							</div>
+
+							<div class="mt-20 right_sec">
+								<button id="data_export_btn">Export Data</button>
+							</div>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+						<table mat-table [dataSource]="dataSource">
+							<!-- Name Column -->
+							<ng-container matColumnDef="name">
+								<th mat-header-cell *matHeaderCellDef> Name
+									<span class="pointer">
+										<i (click)="updateSortingOrderCompany('name','ASC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderCompany('name','DESC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</th>
+								<td class="style" mat-cell *matCellDef="let row"> {{row.name}} </td>
+							</ng-container>
+
+							<ng-container matColumnDef="industry">
+								<th mat-header-cell *matHeaderCellDef> Industry
+									<span class="pointer">
+										<i (click)="updateSortingOrderCompany('industry','ASC')"
+											[class]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderCompany('industry','DESC')"
+											[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</th>
+								<td class="style" mat-cell *matCellDef="let row"> {{row.industry}} </td>
+							</ng-container>
+							<!-- Symbol Column -->
+							<ng-container matColumnDef="total_client">
+								<th mat-header-cell *matHeaderCellDef> Total Clients
+									<span class="pointer">
+										<i (click)="updateSortingOrderCompany('total_client','ASC')"
+											[class]='(this.sort_column=="total_client" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderCompany('total_client','DESC')"
+											[class]='(this.sort_column=="total_client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</th>
+								<td mat-cell *matCellDef="let row"> {{row.total_client}} </td>
+							</ng-container>
+
+							<!-- Weight Column -->
+							<ng-container matColumnDef="total_user">
+								<th mat-header-cell *matHeaderCellDef> Total User
+									<span class="pointer">
+										<i (click)="updateSortingOrderCompany('total_user','ASC')"
+											[class]='(this.sort_column=="total_user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderCompany('total_user','DESC')"
+											[class]='(this.sort_column=="total_user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</th>
+								<td mat-cell *matCellDef="let row"> {{row.total_user}} </td>
+							</ng-container>
+
+
+							<ng-container matColumnDef="status">
+								<th mat-header-cell *matHeaderCellDef> Status
+									<span class="pointer">
+										<i (click)="updateSortingOrderCompany('status','ASC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderCompany('status','DESC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span></th>
+								<td mat-cell *matCellDef="let row"> {{row.status}} </td>
+							</ng-container>
+							<ng-container matColumnDef="register_date">
+								<th mat-header-cell *matHeaderCellDef> Registered
+									<span class="pointer">
+										<i (click)="updateSortingOrderCompany('register_date','ASC')"
+											[class]='(this.sort_column=="register_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderCompany('register_date','DESC')"
+											[class]='(this.sort_column=="register_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</th>
+								<td mat-cell *matCellDef="let row"> {{row.register_date}} </td>
+							</ng-container>
+
+							<tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+							<tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+						</table>
+						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							(page)="handlePage1($event)"></mat-paginator>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
+						available in table</div>
+
+					<mat-card *ngIf="showloader==true"
+						style="display: flex; justify-content: center; align-items: center">
+						<mat-progress-spinner color="primary" mode="indeterminate">
+						</mat-progress-spinner>
+					</mat-card>
+
+					<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+
+				</div>
+				<!-- END OF ROW -->
+				<!-- </div> -->
+				<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+
+				<!-- END OF ROW -->
+
+				<!-- END OF ROW -->
+				<div class="row">
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<p>Showing {{startIndex}} to {{endIndex}} of {{allItems}} entries</p>
+						</div> -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+								<li [ngClass]="{disabled:pager.currentPage === 1}">
+									<a (click)="setPage(1)">First</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === 1}">
+									<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+								</li>
+								<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+									<a (click)="setPage(page)">{{page}}</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+									<a (click)="setPage(pager.currentPage + 1)">Next</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+									<a (click)="setPage(pager.totalPages)">Last</a>
+								</li>
+							</ul>
+						</div> -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
+			</div>
+			<!-- END OF *NGIF="TABLE == 2" -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div *ngIf="table == 3" class="table__Companies">
+				<div class="row" fxLayoutAlign="space-between">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Clients
+								{{client_total}}</span></p>
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="row" style="display: flex;">
+							<div class="mt-20 mr-20">
+								<mat-form-field appearance="outline">
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="clientmodel"
+										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'client')"
+										readonly="">
+								</mat-form-field>
+							</div>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+							<div class="mt-20">
+								<mat-form-field appearance="outline">
+									<input matInput (keyup)="Search($event.target.value,'client')"
+										placeholder="Search here">
+								</mat-form-field>
+							</div>
+							<div class="mt-20 right_sec" style="margin-right: 10px;">
+								<button id="data_export_btn">Export Data</button>
+							</div>
+						</div>
+						<!-- END OF ROW -->
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
+
+
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<!-- (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear -->
+						<mat-table [dataSource]="dataSource">
+							<!-- Name Column -->
+							<ng-container matColumnDef="name">
+								<mat-header-cell *matHeaderCellDef> Name
+									<span class="pointer">
+										<i (click)="updateSortingOrderClient('name','ASC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderClient('name','DESC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell class="style" mat-cell *matCellDef="let element"> {{element[0]}}
+								</mat-cell>
+							</ng-container>
+							<!-- Weight Column -->
+							<ng-container matColumnDef="industry">
+								<mat-header-cell *matHeaderCellDef> Industries
+									<span class="pointer">
+										<i (click)="updateSortingOrderClient('industry','ASC')"
+											[class]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderClient('industry','DESC')"
+											[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[1]}} </mat-cell>
+							</ng-container>
+							<!-- Symbol Column -->
+							<ng-container matColumnDef="company">
+								<mat-header-cell *matHeaderCellDef> Companies
+									<span class="pointer">
+										<i (click)="updateSortingOrderClient('company','ASC')"
+											[class]='(this.sort_column=="company" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderClient('company','DESC')"
+											[class]='(this.sort_column=="company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span> </mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="vertical">
+								<mat-header-cell *matHeaderCellDef> Vertical
+									<span class="pointer">
+										<i (click)="updateSortingOrderClient('vertical','ASC')"
+											[class]='(this.sort_column=="vertical" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderClient('vertical','DESC')"
+											[class]='(this.sort_column=="vertical" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span> </mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="user">
+								<mat-header-cell *matHeaderCellDef> Users
+									<span class="pointer">
+										<i (click)="updateSortingOrderClient('user','ASC')"
+											[class]='(this.sort_column=="user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderClient('user','DESC')"
+											[class]='(this.sort_column=="user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span> </mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
+							</ng-container>
+
+							<ng-container matColumnDef="status">
+								<mat-header-cell *matHeaderCellDef> Status
+									<span class="pointer">
+										<i (click)="updateSortingOrderClient('status','ASC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderClient('status','DESC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[5]}} </mat-cell>
+							</ng-container>
+
+							<ng-container matColumnDef="register">
+								<mat-header-cell *matHeaderCellDef>Registered
+									<span class="pointer">
+										<i (click)="updateSortingOrderClient('register','ASC')"
+											[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderClient('register','DESC')"
+											[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element">{{element[6]}}</mat-cell>
+							</ng-container>
+							<mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+							<mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+						</mat-table>
+						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							(page)="handlePage2($event)"></mat-paginator>
+					</div>
+					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
+						available in table</div>
+				</div>
+				<!-- END OF ROW -->
+				<div class="row">
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<p>Showing {{startIndex}} to {{endIndex}} of {{allItems}} entries</p>
+						</div> -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+								<li [ngClass]="{disabled:pager.currentPage === 1}">
+									<a (click)="setPage(1)">First</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === 1}">
+									<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+								</li>
+								<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+									<a (click)="setPage(page)">{{page}}</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+									<a (click)="setPage(pager.currentPage + 1)">Next</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+									<a (click)="setPage(pager.totalPages)">Last</a>
+								</li>
+							</ul>
+						</div> -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
+			</div>
+			<!-- END OF *NGIF="TABLE == 3" -->
+
+
+
+
+
+
+
+
+
+
+
+			<div *ngIf="table == 4" class="table__Companies">
+				<div class="row table_heading" fxLayoutAlign="space-between">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Users
+								{{user_total}}</span></p>
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="row" style="display: flex;">
+							<div class="mt-20 mr-20">
+								<select (change)="searchType($event.target.value)" class="user_name_select"
+									style="margin-top: 5px;">
+									<option selected="" value="name">Name</option>
+									<option value="email">Email</option>
+									<option value="access_code">Access Code</option>
+									<option value="status">Status</option>
+									<option value="course">Course</option>
+									<option value="certificates">Certificates</option>
+								</select>
+							</div>
+							<div class="mt-20 mr-20">
+								<mat-form-field appearance="outline">
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="usermodel"
+										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'user')"
+										readonly="">
+								</mat-form-field>
+							</div>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+							<div class="mt-20" *ngIf="select_box == 1">
+								<mat-form-field appearance="outline">
+									<input matInput (keyup)="Search($event.target.value,'user')"
+										placeholder="Search here">
+								</mat-form-field>
+							</div>
+
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="select_box == 2">
+								<mat-form-field appearance="outline">
+									<select matNativeControl (change)="Status($event.target.value)">
+										<option value="Active" selected="">Active
+										<option>
+										<option value="Inactive">InActive
+										<option>
+									</select>
+								</mat-form-field>
+							</div>
+
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf="select_box == 3">
+								<mat-form-field appearance="outline">
+									<select matNativeControl (change)="Course($event.target.value)">
+										<option value="notstarted" selected="">Not Started
+										<option>
+										<option value="pending"> Pending
+										<option>
+										<option value="completed">Completed
+										<option>
+									</select>
+								</mat-form-field>
+							</div>
+
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngIf="select_box == 4">
+								<mat-form-field appearance="outline">
+									<select matNativeControl (change)="Certificate($event.target.value)">
+										<option selected="" value="completed"> Downloaded </option>
+										<option value="pending"> Pending </option>
+									</select>
+								</mat-form-field>
+							</div>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						</div>
+						<!-- END OF ROW -->
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
+
+
+
+
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<mat-table [dataSource]="dataSource">
+							<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
+							<ng-container matColumnDef="name">
+								<mat-header-cell *matHeaderCellDef> Name
+									<span class="pointer">
+										<i (click)="updateSortingOrderUser('name','ASC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderUser('name','DESC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell class="style" *matCellDef="let element" (click)="openDialog()">
+									<div [innerHtml]="element[0]"></div>
+								</mat-cell>
+							</ng-container>
+							<!-- Weight Column -->
+							<ng-container matColumnDef="email">
+								<mat-header-cell *matHeaderCellDef> Email
+									<span class="pointer">
+										<i (click)="updateSortingOrderUser('email','ASC')"
+											[class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderUser('email','DESC')"
+											[class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element">
+									<div [innerHtml]="element[1]"></div>
+								</mat-cell>
+							</ng-container>
+							<!-- Symbol Column -->
+							<ng-container matColumnDef="vedio">
+								<mat-header-cell *matHeaderCellDef> Video </mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="cloud">
+								<mat-header-cell *matHeaderCellDef>
+									<mat-icon>cloud_download</mat-icon>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="certificate">
+								<mat-header-cell *matHeaderCellDef>Certificate
+									<span class="pointer">
+										<i (click)="updateSortingOrderUser('certificate','ASC')"
+											[class]='(this.sort_column=="certificate" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderUser('certificate','DESC')"
+											[class]='(this.sort_column=="certificate" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="progress">
+								<mat-header-cell *matHeaderCellDef>Progress
+									<span class="pointer">
+										<i (click)="updateSortingOrderUser('progress','ASC')"
+											[class]='(this.sort_column=="progress" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderUser('progress','DESC')"
+											[class]='(this.sort_column=="progress" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[5]}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="percent">
+								<mat-header-cell *matHeaderCellDef> %
+									<span class="pointer">
+										<i (click)="updateSortingOrderUser('percent','ASC')"
+											[class]='(this.sort_column=="percent" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderUser('percent','DESC')"
+											[class]='(this.sort_column=="percent" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[6]}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="status">
+								<mat-header-cell *matHeaderCellDef> Status
+									<span class="pointer">
+										<i (click)="updateSortingOrderUser('status','ASC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderUser('status','DESC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="register">
+								<mat-header-cell *matHeaderCellDef>Registered
+									<span class="pointer">
+										<i (click)="updateSortingOrderUser('register','ASC')"
+											[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderUser('register','DESC')"
+											[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element">{{element[8]}}</mat-cell>
+							</ng-container>
+							<mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+							<mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
+						</mat-table>
+						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							(page)="handlePage3($event)"></mat-paginator>
+					</div>
+					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
+						available in table</div>
+				</div>
+				<!-- END OF ROW -->
+				<div class="row">
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<p>Showing {{startIndex}} to {{endIndex}} of {{allItems}} entries</p>
+						</div> -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+								<li [ngClass]="{disabled:pager.currentPage === 1}">
+									<a (click)="setPage(1)">First</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === 1}">
+									<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+								</li>
+								<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+									<a (click)="setPage(page)">{{page}}</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+									<a (click)="setPage(pager.currentPage + 1)">Next</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+									<a (click)="setPage(pager.totalPages)">Last</a>
+								</li>
+							</ul>
+						</div> -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
+			</div>
+			<!-- END OF *NGIF="TABLE == 4" -->
+
+
+
+
+
+
+
+
+
+
+
+			<div *ngIf="table == 5" class="table__Companies">
+				<div class="row" fxLayoutAlign="space-between">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Verticals
+								{{vertical_total}}</span></p>
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="row" style="display: flex;">
+							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
 
-									<!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
-									<input matInput readonly type="text" ngxDaterangepickerMd
-										placeholder="Select Date range" [(ngModel)]="usergraph" 
-										class="cursor-pointer input_date" [opens]="'left'"
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [showCustomRangeLabel]="true"
-										(datesUpdated)="datesUpdated($event,'usergraph')">
+										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="verticalmodel"
+										[showCustomRangeLabel]="true" [opens]="'right'"
+										(datesUpdated)="datesUpdated($event,'vertical')" readonly="">
+								</mat-form-field>
+							</div>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+							<div class="mt-20">
+								<mat-form-field appearance="outline">
+									<input matInput (keyup)="Search($event.target.value,'vertical')"
+										placeholder="Search here">
+								</mat-form-field>
+							</div>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						</div>
+						<!-- END OF ROW -->
+					</div>
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<table mat-table [dataSource]="dataSource">
+							<!-- Name Column -->
+							<ng-container matColumnDef="name">
+								<th mat-header-cell *matHeaderCellDef> Name
+									<span class="pointer">
+										<i (click)="updateSortingOrderVertical('name','ASC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderVertical('name','DESC')"
+											[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</th>
+								<td class="style" mat-cell *matCellDef="let element"> {{element[0]}} </td>
+							</ng-container>
+							<!-- Weight Column -->
+							<ng-container matColumnDef="total_vedio">
+								<th mat-header-cell *matHeaderCellDef> Total Vedios </th>
+								<td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+							</ng-container>
+							<!-- Symbol Column -->
+							<ng-container matColumnDef="total_quiz">
+								<th mat-header-cell *matHeaderCellDef> Total Quiz </th>
+								<td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+							</ng-container>
+							<ng-container matColumnDef="total_question">
+								<th mat-header-cell *matHeaderCellDef>Total Questions</th>
+								<td mat-cell *matCellDef="let element"> {{element[3]}} </td>
+							</ng-container>
+							<ng-container matColumnDef="create_date">
+								<th mat-header-cell *matHeaderCellDef>Created Date</th>
+								<td mat-cell *matCellDef="let element"> {{element[4]}} </td>
+							</ng-container>
+							<ng-container matColumnDef="action">
+								<th mat-header-cell *matHeaderCellDef>Action</th>
+								<!-- /apps/vertical-management/vertical/{{element[0]}} -->
+
+								<td mat-cell *matCellDef="let element"> <button mat-raised-button type="submit"
+										class="button"
+										routerLink="/apps/vertical-management/management/{{element[0]}}">Manage
+									</button>
+								</td>
+							</ng-container>
+							<tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
+							<tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+						</table>
+						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							(page)="handlePage4($event)"></mat-paginator>
+					</div>
+					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
+						available in table</div>
+				</div>
+				<!-- END OF ROW -->
+				<div class="row">
+					<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<p>Showing {{start}} to {{end}} of {{allItems}} entries</p>
+						</div> -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+							<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+								<li [ngClass]="{disabled:pager.currentPage === 1}">
+									<a (click)="setPage(1)">First</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === 1}">
+									<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+								</li>
+								<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+									<a (click)="setPage(page)">{{page}}</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+									<a (click)="setPage(pager.currentPage + 1)">Next</a>
+								</li>
+								<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+									<a (click)="setPage(pager.totalPages)">Last</a>
+								</li>
+							</ul>
+						</div> -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
+			</div>
+			<!-- END OF *NGIF="TABLE == 5" -->
 
 
 
-									<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+
+
+
+
+
+
+
+
+			<!-- *ngIf="table == 6" -->
+			<!-- <div  class="table__Companies">
+				<div class="row" fxLayoutAlign="space-between">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<p fxFlex="50" class="pr-4 heading_value">Total Video Views <span class="color_value">Total
+								Video Views
+								{{vertical_total}}</span></p>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="row" style="display: flex;">
+							<div class="mt-20 mr-20">
+								<mat-form-field appearance="outline">
+									<mat-select>
+										<mat-option *ngFor="let item of foods" [value]="item.value">
+											{{item.viewValue}}
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			
+
+			</div> -->
+			<!-- END OF *NGIF="TABLE == 6 video" -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+		<!-- END OF MAT__BOX MT-20 MR-28 -->
+
+		<div class="row mt-20 mr-28" style="display: flex;">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
+
+
+				<div class="mat__box graph_dive">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+							<p>Total Users <span class="color_value">{{usergraph_total}}</span></p>
+						</div>
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+							<mat-form-field appearance="outline">
+
+								<!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
+								<input matInput readonly type="text" ngxDaterangepickerMd
+									placeholder="Select Date range" [(ngModel)]="usergraph"
+									class="cursor-pointer input_date" [opens]="'left'"
+									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+									startKey="start" endKey="end" [ranges]="ranges" [showCustomRangeLabel]="true"
+									(datesUpdated)="datesUpdated($event,'usergraph')">
+
+
+
+								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="usergraph"
 										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'usergraph')"
 										readonly=""> -->
-								</mat-form-field>
-							</div>
-							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+							</mat-form-field>
 						</div>
-						<div id="users"></div>
+						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<!-- END OF MAT__BOX -->
+					<div id="users"></div>
 				</div>
-				<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-					style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
-					<div class="mat__box graph_dive">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
-								<p>Total Downloads <span class="color_value">{{totaldownloadgraph}}</span></p>
-							</div>
-							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-								<mat-form-field appearance="outline">
-
-
-									<!-- [showCancel]="true" [alwaysShowCalendars]="true" -->
-									<input matInput class="daterange" type="text" placeholder="Select Date range"
-										ngxDaterangepickerMd
-										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										 [opens]="'left'" class="cursor-pointer input_date"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="downloadgraph"
-										[showCustomRangeLabel]="true"
-										(datesUpdated)="datesUpdated($event,'downloadgraph')" readonly="">
-								</mat-form-field>
-							</div>
-							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
-						</div>
-						<div id="download"></div>
-						<ul class="course_status_ul">
-							<li><span class="blue_status"></span> Certificates {{certificate}}</li>
-							<li><span class="black_status"></span> Workbooks {{workbook}}</li>
-							<li><span class="green_status"></span> Tools {{tool}}</li>
-						</ul>
-					</div>
-					<!-- END OF MAT__BOX -->
-				</div>
-				<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				<!-- END OF MAT__BOX -->
 			</div>
-			<!-- END OF ROW MT-20 MR-28 -->
-			<div class="row mt-20 mr-28" style="display: flex;">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-					style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
-					<div class="mat__box graph_dive">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
-								<p>Total Video Views <span class="color_value">{{totalvideograph}}</span></p>
-							</div>
-							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-								<mat-form-field appearance="outline">
-									<!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-										 [opens]="'left'" 
-										class="cursor-pointer input_date"
-										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="videograph"
-										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'videograph')"
-										readonly="">
-								</mat-form-field>
-							</div>
-							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
+				<div class="mat__box graph_dive">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+							<p>Total Downloads <span class="color_value">{{totaldownloadgraph}}</span></p>
 						</div>
-						<div id="video"></div>
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+							<mat-form-field appearance="outline">
+
+
+								<!-- [showCancel]="true" [alwaysShowCalendars]="true" -->
+								<input matInput class="daterange" type="text" placeholder="Select Date range"
+									ngxDaterangepickerMd
+									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+									[opens]="'left'" class="cursor-pointer input_date" startKey="start" endKey="end"
+									[ranges]="ranges" [(ngModel)]="downloadgraph" [showCustomRangeLabel]="true"
+									(datesUpdated)="datesUpdated($event,'downloadgraph')" readonly="">
+							</mat-form-field>
+						</div>
+						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<!-- END OF MAT__BOX -->
+					<div id="download"></div>
+					<ul class="course_status_ul">
+						<li><span class="blue_status"></span> Certificates {{certificate}}</li>
+						<li><span class="black_status"></span> Workbooks {{workbook}}</li>
+						<li><span class="green_status"></span> Tools {{tool}}</li>
+					</ul>
 				</div>
-				<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-
-
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-					style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
-					<div class="mat__box graph_dive">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
-								<p>Certificates Claimed <span
-										class="color_value">{{totalcertificategraph}}/{{totalpendinggraph}}</span></p>
-							</div>
-							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-								<mat-form-field appearance="outline">
-
-
-
-
-									<!--[showCancel]="true" 	[alwaysShowCalendars]="true"-->
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-										class="cursor-pointer input_date" [opens]="'left'"
-										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="claimedgraph"
-										[showCustomRangeLabel]="true"
-										(datesUpdated)="datesUpdated($event,'claimedgraph')" readonly="">
-								</mat-form-field>
-							</div>
-							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+				<!-- END OF MAT__BOX -->
+			</div>
+			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+		</div>
+		<!-- END OF ROW MT-20 MR-28 -->
+		<div class="row mt-20 mr-28" style="display: flex;">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
+				<div class="mat__box graph_dive">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+							<p>Total Video Views <span class="color_value">{{totalvideograph}}</span></p>
 						</div>
-						<div id="certificate"></div>
-						<!-- <highcharts-chart
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+							<mat-form-field appearance="outline">
+								<!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
+								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[opens]="'left'" class="cursor-pointer input_date"
+									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="videograph"
+									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'videograph')"
+									readonly="">
+							</mat-form-field>
+						</div>
+						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div id="video"></div>
+				</div>
+				<!-- END OF MAT__BOX -->
+			</div>
+			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+
+
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
+				<div class="mat__box graph_dive">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+							<p>Certificates Claimed <span
+									class="color_value">{{totalcertificategraph}}/{{totalpendinggraph}}</span></p>
+						</div>
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+							<mat-form-field appearance="outline">
+
+
+
+
+								<!--[showCancel]="true" 	[alwaysShowCalendars]="true"-->
+								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									class="cursor-pointer input_date" [opens]="'left'"
+									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="claimedgraph"
+									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'claimedgraph')"
+									readonly="">
+							</mat-form-field>
+						</div>
+						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div id="certificate"></div>
+					<!-- <highcharts-chart
 	  style="display: block"
 	  [Highcharts]="Highcharts"
 	  [constructorType]="'chart'"
 	  [options]="chartOptions"
 	></highcharts-chart> -->
-						<ul class="course_status_ul">
-							<li><span class="black_status"></span> Downloaded {{downloaded}}</li>
-							<li><span class="blue_status"></span> Download Pending {{download_pending}}</li>
-						</ul>
-					</div>
-					<!-- END OF MAT__BOX -->
+					<ul class="course_status_ul">
+						<li><span class="black_status"></span> Downloaded {{downloaded}}</li>
+						<li><span class="blue_status"></span> Download Pending {{download_pending}}</li>
+					</ul>
 				</div>
-				<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				<!-- END OF MAT__BOX -->
 			</div>
-			<!-- END OF ROW MT-20 MR-28 -->
-			<div class="row mt-20 mr-28" style="display: flex;">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-					style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
-					<div class="mat__box graph_dive">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
-								<p>Course Status <span
-										class="color_value">{{fullCourse}}/{{mandatory}}/{{pending}}/{{notstarted}}</span>
-								</p>
-							</div>
-							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-								<mat-form-field appearance="outline">
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="coursegraph"
-										[showCustomRangeLabel]="true"
-										(datesUpdated)="datesUpdated($event,'coursegraph')" readonly=""
-										class="cursor-pointer input_date">
-								</mat-form-field>
-							</div>
-							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+		</div>
+		<!-- END OF ROW MT-20 MR-28 -->
+		<div class="row mt-20 mr-28" style="display: flex;">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
+				<div class="mat__box graph_dive">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+							<p>Course Status <span
+									class="color_value">{{fullCourse}}/{{mandatory}}/{{pending}}/{{notstarted}}</span>
+							</p>
 						</div>
-						<div id="completion"></div>
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+							<mat-form-field appearance="outline">
+								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="coursegraph"
+									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'coursegraph')"
+									readonly="" class="cursor-pointer input_date">
+							</mat-form-field>
+						</div>
+						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div id="completion"></div>
 
-						<ul class="course_status_ul">
-							<li><span class="blue_status"></span> Not Started {{notstarted}}</li>
-							<li><span class="black_status"></span> Pending {{pending}}</li>
-							<li><span class="green_status"></span> Mandatory {{mandatory}}</li>
-							<li><span class="orange_status"></span> Full Course {{fullCourse}}</li>
-						</ul>
-					</div>
-					<!-- END OF MAT__BOX -->
+					<ul class="course_status_ul">
+						<li><span class="blue_status"></span> Not Started {{notstarted}}</li>
+						<li><span class="black_status"></span> Pending {{pending}}</li>
+						<li><span class="green_status"></span> Mandatory {{mandatory}}</li>
+						<li><span class="orange_status"></span> Full Course {{fullCourse}}</li>
+					</ul>
 				</div>
-				<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-					style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
-					<div class="mat__box graph_dive">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
-								<p>Access Codes <span class="color_value">{{unused}}/{{used}}</span></p>
-							</div>
-							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-								<mat-form-field appearance="outline">
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="accessgraph"
-										[showCustomRangeLabel]="true"
-										(datesUpdated)="datesUpdated($event,'accessgraph')" readonly=""
-										class="cursor-pointer input_date">
-								</mat-form-field>
-							</div>
-							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
-						</div>
-						<div id="access"></div>
-						<ul class="course_status_ul">
-							<li><span class="blue_status"></span> Unused Code {{unused}}</li>
-							<li><span class="black_status"></span> Used Code {{used}}</li>
-						</ul>
-					</div>
-					<!-- END OF MAT__BOX -->
-				</div>
-				<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				<!-- END OF MAT__BOX -->
 			</div>
-			<!-- END OF ROW MT-20 MR-28 -->
-			<div class="row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
-				<div class="mat__box graph_dive" style="width: 100%">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
-								<p>Year Over Year Comparison<br>
-									<span class="color_value">{{comparisiongraph_total}}</span></p>
-							</div>
+			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
+				<div class="mat__box graph_dive">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+							<p>Access Codes <span class="color_value">{{unused}}/{{used}}</span></p>
+						</div>
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+							<mat-form-field appearance="outline">
+								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="accessgraph"
+									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'accessgraph')"
+									readonly="" class="cursor-pointer input_date">
+							</mat-form-field>
+						</div>
+						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div id="access"></div>
+					<ul class="course_status_ul">
+						<li><span class="blue_status"></span> Unused Code {{unused}}</li>
+						<li><span class="black_status"></span> Used Code {{used}}</li>
+					</ul>
+				</div>
+				<!-- END OF MAT__BOX -->
+			</div>
+			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+		</div>
+		<!-- END OF ROW MT-20 MR-28 -->
+		<div class="row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
+			<div class="mat__box graph_dive" style="width: 100%">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+							<p>Year Over Year Comparison<br>
+								<span class="color_value">{{comparisiongraph_total}}</span></p>
+						</div>
 
-							<!-- <mat-form-field appearance="outline">
+						<!-- <mat-form-field appearance="outline">
 								<mat-label>Total Users</mat-label>
 								<mat-select (selectionChange)="comparision_type($event)" class="mt_cls">
 									<option value="total_companies">Total Companies</option>
@@ -1348,28 +1386,85 @@
 								</mat-select>
 							  </mat-form-field> -->
 
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex;">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex;">
 
-								<select (change)="comparision_type($event.target.value)" class="mt_cls total_user_dd">
-									<option selected="" value="total_users">Total Users</option>
-									<option value="total_companies">Total Companies</option>
-									<option value="total_clients">Total Clients</option>
-									<option value="total_video_views">Total Video Views</option>
-									<option value="total_downloads">Total Downloads</option>
-									<option value="total_course_completions">Total Course Completions</option>
-									<option value="total_certificates">Total Certificates</option>
-								</select>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+							<select (change)="comparision_type($event.target.value)" class="mt_cls total_user_dd">
+								<option selected="" value="total_users">Total Users</option>
+								<option value="total_companies">Total Companies</option>
+								<option value="total_clients">Total Clients</option>
+								<option value="total_video_views">Total Video Views</option>
+								<option value="total_downloads">Total Downloads</option>
+								<option value="total_course_completions">Total Course Completions</option>
+								<option value="total_certificates">Total Certificates</option>
+							</select>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 
 
-								<mat-form-field appearance="outline">
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-										[showCancel]="true" class="cursor-pointer" [alwaysShowCalendars]="true"
-										[opens]="'left'" [ranges]="ranges" [(ngModel)]="model" startKey="start"
-										endKey="end" [showCustomRangeLabel]="true"
-										(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly=""
-										class="input_date cursor-pointer">
-								</mat-form-field>
+							<mat-form-field appearance="outline">
+								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[showCancel]="true" class="cursor-pointer" [alwaysShowCalendars]="true"
+									[opens]="'left'" [ranges]="ranges" [(ngModel)]="model" startKey="start" endKey="end"
+									[showCustomRangeLabel]="true"
+									(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly=""
+									class="input_date cursor-pointer">
+							</mat-form-field>
+						</div>
+						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<!-- END OF ROW -->
+				</div>
+				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div id="comparison"></div>
+
+					<ul class="course_status_ul" *ngIf="user_status == 'false' ">
+						<li><span class="orange_status"></span> {{full_2019}}</li>
+						<li><span class="green_status"></span> {{mandatory_2019}}</li>
+						<li><span class="black_status"></span> {{full_2018}}</li>
+						<li><span class="blue_status"></span> {{mandatory_2018}}</li>
+					</ul>
+
+					<ul class="course_status_ul" *ngIf="user_status == 'true' ">
+						<li><span class="black_status"></span> {{pyear}}</li>
+						<li><span class="blue_status"></span> {{year}}</li>
+						<li><span class="green_status"></span> Average</li>
+					</ul>
+				</div>
+				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+			</div>
+		</div>
+		<!-- END OF ROW MT-20 MR-28 -->
+
+
+
+
+
+
+
+
+
+
+
+		<!-- video -->
+		<div class="row mt-20 mr-28 mb-28" >
+				<div class="mat__box graph_dive" style="width: 100%">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="row" fxLayoutAlign="space-between">
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+								<p>Total Video Views<br>
+									<span class="color_value">{{total_users_video}}</span></p>
+							</div>
+						
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px;">
+									<mat-form-field appearance="outline">
+											<mat-select placeholder="select topic master"  placeholder={{cat_name}} 
+											(selectionChange)="changeTopicMaster($event.value)">
+												<mat-option *ngFor="let item of topicList" [value]="item.id">
+													{{item.cat_name}}
+												</mat-option>
+											</mat-select>
+										</mat-form-field>
+							
 							</div>
 							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 						</div>
@@ -1377,20 +1472,11 @@
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div id="comparison"></div>
-
-						<ul class="course_status_ul" *ngIf="user_status == 'false' ">
-							<li><span class="orange_status"></span> {{full_2019}}</li>
-							<li><span class="green_status"></span> {{mandatory_2019}}</li>
-							<li><span class="black_status"></span> {{full_2018}}</li>
-							<li><span class="blue_status"></span> {{mandatory_2018}}</li>
-						</ul>
-
-						<ul class="course_status_ul" *ngIf="user_status == 'true' ">
-							<li><span class="black_status"></span> {{pyear}}</li>
-							<li><span class="blue_status"></span> {{year}}</li>
-							<li><span class="green_status"></span> Average</li>
-						</ul>
+						<div id="videochartGraph"></div>
+						<ul class="course_status_ul">
+							<li><span class="black_status"></span> Most Viewed Video: {{maxVideo}}</li>
+							<li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li>
+						</ul> 
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 				</div>
@@ -1398,30 +1484,70 @@
 			<!-- END OF ROW MT-20 MR-28 -->
 
 
-		</div>
+
+			<!-- surway -->
+		<!-- <div class="row mt-20 mr-28 mb-28" >
+				<div class="mat__box graph_dive" style="width: 100%">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="row" fxLayoutAlign="space-between">
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+								<p>Total Video Views<br>
+									<span class="color_value">{{total_users_video}}</span></p>
+							</div>
+						
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px;">
+									<mat-form-field appearance="outline">
+											<mat-select placeholder="select topic master"  [value]="{{value_id}}" 
+											(selectionChange)="changeTopicMaster($event.value)">
+												<mat-option *ngFor="let item of topicList" [value]="item.id">
+													{{item.cat_name}}
+												</mat-option>
+											</mat-select>
+										</mat-form-field>
+							
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div id="videochartGraph"></div>
+						<ul class="course_status_ul">
+							<li><span class="black_status"></span> Most Viewed Video: {{maxVideo}}</li>
+							<li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li>
+						</ul> 
+					</div>
+				</div>
+			</div>
+ -->
+
+
+
+
+
+
 	</div>
-	<style type="text/css">
-		.displayNone {
-			display: none;
-		}
+</div>
+<style type="text/css">
+	.displayNone {
+		display: none;
+	}
 
-		.inline_list {
-			list-style-type: none;
-		}
+	.inline_list {
+		list-style-type: none;
+	}
 
-		.inline_list li {
-			display: inline-block;
-		}
+	.inline_list li {
+		display: inline-block;
+	}
 
-		.inline_list li a {
-			position: relative;
-			float: left;
-			padding: 6px 12px;
-			margin-left: -1px;
-			line-height: 1.42857143;
-			color: #337ab7;
-			text-decoration: none;
-			background-color: #fff;
-			border: 1px solid #ddd;
-		}
-	</style>
+	.inline_list li a {
+		position: relative;
+		float: left;
+		padding: 6px 12px;
+		margin-left: -1px;
+		line-height: 1.42857143;
+		color: #337ab7;
+		text-decoration: none;
+		background-color: #fff;
+		border: 1px solid #ddd;
+	}
+</style>

@@ -14,6 +14,9 @@ import { QuestioneditComponent } from './questionedit/questionedit.component';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { ConfirmboxComponent } from './confirmbox/confirmbox.component';
+import { ConfirmDialogModel } from '../quizzeslist/confirmbox/confirmbox.component';
+// import { ConfirmDialogModel, ConfirmboxComponent } from '../quizzeslist/confirmbox/confirmbox.component';
 
 @Component({
   selector: 'app-showquiz',
@@ -52,6 +55,9 @@ export class ShowquizComponent implements OnInit {
   res_data: any;
   // paged items
   pagedItems: any[];
+  sort_column
+  ASC
+  sort_order='DESC'
   getQuestionsList = myGlobals.getQuestionsList;
   dataSource = new MatTableDataSource<any>(this.data);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -105,9 +111,17 @@ export class ShowquizComponent implements OnInit {
     this.dummy.controls['desc'].disable();
 
   }
+  /**
+   * back location
+   */
   back(){
     this.location.back();
   }
+
+  /**
+   * 
+   * @param id getQuetionList
+   */
   getquestionList(id) {
     this.show_service.Post(this.getQuestionsList, { quiz_id: id, token: 'LIVESITE', start: this.pageNumber, length: this.pageSize })
       .subscribe(res => {
@@ -152,7 +166,9 @@ export class ShowquizComponent implements OnInit {
     })
   }
 
-
+/**
+ * snackbar
+ */
   openquestionaddedSnackBar() {
     this._snackBar.open('Question added successfully!!', 'End now', {
       duration: 4000,
@@ -191,19 +207,30 @@ export class ShowquizComponent implements OnInit {
          
       }*/
 
+      /**
+       * 
+       * @param value change limit
+       */
   changelimit(value) {
     this.size = parseInt(value);
     this.getquestionList(this.id);
   }
 
+  /**
+   * Add question Dialog
+   */
   addQuestion() {
     let value = { quiz_id: this.id, topic_id: this.topic_id }
     let dialog = this.dialog.open(AddquestionComponent, {
       data: value,
-      width: '700px', height: '550px'
+      width: '600px', height: '550px'
     });
   }
 
+  /**
+   * 
+   * @param value search bar
+   */
   Search(value) {
     this.value = value;
     const end = (this.currentPage + 1) * this.pageSize;
@@ -224,12 +251,46 @@ export class ShowquizComponent implements OnInit {
     })
   }
 
+  /**
+   * 
+   * @param element edit dialog open
+   */
   openDialog(element) {
     //let value={quiz_id:this.id,topic_id:this.topic_id}
     let dialog = this.dialog.open(QuestioneditComponent, {
       data: element,
-      width: '700px', height: '550px'
+      width: '550px', height: '550px'
     });
   }
+/**
+  * table sort
+  * @param sort_column 
+  * @param sort_order 
+  */
+ updateSortingOrderVerical(sort_column,sort_order){
+  this.sort_column = sort_column
+  this.ASC = sort_order
+  // this.manage_service.Post(this.getVerticalDataList, {column:this.sort_column,dir:this.ASC, vertical_id:this.id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+  //   this.common = res
+  //   this.dataSource=this.common.data
+  // });
+}
 
+ /**
+    * Confirm Dialog For Delete
+    */
+   confirmDialog(value): void {
+    const message = `Are you sure you want to delete this showquiz?`;
+    let data = value
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, data);
+
+    const dialogRef = this.dialog.open(ConfirmboxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+    });
+  }
 }

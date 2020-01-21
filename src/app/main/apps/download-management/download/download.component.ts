@@ -39,6 +39,7 @@ export class DownloadComponent implements OnInit {
   downloadForm:FormGroup
   // paged items
   pagedItems: any[];
+  deleteFileApi= myGlobals.deleteFileApi
   uploadFileList = myGlobals.uploadFileList;
   uploadFile = myGlobals.uploadFile;
   dataSource = new MatTableDataSource<any>(this.data);
@@ -97,10 +98,17 @@ export class DownloadComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
+  /**
+   * reset button
+   */
   reset() {
     this.downloadForm.reset()
     this.ngOnInit();
   }
+
+  /**
+   * show hide button toggle
+   */
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
   buttontoggle() {
@@ -121,6 +129,10 @@ export class DownloadComponent implements OnInit {
     else
       this.buttonName1 = "keyboard_arrow_down";
   }
+
+  /**
+   * get list 
+   */
   fetchData() {
     this.download_service.Post(this.uploadFileList, { token: 'LIVESITE' })
       .subscribe(res => {
@@ -135,6 +147,10 @@ export class DownloadComponent implements OnInit {
       });
   }
 
+  /**
+   * 
+   * @param page pagination
+   */
   setPage(page: number) {
     // get pager object from service
     this.pager = this.pagerService.getPager(this.allItems, page, this.size);
@@ -162,6 +178,10 @@ export class DownloadComponent implements OnInit {
     this.fetchData();
   }
 
+  /**
+   * 
+   * @param value select file
+   */
 
   selectFile(value) {
     console.log(value)
@@ -170,17 +190,40 @@ export class DownloadComponent implements OnInit {
     })
   }
 
+/**
+ * 
+ * @param name delete record for file pdf related
+ */
+  delete(name) {
+    console.log(name)
+    var file_path=name.file_path
+    this.download_service.Post(this.deleteFileApi, { file_path: file_path, token: "LIVESITE" }).subscribe(res => {
+      console.log(res)
+      if(res['succes']==true){
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You will not be able to recover this pdf!',
+          icon: 'success',
+          showCancelButton: true,
+          cancelButtonText: 'Cencel',
+          confirmButtonText: 'Yes delete it!',
+    
+        })
+        this.fetchData();
 
-  delete(id) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this pdf!',
-      icon: 'warning',
-      showCancelButton: true,
-      cancelButtonText: 'Cencel',
-      confirmButtonText: 'Yes delete it!',
-
+      // }else{
+      //   Swal.fire({
+      //     title: 'Are you sure?',
+      //     text: 'You will not be able to recover this pdf!',
+      //     icon: 'warning',
+      //     showCancelButton: true,
+      //     cancelButtonText: 'Cencel',
+      //     confirmButtonText: 'Yes delete it!',
+    
+      //   })
+      }
     })
+    
   }
 
 }

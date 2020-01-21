@@ -24,34 +24,28 @@
         <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
         Manage post
       </div>
-      <div class="mat__box mt-20 mr-28">
+      <div class="mat__box mt-20 mr-10">
         <form [formGroup]="blogForm">
           <ng-container *ngIf="show">
 
 
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-
-                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
-            margin-right: 20px; ">
+            <div class="row mat__box1 ">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-5 mt-10" fxLayoutGap="25px">
+                <mat-form-field appearance="outline" style="margin-right: 25px; width: 450px; margin-top: 30px;">
                   <mat-label>Post Title</mat-label>
                   <input formControlName="post_title" matInput placeholder="Search post title"
                     (keyup)="Search($event.target.value,'title')">
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="100" style="width: 345px;
-             ">
+                <mat-form-field appearance="outline"  style="margin-right: 25px; width: 450px; margin-top: 30px;">
                   <mat-label>Categary</mat-label>
                   <input matInput formControlName="category" placeholder="Search categary"
                     (keyup)="Search($event.target.value,'categary')">
                 </mat-form-field>
               </div>
 
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8">
-
-                <mat-form-field class="example-full-width" appearance="outline" style="width: 345px;
-              margin-right: 20px; ">
-
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8" fxLayoutGap="25px">
+                <mat-form-field class="example-full-width" style="margin-right: 25px; width: 450px;margin-top:15px;" appearance="outline">
                   <mat-label>Start Date</mat-label>
                   <!-- [max]="maxDate" -->
                   <input matInput [min]="myDate" [max]="blogForm.controls['end_date'].value"
@@ -60,30 +54,25 @@
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="example-full-width" appearance="outline" style="width: 345px;">
+                <mat-form-field class="example-full-width"  style="margin-right: 25px; width: 450px;margin-top: 15px;" appearance="outline"  >
                   <mat-label>End Date</mat-label>
                   <input matInput formControlName="end_date" readonly [min]="blogForm.controls['start_date'].value"
                     [matDatepicker]="picker2">
                   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                   <mat-datepicker #picker2 color="primary"></mat-datepicker>
                 </mat-form-field>
-
-
-
-
               </div>
-
             </div>
 
 
 
 
-            <mat-divider></mat-divider>
-            <br>
-            <div class="mat__box mt-20 mr-28">
+            <!-- <mat-divider></mat-divider>
+            <br> -->
+            <div class="mt-20 mr-10">
 
               <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right ">
                   <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
                     class="ColVis_Button ColVis_MasterButton">
                     <span> Show/Hide Column</span>
@@ -91,25 +80,24 @@
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item>
                       <label>
-                      <input type="checkbox" (change)="columnClick('post_title',$event)" 
-                          checked><span class="ml ">Post_Title</span>
-                        </label>
+                        <input type="checkbox" (change)="columnClick('post_title',$event)" checked><span
+                          class="ml ">Post_Title</span>
+                      </label>
                     </button>
                     <button mat-menu-item>
-                      <label><input type="checkbox" (change)="columnClick('author',$event)" 
-                          checked>
-                          <span class="ml">Author</span>
-                        </label>
+                      <label><input type="checkbox" (change)="columnClick('author',$event)" checked>
+                        <span class="ml">Author</span>
+                      </label>
                     </button>
                     <button mat-menu-item><label>
-                      <input type="checkbox" (change)="columnClick('category',$event)"
-                          checked><span class="ml">Categary</span></label>
+                        <input type="checkbox" (change)="columnClick('category',$event)" checked><span
+                          class="ml">Categary</span></label>
                     </button>
                     <button mat-menu-item><label>
-                      <input type="checkbox" (change)="columnClick('created_date',$event)"
-                          checked><span class="ml">Created Date</span></label>
+                        <input type="checkbox" (change)="columnClick('created_date',$event)" checked><span
+                          class="ml">Created Date</span></label>
                     </button>
-                    <button mat-menu-item><label><input  type="checkbox" (change)="columnClick('action',$event)"
+                    <button mat-menu-item><label><input type="checkbox" (change)="columnClick('action',$event)"
                           checked><span class="ml">Action</span></label>
                     </button>
                   </mat-menu>
@@ -217,6 +205,8 @@
                 </div>
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
               </div>
+
+
               <!-- END OF ROW -->
               <!--   <div class="row">
                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

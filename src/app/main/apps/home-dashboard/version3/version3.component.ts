@@ -203,8 +203,8 @@ export class Version3Component implements OnInit {
   selected: any;
   clients_id = [];
   vertical_id = [];
-  // selectedVideo = ''
-  selectedVideo = 'Money Myths | Refresh'
+  cat_name;
+
 
   ClientsList = myGlobals.ClientsList
   topicsMaster = myGlobals.topicsMaster
@@ -223,10 +223,11 @@ export class Version3Component implements OnInit {
   getCompletionGraphData = myGlobals.getCompletionGraphData;
   getAccessCodeGraphData = myGlobals.getAccessCodeGraphData;
   getComparisonGraphData = myGlobals.getComparisonGraphData;
-  date_range: any;
+  // date_range: any;
   common: any;
   name = [];
   final_name = [];
+  Grades = [{ id: '80_to_100', value: '80% higher : Excellent' }, { id: '70_to_79', value: '70-79% : Good' }, { id: '60_to_69', value: '60-69% : Fair' }, { id: '10_to_50', value: 'Below 60% : Needs Work' }]
   displayedColumns: string[] = ['name', 'total_company', 'total_client', 'total_user'];
   displayedColumns1: string[] = ['name', 'industry', 'total_client', 'total_user', 'status', 'register_date'];
   displayedColumns2: string[] = ['name', 'industry', 'company', 'vertical', 'user', 'status', 'register'];
@@ -254,6 +255,7 @@ export class Version3Component implements OnInit {
     'Today': [moment(), moment()],
     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    // 'Current Month': [moment().add(1, 'month'), moment()],
     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
     'Last 3 Month': [moment().subtract(2, 'month'), moment()],
     'Last 6 Month': [moment().subtract(5, 'month'), moment()],
@@ -276,7 +278,11 @@ export class Version3Component implements OnInit {
   MaxVideo: any;
   minVideo: any;
   maxVideo: any;
-
+  surwayArray: any;
+  totalSurways: any;
+  select_grade=''
+  select_client=''
+  date_range=''
 
   constructor(public dialog: MatDialog,
     private _snackBar: MatSnackBar
@@ -384,29 +390,33 @@ export class Version3Component implements OnInit {
 
     this.getVideoListDropdown();
     this.getSurveyListDropdown();
+
+    this.getSurveyChartGraph(this.select_client,this.select_grade,this.date_range)
   }
 
-  catName=[]
+  catName = []
   getVideoListDropdown() {
     this.v3Service.POST(this.topicsMaster, { token: 'LIVESITE' }).subscribe(res => {
       this.topicList = res['data']
-      var value_id = res['data'][0]
+      var value_id = res['data'][0]// get data for 0 index object
       this.changeTopicMaster(value_id)
     })
   }
- 
 
 
   changeTopicMaster(value_id) {
-    console.log(value_id);
+    // console.log(value_id);
     this.topic_id = value_id
+    // console.log( this.topic_id )
+    this.cat_name = value_id.cat_name
+    // console.log( this.cat_name)
     this.getVideoChartGraph(this.clients_id, this.vertical_id, this.location_data)
   }
 
 
 
   getVideoChartGraph(client_id, vertical_id, location_data, ) {
-    console.log("client id================", client_id, "ver id============", vertical_id, "location id===============", location_data)
+    // console.log("client id================", client_id, "ver id============", vertical_id, "location id===============", location_data)
     this.v3Service.POST(this.getVideoChart, {
       topic_id: this.topic_id, clients_ids: client_id,
       verticals_ids: vertical_id, location: location_data, dateRange: '', token: 'LIVESITE'
@@ -416,127 +426,83 @@ export class Version3Component implements OnInit {
   }
 
 
+
+
   getVideoGraphSuccessHandler(res) {
     this.vertical_id = [];
     this.clients_id = [];
-    // console.log(res.data)
     var data = res.data
-    // console.log("data array===", data)
     for (let index = 0; index < data.length; index++) {
       var element = data[index].data;
-      console.log("data inside data=====", element)
-
+      // console.log("data inside data=====", element)
     }
-
     var categary = res.category
-    // console.log("categary=======", categary)
-
     this.total_users_video = res.total_users
     this.minVideo = res.minVideo
     this.maxVideo = res.maxVideo
 
-    console.log('vedio ===========', res, res['data'], " this.total_users_video=======", this.total_users_video)
+    // console.log('vedio ===========', res, res['data'], " this.total_users_video=======", this.total_users_video)
     this.graph.video.xAxis.categories = categary
     // this.graph.video.yAxis.categories =  element
     // this.graph.video.series[0].data = categary
     this.graph.video.series[0].data = element
-
-    console.log(this.graph.video.xAxis.categories, this.graph.video.yAxis.categories, this.graph.video.series[0].data, this.graph.video.series[1].data)
-
+    // console.log(this.graph.video.xAxis.categories, this.graph.video.yAxis.categories, this.graph.video.series[0].data, this.graph.video.series[1].data)
     Highcharts.chart('videochartGraph', this.graph.video);
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /**
+   * get surway list dropdown
+   */
 
   getSurveyListDropdown() {
     this.v3Service.POST(this.ClientsList, { token: 'LIVESITE' }).subscribe(res => {
-      this.common = res
-      console.log("surwey=====", this.common)
+      this.surwayArray = res['data']
+      console.log("surwey=====", this.surwayArray)
     })
-
   }
 
+  changeGrades(value) {
+    console.log(value)
+    this.select_grade = value
+    this.getSurveyChartGraph(this.select_grade,this.select_client,this.date_range)
+  }
 
+  changeClient(value) {
+    console.log(value)
+    this.select_client = value
+    this.getSurveyChartGraph(this.select_grade,this.select_client,this.date_range)
 
+  }
+  // getSurveyChart
 
+  getSurveyChartGraph(select_grade,select_client,date_range) {
+    this.v3Service.POST(this.getSurveyChart, {
+      token: 'LIVESITE',
+
+      select_grade:  select_grade, 
+      select_client: select_client,
+      dateRange:     date_range,
+    }).subscribe(res => {
+      this.totalSurways = res['totals']
+      var columns = res['columns']
+
+      console.log(columns)
+
+      var data = res['data']
+      for (let index = 0; index < data.length; index++) {
+        var element = data[index].data;
+        console.log("data inside data=====", element)
+      }
+      this.graph.survey.xAxis.categories = columns
+      // this.graph.survey.yAxis.categories = element
+      this.graph.survey.series[0].data = element
+      // this.graph.survey.series[1].data = element
+
+      Highcharts.chart('surveychartGraph', this.graph.survey);
+     
+    })
+  }
 
 
 
@@ -1971,6 +1937,11 @@ export class Version3Component implements OnInit {
 
       this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
       this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, this.location_data)
+    }
+    else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'surveychartGraph') {
+
+      this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
+      this.getSurveyChartGraph(this.select_grade, this.select_client, this.date_range)
     }
   }
 

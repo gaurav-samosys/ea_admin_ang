@@ -97,15 +97,21 @@ export class AddPostComponent implements OnInit {
       cover_img: this.AddPostForm.controls['cover_img'].value
       // cover_img:this.AddPostForm.value.cover_img = this.filesToUpload
     }
-    this.addpost_service.Post(this.updateBlogApi, {id:this.prodId,
-      post_title: item.post_title,
-       category: item.category, 
-       author: item.author, 
-       video_id: item.video_id, 
-       description: item.description, 
-       cover_img: item.cover_img,
+    // this.addpost_service.Post(this.updateBlogApi, {id:this.prodId,
+    //   post_title: item.post_title,
+    //    category: item.category, 
+    //    author: item.author, 
+    //    video_id: item.video_id, 
+    //    description: item.description, 
+    //    cover_img: item.cover_img,
+    //   token: 'LIVESITE'
+    // })
+    this.addpost_service.Post(this.updateBlogApi, {
       token: 'LIVESITE'
-    }).subscribe(res => {
+    })
+
+
+    .subscribe(res => {
       console.log(res)
       if (res['success'] == true && res['status_code'] == 200) {
         this.toastr.success('Blog Update Successfully')

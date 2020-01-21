@@ -25,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { CommentComponent } from './comment.component';
 import { UiSwitchModule } from 'ngx-toggle-switch';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 const routes: Routes = [
   {
       path: '**',
@@ -35,7 +36,7 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  declarations: [CommentComponent],
+  declarations: [CommentComponent, ConfirmDialogComponent],
   imports: [
     CommonModule,RouterModule.forChild(routes),MatFormFieldModule,MatSnackBarModule,MatIconModule,MatDatepickerModule,MatInputModule,
     MatButtonModule,
@@ -69,6 +70,6 @@ const routes: Routes = [
         MatTabsModule,
         MatTooltipModule,
         MatTreeModule,
-  ]
+  ],entryComponents:[ConfirmDialogComponent]
 })
 export class CommentModule { }

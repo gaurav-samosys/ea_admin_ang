@@ -59,7 +59,10 @@ export class ManagementComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     
-    private _snackBar: MatSnackBar, private rt: Router, private _Activatedroute: ActivatedRoute, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public manage_service: ManagementService) {
+    private _snackBar: MatSnackBar,
+     private rt: Router,
+      private _Activatedroute: ActivatedRoute,
+       private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public manage_service: ManagementService) {
     if (localStorage.getItem('addtopic_status') == 'true') {
       this.openaddSnackBar();
       localStorage.removeItem('addtopic_status');

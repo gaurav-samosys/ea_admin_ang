@@ -16,7 +16,7 @@
 
           <mat-divider></mat-divider>
           <br>
-          <div class="mat__box mt-20 mr-28">
+          <div class="mat__box mt-20 mr-10">
 
             <!-- END OF ROW -->
             <div class="row">
@@ -126,7 +126,8 @@
                         (change)="onChange($event,element.id)"></ui-switch> -->
                       <!-- <i>delete</i> -->
                       <!-- <button mat-menu-item matTooltip="Delete"></button> -->
-                        &nbsp;&nbsp;&nbsp;&nbsp;<mat-icon>delete</mat-icon>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" (click)="confirmDialog(element)">
+                          <mat-icon>delete</mat-icon></span>
                     </mat-cell>
                   </ng-container>
 
@@ -136,7 +137,7 @@
                 <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
                   [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
                   (page)="handlePage($event)"></mat-paginator>
-                <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+                <div *ngIf="data == '' " style="text-align: center;margin-top: 10px; margin-bottom: 10px;">No data available in table</div>
               </div>
               <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             </div>

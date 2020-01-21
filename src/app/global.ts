@@ -36,6 +36,12 @@ export const getCommentWithDataApi="http://192.168.0.18/enrichedacademy_live/api
 export const addEditBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/addEditBlogApi"
 export const deleteBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/deleteBlogApi"
 export const updateBlogApi="http://192.168.0.18/enrichedacademy_live/api/admin/updateBlogApi"
+export const changeCommentStatusApi="http://192.168.0.18/enrichedacademy_live/api/admin/changeCommentStatusApi"
+export const deleteCommentApi="http://192.168.0.18/enrichedacademy_live/api/admin/deleteCommentApi"
+export const deleteFileApi="http://192.168.0.18/enrichedacademy_live/api/admin/deleteFileApi"
+export const uploadFile="http://192.168.0.18/enrichedacademy_live/api/admin/uploadFile";
+
+
 
 export const client_color2="http://192.168.0.18/enrichedacademy_live/api/admin/client_color2";
 export const save_client_color_v2="http://192.168.0.18/enrichedacademy_live/api/admin/save_client_color_v2";
@@ -68,7 +74,6 @@ export const addCompany=" https://staging.enrichedacademy.com/api/admin/addCompa
 export const editAdminUser=" https://staging.enrichedacademy.com/api/admin/editAdminUser";
 export const addAdminUser=" https://staging.enrichedacademy.com/api/admin/addAdminUser";
 export const uploadFileList=" https://staging.enrichedacademy.com/api/admin/uploadFileList";
-export const uploadFile=" https://staging.enrichedacademy.com/api/admin/uploadFile";
 export const getPortalView=" https://staging.enrichedacademy.com/api/admin/getPortalView";
 export const statusChangeApiUser=" https://staging.enrichedacademy.com/api/admin/statusChangeApiUser";
 export const getVerticals=" https://staging.enrichedacademy.com/api/admin/getVerticals";

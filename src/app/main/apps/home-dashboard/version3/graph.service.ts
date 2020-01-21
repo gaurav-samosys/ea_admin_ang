@@ -361,6 +361,54 @@ comparision:any={
                 }]   
 }
 
+public survey: any =  {
+    chart: {
+        type: 'column',zoomType: 'x',
+                        resetZoomButton: {
+                            position: {
+                                // align: 'right', // by default
+                                // verticalAlign: 'top', // by default
+                                x: 0,
+                                y: -30
+                            }
+                        }
+    },
+    navigation: {buttonOptions: {enabled: false}},
+    title: {
+        text: ''
+    },
+    xAxis: {
+        categories: [],
+    labels: {enabled: true},
+    opposite: false,
+    },
+    yAxis: {
+       min: 0,title: {text: ''}
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: 'Users: <b>{point.y:.1f}</b>'
+    },
+    series: [{showInLegend: false,enableMouseTracking: true},{
+        name: 'Survey Views',
+        data: [
+        ],
+        dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            format: '{point.y:.1f}', // one decimal
+            y: 10, // 10 pixels down from the top
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    }]
+}
 
 /*
 comparision_course:any={

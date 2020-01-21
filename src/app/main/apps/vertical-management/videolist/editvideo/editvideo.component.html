@@ -3,10 +3,19 @@
   <!--      <div class="h1">
  Add Company
         </div> -->
-        <mat-toolbar>
+        <!-- <mat-toolbar>
   <span> Edit Video </span>
   <span class="fill-remaining-space"></span>
   <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar> -->
+
+<mat-toolbar class="mat-accent m-0">
+  <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+    <span class="title dialog-title"> Edit Video</span>
+    <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar-row>
 </mat-toolbar>
     <!-- CONTENT -->
     <div class="content p-24">
@@ -18,38 +27,38 @@
 
             <!-- REACTIVE FORM EXAMPLE -->
 
-            <form  fxLayout="column" fxLayoutAlign="start"
+            <form  fxLayout="column" fxLayoutAlign="start" class="example-form"
                   fxFlex="1 0 auto" name="adduserForm" [formGroup]="editvideoForm" (ngSubmit)="updateVideo()">
 
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
                     <mat-label style=" width: 36%;margin-bottom: 10px">Title*</mat-label>
-                    <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-form-field  fxFlex="100">
                        <input matInput formControlName="title"  required>
                         <mat-error *ngIf="hasError('title', 'required')">Please enter title! </mat-error>
                     </mat-form-field>
 
                       <mat-label style=" width: 36%;margin-bottom: 10px">Order*</mat-label>
-                    <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-form-field  fxFlex="100">
                        <input matInput formControlName="order"  required>
                         <mat-error *ngIf="hasError('order', 'required')">Please enter order! </mat-error>
                     </mat-form-field>
 
                             <mat-label style=" width: 36%;margin-bottom: 10px">Embed Code / Video ID *</mat-label>
-                         <mat-form-field appearance="outline" fxFlex="100">
-                           <textarea matInput  formControlName="video_composer" ></textarea>
+                         <mat-form-field fxFlex="100" class="example-full-width" >
+                           <textarea matInput  rows="5" cols="10" formControlName="video_composer" ></textarea>
                             <mat-error *ngIf="hasError('video_composer', 'required')">This field is required! </mat-error>
                           </mat-form-field>
 
                           <mat-label style=" width: 36%;margin-bottom: 10px">Description*</mat-label>
-                         <mat-form-field appearance="outline" fxFlex="100">
+                         <mat-form-field  rows="5" cols="10"  class="example-full-width" fxFlex="100">
                            <textarea matInput  formControlName="sort_desc" ></textarea>
                             <mat-error *ngIf="hasError('sort_desc', 'required')">This field is required!</mat-error>
                     </mat-form-field>
                      
 
                       <mat-label style=" width: 36%;margin-bottom: 10px">User Type</mat-label>
-                      <input type="radio" value="1" name="user_type" formControlName="user_type" [checked]="check == 1" >
-                      <mat-label class="mr_radio">Student</mat-label>
+                      <input type="radio" value="1" name="user_type" formControlName="user_type" [checked]="check == 1" >&nbsp;&nbsp;&nbsp;
+                      <mat-label class="mr_radio">Student</mat-label>&nbsp;&nbsp;&nbsp;
                       <input type="radio" value="2" name="user_type" formControlName="user_type" [checked]="check == 2"><mat-label>Teacher</mat-label>
                 </div>
 

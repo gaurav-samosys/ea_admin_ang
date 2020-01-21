@@ -1098,59 +1098,6 @@
 
 
 
-
-
-
-
-
-
-
-
-			<!-- *ngIf="table == 6" -->
-			<!-- <div  class="table__Companies">
-				<div class="row" fxLayoutAlign="space-between">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<p fxFlex="50" class="pr-4 heading_value">Total Video Views <span class="color_value">Total
-								Video Views
-								{{vertical_total}}</span></p>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="row" style="display: flex;">
-							<div class="mt-20 mr-20">
-								<mat-form-field appearance="outline">
-									<mat-select>
-										<mat-option *ngFor="let item of foods" [value]="item.value">
-											{{item.viewValue}}
-										</mat-option>
-									</mat-select>
-								</mat-form-field>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			
-
-			</div> -->
-			<!-- END OF *NGIF="TABLE == 6 video" -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		</div>
 		<!-- END OF MAT__BOX MT-20 MR-28 -->
 
@@ -1399,10 +1346,10 @@
 							</select>
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 
-
+							<!-- [alwaysShowCalendars]="true" -->
 							<mat-form-field appearance="outline">
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-									[showCancel]="true" class="cursor-pointer" [alwaysShowCalendars]="true"
+									[showCancel]="true" class="cursor-pointer" 
 									[opens]="'left'" [ranges]="ranges" [(ngModel)]="model" startKey="start" endKey="end"
 									[showCustomRangeLabel]="true"
 									(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly=""
@@ -1446,7 +1393,7 @@
 
 
 		<!-- video -->
-		<div class="row mt-20 mr-28 mb-28" >
+		<div class="row mt-10 mr-28 mb-28" >
 				<div class="mat__box graph_dive" style="width: 100%">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="row" fxLayoutAlign="space-between">
@@ -1464,7 +1411,6 @@
 												</mat-option>
 											</mat-select>
 										</mat-form-field>
-							
 							</div>
 							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 						</div>
@@ -1486,38 +1432,63 @@
 
 
 			<!-- surway -->
-		<!-- <div class="row mt-20 mr-28 mb-28" >
+		<div class="row mt-10 mr-28 mb-28" >
 				<div class="mat__box graph_dive" style="width: 100%">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="row" fxLayoutAlign="space-between">
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
-								<p>Total Video Views<br>
-									<span class="color_value">{{total_users_video}}</span></p>
+								<p>Survey Responses
+									<br>
+									<span class="color_value">{{totalSurways}}</span></p>
 							</div>
 						
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px;">
-									<mat-form-field appearance="outline">
-											<mat-select placeholder="select topic master"  [value]="{{value_id}}" 
-											(selectionChange)="changeTopicMaster($event.value)">
-												<mat-option *ngFor="let item of topicList" [value]="item.id">
-													{{item.cat_name}}
-												</mat-option>
-											</mat-select>
-										</mat-form-field>
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="width: 150px;">
+								
+								<mat-form-field appearance="outline">
+									<mat-select placeholder="Select Grades"  
+									(selectionChange)="changeGrades($event.value)">
+										<mat-option *ngFor="let item of Grades" [value]="item.id">
+											{{item.value}}
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
 							
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="display: flex; width: 150px">
+
+								<mat-form-field appearance="outline">
+									<mat-select placeholder="Select Client"  
+									(selectionChange)="changeClient($event.value)">
+										<mat-option *ngFor="let item of surwayArray" [value]="item.id">
+											{{item.client_name}}
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
+								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+							</div>
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px">
+									<!-- [alwaysShowCalendars]="true" -->
+								<mat-form-field appearance="outline">
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										[showCancel]="true" class="cursor-pointer" 
+										[opens]="'left'" [ranges]="ranges" [(ngModel)]="model" startKey="start" endKey="end"
+										[showCustomRangeLabel]="true" 
+										(datesUpdated)="datesUpdated($event,'surveychartGraph')" readonly=""
+										class="input_date cursor-pointer">
+								</mat-form-field>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div id="videochartGraph"></div>
+						<div id="surveychartGraph"></div>
 						<ul class="course_status_ul">
-							<li><span class="black_status"></span> Most Viewed Video: {{maxVideo}}</li>
-							<li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li>
+							<li><span class="black_status"></span> surveys</li>
+							<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li> -->
 						</ul> 
 					</div>
 				</div>
 			</div>
- -->
+
 
 
 

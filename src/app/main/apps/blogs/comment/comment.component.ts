@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
 import { CommentService } from './comment.service';
 import * as myGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmDialogModel, ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 export interface comment {
   user_name: string;
   user_email: string;
@@ -35,8 +36,11 @@ export class CommentComponent implements OnInit {
   sort_column
   ASC
   sort_order = "DESC";
+  changeCommentStatusApi=myGlobals.changeCommentStatusApi
   getCommentWithDataApi=myGlobals.getCommentWithDataApi
-  constructor(
+  deleteCommentApi=myGlobals.deleteCommentApi
+  result: any;
+  constructor(private dialog:MatDialog,
     private toastr: ToastrService
     ,private comment_service:CommentService) { }
   dataSource = new MatTableDataSource<any>(this.data);
@@ -109,6 +113,9 @@ export class CommentComponent implements OnInit {
     });
   }
   
+  /**
+   * button toggle
+   */
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
   buttontoggle() {
@@ -119,22 +126,55 @@ export class CommentComponent implements OnInit {
     else
       this.buttonName = "keyboard_arrow_down";
   }
+
+  /**
+   * status change
+   * @param value 
+   * @param id 
+   */
   onChange(value, id) {
     console.log(value, id)
     let status;
-    if (value == false) {
-      status = 0;
-      this.toastr.success('Status Inactive Successfully');
-
-    }
-    else {
+    if (value.checked == true) {
       status = 1;
       this.toastr.success('Status Active Successfully');
-
+      this.comment_service.Post(this.changeCommentStatusApi, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
+        console.log(res)
+      })
     }
-    // this.comment_service.Post(this.getCommentWithDataApi, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-    //   console.log(res)
-    // })
+    else {
+      status = 0;
+      this.toastr.success('Status Inactive Successfully');
+      this.comment_service.Post(this.changeCommentStatusApi, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
+        console.log(res)
+      })
+    }
+  
+  }
+  /**
+   * confirm Dialog for delete
+   */
+ 
+  confirmDialog(value): void {
+    const message = `Are you sure you want to delete this comment detail?`;
+    let id = value
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      console.log(this.result)
+      if(this.result == true){
+        // this.comment_service.Post(this.deleteCommentApi,{id:this.res_data.id,token:"LIVESITE"}).subscribe(res=>{
+        // })
+        this.getCommentsList();
+        this.toastr.success("Comment Record Delete SuccessFully")
+      }
+    });
   }
 }
 

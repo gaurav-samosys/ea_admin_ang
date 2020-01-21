@@ -113,7 +113,9 @@ export class BlogComponent implements OnInit {
   //   this.displayedColumns.push(colName);
   // }
 
-
+/**
+ * get blog list
+ */
 
   getBlogList() {
     this.blog_service.Post(this.getBlogWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
@@ -170,11 +172,19 @@ export class BlogComponent implements OnInit {
     // this.router.navigate(['/apps/blog-post'], { queryParams: { order: 'popular' } });
   }
 
+  /**
+   * 
+   * @param element edit blog and navigate 
+   */
   EditPost(element) {
     // console.log(element)
     this.router.navigate(['/apps/blog-post', element.id]);
 
   }
+
+  /**
+   * show hide button toggle
+   */
   buttontoggle() {
     this.show = !this.show;
     // CHANGE THE NAME OF THE BUTTON.
@@ -200,7 +210,11 @@ export class BlogComponent implements OnInit {
     });
   }
 
-
+/**
+ * search fields
+ * @param value 
+ * @param name 
+ */
   Search(value, name) {
     //  console.log(value,name)
     if (this.value != value) {
@@ -282,6 +296,11 @@ export class BlogComponent implements OnInit {
     //   this.Search(date = '', name)
     // }
   }
+
+  /**
+   * 
+   * @param id confirm dialog box and open delete dialog 
+   */
   confirmDialogDelete(id) {
     this.blog_service.Post(this.deleteBlogApi, { id: id, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
@@ -297,8 +316,7 @@ export class BlogComponent implements OnInit {
           title: 'Warning',
           text: 'There Are some issue',
           icon: 'warning',
-
-        })
+          })
       }
       this.getBlogList();
 

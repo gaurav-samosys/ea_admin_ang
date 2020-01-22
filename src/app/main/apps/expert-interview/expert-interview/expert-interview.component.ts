@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatPaginator } from '@angular/material';
 import { ExpertInterviewService } from '../expert-interview.service';
-
+import * as myGlobals from '../../../../global';
+import { EmbedVideoService } from 'ngx-embed-video';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-expert-interview',
   templateUrl: './expert-interview.component.html',
@@ -15,22 +18,34 @@ export class ExpertInterviewComponent implements OnInit {
   endIndex = 10
   data: any;
   value = '';
+  pageNumber: any;
+  vimeoUrl
 
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
-  displayedColumns: string[] = ['title', 'video', 'created_on', 'action'];
+  displayedColumns: string[] = ['title', 'video', 'create_date', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   response: any;
   allItems: any;
+  expert_interview = myGlobals.expert_interview
+  delete_expert_interview_video = myGlobals.delete_expert_interview_video
 
-  constructor(public expert_service:ExpertInterviewService) { }
+  constructor( public toastr: ToastrService,
+    private embedService: EmbedVideoService,
+     public expert_service: ExpertInterviewService,
+     public router: Router) {
+  }
 
   ngOnInit() {
     this.getExpertInterView()
   }
+
+  /**
+   * button toggle show hide
+   */
   buttontoggle() {
     this.show = !this.show;
     // CHANGE THE NAME OF THE BUTTON.
@@ -41,21 +56,36 @@ export class ExpertInterviewComponent implements OnInit {
   }
 
 
+  /**
+   * get Expert list
+   * 
+   */
   getExpertInterView() {
-    // this.expert_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-    //   this.response = res
-    //   console.log(this.response)
-    //   this.data = this.response.data;
-    //   console.log(this.data)
-    //   this.dataSource = this.data;
-    //   this.allItems = this.response.total_data;
-    //   this.dataSource = new MatTableDataSource(this.data);
-    //   this.dataSource.paginator = this.paginator;
-    //   //this.setPage(1);
+    this.expert_service.Post(this.expert_interview, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      console.log(this.response)
+      var video = res['data']
+      for (let index = 0; index < video.length; index++) {
+        const video_id = video[index].video_id;
+        console.log(video_id)
 
-    // });
+        // this.vimeoUrl = "https://vimeo.com/197933516";
+      }
+      this.data = this.response.data;
+      console.log(this.data)
+      this.dataSource = this.data;
+      this.allItems = this.response.total_data;
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      //this.setPage(1);
+
+    });
   }
 
+  /**
+   * 
+   * @param e pagination
+   */
   public handlePage(e: any) {
     console.log(e)
     this.currentPage = e.pageIndex;
@@ -80,16 +110,20 @@ export class ExpertInterviewComponent implements OnInit {
 
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
-    // this.pageNumber = start
+    this.pageNumber = start
     //  this.showloader=true;
-    // this.expert_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      // this.response = res
-      //this.showloader=false;
+    this.expert_service.Post(this.expert_interview, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      // this.showloader=false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
-    // })
+    })
   }
+
+  /**
+   * sorting order
+   */
   sort_column
   ASC
   sort_order = "DESC";
@@ -97,16 +131,16 @@ export class ExpertInterviewComponent implements OnInit {
   updateSortingOrderInterview(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    // this.expert_service.Post(this.getClients, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-    //   this.response = res
-    //   this.dataSource=this.response.data
-    // });
+    this.expert_service.Post(this.expert_interview, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      this.dataSource=this.response.data
+    });
   }
- /**
-   * column toggle show hide
-   * @param colName 
-   * @param evt 
-   */
+  /**
+    * column toggle show hide
+    * @param colName 
+    * @param evt 
+    */
   columnClick(colName: string, evt) {
     console.log('-0-----', evt.target.checked)
     const colIndex = this.displayedColumns.findIndex(col => col === colName);
@@ -115,12 +149,44 @@ export class ExpertInterviewComponent implements OnInit {
     } else {
       this.displayedColumns.push(colName);
     }
-    // if (colIndex > 0) {
+  }
+
+  /**
+   * 
+   * @param id confirm dialog box
+   */
+  confirmDialog(id) {
+    this.expert_service.Post(this.delete_expert_interview_video, { id:id, token: 'LIVESITE' }).subscribe(res => {
+      console.log(res)
+      this.getExpertInterView()
+      if (res['status'] == '0') {
+        this.toastr.success('Expert Record Delete Successfully')
+        // this.router.navigate(['/apps/expert_interview'])
+      } else {
+        this.toastr.warning('There Are some Issue')
+      }
+    })
+  }
+
+
+  /**
+   * 
+   * @param element edit expert interview 
+   */
+  EditExpertInterview(element) {
+    console.log(element)
+    var id=element.id
+    console.log(id)
+    this.router.navigate(['/apps/add_expert_interview', id]);
+
+  }
+}
+
+
+  // if (colIndex > 0) {
     //   // column is currently shown in the table, so we remove it
     //   this.displayedColumns.splice(colIndex, 1);
     // } else {
     //   // column is not in the table, so we add it
     //   this.displayedColumns.push(colName);
     // }
-  }
-}

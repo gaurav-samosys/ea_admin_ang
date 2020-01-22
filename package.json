@@ -78,6 +78,7 @@
         "ngx-daterangepicker-material": "^2.1.9",
         "ngx-dropdown-multiselect": "1.7.1",
         "ngx-editor": "^4.1.0",
+        "ngx-embed-video": "^1.0.4",
         "ngx-mat-select-search": "2.0.0",
         "ngx-owl-carousel": "2.0.7",
         "ngx-swiper-wrapper": "8.0.2",

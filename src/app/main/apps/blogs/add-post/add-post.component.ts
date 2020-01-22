@@ -20,8 +20,11 @@ export class AddPostComponent implements OnInit {
   add_button: number = 0
   name: number = 0
   htmlContentWithoutStyles = '';
-  addEditBlogApi = myGlobals.addEditBlogApi
-  updateBlogApi=myGlobals.updateBlogApi
+  // editBlogAPi addBlogApi
+  editBlogAPi=myGlobals.editBlogAPi
+
+  addBlogApi = myGlobals.addBlogApi
+  updateBlogApi = myGlobals.updateBlogApi
   CategoryArray: AddPost[] = [
     { value: 'Financial Updates', id: 1 },
     { value: 'Live Events', id: 2 },
@@ -31,7 +34,6 @@ export class AddPostComponent implements OnInit {
     { value: 'Admin', id: 1 }
   ]
   AddPostForm: FormGroup
-  getBlogWithDataApi = myGlobals.getBlogWithDataApi
   response: Object;
   authorValue: any;
   categoryValue: any;
@@ -54,18 +56,25 @@ export class AddPostComponent implements OnInit {
   }
   prodId
   ngOnInit() {
-    this.prodId = this.rout.snapshot.paramMap.get('id');
+    // this.prodId = this.rout.snapshot.paramMap.get('id');
+    // console.log(this.prodId)
+
+    this.prodId = window.location.href.split('blog-post/')[1]
+    // alert(id)
     console.log(this.prodId)
-    // if (this.prodId) {
-    //   this.name = 1
-    // } else {
-    //   this.name = 0
-    // }
-    this.editPost()
+    if (this.prodId) {
+      this.editPost()
+      // this.name = 1
+    } else {
+      // this.name = 0
+    }
   }
 
   editPost() {
-    this.addpost_service.Post(this.addEditBlogApi, { id: this.prodId, token: 'LIVESITE' }).subscribe(res => {
+    console.log(this.prodId)
+
+    this.addpost_service.Post(this.editBlogAPi, { id: this.prodId, token: 'LIVESITE' }).subscribe(res => {
+      console.log(res)
       this.response = res
       console.log(this.response)
       this.name = 1
@@ -87,7 +96,7 @@ export class AddPostComponent implements OnInit {
     });
   }
   update(prodId) {
-    console.log(prodId)
+    console.log(prodId, this.response)
     let item = {
       post_title: this.AddPostForm.controls['post_title'].value,
       category: this.AddPostForm.controls['category'].value,
@@ -107,19 +116,26 @@ export class AddPostComponent implements OnInit {
     //   token: 'LIVESITE'
     // })
     this.addpost_service.Post(this.updateBlogApi, {
+      id: this.prodId,
+      post_title: this.response['post_title'],
+      category: this.response['category'],
+      author: this.response['author'],
+      video_id: this.response['video_id'],
+      description: this.response['description'],
+      cover_img: this.response['cover_img'],
       token: 'LIVESITE'
     })
 
 
-    .subscribe(res => {
-      console.log(res)
-      if (res['success'] == true && res['status_code'] == 200) {
-        this.toastr.success('Blog Update Successfully')
-        this.router.navigate(['/apps/blogs'])
-      } else {
-        this.toastr.warning('There Are some Issue')
-      }
-    });
+      .subscribe(res => {
+        console.log(res)
+        if (res['success'] == true && res['status_code'] == 200) {
+          this.toastr.success('Blog Update Successfully')
+          this.router.navigate(['/apps/blogs'])
+        } else {
+          this.toastr.warning('There Are some Issue')
+        }
+      });
   }
 
   authorChange(value) {
@@ -155,23 +171,33 @@ export class AddPostComponent implements OnInit {
     }
 
     // console.log(this.AddPostForm.value);
-    this.addpost_service.Post(this.addEditBlogApi, {
-      post_title: item.post_title, category: item.category, author: item.author, video_id: item.video_id, description: item.description, cover_img: item.cover_img,
+    this.addpost_service.Post(this.addBlogApi , {
+      post_title: item.post_title,
+      category: item.category,
+      author: item.author,
+      video_id: item.video_id,
+      description: item.description,
+      cover_img: item.cover_img,
       token: 'LIVESITE'
     }).subscribe(res => {
-      // console.log(res)
-     this.AddSubmitForm(res)
+      console.log(res)
+      this.toastr.success('Blog Add Successfully')
+      this.router.navigate(['/apps/blogs'])
+      this.ngOnInit()
+      // this.AddSubmitForm(res)
     });
   }
 
-AddSubmitForm(res){
-  if (res['success'] == true && res['status_code'] == 200) {
-    this.toastr.success('Blog Add Successfully')
-    this.router.navigate(['/apps/blogs/blog'])
-  } else {
-    this.toastr.warning('There Are some Issue')
+  AddSubmitForm(res) {
+    console.log(res)
+
+    if (res['success'] == true && res['status_code'] == 200) {
+      this.toastr.success('Blog Add Successfully')
+      this.router.navigate(['/apps/blogs/blog'])
+    } else {
+      this.toastr.warning('There Are some Issue')
+    }
   }
-}
   //image upload
   image_upload(event) {
     let reader = new FileReader();

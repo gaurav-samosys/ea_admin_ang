@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddInterviewService } from './add-interview.service';
 import { ToastrService } from 'ngx-toastr';
+import * as myGlobals from '../../../../global';
 
 @Component({
   selector: 'app-add-interview',
@@ -15,6 +16,11 @@ export class AddInterviewComponent implements OnInit {
   AddInterviewForm: FormGroup
   response: any;
   statusArray = [{ id: '1', value: 'Active' }, { id: '0', value: 'Inactive' }]
+  add_expert_interview = myGlobals.add_expert_interview
+  expert_interviews_detail = myGlobals.expert_interviews_detail
+  update_expert_interview = myGlobals.update_expert_interview
+  prodId;
+
   constructor(public router: Router, private fb: FormBuilder,
     public rout: ActivatedRoute,
     private interview_service: AddInterviewService, public toastr: ToastrService) {
@@ -27,7 +33,46 @@ export class AddInterviewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.prodId = window.location.href.split('add_expert_interview/')[1]
+    // alert(id)
+    console.log(this.prodId)
+    if(this.prodId){
+      this.editForm()
+    }
   }
+  /**
+  * 
+  * @param id 
+  */
+  editForm() {
+    var id = this.prodId;
+    // console.log(id)
+    this.interview_service.Post(this.expert_interviews_detail + '/' + id, { token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      // console.log(this.response)
+      this.name = 1
+      this.add_button = 1
+      if (this.response['status'] == 1) {
+        this.response = this.response['data']
+        console.log(this.response)
+        if (this.response['status'] == 0) {
+          var status = 'Inactive'
+        } else {
+          var status = 'Active'
+        }
+        this.AddInterviewForm.controls['title'].setValue(this.response['title']),
+          this.AddInterviewForm.controls['video_id'].setValue(this.response['video_id'].toString())
+        this.AddInterviewForm.controls['status'].setValue(status)
+      } else {
+        this.name = 0
+        this.add_button = 0
+      }
+    });
+  }
+
+
+
   /**
    * change status
    * @param id 
@@ -63,79 +108,62 @@ export class AddInterviewComponent implements OnInit {
       return false;
     }
 
-    // console.log(this.AddInterviewForm.value);
-    // this.interview_service.Post(this.addEditBlogApi, {
-    //   post_title: item.post_title, category: item.category, author: item.author, video_id: item.video_id, description: item.description, cover_img: item.cover_img,
-    //   token: 'LIVESITE'
-    // }).subscribe(res => {
-    //  this.AddSubmitForm(res)
-    // });
+    console.log(this.AddInterviewForm.value);
+    this.interview_service.Post(this.add_expert_interview, {
+      title: item.title, video_id: item.video_id, status: item.status,
+      token: 'LIVESITE'
+    }).subscribe(res => {
+      console.log(res)
+      if (res['status'] == '1') {
+        this.toastr.success('Expert Added Successfully')
+        this.router.navigate(['/apps/expert_interview'])
+      } else {
+        this.toastr.warning('There Are some Issue')
+      }
+      //  this.AddSubmitForm(res)
+    });
   }
 
-  AddSubmitForm(res) {
-    if (res['success'] == true && res['status_code'] == 200) {
-      this.toastr.success('Blog Add Successfully')
-      this.router.navigate(['/apps/blogs/blog'])
-    } else {
-      this.toastr.warning('There Are some Issue')
-    }
-  }
 
-  /**
-   * Edit Form
-   * @param prodId 
-   */
-  // editPost() {
-  //   this.interview_service.Post(this.addEditBlogApi, { id: this.prodId, token: 'LIVESITE' }).subscribe(res => {
-  //     this.response = res
-  //     console.log(this.response)
-  //     this.name = 1
-  //     this.add_button = 1
-  //     if (this.response['success'] == true && this.response['status_code'] == 200) {
-  //       this.response = this.response['data']
-  //       console.log(this.response)
-  //       this.AddInterviewForm.controls['post_title'].setValue(this.response['post_title']),
-  //         this.AddInterviewForm.controls['category'].setValue(this.response['category'])
-  //       this.AddInterviewForm.controls['author'].setValue(this.response['author'])
-  //       this.AddInterviewForm.controls['video_id'].setValue(this.response['video_id'].toString())
-  //       this.AddInterviewForm.controls['cover_img'].setValue(this.response['cover_img'].toString())
-  //       this.AddInterviewForm.controls['description'].setValue(this.response['description'])
-  //     } else {
-  //       this.name = 0
-  //       this.add_button = 0
-
-  //     }
-  //   });
-  // }
 
   /**
    * 
    * @param prodId update form
    */
   update(prodId) {
+    console.log(this.response)
     console.log(prodId)
-    let item = {
-      title: this.AddInterviewForm.controls['title'].value,
-      status: this.AddInterviewForm.controls['status'].value,
-      video_id: this.AddInterviewForm.controls['video_id'].value,
-    }
-    // this.interview_service.Post(this.updateBlogApi, {id:this.prodId,
-    //   post_title: item.post_title,
-    //    category: item.category, 
-    //    author: item.author, 
-    //    video_id: item.video_id, 
-    //    description: item.description, 
-    //    cover_img: item.cover_img,
-    //   token: 'LIVESITE'
-    // }).subscribe(res => {
-    //   console.log(res)
-    //   if (res['success'] == true && res['status_code'] == 200) {
-    //     this.toastr.success('Blog Update Successfully')
-    //     this.router.navigate(['/apps/blogs'])
-    //   } else {
-    //     this.toastr.warning('There Are some Issue')
-    //   }
-    // });
+    // let item = {
+    //   title: this.AddInterviewForm.controls['title'].value,
+    //   status: this.AddInterviewForm.controls['status'].value,
+    //   video_id: this.AddInterviewForm.controls['video_id'].value,
+    // }
+    this.interview_service.Post(this.update_expert_interview, {
+      id: this.prodId,
+      title:     this.response.title,
+      status:     this.response.status,
+      video_id:   this.response.video_id,
+      token: 'LIVESITE'
+    }).subscribe(res => {
+      console.log(res)
+      if (res['success'] == true && res['status_code'] == 200) {
+        this.toastr.success('Expert Interview Record Update Successfully')
+        this.router.navigate(['/apps/expert_interview'])
+      } else {
+        this.toastr.warning('There Are some Issue')
+      }
+    });
   }
 
 }
+
+
+ // AddSubmitForm(res) {
+  //   console.log(res)
+  //   if (res['success'] == 1) {
+  //     this.toastr.success('Expert Added Successfully')
+  //     this.router.navigate(['/apps/expert_interview'])
+  //   } else {
+  //     this.toastr.warning('There Are some Issue')
+  //   }
+  // }

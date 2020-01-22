@@ -128,6 +128,10 @@ const routes = [
         loadChildren: './blogs/comment/comment.module#CommentModule'
     },
     {
+        path: 'blog-post',
+        loadChildren: './blogs/add-post/add-post.module#AddPostModule'
+    },
+    {
         path: 'blog-post/:id',
         loadChildren: './blogs/add-post/add-post.module#AddPostModule'
     },
@@ -141,6 +145,10 @@ const routes = [
         loadChildren: './expert-interview/add-interview/add-interview.module#AddInterviewModule'
     },
 
+    {
+        path: 'add_expert_interview/:id',
+        loadChildren: './expert-interview/add-interview/add-interview.module#AddInterviewModule'
+    },
 
     {
         path: 'add_webinar',

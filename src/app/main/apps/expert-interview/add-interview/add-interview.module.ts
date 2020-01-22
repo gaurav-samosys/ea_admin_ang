@@ -5,14 +5,15 @@ import { AddInterviewComponent } from './add-interview.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatIconModule, MatMenuModule, MatSelectModule, MatTabsModule, MatTableModule, MatButtonModule, MatButtonToggleModule } from '@angular/material';
+import { AddInterviewService } from './add-interview.service';
 
 const routes: Routes = [
   {
       path     : '**',
       component: AddInterviewComponent,
-      // resolve  : {
-      //     data: ManagementService
-      // }
+      resolve  : {
+          data: AddInterviewService
+      }
 
 
   }
@@ -29,6 +30,6 @@ const routes: Routes = [
     MatTabsModule,
     MatButtonModule,
     MatButtonToggleModule,
-  ]
+  ],providers:[AddInterviewService]
 })
 export class AddInterviewModule { }

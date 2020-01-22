@@ -37,7 +37,7 @@ export class BlogComponent implements OnInit {
   minDate = new Date(2000, 0, 1);
   maxDate = new Date(2020, 0, 1);
   size: number = 10;
-
+  index: number = 0
   displayedColumns: string[] = ['post_title', 'author', 'category', 'created_date', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
@@ -90,19 +90,35 @@ export class BlogComponent implements OnInit {
 
     this.getBlogList()
   }
-/**
- * 
- * @param colName Show hide column
- * @param evt 
- */
-  columnClick(colName: string, evt) {
-    console.log('-0-----', evt.target.checked)
+  /**
+   * 
+   * @param colName Show hide column
+   * @param evt 
+   */
+  columnClick(colName: string, evt,index) {
+    console.log('------colName', colName, evt, evt.target.checked,"index===",index)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);
+    console.log(colIndex)
+    //false 1 true -1
+
+    // if(index == 'index0'){
+    //       this.index =1
+    // }else if(index == 'index1'){
+    //   this.index =1
+
+    // }else if(index == 'index2'){
+
+    // }else if(index == 'index3'){
+
+    // }else if(index == 'index4'){
+
+    // }
     if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
     } else {
       this.displayedColumns.push(colName);
     }
+  
   }
 
   // if (colIndex > 0) {
@@ -113,9 +129,9 @@ export class BlogComponent implements OnInit {
   //   this.displayedColumns.push(colName);
   // }
 
-/**
- * get blog list
- */
+  /**
+   * get blog list
+   */
 
   getBlogList() {
     this.blog_service.Post(this.getBlogWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
@@ -210,11 +226,11 @@ export class BlogComponent implements OnInit {
     });
   }
 
-/**
- * search fields
- * @param value 
- * @param name 
- */
+  /**
+   * search fields
+   * @param value 
+   * @param name 
+   */
   Search(value, name) {
     //  console.log(value,name)
     if (this.value != value) {
@@ -316,7 +332,7 @@ export class BlogComponent implements OnInit {
           title: 'Warning',
           text: 'There Are some issue',
           icon: 'warning',
-          })
+        })
       }
       this.getBlogList();
 

@@ -10,8 +10,8 @@
         </div>
         <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: -36px;">
-          <!-- <button mat-stroked-button color="primary" routerLink="/apps/client-mangement/addclient"><mat-icon>add_circle_outline</mat-icon>Add Client</button> -->
-          <button mat-raised-button (click)="navigateAddPost()">
+          <!-- (click)="navigateAddPost()"<button mat-stroked-button color="primary" routerLink="/apps/blog-post"><mat-icon>add_circle_outline</mat-icon>Add Client</button> -->
+          <button mat-raised-button  routerLink="/apps/blog-post">
             <mat-icon>add_circle_outline</mat-icon>Add Post
           </button>
 
@@ -80,34 +80,36 @@
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item>
                       <label>
-                        <input type="checkbox" (change)="columnClick('post_title',$event)" checked><span
+                          <!-- post_title -->
+                        <input type="checkbox" (change)="columnClick('post_title',$event,'index0')" checked><span
                           class="ml ">Post_Title</span>
                       </label>
                     </button>
                     <button mat-menu-item>
-                      <label><input type="checkbox" (change)="columnClick('author',$event)" checked>
+                      <!-- 'author' -->
+                      <label><input type="checkbox" (change)="columnClick('author',$event,'index1')" checked>
                         <span class="ml">Author</span>
                       </label>
                     </button>
                     <button mat-menu-item><label>
-                        <input type="checkbox" (change)="columnClick('category',$event)" checked><span
+                        <input type="checkbox" (change)="columnClick('category',$event,'index2')" checked><span
                           class="ml">Categary</span></label>
                     </button>
                     <button mat-menu-item><label>
-                        <input type="checkbox" (change)="columnClick('created_date',$event)" checked><span
+                        <input type="checkbox" (change)="columnClick('created_date',$event,'index3')" checked><span
                           class="ml">Created Date</span></label>
                     </button>
-                    <button mat-menu-item><label><input type="checkbox" (change)="columnClick('action',$event)"
+                    <button mat-menu-item><label><input type="checkbox" (change)="columnClick('action',$event,'index4')"
                           checked><span class="ml">Action</span></label>
                     </button>
                   </mat-menu>
                 </div>
 
-                <!-- *ngIf="Post_Title ? hide_column == 1:  hide_column == 0"  -->
+                <!-- *ngIf="Post_Title ? hide_column == 1:  *ngIf="index == 0"  hide_column == 0"  -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <mat-table [dataSource]="dataSource">
                     <ng-container matColumnDef="post_title">
-                      <mat-header-cell *matHeaderCellDef> Post_Title
+                      <mat-header-cell  *matHeaderCellDef> Post_Title
                         <span class="pointer">
                           <i (click)="updateSortingOrderBlog('post_title','ASC')"
                             [class]='(this.sort_column=="post_title" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>

@@ -6,7 +6,7 @@ import { ExpertInterviewComponent } from './expert-interview.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule, MatPaginatorModule, MatSlideToggleModule, MatMenuModule, MatButtonModule } from '@angular/material';
 import { UiSwitchModule } from 'ngx-toggle-switch';
-
+import { EmbedVideo } from 'ngx-embed-video';
 const routes: Routes = [
   {
       path     : '**',
@@ -22,7 +22,7 @@ const routes: Routes = [
   declarations: [ExpertInterviewComponent],
   imports: [
     CommonModule,  RouterModule.forChild(routes),
-
+    EmbedVideo.forRoot(),
         MatIconModule,MatButtonModule,
         MatTableModule,UiSwitchModule,
         MatPaginatorModule,MatSlideToggleModule,MatMenuModule

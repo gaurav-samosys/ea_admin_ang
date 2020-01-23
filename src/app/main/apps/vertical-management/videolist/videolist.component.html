@@ -7,7 +7,7 @@
             <div class="row" fxLayoutAlign="space-between center">
                 <div class="">
                     <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+                        <img width="20px" height="20px" src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
                     <a routerLink="/apps/vertical-management/vertical"
                         style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Vertical</a>
                     <!-- routerLink="/apps/vertical-management/management/{{topic_id}}" -->
@@ -127,7 +127,7 @@
                                                     [class]='(this.sort_column=="created" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                                                     arrow_downward
                                                 </i>
-                                            </span>  -->
+                                            </span> -->
                                     </th>
                                     <td mat-cell *matCellDef="let element" matTooltip="{{element.sort_desc}}">
                                         {{element.sort_desc | limit : 30}}</td>
@@ -171,7 +171,8 @@
                                             <mat-icon matTooltip="Delete" (click)="confirmDialog(element)">delete
                                             </mat-icon>
                                         </button> -->
-                                        <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
+                                        <button style="margin: 15px;
+                                        " mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
 
                                         <mat-menu #belowMenu="matMenu" yPosition="below">
                                             <button mat-menu-item matTooltip="Edit"

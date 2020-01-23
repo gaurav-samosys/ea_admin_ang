@@ -268,7 +268,9 @@ export const navigation: FuseNavigation[] = [
                 title: 'Webinars',
                 translate: 'Webinars',
                 type: 'collapsable',
+                // icon: 'adjust',
                 icon: 'adjust',
+
                 children: [
 
                     {

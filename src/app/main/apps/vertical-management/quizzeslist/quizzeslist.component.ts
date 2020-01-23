@@ -113,13 +113,13 @@ export class QuizzeslistComponent implements OnInit {
  * @param colName Show hide column
  * @param evt 
  */
-  columnClick(colName: string, evt) {
+  columnClick(value,colName: string, evt) {
     console.log('-0-----', evt.target.checked)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);
     if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
     } else {
-      this.displayedColumns.push(colName);
+      this.displayedColumns.splice(value,0,colName);
     }
   }
 

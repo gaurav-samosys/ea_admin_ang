@@ -13,7 +13,7 @@
 
             <div class="">
                 <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard </a>
+                    <img width="20px" height="20px" src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
                 <a routerLink="/apps/vertical-management/vertical"
                     style="text-decoration: none;">&nbsp;&nbsp;/&nbsp;&nbsp;Vertical</a>
                     <a  (click)="back()"
@@ -82,30 +82,30 @@
                                 <mat-menu #menu="matMenu">
                                     <button mat-menu-item>
                                         <label>
-                                            <input type="checkbox" (change)="columnClick('quiz_name',$event)"
+                                            <input type="checkbox" (change)="columnClick(0,'quiz_name',$event)"
                                                 checked><span class="ml ">Quiz Name</span>
                                         </label>
                                     </button>
                                     <button mat-menu-item>
-                                        <label><input type="checkbox" (change)="columnClick('quiz_description',$event)"
+                                        <label><input type="checkbox" (change)="columnClick(1,'quiz_description',$event)"
                                                 checked>
                                             <span class="ml">Quiz Description</span>
                                         </label>
                                     </button>
                                     <button mat-menu-item><label>
-                                            <input type="checkbox" (change)="columnClick('totalQuestions',$event)"
+                                            <input type="checkbox" (change)="columnClick(2,'totalQuestions',$event)"
                                                 checked><span class="ml">TotalQuestions</span></label>
                                     </button>
                                     <button mat-menu-item><label>
-                                            <input type="checkbox" (change)="columnClick('passing_score',$event)"
+                                            <input type="checkbox" (change)="columnClick(3,'passing_score',$event)"
                                                 checked><span class="ml">Passing Score</span></label>
                                     </button>
                                     <button mat-menu-item><label>
-                                            <input type="checkbox" (change)="columnClick('status',$event)" checked><span
+                                            <input type="checkbox" (change)="columnClick(4,'status',$event)" checked><span
                                                 class="ml">Status</span></label>
                                     </button>
                                     <button mat-menu-item><label>
-                                            <input type="checkbox" (change)="columnClick('created',$event)"
+                                            <input type="checkbox" (change)="columnClick(5,'created',$event)"
                                                 checked><span class="ml">Created</span></label>
                                     </button>
                                     <button mat-menu-item><label><input type="checkbox"

@@ -1,3 +1,4 @@
+<!-- <link rel="stylesheet" href="../src/assets/Font-Awesome-master/css/fontawesome.min.css"> -->
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
 
   <!-- <ng-container *ngIf="show"></ng-container> -->
@@ -78,7 +79,7 @@
                    <mat-label>Description</mat-label>
                    <input matInput formControlName="description" placeholder="Discription">
                  </mat-form-field> -->
-              
+                 <!-- <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor> -->
                 <angular-editor id="editor1" formControlName="description"  [config]="editorConfig"></angular-editor>
               </div>
               <!-- <button type="submit " matTooltip="update banner" mat-raised-button color="accent" 

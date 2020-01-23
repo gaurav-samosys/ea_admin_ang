@@ -49,7 +49,7 @@ export class BlogComponent implements OnInit {
 
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
-  // value: any;
+  column:number
   name: any;
   titleName: string;
   categaryName: string;
@@ -90,16 +90,53 @@ export class BlogComponent implements OnInit {
 
     this.getBlogList()
   }
+
+// showHideColumn:boolean;
+//   columnClick1(evt){
+//     console.log(evt)
+//     if (evt.target.checked == false) {
+//       this.showHideColumn=false
+//     }else{
+//       this.showHideColumn= true
+
+
+//     }
+//   }
   /**
    * 
    * @param colName Show hide column
    * @param evt 
    */
-  columnClick(colName: string, evt,index) {
+  columnClick(value,colName: string, evt,index) {
+    console.log('dev------',event)
     console.log('------colName', colName, evt, evt.target.checked,"index===",index)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);
     console.log(colIndex)
-    //false 1 true -1
+ 
+    if (evt.target.checked == false) {
+      this.displayedColumns.splice(colIndex, 1);
+    } else
+    {
+      this.displayedColumns.splice(value,0,colName)
+    }
+  
+  }
+
+  // if (evt.target.checked == false) {
+    // this.displayedColumns.splice(colIndex, 1);
+  // } else {
+    // this.displayedColumns.push(colName);
+  // }
+
+  // if (colIndex > 0) {
+  //   // column is currently shown in the table, so we remove it
+  //   this.displayedColumns.splice(colIndex, 1);
+  // } else {
+  //   // column is not in the table, so we add it
+  //   this.displayedColumns.push(colName);
+  // }
+
+   //false 1 true -1
 
     // if(index == 'index0'){
     //       this.index =1
@@ -113,22 +150,6 @@ export class BlogComponent implements OnInit {
     // }else if(index == 'index4'){
 
     // }
-    if (evt.target.checked == false) {
-      this.displayedColumns.splice(colIndex, 1);
-    } else {
-      this.displayedColumns.push(colName);
-    }
-  
-  }
-
-  // if (colIndex > 0) {
-  //   // column is currently shown in the table, so we remove it
-  //   this.displayedColumns.splice(colIndex, 1);
-  // } else {
-  //   // column is not in the table, so we add it
-  //   this.displayedColumns.push(colName);
-  // }
-
   /**
    * get blog list
    */

@@ -124,13 +124,13 @@ const routes = [
         loadChildren: './blogs/blog/blog.module#BlogModule'
     },
     {
-        path: 'comment',
-        loadChildren: './blogs/comment/comment.module#CommentModule'
-    },
-    {
         path: 'blog-post',
         loadChildren: './blogs/add-post/add-post.module#AddPostModule'
     },
+     {
+         path: 'comment',
+         loadChildren: './blogs/comment/comment.module#CommentModule'
+     },
     {
         path: 'blog-post/:id',
         loadChildren: './blogs/add-post/add-post.module#AddPostModule'
@@ -159,8 +159,6 @@ const routes = [
         path: 'webinars',
         loadChildren: './webinar/webinar-list/webinar-list.module#WebinarListModule'
     },
-
-
 
 
     {

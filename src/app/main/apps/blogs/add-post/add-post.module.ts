@@ -28,6 +28,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 const routes:Routes=[{
   
         path: '**',

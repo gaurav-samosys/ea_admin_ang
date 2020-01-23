@@ -362,7 +362,7 @@ comparision:any={
 }
 
 public survey: any =  {
-    chart: {
+    chart: { 
         type: 'column',zoomType: 'x',
                         resetZoomButton: {
                             position: {

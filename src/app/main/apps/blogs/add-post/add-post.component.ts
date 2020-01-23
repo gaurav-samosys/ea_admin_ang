@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddPostService } from './add-post.service';
 import * as myGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 export interface AddPost {
   value: string;
   id: number;
@@ -16,6 +18,7 @@ export interface AddPost {
   styleUrls: ['./add-post.component.scss']
 })
 export class AddPostComponent implements OnInit {
+  public Editor = ClassicEditor;
   htmlContent = '';
   add_button: number = 0
   name: number = 0
@@ -63,11 +66,11 @@ export class AddPostComponent implements OnInit {
     // alert(id)
     console.log(this.prodId)
     if (this.prodId) {
-      this.editPost()
       // this.name = 1
     } else {
       // this.name = 0
     }
+    this.editPost()
   }
 
   editPost() {
@@ -156,6 +159,9 @@ export class AddPostComponent implements OnInit {
   }
 
   submit() {
+
+    this.name = 0
+    this.add_button = 0
     let item = {
       post_title: this.AddPostForm.controls['post_title'].value,
       category: this.AddPostForm.controls['category'].value,
@@ -181,10 +187,10 @@ export class AddPostComponent implements OnInit {
       token: 'LIVESITE'
     }).subscribe(res => {
       console.log(res)
-      this.toastr.success('Blog Add Successfully')
-      this.router.navigate(['/apps/blogs'])
-      this.ngOnInit()
-      // this.AddSubmitForm(res)
+      // this.toastr.success('Blog Add Successfully')
+      // this.router.navigate(['/apps/blogs'])
+      // this.ngOnInit()
+      this.AddSubmitForm(res)
     });
   }
 
@@ -193,7 +199,7 @@ export class AddPostComponent implements OnInit {
 
     if (res['success'] == true && res['status_code'] == 200) {
       this.toastr.success('Blog Add Successfully')
-      this.router.navigate(['/apps/blogs/blog'])
+      this.router.navigate(['/apps/blogs'])
     } else {
       this.toastr.warning('There Are some Issue')
     }
@@ -217,20 +223,45 @@ export class AddPostComponent implements OnInit {
 
 
   editorConfig: AngularEditorConfig = {
+
+
+
     editable: true,
     spellcheck: true,
-    height: '15rem',
-    minHeight: '5rem',
-    maxHeight: 'auto',
+    height: 'auto',
+    minHeight: '300px',
     width: 'auto',
     minWidth: '0',
     translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
     placeholder: 'Enter text here...',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
+    defaultFontName: 'Arial',
+    defaultFontSize: '2',
+
+
+
+
+
+
+
+
+
+
+    // editable: true,
+    // spellcheck: true,
+    // height: '15rem',
+    // minHeight: '5rem',
+    // maxHeight: 'auto',
+    // width: 'auto',
+    // minWidth: '0',
+    // translate: 'yes',
+    // enableToolbar: true,
+    // showToolbar: true,
+    // placeholder: 'Enter text here...',
+    // defaultParagraphSeparator: '',
+    // defaultFontName: '',
+    // defaultFontSize: '',
     fonts: [
       { class: 'arial', name: 'Arial' },
       { class: 'times-new-roman', name: 'Times New Roman' },

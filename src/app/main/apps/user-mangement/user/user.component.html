@@ -162,33 +162,33 @@
                 <mat-menu #menu="matMenu">
                   <button mat-menu-item>
                     <label>
-                    <input type="checkbox" (change)="columnClick('first_name',$event)" 
+                    <input type="checkbox" (change)="columnClick(0,'first_name',$event)" 
                         checked><span class="ml ">First Name</span>
                       </label>
                   </button>
                   <button mat-menu-item>
-                    <label><input type="checkbox" (change)="columnClick('email',$event)" 
+                    <label><input type="checkbox" (change)="columnClick(1,'email',$event)" 
                         checked>
                         <span class="ml">Email</span>
                       </label>
                   </button>
                   <button mat-menu-item><label>
-                    <input type="checkbox" (change)="columnClick('client_name',$event)"
+                    <input type="checkbox" (change)="columnClick(2,'client_name',$event)"
                         checked><span class="ml">Client Name</span></label>
                   </button>
                   <button mat-menu-item><label>
-                    <input type="checkbox" (change)="columnClick('created_on',$event)"
+                    <input type="checkbox" (change)="columnClick(3,'created_on',$event)"
                         checked><span class="ml">Created Date</span></label>
                   </button>
                   <button mat-menu-item><label>
-                      <input type="checkbox" (change)="columnClick('certificate_downloaded',$event)"
+                      <input type="checkbox" (change)="columnClick(4,'certificate_downloaded',$event)"
                           checked><span class="ml"> Certificate Downloaded</span></label>
                     </button>
                     <button mat-menu-item><label>
-                        <input type="checkbox" (change)="columnClick('status',$event)"
+                        <input type="checkbox" (change)="columnClick(5,'status',$event)"
                             checked><span class="ml">status</span></label>
                       </button>
-                  <button mat-menu-item><label><input  type="checkbox" (change)="columnClick('action',$event)"
+                  <button mat-menu-item><label><input  type="checkbox" (change)="columnClick(6,'action',$event)"
                         checked><span class="ml">Action</span></label>
                   </button>
                 </mat-menu>

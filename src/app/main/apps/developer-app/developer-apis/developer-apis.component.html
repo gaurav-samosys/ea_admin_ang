@@ -56,16 +56,16 @@
                           
                           <label>
                             <input 
-                              type="checkbox" (change)="columnClick('full_name',$event)" checked><span class="ml">Full Name</span></label>
+                              type="checkbox" (change)="columnClick(0,'full_name',$event)" checked><span class="ml">Full Name</span></label>
  
                             </button>
-                        <button mat-menu-item ><label><input (change)="columnClick('email',$event)" type="checkbox"
+                        <button mat-menu-item ><label><input (change)="columnClick(1,'email',$event)" type="checkbox"
                               checked><span class="ml">Email</span></label></button>
-                        <button mat-menu-item ><label><input (change)="columnClick('app_id',$event)" 
+                        <button mat-menu-item ><label><input (change)="columnClick(2,'app_id',$event)" 
                               type="checkbox" checked><span class="ml">App Id</span></label></button>
                         <button mat-menu-item ><label><input 
-                              type="checkbox" (change)="columnClick('app_secret',$event)" checked><span class="ml">App Secret</span></label></button>
-                        <button mat-menu-item ><label><input (change)="columnClick('status',$event)" type="checkbox"
+                              type="checkbox" (change)="columnClick(3,'app_secret',$event)" checked><span class="ml">App Secret</span></label></button>
+                        <button mat-menu-item ><label><input (change)="columnClick(4,'status',$event)" type="checkbox"
                               checked><span class="ml">Status</span></label> </button>
                       </mat-menu>
                 </div>

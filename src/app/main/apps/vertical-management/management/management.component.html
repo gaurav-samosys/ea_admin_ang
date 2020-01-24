@@ -60,7 +60,7 @@
                     <!-- END SECOND ROW -->
 
 
-                    <div class="row">
+                    <div class="row" style="margin-top: 50px">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <mat-table class="mat-table" [dataSource]="dataSource">
 
@@ -141,25 +141,28 @@
 
 
 
-                                <div matColumnDef="action">
-                                    <mat-header-cell *matHeaderCellDef style="text-align: center !important"> Action
+                                <ng-container matColumnDef="action">
+                                    <mat-header-cell style="  padding-right:  100px;" *matHeaderCellDef> Action
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" class="action-input">
 
-                                        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                                            <mat-form-field appearance="outline" fxFlex="20" class="new_manage_bxs">
+                                    <mat-cell style="padding-right:  100px; "   *matCellDef="let element" class="action-input">
+
+                                     <span fxFlex="1 0 auto" fxLayoutAlign="start" style="margin-top: 18px;
+                                     ">
+                                            <mat-form-field appearance="outline" style="width: 30%;    margin-right: 10px;">
                                                 <select matNativeControl (change)="change($event.target.value,element)"
                                                     class="new_cls_select_manage">
                                                     <option value="" selected="" style="display: none; ">Go To
                                                     </option>
-                                                    <!-- <option ><a [routerLink]="['/apps/vertical-management/videolist', element.id]">videos</a></option> -->
+                                                  
                                                     <option value="video">videos</option>
                                                     <option value="quize">quizzes</option>
                                                 </select>
                                             </mat-form-field>
-
-
-                                            <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
+                                       
+                                            <button mat-raised-button style="padding: 0px;
+                                            height: 33px;
+                                            margin-top: 5px;" [matMenuTriggerFor]="belowMenu">Actions</button>
 
                                             <mat-menu #belowMenu="matMenu" yPosition="below">
                                                 <button mat-menu-item matTooltip="Edit"
@@ -168,19 +171,25 @@
                                                 <button mat-menu-item matTooltip="Delete"
                                                     (click)="confirmDialog(element)">delete</button>
                                             </mat-menu>
-                                        </div>
-                                        <!-- <button mat-icon-button>
-                                            <mat-icon matTooltip="Edit" (click)="openDialog(element)">edit</mat-icon>
-                                        </button>
-                                        <button mat-icon-button>
-                                            <mat-icon matTooltip="Delete" (click)="confirmDialog(element)">delete</mat-icon>
-                                        </button> -->
+                                        </span>
+                                     </mat-cell>
+                                </ng-container>
 
-                                    </mat-cell>
-                                </div>
+
+                           
+
+
+
+
+
+
+
+
+
 
                                 <ng-container matColumnDef="created">
-                                    <mat-header-cell *matHeaderCellDef> Created date
+                                    <mat-header-cell style="     padding-right: 19px;
+                                    margin-left: -20px;" *matHeaderCellDef> Created date
                                         <span class="pointer">
                                             <i (click)="updateSortingOrderVerical('created','ASC')"
                                                 [class]='(this.sort_column=="created" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>

@@ -187,7 +187,7 @@ export class AdminAccessComponent implements OnInit {
    */
   openDialog() {
     let dialog = this.dialog.open(AddadminComponent, {
-      width: '650px', height: '500px'
+      width: '600px', height: '600px'
     });
 
   }

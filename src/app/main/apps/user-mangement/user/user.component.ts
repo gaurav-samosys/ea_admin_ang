@@ -305,7 +305,7 @@ export class UserComponent implements OnInit {
  
   addUser() {
     let dialog = this.dialog.open(AdduserComponent, {
-      width: '600px', height: '400px'
+      width: '600px', height: '500px'
     });
   }
  /**

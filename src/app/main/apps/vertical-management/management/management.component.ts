@@ -215,7 +215,7 @@ export class ManagementComponent implements OnInit {
   addTopic() {
     let dialog = this.dialog.open(AddtopicComponent, {
       data: this.vertical_id,
-      width: '550px', height: '500px'
+      width: '450px', height: '670px'
     });
 
   }

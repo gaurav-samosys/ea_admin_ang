@@ -221,13 +221,13 @@
                                                 </i>
                                             </span>
                                         </th>
-                                        <td mat-cell *matCellDef="let element" class="watch-list">
+                                        <td mat-cell style="width: 200px;" *matCellDef="let element" class="watch-list">
 
-                                            <div fxLayout="row" fxLayoutAlign="start center">
-                                                <button mat-stroked-button color="primary"
+                                            <span fxLayout="row" fxLayoutAlign="start center">
+                                                <button mat-stroked-button color="primary" style="    margin-right: 12px;"
                                                     (click)="View(element)">View</button>
 
-                                            </div>
+                                            
 
                                           
                                             <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
@@ -239,6 +239,7 @@
                                                 <button mat-menu-item matTooltip="Delete"
                                                     (click)="confirmDialog(element)">delete</button>
                                             </mat-menu>
+                                            </span>
                                         </td>
                                     </ng-container>
 

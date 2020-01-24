@@ -255,10 +255,15 @@ export class Version3Component implements OnInit {
     'Today': [moment(), moment()],
     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-    // 'Current Month': [moment().add(1, 'month'), moment()],
+
+    'Current Month': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+
     'Last 3 Month': [moment().subtract(2, 'month'), moment()],
     'Last 6 Month': [moment().subtract(5, 'month'), moment()],
+
+    'Year To Date': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
+    
     'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
   }
 

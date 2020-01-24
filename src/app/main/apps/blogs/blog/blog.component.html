@@ -186,10 +186,10 @@
                     <ng-container matColumnDef="action">
                       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                       <mat-cell *matCellDef="let element">
-                        <button mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
+                        <button mat-raised-button [matMenuTriggerFor]="belowMenu" style="background-color: #1D4A69 !important; color: #ffffff !important;">Actions</button>
                         <!-- [routerLink]="['/apps/blog-post', element.id,element]" -->
                         <mat-menu #belowMenu="matMenu" yPosition="below">
-                            <button   [routerLink]="['/apps/blog-post', element.id]" >Edit</button>
+                            <button   mat-menu-item matTooltip="Edit" [routerLink]="['/apps/blog-post', element.id]" >Edit</button>
                           <!-- <button mat-menu-item matTooltip="Edit" (click)="EditPost(element)">Edit</button> -->
                           <button mat-menu-item matTooltip="Delete"
                             (click)="confirmDialogDelete(element.id)">delete</button>

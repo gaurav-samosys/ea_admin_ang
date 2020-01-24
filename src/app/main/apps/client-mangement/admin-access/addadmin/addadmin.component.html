@@ -1,47 +1,56 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column">
 
-  <!--      <div class="h1">
+    <!--      <div class="h1">
  Add Company
         </div> -->
-        <mat-toolbar>
+    <!-- <mat-toolbar>
   <span> Add Admin User </span>
   <span class="fill-remaining-space"></span>
   <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
-</mat-toolbar>
+</mat-toolbar> -->
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Add Admin User</span>
+            <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
     <!-- CONTENT -->
     <div class="content p-24">
 
- 
+
 
 
         <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
 
             <!-- REACTIVE FORM EXAMPLE -->
 
-            <form  fxLayout="column" fxLayoutAlign="start"
-                  fxFlex="1 0 auto" name="form" [formGroup]="form" (ngSubmit)="Addadmin()">
+            <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form" [formGroup]="form"
+                (ngSubmit)="Addadmin()">
 
-                            <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                     <mat-label style=" width: 36%;margin-bottom: 10px">Company name *</mat-label>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <mat-label style=" width: 36%;margin-bottom: 10px">Company name *</mat-label>
                     <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
-                          <select matNativeControl formControlName="companyName"  (change)="getClient($event.target.value)" >
-                              <option value="" selected="">Select Company</option>
-                             <option *ngFor="let data of companiesData" value="{{data.id}}" >
+                        <select matNativeControl formControlName="companyName"
+                            (change)="getClient($event.target.value)">
+                            <option value="" selected="">Select Company</option>
+                            <option *ngFor="let data of companiesData" value="{{data.id}}">
                                 {{data.company_name}}
                             </option>
-                            
+
                         </select>
                         <mat-error *ngIf="hasError('companyName', 'required')"> Company Name is required! </mat-error>
                     </mat-form-field>
-                    
+
                     <mat-label style=" width: 36%;margin-bottom: 10px">Client name*</mat-label>
                     <mat-form-field appearance="outline" fxFlex="100" class="pl-4">
-                          <select matNativeControl formControlName="clienttName"  >
+                        <select matNativeControl formControlName="clienttName">
                             <option value="" selected="">Select client</option>
-                             <option *ngFor="let data of clientData" value="{{data.id}}" >
+                            <option *ngFor="let data of clientData" value="{{data.id}}">
                                 {{data.client_name}}
                             </option>
-                            
+
                         </select>
                         <mat-error *ngIf="hasError('clienttName', 'required')">Client Name is required!</mat-error>
                     </mat-form-field>
@@ -51,7 +60,7 @@
                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
                     <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-                         <mat-label>First name</mat-label>
+                        <mat-label>First name</mat-label>
                         <input matInput formControlName="firstName" required>
                         <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
                         <mat-error *ngIf="hasError('firstName', 'required')"> First Name is required! </mat-error>
@@ -67,24 +76,25 @@
                 </div>
 
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                      
-                       <mat-label style=" width: 36%;margin-bottom: 10px">Email*</mat-label>
+
+                    <mat-label style=" width: 36%;margin-bottom: 10px">Email*</mat-label>
                     <mat-form-field appearance="outline" fxFlex="100">
                         <input matInput formControlName="email" required>
                         <mat-error *ngIf="hasError('email', 'required')">Email is required!</mat-error>
                         <mat-error *ngIf="hasError('email', 'email')">Enter valid email!</mat-error>
                     </mat-form-field>
-                    
+
 
                 </div>
 
 
-                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-                       <button mat-raised-button color="primary" type="submit" class="button">Add </button>
+                    <button mat-raised-button color="primary" type="submit" class="button mat-accent">Add </button>
 
-                        <button mat-raised-button mat-button mat-dialog-close color="primary"  class="button cancel">Close</button>
-                 </div>
+                    <button mat-raised-button mat-button mat-dialog-close color="primary"
+                        class="button cancel mat-accent">Close</button>
+                </div>
 
 
             </form>
@@ -92,7 +102,5 @@
 
         </div>
 
-     </div> 
-</div>       
-
-        
+    </div>
+</div>

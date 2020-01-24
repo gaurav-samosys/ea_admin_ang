@@ -77,7 +77,7 @@ export class VerticalComponent implements OnInit {
 addVertical()
 {
         let dialog= this.dialog.open(AddverticalComponent, {
-      width: '600px',height:'500px'
+      width: '500px',height:'550px'
     });
 }
 

@@ -40,7 +40,7 @@ table {
 }
 
 td, th {
-  width: 25%;
+  // width: 25%;
 }
 
 #container {
@@ -119,10 +119,11 @@ td, th {
 }
 .sort_column { 
   font-weight: 600;
-  font-size: 14px !important;
+  font-size: 11px !important;
   cursor: pointer;
   // visibility: hidden;
   color: #999;
+  // margin-right: -9px;
 }
 // .table_custom th:hover .sort_column{
 //   visibility: visible
@@ -267,3 +268,9 @@ td, th {
   width: calc(100% - 410px);
 }
 .md-drppicker.double{width: 630px !important;}
+
+// td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+//   padding: 28px;
+//   border-bottom-width: 1px;
+//   border-bottom-style: solid;
+// }

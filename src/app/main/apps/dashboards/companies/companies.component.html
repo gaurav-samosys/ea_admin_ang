@@ -108,23 +108,37 @@
               <!-- </div> -->
               <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
               <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
-              <mat-form-field appearance="outline" fxFlex="100">
+              <mat-form-field appearance="outline" class="example-full-width" fxFlex="100">
                 <mat-label>Start Date</mat-label>
                 <input matInput [matDatepicker]="picker" placeholder="Start date" [ngModel]="startDate"
-                  (ngModelChange)="MyDate($event,'start')" readonly="">
+                  (ngModelChange)="MyDate($event,'start')" >
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
+
+
+              <!-- <mat-form-field class="example-full-width">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field> -->
+
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-              <mat-form-field appearance="outline" fxFlex="32">
+
+              <mat-form-field appearance="outline" class="example-full-width" fxFlex="32">
                 <mat-label>End Date</mat-label>
                 <input matInput [matDatepicker]="picker1" placeholder="End date" [ngModel]="endDate"
-                  (ngModelChange)="MyDate($event,'end')" readonly="">
+                  (ngModelChange)="MyDate($event,'end')" >
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
+
+
+     
+
+
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
           </div>

@@ -397,6 +397,22 @@
 								<td mat-cell *matCellDef="let row"> {{row.total_client}} </td>
 							</ng-container>
 
+
+							<ng-container matColumnDef="status">
+								<th mat-header-cell *matHeaderCellDef> Status
+									<span class="pointer">
+										<i (click)="updateSortingOrderCompany('status','ASC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderCompany('status','DESC')"
+											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span></th>
+								<td mat-cell *matCellDef="let row"> {{row.status}} </td>
+							</ng-container>
+
 							<!-- Weight Column -->
 							<ng-container matColumnDef="total_user">
 								<th mat-header-cell *matHeaderCellDef> Total User
@@ -415,20 +431,8 @@
 							</ng-container>
 
 
-							<ng-container matColumnDef="status">
-								<th mat-header-cell *matHeaderCellDef> Status
-									<span class="pointer">
-										<i (click)="updateSortingOrderCompany('status','ASC')"
-											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-											arrow_upward
-										</i>
-										<i (click)="updateSortingOrderCompany('status','DESC')"
-											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-											arrow_downward
-										</i>
-									</span></th>
-								<td mat-cell *matCellDef="let row"> {{row.status}} </td>
-							</ng-container>
+						
+
 							<ng-container matColumnDef="register_date">
 								<th mat-header-cell *matHeaderCellDef> Registered
 									<span class="pointer">
@@ -802,7 +806,7 @@
 						<mat-table [dataSource]="dataSource">
 							<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
 							<ng-container matColumnDef="name">
-								<mat-header-cell *matHeaderCellDef> Name
+								<mat-header-cell *matHeaderCellDef style="    padding-right:  10px;"> Name
 									<span class="pointer">
 										<i (click)="updateSortingOrderUser('name','ASC')"
 											[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -814,13 +818,13 @@
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell class="style" *matCellDef="let element" (click)="openDialog()">
+								<mat-cell  style="    padding-right: 10px;" class="style" *matCellDef="let element" (click)="openDialog()">
 									<div [innerHtml]="element[0]"></div>
 								</mat-cell>
 							</ng-container>
 							<!-- Weight Column -->
 							<ng-container matColumnDef="email">
-								<mat-header-cell *matHeaderCellDef> Email
+								<mat-header-cell *matHeaderCellDef  style="    padding-right: 125px;"> Email
 									<span class="pointer">
 										<i (click)="updateSortingOrderUser('email','ASC')"
 											[class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -832,8 +836,8 @@
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell *matCellDef="let element">
-									<div [innerHtml]="element[1]"></div>
+								<mat-cell *matCellDef="let element" style="    padding-right: 125px;">
+									<span [innerHtml]="element[1]"></span>
 								</mat-cell>
 							</ng-container>
 							<!-- Symbol Column -->
@@ -848,7 +852,7 @@
 								<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
 							</ng-container>
 							<ng-container matColumnDef="certificate">
-								<mat-header-cell *matHeaderCellDef>Certificate
+								<mat-header-cell style="    padding-right:  10px;" *matHeaderCellDef>Certificate
 									<span class="pointer">
 										<i (click)="updateSortingOrderUser('certificate','ASC')"
 											[class]='(this.sort_column=="certificate" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -860,10 +864,10 @@
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
+								<mat-cell style="    padding-right:  10px;" *matCellDef="let element"> {{element[4]}} </mat-cell>
 							</ng-container>
 							<ng-container matColumnDef="progress">
-								<mat-header-cell *matHeaderCellDef>Progress
+								<mat-header-cell style="    padding-right:  10px;" *matHeaderCellDef>Progress
 									<span class="pointer">
 										<i (click)="updateSortingOrderUser('progress','ASC')"
 											[class]='(this.sort_column=="progress" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -875,7 +879,7 @@
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell *matCellDef="let element"> {{element[5]}} </mat-cell>
+								<mat-cell style="    padding-right:  10px;" *matCellDef="let element"> {{element[5]}} </mat-cell>
 							</ng-container>
 							<ng-container matColumnDef="percent">
 								<mat-header-cell *matHeaderCellDef> %
@@ -905,10 +909,10 @@
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
+								<mat-cell  *matCellDef="let element"> {{element[7]}} </mat-cell>
 							</ng-container>
 							<ng-container matColumnDef="register">
-								<mat-header-cell *matHeaderCellDef>Registered
+								<mat-header-cell style="    padding-right:  15px;" *matHeaderCellDef>Registered
 									<span class="pointer">
 										<i (click)="updateSortingOrderUser('register','ASC')"
 											[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -920,7 +924,7 @@
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell *matCellDef="let element">{{element[8]}}</mat-cell>
+								<mat-cell  *matCellDef="let element" style="    padding-right:  10px;" >{{element[8]}}</mat-cell>
 							</ng-container>
 							<mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
 							<mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
@@ -1420,8 +1424,12 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div id="videochartGraph"></div>
 						<ul class="course_status_ul" style="float: right;">
-							<li><span class="black_status"></span> Most Viewed Video :&nbsp;&nbsp;&nbsp; {{maxVideo}}</li>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		<li><span class="blue_status"></span>  Least Viewed Video :&nbsp;&nbsp;&nbsp;{{minVideo}}</li>
+							<li><span class="black_status">
+
+							</span> Most Viewed Video :&nbsp;&nbsp;&nbsp; {{maxVideo}}</li>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+								<li><span class="blue_status"></span> 
+									 Least Viewed Video :&nbsp;&nbsp;&nbsp;{{minVideo}}</li>
 						</ul> 
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->

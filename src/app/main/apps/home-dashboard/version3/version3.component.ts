@@ -43,7 +43,7 @@ export interface Dessert {
   // total_client: number,
   // total_user: string,
 
-  // status: number;
+  status: number;
 
   register_date: string
   //client
@@ -52,7 +52,7 @@ export interface Dessert {
   company: string;
   vertical: string;
   user: number;
-  status: number;
+  // status: number;
   register: string;
 
   //user
@@ -335,7 +335,7 @@ export class Version3Component implements OnInit {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
-      itemsShowLimit: 3,
+      itemsShowLimit: 2,
       allowSearchFilter: true,
       enableCheckAll: false
     };
@@ -421,6 +421,7 @@ export class Version3Component implements OnInit {
       topic_id: this.topic_id, clients_ids: client_id,
       verticals_ids: vertical_id, location: location_data, dateRange: '', token: 'LIVESITE'
     }).subscribe(res => {
+      console.log(res)
       this.getVideoGraphSuccessHandler(res)
     })
   }
@@ -429,6 +430,10 @@ export class Version3Component implements OnInit {
 
 
   getVideoGraphSuccessHandler(res) {
+    this.minVideo = res.minVideo
+    this.maxVideo = res.maxVideo
+
+    console.log(res,this.maxVideo,this.minVideo)
     this.vertical_id = [];
     this.clients_id = [];
     var data = res.data
@@ -438,9 +443,7 @@ export class Version3Component implements OnInit {
     }
     var categary = res.category
     this.total_users_video = res.total_users
-    this.minVideo = res.minVideo
-    this.maxVideo = res.maxVideo
-
+ 
     // console.log('vedio ===========', res, res['data'], " this.total_users_video=======", this.total_users_video)
     this.graph.video.xAxis.categories = categary
     // this.graph.video.yAxis.categories =  element
@@ -559,6 +562,8 @@ export class Version3Component implements OnInit {
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
     this.getIndustrywithData(this.search_data, this.industry_id);
   }
+
+
 
   onCompanyclick(event) {
     this.client_id = []
@@ -1060,10 +1065,6 @@ export class Version3Component implements OnInit {
       }
 
 
-
-
-
-
       else {
         this.industry_total = this.common.data.industries.total;
         this.company_total = this.common.data.companies.total;
@@ -1105,6 +1106,8 @@ export class Version3Component implements OnInit {
       this.locationdropdownList = this.location
     })
   }
+
+
   getIndustrywithData(search_data, industry_id) {
     this.showloader = true;
     this.v3Service.POST(this.getIndustriesWithData, { id: industry_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', search: search_data }).subscribe(res => {
@@ -1269,34 +1272,6 @@ export class Version3Component implements OnInit {
       this.dataSource = this.common.data
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1777,10 +1752,13 @@ export class Version3Component implements OnInit {
       }
       console.log("comparision", this.common)
       this.comparision_data = this.common.data
-      this.pyear = this.comparision_data[0].name;
-      this.year = this.comparision_data[1].name;
+      // this.pyear = this.comparision_data[0].name;
+      // this.year =  this.comparision_data[1].name;
+      this.pyear = this.comparision_data.name;
+      this.year =  this.comparision_data.name;
+
       this.vertical_id = [];
-      this.clients_id = [];
+      this.clients_id  = [];
 
       //this.graph.comparision.title.text= this.graph.access_code.comparision.text + " " +  this.common.total_used+"/"+this.common.total_unused
 

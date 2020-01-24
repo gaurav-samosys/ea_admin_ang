@@ -2640,6 +2640,15 @@
 //     max-height: inherit;
 // }
 
+.multiselect-dropdown[_ngcontent-dmy-c35] .dropdown-btn[_ngcontent-dmy-c35] .selected-item[_ngcontent-dmy-c35] {
+    border: 1px solid #ffffff;
+    margin-right: 4px;
+    background: #337ab7;
+    padding: 0 5px;
+    color: #fff;
+    border-radius: 2px;
+    float: left;
+}
 
 .select2-search__field .multiselect-dropdown .dropdown-btn{
     display: inline-block;
@@ -2671,7 +2680,8 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
-.select2-search__field .multiselect-dropdown .dropdown-btn .dropdown-down:hover{border-top: 10px solid #fff !important;}
+.select2-search__field .multiselect-dropdown .dropdown-btn .dropdown-down:hover
+{border-top: 10px solid #fff !important;}
 
 .course_status_ul
  { text-align: right; padding-top: 8px; }
@@ -2711,3 +2721,9 @@ text.highcharts-credits { display: none; }
   i, .icomoon-liga, .material-icons {
     font-family: 'material-outline-icons' !important;
   }
+
+//   td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+//     padding: 28px;
+//     border-bottom-width: 1px;
+//     border-bottom-style: solid;
+// }

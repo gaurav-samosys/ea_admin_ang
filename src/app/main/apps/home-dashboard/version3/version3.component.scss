@@ -115,6 +115,7 @@ td, th {
   //   margin: 12px;
 }
 .pointer{
+  
   cursor: pointer;
 }
 .sort_column { 
@@ -123,11 +124,30 @@ td, th {
   cursor: pointer;
   // visibility: hidden;
   color: #999;
-  // margin-right: -9px;
+  margin-right: -5px;
 }
 // .table_custom th:hover .sort_column{
 //   visibility: visible
 // }
+
+//apply client and user table sort
+.sort{
+  font-weight: 600;
+  font-size: 11px !important;
+  cursor: pointer;
+  // visibility: hidden;
+  color: #999;
+  margin-left: -7px;
+}
+
+.user_sort_011{
+  font-weight: 600;
+  font-size: 11px !important;
+  cursor: pointer;
+  // visibility: hidden;
+  color: #999;
+  margin-left: -5px;
+}
 
 .sort_column_active {
   font-weight: 600;
@@ -137,8 +157,31 @@ td, th {
 
   // color: #1a73e8;
 }
+.sort_user{
+  
+}
+.comparison_graph ul{justify-content: center;}
+.comparison_graph ul li { list-style: none;position: relative;padding: 0 0 0 20px}
+li.average_label:after {content: "";width: 16px; position: absolute;  height: 3px;  background: #ff6600;  border-radius: 4px;  left: -3px;  top: 8px;}
 
-
+  .comparison_graph ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background-color: #ff6600;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    stroke:#ff6600;
+  }
+  
+  .black_status  {color: rgb(92, 92, 97);}
+  .blue_status {color: #1976a1;}
+  .green_status {color: rgb(144, 237, 125);}
+  .orange_status{color:rgb(255, 188, 117);}
 
 // .sort_column_active {
 //   font-weight: 600;

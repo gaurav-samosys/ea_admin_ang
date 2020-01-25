@@ -2687,13 +2687,22 @@
  { text-align: right; padding-top: 8px; }
 
 .course_status_ul li
-{color: #a0bb3a !important; margin-right: 12px;}
-.course_status_ul li:nth-child(2)
 {color: #1976a1 !important; margin-right: 12px;}
+.course_status_ul li:nth-child(2)
+{color: rgb(92, 92, 97) !important; margin-right: 12px;}
 .course_status_ul li:nth-child(3)
-{color: #e64a19 !important; margin-right: 12px;}
+{color: rgb(144, 237, 125) !important; margin-right: 12px;}
 
-text.highcharts-credits { display: none; }
+.course_status_ul li:nth-child(4)
+{color: rgb(255, 188, 117) !important; margin-right: 12px;}
+
+
+
+// .blue_status_icon_pending{color:  #1976a1 !important; margin-right: 12px;}
+// .black_status_icon_download{color: rgb(92, 92, 97) !important; margin-right: 12px;}
+// body .mat__box .color_chang .material-icons{color: rgb(92, 92, 97) !important; margin-right: 12px;}
+
+.text.highcharts-credits{display:none !important;}
 .mat-form-field-appearance-outline .mat-form-field-outline {
     display: flex;
     position: absolute;

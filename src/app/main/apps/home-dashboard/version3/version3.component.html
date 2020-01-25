@@ -431,7 +431,7 @@
 							</ng-container>
 
 
-						
+
 
 							<ng-container matColumnDef="register_date">
 								<th mat-header-cell *matHeaderCellDef> Registered
@@ -564,13 +564,13 @@
 							<!-- Name Column -->
 							<ng-container matColumnDef="name">
 								<mat-header-cell *matHeaderCellDef> Name
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderClient('name','ASC')"
-											[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderClient('name','DESC')"
-											[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
@@ -581,13 +581,13 @@
 							<!-- Weight Column -->
 							<ng-container matColumnDef="industry">
 								<mat-header-cell *matHeaderCellDef> Industries
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderClient('industry','ASC')"
-											[class]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="industry" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderClient('industry','DESC')"
-											[class]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="industry" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
@@ -597,13 +597,13 @@
 							<!-- Symbol Column -->
 							<ng-container matColumnDef="company">
 								<mat-header-cell *matHeaderCellDef> Companies
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderClient('company','ASC')"
-											[class]='(this.sort_column=="company" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="company" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderClient('company','DESC')"
-											[class]='(this.sort_column=="company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="company" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span> </mat-header-cell>
@@ -611,13 +611,13 @@
 							</ng-container>
 							<ng-container matColumnDef="vertical">
 								<mat-header-cell *matHeaderCellDef> Vertical
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderClient('vertical','ASC')"
-											[class]='(this.sort_column=="vertical" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="vertical" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderClient('vertical','DESC')"
-											[class]='(this.sort_column=="vertical" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="vertical" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span> </mat-header-cell>
@@ -625,13 +625,13 @@
 							</ng-container>
 							<ng-container matColumnDef="user">
 								<mat-header-cell *matHeaderCellDef> Users
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderClient('user','ASC')"
-											[class]='(this.sort_column=="user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="user" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderClient('user','DESC')"
-											[class]='(this.sort_column=="user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="user" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span> </mat-header-cell>
@@ -640,13 +640,13 @@
 
 							<ng-container matColumnDef="status">
 								<mat-header-cell *matHeaderCellDef> Status
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderClient('status','ASC')"
-											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderClient('status','DESC')"
-											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
@@ -656,13 +656,13 @@
 
 							<ng-container matColumnDef="register">
 								<mat-header-cell *matHeaderCellDef>Registered
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderClient('register','ASC')"
-											[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderClient('register','DESC')"
-											[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
@@ -807,31 +807,33 @@
 							<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
 							<ng-container matColumnDef="name">
 								<mat-header-cell *matHeaderCellDef style="    padding-right:  10px;"> Name
-									<span class="pointer">
-										<i (click)="updateSortingOrderUser('name','ASC')"
-											[class]='(this.sort_column=="name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+									<span class="pointer" style="margin-left: 11px !important;">
+
+										<i (click)="updateSortingOrderUser('name','ASC')" [class.sort]='(this.sort_column=="name" && this.sort_order=="ASC") ?
+										"sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderUser('name','DESC')"
-											[class]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell  style="    padding-right: 10px;" class="style" *matCellDef="let element" (click)="openDialog()">
+								<mat-cell style="    padding-right: 10px;" class="style" *matCellDef="let element"
+									(click)="openDialog()">
 									<div [innerHtml]="element[0]"></div>
 								</mat-cell>
 							</ng-container>
 							<!-- Weight Column -->
 							<ng-container matColumnDef="email">
-								<mat-header-cell *matHeaderCellDef  style="    padding-right: 125px;"> Email
-									<span class="pointer">
+								<mat-header-cell *matHeaderCellDef style="padding-right: 125px;"> Email
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderUser('email','ASC')"
-											[class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderUser('email','DESC')"
-											[class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
@@ -853,43 +855,45 @@
 							</ng-container>
 							<ng-container matColumnDef="certificate">
 								<mat-header-cell style="    padding-right:  10px;" *matHeaderCellDef>Certificate
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderUser('certificate','ASC')"
-											[class]='(this.sort_column=="certificate" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="certificate" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderUser('certificate','DESC')"
-											[class]='(this.sort_column=="certificate" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="certificate" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell style="    padding-right:  10px;" *matCellDef="let element"> {{element[4]}} </mat-cell>
+								<mat-cell style="    padding-right:  10px;" *matCellDef="let element"> {{element[4]}}
+								</mat-cell>
 							</ng-container>
 							<ng-container matColumnDef="progress">
 								<mat-header-cell style="    padding-right:  10px;" *matHeaderCellDef>Progress
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderUser('progress','ASC')"
-											[class]='(this.sort_column=="progress" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="progress" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderUser('progress','DESC')"
-											[class]='(this.sort_column=="progress" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="progress" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell style="    padding-right:  10px;" *matCellDef="let element"> {{element[5]}} </mat-cell>
+								<mat-cell style="    padding-right:  10px;" *matCellDef="let element"> {{element[5]}}
+								</mat-cell>
 							</ng-container>
 							<ng-container matColumnDef="percent">
 								<mat-header-cell *matHeaderCellDef> %
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderUser('percent','ASC')"
-											[class]='(this.sort_column=="percent" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="percent" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderUser('percent','DESC')"
-											[class]='(this.sort_column=="percent" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="percent" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
@@ -898,33 +902,34 @@
 							</ng-container>
 							<ng-container matColumnDef="status">
 								<mat-header-cell *matHeaderCellDef> Status
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderUser('status','ASC')"
-											[class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderUser('status','DESC')"
-											[class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell  *matCellDef="let element"> {{element[7]}} </mat-cell>
+								<mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
 							</ng-container>
 							<ng-container matColumnDef="register">
 								<mat-header-cell style="    padding-right:  15px;" *matHeaderCellDef>Registered
-									<span class="pointer">
+									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderUser('register','ASC')"
-											[class]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="register" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_upward
 										</i>
 										<i (click)="updateSortingOrderUser('register','DESC')"
-											[class]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											[class.sort]='(this.sort_column=="register" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
 											arrow_downward
 										</i>
 									</span>
 								</mat-header-cell>
-								<mat-cell  *matCellDef="let element" style="  padding-right:  10px;" >{{element[8]}}</mat-cell>
+								<mat-cell *matCellDef="let element" style="  padding-right:  10px;">{{element[8]}}
+								</mat-cell>
 							</ng-container>
 							<mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
 							<mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
@@ -1142,7 +1147,10 @@
 				</div>
 				<!-- END OF MAT__BOX -->
 			</div>
+
 			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+
+			<!-- total downloads -->
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
 				<div class="mat__box graph_dive">
@@ -1168,9 +1176,20 @@
 					</div>
 					<div id="download"></div>
 					<ul class="course_status_ul">
-						<li><span class="blue_status"></span> Certificates {{certificate}}</li>
-						<li><span class="black_status"></span> Workbooks {{workbook}}</li>
-						<li><span class="green_status"></span> Tools {{tool}}</li>
+						<li><span class="blue_status">
+								<i class="blue_status material-icons">
+									bookmark_border
+								</i>
+							</span>Certificates {{certificate}}
+						</li>
+						<li>
+							<span class="black_status"></span>
+							<i class="black_status material-icons">
+								bookmark_border
+							</i> Workbooks {{workbook}}</li>
+						<li><span class="green_status"></span> <i class="green_status material-icons">
+								bookmark_border
+							</i>Tools {{tool}}</li>
 					</ul>
 				</div>
 				<!-- END OF MAT__BOX -->
@@ -1178,6 +1197,22 @@
 			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 		</div>
 		<!-- END OF ROW MT-20 MR-28 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- total video -->
 		<div class="row mt-20 mr-28" style="display: flex;">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
@@ -1207,6 +1242,8 @@
 			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 
 
+
+
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
 				<div class="mat__box graph_dive">
@@ -1234,15 +1271,18 @@
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
 					<div id="certificate"></div>
-					<!-- <highcharts-chart
-	  style="display: block"
-	  [Highcharts]="Highcharts"
-	  [constructorType]="'chart'"
-	  [options]="chartOptions"
-	></highcharts-chart> -->
+
 					<ul class="course_status_ul">
-						<li><span class="black_status"></span> Downloaded {{downloaded}}</li>
-						<li><span class="blue_status"></span> Download Pending {{download_pending}}</li>
+						<li>
+							<span class="black_status">
+								<i class="black_status material-icons">
+									bookmark_border
+								</i></span>
+								<span class="black_status"> Downloaded {{downloaded}}</span></li>
+
+						<li><span class="blue_status"><i class="blue_status material-icons">
+									bookmark_border
+								</i> </span><span class="blue_status"> Pending {{download_pending}}</span></li>
 					</ul>
 				</div>
 				<!-- END OF MAT__BOX -->
@@ -1250,6 +1290,23 @@
 			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 		</div>
 		<!-- END OF ROW MT-20 MR-28 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		<!-- course -->
 		<div class="row mt-20 mr-28" style="display: flex;">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
@@ -1275,10 +1332,19 @@
 					<div id="completion"></div>
 
 					<ul class="course_status_ul">
-						<li><span class="blue_status"></span> Not Started {{notstarted}}</li>
-						<li><span class="black_status"></span> Pending {{pending}}</li>
-						<li><span class="green_status"></span> Mandatory {{mandatory}}</li>
-						<li><span class="orange_status"></span> Full Course {{fullCourse}}</li>
+						<li><span class="blue_status"></span>
+							<i class="blue_status material-icons">
+								bookmark_border
+							</i>Not Started {{notstarted}}</li>
+						<li><span class="black_status"></span><i class="black_status material-icons">
+								bookmark_border
+							</i> Pending {{pending}}</li>
+						<li><span class="green_status"></span> <i class="green_status material-icons">
+								bookmark_border
+							</i>Mandatory {{mandatory}}</li>
+						<li><span class="orange_status"></span><i class="orange_status material-icons">
+								bookmark_border
+											</i> Full Course {{fullCourse}}</li>
 					</ul>
 				</div>
 				<!-- END OF MAT__BOX -->
@@ -1305,8 +1371,12 @@
 					</div>
 					<div id="access"></div>
 					<ul class="course_status_ul">
-						<li><span class="blue_status"></span> Unused Code {{unused}}</li>
-						<li><span class="black_status"></span> Used Code {{used}}</li>
+						<li><span class="black_status"><i class="black_status material-icons">
+								bookmark_border
+							</i></span><span class="black_status"> Unused Code {{unused}}</span></li>
+						<li><span class="blue_status"><i class="blue_status material-icons">
+								bookmark_border
+							</i></span> <span class="blue_status"> Used Code {{used}}</span></li>
 					</ul>
 				</div>
 				<!-- END OF MAT__BOX -->
@@ -1314,6 +1384,17 @@
 			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 		</div>
 		<!-- END OF ROW MT-20 MR-28 -->
+
+
+
+
+
+
+
+
+
+
+		<!-- year of year -->
 		<div class="row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
 			<div class="mat__box graph_dive" style="width: 100%">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1353,9 +1434,8 @@
 							<!-- [alwaysShowCalendars]="true" -->
 							<mat-form-field appearance="outline">
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-									[showCancel]="true" class="cursor-pointer" 
-									[opens]="'left'" [ranges]="ranges" [(ngModel)]="model" startKey="start" endKey="end"
-									[showCustomRangeLabel]="true"
+									[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
+									[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
 									(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly=""
 									class="input_date cursor-pointer">
 							</mat-form-field>
@@ -1365,7 +1445,7 @@
 					<!-- END OF ROW -->
 				</div>
 				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comparison_graph">
 					<div id="comparison"></div>
 
 					<ul class="course_status_ul" *ngIf="user_status == 'false' ">
@@ -1375,10 +1455,10 @@
 						<li><span class="blue_status"></span> {{mandatory_2018}}</li>
 					</ul>
 
-					<ul class="course_status_ul" *ngIf="user_status == 'true' ">
-						<li><span class="black_status"></span> {{pyear}}</li>
-						<li><span class="blue_status"></span> {{year}}</li>
-						<li><span class="green_status"></span> Average</li>
+					<ul class="course_status_ul" *ngIf="user_status == 'true'">
+						<li><span class="black_status">{{pyear}}</span> </li>
+						<li><span class="blue_status"> {{year}}</span></li>
+						<li class="average_label"><span class="green_status"> {{Average}}</span></li>
 					</ul>
 				</div>
 				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
@@ -1397,105 +1477,106 @@
 
 
 		<!-- video -->
-		<div class="row mt-10 mr-28 mb-28" >
-				<div class="mat__box graph_dive" style="width: 100%">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
-								<p>Total Video Views<br>
-									<span class="color_value">{{total_users_video}}</span></p>
-							</div>
-						
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px;">
-									<mat-form-field appearance="outline">
-											<mat-select placeholder="select topic master"  placeholder={{cat_name}} 
-											(selectionChange)="changeTopicMaster($event.value)">
-												<mat-option *ngFor="let item of topicList" [value]="item.id">
-													{{item.cat_name}}
-												</mat-option>
-											</mat-select>
-										</mat-form-field>
-							</div>
-							<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+		<div class="row mt-10 mr-28 mb-28">
+			<div class="mat__box graph_dive" style="width: 100%">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+							<p>Total Video Views<br>
+								<span class="color_value">{{total_users_video}}</span></p>
 						</div>
-						<!-- END OF ROW -->
-					</div>
-					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div id="videochartGraph"></div>
-						<ul class="course_status_ul" style="float: right;">
-							<li><span class="black_status">
 
-							</span> Most Viewed Video :&nbsp;&nbsp;&nbsp; {{maxVideo}}</li>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-								<li><span class="blue_status"></span> 
-									 Least Viewed Video :&nbsp;&nbsp;&nbsp;{{minVideo}}</li>
-						</ul> 
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px;">
+							<mat-form-field appearance="outline">
+								<mat-select placeholder="select topic master" placeholder={{cat_name}}
+									(selectionChange)="changeTopicMaster($event.value)">
+									<mat-option *ngFor="let item of topicList" [value]="item.id">
+										{{item.cat_name}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+					<!-- END OF ROW -->
 				</div>
+				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div id="videochartGraph"></div>
+					<ul class="course_status_ul" style="float: right;">
+						<li><span class="black_status">
+
+							</span><i class="material-icons">
+								bookmark_border
+							</i> Most Viewed Video :&nbsp;&nbsp;&nbsp; {{maxVideo}}</li>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<li><span class="blue_status"></span>
+							<i class="material-icons">
+								bookmark_border
+							</i> Least Viewed Video :&nbsp;&nbsp;&nbsp;{{minVideo}}</li>
+					</ul>
+				</div>
+				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 			</div>
-			<!-- END OF ROW MT-20 MR-28 -->
+		</div>
+		<!-- END OF ROW MT-20 MR-28 -->
 
 
 
-			<!-- surway -->
-		<div class="row mt-10 mr-28 mb-28" >
-				<div class="mat__box graph_dive" style="width: 100%">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="row" fxLayoutAlign="space-between">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
-								<p>Survey Responses
-									<br>
-									<span class="color_value">{{totalSurways}}</span></p>
-							</div>
-						
-							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="width: 150px;">
-								
-								<mat-form-field appearance="outline">
-									<mat-select placeholder="Select Grades"  
-									(selectionChange)="changeGrades($event.value)">
-										<mat-option *ngFor="let item of Grades" [value]="item.id">
-											{{item.value}}
-										</mat-option>
-									</mat-select>
-								</mat-form-field>
-							
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="display: flex; width: 150px">
-
-								<mat-form-field appearance="outline">
-									<mat-select placeholder="Select Client"  
-									(selectionChange)="changeClient($event.value)">
-										<mat-option *ngFor="let item of surwayArray" [value]="item.id">
-											{{item.client_name}}
-										</mat-option>
-									</mat-select>
-								</mat-form-field>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							</div>
-								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px">
-									<!-- [alwaysShowCalendars]="true" -->
-								<mat-form-field appearance="outline">
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-										[showCancel]="true" class="cursor-pointer" 
-										[opens]="'left'" [ranges]="ranges" [(ngModel)]="model" startKey="start" endKey="end"
-										[showCustomRangeLabel]="true" 
-										(datesUpdated)="datesUpdated($event,'surveychartGraph')" readonly=""
-										class="input_date cursor-pointer">
-								</mat-form-field>
-							</div>
+		<!-- surway -->
+		<div class="row mt-10 mr-28 mb-28">
+			<div class="mat__box graph_dive" style="width: 100%">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+							<p>Survey Responses
+								<br>
+								<span class="color_value">{{totalSurways}}</span></p>
 						</div>
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div id="surveychartGraph"></div>
-						<ul class="course_status_ul" style="margin-left: 460px;">
-							<li><span class="black_status"></span> surveys</li>
-							<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li> -->
-						</ul> 
+
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="width: 150px;">
+
+							<mat-form-field appearance="outline">
+								<mat-select placeholder="Select Grades" (selectionChange)="changeGrades($event.value)">
+									<mat-option *ngFor="let item of Grades" [value]="item.id">
+										{{item.value}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="display: flex; width: 150px">
+
+							<mat-form-field appearance="outline">
+								<mat-select placeholder="Select Client" (selectionChange)="changeClient($event.value)">
+									<mat-option *ngFor="let item of surwayArray" [value]="item.id">
+										{{item.client_name}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px">
+							<!-- [alwaysShowCalendars]="true" -->
+							<mat-form-field appearance="outline">
+								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
+									[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
+									(datesUpdated)="datesUpdated($event,'surveychartGraph')" readonly=""
+									class="input_date cursor-pointer">
+							</mat-form-field>
+						</div>
 					</div>
 				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div id="surveychartGraph"></div>
+					<ul class="course_status_ul" style="margin-left: 460px;">
+						<li><span class="black_status"></span> surveys</li>
+						<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li> -->
+					</ul>
+				</div>
 			</div>
+		</div>
 
 
 

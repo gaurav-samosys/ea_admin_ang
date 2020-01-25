@@ -288,6 +288,7 @@ export class Version3Component implements OnInit {
   select_grade=''
   select_client=''
   date_range=''
+  Average: any;
 
   constructor(public dialog: MatDialog,
     private _snackBar: MatSnackBar
@@ -1757,10 +1758,13 @@ export class Version3Component implements OnInit {
       }
       console.log("comparision", this.common)
       this.comparision_data = this.common.data
-      // this.pyear = this.comparision_data[0].name;
-      // this.year =  this.comparision_data[1].name;
-      this.pyear = this.comparision_data.name;
-      this.year =  this.comparision_data.name;
+      console.log(  this.comparision_data )
+      this.pyear = this.comparision_data[0].name;
+      this.year =  this.comparision_data[1].name;
+      this.Average =  this.comparision_data[2].name;
+
+      // this.pyear = this.comparision_data.name;
+      // this.year =  this.comparision_data.name;
 
       this.vertical_id = [];
       this.clients_id  = [];

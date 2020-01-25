@@ -133,25 +133,25 @@ export class AddInterviewComponent implements OnInit {
   update(prodId) {
     console.log(this.response)
     console.log(prodId)
-    // let item = {
-    //   title: this.AddInterviewForm.controls['title'].value,
-    //   status: this.AddInterviewForm.controls['status'].value,
-    //   video_id: this.AddInterviewForm.controls['video_id'].value,
-    // }
+    let item = {
+      title: this.AddInterviewForm.controls['title'].value,
+      status: this.AddInterviewForm.controls['status'].value,
+      video_id: this.AddInterviewForm.controls['video_id'].value,
+    }
     this.interview_service.Post(this.update_expert_interview, {
       id: this.prodId,
-      title:     this.response.title,
-      status:     this.response.status,
-      video_id:   this.response.video_id,
+      title:      item.title,
+      status:     item.status,
+      video_id:   item.video_id,
       token: 'LIVESITE'
     }).subscribe(res => {
       console.log(res)
-      if (res['success'] == true && res['status_code'] == 200) {
+      // if (res['success'] == true && res['status_code'] == 200) {
         this.toastr.success('Expert Interview Record Update Successfully')
         this.router.navigate(['/apps/expert_interview'])
-      } else {
-        this.toastr.warning('There Are some Issue')
-      }
+      // } else {
+        // this.toastr.warning('There Are some Issue')
+      // }
     });
   }
 

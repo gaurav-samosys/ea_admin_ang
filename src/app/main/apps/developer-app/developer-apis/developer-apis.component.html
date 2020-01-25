@@ -50,7 +50,7 @@
                     <!-- style="flex-basis: 400px;
                     max-width: 400px;" -->
                       <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
-                        class="ColVis_Button ColVis_MasterButton"><span> Show/Hide Column</span></button>
+                        class="ColVis_Button ColVis_MasterButton" style="color: white; background-color: #7da843 !important;"><span> Show/Hide Column</span></button>
                       <mat-menu #menu="matMenu">
                         <button mat-menu-item >
                           
@@ -78,10 +78,10 @@
             <div class="row mt-20">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <table mat-table [dataSource]="dataSource" class="table">
+                <mat-table [dataSource]="dataSource" class="table">
                   <!-- Name Column -->
                   <ng-container matColumnDef="full_name">
-                    <th mat-header-cell *matHeaderCellDef> Full Name
+                    <mat-header-cell *matHeaderCellDef> Full Name
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('full_name','ASC')"
                           [class]='(this.sort_column=="full_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -92,14 +92,15 @@
                           arrow_downward
                         </i>
                       </span>
-                    </th>
-                    <td class="style" mat-cell *matCellDef="let element" (click)="openDialog(element)">
-                      {{element.first_name}} {{element.last_name}}</td>
+                    </mat-header-cell>
+                    <mat-cell class="style"  *matCellDef="let element" (click)="openDialog(element)">
+                      {{element.first_name}} {{element.last_name}}</mat-cell>
                   </ng-container>
 
                   <!-- Weight Column -->
                   <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef> Email
+                    <mat-header-cell style="padding-right: 80px;
+                    " *matHeaderCellDef> Email
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('email','ASC')"
                           [class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -109,13 +110,14 @@
                           [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </th>
-                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                      </span> </mat-header-cell>
+                    <mat-cell style="padding-right: 80px;
+                    " *matCellDef="let element"> {{element.email}} </mat-cell>
                   </ng-container>
 
                   <!-- Symbol Column -->
                   <ng-container matColumnDef="app_id">
-                    <th mat-header-cell *matHeaderCellDef> App_Id
+                    <mat-header-cell *matHeaderCellDef> App_Id
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('app_id','ASC')"
                           [class]='(this.sort_column=="app_id" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -125,12 +127,13 @@
                           [class]='(this.sort_column=="app_id" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </th>
-                    <td mat-cell *matCellDef="let element"> {{element.app_id}} </td>
+                      </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.app_id}} </mat-cell>
                   </ng-container>
 
                   <ng-container matColumnDef="app_secret">
-                    <th mat-header-cell *matHeaderCellDef> App_Secret
+                    <mat-header-cell style="padding-right: 80px;
+                    " *matHeaderCellDef> App_Secret
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('app_secret','ASC')"
                           [class]='(this.sort_column=="app_secret" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -140,12 +143,15 @@
                           [class]='(this.sort_column=="app_secret" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </th>
-                    <td mat-cell *matCellDef="let element"> {{element.app_secret}} </td>
+                      </span> </mat-header-cell>
+                    <mat-cell style="padding-right: 80px;
+                    " *matCellDef="let element"> {{element.app_secret}} </mat-cell>
                   </ng-container>
 
                   <ng-container matColumnDef="website">
-                    <th mat-header-cell *matHeaderCellDef> Domain
+                    <mat-header-cell style="padding-right: 80px;
+                    "
+                     *matHeaderCellDef> Domain
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('website','ASC')"
                           [class]='(this.sort_column=="website" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -155,12 +161,14 @@
                           [class]='(this.sort_column=="website" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </th>
-                    <td mat-cell *matCellDef="let element"> {{element.website}} </td>
+                      </span> </mat-header-cell>
+                    <mat-cell style="padding-right: 80px;
+                    "
+                     *matCellDef="let element"> {{element.website}} </mat-cell>
                   </ng-container>
 
                   <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef> Status
+                    <mat-header-cell *matHeaderCellDef> Status
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('status','ASC')"
                           [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -170,16 +178,16 @@
                           [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </th>
-                    <td mat-cell *matCellDef="let element">
+                      </span> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
                       <ui-switch [checked]="element.status == '1' ? true : false"
                         (change)="onChange($event,element.id)"></ui-switch>
-                    </td>
+                    </mat-cell>
                   </ng-container>
 
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
+                  <mat-header-row style="width: 1041px;" *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row style="width: 1041px;" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
                 <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
                     [pageSize]="pageSize" [pageSizeOptions]="[1,2,3,10, 25, 50,100]" showFirstLastButtons
                     (page)="handlePage($event)"></mat-paginator>

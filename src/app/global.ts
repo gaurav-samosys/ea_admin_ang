@@ -2,11 +2,13 @@
 // export const getClients="http://192.168.0.126/enrichedacademy_live/api/admin/editClient";
 export const editClient="http://192.168.0.126/enrichedacademy_live/api/admin/editClient";
 
-export const expert_interview="http://192.168.0.40/enrichedacademy_live/api/admin/expert_interview"  
-export const add_expert_interview="http://192.168.0.40/enrichedacademy_live/api/admin/add_expert_interview"
-export const delete_expert_interview_video="http://192.168.0.40/enrichedacademy_live/api/admin/delete_expert_interview_video"
-export const update_expert_interview="http://192.168.0.40/enrichedacademy_live/api/admin/update_expert_interview"
-export const expert_interviews_detail="http://192.168.0.40/enrichedacademy_live/api/admin/expert_interviews_detail"
+export const expert_interview=" https://staging.enrichedacademy.com/api/admin/expert_interview"  
+export const add_expert_interview=" https://staging.enrichedacademy.com/api/admin/add_expert_interview"
+export const delete_expert_interview_video=" https://staging.enrichedacademy.com/api/admin/delete_expert_interview_video"
+export const update_expert_interview=" https://staging.enrichedacademy.com/api/admin/update_expert_interview"
+export const expert_interviews_detail=" https://staging.enrichedacademy.com/api/admin/expert_interviews_detail"
+
+
 
 
 export const exportManageCompanies="http://192.168.0.18/enrichedacademy_live/api/admin/exportManageCompanies";

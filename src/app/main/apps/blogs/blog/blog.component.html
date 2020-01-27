@@ -32,13 +32,13 @@
 
             <div class="row mat__box1 mt-10 ">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-5 mt-10" fxLayoutGap="25px">
-                <mat-form-field appearance="outline" style="margin-right: 25px; width: 450px; margin-top: 30px;">
+                <mat-form-field appearance="outline" style="margin-right: 25px; width: 450px; margin-top: 30px;    padding-left: 15px;">
                   <mat-label>Post Title</mat-label>
                   <input formControlName="post_title" matInput placeholder="Search post title"
                     (keyup)="Search($event.target.value,'title')">
                 </mat-form-field>
 
-                <mat-form-field appearance="outline"  style="margin-right: 25px; width: 450px; margin-top: 30px;">
+                <mat-form-field appearance="outline"  style="margin-right: 25px; width: 450px; margin-top: 30px;    padding-left: 15px;">
                   <mat-label>Categary</mat-label>
                   <input matInput formControlName="category" placeholder="Search categary"
                     (keyup)="Search($event.target.value,'categary')">
@@ -46,7 +46,7 @@
               </div>
 
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8" fxLayoutGap="25px">
-                <mat-form-field class="example-full-width" style="margin-right: 25px; width: 450px;margin-top:15px;" appearance="outline">
+                <mat-form-field class="example-full-width" style="margin-right: 25px; width: 450px;margin-top:15px;    padding-left: 15px;" appearance="outline">
                   <mat-label>Start Date</mat-label>
                   <!-- [max]="maxDate" -->
                   <input matInput [min]="myDate" [max]="blogForm.controls['end_date'].value"
@@ -55,7 +55,7 @@
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field class="example-full-width"  style="margin-right: 25px; width: 450px;margin-top: 15px;" appearance="outline"  >
+                <mat-form-field class="example-full-width"  style="margin-right: 25px; width: 450px;margin-top: 15px;    padding-left: 15px;" appearance="outline"  >
                   <mat-label>End Date</mat-label>
                   <input matInput formControlName="end_date" readonly [min]="blogForm.controls['start_date'].value"
                     [matDatepicker]="picker2">

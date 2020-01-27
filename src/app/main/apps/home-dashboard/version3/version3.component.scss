@@ -160,9 +160,29 @@ td, th {
 .sort_user{
   
 }
+.survey_graph ul{justify-content: center;}
+.survey_graph ul li { list-style: none;position: relative;padding: 0 0 0 20px}
+
+.survey_graph ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background-color:#1976a1 ;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  // stroke:#ff6600;
+}
 .comparison_graph ul{justify-content: center;}
 .comparison_graph ul li { list-style: none;position: relative;padding: 0 0 0 20px}
-li.average_label:after {content: "";width: 16px; position: absolute;  height: 3px;  background: #ff6600;  border-radius: 4px;  left: -3px;  top: 8px;}
+li.average_label:after
+ {content: "";width: 16px; position: absolute; 
+   height: 3px; 
+    // background: #ff6600; 
+     border-radius: 4px;  left: -3px;  top: 8px;}
 
   .comparison_graph ul li::before {
     content: "";
@@ -200,8 +220,10 @@ li.average_label:after {content: "";width: 16px; position: absolute;  height: 3p
 //   color: #1a73e8;
 // }
 
+.users{
+  width: 100%;
 
-
+}
 .tabbing_container .tabs li {
   padding: 6px 15px;
   cursor: pointer;
@@ -278,13 +300,17 @@ li.average_label:after {content: "";width: 16px; position: absolute;  height: 3p
     color: unset;
 }
 .select2-search__field:hover{background: #3195c2;}
-
+// .graph_section{width: 100%;}
+.graph_section .highcharts-container{width:100%;height:300px;}
 
 .reload { background-color: #3195c2; border-radius: 10px; box-shadow: 0 0 10px rgba(32, 176, 242, 0.40); font-size: 18px; padding: 12px; color: #fff; display: inline-block; vertical-align: middle; width: 250px; height: 49px; text-align: center; margin-top: 5px; }
 .reload .mat-icon{margin-left:10px;margin-top:8px;}
 .industries_datatable_search {padding:2px 0px;}
-.graph_dive { background-color: #fff; border: 1px solid #efefef; border-radius: 15px; box-shadow: 0 0 6px rgba(32, 176, 242, 0.25); margin-top: 30px; padding: 20px 15px; height: 530px;}
-.graph_dive .total-us p{display:inline-block;font-size:17px;color:#323759;margin:0;margin-right:10px;line-height:24px;margin-bottom:5px;font-weight:600;}
+.graph_dive { background-color: #fff;border: 1px solid #efefef; border-radius: 15px;
+  box-shadow: 0 0 6px rgba(32, 176, 242, 0.25);margin-top: 30px; padding: 20px 15px; height: 435px;}
+.graph_dive .total-us p{display:inline-block;
+  font-size:17px;color:#323759;margin:0;margin-right:10px;line-height:24px;
+  margin-bottom:5px;font-weight:600;}
 .graph_dive .total-us p span{color: #039be5;}
 .input_date { background-color: #fff; width: 215px; outline: none; background-size: 18px; display: inline-block; color: #989bac; text-align: left; cursor: pointer; margin-top: 0px; }
 .total_user_dd { height: 35px !important; background-color: #fff; width: 220px; outline: none; border: 1px solid #e6e7ee; padding: 6px 15px; border-radius: 4px; color: #989bac; margin-right: 9px; margin-top: 4px; }
@@ -317,3 +343,4 @@ li.average_label:after {content: "";width: 16px; position: absolute;  height: 3p
 //   border-bottom-width: 1px;
 //   border-bottom-style: solid;
 // }
+

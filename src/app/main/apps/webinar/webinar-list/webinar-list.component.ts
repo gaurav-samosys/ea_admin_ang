@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatPaginator } from '@angular/material';
 import { WebinarListService } from './webinar-list.service';
+import * as myGlobals from '../../../../global';
 
 @Component({
   selector: 'app-webinar-list',
@@ -15,6 +16,12 @@ export class WebinarListComponent implements OnInit {
   endIndex = 10
   data: any;
   value = '';
+  get_webinars=myGlobals.get_webinars
+  // delete_webinar=myGlobals.delete_webinar
+ 
+  pageNumber: number = 0;
+  size: number = 10;
+  
 
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
@@ -47,19 +54,22 @@ export class WebinarListComponent implements OnInit {
  /**
    * Get list by using apicall
    */
+  webinar_img
   getWebinarList() {
-    // this.expert_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-    //   this.response = res
-    //   console.log(this.response)
-    //   this.data = this.response.data;
-    //   console.log(this.data)
-    //   this.dataSource = this.data;
-    //   this.allItems = this.response.total_data;
-    //   this.dataSource = new MatTableDataSource(this.data);
-    //   this.dataSource.paginator = this.paginator;
-    //   //this.setPage(1);
+    this.webinar_service.Post(this.get_webinars, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      console.log("get_webinars list=============",this.response)
+      this.data = this.response.data;
+      console.log(this.data)
+      this.webinar_img=this.data['webinar_img']
+      console.log (this.webinar_img)
+      this.dataSource = this.data;
+      this.allItems = this.response.total_data;
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      //this.setPage(1);
 
-    // });
+    });
   }
 
   public handlePage(e: any) {
@@ -90,7 +100,7 @@ export class WebinarListComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     // this.pageNumber = start
     //  this.showloader=true;
-    // this.expert_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    // this.webinar_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       // this.response = res
       //this.showloader=false;
       this.data = this.response.data;
@@ -107,7 +117,7 @@ export class WebinarListComponent implements OnInit {
   updateSortingOrderWebinar(sort_column, sort_order) {
     this.sort_column = sort_column
     this.ASC = sort_order
-    // this.expert_service.Post(this.getClients, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    // this.webinar_service.Post(this.getClients, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
     //   this.response = res
     //   this.dataSource=this.response.data
     // });

@@ -1110,11 +1110,16 @@
 		</div>
 		<!-- END OF MAT__BOX MT-20 MR-28 -->
 
+     <!-- END OF TABLES	 -->
+
+
+
+
 		<div class="row mt-20 mr-28" style="display: flex;">
-			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+
+			<!-- total_users -->
+			<div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
-
-
 				<div class="mat__box graph_dive">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
@@ -1132,8 +1137,6 @@
 									startKey="start" endKey="end" [ranges]="ranges" [showCustomRangeLabel]="true"
 									(datesUpdated)="datesUpdated($event,'usergraph')">
 
-
-
 								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="usergraph"
@@ -1143,15 +1146,24 @@
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<div id="users"></div>
+					<div class="graph_section" id="users"></div>
 				</div>
 				<!-- END OF MAT__BOX -->
 			</div>
 
 			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 
+
+
+
+
+
+
+
+
+
 			<!-- total downloads -->
-			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+			<div class="total_download col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
 				<div class="mat__box graph_dive">
 					<div class="row" fxLayoutAlign="space-between">
@@ -1174,21 +1186,21 @@
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<div id="download"></div>
+					<div class="graph_section" id="download"></div>
 					<ul class="course_status_ul">
 						<li><span class="blue_status">
 								<i class="blue_status material-icons">
-									bookmark_border
+									bookmark
 								</i>
 							</span>Certificates {{certificate}}
 						</li>
 						<li>
 							<span class="black_status"></span>
 							<i class="black_status material-icons">
-								bookmark_border
+								bookmark
 							</i> Workbooks {{workbook}}</li>
 						<li><span class="green_status"></span> <i class="green_status material-icons">
-								bookmark_border
+								bookmark
 							</i>Tools {{tool}}</li>
 					</ul>
 				</div>
@@ -1213,7 +1225,7 @@
 
 
 		<!-- total video -->
-		<div class="row mt-20 mr-28" style="display: flex;">
+		<div class="total_video row mt-20 mr-28" style="display: flex;">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
 				<div class="mat__box graph_dive">
@@ -1235,7 +1247,7 @@
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<div id="video"></div>
+					<div class="graph_section" id="video"></div>
 				</div>
 				<!-- END OF MAT__BOX -->
 			</div>
@@ -1244,7 +1256,20 @@
 
 
 
-			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Certificates claimed -->
+			<div class="total_certificates col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
 				<div class="mat__box graph_dive">
 					<div class="row" fxLayoutAlign="space-between">
@@ -1270,18 +1295,18 @@
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<div id="certificate"></div>
+					<div class="graph_section" id="certificate"></div>
 
 					<ul class="course_status_ul">
 						<li>
 							<span class="black_status">
 								<i class="black_status material-icons">
-									bookmark_border
+									bookmark
 								</i></span>
 								<span class="black_status"> Downloaded {{downloaded}}</span></li>
 
 						<li><span class="blue_status"><i class="blue_status material-icons">
-									bookmark_border
+									bookmark
 								</i> </span><span class="blue_status"> Pending {{download_pending}}</span></li>
 					</ul>
 				</div>
@@ -1306,8 +1331,8 @@
 
 
 		
-		<!-- course -->
-		<div class="row mt-20 mr-28" style="display: flex;">
+		<!-- course status -->
+		<div class="total_course row mt-20 mr-28" style="display: flex;">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%;">
 				<div class="mat__box graph_dive">
@@ -1329,28 +1354,36 @@
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<div id="completion"></div>
+					<div class="graph_section" id="completion"></div>
 
 					<ul class="course_status_ul">
 						<li><span class="blue_status"></span>
 							<i class="blue_status material-icons">
-								bookmark_border
+								bookmark
 							</i>Not Started {{notstarted}}</li>
 						<li><span class="black_status"></span><i class="black_status material-icons">
-								bookmark_border
+								bookmark
 							</i> Pending {{pending}}</li>
 						<li><span class="green_status"></span> <i class="green_status material-icons">
-								bookmark_border
+								bookmark
 							</i>Mandatory {{mandatory}}</li>
 						<li><span class="orange_status"></span><i class="orange_status material-icons">
-								bookmark_border
+								bookmark
 											</i> Full Course {{fullCourse}}</li>
 					</ul>
 				</div>
 				<!-- END OF MAT__BOX -->
 			</div>
 			<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+
+
+
+
+
+
+
+<!-- Access Code -->
+			<div class="total_access_code col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;max-width: 49%; margin-left: 20px;">
 				<div class="mat__box graph_dive">
 					<div class="row" fxLayoutAlign="space-between">
@@ -1369,13 +1402,13 @@
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<div id="access"></div>
+					<div class="graph_section" id="access"></div>
 					<ul class="course_status_ul">
 						<li><span class="black_status"><i class="black_status material-icons">
-								bookmark_border
+								bookmark
 							</i></span><span class="black_status"> Unused Code {{unused}}</span></li>
 						<li><span class="blue_status"><i class="blue_status material-icons">
-								bookmark_border
+								bookmark
 							</i></span> <span class="blue_status"> Used Code {{used}}</span></li>
 					</ul>
 				</div>
@@ -1395,7 +1428,7 @@
 
 
 		<!-- year of year -->
-		<div class="row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
+		<div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
 			<div class="mat__box graph_dive" style="width: 100%">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
@@ -1446,7 +1479,7 @@
 				</div>
 				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comparison_graph">
-					<div id="comparison"></div>
+					<div class="graph_section" id="comparison"></div>
 
 					<ul class="course_status_ul" *ngIf="user_status == 'false' ">
 						<li><span class="orange_status"></span> {{full_2019}}</li>
@@ -1477,7 +1510,7 @@
 
 
 		<!-- video -->
-		<div class="row mt-10 mr-28 mb-28">
+		<div class="total_videochart row mt-10 mr-28 mb-28">
 			<div class="mat__box graph_dive" style="width: 100%">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
@@ -1502,17 +1535,17 @@
 				</div>
 				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div id="videochartGraph"></div>
+					<div class="graph_section" id="videochartGraph"></div>
 					<ul class="course_status_ul" style="float: right;">
 						<li><span class="black_status">
 
-							</span><i class="material-icons">
-								bookmark_border
-							</i> Most Viewed Video :&nbsp;&nbsp;&nbsp; {{maxVideo}}</li>
+							</span><i class="black_status material-icons">
+								bookmark
+							</i><span style="color: #5c5c61;"> Most Viewed Video :&nbsp;&nbsp;&nbsp; {{maxVideo}}</span></li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<li><span class="blue_status"></span>
 							<i class="material-icons">
-								bookmark_border
+								bookmark
 							</i> Least Viewed Video :&nbsp;&nbsp;&nbsp;{{minVideo}}</li>
 					</ul>
 				</div>
@@ -1523,8 +1556,11 @@
 
 
 
+
+
+
 		<!-- surway -->
-		<div class="row mt-10 mr-28 mb-28">
+		<div class="total_survey row mt-10 mr-28 mb-28">
 			<div class="mat__box graph_dive" style="width: 100%">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
@@ -1568,10 +1604,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div id="surveychartGraph"></div>
-					<ul class="course_status_ul" style="margin-left: 460px;">
-						<li><span class="black_status"></span> surveys</li>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_graph">
+					<div class="graph_section" id="surveychartGraph"></div>
+					<ul class="course_status_ul">
+						<li><span class="black_status" style="color: black;"> surveys</span></li>
 						<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li> -->
 					</ul>
 				</div>

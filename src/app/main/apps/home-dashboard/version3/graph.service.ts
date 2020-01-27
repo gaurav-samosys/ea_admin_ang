@@ -3,12 +3,13 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
-
+// scatter,column,line
 @Injectable()
 export class GraphService 
 {
  public users: any =  {
     chart: {
+       height:300,
         type: 'column',zoomType: 'xy', panning: true, panKey: 'shift',
                         resetZoomButton: {
                             position: {
@@ -19,6 +20,9 @@ export class GraphService
                         }
                     }
     },
+    credits: {
+        enabled: false
+      },
     navigation: {buttonOptions: {enabled: false}},
     title: {
         text: ''
@@ -46,13 +50,21 @@ export class GraphService
     },
     series: [{showInLegend: false,enableMouseTracking: true},
                 { 
-                    showInLegend: false,name: "Users",data: []
-                }]
+                    showInLegend: false,
+                    name: "Users",
+                    data: []
+                }
+            ]
 }
 
 
+
+
+
+
+
  public downloads: any = {
-    chart: {showInLegend: false,zoomType: 'x',
+    chart: {showInLegend: false,zoomType: 'x',height:300,
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
@@ -114,9 +126,13 @@ credits: {enabled: false},
 
 }
 
+
+
+
+
  public video: any =  {
     chart: {
-        type: 'column',zoomType: 'x',
+        type: 'column',zoomType: 'x',height:300,
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
@@ -125,7 +141,9 @@ credits: {enabled: false},
                                 y: -30
                             }
                         }
-    },
+    },  credits: {
+        enabled: false
+      },
     navigation: {buttonOptions: {enabled: false}},
     title: {
         text: ''
@@ -164,9 +182,14 @@ credits: {enabled: false},
 }
 
 
+
+
+
+
+
 certificate:any={
     chart: {
-        type: 'column',zoomType: 'x',
+        type: 'column',zoomType: 'x',height:300,
                         resetZoomButton: {
                             position: {
                                     // align: 'right', // by default
@@ -175,7 +198,9 @@ certificate:any={
                                     y: -30
                                 }
                             }
-    },
+    },  credits: {
+        enabled: false
+      },
      navigation: {buttonOptions: {enabled: false}},
     title: {
         text: ''
@@ -211,9 +236,21 @@ certificate:any={
     ]
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 completion:any={
     chart: {
-        type: 'column',
+        type: 'column',height:300,
         zoomType: 'x',
 
                         resetZoomButton: {
@@ -224,7 +261,9 @@ completion:any={
                                     y: -30
                                 }
                             }
-    },
+    },  credits: {
+        enabled: false
+      },
     navigation: {buttonOptions: {enabled: false}},
     title: {
         text: ''
@@ -273,9 +312,21 @@ completion:any={
     ]
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 access_code:any={
     chart: {
-        type: 'column',
+        type: 'column',height:300,
         zoomType: 'x',
                         resetZoomButton: {
                             position: {
@@ -285,7 +336,9 @@ access_code:any={
                                 y: -30
                             }
                         }
-    },
+    },  credits: {
+        enabled: false
+      },
      navigation: {buttonOptions: {enabled: false}},
     title: {
         text: ''
@@ -321,10 +374,23 @@ access_code:any={
     ]
 }
 
+
+
+
+
+
+
+
+
+
+
+
 comparision:any={
-    chart: {zoomType: 'x',type: 'column',resetZoomButton: {position: {x: 0,y: -30}}},
+    chart: {height:300, zoomType: 'x',type: 'column',resetZoomButton: {position: {x: 0,y: -30}}},
 
-
+    credits: {
+        enabled: false
+      },
                         navigation: {buttonOptions: {enabled: false}},
 
                         title: {text: ''},
@@ -356,13 +422,26 @@ comparision:any={
                 //     shared: true
                 // },
               plotOptions: {column: ''},              
-                series:[{
-
-                }]   
+                series:[
+                    {
+                        name: 'Average',
+                        data: [
+                          [1373228000, 40],
+                          [1373928000, 32],
+                          [1374228000, 30]
+                        ],
+                        color: 'black',
+                        tooltip: {valueSuffix: '°C'}
+                      },
+                ]   
 }
 
+
+
+
+
 public survey: any =  {
-    chart: { 
+    chart: { height:300,
         type: 'column',zoomType: 'x',
                         resetZoomButton: {
                             position: {
@@ -372,7 +451,9 @@ public survey: any =  {
                                 y: -30
                             }
                         }
-    },
+    },  credits: {
+        enabled: false
+      },
     navigation: {buttonOptions: {enabled: false}},
     title: {
         text: ''
@@ -389,7 +470,7 @@ public survey: any =  {
         enabled: false
     },
     tooltip: {
-        pointFormat: 'Users: <b>{point.y:.1f}</b>'
+        pointFormat: 'Serveys: <b>{point.y:.1f}</b>'
     },
     series: [{showInLegend: false,enableMouseTracking: true},{
         name: 'Survey Views',

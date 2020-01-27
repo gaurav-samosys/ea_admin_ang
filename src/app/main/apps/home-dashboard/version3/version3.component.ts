@@ -263,7 +263,7 @@ export class Version3Component implements OnInit {
     'Last 6 Month': [moment().subtract(5, 'month'), moment()],
 
     'Year To Date': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
-    
+
     'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
   }
 
@@ -285,10 +285,12 @@ export class Version3Component implements OnInit {
   maxVideo: any;
   surwayArray: any;
   totalSurways: any;
-  select_grade=''
-  select_client=''
-  date_range=''
+  select_grade = ''
+  select_client = ''
+  date_range = ''
   Average: any;
+
+  getToggle
 
   constructor(public dialog: MatDialog,
     private _snackBar: MatSnackBar
@@ -323,6 +325,8 @@ export class Version3Component implements OnInit {
 
 
   ngOnInit() {
+    this.getToggle = this._fuseSidebarService.getSidebar('navbar');
+    console.log("getToggle===============#############",this.getToggle)
     //   this.matSelect.valueChange.subscribe(value => {
     //     console.log(value);
     // });
@@ -397,7 +401,7 @@ export class Version3Component implements OnInit {
     this.getVideoListDropdown();
     this.getSurveyListDropdown();
 
-    this.getSurveyChartGraph(this.select_client,this.select_grade,this.date_range)
+    this.getSurveyChartGraph(this.select_client, this.select_grade, this.date_range)
   }
 
   catName = []
@@ -439,7 +443,7 @@ export class Version3Component implements OnInit {
     this.minVideo = res.minVideo
     this.maxVideo = res.maxVideo
 
-    console.log(res,this.maxVideo,this.minVideo)
+    console.log(res, this.maxVideo, this.minVideo)
     this.vertical_id = [];
     this.clients_id = [];
     var data = res.data
@@ -449,7 +453,7 @@ export class Version3Component implements OnInit {
     }
     var categary = res.category
     this.total_users_video = res.total_users
- 
+
     // console.log('vedio ===========', res, res['data'], " this.total_users_video=======", this.total_users_video)
     this.graph.video.xAxis.categories = categary
     // this.graph.video.yAxis.categories =  element
@@ -474,24 +478,24 @@ export class Version3Component implements OnInit {
   changeGrades(value) {
     console.log(value)
     this.select_grade = value
-    this.getSurveyChartGraph(this.select_grade,this.select_client,this.date_range)
+    this.getSurveyChartGraph(this.select_grade, this.select_client, this.date_range)
   }
 
   changeClient(value) {
     console.log(value)
     this.select_client = value
-    this.getSurveyChartGraph(this.select_grade,this.select_client,this.date_range)
+    this.getSurveyChartGraph(this.select_grade, this.select_client, this.date_range)
 
   }
   // getSurveyChart
 
-  getSurveyChartGraph(select_grade,select_client,date_range) {
+  getSurveyChartGraph(select_grade, select_client, date_range) {
     this.v3Service.POST(this.getSurveyChart, {
       token: 'LIVESITE',
 
-      select_grade:  select_grade, 
+      select_grade: select_grade,
       select_client: select_client,
-      dateRange:     date_range,
+      dateRange: date_range,
     }).subscribe(res => {
       this.totalSurways = res['totals']
       var columns = res['columns']
@@ -509,7 +513,7 @@ export class Version3Component implements OnInit {
       // this.graph.survey.series[1].data = element
 
       Highcharts.chart('surveychartGraph', this.graph.survey);
-     
+
     })
   }
 
@@ -1758,16 +1762,16 @@ export class Version3Component implements OnInit {
       }
       console.log("comparision", this.common)
       this.comparision_data = this.common.data
-      console.log(  this.comparision_data )
+      console.log(this.comparision_data)
       this.pyear = this.comparision_data[0].name;
-      this.year =  this.comparision_data[1].name;
-      this.Average =  this.comparision_data[2].name;
+      this.year = this.comparision_data[1].name;
+      this.Average = this.comparision_data[2].name;
 
       // this.pyear = this.comparision_data.name;
       // this.year =  this.comparision_data.name;
 
       this.vertical_id = [];
-      this.clients_id  = [];
+      this.clients_id = [];
 
       //this.graph.comparision.title.text= this.graph.access_code.comparision.text + " " +  this.common.total_used+"/"+this.common.total_unused
 

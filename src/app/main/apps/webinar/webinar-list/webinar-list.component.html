@@ -110,9 +110,11 @@
                       </mat-cell>
                     </ng-container>
 
+
+  
                     <!-- Weight Column -->
                     <ng-container matColumnDef="image">
-                      <mat-header-cell *matHeaderCellDef> Video
+                      <mat-header-cell *matHeaderCellDef> Image
                         <span class="pointer">
                           <i (click)="updateSortingOrderWebinar('image','ASC')"
                             [class]='(this.sort_column=="image" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -124,7 +126,7 @@
                           </i>
                         </span>
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let element"> {{element.image}} </mat-cell>
+                      <mat-cell *matCellDef="let element"><img src="{{element.webinar_img}}"> </mat-cell>
                     </ng-container>
 
 
@@ -156,7 +158,7 @@
                             arrow_downward
                           </i>
                         </span> </mat-header-cell>
-                      <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+                      <mat-cell *matCellDef="let element"> {{element.webinar_date}} </mat-cell>
                     </ng-container>
 
 
@@ -172,7 +174,7 @@
                             arrow_downward
                           </i>
                         </span> </mat-header-cell>
-                      <mat-cell *matCellDef="let element"> {{element.start_time}} </mat-cell>
+                      <mat-cell *matCellDef="let element"> {{element.webinar_time}} </mat-cell>
                     </ng-container>
 
 
@@ -198,7 +200,7 @@
 
                         <mat-menu #belowMenu="matMenu" yPosition="below">
                           <button mat-menu-item matTooltip="Edit"
-                            [routerLink]="['/apps/add_expert_interview', element.id]">Edit</button>
+                            [routerLink]="['/apps/add_webinar', element.id]">Edit</button>
                           <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
                         </mat-menu>
                         <!-- <button mat-icon-button>

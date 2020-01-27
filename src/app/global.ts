@@ -8,9 +8,6 @@ export const delete_expert_interview_video=" https://staging.enrichedacademy.com
 export const update_expert_interview=" https://staging.enrichedacademy.com/api/admin/update_expert_interview"
 export const expert_interviews_detail=" https://staging.enrichedacademy.com/api/admin/expert_interviews_detail"
 
-
-
-
 export const exportManageCompanies="http://192.168.0.18/enrichedacademy_live/api/admin/exportManageCompanies";
 export const exportManageClient="http://192.168.0.18/enrichedacademy_live/api/admin/exportManageClient"
 export const downloadAccessCodesFile="http://192.168.0.18/enrichedacademy_live/api/admin/downloadAccessCodesFile"
@@ -58,6 +55,19 @@ export const getVideoChart="http://192.168.0.18/enrichedacademy_live/api/admin/g
 export const topicsMaster="http://192.168.0.18/enrichedacademy_live/api/admin/topicsMaster"
 export const ClientsList="http://192.168.0.18/enrichedacademy_live/api/admin/ClientsList"
 export const getSurveyChart="http://192.168.0.18/enrichedacademy_live/api/admin/getSurveyChart"
+
+
+
+export const add_webinar="https://staging.enrichedacademy.com/api/admin/add_webinar"
+export const getwebinarById="https://staging.enrichedacademy.com/api/admin/getwebinarById"
+// export const update_webinar="https://staging.enrichedacademy.com/api/admin/update_webinar"
+// export const delete_webinar="https://staging.enrichedacademy.com/api/admin/delete_webinar"
+export const get_webinars=" https://staging.enrichedacademy.com/api/admin/get_webinars"
+
+
+
+
+
 
 
 

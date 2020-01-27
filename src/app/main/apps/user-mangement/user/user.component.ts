@@ -39,6 +39,8 @@ export class UserComponent implements OnInit {
   public pageSize = 10;
   public currentPage = 0;
   public totalSize = 0;
+  pageNumber: number = 0;
+  size: number = 10;
   startIndex = 1
   endIndex = 10;
   value = '';
@@ -56,8 +58,7 @@ export class UserComponent implements OnInit {
   getCountry = myGlobals.getCountry;
   getStates = myGlobals.getState;
   changeUserStatus = myGlobals.changeUserStatus;
-  pageNumber: number = 0;
-  size: number = 10;
+
   rows: any;
   start: any;
   end: any;

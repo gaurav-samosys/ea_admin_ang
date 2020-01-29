@@ -1,5 +1,5 @@
 import { Component, OnInit , ElementRef, ViewChild,EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AddclientService } from './addclient.service';
 import * as myGlobals from '../../../../global';
@@ -33,6 +33,7 @@ portal:any;
  addClients=myGlobals.addClient;
     getCompanies=myGlobals.getCompanies;
       getClientVertical=myGlobals.getClientVertical;
+      getClients=myGlobals.getClients
        urls = [];
        showreward=1;
  common:any;
@@ -42,6 +43,7 @@ portal:any;
  selected ={startDate: moment, endDate: moment};
  status=false;
  formdata:any;
+ id
  clientadded_status:any;
  reward_start:any;
  imgURL:any;
@@ -49,13 +51,17 @@ portal:any;
  imgURLchallenge:any;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  constructor(private sanitizer:DomSanitizer,private datePipe: DatePipe,private _snackBar: MatSnackBar,private rt:Router,private _formBuilder: FormBuilder,public addclient_service:AddclientService) { }
+  constructor(
+    private _Activatedroute :ActivatedRoute ,private sanitizer:DomSanitizer,private datePipe: DatePipe,private _snackBar: MatSnackBar,private rt:Router,private _formBuilder: FormBuilder,public addclient_service:AddclientService) { }
   
   transform(image) {
     return this.sanitizer.bypassSecurityTrustHtml(image);
   }
   
   ngOnInit() {
+    this.id = window.location.href.split('client-mangement/addclient/')[1]
+    // alert(id)
+    console.log(this.id)
     this.getcompany();
     this.getVertical();
     this.getPortalview();
@@ -98,7 +104,51 @@ portal:any;
     this.addclientForm.patchValue({
       free_link:'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
     })
+
+    this.getCompWithClientData();
   }
+
+  dataArray=[]
+  company_name
+  getCompWithClientData()
+  {
+  	 this.addclient_service.Post(this.getClients,{company_id:this.id,fields:'*',token:'LIVESITE'}).subscribe(res=>{
+     this.common=res
+     console.log(this.common)
+     if(this.common['success']==true){
+      this.dataArray=this.common['data']
+       console.log(this.dataArray)
+       for (let index = 0; index < this.dataArray.length; index++) {
+        var indexValue = this.dataArray[index];
+
+         this. company_name = this.dataArray[index]['company_name'];
+       console.log(this.company_name,indexValue)
+         this.addclientForm.controls['companyname'].setValue(indexValue['company_name'])
+       }
+     }
+    //  this.allItems = this.common.total_data;
+    //  this.data=this.common.data;
+    //  console.log(this.data)
+    //  this.company_name=this.data[0].company_name;
+    //   this.first_name=this.data[0].first_name;
+    //   this.last_name=this.data[0].last_name;
+    //   this.emails=this.data[0].email;
+    //   this.phone=this.data[0].phone;
+    //   this.industrys=this.data[0].industry;
+    //       this.dataSource = new MatTableDataSource(this.data);
+    //     this.dataSource.paginator = this.paginator;
+ })
+  }
+
+
+
+
+
+
+
+
+
+
 
         public hasError = (controlName: string, errorName: string) =>{
     return this.addclientForm.controls[controlName].hasError(errorName);

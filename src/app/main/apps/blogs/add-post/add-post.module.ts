@@ -28,7 +28,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
+import { CKEditorModule } from 'ng2-ckeditor';
 const routes:Routes=[{
   
         path: '**',
@@ -48,6 +48,7 @@ const routes:Routes=[{
         MatIconModule,
         MatMenuModule,
         MatSelectModule,
+        CKEditorModule,
         AngularEditorModule,
         MatTableModule,
         MatTabsModule,

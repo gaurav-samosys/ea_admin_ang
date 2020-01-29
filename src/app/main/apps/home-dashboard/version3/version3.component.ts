@@ -325,6 +325,19 @@ export class Version3Component implements OnInit {
 
 
   ngOnInit() {
+    this._router.events
+    .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this._unsubscribeAll)
+    )
+    .subscribe(() => {
+        if (this._fuseSidebarService.getSidebar('navbar')) {
+            this._fuseSidebarService.getSidebar('navbar').close();
+        }
+    }
+    );
+
+
     this.getToggle = this._fuseSidebarService.getSidebar('navbar');
     console.log("getToggle===============#############",this.getToggle)
     //   this.matSelect.valueChange.subscribe(value => {

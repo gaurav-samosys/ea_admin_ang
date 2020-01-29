@@ -38,7 +38,7 @@
                   margin-right: 20px; ">
                   <mat-label>Start Time*</mat-label>
                   <!-- [min]="currentDate" -->
-                  <input matInput [min]="AddWebinarForm.controls['start_time'].value"
+                  <input matInput value="{{start_time}}" [min]="AddWebinarForm.controls['start_time'].value"
                     [owlDateTimeTrigger]="dt1" formControlName="start_time" [(ngModel)]="dateTime2"
                     [owlDateTime]="dt1">
                   <owl-date-time [pickerType]="'timer'" [hour12Timer]="true" style="width: 20px;height: 20px;" #dt1>
@@ -50,7 +50,7 @@
                 <mat-form-field appearance="outline" fxFlex="100" style="  width: 345px;
                 margin-right: 20px; ">
                   <mat-label>End Time*</mat-label>
-                  <input matInput [owlDateTimeTrigger]="dt2" formControlName="end_time" [owlDateTime]="dt2">
+                  <input matInput [owlDateTimeTrigger]="dt2" value="{{end_time}}" formControlName="end_time" [owlDateTime]="dt2">
                   <owl-date-time [pickerType]="'timer'" [hour12Timer]="true" #dt2></owl-date-time>
                   <mat-error>End Time is required</mat-error>
                
@@ -58,20 +58,16 @@
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
                 <h2>Attach Image</h2>
-                <!-- selected url *ngIf="message == 1" *ngIf="hide == 1"-->
                 <span>
-                  <!-- <input type="file" (change)="onSelectFile($event)" name="file" accept="image/*"> -->
-                  
-                  <input type="file" (change)="image_upload($event)" name="file" accept="image/*">
-                  <input type="hidden" formControlName="image_upload">
-                  <!-- <img [src]="url"> -->
+                  <input type="file" (change)="onSelectFile($event)" name="file" accept="image/*" >
                   <span class="" *ngIf="message == 0" style="color:red;">
                     <span >{{message1}}</span>
                   </span>
                 </span>
                 <!-- bydefault image-->
                 <img class="file_upload_image" 
-                  [src]="url">
+                  [src]="url" >
+                  <!-- src="{{url?'url':'webinar_img'}}" -->
               </div>
 
               <button type="submit" mat-raised-button color="accent" matTooltip="save Webinar"
@@ -123,3 +119,12 @@
                 <span class="add_file_button">Select File</span>
                 <span class="inner_text_span">Please select and upload file</span>
               </span> -->
+
+
+              <!-- 1 image upload -->
+               <!-- <input type="file" (change)="image_upload($event)" name="file" accept="image/*">
+                  <input type="hidden" formControlName="image_upload"> -->
+
+                  <!-- 2 image pdf -->
+                   <!-- <input type="file" (change)="onSelectFile($event)" name="file" accept="image/*"> -->
+                  <!-- <img [src]="url"> -->

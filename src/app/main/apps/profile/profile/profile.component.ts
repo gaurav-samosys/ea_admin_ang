@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import * as myGlobals from '../../../../global';
 import { ProfileService }    from './profile.service';
 import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,7 @@ states:any;
 data:any;
 horizontalPosition: MatSnackBarHorizontalPosition = 'right';
 verticalPosition: MatSnackBarVerticalPosition = 'top';
-  constructor(private _snackBar: MatSnackBar,private http: HttpClient,private profile_service:ProfileService,private _formBuilder: FormBuilder) { }
+  constructor(public toastr: ToastrService,private _snackBar: MatSnackBar,private http: HttpClient,private profile_service:ProfileService,private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
   	this.fetchCountry();
@@ -66,6 +67,10 @@ verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   }
 
+  /**
+ * Submit Form
+ * @param value 
+ */
   onSubmit()
   {
     if(this.profileForm.invalid)
@@ -80,9 +85,15 @@ verticalPosition: MatSnackBarVerticalPosition = 'top';
             .subscribe(res => {
             this.common=res
             console.log( this.common)
+            this.toastr.success('profile Update Successfully')
+
           })
   }
 
+  /**
+ * 
+ * @param value get country
+ */
   fetchCountry(){
    this.profile_service.Post(this.getCountry,{token:'LIVESITE'})
             .subscribe(res => {
@@ -91,6 +102,11 @@ verticalPosition: MatSnackBarVerticalPosition = 'top';
 
             })
 }
+
+/**
+ * 
+ * @param value get state
+ */
 getState(value){
   console.log(value)
    this.profile_service.Post(this.getStates,{countries_id:value,token:'LIVESITE'}).subscribe(res=>{

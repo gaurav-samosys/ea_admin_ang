@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CompaniesService } from '../companies.service';
 import * as myGlobals from '../../../../../global';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class AddCompanyComponent implements OnInit {
   formData: any;
   industry: any;
   added_status: any;
-  constructor(public dialogRef: MatDialogRef<AddCompanyComponent>, private rt: Router, private _formBuilder: FormBuilder, private company: CompaniesService) { }
+  constructor(
+    private toastr: ToastrService,
+    public dialogRef: MatDialogRef<AddCompanyComponent>, private rt: Router, private _formBuilder: FormBuilder, private company: CompaniesService) { }
 
   ngOnInit() {
     this.fetchCountry();
@@ -43,15 +46,20 @@ export class AddCompanyComponent implements OnInit {
     });
   }
 
+  /**
+   * has error
+   */
   public hasError = (controlName: string, errorName: string) => {
     return this.form.controls[controlName].hasError(errorName);
   }
   onClose() {
     this.dialogRef.close();
   }
+
+  /**
+   * get country
+   */
   fetchCountry() {
-
-
     this.company.Post(this.getCountry, { token: 'LIVESITE' })
       .subscribe(res => {
         this.common = res
@@ -59,12 +67,21 @@ export class AddCompanyComponent implements OnInit {
 
       })
   }
+
+   /**
+   * get state
+   */
+
   getState(value) {
     this.company.Post(this.getStates, { countries_id: value, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.states = this.common.data
     })
   }
+
+  /**
+   * get Industry
+   */
   getIndustries() {
     this.company.Post(this.getIndustry, { token: 'LIVESITE' }).subscribe(res => {
       this.common = res
@@ -72,6 +89,9 @@ export class AddCompanyComponent implements OnInit {
     })
   }
 
+  /**
+   * update form
+   */
   updateForm() {
     this.formData = {
       company_name: this.form.value.companyname,
@@ -91,6 +111,7 @@ export class AddCompanyComponent implements OnInit {
     this.company.Post(this.addCompany, this.formData).subscribe(res => {
       console.log(res)
       this.common = res
+      if(res['success']==true){
       this.added_status = this.common.success;
 
       localStorage.setItem('companystatus', this.added_status)
@@ -98,6 +119,11 @@ export class AddCompanyComponent implements OnInit {
       this.rt.navigateByUrl('/apps/dashboards/users', { skipLocationChange: true }).then(() =>
         this.rt.navigate(["/apps/dashboards/companies"]));
       this.dialogRef.close();
+      this.toastr.success('Added company Successfully');
+      }else{
+        this.toastr.success('There are Some Issue');
+
+      }
     })
   }
 }

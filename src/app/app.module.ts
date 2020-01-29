@@ -20,6 +20,8 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { LoginGuard } from './login.guard';
 import { AuthService } from './main/apps/auth.service';
 import { ToastrModule } from 'ngx-toastr';
+import { CKEditorModule } from 'ng2-ckeditor';
+
 // import { AddverticalComponent } from './main/apps/vertical-management/vertical/addvertical/addvertical.component';
 // import { AdminComponent } from './admin/admin.component';
 // import { AuthGuard } from './auth.guard';
@@ -87,7 +89,7 @@ const appRoutes: Routes = [
         // Material
         MatButtonModule,
         MatIconModule,
-
+        CKEditorModule,
         // Fuse modules
         FuseModule.forRoot(fuseConfig),
         FuseProgressBarModule,

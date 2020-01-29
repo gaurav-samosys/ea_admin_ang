@@ -1,185 +1,218 @@
-
-
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
 
 
-    <!-- CENTER -->
-    <div class="center" fusePerfectScrollbar>
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
 
-
+    <!-- 
       <div class="mat__box mat__box2 mt-20 mr-28">
         <div class="row" fxLayoutAlign="space-between center">
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="h2 mb-8">Manage Client</div>
           </div>
-          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
-        <!--   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-            <button mat-stroked-button color="primary" (click)="addCompany()"><mat-icon>add_circle_outline</mat-icon>Add Company</button>
-          </div> -->
-          <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
+      
         </div>
-        <!-- END OF ROW -->
+        
+      </div> -->
+
+
+
+    <div class="" style="flex-direction: row;
+      box-sizing: border-box;
+     height: 100px;
+      place-content: center space-between;
+      align-items: center;  background-color: #039be5 !important;
+      color: white !important;">
+      <div class="row" fxLayoutAlign="space-between center">
+        <div class="" style="color: white;margin-top:40px">
+          <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white;">
+            <img style="margin-left: 10px;" width="20px" height="20px"
+              src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
+          <a routerLink="/apps/dashboards/companies"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Company</a>
+          <a routerLink="/apps/dashboards/company-detail/{{id}}"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a>
+
+            <!-- <a routerLink="/apps/dashboards/company-detail/{{id}}/"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a> -->
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 28px;;
+          margin-right: 40px;
+      ">
+          <button mat-raised-button routerLink="/apps/client-mangement/addclient/{{id}}" *ngIf="division == 1">
+            <mat-icon>add_circle_outline</mat-icon>Add Client
+          </button>
+        </div>
       </div>
-      <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
-       
-       <div class="mat__box mat__box2 mt-20 mr-28">
-           <div class="row" fxLayoutAlign="space-between center">
+    </div>
+
+
+
+    <div class="mat__box mat__box2 mt-20 mr-28">
+           <div class="row" style="float: right;">
            	 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-              <button mat-raised-button color="primary"  class="button" (click)="SwitchButton(1)" *ngIf="division == 1">Company Detail</button>
+                
+              <button mat-raised-button style="margin-right: 21px;"  class="button" (click)="SwitchButton(1)" *ngIf="division == 1">Company Detail</button>
 
-              <button mat-raised-button  (click)="SwitchButton(1)" *ngIf="division == 2">Company Detail</button>
-               <button mat-raised-button color="primary"  class="button" (click)="SwitchButton(2)" *ngIf="division == 2">Client Search</button>
+              <button mat-raised-button  style="margin-right: 21px;"   (click)="SwitchButton(1)" *ngIf="division == 2">Company Detail</button>
+               <button mat-raised-button  style="margin-right: 21px;"   class="button" (click)="SwitchButton(2)" *ngIf="division == 2">Client Search</button>
 
-               <button mat-raised-button   (click)="SwitchButton(2)" *ngIf="division == 1">Client Search</button>
+               <button mat-raised-button   style="margin-right: 21px;"  (click)="SwitchButton(2)" *ngIf="division == 1">Client Search</button>
           </div>
            </div>
        </div>
 
-      <div class="mat__box mt-20 mr-28" *ngIf="division == 1">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="mat__box mt-20 mr-28" *ngIf="division == 1">
+      <div class="row" style="background-color: white; padding:10px">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <!--   <div class="h2 mb-8">Company Search</div> -->
-            <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label >Company Name ( ID: 157 )</mat-label>
-                    <input matInput [ngModel]="company_name" placeholder="Search company name" (keyup)="Search($event.target.value,'company')" readonly="readonly" class="disable">
-                </mat-form-field>
-              </div>
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>First Name</mat-label>
-                    <input matInput [ngModel]="first_name" placeholder="Search full name" (keyup)="Search($event.target.value,'fullname')" readonly="readonly" class="disable">
-                </mat-form-field>
-              </div>
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Last Name </mat-label>
-                    <input matInput [ngModel]="last_name" placeholder="Search email" (keyup)="Search($event.target.value,'email')" readonly="readonly" class="disable">
-                </mat-form-field>
-              </div>
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>E-mail</mat-label>
-                    <input matInput [ngModel]="emails" placeholder="Search city" (keyup)="Search($event.target.value,'city')" readonly="readonly" class="disable">
-                </mat-form-field>
-              </div>
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          <!-- <div class="row"> -->
 
 
-                   <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Phone Number</mat-label>
-                    <input matInput [ngModel]="phone" placeholder="Search city" (keyup)="Search($event.target.value,'city')"  readonly="readonly" class="disable">
-                </mat-form-field>
-              </div>
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100"  style="margin-top: 25px; padding:10px">
 
 
-          
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Industry</mat-label>
-                    <mat-select matNativeControl [ngModel]="industrys"  (selectionChange)="Search($event.value,'industry')" readonly="readonly" disabled="disabled" class="disable">
-                        <mat-option selected=""  value=""  >Please select industry</mat-option>
-                        <mat-option *ngFor="let data of industry" value="{{data.id}}" >{{data.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-              </div>
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Company Name ( ID: 157 )</mat-label>
+                <input matInput [ngModel]="company_name" placeholder="Search company name"
+                  (keyup)="Search($event.target.value,'company')" readonly="readonly" class="disable">
+              </mat-form-field>
 
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Start Date</mat-label>
-                    <input matInput [matDatepicker] = "picker2" placeholder = "Start date"  [ngModel]="startDate1" (ngModelChange)="MyDate1($event,'start')" readonly="">
-                    <mat-datepicker-toggle matSuffix [for] = "picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2 ></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>End Date</mat-label>
-                    <input matInput [matDatepicker] = "picker3" placeholder = "End date" [ngModel]="endDate1" (ngModelChange)="MyDate1($event,'end')" readonly="">
-                    <mat-datepicker-toggle matSuffix [for] = "picker3"></mat-datepicker-toggle>
-                    <mat-datepicker #picker3></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>First Name</mat-label>
+                <input matInput [ngModel]="first_name" placeholder="Search full name"
+                  (keyup)="Search($event.target.value,'fullname')" readonly="readonly" class="disable">
+              </mat-form-field>
             </div>
-            <!-- END OF ROW -->
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Last Name </mat-label>
+                <input matInput [ngModel]="last_name" placeholder="Search email"
+                  (keyup)="Search($event.target.value,'email')" readonly="readonly" class="disable">
+              </mat-form-field>
+              <!-- </div>
+         
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>E-mail</mat-label>
+                <input matInput [ngModel]="emails" placeholder="Search city"
+                  (keyup)="Search($event.target.value,'city')" readonly="readonly" class="disable">
+              </mat-form-field>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Phone Number</mat-label>
+                <input matInput [ngModel]="phone" placeholder="Search city" (keyup)="Search($event.target.value,'city')"
+                  readonly="readonly" class="disable">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;"> 
+                <mat-label>Industry</mat-label>
+                <mat-select matNativeControl [ngModel]="industrys" (selectionChange)="Search($event.value,'industry')"
+                  readonly="readonly" disabled="disabled" class="disable">
+                  <mat-option selected="" value="">Please select industry</mat-option>
+                  <mat-option *ngFor="let data of industry" value="{{data.id}}">{{data.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 34px;">
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="picker2" placeholder="Start date" [ngModel]="startDate1"
+                  (ngModelChange)="MyDate1($event,'start')" readonly="">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="picker3" placeholder="End date" [ngModel]="endDate1"
+                  (ngModelChange)="MyDate1($event,'end')" readonly="">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
+            </div>
+
           </div>
-          <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
         </div>
-        <!-- END OF ROW -->
       </div>
-      <!-- END OF MAT__BOX MT-20 MR-28 -->
+    </div>
+    <!-- END OF MAT__BOX MT-20 MR-28 -->
 
 
-     <div class="mat__box mt-20 mr-28" *ngIf="division == 2">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label required>Client Name</mat-label>
-                      <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'client')">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>Company Name</mat-label>
-                      <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'company')">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>First Name</mat-label>
-                      <input matInput placeholder="Search first name" (keyup)="Search($event.target.value,'fname')">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>Email</mat-label>
-                      <input matInput placeholder="Search email" (keyup)="Search($event.target.value,'email')">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>Client Vertical</mat-label>
-                        <mat-select matNativeControl   (selectionChange)="Search($event.value,'vertical')" >
-                          <mat-option selected="" value=""> Please select Vertical </mat-option>
-                          <mat-option *ngFor="let data of vertical"  value="{{data.id}}">{{data.name}}</mat-option>
-                        </mat-select>
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>Portal View</mat-label>
-                        <mat-select matNativeControl (selectionChange)="Search($event.value,'portal')">
-                            <mat-option selected="" value="">Select portal view</mat-option>
-                             <mat-option value="1">Standard Portal</mat-option>
-                            <mat-option value="2">Drip Compaign</mat-option>
-                            <mat-option value="3">Challenge View</mat-option>
-                        </mat-select>
-                  </mat-form-field>
-                </div>
-                <!-- <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="mat__box mt-20 mr-28" *ngIf="division == 2">
+      <div class="row" style="background-color: white;">
+          <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100"  style="margin-top: 25px; padding:10px">
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+          <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+            <mat-label required>Client Name</mat-label>
+            <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'client')">
+          </mat-form-field>
+       
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Company Name</mat-label>
+            <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'company')">
+          </mat-form-field>
+        </div>
+        <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+          <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="Search first name" (keyup)="Search($event.target.value,'fname')">
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Search email" (keyup)="Search($event.target.value,'email')">
+          </mat-form-field>
+        </div>
+        <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+          <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+            <mat-label>Client Vertical</mat-label>
+            <mat-select matNativeControl (selectionChange)="Search($event.value,'vertical')">
+              <mat-option selected="" value=""> Please select Vertical </mat-option>
+              <mat-option *ngFor="let data of vertical" value="{{data.id}}">{{data.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Portal View</mat-label>
+            <mat-select matNativeControl (selectionChange)="Search($event.value,'portal')">
+              <mat-option selected="" value="">Select portal view</mat-option>
+              <mat-option value="1">Standard Portal</mat-option>
+              <mat-option value="2">Drip Compaign</mat-option>
+              <mat-option value="3">Challenge View</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- <br>
 
                      <mat-divider></mat-divider>
                      <br> -->
 
-                      <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto"> -->
-<!--                     <mat-label >Show</mat-label>
+        <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto"> -->
+        <!--                     <mat-label >Show</mat-label>
                     <mat-form-field  appearance="outline" fxFlex="10">
   <select matNativeControl  (change)="changelimit($event.target.value)">
     <option value="10">10</option>
@@ -190,81 +223,88 @@
 </mat-form-field>
 <mat-label >entries</mat-label> -->
 
-<!--    <div fxLayout="row" fxLayoutAlign="end end" fxFlex="1 0 auto">
+        <!--    <div fxLayout="row" fxLayoutAlign="end end" fxFlex="1 0 auto">
                    <button mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> 
                 </div> -->
 
 
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>Country</mat-label>
-                        <mat-select matNativeControl (selectionChange)="getState($event.value,'country')" >
-                            <mat-option selected="" value="">Please select country</mat-option>
-                            <mat-option *ngFor="let data of country" value="{{data.id}}" >{{data.name}}</mat-option>
-                        </mat-select>
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>State</mat-label>
-                      <mat-select matNativeControl (selectionChange)="Search($event.value,'state')">
-                          <mat-option selected="" value="">Please select state</mat-option>
-                          <mat-option *ngFor="let data of states" value="{{data.id}}">{{data.state_name}}</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>City</mat-label>
-                      <input matInput placeholder="Search city" (keyup)="Search($event.target.value,'city')">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>Status</mat-label>
-                      <mat-select matNativeControl   (selectionChange)="Search($event.value,'status')" >
-                          <mat-option selected="" value="">Please select status</mat-option>
-                          <mat-option value="Active">Active</mat-option>
-                          <mat-option value="Inactive">Inactive</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>Start Date</mat-label>
-                      <input matInput [matDatepicker] = "picker" (click)="picker.open()" placeholder = "Start date" [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
-                       <mat-datepicker-toggle matSuffix [for] = "picker"></mat-datepicker-toggle>
-                       <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
-                  <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>End Date</mat-label>
-                       <input matInput [matDatepicker] = "picker1" (click)="picker1.open()" placeholder = "End date" [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
-                       <mat-datepicker-toggle matSuffix [for] = "picker1"></mat-datepicker-toggle>
-                       <mat-datepicker #picker1></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-            <!-- </div> -->
-            <!-- END OF ROW -->
-          </div>
+        <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+          <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+            <mat-label>Country</mat-label>
+            <mat-select matNativeControl (selectionChange)="getState($event.value,'country')">
+              <mat-option selected="" value="">Please select country</mat-option>
+              <mat-option *ngFor="let data of country" value="{{data.id}}">{{data.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>State</mat-label>
+            <mat-select matNativeControl (selectionChange)="Search($event.value,'state')">
+              <mat-option selected="" value="">Please select state</mat-option>
+              <mat-option *ngFor="let data of states" value="{{data.id}}">{{data.state_name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+          <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="Search city" (keyup)="Search($event.target.value,'city')">
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Status</mat-label>
+            <mat-select matNativeControl (selectionChange)="Search($event.value,'status')">
+              <mat-option selected="" value="">Please select status</mat-option>
+              <mat-option value="Active">Active</mat-option>
+              <mat-option value="Inactive">Inactive</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+          <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker" (click)="picker.open()" placeholder="Start date"
+              [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+     
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker1" (click)="picker1.open()" placeholder="End date"
+              [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+        <!-- </div> -->
         <!-- END OF ROW -->
       </div>
- <!-- END OF MAT__BOX2 MT-20 MR-28 -->
+      <!-- END OF ROW -->
+    </div>
+    <!-- END OF MAT__BOX2 MT-20 MR-28 -->
 
-      <div class="mat__box mt-20 mr-28">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
-              <!--     <mat-form-field appearance="outline" fxFlex="100">
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="mat__box mt-20 mr-28">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+              <!--     <mat-form-field appearance="outline"fxFlex="100">
                     <mat-label>Show Entries</mat-label>
                      <mat-select matNativeControl  (change)="changelimit($event.target.value)">
                         <mat-option value="10">10</mat-option>
@@ -273,80 +313,100 @@
                         <mat-option value="100">100</mat-option>
                       </mat-select>
                   </mat-form-field> -->
-                  <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
-                   <button mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button>
-                </div>
-                
+              <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
             </div>
-            <!-- END OF ROW -->
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <table mat-table [dataSource]="dataSource">
-                   
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="client_name">
-                      <th mat-header-cell *matHeaderCellDef> Client Name </th>
-                      <td class="style" mat-cell *matCellDef="let element" [routerLink]="['/apps/dashboards/company-detail', element.id]"> {{element.client_name}} </td>
-                    </ng-container>
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
+              <button  mat-raised-button matTooltip="Download Excel File" (click)="exportData()">Export Data to Excel</button>
+            </div>
 
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="client_vertical">
-                      <th mat-header-cell *matHeaderCellDef> Client Vertical </th>
-                      <td mat-cell *matCellDef="let element"> {{element.client_vertical}} </td>
-                    </ng-container>
+          </div>
+          <!-- END OF ROW -->
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <table mat-table [dataSource]="dataSource">
 
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> Portal View </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                    </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="client_name">
+                  <th mat-header-cell *matHeaderCellDef> Client Name </th>
+                  <td class="style" mat-cell *matCellDef="let element"
+                    [routerLink]="['/apps/dashboards/company-detail', element.id]"> {{element.client_name}} </td>
+                </ng-container>
 
-                    <ng-container matColumnDef="created_on">
-                      <th mat-header-cell *matHeaderCellDef> SignUp Date </th>
-                      <td mat-cell *matCellDef="let element"> {{element.created_on}} </td>
-                    </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="client_vertical">
+                  <th mat-header-cell *matHeaderCellDef> Client Vertical </th>
+                  <td mat-cell *matCellDef="let element"> {{element.client_vertical}} </td>
+                </ng-container>
 
-<!-- 
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Portal View </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="created_on">
+                  <th mat-header-cell *matHeaderCellDef> SignUp Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.created_on}} </td>
+                </ng-container>
+
+                <!-- 
                     <ng-container matColumnDef="">
                       <th mat-header-cell *matHeaderCellDef> Total Users </th>
                       <td mat-cell *matCellDef="let element"> {{element.totalClients}} </td>
                     </ng-container> -->
 
-                    <ng-container matColumnDef="status">
-                      <th mat-header-cell *matHeaderCellDef> Status </th>
-                        <td mat-cell *matCellDef="let element"> <ui-switch [checked]="element.status == 'Active' ? true : false" (change)="onChange($event,element.id)"></ui-switch></td>
-                    </ng-container>
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ui-switch [checked]="element.status == 'Active' ? true : false"
+                      (change)="onChange($event,element.id)"></ui-switch>
+                  </td>
+                </ng-container>
 
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  </table>
-                   <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems"   [pageIndex]="currentPage"
-                [pageSize]="pageSize"  [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons (page)="handlePage($event)"></mat-paginator>
-                  <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-              </div>
-              <!-- END OF ROW -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+                (page)="handlePage($event)"></mat-paginator>
+              <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+            </div>
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
           </div>
-          <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+          <!-- END OF ROW -->
         </div>
-        <!-- END OF ROW -->
+        <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
       </div>
-      <!-- END OF MAT__BOX MT-20 MR-28 -->
-  
+      <!-- END OF ROW -->
+    </div>
+    <!-- END OF MAT__BOX MT-20 MR-28 -->
 
-</div>
+
+  </div>
 </div>
 
 
 
 <style type="text/css">
-    .inline_list{list-style-type: none;}
-    .inline_list li{display: inline-block;}
-    .inline_list li a{    position: relative;
-    float: left;padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #337ab7; text-decoration: none; background-color: #fff; border: 1px solid #ddd;} 
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
 </style>

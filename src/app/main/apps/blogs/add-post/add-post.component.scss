@@ -64,3 +64,27 @@
     max-height: 10rem;
     overflow: auto;
   }
+  .x_panel{
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 26px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    opacity: 1;
+    transition: all 0.2s ease;
+}
+.btn-primary{
+  height: 31px;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  text-decoration: none;
+  width: 78px;
+  // margin-left: 28px;
+
+}
+.hide{
+  display: none;
+}

@@ -112,19 +112,19 @@ export class CompaniesComponent implements OnInit {
     private toastr: ToastrService,
 
     private datePipe: DatePipe, private _snackBar: MatSnackBar, public route: ActivatedRoute, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public companyService: CompaniesService) {
-    if (localStorage.getItem('status') == 'true') {
-      this.openSnackBar();
-      localStorage.removeItem('status');
-    }
-    else if (localStorage.getItem('companystatus') == 'true') {
-      this.opencompanySnackBar();
-      localStorage.removeItem('companystatus');
-    }
+    // if (localStorage.getItem('status') == 'true') {
+    //   this.openSnackBar();
+    //   localStorage.removeItem('status');
+    // }
+    // else if (localStorage.getItem('companystatus') == 'true') {
+    //   this.opencompanySnackBar();
+    //   localStorage.removeItem('companystatus');
+    // }
 
-    else if (localStorage.getItem('companystatus') == 'false') {
-      this.opencompanyerrorSnackBar();
-      localStorage.removeItem('companystatus');
-    }
+    // else if (localStorage.getItem('companystatus') == 'false') {
+    //   this.opencompanyerrorSnackBar();
+    //   localStorage.removeItem('companystatus');
+    // }
   }
 
   ngOnInit() {
@@ -134,6 +134,10 @@ export class CompaniesComponent implements OnInit {
     this.getCompany();
 
   }
+
+  /**
+   * button toggle
+   */
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
   buttontoggle() {
@@ -146,10 +150,7 @@ export class CompaniesComponent implements OnInit {
   }
 
 
-  // tempArr = []
 
-      // this.tempArr = res['data'];
-      // console.log('========>', this.tempArr);
   /**===========================================================
         get Company
   ===========================================================*/
@@ -269,23 +270,6 @@ export class CompaniesComponent implements OnInit {
     });
   }
 
-  /*     setPage(page: number) {
-          this.showloader=true;
-          this.pager = this.pagerService.getPager(this.allItems, page,this.size);
-             this.start=this.pager.startIndex + 1;
-          this.end=this.pager.endIndex + 1;
-                    this.pageNumber=this.pager.startIndex;
-     this.companyService.Post(this.getCompanies,{ offset:this.pageNumber,limit : this.size ,token:'LIVESITE'})
-              .subscribe(res => {
-                this.showloader=false;
-                  this.response=res
-                 this.rows=this.response.data
-                 this.data=this.rows.slice(0, this.size);
-                 console.log(this.data)
-               this.dataSource.data=this.data
-              });
-            }
-  */
 
   /**===========================================================
         add company
@@ -573,3 +557,21 @@ export class CompaniesComponent implements OnInit {
   // state_name: "Alberta"
   // status: "Active"
   // totalClients: 0
+
+    /*     setPage(page: number) {
+          this.showloader=true;
+          this.pager = this.pagerService.getPager(this.allItems, page,this.size);
+             this.start=this.pager.startIndex + 1;
+          this.end=this.pager.endIndex + 1;
+                    this.pageNumber=this.pager.startIndex;
+     this.companyService.Post(this.getCompanies,{ offset:this.pageNumber,limit : this.size ,token:'LIVESITE'})
+              .subscribe(res => {
+                this.showloader=false;
+                  this.response=res
+                 this.rows=this.response.data
+                 this.data=this.rows.slice(0, this.size);
+                 console.log(this.data)
+               this.dataSource.data=this.data
+              });
+            }
+  */

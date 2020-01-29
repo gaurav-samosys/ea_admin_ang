@@ -8,9 +8,6 @@ import { FuseSidebarComponent } from './sidebar.component';
 export class FuseSidebarService
 {
 
-toggleOpenClose(){
-
-}
 
     // Private
     private _registry: { [key: string]: FuseSidebarComponent } = {};

@@ -21,6 +21,7 @@ export class AddWebinarComponent implements OnInit {
   currentDate
   message1 = 'this is field required'
   prodId
+  imageSelected:number =0
   // update_webinar = myGlobals.update_webinar
   getwebinarById = myGlobals.getwebinarById
   add_webinar = myGlobals.add_webinar
@@ -55,22 +56,6 @@ export class AddWebinarComponent implements OnInit {
     console.log(this.currentDate)
   }
 
-  /**
-   * File Select 
-   */
-  url = 'https://staging.enrichedacademy.com/img/enriched-logo.png';
-  // onSelectFile(event) {
-  //   this.hide = 1
-  //   this.message = 1
-  //   if (event.target.files && event.target.files[0]) {
-  //     var reader = new FileReader();
-  //     reader.readAsDataURL(event.target.files[0]); // read file as data url
-  //     reader.onload = (event: any) => { // called once readAsDataURL is completed
-  //       console.log(event);
-  //       this.url = event.target.result;
-  //     }
-  //   }
-  // }
 
   /**
    * 
@@ -97,7 +82,8 @@ export class AddWebinarComponent implements OnInit {
    * submit form
    */
   submit() {
-    this.message = 0
+      this.message = 0
+
     let item = {
       name: this.AddWebinarForm.controls['name'].value,
       // webinar_date: moment(this.AddWebinarForm.controls['webinar_date'].value).local().format('YYYY-MM-DD HH:mm:ss'),
@@ -118,7 +104,7 @@ export class AddWebinarComponent implements OnInit {
     this.interview_service.Post(this.add_webinar, {
       name: item.name, webinar_date: item.webinar_date, start_time: item.start_time, end_time: item.end_time,
       // img_url: item.image,
-      img_url: item.img_url,
+      img_url: this.url,
       token: 'LIVESITE'
     }).subscribe(res => {
       console.log(res)
@@ -134,15 +120,14 @@ export class AddWebinarComponent implements OnInit {
       this.toastr.warning('There Are some Issue')
     }
   }
-  // day: "Thursday"
-  // end_time: null
-  // webinar_date: null
-  // webinar_name: null
-  // webinar_time: null
+
   /**
    * Edit Form
    * @param prodId 
    */
+  end_time
+  start_time
+  webinar_img
   editPostWebinar() {
     this.interview_service.Post(this.getwebinarById, { webinar_id: this.prodId, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
@@ -154,14 +139,15 @@ export class AddWebinarComponent implements OnInit {
         for (let index = 0; index < this.response.length; index++) {
           var element = this.response[index];
           console.log(element)
+          console.log(element['end_time'], element['webinar_time']);
+          this.start_time = element['webinar_time']
+          this.end_time = element['end_time']
+          this.webinar_img=element['webinar_img']
+          console.log(this.webinar_img)
         }
-        // console.log(this.response,this.response['webinar_name'],this.response['webinar_date'],
-        // this.response['webinar_time'],this.response['end_time'],this.response['webinar_img'])
         this.AddWebinarForm.controls['name'].setValue(element['webinar_name']),
           this.AddWebinarForm.controls['webinar_date'].setValue(element['webinar_date'])
-        this.AddWebinarForm.controls['start_time'].setValue(element['webinar_time'])
-        this.AddWebinarForm.controls['end_time'].setValue(element['end_time'])
-        this.AddWebinarForm.controls['image_upload'].setValue(element['webinar_img'])
+        // this.AddWebinarForm.controls['image_upload'].setValue(element['webinar_img'])
       } else {
         this.name = 0
         this.add_button = 0
@@ -170,19 +156,9 @@ export class AddWebinarComponent implements OnInit {
     });
   }
 
-  // created_date: "2019-10-31 16:29:50"
-  // day: "Thursday"
-  // end_time: "14:30:00"
-  // id: 3
-  // links: ""
-  // webinar_date: "2019-11-12"
-  // webinar_img: "2.png"
-  // webinar_name: "8 Factors To Mastering Your Personal Finances As A Canadian Presented By Dustan Woodhouse and Enriched Academy"
-  // webinar_time: "13:00:00
-
   /**
-   * 
-   * @param prodId update form
+   * update form webinar
+   * @param prodId 
    */
   update(prodId) {
     console.log(prodId)
@@ -192,15 +168,12 @@ export class AddWebinarComponent implements OnInit {
       webinar_date: this.AddWebinarForm.controls['webinar_date'].value,
       start_time: this.AddWebinarForm.controls['start_time'].value,
       end_time: this.AddWebinarForm.controls['end_time'].value,
-      // image: this.url
-      img_url: this.AddWebinarForm.controls['image_upload'].value
-
-
+      // img_url: this.AddWebinarForm.controls['image_upload'].value
     }
 
     this.interview_service.Post(this.add_webinar, {
       name: item.name, webinar_date: item.webinar_date, start_time: item.start_time, end_time: item.end_time,
-      img_url: item.img_url,webinar_id: this.prodId,
+      img_url: this.url, webinar_id: this.prodId,
       token: 'LIVESITE'
     }).subscribe(res => {
       console.log(res)
@@ -232,20 +205,61 @@ export class AddWebinarComponent implements OnInit {
     //     this.Search(date = '', name)
     //   }
   }
-  //image upload
-  image_upload(event) {
-    let reader = new FileReader();
-    let file = event.target.files[0];
-    console.log(file);
 
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.AddWebinarForm.get('image_upload').setValue({
-        filename: file.name,
-        filetype: file.type,
-        filesize: file.size,
-        value: (reader.result).toString().split(',')[1],
-      })
-    };
+
+
+
+
+  /**
+   * File Select 
+   */
+  url = 'https://staging.enrichedacademy.com/img/enriched-logo.png';
+  onSelectFile(event) {
+    this.hide = 1
+    this.message = 1
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.onload = (event: any) => { // called once readAsDataURL is completed
+        console.log(event);
+        this.url = event.target.result;
+      }
+    }
   }
 }
+
+   // <!-- 1 image upload -->
+  // image_upload(event) {
+  //   let reader = new FileReader();
+  //   let file = event.target.files[0];
+  //   console.log(file);
+
+  //   reader.readAsDataURL(file);
+  //   reader.onload = () => {
+  //     this.AddWebinarForm.get('image_upload').setValue({
+  //       filename: file.name,
+  //       filetype: file.type,
+  //       filesize: file.size,
+  //       value: (reader.result).toString().split(',')[1],
+  //     })
+  //   };
+  // }
+
+
+  // <!-- 2 image pdf -->
+/**
+ * File Select
+ */
+  // url = 'https://staging.enrichedacademy.com/img/enriched-logo.png';
+  // onSelectFile(event) {
+  //   this.hide = 1
+  //   this.message = 1
+  //   if (event.target.files && event.target.files[0]) {
+  //     var reader = new FileReader();
+  //     reader.readAsDataURL(event.target.files[0]); // read file as data url
+  //     reader.onload = (event: any) => { // called once readAsDataURL is completed
+  //       console.log(event);
+  //       this.url = event.target.result;
+  //     }
+  //   }
+  // }

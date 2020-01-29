@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,9 +22,11 @@ export class AddPostComponent implements OnInit {
   htmlContent = '';
   add_button: number = 0
   name: number = 0
+  message: number = 1
+  message1 = "This field is required"
   htmlContentWithoutStyles = '';
   // editBlogAPi addBlogApi
-  editBlogAPi=myGlobals.editBlogAPi
+  editBlogAPi = myGlobals.editBlogAPi
 
   addBlogApi = myGlobals.addBlogApi
   updateBlogApi = myGlobals.updateBlogApi
@@ -58,7 +60,41 @@ export class AddPostComponent implements OnInit {
     })
   }
   prodId
+  ckeConfig: any;
+  mycontent: string;
+  log: string = '';
+  @ViewChild("myckeditor", { static: true }) ckeditor: any;
+
+  // constructor() {
+  //   this.mycontent = `<p>My html content</p>`;
+  // }
+  onChange($event: any): void {
+    console.log("onChange", $event);
+  }
   ngOnInit() {
+    this.ckeConfig = {
+      allowedContent: false,
+      forcePasteAsPlainText: true,
+      font_names: 'Arial;Times New Roman;Verdana',
+      toolbarGroups: [
+        { name: 'document', groups: ['mode', 'document', 'doctools'] },
+        { name: 'clipboard', groups: ['clipboard', 'undo'] },
+        { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
+        { name: 'forms', groups: ['forms'] },
+        '/',
+        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+        { name: 'links', groups: ['links'] },
+        { name: 'insert', groups: ['insert'] },
+        '/',
+        { name: 'styles', groups: ['styles'] },
+        { name: 'colors', groups: ['colors'] },
+        { name: 'tools', groups: ['tools'] },
+        { name: 'others', groups: ['others'] },
+        { name: 'about', groups: ['about'] }
+      ],
+      removeButtons: 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Unlink,Anchor,Image,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About'
+    };
     // this.prodId = this.rout.snapshot.paramMap.get('id');
     // console.log(this.prodId)
 
@@ -159,6 +195,7 @@ export class AddPostComponent implements OnInit {
   }
 
   submit() {
+    this.message = 0
 
     this.name = 0
     this.add_button = 0
@@ -177,7 +214,7 @@ export class AddPostComponent implements OnInit {
     }
 
     // console.log(this.AddPostForm.value);
-    this.addpost_service.Post(this.addBlogApi , {
+    this.addpost_service.Post(this.addBlogApi, {
       post_title: item.post_title,
       category: item.category,
       author: item.author,
@@ -206,6 +243,7 @@ export class AddPostComponent implements OnInit {
   }
   //image upload
   image_upload(event) {
+    this.message = 1
     let reader = new FileReader();
     let file = event.target.files[0];
     console.log(file);
@@ -220,83 +258,102 @@ export class AddPostComponent implements OnInit {
       })
     };
   }
+  
 
+  /**
+   * File Select 
+   */
+  url = '';
+  onSelectFile(event) {
+    // this.hide = 1
+    this.message = 1
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.onload = (event: any) => { // called once readAsDataURL is completed
+        console.log(event);
+        this.url = event.target.result;
+        console.log( this.url)
+      }
+    }
+  }
+  clipBoard() {
 
-  editorConfig: AngularEditorConfig = {
-
-
-
-    editable: true,
-    spellcheck: true,
-    height: 'auto',
-    minHeight: '300px',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Enter text here...',
-    defaultFontName: 'Arial',
-    defaultFontSize: '2',
-
-
-
-
-
-
-
-
-
-
-    // editable: true,
-    // spellcheck: true,
-    // height: '15rem',
-    // minHeight: '5rem',
-    // maxHeight: 'auto',
-    // width: 'auto',
-    // minWidth: '0',
-    // translate: 'yes',
-    // enableToolbar: true,
-    // showToolbar: true,
-    // placeholder: 'Enter text here...',
-    // defaultParagraphSeparator: '',
-    // defaultFontName: '',
-    // defaultFontSize: '',
-    fonts: [
-      { class: 'arial', name: 'Arial' },
-      { class: 'times-new-roman', name: 'Times New Roman' },
-      { class: 'calibri', name: 'Calibri' },
-      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
-    ],
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    uploadUrl: 'v1/image',
-    sanitize: true,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      ['bold', 'italic'],
-      ['fontSize']
-    ]
-  };
-
+    var str = "/apps/blog-post/";
+    var res = str.split(" ");
+    console.log(res);
+    var canvas = document.getElementById("mycanvas");
+    console.log(canvas)
+  }
   showHTML() {
     this.htmlContentWithoutStyles = document.getElementById("htmlDiv").innerHTML;
-
   }
+}
 
+  // https://gist.github.com/sandcastle/00aaa8a820061c899edf76c3ed3c8bac
+
+
+  // editorConfig: AngularEditorConfig = {
+  //   editable: true,
+  //   spellcheck: true,
+  //   height: 'auto',
+  //   minHeight: '300px',
+  //   width: 'auto',
+  //   minWidth: '0',
+  //   translate: 'yes',
+  //   enableToolbar: true,
+  //   showToolbar: true,
+  //   placeholder: 'Enter text here...',
+  //   defaultFontName: 'Arial',
+  //   defaultFontSize: '2',
+
+
+
+  //   // editable: true,
+  //   // spellcheck: true,
+  //   // height: '15rem',
+  //   // minHeight: '5rem',
+  //   // maxHeight: 'auto',
+  //   // width: 'auto',
+  //   // minWidth: '0',
+  //   // translate: 'yes',
+  //   // enableToolbar: true,
+  //   // showToolbar: true,
+  //   // placeholder: 'Enter text here...',
+  //   // defaultParagraphSeparator: '',
+  //   // defaultFontName: '',
+  //   // defaultFontSize: '',
+  //   fonts: [
+  //     { class: 'arial', name: 'Arial' },
+  //     { class: 'times-new-roman', name: 'Times New Roman' },
+  //     { class: 'calibri', name: 'Calibri' },
+  //     { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+  //   ],
+  //   customClasses: [
+  //     {
+  //       name: 'quote',
+  //       class: 'quote',
+  //     },
+  //     {
+  //       name: 'redText',
+  //       class: 'redText'
+  //     },
+  //     {
+  //       name: 'titleText',
+  //       class: 'titleText',
+  //       tag: 'h1',
+  //     },
+  //   ],
+  //   uploadUrl: 'v1/image',
+  //   sanitize: true,
+  //   toolbarPosition: 'top',
+  //   toolbarHiddenButtons: [
+  //     ['bold', 'italic'],
+  //     ['fontSize']
+  //   ]
+  // };
+
+  
 
   // config: AngularEditorConfig = {
   //   editable: true,
@@ -326,7 +383,6 @@ export class AddPostComponent implements OnInit {
   //     },
   //   ]
   // };
-}
 
 
   // update() {

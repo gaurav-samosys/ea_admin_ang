@@ -9,6 +9,8 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
 import { Router } from '@angular/router';
+// import {MatDialog} from '@angular/material/dialog';
+
 
 @Component({
     selector     : 'toolbar',
@@ -38,6 +40,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
      * @param {TranslateService} _translateService
      */
     constructor(
+        // public dialog: MatDialog,
         private router:Router,
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
@@ -169,4 +172,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
         console.log("navigate============admin login")
         this.router.navigate(['apps/admin/login'])
     }
+
+    // openDialog(){
+        // this.dialog.open(DialogElementsExampleDialog);
+    // }
 }

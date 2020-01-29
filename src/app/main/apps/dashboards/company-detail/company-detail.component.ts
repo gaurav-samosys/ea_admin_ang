@@ -152,6 +152,37 @@ let part;
  })
 }
 
+ /**===========================================================
+          Export data and download
+  ===========================================================*/
+  // exportData() {
+  //   this.companyService.Post(this.exportManageCompanies, {
+  //     company_name: this.company ? this.company : '',
+  //     full_name: this.fullname ? this.fullname : '',
+  //     user_email: this.email ? this.email : '',
+  //     country: this.country1 ? this.country1 : '',
+  //     state: this.state1 ? this.state1 : '',
+  //     city: this.city ? this.city : '',
+  //     industry: this.industry1 ? this.industry1 : '',
+  //     start_date: this.sdate ? this.sdate : '',
+  //     end_date: this.edate ? this.edate : '',
+  //     user_type: '',
+  //     status_check: '',
+  //     excel: '',
+  //     pdf: '',
+  //     search_keyword: '',
+  //     token: 'LIVESITE'
+  //   })
+  //     .subscribe(res => {
+  //       console.log(res)
+  //       if (res['success'] == true) {
+  //         console.log(this.data)
+  //         this.companyService.exportAsExcelFile(this.data, 'sample');
+  //       }
+
+  //     })
+
+  // }
 
 getIndustries(){
  this.companyService.Post(this.getIndustry,{token:'LIVESITE'}).subscribe(res=>{

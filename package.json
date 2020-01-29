@@ -73,6 +73,7 @@
         "ng-multiselect-dropdown": "0.2.9",
         "ng-pick-datetime": "^7.0.0",
         "ng2-charts": "2.2.4",
+        "ng2-ckeditor": "^1.2.6",
         "ngrx-store-freeze": "0.2.4",
         "ngx-color": "4.1.0",
         "ngx-color-picker": "7.5.0",

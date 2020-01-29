@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { AuthService } from './auth.service';
 import { LoginGuard } from '../../login.guard';
+// import { NotificationComponent } from './notification/notification/notification.component';
 // import { ExpertInterviewComponent } from './expert-interview/expert-interview/expert-interview.component';
 // import { AddInterviewComponent } from './expert-interview/add-interview/add-interview.component';
 // import { WebinarListComponent } from './webinar/webinar-list/webinar-list.component';
@@ -162,8 +163,12 @@ const routes = [
 
 
     {
-        path: 'profile/profile',
+        path: 'profile',
         loadChildren: './profile/profile/profile.module#ProfileModule', canActivate: [LoginGuard]
+    },
+    {
+        path: 'notification',
+        loadChildren: './notification/notification/notification.module#NotificationModule', canActivate: [LoginGuard]
     },
     {
         path: 'admin/login',

@@ -43,7 +43,7 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
         this._unsubscribeAll = new Subject();
     }
 
-  
+
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
     // -----------------------------------------------------------------------------------------------------
@@ -99,6 +99,9 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
             .subscribe(() => {
                 if (this._fuseSidebarService.getSidebar('navbar')) {
                     this._fuseSidebarService.getSidebar('navbar').close();
+                    //navbar close
+                    // this._fuseSidebarService.getSidebar('navbar').toggleFold();
+
                 }
             }
             );

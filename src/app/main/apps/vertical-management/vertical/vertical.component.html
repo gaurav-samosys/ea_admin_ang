@@ -3,22 +3,43 @@
     <!-- CENTER -->
     <div class="center" fusePerfectScrollbar>
 
-        <div class="mat__box mat__box2 mt-20 mr-28">
+        <!-- <div class="mat__box mat__box2 mt-20 mr-28">
             <div class="row" fxLayoutAlign="space-between center">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="h2 mb-8">Verticals</div>
                 </div>
-                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12" -->
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
-                        <!-- <button  mat-raised-button mat-stroked-button  (click)="addTopic()"> -->
 
                     <button mat-raised-button  (click)="addVertical()">
                         <mat-icon>add_circle_outline</mat-icon>Add more</button>
                 </div>
-                <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
             </div>
-            <!-- END OF ROW -->
+        </div> -->
+
+
+        <div class="mat__box mat__box2" style="flex-direction: row;
+        box-sizing: border-box;
+       height: 100px;
+        place-content: center space-between;
+        align-items: center;    background-color: #039be5 !important;
+        color: white !important;">
+        <div class="row" fxLayoutAlign="space-between center">
+          <div class="" style="color: white;margin-top: 20px;
+          margin-left: 10px;">
+          <h2>Verticals</h2>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 12px;
+            margin-right: 40px;
+        ">
+            <button mat-raised-button  (click)="addVertical()">
+                    <mat-icon>add_circle_outline</mat-icon>Add Vertical</button>
+          </div>
         </div>
+     </div>
+  
+
+
+
 
  
        <div class="mt-20 mr-28"> 

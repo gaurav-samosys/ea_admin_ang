@@ -4,7 +4,7 @@
   <!-- <ng-container *ngIf="show"></ng-container> -->
   <!-- CENTER -->
   <div class="center" fusePerfectScrollbar>
-    <div class="mat__box mat__box2 mt-20 mr-28">
+    <div class="mat__box mat__box2 mt-20 mr-28 x_panel">
 
       <!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 TEXT-RIGHT -->
 
@@ -22,18 +22,19 @@
             <form [formGroup]="AddPostForm" (ngSubmit)="submit()">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
 
-                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
-              margin-right: 20px; ">
+                <mat-form-field appearance="outline" fxFlex="100" fxLayoutGap="20px" style="margin-right: 20px; 
+                margin-left:20px;width: 43%;">
                   <mat-label>Post Title</mat-label>
                   <input matInput formControlName="post_title" placeholder="post title" required>
                   <mat-error>Title is required</mat-error>
                 </mat-form-field>
 
 
-                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
-              margin-right: 20px;">
+                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style="margin-right: 20px;
+                 margin-left:20px;width:43%">
                   <mat-label>Categary*</mat-label>
-                  <mat-select formControlName="category"  placeholder="Categary"  (selectionChange)="categoryChange($event.value)" [value]='value'>
+                  <mat-select formControlName="category" placeholder="Categary"
+                    (selectionChange)="categoryChange($event.value)" [value]='value'>
                     <mat-option *ngFor="let item of CategoryArray" [value]="item.value">
                       {{item.value}}
                     </mat-option>
@@ -44,10 +45,11 @@
               </div>
 
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
-              margin-right: 20px; ">
+                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style=" width: 43%   ;
+              margin-right: 20px; margin-left:20px">
                   <mat-label>Author*</mat-label>
-                  <mat-select formControlName="author" placeholder="Author" (selectionChange)="authorChange($event.value)">
+                  <mat-select formControlName="author" placeholder="Author"
+                    (selectionChange)="authorChange($event.value)">
                     <mat-option *ngFor="let item of authorArray" [value]="item.value">
                       {{item.value}}
                     </mat-option>
@@ -56,8 +58,9 @@
 
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
-               ">
+                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" 
+                style="margin-right: 20px; margin-left:20px;width: 43%">
+
                   <mat-label>Video Id</mat-label>
                   <input matInput formControlName="video_id" placeholder="Video Id">
                 </mat-form-field>
@@ -65,52 +68,50 @@
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
 
-                <h2>Post Cover Image *</h2>
-                <!-- <input type='file' (change)="fileChangeEvent($event);" accept="image/*">
-                <img (click)="preiviewImage(image_path,2)" style="border: 1px solid black; border-radius: 8px;width: 152px;height: 157px;" src="{{cover_img}}" alt=""> -->
-                <input type="file"   (change)="image_upload($event)" name="file" accept="image/*">
-                <input type="hidden" formControlName="cover_img">
-              </div>
-              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mb-8" fxLayoutGap="20px" style="margin-right: 20px; margin-left:20px;width: 43%" >
+                    <h3>Post Cover Image *</h3>
+                    <input type="file" (change)="image_upload($event)" name="file" accept="image/*" style="padding:0">
+                    <input type="hidden" formControlName="cover_img">
+                    <span class="" *ngIf="message == 0" style="color:red;">
+                      <span>{{message1}}</span>
+                    </span>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mb-8" fxLayoutGap="20px"
+                 style="float: right;margin-right: 20px;width: 50%;
+                margin-top: -85px;">
+                <h3>Select Blog Image</h3>
+                <span>
+                  <input type="file" (change)="onSelectFile($event)" name="file" accept="image/*" style="padding:0">
+                  <button type="button" (click)="clipBoard()" class="btn-primary">Copy Url</button>
+                  <p id="demo"></p>
 
-                 <h2>Post Description *</h2>
-                <!-- <mat-form-field appearance="outline" fxFlex="100" style="    width: 345px;
-                ">
-                   <mat-label>Description</mat-label>
-                   <input matInput formControlName="description" placeholder="Discription">
-                 </mat-form-field> -->
-                 <!-- <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor> -->
-                <angular-editor id="editor1" formControlName="description"  [config]="editorConfig"></angular-editor>
+                  <div style="width:50px;height:50px">
+                    <img class="file_upload_image" id="mycanvas" [src]="url">
+                  </div> 
+                </span>
               </div>
-              <!-- <button type="submit " matTooltip="update banner" mat-raised-button color="accent" 
-              >Upload</button> -->
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" style="margin-right: 20px; margin-left:20px;width: 90%" >
+                <h2>Post Description *</h2>
+                <!-- <ckeditor [config]="config" debounce="500"></ckeditor> -->
+                <ckeditor  [config]="ckeConfig" formControlName="description" debounce="500" (change)="onChange($event)">
+                  </ckeditor>
+              </div>
 
               <button type="submit" mat-raised-button color="accent" matTooltip="save blog"
-                *ngIf="add_button == 0 ">Upload</button>
-            
+                *ngIf="add_button == 0 " style="margin-top: 25px;margin-left: 20px;">Upload</button>
             </form>
-            <button type="submit " matTooltip="update blog" mat-raised-button color="accent" *ngIf="add_button == 1"
-            (click)="update(prodId)">Update</button>
+            <button type="submit " matTooltip="update blog" mat-raised-button color="accent" 
+            *ngIf="add_button == 1" style="margin-left: 20px ;margin-top: 25px"
+              (click)="update(prodId)">Update</button>
           </div>
-
-
 
 
         </ng-container>
 
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -174,5 +175,15 @@
                     </mat-form-field> -->
 
 
-                      <!-- <angular-editor (input)="showHTML()"    [config]="editorConfig"></angular-editor>
+<!-- <angular-editor (input)="showHTML()"    [config]="editorConfig"></angular-editor>
                 <div id="htmlDiv" style="display:none;" class="html" [innerHTML]="htmlContent"></div> -->
+
+
+<!-- its working -->
+<!-- <div class="form-group has-feedback" 
+        [ngClass]="{ 'has-error': myckeditor.invalid && myckeditor.touched }"> -->
+<!-- <ckeditor required [config]="ckeConfig" debounce="500" (change)="onChange($event)">
+        </ckeditor> -->
+<!-- <div *ngIf="myckeditor.invalid && myckeditor.touched" class="help-block">Required field.</div> -->
+<!-- </div> -->
+<!-- <button [disabled]="myForm.invalid" class="btn btn-primary">Save</button> -->

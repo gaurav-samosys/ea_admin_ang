@@ -63,7 +63,7 @@ export const getSurveyChart=" https://staging.enrichedacademy.com/api/admin/getS
 export const add_webinar="https://staging.enrichedacademy.com/api/admin/add_webinar"
 export const getwebinarById="https://staging.enrichedacademy.com/api/admin/getwebinarById"
 // export const update_webinar="https://staging.enrichedacademy.com/api/admin/update_webinar"
-// export const delete_webinar="https://staging.enrichedacademy.com/api/admin/delete_webinar"
+export const delete_webinar="https://staging.enrichedacademy.com/api/admin/delete_webinar"
 export const get_webinars=" https://staging.enrichedacademy.com/api/admin/get_webinars"
 
 

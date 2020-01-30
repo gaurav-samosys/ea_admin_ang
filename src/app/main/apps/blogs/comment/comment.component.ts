@@ -29,7 +29,7 @@ export class CommentComponent implements OnInit {
   titleName: string;
   data: any;
   allItems: any;
-
+  showloader=false
   categaryName: string;
   pageNumber: any;
   common: any;
@@ -53,8 +53,12 @@ export class CommentComponent implements OnInit {
     this.getCommentsList();
   }
   getCommentsList(){
+  
+  this.showloader=true
     this.comment_service.Post(this.getCommentWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader=false
       this.response = res
+
       console.log(res)
       this.allItems= this.response['recordsTotal']
 
@@ -87,12 +91,12 @@ export class CommentComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
+  this.showloader=true;
     this.comment_service.Post(this.getCommentWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader=false;
       this.response = res
       this.allItems= this.response['recordsTotal']
 
-      //this.showloader=false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
@@ -105,10 +109,14 @@ export class CommentComponent implements OnInit {
    */
 
   updateSortingOrderComment(sort_column, sort_order) {
+    this.showloader=true
+
     this.sort_column = sort_column
     this.ASC = sort_order
       this.comment_service.Post(this.getCommentWithDataApi, { column:this.sort_column,dir:this.ASC,offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
         this.response = res
+        this.showloader=false
+
       this.dataSource=this.response.data
     });
   }

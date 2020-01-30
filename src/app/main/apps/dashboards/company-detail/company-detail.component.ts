@@ -85,26 +85,64 @@ public totalSize = 0;
       last_name:any;
       emails:any;
       phone:any;
+      sort_column
+      // sort_column = "date_created";
+      sort_order = "DESC";
+      ASC;
+      
       industrys:any;
-  displayedColumns: string[] = ['client_name', 'client_vertical', 'name','created_on','status'];
+  displayedColumns: string[] = ['client_name', 'client_vertical', 'name','created_on','status','total_user','action'];
 	dataSource = new MatTableDataSource<any>(this.data);
    horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-   constructor(private _Activatedroute:ActivatedRoute,private datePipe: DatePipe,public route:ActivatedRoute,private http: HttpClient,public dialog: MatDialog,private pagerService: PagerService,public companyService:CompanyDetailService) {
+   constructor(private _Activatedroute:ActivatedRoute,
+    private datePipe: DatePipe,
+    public route:ActivatedRoute,
+    private http: HttpClient,
+    public dialog: MatDialog,
+    private pagerService: PagerService,
+    public companyService:CompanyDetailService) {
 
      
    }
+   sub
   ngOnInit() {
-  	this.id=this._Activatedroute.snapshot.paramMap.get("id");
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['id']; // (+) converts string 'id' to a number
+console.log(this.id)
+      // In a real app: dispatch action to load the details here.
+   });
+    this.id=this._Activatedroute.snapshot.paramMap.get("id");
+    console.log(this.id)
   	this.getIndustries();
   	this.getData();
     this.ClientVertical();
+    this.getCountryList();
+    this.getStatesList()
+  }
+  getCountryList(){
+    this.companyService.Post(this.getCountry,{token:'LIVESITE'}).subscribe(res=>{
+      this.common=res['data']
+      this.country=this.common
+      // console.log(this.common,this.country)
+    });
+      
+  }
+  getStatesList(){
+    this.companyService.Post(this.getStates,{token:'LIVESITE'}).subscribe(res=>{
+      this.common=res['data']
+      this.states=this.common
+      // console.log(this.common,this.states)
+    });
   }
   getData()
   {
+    this.showloader=true
   	 this.companyService.Post(this.getClients,{company_id:this.id,fields:'*',token:'LIVESITE'}).subscribe(res=>{
      this.common=res
+     this.showloader=false
+
      this.allItems = this.common.total_data;
      this.data=this.common.data;
      console.log(this.data)
@@ -142,15 +180,36 @@ let part;
   const end = (this.currentPage + 1) * this.pageSize;
   const start = this.currentPage * this.pageSize;
   this.pageNumber=start
+  this.showloader=true
 
         this.companyService.Post(this.getClients,{company_id:this.id,fields:'*',token:'LIVESITE'}).subscribe(res => {
         this.common=res
+        this.showloader=false
+
          this.allItems = this.common.total_data;
         this.data=this.common.data;
        this.dataSource = this.data;
 
  })
 }
+
+  /**===========================================================
+        sorting using Assending and dissending order
+  ===========================================================*/
+
+  updateSortingOrderCompany(sort_column, sort_order) {
+    this.showloader=true
+
+    this.sort_column = sort_column
+    this.ASC = sort_order
+    // this.companyService.Post(this.getCompanies, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    //   this.response = res
+    this.showloader=false
+
+    //   console.log(this.response.data)
+    //   this.dataSource=this.response.data
+    // })
+  }
 
  /**===========================================================
           Export data and download
@@ -310,8 +369,16 @@ else if (value == 2) {
       const end = (this.currentPage + 1) * this.pageSize;
   const start = this.currentPage * this.pageSize;
   this.pageNumber=start
-   this.companyService.Post(this.getClients,{company_id:this.id,company_name:this.companyname,client_name:this.clientname,first_name:this.first_name,email : this.email,client_vertical:this.vertical1,portal_name:this.portal,city:this.city,start_date:this.sdate,end_date:this.edate,status:this.status,country:this.country1,state:this.state, offset:this.pageNumber,limit : this.pageSize ,token:'LIVESITE'})
+  this.showloader=true
+
+   this.companyService.Post(this.getClients,{company_id:this.id,company_name:this.companyname,
+    client_name:this.clientname,first_name:this.first_name,
+    email : this.email,client_vertical:this.vertical1,portal_name:this.portal,city:this.city,
+    start_date:this.sdate,end_date:this.edate,status:this.status,country:this.country1,
+    state:this.state, offset:this.pageNumber,limit : this.pageSize ,token:'LIVESITE'})
             .subscribe(res => {
+              this.showloader=false
+
                 this.common=res
                 this.allItems=this.common.total_data;
                this.rows=this.common.data

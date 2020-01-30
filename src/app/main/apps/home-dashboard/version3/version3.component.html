@@ -149,6 +149,11 @@
 								<span class="accent">{{vertical_total}}</span>
 							</li>
 							<!-- END OF LI -->
+							<li class="tab-link" (click)=getData(6)>
+								<p>Tools</p>
+								<span class="accent">{{Tools}}</span>
+							</li>
+							<!-- END OF LI -->
 						</ul>
 						<!-- END OF UL -->
 					</div>
@@ -181,6 +186,7 @@
 					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 					<div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
 						<mat-form-field appearance="outline" style="margin-top:15px;">
+								<mat-icon matSuffix>search</mat-icon>
 							<input matInput (keyup)="Search($event.target.value,'industry')" placeholder="Search here"
 								class="search industries_datatable_search">
 						</mat-form-field>
@@ -260,7 +266,13 @@
 						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
 							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
 							(page)="handlePage($event)"></mat-paginator>
-						<div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+						<div *ngIf="data == '' " style="text-align: center;margin-top: 10px;margin-bottom: 10px;">No
+							data available in table</div>
+						<mat-card *ngIf="showloader==true"
+							style="display: flex; justify-content: center; align-items: center">
+							<mat-progress-spinner mode="indeterminate">
+							</mat-progress-spinner>
+						</mat-card>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 				</div>
@@ -331,6 +343,7 @@
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 							<div class="mt-20">
 								<mat-form-field appearance="outline">
+										<mat-icon matSuffix>search</mat-icon>
 									<input matInput (keyup)="Search($event.target.value,'company')"
 										placeholder="Search here">
 								</mat-form-field>
@@ -461,7 +474,7 @@
 
 					<mat-card *ngIf="showloader==true"
 						style="display: flex; justify-content: center; align-items: center">
-						<mat-progress-spinner color="primary" mode="indeterminate">
+						<mat-progress-spinner mode="indeterminate">
 						</mat-progress-spinner>
 					</mat-card>
 
@@ -542,6 +555,7 @@
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 							<div class="mt-20">
 								<mat-form-field appearance="outline">
+									<mat-icon matSuffix>search</mat-icon>
 									<input matInput (keyup)="Search($event.target.value,'client')"
 										placeholder="Search here">
 								</mat-form-field>
@@ -677,8 +691,13 @@
 							(page)="handlePage2($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
 						available in table</div>
+						<mat-card *ngIf="showloader==true"
+						style="display: flex; justify-content: center; align-items: center">
+						<mat-progress-spinner mode="indeterminate">
+						</mat-progress-spinner>
+					</mat-card>
 				</div>
 				<!-- END OF ROW -->
 				<div class="row">
@@ -731,7 +750,7 @@
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<div class="row" style="display: flex;">
 							<div class="mt-20 mr-20">
-								<select (change)="searchType($event.target.value)" class="user_name_select"
+								<!-- <select (change)="searchType($event.target.value)" class="user_name_select"
 									style="margin-top: 5px;">
 									<option selected="" value="name">Name</option>
 									<option value="email">Email</option>
@@ -739,7 +758,20 @@
 									<option value="status">Status</option>
 									<option value="course">Course</option>
 									<option value="certificates">Certificates</option>
-								</select>
+								</select> -->
+								<mat-form-field appearance="outline">
+										<!-- <mat-label>Cars</mat-label> -->
+										<select matNativeControl required (change)="searchType($event.target.value)" class="user_name_select"
+										style="margin-top: 5px;">
+										<option selected="" value="name">Name</option>
+										  <option value="email">Email</option>
+										  <option value="access_code">Access Code</option>
+										  <option value="status">Status</option>
+										  <option value="course">Course</option>
+										  <option value="certificates">Certificates</option>
+
+										</select>
+									  </mat-form-field>
 							</div>
 							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
@@ -753,6 +785,7 @@
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 							<div class="mt-20" *ngIf="select_box == 1">
 								<mat-form-field appearance="outline">
+									<mat-icon matSuffix>search</mat-icon>
 									<input matInput (keyup)="Search($event.target.value,'user')"
 										placeholder="Search here">
 								</mat-form-field>
@@ -806,7 +839,7 @@
 						<mat-table [dataSource]="dataSource">
 							<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
 							<ng-container matColumnDef="name">
-								<mat-header-cell *matHeaderCellDef style="    padding-right:  10px;"> Name
+								<mat-header-cell *matHeaderCellDef style="padding-right:  10px;"> Name
 									<span class="pointer" style="margin-left: 11px !important;">
 
 										<i (click)="updateSortingOrderUser('name','ASC')" [class.sort]='(this.sort_column=="name" && this.sort_order=="ASC") ?
@@ -939,8 +972,13 @@
 							(page)="handlePage3($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
 						available in table</div>
+						<mat-card *ngIf="showloader==true"
+						style="display: flex; justify-content: center; align-items: center">
+						<mat-progress-spinner mode="indeterminate">
+						</mat-progress-spinner>
+					</mat-card>
 				</div>
 				<!-- END OF ROW -->
 				<div class="row">
@@ -1005,6 +1043,7 @@
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 							<div class="mt-20">
 								<mat-form-field appearance="outline">
+									<mat-icon matSuffix>search</mat-icon>
 									<input matInput (keyup)="Search($event.target.value,'vertical')"
 										placeholder="Search here">
 								</mat-form-field>
@@ -1071,8 +1110,13 @@
 							(page)="handlePage4($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
 						available in table</div>
+						<mat-card *ngIf="showloader==true"
+						style="display: flex; justify-content: center; align-items: center">
+						<mat-progress-spinner mode="indeterminate">
+						</mat-progress-spinner>
+					</mat-card>
 				</div>
 				<!-- END OF ROW -->
 				<div class="row">
@@ -1107,10 +1151,205 @@
 
 
 
+
+
+
+
+
+
+			<div *ngIf="table == 6" class="table__Companies">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Verticals
+									{{tools}}</span></p>
+						</div>
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class="row" style="display: flex;">
+								<div class="mt-20 mr-20">
+										<mat-form-field appearance="outline">
+												<!-- <mat-label>Cars</mat-label> (change)="searchType($event.target.value)"-->
+												<select matNativeControl required  class="user_name_select"
+												style="margin-top: 5px;">
+												<option selected="" value="name">Name</option>
+												  <option value="email">Email</option>
+		
+												</select>
+											  </mat-form-field>
+								</div>
+								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+								<div class="mt-20">
+									<mat-form-field appearance="outline">
+										<mat-icon matSuffix>search</mat-icon>
+										<input matInput (keyup)="Search($event.target.value,'vertical')"
+											placeholder="Search here">
+									</mat-form-field>
+								</div>
+								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+							</div>
+							<!-- END OF ROW -->
+						</div>
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					</div>
+					<!-- END OF ROW -->
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<mat-table [dataSource]="dataSource">
+										<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
+										<ng-container matColumnDef="name">
+											<mat-header-cell *matHeaderCellDef style="padding-right:  10px;"> Name
+												<span class="pointer" style="margin-left: 11px !important;">
+			
+													<i (click)="updateSortingOrderTools('name','ASC')" [class.sort]='(this.sort_column=="name" && this.sort_order=="ASC") ?
+													"sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_upward
+													</i>
+													<i (click)="updateSortingOrderTools('name','DESC')"
+														[class.sort]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_downward
+													</i>
+												</span>
+											</mat-header-cell>
+											<mat-cell style="    padding-right: 10px;" class="style" *matCellDef="let element"
+												(click)="openDialog()">
+												<div [innerHtml]="element[0]"></div>
+											</mat-cell>
+										</ng-container>
+										<!-- Weight Column -->
+										<ng-container matColumnDef="email">
+											<mat-header-cell *matHeaderCellDef style="padding-right: 125px;"> Email
+												<span class="pointer" style="margin-left: 11px !important;">
+													<i (click)="updateSortingOrderTools('email','ASC')"
+														[class.sort]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_upward
+													</i>
+													<i (click)="updateSortingOrderTools('email','DESC')"
+														[class.sort]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_downward
+													</i>
+												</span>
+											</mat-header-cell>
+											<mat-cell *matCellDef="let element" style="padding-right: 125px;">{{element.email}}
+												<!-- <span [innerHtml]="element[1]"></span> -->
+											</mat-cell>
+										</ng-container>
+										<!-- Symbol Column -->
+										<ng-container matColumnDef="total_dept">
+											<mat-header-cell *matHeaderCellDef> total_dept<span class="pointer" style="margin-left: 11px !important;">
+													<i (click)="updateSortingOrderTools('total_dept','ASC')"
+														[class.sort]='(this.sort_column=="total_dept" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_upward
+													</i>
+													<i (click)="updateSortingOrderTools('total_dept','DESC')"
+														[class.sort]='(this.sort_column=="total_dept" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_downward
+													</i>
+												</span> </mat-header-cell>
+											<mat-cell *matCellDef="let element"> {{element.total_dept}} </mat-cell>
+										</ng-container>
+										<ng-container matColumnDef="total_dept_amount">
+											<mat-header-cell *matHeaderCellDef>
+													total_dept Amount
+													<span class="pointer" style="margin-left: 11px !important;">
+															<i (click)="updateSortingOrderTools('total_dept_amount','ASC')"
+																[class.sort]='(this.sort_column=="total_dept_amount" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+																arrow_upward
+															</i>
+															<i (click)="updateSortingOrderTools('total_dept_amount','DESC')"
+																[class.sort]='(this.sort_column=="total_dept_amount" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+																arrow_downward
+															</i>
+														</span>
+											</mat-header-cell>
+											<mat-cell *matCellDef="let element"> {{element.total_dept}} </mat-cell>
+										</ng-container>
+								
+
+										<ng-container matColumnDef="status">
+											<mat-header-cell *matHeaderCellDef> Status
+												<span class="pointer" style="margin-left: 11px !important;">
+													<i (click)="updateSortingOrderTools('status','ASC')"
+														[class.sort]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_upward
+													</i>
+													<i (click)="updateSortingOrderTools('status','DESC')"
+														[class.sort]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_downward
+													</i>
+												</span>
+											</mat-header-cell>
+											<mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
+										</ng-container>
+										<ng-container matColumnDef="dept_free_date">
+											<mat-header-cell style="padding-right:  15px;" *matHeaderCellDef>dept_free_date
+												<span class="pointer" style="margin-left: 11px !important;">
+													<i (click)="updateSortingOrderTools('dept_free_date','ASC')"
+														[class.sort]='(this.sort_column=="dept_free_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_upward
+													</i>
+													<i (click)="updateSortingOrderTools('dept_free_date','DESC')"
+														[class.sort]='(this.sort_column=="dept_free_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+														arrow_downward
+													</i>
+												</span>
+											</mat-header-cell>
+											<mat-cell *matCellDef="let element" style="padding-right:  10px;">{{element.dept_free_date}}
+											</mat-cell>
+										</ng-container>
+										<mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
+										<mat-row *matRowDef="let row; columns: displayedColumns6;"></mat-row>
+									</mat-table>
+							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+								(page)="handlePage4($event)"></mat-paginator>
+						</div>
+						<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
+							available in table</div>
+							<mat-card *ngIf="showloader==true"
+							style="display: flex; justify-content: center; align-items: center">
+							<mat-progress-spinner mode="indeterminate">
+							</mat-progress-spinner>
+						</mat-card>
+					</div>
+					<!-- END OF ROW -->
+					<div class="row">
+						<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<p>Showing {{start}} to {{end}} of {{allItems}} entries</p>
+							</div> -->
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+								<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
+									<li [ngClass]="{disabled:pager.currentPage === 1}">
+										<a (click)="setPage(1)">First</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === 1}">
+										<a (click)="setPage(pager.currentPage - 1)">Previous</a>
+									</li>
+									<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+										<a (click)="setPage(page)">{{page}}</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+										<a (click)="setPage(pager.currentPage + 1)">Next</a>
+									</li>
+									<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+										<a (click)="setPage(pager.totalPages)">Last</a>
+									</li>
+								</ul>
+							</div> -->
+						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					</div>
+					<!-- END OF ROW -->
+				</div>
+
+
+
+
+
 		</div>
 		<!-- END OF MAT__BOX MT-20 MR-28 -->
 
-     <!-- END OF TABLES	 -->
+		<!-- END OF TABLES	 -->
 
 
 
@@ -1225,7 +1464,7 @@
 
 
 
-		
+
 
 
 
@@ -1236,7 +1475,7 @@
 
 		<!-- total video -->
 		<div class="row mt-20 mr-28" style="display: flex; width: 98% !important;">
-			
+
 			<div class="total_video col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;width: 42% !important;">
 				<div class="mat__box graph_dive">
@@ -1279,7 +1518,7 @@
 
 
 
-      <!-- Certificates claimed -->
+			<!-- Certificates claimed -->
 			<div class="total_certificates col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;width: 42% !important; margin-left: 20px;">
 				<div class="mat__box graph_dive">
@@ -1314,7 +1553,7 @@
 								<i class="black_status material-icons">
 									bookmark
 								</i></span>
-								<span class="black_status"> Downloaded {{downloaded}}</span></li>
+							<span class="black_status"> Downloaded {{downloaded}}</span></li>
 
 						<li><span class="blue_status"><i class="blue_status material-icons">
 									bookmark
@@ -1337,7 +1576,7 @@
 
 
 
-		
+
 		<!-- course status -->
 		<div class="row mt-20 mr-28" style="display: flex; width: 98% !important;">
 			<div class="total_course col-lg-6 col-md-6 col-sm-12 col-xs-12"
@@ -1376,7 +1615,7 @@
 							</i>Mandatory {{mandatory}}</li>
 						<li><span class="orange_status"></span><i class="orange_status material-icons">
 								bookmark
-											</i> Full Course {{fullCourse}}</li>
+							</i> Full Course {{fullCourse}}</li>
 					</ul>
 				</div>
 				<!-- END OF MAT__BOX -->
@@ -1389,7 +1628,7 @@
 
 
 
-<!-- Access Code -->
+			<!-- Access Code -->
 			<div class="total_access_code col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;width:42% !important; margin-left: 20px;">
 				<div class="mat__box graph_dive">
@@ -1412,11 +1651,11 @@
 					<div class="graph_section" id="access"></div>
 					<ul class="course_status_ul">
 						<li><span class="black_status"><i class="black_status material-icons">
-								bookmark
-							</i></span><span class="black_status"> Unused Code {{unused}}</span></li>
+									bookmark
+								</i></span><span class="black_status"> Unused Code {{unused}}</span></li>
 						<li><span class="blue_status"><i class="blue_status material-icons">
-								bookmark
-							</i></span> <span class="blue_status"> Used Code {{used}}</span></li>
+									bookmark
+								</i></span> <span class="blue_status"> Used Code {{used}}</span></li>
 					</ul>
 				</div>
 				<!-- END OF MAT__BOX -->
@@ -1547,7 +1786,8 @@
 
 							</span><i class="black_status material-icons">
 								bookmark
-							</i><span style="color: #5c5c61;"> Most Viewed Video :&nbsp;&nbsp;&nbsp; {{maxVideo}}</span></li>
+							</i><span style="color: #5c5c61;"> Most Viewed Video :&nbsp;&nbsp;&nbsp; {{maxVideo}}</span>
+						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<li><span class="blue_status"></span>
 							<i class="material-icons">
@@ -1564,7 +1804,7 @@
 
 
 
-		
+
 
 		<!-- surway -->
 		<div class="total_survey row mt-10 mr-28 mb-28">

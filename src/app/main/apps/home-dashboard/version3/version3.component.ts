@@ -233,6 +233,8 @@ export class Version3Component implements OnInit {
   displayedColumns2: string[] = ['name', 'industry', 'company', 'vertical', 'user', 'status', 'register'];
   displayedColumns3: string[] = ['name', 'email', 'vedio', 'cloud', 'certificate', 'progress', 'percent', 'status', 'register'];
   displayedColumns4: string[] = ['name', 'total_vedio', 'total_quiz', 'total_question', 'create_date', 'action'];
+  displayedColumns6: string[] = ['name',	'email'	,'total_dept',	'total_dept_amount'	,'status' ,'dept_free_date']
+                   
   dataSource = new MatTableDataSource<any>(this.data);
   @ViewChild('matSelect', { static: true }) matSelect: MatSelect;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -325,21 +327,21 @@ export class Version3Component implements OnInit {
 
 
   ngOnInit() {
-    this._router.events
-    .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        takeUntil(this._unsubscribeAll)
-    )
-    .subscribe(() => {
-        if (this._fuseSidebarService.getSidebar('navbar')) {
-            this._fuseSidebarService.getSidebar('navbar').close();
-        }
-    }
-    );
+    // this._router.events
+    // .pipe(
+    //     filter((event) => event instanceof NavigationEnd),
+    //     takeUntil(this._unsubscribeAll)
+    // )
+    // .subscribe(() => {
+    //     if (this._fuseSidebarService.getSidebar('navbar')) {
+    //         this._fuseSidebarService.getSidebar('navbar').close();
+    //     }
+    // }
+    // );
 
 
-    this.getToggle = this._fuseSidebarService.getSidebar('navbar');
-    console.log("getToggle===============#############",this.getToggle)
+    // this.getToggle = this._fuseSidebarService.getSidebar('navbar');
+    // console.log("getToggle===============#############",this.getToggle)
     //   this.matSelect.valueChange.subscribe(value => {
     //     console.log(value);
     // });
@@ -548,6 +550,7 @@ export class Version3Component implements OnInit {
 
 
   onIndustryclick(event) {
+    // this.showloader = true;
     this.industry_disable = 0;
     this.table = 1;
     this.company_id = [];
@@ -574,6 +577,7 @@ export class Version3Component implements OnInit {
 
 
   onIndustrydelselect(event) {
+    // this.showloader = true;
     this.table = 1;
     this.company_id = [];
     for (var obj in this.industry_id) {
@@ -678,6 +682,7 @@ export class Version3Component implements OnInit {
   }
 
   onVerticalclick(event) {
+    // this.showloader=true
     this.location_data = []
 
     this.resetLocation();
@@ -1196,12 +1201,17 @@ export class Version3Component implements OnInit {
 
 
   updateSortingOrderIndustry(sort_column, sort_order) {
+    this.showloader = true;
     this.sort_column = sort_column
     this.ASC = sort_order
+    // setTimeout (() => {
+
     this.v3Service.POST(this.getIndustriesWithData, { column: this.sort_column, dir: this.ASC, id: this.industry_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', search: this.search_data }).subscribe(res => {
+      this.showloader = false
       this.common = res
       this.dataSource = this.common.data
     });
+    // }, 2000)
   }
 
 
@@ -1221,6 +1231,8 @@ export class Version3Component implements OnInit {
 
 
   getCompanywithData(date_range, search_data, industry_id, company_ids) {
+    this.showloader = true
+
     if (company_ids == '' && industry_id != '') {
       for (var i = 0; i < this.company.length; i++) {
         company_ids.push(this.company[i].id)
@@ -1228,6 +1240,8 @@ export class Version3Component implements OnInit {
     }
     //this.company_id=company_id
     this.v3Service.POST(this.getCompaniesWithData, { industries_ids: industry_id.toString(), id: company_ids.toString(), start: this.pageNumber, length: this.size, token: 'LIVESITE', dateRange: date_range, search: search_data }).subscribe(res => {
+      this.showloader = false
+
       this.common = res
       this.date_range = '';
       this.data = this.common.data
@@ -1288,9 +1302,13 @@ export class Version3Component implements OnInit {
 
 
   updateSortingOrderCompany(sort_column, sort_order) {
+    this.showloader = true
+
     this.sort_column = sort_column
     this.ASC = sort_order
     this.v3Service.POST(this.getCompaniesWithData, { column: this.sort_column, dir: this.ASC, industries_ids: this.industry_id.toString(), id: this.company_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
+      this.showloader = false
+
       this.common = res
       this.dataSource = this.common.data
     });
@@ -1304,7 +1322,9 @@ export class Version3Component implements OnInit {
 
   getClientwithData(date_range, search_data, client_id) {
     var a = []
+    this.showloader = true
     this.v3Service.POST(this.getClientsWithData, { id: client_id.toString(), verticals_ids: client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data, location: this.location_data.toString() }).subscribe(res => {
+      this.showloader = false
       this.common = res;
       this.date_range = '';
       this.data = this.common.data
@@ -1368,9 +1388,11 @@ export class Version3Component implements OnInit {
 
 
   updateSortingOrderClient(sort_column, sort_order) {
+    this.showloader = true
     this.sort_column = sort_column
     this.ASC = sort_order
     this.v3Service.POST(this.getClientsWithData, { column: this.sort_column, dir: this.ASC, id: this.client_id.toString(), verticals_ids: this.client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, location: this.location_id }).subscribe(res => {
+      this.showloader = false
       this.common = res
       this.dataSource = this.common.data
     });
@@ -1387,6 +1409,8 @@ export class Version3Component implements OnInit {
 
 
   getUserwithData(date_range, search_data, id_vertical, location_data, searchtype) {
+    this.showloader=true;
+
     let vid;
     if (id_vertical.length > 0 || location_data.length > 0) {
       //this.clients_data=
@@ -1405,6 +1429,8 @@ export class Version3Component implements OnInit {
         */
 
     this.v3Service.POST(this.getUsersWithData, { clients_ids: this.clients_data.toString(), verticals: id_vertical.toString(), location: location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search_type: searchtype, search: search_data, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
+      this.showloader=false;
+    
       this.common = res
       console.log("user data=================", this.common)
       this.date_range = '';
@@ -1483,9 +1509,12 @@ export class Version3Component implements OnInit {
 
 
   updateSortingOrderUser(sort_column, sort_order) {
+    this.showloader=true;
     this.sort_column = sort_column
     this.ASC = sort_order
     this.v3Service.POST(this.getUsersWithData, { column: this.sort_column, dir: this.ASC, clients_ids: this.clients_data, verticals: this.vid, location: this.location_data, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
+    this.showloader=false;
+     
       this.common = res
       this.dataSource = this.common.data
     });
@@ -1495,11 +1524,12 @@ export class Version3Component implements OnInit {
 
 
   getVerticalwithData(date_range, search_data) {
+    this.showloader=true
     this.v3Service.POST(this.getVerticalsWithData, { start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data }).subscribe(res => {
+    this.showloader=false
       this.common = res
       //this.date_range='';
       this.data = this.common.data
-
       // this.desserts = this.data;
       // console.log(this.desserts)
       // this.sortedData = this.desserts.slice();
@@ -1554,9 +1584,12 @@ export class Version3Component implements OnInit {
 
 
   updateSortingOrderVertical(sort_column, sort_order) {
+    this.showloader=true
     this.sort_column = sort_column
     this.ASC = sort_order
     this.v3Service.POST(this.getVerticalsWithData, { column: this.sort_column, dir: this.ASC, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
+    this.showloader=false
+     
       this.common = res
       this.dataSource = this.common.data
     });

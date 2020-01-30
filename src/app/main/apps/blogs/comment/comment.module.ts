@@ -26,6 +26,8 @@ import { MatTreeModule } from '@angular/material/tree';
 import { CommentComponent } from './comment.component';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 const routes: Routes = [
   {
       path: '**',
@@ -44,6 +46,7 @@ const routes: Routes = [
         MatFormFieldModule,
         MatIconModule,
         MatMenuModule,
+        MatProgressSpinnerModule,
         MatSelectModule,
         UiSwitchModule,
         MatTableModule,

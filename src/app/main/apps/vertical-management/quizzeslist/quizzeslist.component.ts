@@ -37,6 +37,7 @@ export class QuizzeslistComponent implements OnInit {
   startIndex = 1;
   endIndex = 10;
   value = '';
+  showloader=false
   name1: any;
   dataSource = new MatTableDataSource<any>(this.data);
   allItems: any;
@@ -130,10 +131,14 @@ export class QuizzeslistComponent implements OnInit {
       */
 
   updateSortingOrderQuiz(sort_column, sort_order) {
+    this.showloader=true
+
     this.sort_column = sort_column
     this.ASC = sort_order
     this.quize_service.Post(this.getQuizzesListbyTopic, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
+      this.showloader=false
+
       this.dataSource = this.response['data']
     });
   }
@@ -156,8 +161,12 @@ export class QuizzeslistComponent implements OnInit {
    * @param id get Quizzes list
    */
   getQuizeList(id) {
+    this.showloader=true
+
     this.quize_service.Post(this.getQuizzesListbyTopic, { topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
+      this.showloader=false
+
       this.allItems = this.common.total_data;
       this.data = this.common.data
       this.dataSource = new MatTableDataSource(this.data);
@@ -183,16 +192,15 @@ export class QuizzeslistComponent implements OnInit {
 
   private iterator(id) {
     let part;
-
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
+     this.showloader=true;
     this.quize_service.Post(this.getQuizzesListbyTopic, { topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.allItems = this.common.total_data;
       this.data = this.common.data
-      //this.showloader=false;
+      this.showloader=false;
       this.dataSource = this.data;
 
     })

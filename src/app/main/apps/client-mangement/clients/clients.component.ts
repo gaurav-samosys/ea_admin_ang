@@ -72,7 +72,7 @@ export class ClientsComponent implements OnInit {
   name: any;
   // pager object
   pager: any = {};
-
+  showloader=false
   // paged items
   pagedItems: any[];
   getClients = myGlobals.getClients;
@@ -94,6 +94,7 @@ export class ClientsComponent implements OnInit {
 
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
+  id: any;
   constructor(
     private toastr: ToastrService,
 
@@ -132,12 +133,22 @@ export class ClientsComponent implements OnInit {
     else
       this.buttonName = "keyboard_arrow_down";
   }
+  clientName
+  client_Name
   FetchClient() {
+    this.showloader=true;
+
     this.client_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.showloader=false;
+     
       this.response = res
-      console.log(this.response)
+      // console.log(this.response)
       this.data = this.response.data;
-      console.log(this.data)
+      this.clientName=this.data[0]['client_name']
+      this.id=this.data[0]['id']
+      this.client_Name =this.data[0]['client_name'].replace(/ /g,"_");
+      console.log(this.client_Name);
+      // console.log(this.data[0]['client_name'])
       this.dataSource = this.data;
       this.allItems = this.response.total_data;
       this.dataSource = new MatTableDataSource(this.data);
@@ -174,10 +185,10 @@ export class ClientsComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
+    this.showloader=true;
     this.client_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      //this.showloader=false;
+      this.showloader=false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
@@ -188,9 +199,13 @@ export class ClientsComponent implements OnInit {
   sort_order = "DESC";
 
   updateSortingOrderClient(sort_column, sort_order) {
+    this.showloader=true;
+
     this.sort_column = sort_column
     this.ASC = sort_order
     this.client_service.Post(this.getClients, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.showloader=false;
+     
       this.response = res
       this.dataSource=this.response.data
     });
@@ -440,8 +455,12 @@ export class ClientsComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
+    this.showloader=true
+
     this.client_service.Post(this.getClients, { company_name: this.companyname, client_name: this.clientname, first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal, city: this.city, start_date: this.sdate, end_date: this.edate, status: this.status, country: this.country1, state: this.state, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
       .subscribe(res => {
+        this.showloader=false
+
         this.response = res
         this.allItems = this.response.total_data;
         this.rows = this.response.data

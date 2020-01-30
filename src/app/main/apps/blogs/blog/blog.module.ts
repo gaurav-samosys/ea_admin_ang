@@ -26,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
         MatIconModule,
         MatMenuModule,
         MatSelectModule,
+        MatProgressSpinnerModule,
         MatTableModule,
         ReactiveFormsModule,
         MatTabsModule,

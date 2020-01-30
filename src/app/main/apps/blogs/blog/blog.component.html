@@ -226,9 +226,14 @@
                 </mat-table>
 
                 <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-                  [pageSize]="pageSize" [pageSizeOptions]="[2,5,10, 25, 50,100]" showFirstLastButtons
+                  [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
                   (page)="handlePage($event)"></mat-paginator>
                 <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+                <mat-card *ngIf="showloader==true"
+                style="display: flex; justify-content: center; align-items: center">
+                <mat-progress-spinner mode="indeterminate">
+                </mat-progress-spinner>
+              </mat-card>
               </div>
               <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             </div>

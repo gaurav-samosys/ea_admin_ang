@@ -20,7 +20,7 @@ export class ExpertInterviewComponent implements OnInit {
   value = '';
   pageNumber: any;
   vimeoUrl
-
+  showloader=false
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
   displayedColumns: string[] = ['title', 'video', 'create_date', 'action'];
@@ -61,7 +61,10 @@ export class ExpertInterviewComponent implements OnInit {
    * 
    */
   getExpertInterView() {
+    this.showloader=true
     this.expert_service.Post(this.expert_interview, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.showloader=false
+     
       this.response = res
       console.log(this.response)
       var video = res['data']
@@ -111,10 +114,10 @@ export class ExpertInterviewComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    //  this.showloader=true;
+     this.showloader=true;
     this.expert_service.Post(this.expert_interview, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      // this.showloader=false;
+      this.showloader=false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
@@ -129,9 +132,13 @@ export class ExpertInterviewComponent implements OnInit {
   sort_order = "DESC";
 
   updateSortingOrderInterview(sort_column, sort_order) {
+    this.showloader=true
+
     this.sort_column = sort_column
     this.ASC = sort_order
     this.expert_service.Post(this.expert_interview, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader=false
+    
       this.response = res
       this.dataSource=this.response.data
     });

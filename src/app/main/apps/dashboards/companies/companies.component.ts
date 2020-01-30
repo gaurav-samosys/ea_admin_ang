@@ -212,9 +212,12 @@ export class CompaniesComponent implements OnInit {
   ===========================================================*/
 
   updateSortingOrderCompany(sort_column, sort_order) {
+    this.showloader=true
     this.sort_column = sort_column
     this.ASC = sort_order
     this.companyService.Post(this.getCompanies, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.showloader=false
+     
       this.response = res
       console.log(this.response.data)
       this.dataSource=this.response.data
@@ -451,8 +454,12 @@ export class CompaniesComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
+    this.showloader=true
+
     this.companyService.Post(this.getCompanies, { company_name: this.company, full_name: this.fullname, email: this.email, city: this.city, start_date: this.sdate, end_date: this.edate, industry: this.industry1, status: this.status1, country: this.country1, state: this.state1, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
       .subscribe(res => {
+        this.showloader=false
+
         this.response = res
         this.allItems = this.response.total_data;
         this.rows = this.response.data

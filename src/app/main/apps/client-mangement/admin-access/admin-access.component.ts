@@ -58,6 +58,7 @@ export class AdminAccessComponent implements OnInit {
   sort_column
   sort_order = "DESC";
   ASC;
+  showloader = false
   // paged items
   pagedItems: any[];
   getClients = myGlobals.getClients;
@@ -66,7 +67,7 @@ export class AdminAccessComponent implements OnInit {
   getAdminUsers = myGlobals.getAdminUsers;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  displayedColumns: string[] = ['id','email', 'first_name', 'last_name', 'client_name', 'company_name', 'action'];
+  displayedColumns: string[] = ['id', 'email', 'first_name', 'last_name', 'client_name', 'company_name', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -120,7 +121,11 @@ export class AdminAccessComponent implements OnInit {
    * =========================================
    */
   fetchAdminaccess() {
+
+    this.showloader = true
     this.admin_service.Post(this.getAdminUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader = false
+
       this.common = res
       this.data = this.common.data;
       console.log(this.data)
@@ -156,46 +161,50 @@ export class AdminAccessComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
+    this.showloader = true;
     this.admin_service.Post(this.getAdminUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      //this.showloader=false;
+      this.showloader = false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
     })
   }
- /**
-   * =========================================
-   *        Update sorting 
-   * =========================================
-   */
+  /**
+    * =========================================
+    *        Update sorting 
+    * =========================================
+    */
 
   updateSortingOrderAdminAccess(sort_column, sort_order) {
+    this.showloader = true
+
     this.sort_column = sort_column
     this.ASC = sort_order
-      this.admin_service.Post(this.getAdminUsers, { column:this.sort_column,dir:this.ASC,offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-        this.response = res
-      this.dataSource=this.response.data
+    this.admin_service.Post(this.getAdminUsers, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader = false
+
+      this.response = res
+      this.dataSource = this.response.data
     });
   }
 
-   /**
-   * =========================================
-   *       open Dialog
-   * =========================================
-   */
+  /**
+  * =========================================
+  *       open Dialog
+  * =========================================
+  */
   openDialog() {
     let dialog = this.dialog.open(AddadminComponent, {
       width: '600px', height: '600px'
     });
 
   }
- /**
-   * =========================================
-   *        Open snackbar
-   * =========================================
-   */
+  /**
+    * =========================================
+    *        Open snackbar
+    * =========================================
+    */
   openSnackBar() {
     this._snackBar.open('Admin User added successfully!!', 'End now', {
       duration: 4000,
@@ -225,11 +234,11 @@ export class AdminAccessComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
- /**
-   * =========================================
-   *        Confirm Dialog Box
-   * =========================================
-   */
+  /**
+    * =========================================
+    *        Confirm Dialog Box
+    * =========================================
+    */
   confirmDialog(value): void {
     const message = `Are you sure you want to delete this user detail?`;
     let id = value
@@ -244,11 +253,11 @@ export class AdminAccessComponent implements OnInit {
       this.result = dialogResult;
     });
   }
- /**
-   * =========================================
-   *        Edit Dialog
-   * =========================================
-   */
+  /**
+    * =========================================
+    *        Edit Dialog
+    * =========================================
+    */
   editDialog(value): void {
     const dialogRef = this.dialog.open(EditAdminComponent, {
       width: '600px', height: '500px',
@@ -282,11 +291,11 @@ export class AdminAccessComponent implements OnInit {
     this.size = parseInt(value);
     this.fetchAdminaccess();
   }
- /**
-   * =========================================
-   *        Fetch Country
-   * =========================================
-   */
+  /**
+    * =========================================
+    *        Fetch Country
+    * =========================================
+    */
   fetchCountry() {
     this.admin_service.Post(this.getCountry, { token: 'LIVESITE' })
       .subscribe(res => {
@@ -296,11 +305,11 @@ export class AdminAccessComponent implements OnInit {
       })
   }
 
-/**
-   * =========================================
-   *        Get State
-   * =========================================
-   */
+  /**
+     * =========================================
+     *        Get State
+     * =========================================
+     */
 
   getState(value) {
     this.admin_service.Post(this.getStates, { countries_id: value, token: 'LIVESITE' }).subscribe(res => {
@@ -384,15 +393,20 @@ export class AdminAccessComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
+    this.showloader=true
+
     this.admin_service.Post(this.getAdminUsers, {
-       company_name: this.companyname,
-       client_name: this.clientname, 
-       first_name: this.firstname,
+      company_name: this.companyname,
+      client_name: this.clientname,
+      first_name: this.firstname,
       //  full_name: this.firstname, 
-       last_name: this.lastname,
-        email: this.email,
-         start_date: this.sdate, end_date: this.edate, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
+      last_name: this.lastname,
+      email: this.email,
+      start_date: this.sdate, end_date: this.edate, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
+    })
       .subscribe(res => {
+        this.showloader=false
+
         this.common = res
         this.allItems = this.common.total_data;
         this.rows = this.common.data
@@ -404,11 +418,11 @@ export class AdminAccessComponent implements OnInit {
       });
   }
 
-/**
-   * =========================================
-   *        Select Date range
-   * =========================================
-   */
+  /**
+     * =========================================
+     *        Select Date range
+     * =========================================
+     */
   MyDate(newDate, name) {
     let date;
     if (name == 'start') {

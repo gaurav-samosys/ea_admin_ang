@@ -242,6 +242,11 @@
                             (page)="handlePage($event)"></mat-paginator>
                         <div *ngIf="data == '' " style="text-align: center;margin-top: 20px; margin-bottom:20px;">No
                             data available in table</div>
+                            <mat-card *ngIf="showloader==true"
+                            style="display: flex; justify-content: center; align-items: center">
+                            <mat-progress-spinner mode="indeterminate">
+                            </mat-progress-spinner>
+                          </mat-card>
 
                         <!--    <div>
                                 <div class="container">

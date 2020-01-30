@@ -55,6 +55,8 @@ export class ManagementComponent implements OnInit {
   id: any;
   sort_order:'DESC'
   sort_column
+  showloader=false;
+
   ASC
   constructor(
     private toastr: ToastrService,
@@ -115,8 +117,12 @@ export class ManagementComponent implements OnInit {
    * get vertical list
    */
   getVerticalList(id) {
+    this.showloader=true;
+
     this.manage_service.Post(this.getVerticalDataList, { vertical_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
+      this.showloader=false;
+
       this.data = this.common.data
       this.dataSource = this.data;
 
@@ -149,11 +155,11 @@ export class ManagementComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
+    this.showloader=true;
     this.manage_service.Post(this.getVerticalDataList, { vertical_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.data = this.common.data
-      //this.showloader=false;
+      this.showloader=false;
       this.dataSource = this.data;
 
     })
@@ -164,10 +170,14 @@ export class ManagementComponent implements OnInit {
   * @param sort_order 
   */
   updateSortingOrderVerical(sort_column,sort_order){
+    this.showloader=true;
+
     this.sort_column = sort_column
     this.ASC = sort_order
     this.manage_service.Post(this.getVerticalDataList, {column:this.sort_column,dir:this.ASC, vertical_id:this.id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
+      this.showloader=false;
+
       this.dataSource=this.common.data
     });
   }
@@ -250,8 +260,12 @@ export class ManagementComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
+    this.showloader=true;
+
     this.manage_service.Post(this.getVerticalDataList, { vertical_id: this.vertical_id, cat_name: this.title, description: this.description, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
       .subscribe(res => {
+        this.showloader=false;
+
         this.common = res
         this.allItems = this.common.total_data;
         this.rows = this.common.data

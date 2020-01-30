@@ -33,7 +33,7 @@ export class DownloadComponent implements OnInit {
   // array of all items to be paged
   allItems: any;
   states: any;
-
+  showloader:false;
   // pager object
   pager: any = {};
   downloadForm:FormGroup

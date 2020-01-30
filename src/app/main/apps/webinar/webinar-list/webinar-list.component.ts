@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatPaginator } from '@angular/material';
 import { WebinarListService } from './webinar-list.service';
 import * as myGlobals from '../../../../global';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-webinar-list',
@@ -17,7 +18,7 @@ export class WebinarListComponent implements OnInit {
   data: any;
   value = '';
   get_webinars=myGlobals.get_webinars
-  // delete_webinar=myGlobals.delete_webinar
+  delete_webinar=myGlobals.delete_webinar
  
   pageNumber: number = 0;
   size: number = 10;
@@ -32,8 +33,8 @@ export class WebinarListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   response: any;
   allItems: any;
-
-  constructor(public webinar_service:WebinarListService) { }
+  showloader=false
+  constructor(public toastr: ToastrService,public webinar_service:WebinarListService) { }
 
   ngOnInit() {
     this.getWebinarList()
@@ -56,8 +57,12 @@ export class WebinarListComponent implements OnInit {
    */
   webinar_img
   getWebinarList() {
+    this.showloader=true
+
     this.webinar_service.Post(this.get_webinars, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
+      this.showloader=false
+
       console.log("get_webinars list=============",this.response)
       this.data = this.response.data;
       console.log(this.data)
@@ -99,10 +104,10 @@ export class WebinarListComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     // this.pageNumber = start
-    //  this.showloader=true;
+     this.showloader=true;
     // this.webinar_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       // this.response = res
-      //this.showloader=false;
+      this.showloader=false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
@@ -115,10 +120,13 @@ export class WebinarListComponent implements OnInit {
    * sorting
    */
   updateSortingOrderWebinar(sort_column, sort_order) {
+    this.showloader=true
     this.sort_column = sort_column
     this.ASC = sort_order
     // this.webinar_service.Post(this.getClients, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
     //   this.response = res
+    this.showloader=false
+
     //   this.dataSource=this.response.data
     // });
   }
@@ -146,4 +154,20 @@ export class WebinarListComponent implements OnInit {
     // }
   }
 
+  confirmDialog(id){
+    var id=id
+    console.log(id )
+    this.webinar_service.Post(this.delete_webinar, {webinar_id:id,  token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
+      console.log(this.response )
+      if(this.response['status']==1){
+        this.toastr.success('Webinar Deleted Successfully')
+
+      }else{
+        this.toastr.warning('There Are some Issue')
+
+      }
+      this.getWebinarList()
+    });
+  }
 }

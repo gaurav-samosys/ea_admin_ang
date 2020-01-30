@@ -99,9 +99,13 @@ endDate1:Date;
   constructor(private _Activatedroute:ActivatedRoute,private datePipe: DatePipe,private http: HttpClient,public dialog: MatDialog,public client_service:ClientDetailService) {
 
    }
-
+   clientName
   ngOnInit() {
     this.id=this._Activatedroute.snapshot.paramMap.get("id");
+    this._Activatedroute.queryParamMap.subscribe(params => {
+console.log(params)
+    });
+    console.log(this.id,this.clientName)
     this.fetchCountry();
     this.getClient();
     this.ClientVertical();

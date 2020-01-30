@@ -63,7 +63,7 @@ export class UserComponent implements OnInit {
   start: any;
   end: any;
   // array of all items to be paged
-  
+
   allItems: any;
   fullname: any;
   email: any;
@@ -78,12 +78,12 @@ export class UserComponent implements OnInit {
   endDate: Date;
   sdate: any;
   edate: any;
-
+  showloader = false
   // pager object
   pager: any = {};
   sort_column
   ASC
-  sort_order='DESC'
+  sort_order = 'DESC'
   // paged items
   pagedItems: any[];
   @ViewChild(MatSort, { static: true }) MatSort: MatSort;
@@ -99,11 +99,11 @@ export class UserComponent implements OnInit {
     private toastr: ToastrService,
 
     private excelService: ExcelService,
-     private datePipe: DatePipe,
-      private _snackBar: MatSnackBar, 
-      private http: HttpClient, public dialog: MatDialog,
-       private pagerService: PagerService, 
-       public user: UserService,private router:Router) {
+    private datePipe: DatePipe,
+    private _snackBar: MatSnackBar,
+    private http: HttpClient, public dialog: MatDialog,
+    private pagerService: PagerService,
+    public user: UserService, private router: Router) {
     if (localStorage.getItem('status') == 'true') {
       // this.openSnackBar();
       localStorage.removeItem('status');
@@ -125,9 +125,10 @@ export class UserComponent implements OnInit {
 
 
   }
-  reload(){location.reload()
-  // this.router.navigate(['/apps/user-mangement/user']);
-}
+  reload() {
+    location.reload()
+    // this.router.navigate(['/apps/user-mangement/user']);
+  }
   /**
    * button toggle
    */
@@ -147,24 +148,24 @@ export class UserComponent implements OnInit {
    * @param value 
    */
 
-  columnClick(value,colName: string, evt) {
+  columnClick(value, colName: string, evt) {
     console.log('-0-----', evt.target.checked)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);
     if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
     } else {
       // this.displayedColumns.push(colName);
-      this.displayedColumns.splice(value,0,colName)
+      this.displayedColumns.splice(value, 0, colName)
 
     }
   }
 
- /**
-   * =========================================
-   *      open dialog popup
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *      open dialog popup
+    * =========================================
+    */
+
   openDialog(value) {
     let dialog = this.dialog.open(UserPopupComponent, {
       data: value,
@@ -172,12 +173,12 @@ export class UserComponent implements OnInit {
     });
 
   }
- /**
-   * =========================================
-   *        Confirm dialog
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *        Confirm dialog
+    * =========================================
+    */
+
   confirmDialog(value): void {
     const message = `Are you sure you want to delete this user detail?`;
     let id = value
@@ -192,25 +193,26 @@ export class UserComponent implements OnInit {
       this.result = dialogResult;
     });
   }
- /**
-   * =========================================
-   *        Update Dialog user 
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *        Update Dialog user 
+    * =========================================
+    */
+
   editDialog(value): void {
     const dialogRef = this.dialog.open(UserEditComponent, {
       width: '600px', height: '500px',
       data: value
     });
   }
- /**
-   * =========================================
-   *        Fetch user 
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *        Fetch user 
+    * =========================================
+    */
+
   FetchUser() {
+    this.showLoader = true
     this.user.POST(this.getUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showLoader = false;
       this.response = res
@@ -248,27 +250,29 @@ export class UserComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
+    this.showloader = true;
     this.user.POST(this.getUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      //this.showloader=false;
+      this.showloader = false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
     })
   }
- /**
-   * =========================================
-   *        Update sorting 
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *        Update sorting 
+    * =========================================
+    */
+
   updateSortingOrderUser(sort_column, sort_order) {
+    this.showloader = true
     this.sort_column = sort_column
     this.ASC = sort_order
-        this.user.POST(this.getUsers, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-          this.response = res
-      this.dataSource=this.response.data
+    this.user.POST(this.getUsers, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader = false
+      this.response = res
+      this.dataSource = this.response.data
     });
   }
 
@@ -298,23 +302,23 @@ export class UserComponent implements OnInit {
             });
        
     }*/
- /**
-   * =========================================
-   *        Add user
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *        Add user
+    * =========================================
+    */
+
   addUser() {
     let dialog = this.dialog.open(AdduserComponent, {
       width: '600px', height: '500px'
     });
   }
- /**
-   * =========================================
-   *      fetch country
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *      fetch country
+    * =========================================
+    */
+
   fetchCountry() {
 
 
@@ -325,12 +329,12 @@ export class UserComponent implements OnInit {
 
       })
   }
-   /**
-   * =========================================
-   *        Get state
-   * =========================================
-   */
- 
+  /**
+  * =========================================
+  *        Get state
+  * =========================================
+  */
+
   getState(value, name) {
     this.country1 = '';
     this.state = '';
@@ -340,12 +344,12 @@ export class UserComponent implements OnInit {
       this.states = this.common.data
     })
   }
- /**
-   * =========================================
-   *        OnSelection change
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *        OnSelection change
+    * =========================================
+    */
+
   onChange(value, id) {
     console.log(value, id)
     let status;
@@ -363,12 +367,12 @@ export class UserComponent implements OnInit {
       console.log(res)
     })
   }
- /**
-   * =========================================
-   *        Open Snackbar
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *        Open Snackbar
+    * =========================================
+    */
+
   openSnackBar() {
     this._snackBar.open('User details updated successfully!!', 'End now', {
       duration: 4000,
@@ -390,12 +394,12 @@ export class UserComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
- /**
-   * =========================================
-   *        Searching
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *        Searching
+    * =========================================
+    */
+
   Search(value, name) {
     console.log(value, name)
     if (this.value != value) {
@@ -493,19 +497,24 @@ export class UserComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.user.POST(this.getUsers, { full_name: this.fullname,
-      email:this.email,
-       client_name: this.clientname,
-        company_name: this.companyname, 
-        country: this.country1, state: this.state,
-         city: this.city, status: this.status,
-          access_code: this.access_code,
-           start_date: this.sdate, 
-           end_date: this.edate, 
-           offset: this.pageNumber, 
-           limit: this.size, token: 'LIVESITE' })
+    this.showloader = true
+    this.user.POST(this.getUsers, {
+      full_name: this.fullname,
+      email: this.email,
+      client_name: this.clientname,
+      company_name: this.companyname,
+      country: this.country1, state: this.state,
+      city: this.city, status: this.status,
+      access_code: this.access_code,
+      start_date: this.sdate,
+      end_date: this.edate,
+      offset: this.pageNumber,
+      limit: this.size, token: 'LIVESITE'
+    })
       .subscribe(res => {
         this.response = res
+        this.showloader = false
+
         this.allItems = this.response.total_data;
         this.rows = this.response.data
         this.data = this.rows.slice(0, this.size);
@@ -515,12 +524,12 @@ export class UserComponent implements OnInit {
       });
   }
 
- /**
-   * =========================================
-   *       Date range Selection
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *       Date range Selection
+    * =========================================
+    */
+
   MyDate(newDate, name) {
     let date;
     if (name == 'start') {
@@ -548,12 +557,12 @@ export class UserComponent implements OnInit {
     this.FetchUser();
   }
 
- /**
-   * =========================================
-   *       Export Data And Download 
-   * =========================================
-   */
- 
+  /**
+    * =========================================
+    *       Export Data And Download 
+    * =========================================
+    */
+
   exportData() {
     this.user.exportAsExcelFile(this.data, 'sample');
 

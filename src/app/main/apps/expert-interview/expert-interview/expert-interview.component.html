@@ -178,6 +178,11 @@
                   <div *ngIf="data == '' " style="margin-bottom: 20px;
                     text-align: center;
                     margin-top: 20px;">No data available in table</div>
+                       <mat-card *ngIf="showloader==true"
+                       style="display: flex; justify-content: center; align-items: center">
+                       <mat-progress-spinner mode="indeterminate">
+                       </mat-progress-spinner>
+                     </mat-card>
                 </div>
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
               </div>

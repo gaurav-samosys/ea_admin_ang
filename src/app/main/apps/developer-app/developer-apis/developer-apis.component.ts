@@ -37,9 +37,10 @@ export class DeveloperApisComponent implements OnInit {
   country: any;
   // array of all items to be paged
   allItems: any;
+  showloader=false
   states: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  public pageSize = 1;
+  public pageSize = 10;
   public currentPage = 0;
   public totalSize = 0;
   startIndex = 1
@@ -136,10 +137,14 @@ export class DeveloperApisComponent implements OnInit {
     */
 
   updateSortingOrderDevloperApi(sort_column, sort_order) {
+ 
+  this.showloader=true
     this.sort_column = sort_column
     this.ASC = sort_order
     this.developer_service.Post(this.getDeveloperApiListing, { column: sort_column, dir: this.ASC, limit: this.pageNumber, offset: this.size, id: '', token: 'LIVESITE' })
       .subscribe(res => {
+        this.showloader=false
+
         this.response = res
         this.dataSource = this.response.data
       });
@@ -161,8 +166,12 @@ export class DeveloperApisComponent implements OnInit {
    */
 
   fetchListing() {
+    this.showloader=true
+
     this.developer_service.Post(this.getDeveloperApiListing, { limit: this.pageNumber, offset: this.size, id: '', token: 'LIVESITE' })
       .subscribe(res => {
+        this.showloader=false
+
         this.common = res;
         this.data = this.common.data
         this.dataSource.data = this.data
@@ -193,10 +202,10 @@ export class DeveloperApisComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
+     this.showloader=true;
     this.developer_service.Post(this.getDeveloperApiListing, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      //this.showloader=false;
+      this.showloader=false;
       this.data = this.response.data;
       this.dataSource = this.data;
       console.log(this.dataSource)

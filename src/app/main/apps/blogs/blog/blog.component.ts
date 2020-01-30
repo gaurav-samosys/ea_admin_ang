@@ -68,6 +68,7 @@ export class BlogComponent implements OnInit {
   startDate: string;
   endDate: string;
   myDate;
+  showloader=false
   blogForm: FormGroup
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -155,8 +156,11 @@ export class BlogComponent implements OnInit {
    */
 
   getBlogList() {
+    this.showloader=true
     this.blog_service.Post(this.getBlogWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
+      this.showloader=false
+
       // console.log(res)
       this.data = this.response['data']
       // console.log(this.data)
@@ -194,10 +198,10 @@ export class BlogComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
+     this.showloader=true;
     this.blog_service.Post(this.getBlogWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      //this.showloader=false;
+      this.showloader=false;
       this.data = this.response['data'];
       this.dataSource = this.data;
 
@@ -239,10 +243,14 @@ export class BlogComponent implements OnInit {
     */
 
   updateSortingOrderBlog(sort_column, sort_order) {
+    this.showloader=true
+
     this.sort_column = sort_column
     this.ASC = sort_order
     this.blog_service.Post(this.getBlogWithDataApi, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
+      this.showloader=false
+
       this.dataSource = this.response['data']
     });
   }
@@ -297,13 +305,17 @@ export class BlogComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
+
+    this.showloader=true
+
     this.blog_service.Post(this.getBlogWithDataApi, {
       post_title: this.titleName, category: this.categaryName,
       start_date: this.startDate, end_date: this.endDate,
       offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
     })
       .subscribe(res => {
-        // console.log(res)
+    this.showloader=false
+    // console.log(res)
         this.response = res
         this.allItems = this.response['recordsTotal'];
         this.rows = this.response['data']

@@ -59,7 +59,10 @@ export class CompanyEditComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       state: ['', Validators.required],
       industry: ['', [Validators.required]],
-      country: ['', Validators.required]
+      country: ['', Validators.required],
+      //third field add 31/01/20
+      res_add_user :[''], defoult_vertical:[''], client_vertical:['']
+
     });
     this.company.Post(this.getCompanies, { token: 'LIVESITE', company_id: this.res_data.id, fields: '*' }).subscribe(res => {
       this.common = res;

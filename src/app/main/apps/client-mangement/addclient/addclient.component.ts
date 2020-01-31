@@ -63,6 +63,12 @@ export class AddclientComponent implements OnInit {
     this.id = window.location.href.split('client-mangement/addclient/')[1]
     // alert(id)
     console.log(this.id)
+    if(this.id){
+
+      this.getCompWithClientData();
+    }else{
+
+    }
     this.getcompany();
     this.getVertical();
     this.getPortalview();
@@ -102,13 +108,13 @@ export class AddclientComponent implements OnInit {
       allow_unlock:[''],
       allow_unlock_bonus:[''],
       allow_unlock_user:[''],
-      Video:['']
+      Video:[''],
+      default_client:''
     })
     this.addclientForm.patchValue({
       free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
     })
 
-    this.getCompWithClientData();
   }
 
   dataArray 

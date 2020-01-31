@@ -18,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
           <app-client-edit (notifyParent)="getNotification($event)"></app-client-edit> `*/
 })
 export class ClientEditComponent implements OnInit {
+  seasons: string[] = ['Credit Link', 'Free Link', 'Link from user'];
+  rewards: string[]=['Yes','Specific Completions Only']
   /* getNotification(evt) {
  
      if ( ! evt) {
@@ -26,6 +28,12 @@ export class ClientEditComponent implements OnInit {
      console.log(evt)
          // Do something with the notification (evt) sent by the child!
      }*/
+     public buttonName: any = 'keyboard_arrow_down';
+     public buttonName1: any = 'keyboard_arrow_down';
+
+     public show: boolean = true;
+     public show1: boolean = true;
+
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
   editclientForm: FormGroup;
   editClient = myGlobals.editClient;
@@ -116,7 +124,9 @@ export class ClientEditComponent implements OnInit {
       reward_type1: [''],
       reward_completion1: [''],
       email_remainder: [''],
-      upload_file:['']
+      upload_file:[''],
+      allow_unlock_bonus:'',emai_domain:'',
+       allow_unlock:'' , allow_unlock_user:'', default_client_vertical:'' ,vimeo_id:''
     })
 
     this.edit_service.Post(this.getClients, { id: this.client_id, company_id: this.company_id, token: "LIVESITE", fields: '*' }).subscribe(res => {
@@ -437,6 +447,30 @@ export class ClientEditComponent implements OnInit {
   }
 
 
+
+  /**
+   * show hide button toggle
+   */
+  buttontoggle1() {
+    this.show1 = !this.show1;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show1)
+      this.buttonName1 = "keyboard_arrow_up";
+    else
+      this.buttonName1 = "keyboard_arrow_down";
+  }
+
+  /**
+   * show hide button toggle
+   */
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
 
 
 

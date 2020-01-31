@@ -47,10 +47,17 @@
                             <mat-option value="100">100</mat-option>
                           </mat-select>
                       </mat-form-field> -->
-
+<form [formGroup]="webinarListForm">
+    <mat-form-field appearance="outline"
+                    style="margin-right: 25px; width: 450px; margin-top: 30px;    padding-left: 15px;">
+                    <mat-label>Webinar name</mat-label>
+                    <input formControlName="webinar_name" matInput placeholder="Search webinar name"
+                      (keyup)="Search($event.target.value,'title')">
+                  </mat-form-field>
+</form>
                 </div>
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right" style="margin-top: -84px;">
                   <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
                     style="  background-color: #7da843 !important;
                     color: #ffffff !important;"><span> Show/Hide Column</span></button>

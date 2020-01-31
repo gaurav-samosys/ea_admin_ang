@@ -268,7 +268,7 @@ export class CompaniesComponent implements OnInit {
     ===========================================================*/
   editDialog(value): void {
     const dialogRef = this.dialog.open(CompanyEditComponent, {
-      width: '600px', height: '500px',
+      width: '800px', height: '500px',
       data: value
     });
   }

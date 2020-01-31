@@ -13,6 +13,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 import { fuseAnimations } from '@fuse/animations';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -101,6 +102,7 @@ public totalSize = 0;
     public route:ActivatedRoute,
     private http: HttpClient,
     public dialog: MatDialog,
+    private toastr: ToastrService,
     private pagerService: PagerService,
     public companyService:CompanyDetailService) {
 
@@ -121,6 +123,8 @@ console.log(this.id)
     this.getCountryList();
     this.getStatesList()
   }
+
+  /**get company list */
   getCountryList(){
     this.companyService.Post(this.getCountry,{token:'LIVESITE'}).subscribe(res=>{
       this.common=res['data']
@@ -129,6 +133,10 @@ console.log(this.id)
     });
       
   }
+
+  /**
+   * get states list
+   */
   getStatesList(){
     this.companyService.Post(this.getStates,{token:'LIVESITE'}).subscribe(res=>{
       this.common=res['data']
@@ -136,6 +144,10 @@ console.log(this.id)
       // console.log(this.common,this.states)
     });
   }
+
+  /**
+   * get data based on company
+   */
   getData()
   {
     this.showloader=true
@@ -210,7 +222,25 @@ let part;
     //   this.dataSource=this.response.data
     // })
   }
-
+ /**===========================================================
+           on selction change status 
+     ===========================================================*/
+     onChange(value, id) {
+      console.log(value, id)
+      let status;
+      if (value == false) {
+        status = 0;
+        this.toastr.success('Status Inactive Successfully');
+      }
+      else {
+        status = 1;
+        this.toastr.success('Status Active Successfully');
+  
+      }
+      this.companyService.Post(this.companyActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
+        console.log(res)
+      })
+    }
  /**===========================================================
           Export data and download
   ===========================================================*/
@@ -243,6 +273,9 @@ let part;
 
   // }
 
+  /**
+   * get industry
+   */
 getIndustries(){
  this.companyService.Post(this.getIndustry,{token:'LIVESITE'}).subscribe(res=>{
      this.common=res
@@ -250,6 +283,10 @@ getIndustries(){
    })
 }
 
+/**
+ * 
+ * @param value change button company detail and company search
+ */
 SwitchButton(value)
 {
 if(value == 1)
@@ -261,7 +298,11 @@ else if (value == 2) {
 }
 }
 
-
+/**
+ * 
+ * @param value search
+ * @param name 
+ */
   Search(value,name){
      if(this.value != value)
     {
@@ -412,7 +453,9 @@ else if (value == 2) {
     }
   }
 
-
+/**
+ * client vertical
+ */
   ClientVertical(){
   this.companyService.Post(this.getClientVertical,{token:'LIVESITE'}).subscribe(res=>{
      this.common=res

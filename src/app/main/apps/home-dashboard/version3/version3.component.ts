@@ -470,12 +470,12 @@ export class Version3Component implements OnInit {
     this.total_users_video = res.total_users
 
     // console.log('vedio ===========', res, res['data'], " this.total_users_video=======", this.total_users_video)
-    this.graph.video.xAxis.categories = categary
+    this.graph.videochartGraph.xAxis.categories = categary
     // this.graph.video.yAxis.categories =  element
     // this.graph.video.series[0].data = categary
-    this.graph.video.series[0].data = element
+    this.graph.videochartGraph.series[0].data = element
     // console.log(this.graph.video.xAxis.categories, this.graph.video.yAxis.categories, this.graph.video.series[0].data, this.graph.video.series[1].data)
-    Highcharts.chart('videochartGraph', this.graph.video);
+    Highcharts.chart('videochartGraph', this.graph.videochartGraph);
   }
 
 

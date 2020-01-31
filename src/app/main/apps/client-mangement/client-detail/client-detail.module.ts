@@ -46,16 +46,16 @@ import { PagerService } from 'app/main/apps/dashboards/pager.service';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 /*import { AdduserComponent } from 'app/main/apps/user-mangement/user/adduser/adduser.component';
 import { UserEditComponent } from 'app/main/apps/user-mangement/user/user-edit/user-edit.component';*/
-import { UserModule } from 'app/main/apps/user-mangement/user/user.module';
-import { UserService } from 'app/main/apps/user-mangement/user/user.service';
+// import { UserModule } from 'app/main/apps/user-mangement/user/user.module';
+// import { UserService } from 'app/main/apps/user-mangement/user/user.service';
 
 const routes: Routes = [
     {
-        path     : '**',
+        path     : '',
         component: ClientDetailComponent,
-        resolve  : {
-            data: ClientDetailService
-        }
+        // resolve  : {
+        //     data: ClientDetailService
+        // }
     }
 ];
 
@@ -77,7 +77,7 @@ const routes: Routes = [
         MatSelectModule,
         MatTableModule,
         MatTabsModule,
-       UserModule,
+    //    UserModule,
         NgxChartsModule,
 
         FuseSharedModule,
@@ -159,8 +159,9 @@ const routes: Routes = [
         MatTooltipModule,
         MatTreeModule,
     ],
+    // UserService
     providers   : [
-        ClientDetailService,UserService
+        ClientDetailService,
     ],
      entryComponents: []
 })

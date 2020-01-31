@@ -50,9 +50,13 @@ const routes = [
         path: 'client-mangement/clients',
         loadChildren: './client-mangement/clients/clients.module#ClientsModule', canActivate: [LoginGuard]
     },
+    // {
+    //     path: 'client-mangement/client-detail/:id/:id1',
+    //     loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule', canActivate: [LoginGuard]
+    // },
     {
-        path: 'client-mangement/client-detail/:id',
-        loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule', canActivate: [LoginGuard]
+        path: 'client-mangement/client-detail/:id/:id1',
+        loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule', 
     },
     {
         path: 'client-mangement/client-edit/:id/:id1',

@@ -7,9 +7,12 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class GraphService 
 {
+// total users
+
  public users: any =  {
     chart: {
        height:300,
+       width:470,
         type: 'column',zoomType: 'xy', panning: true, panKey: 'shift',
                         resetZoomButton: {
                             position: {
@@ -62,9 +65,9 @@ export class GraphService
 
 
 
-
+// total downloads
  public downloads: any = {
-    chart: {showInLegend: false,zoomType: 'x',height:300,
+    chart: {showInLegend: false,zoomType: 'x',height:300,width:460,
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
@@ -129,8 +132,61 @@ credits: {enabled: false},
 
 
 
+// total video
 
  public video: any =  {
+    chart: {
+        type: 'column',zoomType: 'x',height:300,width:470,
+                        resetZoomButton: {
+                            position: {
+                                // align: 'right', // by default
+                                // verticalAlign: 'top', // by default
+                                x: 0,
+                                y: -30
+                            }
+                        }
+    },  credits: {
+        enabled: false
+      },
+    navigation: {buttonOptions: {enabled: false}},
+    title: {
+        text: ''
+    },
+    xAxis: {
+        categories: [],
+    labels: {enabled: true},
+    opposite: false,
+    },
+    yAxis: {
+       min: 0,title: {text: ''}
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: 'Users: <b>{point.y:.1f}</b>'
+    },
+    series: [{showInLegend: false,enableMouseTracking: true},{
+        name: 'Video Views',
+        data: [
+        ],
+        dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            format: '{point.y:.1f}', // one decimal
+            y: 10, // 10 pixels down from the top
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    }]
+}
+
+
+public videochartGraph: any =  {
     chart: {
         type: 'column',zoomType: 'x',height:300,
                         resetZoomButton: {
@@ -186,10 +242,9 @@ credits: {enabled: false},
 
 
 
-
 certificate:any={
     chart: {
-        type: 'column',zoomType: 'x',height:300,
+        type: 'column',zoomType: 'x',height:300,width:470,
                         resetZoomButton: {
                             position: {
                                     // align: 'right', // by default
@@ -250,7 +305,7 @@ certificate:any={
 
 completion:any={
     chart: {
-        type: 'column',height:300,
+        type: 'column',height:300,width:470,
         zoomType: 'x',
 
                         resetZoomButton: {
@@ -326,7 +381,7 @@ completion:any={
 
 access_code:any={
     chart: {
-        type: 'column',height:300,
+        type: 'column',height:300,width:470,
         zoomType: 'x',
                         resetZoomButton: {
                             position: {

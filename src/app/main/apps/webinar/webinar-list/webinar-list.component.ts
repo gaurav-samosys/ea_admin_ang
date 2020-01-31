@@ -3,6 +3,7 @@ import { MatTableDataSource, MatSnackBarHorizontalPosition, MatSnackBarVerticalP
 import { WebinarListService } from './webinar-list.service';
 import * as myGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-webinar-list',
@@ -34,7 +35,12 @@ export class WebinarListComponent implements OnInit {
   response: any;
   allItems: any;
   showloader=false
-  constructor(public toastr: ToastrService,public webinar_service:WebinarListService) { }
+  webinarListForm:FormGroup
+  constructor(public toastr: ToastrService,public webinar_service:WebinarListService,private fb :FormBuilder) { 
+    this.webinarListForm=this.fb.group({
+      webinar_name :''
+    })
+  }
 
   ngOnInit() {
     this.getWebinarList()

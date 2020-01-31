@@ -126,6 +126,24 @@
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="Search email" (keyup)="Search($event.target.value,'email')">
               </mat-form-field>
+
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker] = "picker2" (click)="picker2.open()" placeholder = "Start date" [ngModel]="startDate1" (ngModelChange)="MyDate($event,'start')">
+                     <mat-datepicker-toggle matSuffix [for] = "picker2"></mat-datepicker-toggle>
+                     <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>End Date</mat-label>
+                     <input matInput [matDatepicker] = "picker3" (click)="picker3.open()" placeholder = "End date" [ngModel]="endDate1" (ngModelChange)="MyDate($event,'end')">
+                     <mat-datepicker-toggle matSuffix [for] = "picker3"></mat-datepicker-toggle>
+                     <mat-datepicker #picker3></mat-datepicker>
+                </mat-form-field>
+              </div>
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8">

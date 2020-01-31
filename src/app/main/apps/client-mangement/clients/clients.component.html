@@ -56,7 +56,7 @@
     <!-- END OF MAT__BOX MAT__BOX2 MT-20 MR-28 -->
     <div class="h2 mb-8 company_heading" style="margin-top: 15px;">
       <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
-      Client Manage
+     Manage Client 
     </div>
 
     <ng-container *ngIf="show">
@@ -373,6 +373,8 @@
                       <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn">Actions</button>
 
                       <mat-menu #belowMenu="matMenu" yPosition="below">
+                          <!-- /apps/client-mangement/addclient -->
+
                         <button mat-menu-item matTooltip="Edit"
                           [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">Edit</button>
                         <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>

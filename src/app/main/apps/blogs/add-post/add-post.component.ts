@@ -26,9 +26,9 @@ export class AddPostComponent implements OnInit {
   message1 = "This field is required"
   htmlContentWithoutStyles = '';
   // editBlogAPi addBlogApi
-  editBlogAPi = myGlobals.editBlogAPi
+  addEditBlogApi = myGlobals.addEditBlogApi
 
-  addBlogApi = myGlobals.addBlogApi
+  // addBlogApi = myGlobals.addBlogApi
   updateBlogApi = myGlobals.updateBlogApi
   CategoryArray: AddPost[] = [
     { value: 'Financial Updates', id: 1 },
@@ -102,17 +102,17 @@ export class AddPostComponent implements OnInit {
     // alert(id)
     console.log(this.prodId)
     if (this.prodId) {
+      this.editPost()
       // this.name = 1
     } else {
       // this.name = 0
     }
-    this.editPost()
   }
 
   editPost() {
     console.log(this.prodId)
 
-    this.addpost_service.Post(this.editBlogAPi, { id: this.prodId, token: 'LIVESITE' }).subscribe(res => {
+    this.addpost_service.Post(this.addEditBlogApi, { id: this.prodId, token: 'LIVESITE' }).subscribe(res => {
       console.log(res)
       this.response = res
       console.log(this.response)
@@ -124,8 +124,8 @@ export class AddPostComponent implements OnInit {
         this.AddPostForm.controls['post_title'].setValue(this.response['post_title']),
           this.AddPostForm.controls['category'].setValue(this.response['category'])
         this.AddPostForm.controls['author'].setValue(this.response['author'])
-        this.AddPostForm.controls['video_id'].setValue(this.response['video_id'].toString())
-        this.AddPostForm.controls['cover_img'].setValue(this.response['cover_img'].toString())
+        this.AddPostForm.controls['video_id'].setValue(this.response['video_id'])
+        this.AddPostForm.controls['cover_img'].setValue(this.response['cover_img'])
         this.AddPostForm.controls['description'].setValue(this.response['description'])
       } else {
         this.name = 0
@@ -145,35 +145,35 @@ export class AddPostComponent implements OnInit {
       cover_img: this.AddPostForm.controls['cover_img'].value
       // cover_img:this.AddPostForm.value.cover_img = this.filesToUpload
     }
-    // this.addpost_service.Post(this.updateBlogApi, {id:this.prodId,
-    //   post_title: item.post_title,
-    //    category: item.category, 
-    //    author: item.author, 
-    //    video_id: item.video_id, 
-    //    description: item.description, 
-    //    cover_img: item.cover_img,
-    //   token: 'LIVESITE'
-    // })
-    this.addpost_service.Post(this.updateBlogApi, {
-      id: this.prodId,
-      post_title: this.response['post_title'],
-      category: this.response['category'],
-      author: this.response['author'],
-      video_id: this.response['video_id'],
-      description: this.response['description'],
-      cover_img: this.response['cover_img'],
+    this.addpost_service.Post(this.updateBlogApi, {id:this.prodId,
+      post_title: item.post_title,
+       category: item.category, 
+       author: item.author, 
+       video_id: item.video_id, 
+       description: item.description, 
+       cover_img: item.cover_img,
       token: 'LIVESITE'
     })
+    // this.addpost_service.Post(this.updateBlogApi, {
+    //   id: this.prodId,
+    //   post_title: this.response['post_title'],
+    //   category: this.response['category'],
+    //   author: this.response['author'],
+    //   video_id: this.response['video_id'],
+    //   description: this.response['description'],
+    //   cover_img: this.response['cover_img'],
+    //   token: 'LIVESITE'
+    // })
 
 
       .subscribe(res => {
         console.log(res)
-        if (res['success'] == true && res['status_code'] == 200) {
+        // if (res['success'] == true && res['status_code'] == 200) {
           this.toastr.success('Blog Update Successfully')
           this.router.navigate(['/apps/blogs'])
-        } else {
-          this.toastr.warning('There Are some Issue')
-        }
+        // } else {
+          // this.toastr.warning('There Are some Issue')
+        // }
       });
   }
 
@@ -214,7 +214,7 @@ export class AddPostComponent implements OnInit {
     }
 
     // console.log(this.AddPostForm.value);
-    this.addpost_service.Post(this.addBlogApi, {
+    this.addpost_service.Post(this.addEditBlogApi, {
       post_title: item.post_title,
       category: item.category,
       author: item.author,

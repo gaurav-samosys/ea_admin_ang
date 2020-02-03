@@ -1,12 +1,11 @@
 // https://ckeditor.com/docs/ckeditor4/latest/guide/dev_angular.html
-// export const getClients="http://192.168.0.126/enrichedacademy_live/api/admin/editClient";
 export const editClient="http://192.168.0.126/enrichedacademy_live/api/admin/editClient";
 
-export const expert_interview=" https://staging.enrichedacademy.com/api/admin/expert_interview"  
-export const add_expert_interview=" https://staging.enrichedacademy.com/api/admin/add_expert_interview"
-export const delete_expert_interview_video=" https://staging.enrichedacademy.com/api/admin/delete_expert_interview_video"
-export const update_expert_interview=" https://staging.enrichedacademy.com/api/admin/update_expert_interview"
-export const expert_interviews_detail=" https://staging.enrichedacademy.com/api/admin/expert_interviews_detail"
+export const expert_interview="http://localhost/enrichedacademy_live/api/admin/expert_interview"  
+export const add_expert_interview="http://localhost/enrichedacademy_live/api/admin/add_expert_interview"
+export const delete_expert_interview_video="http://localhost/enrichedacademy_live/api/admin/delete_expert_interview_video"
+export const update_expert_interview="http://localhost/enrichedacademy_live/api/admin/update_expert_interview"
+export const expert_interviews_detail="http://localhost/enrichedacademy_live/api/admin/expert_interviews_detail"
 
 export const exportManageCompanies=" https://staging.enrichedacademy.com/api/admin/exportManageCompanies";
 export const exportManageClient=" https://staging.enrichedacademy.com/api/admin/exportManageClient"
@@ -33,15 +32,17 @@ export const getAdminUsers=" https://staging.enrichedacademy.com/api/admin/getAd
 export const getUsers=" https://staging.enrichedacademy.com/api/admin/getUsers";
 export const getVerticalDataList=" https://staging.enrichedacademy.com/api/admin/getVerticalDataList";
 export const getDeveloperApiListing=" https://staging.enrichedacademy.com/api/admin/getDeveloperApiListing";
-export const getBlogWithDataApi=" https://staging.enrichedacademy.com/api/admin/getBlogWithDataApi"
+
 export const getCommentWithDataApi=" https://staging.enrichedacademy.com/api/admin/getCommentWithDataApi"
-// export const addEditBlogApi=" https://staging.enrichedacademy.com/api/admin/addEditBlogApi"
 
 
-export const deleteBlogApi="https://staging.enrichedacademy.com/api/admin/deleteBlogApi"
-export const updateBlogApi=" https://staging.enrichedacademy.com/api/admin/updateBlogApi"
-export const addBlogApi=" https://staging.enrichedacademy.com/api/admin/addBlogApi"
-export const editBlogAPi=" https://staging.enrichedacademy.com/api/admin/editBlogAPi"
+
+export const getBlogWithDataApi=" http://localhost/enrichedacademy_live/api/admin/getBlogWithDataApi"
+export const addEditBlogApi=" http://localhost/enrichedacademy_live/api/admin/addEditBlogApi"
+export const deleteBlogApi=" http://localhost/enrichedacademy_live/api/admin/deleteBlogApi"
+export const updateBlogApi=" http://localhost/enrichedacademy_live/api/admin/updateBlogApi"
+// export const addBlogApi=" https://staging.enrichedacademy.com/api/admin/addBlogApi"
+// export const editBlogAPi=" https://staging.enrichedacademy.com/api/admin/editBlogAPi"
 
 
 export const changeCommentStatusApi=" https://staging.enrichedacademy.com/api/admin/changeCommentStatusApi"
@@ -64,7 +65,7 @@ export const add_webinar="https://staging.enrichedacademy.com/api/admin/add_webi
 export const getwebinarById="https://staging.enrichedacademy.com/api/admin/getwebinarById"
 // export const update_webinar="https://staging.enrichedacademy.com/api/admin/update_webinar"
 export const delete_webinar="https://staging.enrichedacademy.com/api/admin/delete_webinar"
-export const get_webinars=" https://staging.enrichedacademy.com/api/admin/get_webinars"
+export const get_webinars="http://localhost/enrichedacademy_live/api/admin/get_webinars"
 
 
 
@@ -121,14 +122,37 @@ export const deleteTopic=" https://staging.enrichedacademy.com/api/admin/deleteT
 export const changeUserStatus=" https://staging.enrichedacademy.com/api/admin/changeUserStatus";
 export const clientActive=" https://staging.enrichedacademy.com/api/admin/clientActive";
 export const companyActive=" https://staging.enrichedacademy.com/api/admin/companyActive";
-//export const editClient=" https://staging.enrichedacademy.com/api/admin/editClient";
 export const login="https://staging.enrichedacademy.com/api/admin/login";
 export const setProfile=" https://staging.enrichedacademy.com/api/admin/setProfile";
 export const getProfile=" https://staging.enrichedacademy.com/api/admin/getProfile";
 export const forgetPassword=" https://staging.enrichedacademy.com/api/admin/forgetPassword";
 export const exportUser="https://staging.enrichedacademy.com/api/admin/exportAdminManageUser";
-// export const editClient="https://staging.enrichedacademy.com/api/admin/editClient";
 export const deleteUser="https://staging.enrichedacademy.com/api/admin/deleteUser";
+
+
+// ================================================================
+            
+
+// ================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 18/11 jeevan
 // export const getIndustriesWithData=" https://staging.enrichedacademy.com/api/admin/getIndustriesWithData";

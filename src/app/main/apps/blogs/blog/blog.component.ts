@@ -167,9 +167,12 @@ export class BlogComponent implements OnInit {
       this.dataSource = this.data
       this.dataSource = new MatTableDataSource(this.data);
       this.allItems = this.response['recordsTotal'];
-      // console.log(this.allItems)
+      console.log(this.allItems)
       this.dataSource.paginator = this.paginator;
-
+      // draw: 1
+      // recordsFiltered: 21
+      // recordsTotal: 21
+      // showing: 10
     });
   }
 

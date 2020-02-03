@@ -9,7 +9,7 @@
             <mat-icon (click)="buttontoggle1()" style="cursor: pointer;">{{buttonName1}}</mat-icon>
             Company Info
           </div>
-          <ng-container *ngIf="show">
+          <ng-container *ngIf="show1">
         <!-- <h2 class="example-h2">Company Info</h2> -->
 
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
@@ -26,14 +26,14 @@
             </select>
             <mat-error *ngIf="hasError('companyname', 'required')">Company Name is required!</mat-error>
           </mat-form-field> -->
-          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-form-field appearance="outline" fxFlex="40" class="pr-4">
             <mat-label>Company Name</mat-label>
             <input matInput required formControlName="companyname" readonly="readonly">
             <mat-error *ngIf="hasError('companyname', 'required')">company name is required!</mat-error>
           </mat-form-field>
 
 
-          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-form-field appearance="outline" fxFlex="40" class="pr-4">
             <mat-label>Country</mat-label>
             <input matInput required formControlName="country" readonly="readonly">
             <mat-error *ngIf="hasError('country', 'required')">Country is required!</mat-error>

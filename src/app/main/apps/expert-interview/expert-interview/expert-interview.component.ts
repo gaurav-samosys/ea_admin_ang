@@ -218,7 +218,7 @@ export class ExpertInterviewComponent implements OnInit {
     this.expert_service.Post(this.delete_expert_interview_video, { id: id, token: 'LIVESITE' }).subscribe(res => {
       console.log(res)
       this.getExpertInterView()
-      if (res['status'] == '0') {
+      if (res['status'] == '1') {
         this.toastr.success('Expert Record Delete Successfully')
         // this.router.navigate(['/apps/expert_interview'])
       } else {

@@ -27,7 +27,7 @@ export class WebinarListComponent implements OnInit {
 
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
-  displayedColumns: string[] = ['webinar_name', 'image', 'day', 'date','start_time','end_time','action'];
+  displayedColumns: string[] = ['webinar_name', 'image', 'day', 'created_date','webinar_time','end_time','action'];
   dataSource = new MatTableDataSource<any>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -76,6 +76,7 @@ export class WebinarListComponent implements OnInit {
       console.log (this.webinar_img)
       this.dataSource = this.data;
       this.allItems = this.response.total_data;
+      console.log(this.allItems)
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       //this.setPage(1);
@@ -94,7 +95,7 @@ export class WebinarListComponent implements OnInit {
         this.currentPage = 0;
       }
       // console.log(this.value, this.name)
-      // this.Search(this.value, this.name)
+      this.Search(this.value, this.name)
     }
     else {
       this.iterator();
@@ -111,13 +112,13 @@ export class WebinarListComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     // this.pageNumber = start
      this.showloader=true;
-    // this.webinar_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      // this.response = res
+    this.webinar_service.Post(this.get_webinars, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
       this.showloader=false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
-    // })
+    })
   }
   sort_column
   ASC
@@ -129,12 +130,14 @@ export class WebinarListComponent implements OnInit {
     this.showloader=true
     this.sort_column = sort_column
     this.ASC = sort_order
-    // this.webinar_service.Post(this.getClients, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-    //   this.response = res
+    this.webinar_service.Post(this.get_webinars,
+       {column:this.sort_column,dir:this.ASC, 
+        offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.response = res
     this.showloader=false
 
-    //   this.dataSource=this.response.data
-    // });
+      this.dataSource=this.response.data
+    });
   }
  /**
    * column toggle show hide
@@ -175,5 +178,50 @@ export class WebinarListComponent implements OnInit {
       }
       this.getWebinarList()
     });
+  }
+
+  rows: any;
+
+  webinarName: string;
+  name
+  Search(value, name) {
+    //  console.log(value,name)
+    if (this.value != value) {
+      this.currentPage = 0;
+    }
+    this.value = value;
+    this.name = name;
+    if (value.length == 0) {
+
+      if (name == 'webinar_name') {
+        this.webinarName = '';
+      }
+    }
+    else {
+      if (name == 'webinar_name') {
+        this.webinarName = value;
+      }
+    }
+
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    this.pageNumber = start
+
+    this.showloader=true
+
+    this.webinar_service.Post(this.get_webinars, {
+      webinar_name: this.webinarName, 
+  
+      offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
+    })
+      .subscribe(res => {
+    this.showloader=false
+    // console.log(res)
+        this.response = res
+        this.allItems = this.response['recordsTotal'];
+        this.rows = this.response['data']
+        this.data = this.rows.slice(0, this.size);
+        this.dataSource = this.data
+      });
   }
 }

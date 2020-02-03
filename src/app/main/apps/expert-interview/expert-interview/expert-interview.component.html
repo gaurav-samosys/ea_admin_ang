@@ -112,7 +112,7 @@
                     <!-- Weight Column -->
                     <ng-container matColumnDef="video">
                       <mat-header-cell *matHeaderCellDef> Video
-                        <span class="pointer">
+                        <!-- <span class="pointer">
                           <i (click)="updateSortingOrderInterview('video','ASC')"
                             [class]='(this.sort_column=="video" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                             arrow_upward
@@ -121,7 +121,7 @@
                             [class]='(this.sort_column=="video" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                             arrow_downward
                           </i>
-                        </span>
+                        </span> -->
                       </mat-header-cell>
                       <mat-cell *matCellDef="let element"> 
                        {{element.video_id}}

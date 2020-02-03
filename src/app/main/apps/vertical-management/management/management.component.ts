@@ -94,9 +94,9 @@ export class ManagementComponent implements OnInit {
 
   ngOnInit() {
     this.name = localStorage.getItem('name')
+    localStorage.setItem('vertical_id',this.vertical_id)
     this.vertical_id = this._Activatedroute.snapshot.paramMap.get("id");
   //  console.log(this.vertical_id)
-   localStorage.setItem('vertical_id',this.vertical_id)
     this.getVerticalList(this.vertical_id);
   }
   /**

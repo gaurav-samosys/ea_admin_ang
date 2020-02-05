@@ -108,7 +108,7 @@ export class ExpertInterviewComponent implements OnInit {
         this.currentPage = 0;
       }
       // console.log(this.value, this.name)
-      // this.Search(this.value, this.name)
+      this.Search(this.value, this.name)
     }
     else {
       this.iterator();

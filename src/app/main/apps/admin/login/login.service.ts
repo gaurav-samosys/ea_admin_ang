@@ -82,7 +82,11 @@ export class LoginService implements Resolve<any> {
       const httpOptions = {
      headers: new HttpHeaders({
        'Content-Type': 'application/json',
-       'Access-Control-Allow-Origin':'*'       
+       'Access-Control-Allow-Origin':'*' 
+           
+// 'Access-Control-Allow-Methods':'POST,GET,DELETE,PUT',
+// 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization'
+
      })
   };
 

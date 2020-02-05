@@ -8,6 +8,7 @@ import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} f
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector     : 'login',
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit
     horizontalPosition: MatSnackBarHorizontalPosition = 'right';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
     common:any;
+    show: boolean;
     login_data:any;
+
     /**
      * Constructor
      *
@@ -31,15 +34,19 @@ export class LoginComponent implements OnInit
      * @param {FormBuilder} _formBuilder
      */
     constructor(
+        private toastr: ToastrService,
+
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
         private _snackBar: MatSnackBar,
         private rt:Router,
         public login_service:LoginService,
         private auth: AuthService,
-        private myRoute: Router
+        private myRoute: Router,
     )
     {
+        this.show = false;
+
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
@@ -96,18 +103,47 @@ export class LoginComponent implements OnInit
 
    Login()
    {
-        this.login_service.Post(this.login,{email:this.loginForm.value.email,password:this.loginForm.value.password,role:0,token:'LIVESITE'})
+        this.login_service.Post(this.login,{
+            email:this.loginForm.value.email,
+            password:this.loginForm.value.password,role:0,token:'LIVESITE'})
             .subscribe(res => {
                 console.log(res)
-                this.common=res;
-                this.login_data=this.common.data
-                console.log(this.common)
-                this.auth.sendToken(this.login_data.auth_secret_key)
-                localStorage.setItem('user_id',this.login_data.id)
-                if(localStorage.getItem("LoggedInUser") == this.login_data.auth_secret_key)
-                {
-                  this.myRoute.navigate(["apps/home-dashboard/version3"]);
-                }
+                // message: "Either email or password is incorrect."
+                // status: false
+if(res['status']=='success'){
+    this.common=res;
+    this.login_data=this.common.data
+    console.log(this.common)
+    this.auth.sendToken(this.login_data.auth_secret_key)
+    localStorage.setItem('user_id',this.login_data.id)
+    if(localStorage.getItem("LoggedInUser") == this.login_data.auth_secret_key)
+    {
+        this.toastr.success('Login Successfully');
+
+      this.myRoute.navigate(["apps/home-dashboard/version3"]);
+    }
+}else{
+    this.toastr.warning("Email or password is incorrect");
+
+}
+
+                // this.common=res;
+                // this.login_data=this.common.data
+                // console.log(this.common)
+                // this.auth.sendToken(this.login_data.auth_secret_key)
+                // localStorage.setItem('user_id',this.login_data.id)
+                // if(localStorage.getItem("LoggedInUser") == this.login_data.auth_secret_key)
+                // {
+                //     this.toastr.success('Login Successfully');
+
+                //   this.myRoute.navigate(["apps/home-dashboard/version3"]);
+                // }
         })
+   }
+
+  
+
+   toggleShow() {
+    this.show = !this.show;
    }
 }

@@ -12,6 +12,7 @@ import { map, startWith } from 'rxjs/operators';
 import { MobilecolorService } from './mobilecolor.service';
 import Swal from 'sweetalert2';
 
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mobile-color',
@@ -46,7 +47,7 @@ export class MobileColorComponent implements OnInit {
   { id: 2, name: 'My Magic Number' },
   { id: 3, name: 'NetWorth Calculator' },
   { id: 4, name: 'Student Loan Calculator' }]
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient, private toastr:ToastrService,
     public service: MobilecolorService, private rt: Router,
      public _formBuilder: FormBuilder) {
     this.filteredArray = this.select_client.valueChanges.pipe(
@@ -205,37 +206,29 @@ export class MobileColorComponent implements OnInit {
     console.log('=c=', this.ternary)
 
     this.image_name = this.mobileColorForm.controls['image_upload'].value
-    let item = {
-      type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
-      secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
-    }
-    console.log(item)
-
-    if (this.ids == null && this.ids == undefined) {
-      Swal.fire({
-        title: 'Warning',
-        text: 'Please select client code',
-        icon: 'warning',
-
-      })
-    }
-    // https://staging.enrichedacademy.com/api/admin/getCompaniesWithData http://192.168.0.40/enrichedacademy_live/api/admin/save_mobile_app_color
-    else {
+    // let item = {
+    //   type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
+    //   secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
+    // }
+    // console.log(item)
+    if(this.idsArray.length > 0){
       this.service.Post('http://192.168.0.18/enrichedacademy_live/api/admin/save_mobile_app_color ', {
         type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
         secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
       }).subscribe(res => {
         console.log(res)
-      })
-
-      Swal.fire({
-        title: 'Success',
-        text: 'Website theme update successfully',
-        icon: 'success'
-
-      })
-
+        if(res['success']==true){
+          this.toastr.success("Color Added SuccessFully");
+          }else{
+             this.toastr.warning("Please Select Client");
+          }
+        })
+        
+      }else{
+        this.toastr.warning("Please Select Client");
+ 
     }
+
 
   }
   //image upload
@@ -316,4 +309,47 @@ export class MobileColorComponent implements OnInit {
   //       icon: 'success'
   //     })
   //   }
+  // }
+
+
+  // SaveDetail() {
+
+  //   this.primary = document.getElementById('demo1').getAttribute("ng-reflect-color");
+  //   this.secondary = document.getElementById('demo2').getAttribute("ng-reflect-color");
+  //   this.ternary = document.getElementById('demo3').getAttribute("ng-reflect-color");
+  //   console.log('=a=', this.primary)
+  //   console.log('=b=', this.secondary)
+  //   console.log('=c=', this.ternary)
+
+  //   this.image_name = this.mobileColorForm.controls['image_upload'].value
+  //   let item = {
+  //     type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
+  //     secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
+  //   }
+  //   console.log(item)
+
+  //   if (this.ids == null && this.ids == undefined) {
+  //     Swal.fire({
+  //       title: 'Warning',
+  //       text: 'Please select client code',
+  //       icon: 'warning',
+
+  //     })
+  //   }
+  //   else {
+  //     this.service.Post('http://192.168.0.18/enrichedacademy_live/api/admin/save_mobile_app_color ', {
+  //       type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
+  //       secondary_color: this.secondary, another_color: this.ternary, image_name: this.image_name
+  //     }).subscribe(res => {
+  //       console.log(res)
+  //     })
+  //     Swal.fire({
+  //       title: 'Success',
+  //       text: 'Website theme update successfully',
+  //       icon: 'success'
+
+  //     })
+
+  //   }
+
   // }

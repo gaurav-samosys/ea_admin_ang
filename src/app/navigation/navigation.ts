@@ -181,7 +181,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Vertical Management',
                 translate: 'Vertical',
                 type: 'collapsable',
-                icon: 'account_circle',
+                icon: 'dashboard',
                 children: [
 
                     {
@@ -220,7 +220,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Blogs',
                 translate: 'Blogs',
                 type: 'collapsable',
-                icon: 'adjust',
+                icon: 'picture_in_picture',
                 children: [
 
                     {
@@ -244,7 +244,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Expert Interview',
                 translate: 'Expert-Interview',
                 type: 'collapsable',
-                icon: 'adjust',
+                icon: 'picture_in_picture',
                 children: [
 
                     {
@@ -269,7 +269,7 @@ export const navigation: FuseNavigation[] = [
                 translate: 'Webinars',
                 type: 'collapsable',
                 // icon: 'adjust',
-                icon: 'adjust',
+                icon: 'picture_in_picture',
 
                 children: [
 

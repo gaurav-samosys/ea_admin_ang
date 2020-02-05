@@ -381,7 +381,7 @@ completion:any={
 
 access_code:any={
     chart: {
-        type: 'column',height:300,width:470,
+        type: 'column',height:300,width:460,
         zoomType: 'x',
                         resetZoomButton: {
                             position: {

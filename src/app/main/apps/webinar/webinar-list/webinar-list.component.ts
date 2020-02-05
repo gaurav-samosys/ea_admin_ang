@@ -103,7 +103,7 @@ export class WebinarListComponent implements OnInit {
     }
   }
  /**
-   * Iterate
+   * Iterate 
    */
   private iterator() {
     let part;
@@ -115,7 +115,7 @@ export class WebinarListComponent implements OnInit {
     this.webinar_service.Post(this.get_webinars, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
       this.showloader=false;
-      this.data = this.response.data;
+      this.data = this.response['data'];
       this.dataSource = this.data;
 
     })

@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ForgotPasswordComponent } from 'app/main/pages/authentication/forgot-password/forgot-password.component';
+import { ForgotService } from 'app/main/apps/admin/forgot/forgot.service';
+import { AuthService } from 'app/main/apps/auth.service';
 
 const routes = [
     {
@@ -29,7 +31,11 @@ const routes = [
         MatInputModule,
 
         FuseSharedModule
-    ]
+    ],
+    providers   : [
+        ForgotService,
+        AuthService 
+     ],
 })
 export class ForgotPasswordModule
 {

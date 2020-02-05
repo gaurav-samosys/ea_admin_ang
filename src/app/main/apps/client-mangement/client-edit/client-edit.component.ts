@@ -18,8 +18,11 @@ import { ToastrService } from 'ngx-toastr';
           <app-client-edit (notifyParent)="getNotification($event)"></app-client-edit> `*/
 })
 export class ClientEditComponent implements OnInit {
-  seasons: string[] = ['Credit Link', 'Free Link', 'Link from user'];
+  // seasons: string[] = ['Credit Link', 'Free Link', 'Link from user',''];
+  seasons: string[] = ['CreditView', 'Free Consumer Disclosure', 'Allow User'];
+
   rewards: string[]=['Yes','Specific Completions Only']
+  // CreditView  Free Consumer Disclosure  Allow User
   /* getNotification(evt) {
  
      if ( ! evt) {
@@ -65,6 +68,7 @@ export class ClientEditComponent implements OnInit {
   //date ={startDate: moment, endDate: moment};
   check = 1;
   reward_check = 1;
+  clientName
   reward_cycle = 1;
   formdata: any;
   reward_start: any;
@@ -126,11 +130,16 @@ export class ClientEditComponent implements OnInit {
       email_remainder: [''],
       upload_file:[''],
       allow_unlock_bonus:'',emai_domain:'',
-       allow_unlock:'' , allow_unlock_user:'', default_client_vertical:'' ,vimeo_id:''
+       allow_unlock:'' , allow_unlock_user:'', default_client_vertical:'' ,
+       vimeo_id:'',
+        portalviewdefault:'', defaultclientvertical:''
+
     })
 
     this.edit_service.Post(this.getClients, { id: this.client_id, company_id: this.company_id, token: "LIVESITE", fields: '*' }).subscribe(res => {
-      this.common = res
+      this.common = res;
+      this.clientName=this.common.data[0].client_name
+      console.log(this.common.data[0].client_name,"=====================")
       this.client_data = this.common.data;
       this.portal_data = this.common.portalData
       console.log(this.portal_data)
@@ -191,11 +200,11 @@ export class ClientEditComponent implements OnInit {
           this.imgURL = 'https://staging.enrichedacademy.com/app/webroot/files/' + this.portal_data.image_assoc[0].image
           this.imgURLdrip = 'https://staging.enrichedacademy.com/app/webroot/files/' + this.portal_data.image_assoc[1].image
         }
-
+        // this.clientName=this.client_data[0].client_name
+        // console.log("this.clientName=============",this.clientName)
         this.editclientForm.patchValue({
           username: this.client_data[0].user_name,
           companyname: this.client_data[0].company_name,
-
           clientname: this.client_data[0].client_name,
           firstname: this.client_data[0].first_name,
           lastname: this.client_data[0].last_name,
@@ -210,6 +219,7 @@ export class ClientEditComponent implements OnInit {
 
 
         })
+
         this.editclientForm.controls['companyname'].setValue(this.company_id, { onlySelf: true });
         this.editclientForm.controls['clientvertical'].setValue(this.client_data[0].client_vertical_id, { onlySelf: true });
         this.editclientForm.controls['portalview'].setValue(this.client_data[0].portal_view, { onlySelf: true });
@@ -246,6 +256,8 @@ export class ClientEditComponent implements OnInit {
           this.imgURL = 'https://staging.enrichedacademy.com/app/webroot/files/' + this.portal_data.image_assoc[0].image
           this.imgURLchallenge = 'https://staging.enrichedacademy.com/app/webroot/files/' + this.portal_data.image_assoc[1].image
         }
+        // this.clientName=this.client_data[0].client_name
+        // console.log("this.clientName=============",this.clientName)
         this.editclientForm.patchValue({
           username: this.client_data[0].user_name,
           companyname: this.client_data[0].company_name,
@@ -404,14 +416,19 @@ export class ClientEditComponent implements OnInit {
         this.companyData = this.common.data;
       })
   }
-
+  companyName
   getData(value) {
     this.edit_service.Post(this.getCompanies, { company_id: value, token: 'LIVESITE' })
       .subscribe(res => {
         this.common = res;
-        console.log(this.common)
+        console.log("this common===========",this.common)
         this.data = this.common.data
+        console.log("this data===========",this.data)
+        this.companyName=this.data[0]['company_name']
+        console.log("this data===========",this.companyName)
+
         this.editclientForm.patchValue({
+          companyname:this.data[0].company_name,
           country: this.data[0].countries_name,
           state: this.data[0].state_name,
           city: this.data[0].city,

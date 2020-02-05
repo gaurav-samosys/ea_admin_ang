@@ -26,10 +26,11 @@
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" style="margin-top: 25px;">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="password">
-                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <!-- [type]="_pwdType" -->
+                    <input matInput  [type]="show ? 'text' : 'password'" formControlName="password">
+                    <mat-icon matSuffix class="secondary-text" (click)="toggleShow()" style="cursor: pointer;">vpn_key</mat-icon>
                     <mat-error>
                         Password is required
                     </mat-error>
@@ -40,8 +41,11 @@
                    <!--  <mat-checkbox class="remember-me" aria-label="Remember Me">
                         Remember Me
                     </mat-checkbox> -->
-
-                    <a class="forgot-password" [routerLink]="'/apps/admin/forgot'">
+                    <!-- /pages/auth/forgot-password -->
+                    <!-- <a class="forgot-password" [routerLink]="'/apps/admin/forgot'">
+                        Forgot Password?
+                    </a> -->
+                    <a class="forgot-password" [routerLink]="'/pages/auth/forgot-password'">
                         Forgot Password?
                     </a>
                 </div>

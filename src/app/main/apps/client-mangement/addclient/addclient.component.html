@@ -14,12 +14,17 @@
           <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white;">
             <img style="margin-left: 10px;" width="20px" height="20px"
               src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
-          <a routerLink="/apps/dashboards/companies"
-            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Company</a>
-          <a routerLink="/apps/dashboards/company-detail/{{id}}"
-            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a>
-
-          <a routerLink="/apps/client-mangement/addclient/{{id}}/"
+          <!-- <a routerLink="/apps/dashboards/companies"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Company</a> -->
+          <!-- <a routerLink="/apps/dashboards/company-detail/{{id}}"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a> -->
+            <!-- <a routerLink="/apps/client-mangement/addclient/{{id}}/"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Add Client</a> -->
+            <a routerLink="/apps/client-mangement/clients"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;ManageClient</a>
+            <span *ngIf="hide1 ==0"><a routerLink="/apps/dashboards/company-detail/{{id}}"
+              style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a> </span>
+          <a routerLink="/apps/client-mangement/addclient"
             style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Add Client</a>
         </div>
         <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 28px;;

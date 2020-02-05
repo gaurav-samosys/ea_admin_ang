@@ -1,39 +1,65 @@
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
   <!-- CENTER -->
   <div class="center" fusePerfectScrollbar>
+
+    
+      <div class="" style="flex-direction: row;
+      box-sizing: border-box;
+     height: 100px;
+      place-content: center space-between;
+      align-items: center;  background-color: #039be5 !important;
+      color: white !important;">
+      <div class="row" fxLayoutAlign="space-between center">
+        <div class="" style="color: white;margin-top:40px">
+          <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white;">
+            <img style="margin-left: 10px;" width="20px" height="20px"
+              src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
+          <!-- <a routerLink="/apps/dashboards/companies"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Company</a> -->
+          <a routerLink="/apps/dashboards/companies"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;company</a>
+            <!-- <a routerLink="/apps/client-mangement/addclient/{{id}}/"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Add Client</a> -->
+            <!-- <a routerLink="/apps/client-mangement/clients"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;ManageClient</a> -->
+            <!-- <span *ngIf="hide1 ==0"> -->
+              <a routerLink="/apps/dashboards/company-detail/{{company_id}}"
+              style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{companyName}}</a>
+             <!-- </span> -->
+          <a routerLink="/apps/client-mangement/client-edit/{{company_id}}/{{client_id}}"
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{clientName}}</a>
+        </div>
+        <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 28px;;
+          margin-right: 40px;
+      ">
+          <button mat-raised-button routerLink="/apps/client-mangement/addclient" *ngIf="division == 1">
+            <mat-icon>add_circle_outline</mat-icon>Add Client
+          </button>
+        </div> -->
+      </div>
+    </div>
+
+
+
+
+
+
+
     <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
       <form class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto"
         [formGroup]="editclientForm" (ngSubmit)="updateClient()">
-
-        <div class="h2 mb-8" style="margin-top: 25px;">
-            <mat-icon (click)="buttontoggle1()" style="cursor: pointer;">{{buttonName1}}</mat-icon>
-            Company Info
-          </div>
-          <ng-container *ngIf="show1">
-        <!-- <h2 class="example-h2">Company Info</h2> -->
+        <h2 class="example-h2">Company Info</h2>
 
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-          <!-- <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-            <mat-label>Company Name</mat-label>
-            <select matNativeControl required formControlName="companyname" (change)="getData($event.target.value)">
-              <option selected="" value="">
-                Select Company name
-              </option>
-              <option *ngFor="let data of companyData" value="{{data.id}}">
-                {{data.company_name}}
-              </option>
-            </select>
-            <mat-error *ngIf="hasError('companyname', 'required')">Company Name is required!</mat-error>
-          </mat-form-field> -->
-          <mat-form-field appearance="outline" fxFlex="40" class="pr-4">
-            <mat-label>Company Name</mat-label>
-            <input matInput required formControlName="companyname" readonly="readonly">
-            <mat-error *ngIf="hasError('companyname', 'required')">company name is required!</mat-error>
-          </mat-form-field>
-
-
-          <mat-form-field appearance="outline" fxFlex="40" class="pr-4">
+            <mat-form-field appearance="outline" fxFlex="50" class="pr-4" readonly="readonly">
+                <mat-label>Company Name</mat-label>
+                <input matInput required formControlName="companyname" >
+                <mat-error *ngIf="hasError('companyname', 'required')">company name is required!</mat-error>
+              </mat-form-field>
+    
+    
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4" readonly="readonly">
             <mat-label>Country</mat-label>
             <input matInput required formControlName="country" readonly="readonly">
             <mat-error *ngIf="hasError('country', 'required')">Country is required!</mat-error>
@@ -42,13 +68,13 @@
 
 
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4" readonly="readonly">
             <mat-label>State </mat-label>
             <input matInput required formControlName="state" readonly="readonly">
             <mat-error *ngIf="hasError('state', 'required')">State is required!</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4" readonly="readonly">
             <mat-label>City</mat-label>
             <input matInput formControlName="city" readonly="readonly" required>
             <mat-error *ngIf="hasError('city', 'required')">City is required!</mat-error>
@@ -56,19 +82,13 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4" readonly="readonly">
             <mat-label>Industry</mat-label>
             <input matInput formControlName="industry" readonly="readonly" required>
             <mat-error *ngIf="hasError('industry', 'required')">industry is required!</mat-error>
           </mat-form-field>
         </div>
-
-        </ng-container>
-
         <mat-divider></mat-divider>
-
-
-
 
 
 
@@ -99,43 +119,54 @@
           </mat-form-field>
         </div>
 
+
+
+      
+
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
           <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
-            <mat-label>Select Client Vertical</mat-label>
+            <mat-label>Client Vertical</mat-label>
             <select matNativeControl formControlName="clientvertical">
               <option *ngFor="let data of vertical" value="{{data.id}}">
                 {{data.name}}
               </option>
             </select>
           </mat-form-field>
-
-          <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
-            <mat-label>Default Client Vertical</mat-label>
-            <input matInput placeholder="Default Client Vertical" formControlName="default_client_vertical" required>
-            <mat-error *ngIf="hasError('default_client_vertical', 'required')">Default Client Vertical is required!
-            </mat-error>
-          </mat-form-field>
-
           <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
             <mat-label>Person First Name </mat-label>
             <input matInput placeholder="Client's first name" formControlName="firstname" required>
             <mat-error *ngIf="hasError('firstname', 'required')">First Name is required!</mat-error>
           </mat-form-field>
-
-
-        </div>
-
-
-
-
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
           <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
             <mat-label>Person Last Name</mat-label>
             <input matInput placeholder="Client's last name" formControlName="lastname" required>
             <mat-error *ngIf="hasError('lastname', 'required')">Last Name is required!</mat-error>
           </mat-form-field>
+        </div>
 
+
+        <!-- 05/02 -->
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
+              <mat-label>Default Client Vertical</mat-label>
+              <input matInput placeholder="Client's first name" formControlName="defaultclientvertical" required>
+              <!-- <mat-error *ngIf="hasError('clientvertical', 'required')">clientvertical is required!</mat-error> -->
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
+              <mat-label>Portal View</mat-label>
+              <input matInput formControlName="portalviewdefault">
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
+              <mat-label>Intro Video Vimeo ID</mat-label>
+              <input matInput placeholder="vimeo_id" formControlName="vimeo_id" required>
+              <!-- <mat-error *ngIf="hasError('clientname', 'required')">Vimeo id is required!</mat-error> -->
+            </mat-form-field>
+          </div>
+<!-- 05/02 -->
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
           <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
             <mat-label>Portal View </mat-label>
             <select matNativeControl formControlName="portalview" (change)="portalChange($event.target.value)">
@@ -153,35 +184,20 @@
             <input matInput placeholder="Client's email" formControlName="email" required>
             <mat-error *ngIf="hasError('email', 'required')">Email is required!</mat-error>
           </mat-form-field>
-
-
-        </div>
-
-
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
           <mat-form-field appearance="outline" fxFlex="33" class="pr-4">
             <mat-label>City</mat-label>
             <input matInput placeholder="Client's city" formControlName="clientcity" required>
             <mat-error *ngIf="hasError('city', 'required')">City is required!</mat-error>
           </mat-form-field>
+        </div>
+
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
           <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
             <mat-label>Phone </mat-label>
             <input matInput placeholder="Ex-9825361478" formControlName="phone" required>
             <mat-error *ngIf="hasError('phone', 'required')">Phone is required!</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-            <mat-label> Client E-mail Domain </mat-label>
-            <input matInput placeholder="emai_domain" formControlName="emai_domain" required>
-            <mat-error *ngIf="hasError('emai_domain', 'required')"> Client E-mail Domain is required!</mat-error>
-          </mat-form-field>
-
-        </div>
-
-        <mat-label>Intro video Vimeo Id </mat-label>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="30" fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
-            <input readonly="" matInput placeholder="vimeo_id" formControlName="vimeo_id" required>
-            <mat-error *ngIf="hasError('vimeo_id', 'required')">vimeo_id is required!</mat-error>
           </mat-form-field>
           <mat-label fxFlex="20" class="pr-4">User Access</mat-label>
           <input type="radio" class="example-margin" value="1" name="useraccess" formControlName="useraccess"
@@ -192,6 +208,8 @@
           <mat-label>Company import users</mat-label>
         </div>
 
+
+
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
           <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
             <mat-label>Min. passing score for each course (%) : </mat-label>
@@ -199,20 +217,17 @@
             </mat-hint>
             <input matInput formControlName="min_passing_score">
           </mat-form-field>
-
           <mat-label fxFlex="10">Attach Logo</mat-label>
           <input fxFlex="30" class="pr-4" type="file" id="avatar" accept="image/*" ngf-max-size="3MB"
             (change)="selectFile($event)" #fileInput>
-
         </div>
-
-        <h3>Client IT Access</h3>
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
           <section class="example-section" fxFlex="70" class="pr-4">
+            <h3>Client IT Access</h3>
             <mat-checkbox class="example-margin" value="1" formControlName="allow_create_api">Allow To Create API
-            </mat-checkbox><br>
+            </mat-checkbox>
             <h3>Restrict Add User</h3>
-            <mat-checkbox class="example-margin" (change)="credit_view($event)">Restrict To Add User</mat-checkbox>
+            <mat-checkbox class="example-margin" (change)="credit_view($event)">Enable Credit View</mat-checkbox>
           </section>
 
           <div fxFlex="30" class="pr-4">
@@ -220,8 +235,24 @@
 
           </div>
         </div>
-        <!-- example-section -->
-        <div class="">
+
+        <!-- <div *ngIf="status == true" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+            <mat-label>Free Link </mat-label>
+            <input matInput formControlName="free_link">
+          </mat-form-field>
+        </div> -->
+        <div *ngIf="status == false" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+              <mat-label>Credit Link </mat-label>
+              <input matInput formControlName="credit_link">
+            </mat-form-field>
+          </div>
+       
+
+
+       <!-- example-section -->
+       <div class="">
           <h3>Unlock Mandatory Course</h3>
           <mat-checkbox class="example-margin" value="1" formControlName="allow_unlock">Allow To Unlock Mandatory Course
           </mat-checkbox>
@@ -242,30 +273,36 @@
         <div class="mt-10" style="margin-top: 15px;
           margin-left: 10px;">
           <!-- [(ngModel)]="favoriteSeason" -->
+          <h3 style="    margin-top: 1px;">Transunion Link</h3>
           <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
             <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
               {{season}}
             </mat-radio-button>
           </mat-radio-group>
+        
         </div>
-
-
-        <div *ngIf="status == true" fxLayoutAlign="start center" fxFlex="1 0 auto">
-          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-            <mat-label>Free Link </mat-label>
-            <input matInput formControlName="free_link">
+        <div class="a">
+        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+            <!-- <mat-label>City</mat-label> -->
+            <input matInput placeholder="" >
           </mat-form-field>
-        </div>
-
-        <div *ngIf="status == false" fxLayoutAlign="start center" fxFlex="1 0 auto">
-          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-            <mat-label>Credit Link </mat-label>
-            <input matInput formControlName="credit_link">
-          </mat-form-field>
-        </div>
+</div>
 
 
-        <!--division===============================2 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <h2 class="example-h2" *ngIf="division == 2">Drip Reward Set Up</h2>
 
@@ -314,7 +351,6 @@
             </mat-radio-button>
           </mat-radio-group>
         </div>
-
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 2">
           <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
             <mat-label>Drip Campaign Cycle</mat-label>
@@ -341,108 +377,90 @@
           </div>
           <div fxFlex="30" class="pr-4">
             <img [src]="imgURLdrip" height="200" *ngIf="imgURLdrip">
+
           </div>
         </div>
 
 
 
-        <!--division===============================3 -->
-        <div class="h2 mb-8" style="margin-top: 25px;">
-          <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>
-          Challenge View Reward Setup
+
+        <h2 class="example-h2" *ngIf="division == 3">Challenge View Reward Setup</h2>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+            <mat-label>Reward Start - End Date</mat-label>
+            <!-- <input matInput  type="text" formControlName="reward_start" placeholder="Select Date range" ngxDaterangepickerMd [locale]="{applyLabel: 'ok', format: 'DD/MM/YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}" startKey="start" endKey="end"  [showCustomRangeLabel]="true"  (datesUpdated)="datesUpdated($event)" readonly=""> -->
+            <input matInput type="text" ngxDaterangepickerMd [(ngModel)]="selected" placeholder="Choose date"
+              (change)="change($event)" [ngModelOptions]="{standalone: true}" readonly="" />
+            <mat-error *ngIf="reward_start == '' ">This field is required!</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+            <mat-label>Reward Type</mat-label>
+            <select matNativeControl formControlName="reward_type1" (change)="rewardData1($event.target.value)">
+              <option value="single_reward_program" selected>
+                Single Reward Program Completion Reward
+              </option>
+              <option value="multi-section_completion">
+                Multi-Section Completion Reward
+              </option>
+              <option value="no">
+                No Reward
+              </option>
+            </select>
+          </mat-form-field>
         </div>
-        <ng-container *ngIf="show">
-          <div class="third_partion">
 
-            <!-- <h2 class="example-h2" *ngIf="division == 3" >Challenge View Reward Setup</h2> -->
-            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-              <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-                <mat-label>Reward Start - End Date</mat-label>
-                <!-- <input matInput  type="text" formControlName="reward_start" placeholder="Select Date range" ngxDaterangepickerMd [locale]="{applyLabel: 'ok', format: 'DD/MM/YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}" startKey="start" endKey="end"  [showCustomRangeLabel]="true"  (datesUpdated)="datesUpdated($event)" readonly=""> -->
-                <input matInput type="text" ngxDaterangepickerMd [(ngModel)]="selected" placeholder="Choose date"
-                  (change)="change($event)" [ngModelOptions]="{standalone: true}" readonly="" />
-                <mat-error *ngIf="reward_start == '' ">This field is required!</mat-error>
-              </mat-form-field>
-
-              <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-                <mat-label>Reward Type</mat-label>
-                <select matNativeControl formControlName="reward_type1" (change)="rewardData1($event.target.value)">
-                  <option value="single_reward_program" selected>
-                    Single Reward Program Completion Reward
-                  </option>
-                  <option value="multi-section_completion">
-                    Multi-Section Completion Reward
-                  </option>
-                  <option value="no">
-                    No Reward
-                  </option>
-                </select>
-              </mat-form-field>
-            </div>
-
-            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-              <!--                                       <mat-label fxFlex="30" class="pr-4">Reward Cycle Runs From User Sign Up Date</mat-label>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
+          <!--                                       <mat-label fxFlex="30" class="pr-4">Reward Cycle Runs From User Sign Up Date</mat-label>
           <mat-radio-group aria-label="Select an option" fxFlex="30" class="pr-4" formControlName="reward_cycle">
           <mat-radio-button class="example-margin" value="1" >Yes</mat-radio-button>
           <mat-radio-button class="example-margin" value="2" >No</mat-radio-button>
           </mat-radio-group> -->
-              <mat-label fxFlex="20" class="pr-4">Reward All Completions ?</mat-label>
-              <mat-radio-group aria-label="Select an option" fxFlex="40" class="pr-4"
-                formControlName="reward_completion1">
-                <mat-radio-button class="example-margin" value="1" (click)="Showreward('yes')"
-                  [checked]="reward_check == 1">Yes</mat-radio-button>
-                <mat-radio-button class="example-margin" value="2" (click)="Showreward('specific')"
-                  [checked]="reward_check == 2">Specific Completions Only</mat-radio-button>
-              </mat-radio-group>
-            </div>
+          <mat-label fxFlex="20" class="pr-4">Reward All Completions ?</mat-label>
+          <mat-radio-group aria-label="Select an option" fxFlex="40" class="pr-4" formControlName="reward_completion1">
+            <mat-radio-button class="example-margin" value="1" (click)="Showreward('yes')"
+              [checked]="reward_check == 1">Yes</mat-radio-button>
+            <mat-radio-button class="example-margin" value="2" (click)="Showreward('specific')"
+              [checked]="reward_check == 2">Specific Completions Only</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
+          <div fxFlex="50" class="pr-4" *ngIf="showreward == 2"></div>
 
-            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-              <div fxFlex="50" class="pr-4" *ngIf="showreward == 2"></div>
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4" *ngIf="showreward == 1">
+            <mat-label>Specific Reward</mat-label>
+            <select matNativeControl formControlName="specific_reward" (change)="specificData($event.target.value)">
+              <option value="" selected="">Select</option>
+              <option value="1">1</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+            </select>
+          </mat-form-field>
 
-              <mat-form-field appearance="outline" fxFlex="50" class="pr-4" *ngIf="showreward == 1">
-                <mat-label>Specific Reward</mat-label>
-                <select matNativeControl formControlName="specific_reward" (change)="specificData($event.target.value)">
-                  <option value="" selected="">Select</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                </select>
-              </mat-form-field>
+          <mat-label fxFlex="10">Attach Reward Offer(s)[may select multiple files]</mat-label>
+         
+          <input fxFlex="30" class="pr-4" type="file"  accept="image/*" ngf-max-size="3MB" (change)="selectFile2($event)"
+            #fileInput multiple>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+            <mat-label>Email Reminder Cycle</mat-label>
+            <select matNativeControl formControlName="email_remainder" (change)="remainderData($event.target.value)">
+              <option value="weekly" selected="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="off">off</option>
+            </select>
+          </mat-form-field>
+          <div fxFlex="30" class="pr-4">
+            <img [src]="imgURLchallenge" height="100" *ngIf="imgURLchallenge">
 
-              <mat-label fxFlex="10">Attach Reward Offer(s)[may select multiple files]</mat-label>
-
-              <input fxFlex="30" class="pr-4" type="file" accept="image/*" ngf-max-size="3MB"
-                (change)="selectFile2($event)" #fileInput multiple>
-            </div>
-
-            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-              <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-                <mat-label>Email Reminder Cycle</mat-label>
-                <select matNativeControl formControlName="email_remainder"
-                  (change)="remainderData($event.target.value)">
-                  <option value="weekly" selected="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                  <option value="off">off</option>
-                </select>
-              </mat-form-field>
-              <div fxFlex="30" class="pr-4">
-                <img [src]="imgURLchallenge" height="100" *ngIf="imgURLchallenge">
-
-              </div>
-            </div>
           </div>
-        </ng-container>
+        </div>
 
 
-
-
-
-
-
-
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-          <button mat-raised-button color="primary" type="submit" class="button">Update Client </button>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-top: 15px;">
+          <button mat-raised-button  type="submit" class="button" style="background-color: #039be5;color:white">Update Client </button>
         </div>
 
       </form>
@@ -450,178 +468,3 @@
 
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <h2 class="example-h2" *ngIf="division == 3" >Challenge View Reward Setup</h2> -->
-<!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
-        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-          <mat-label>Reward Start - End Date</mat-label>
-          <input matInput type="text" ngxDaterangepickerMd [(ngModel)]="selected" placeholder="Choose date"
-            (change)="change($event)" [ngModelOptions]="{standalone: true}" readonly="" />
-          <mat-error *ngIf="reward_start == '' ">This field is required!</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-          <mat-label>Reward Type</mat-label>
-          <select matNativeControl formControlName="reward_type1" (change)="rewardData1($event.target.value)">
-            <option value="single_reward_program" selected>
-              Single Reward Program Completion Reward
-            </option>
-            <option value="multi-section_completion">
-              Multi-Section Completion Reward
-            </option>
-            <option value="no">
-              No Reward
-            </option>
-          </select>
-        </mat-form-field>
-      </div>
-
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
-        <mat-label fxFlex="20" class="pr-4">Reward All Completions ?</mat-label>
-        <mat-radio-group aria-label="Select an option" fxFlex="40" class="pr-4" formControlName="reward_completion1">
-          <mat-radio-button class="example-margin" value="1" (click)="Showreward('yes')"
-            [checked]="reward_check == 1">Yes</mat-radio-button>
-          <mat-radio-button class="example-margin" value="2" (click)="Showreward('specific')"
-            [checked]="reward_check == 2">Specific Completions Only</mat-radio-button>
-        </mat-radio-group>
-      </div>
-
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
-        <div fxFlex="50" class="pr-4" *ngIf="showreward == 2"></div>
-
-        <mat-form-field appearance="outline" fxFlex="50" class="pr-4" *ngIf="showreward == 1">
-          <mat-label>Specific Reward</mat-label>
-          <select matNativeControl formControlName="specific_reward" (change)="specificData($event.target.value)">
-            <option value="" selected="">Select</option>
-            <option value="1">1</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-          </select>
-        </mat-form-field>
-
-        <mat-label fxFlex="10">Attach Reward Offer(s)[may select multiple files]</mat-label>
-
-        <input fxFlex="30" class="pr-4" type="file" accept="image/*" ngf-max-size="3MB" (change)="selectFile2($event)"
-          #fileInput multiple>
-      </div>
-
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
-        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-          <mat-label>Email Reminder Cycle</mat-label>
-          <select matNativeControl formControlName="email_remainder" (change)="remainderData($event.target.value)">
-            <option value="weekly" selected="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-            <option value="off">off</option>
-          </select>
-        </mat-form-field>
-        <div fxFlex="30" class="pr-4">
-          <img [src]="imgURLchallenge" height="100" *ngIf="imgURLchallenge">
-
-        </div>
-      </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- dateRange reward_type reward_completion specific_reward email_remainder -->
-<!-- <div  fxLayoutAlign="start center" fxFlex="1 0 auto">
-  <div class="">
-    <h3>Challenge View Reward Setup</h3>
-  </div>
-  <div  fxLayout fxLayout.xs="column"    fxLayoutGap="10px" fxLayoutGap.xs="0">
-    <mat-label>Reward Start - End Date *</mat-label>
-      <mat-form-field appearance="outline" style="width:559px;">
-          <input  formControlName="dateRange" style="left: -11px; width: 600px;" type="text"  matInput ngxDaterangepickerMd
-          [locale]="{applyLabel: 'Apply', format: 'DD-MM-YYYY'}" startKey="start" endKey="end"
-            name="daterange" (datesUpdated)="datesUpdated($event)" />
-        </mat-form-field>
-
-        <mat-label>Reward Type</mat-label>
-      <mat-form-field appearance="outline"  style="width:439px;">
-        <mat-select formControlName="reward_type" (selectionChange)="onSelection($event.value)">
-          <mat-option *ngFor="let item of companyListArray" [value]="item.id">
-            {{item.company_name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-   
-      
-  </div>
-
-  <mat-label>Reward All Completions ?</mat-label>
-  <div class="mt-10" style="margin-top: 15px;
-  margin-left: 10px;">
-  <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="reward_completion" class="example-radio-group">
-    <mat-radio-button class="example-radio-button" *ngFor="let reward of rewards" [value]="reward">
-      {{reward}}
-    </mat-radio-button>
-  </mat-radio-group>
-</div>
-
-<div fxLayout fxLayout.xs="column"    fxLayoutGap="10px" fxLayoutGap.xs="0">
-   
-
-  <mat-label>Specific Reward</mat-label>
-    <mat-form-field appearance="outline"  style="width:439px;">
-      <mat-select formControlName="specific_reward" (selectionChange)="onSelection($event.value)">
-        <mat-option *ngFor="let item of companyListArray" [value]="item.id">
-          {{item.company_name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-label>Email Reminder Cycle</mat-label>
-    <mat-form-field appearance="outline"  style="width:439px;">
-        <mat-select formControlName="email_remainder" (selectionChange)="onSelection($event.value)">
-          <mat-option *ngFor="let item of companyListArray" [value]="item.id">
-            {{item.company_name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-</div>
-<div   fxLayout fxLayout.xs="column"    fxLayoutGap="10px" fxLayoutGap.xs="0">
-
-    <h3>Attach Reward Offer(s) [you may select multiple files]</h3>
-    <input  formControlName="dateRange" style="left: -11px; width: 600px;" type="text">
-
-    
-    
-</div>
-
-  <div class="example-button-row">
-    <button mat-raised-button type="button"  class="download_btn" (click)="downloadReport()">Download Report</button>
-  </div>
-</div> -->

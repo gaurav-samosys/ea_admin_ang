@@ -7,6 +7,7 @@ import * as myGlobals from '../../../../global';
 import { ProfileService }    from './profile.service';
 import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +26,8 @@ states:any;
 data:any;
 horizontalPosition: MatSnackBarHorizontalPosition = 'right';
 verticalPosition: MatSnackBarVerticalPosition = 'top';
-  constructor(public toastr: ToastrService,private _snackBar: MatSnackBar,private http: HttpClient,private profile_service:ProfileService,private _formBuilder: FormBuilder) { }
+  constructor(
+    private route: Router,public toastr: ToastrService,private _snackBar: MatSnackBar,private http: HttpClient,private profile_service:ProfileService,private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
   	this.fetchCountry();
@@ -67,6 +69,9 @@ verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   }
 
+  cencel(){
+    this.route.navigate(["/apps/home-dashboard/version3"])
+  }
   /**
  * Submit Form
  * @param value 

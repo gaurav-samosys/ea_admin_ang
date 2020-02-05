@@ -58,6 +58,8 @@ export class UserComponent implements OnInit {
   getCountry = myGlobals.getCountry;
   getStates = myGlobals.getState;
   changeUserStatus = myGlobals.changeUserStatus;
+  delete_Users=myGlobals.delete_Users;
+  // https://staging.enrichedacademy.com/customers/
 
   rows: any;
   start: any;

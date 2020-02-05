@@ -23,7 +23,7 @@ export class AddclientComponent implements OnInit {
       sendNotification() {
           this.notifyParent.emit('Some value to send to the parent');
       }*/
-
+  hide1: number = 0
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
   Counters = 0;
   addclientForm: FormGroup;
@@ -44,7 +44,7 @@ export class AddclientComponent implements OnInit {
   status = false;
   formdata: any;
   id
-  hide :number= 0
+  hide: number = 0
   clientadded_status: any;
   reward_start: any;
   imgURL: any;
@@ -54,19 +54,21 @@ export class AddclientComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(
     private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer, private datePipe: DatePipe, private _snackBar: MatSnackBar, private rt: Router, private _formBuilder: FormBuilder, public addclient_service: AddclientService) { }
-    seasons: string[] = ['Credit Link', 'Free Link', 'Link from user'];
+  seasons: string[] = ['Credit Link', 'Free Link', 'Link from user'];
   transform(image) {
     return this.sanitizer.bypassSecurityTrustHtml(image);
   }
 
   ngOnInit() {
+    this.hide1 = 1
     this.id = window.location.href.split('client-mangement/addclient/')[1]
     // alert(id)
     console.log(this.id)
-    if(this.id){
+    if (this.id) {
+      this.hide1 = 0
 
       this.getCompWithClientData();
-    }else{
+    } else {
 
     }
     this.getcompany();
@@ -105,11 +107,11 @@ export class AddclientComponent implements OnInit {
       reward_completion1: [''],
       email_remainder: [''],
       upload_file: [''],
-      allow_unlock:[''],
-      allow_unlock_bonus:[''],
-      allow_unlock_user:[''],
-      Video:[''],
-      default_client:''
+      allow_unlock: [''],
+      allow_unlock_bonus: [''],
+      allow_unlock_user: [''],
+      Video: [''],
+      default_client: ''
     })
     this.addclientForm.patchValue({
       free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
@@ -117,7 +119,7 @@ export class AddclientComponent implements OnInit {
 
   }
 
-  dataArray 
+  dataArray
   company_name
   indexValue
   industry_name
@@ -131,25 +133,25 @@ export class AddclientComponent implements OnInit {
       if (this.common['success'] == true) {
         this.dataArray = this.common['data']
         console.log(this.dataArray[0]['company_name'])
-    
-this.company_name=this.dataArray[0]['company_name']
-this.country_name=this.dataArray[0]['country']
-this.state_name=this.dataArray[0]['state_name']
-this.city_name=this.dataArray[0]['city']
-this.industry_name=this.dataArray[0]['industry']
 
-this.addclientForm.controls['company_name'].setValue(this.company_name)
-this.addclientForm.controls['country'].setValue(this.country_name)
-this.addclientForm.controls['state'].setValue(this.state_name)
-this.addclientForm.controls['city'].setValue(this.city_name)
-this.addclientForm.controls['industry'].setValue(this.industry_name)
+        this.company_name = this.dataArray[0]['company_name']
+        this.country_name = this.dataArray[0]['country']
+        this.state_name = this.dataArray[0]['state_name']
+        this.city_name = this.dataArray[0]['city']
+        this.industry_name = this.dataArray[0]['industry']
+
+        this.addclientForm.controls['company_name'].setValue(this.company_name)
+        this.addclientForm.controls['country'].setValue(this.country_name)
+        this.addclientForm.controls['state'].setValue(this.state_name)
+        this.addclientForm.controls['city'].setValue(this.city_name)
+        this.addclientForm.controls['industry'].setValue(this.industry_name)
 
 
 
 
         for (let index = 0; index < this.dataArray.length; index++) {
           this.indexValue = this.dataArray[index];
-          
+
           // this.company_name = this.dataArray[index]['company_name'];
           // console.log(this.company_name, indexValue)
           // console.log("cmp name=====",indexValue['company_name'],

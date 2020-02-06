@@ -6,7 +6,7 @@ import { EditClientService } from './edit-client.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr'; 
 
 
 @Component({
@@ -50,6 +50,8 @@ export class ClientEditComponent implements OnInit {
   common: any;
   client_id: any;
   company_id: any;
+  hide: number = 0
+
   companyData: any;
   vertical: any;
   status = true;
@@ -79,7 +81,10 @@ export class ClientEditComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     
-    private datePipe: DatePipe, private _snackBar: MatSnackBar, private _Activatedroute: ActivatedRoute, private rt: Router, private _formBuilder: FormBuilder, public edit_service: EditClientService, private route: ActivatedRoute) {
+    private datePipe: DatePipe, private _snackBar: MatSnackBar,
+     private _Activatedroute: ActivatedRoute, private rt: Router, 
+     private _formBuilder: FormBuilder, public edit_service: EditClientService,
+      private route: ActivatedRoute) {
 
     /*this.route.queryParams.subscribe(params => {
         this.data = JSON.parse(params["data"]);
@@ -88,6 +93,9 @@ export class ClientEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.editclientForm.patchValue({
+    //   free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
+    // })
     this.selectedd = JSON.stringify(1);
     this.getcompany();
     this.getVertical();
@@ -95,6 +103,9 @@ export class ClientEditComponent implements OnInit {
     this.client_id = this._Activatedroute.snapshot.paramMap.get("id");
     this.company_id = this._Activatedroute.snapshot.paramMap.get("id1");
     console.log(this.client_id, this.company_id)
+    // this.id = window.location.href.split('client-mangement/addclient/')[1]
+
+
 
     this.editclientForm = this._formBuilder.group({
       username: ['', Validators.required],
@@ -131,15 +142,140 @@ export class ClientEditComponent implements OnInit {
       upload_file:[''],
       allow_unlock_bonus:'',emai_domain:'',
        allow_unlock:'' , allow_unlock_user:'', default_client_vertical:'' ,
-       vimeo_id:'',
-        portalviewdefault:'', defaultclientvertical:''
+       intro_video:'',
+        portalviewdefault:'',
+        //  defaultclientvertical:''
 
     })
 
+
+
+
+
+
+
+    // TUCITOKEN: null
+    // access_code: null
+    // add_user_restrict: 1
+    // address_format_id: 1
+    // allow_create_api: null
+    // api_user_table_id: null
+    // auth_key: null
+    // auth_secret_key: null
+    // campus: null
+    // certificate_download_count: null
+    // certificate_downloaded: null
+    // city: "Vancover"
+    // client_email_domain: "medix"
+    // client_name: "Westervelt London"
+    // client_vertical: null
+    // client_vertical_id: null
+    // client_verticals: null
+    // client_website: "http://www.medixcollege.ca"
+    // company: null
+    // company_logo: "15654357.png"
+    // company_name: "Westervelt College22222"
+    // countries_iso_code_2: "CA"
+    // countries_iso_code_3: "CAN"
+    // country: "38"
+    // country_id: 38
+    // course_completion: null
+    // course_completion_type: null
+    // course_progress_status: null
+    // created_on: "2015-05-18"
+    // credit_link: null
+    // default_language: null
+    // default_vertical: null
+    // device_token: null
+    // device_type: null
+    // disable_vertical_ids: null
+    // email: "jlaird@medixcollege.ca"
+    // enable_refresh_theme: 0
+    // event_id: null
+    // first_name: "Jeanette"
+    // forget_pass: null
+    // forget_pass_status: null
+    // free_link: null
+    // id: 1
+    // indicator: null
+    // industry: "4"
+    // intro_video: null
+    // is_deleted: null
+    // is_quiz_status: 1
+    // last_login: null
+    // last_name: "Laird"
+    // login_code: null
+    // login_type: null
+    // min_passing_score: 0
+    // name: "Standard Portal"
+    // partner_code: ""
+    // password: "81dc9bdb52d04dc20036dbd8313ed055"
+    // phone: "519-668-2000"
+    // phone_no: null
+    // portal_type: "s"
+    // portal_view: "1"
+    // pro_customer: null
+    // profile_image: null
+    // progress_status: null
+    // registered_by: null
+    // registered_via: null
+    // role: "1"
+    // role_id: null
+    // show_transunion_button: null
+    // social_id: null
+    // state: "80"
+    // state_code: "ON"
+    // state_name: "Ontario"
+    // status: "Active"
+    // student_code: "medixcollegelondon"
+    // student_id: null
+    // subdomain: null
+    // survey_attempt: null
+    // terms_condition: null
+    // unlock_bonus_course: null
+    // unlock_mandatory_course: null
+    // updated_on: "2015-05-18"
+    // user_access: null
+    // user_budget: null
+    // user_debt: null
+    // user_id: null
+    // user_level_unlock: 0
+    // user_name: "Jeanette.Laird"
+    // vertical_id: null
+    // viewed_intro_video: null
+    // workbook_downloaded: null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     this.edit_service.Post(this.getClients, { id: this.client_id, company_id: this.company_id, token: "LIVESITE", fields: '*' }).subscribe(res => {
       this.common = res;
+      console.log(this.common)
+      var city=this.common.data[0].city
+      console.log(city)
+      this.editclientForm.controls['city'].setValue(city)
       this.clientName=this.common.data[0].client_name
-      console.log(this.common.data[0].client_name,"=====================")
+      // console.log(this.common.data[0].client_name,"=====================")
       this.client_data = this.common.data;
       this.portal_data = this.common.portalData
       console.log(this.portal_data)
@@ -153,12 +289,15 @@ export class ClientEditComponent implements OnInit {
 
 
 
+
       if (this.client_data[0].portal_view == 1) {
         this.division = 1;
         this.editclientForm.patchValue({
           username: this.client_data[0].user_name,
-          companyname: this.client_data[0].company_name,
+          intro_video: this.client_data[0].intro_video,
+          city:this.client_data[0].city,
 
+          companyname: this.client_data[0].company_name,
           clientname: this.client_data[0].client_name,
           firstname: this.client_data[0].first_name,
           lastname: this.client_data[0].last_name,
@@ -170,8 +309,6 @@ export class ClientEditComponent implements OnInit {
           allow_create_api: this.client_data[0].allow_create_api,
           credit_link: this.client_data[0].credit_link,
           free_link: this.client_data[0].free_link,
-
-
         })
         this.editclientForm.controls['companyname'].setValue(this.company_id, { onlySelf: true });
         this.editclientForm.controls['clientvertical'].setValue(this.client_data[0].client_vertical_id, { onlySelf: true });
@@ -207,9 +344,12 @@ export class ClientEditComponent implements OnInit {
           companyname: this.client_data[0].company_name,
           clientname: this.client_data[0].client_name,
           firstname: this.client_data[0].first_name,
+          intro_video: this.client_data[0].intro_video,
+
           lastname: this.client_data[0].last_name,
           email: this.client_data[0].email,
           clientcity: this.data,
+          city:this.client_data[0].city,
           phone: this.client_data[0].phone_no,
           useraccess: this.client_data[0].user_access,
           min_passing_score: this.client_data[0].min_passing_score,
@@ -266,6 +406,10 @@ export class ClientEditComponent implements OnInit {
           firstname: this.client_data[0].first_name,
           lastname: this.client_data[0].last_name,
           email: this.client_data[0].email,
+          city: this.client_data[0].city,
+          intro_video: this.client_data[0].intro_video,
+
+
           clientcity: this.data,
           phone: this.client_data[0].phone_no,
           useraccess: this.client_data[0].user_access,
@@ -300,7 +444,18 @@ export class ClientEditComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) => {
     return this.editclientForm.controls[controlName].hasError(errorName);
   }
+  
+  public show2: boolean = true;
+  public buttonName2: any = 'keyboard_arrow_down';
 
+  buttontoggle2() {
+    this.show2 = !this.show2;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show2)
+      this.buttonName2 = "keyboard_arrow_up";
+    else
+      this.buttonName2 = "keyboard_arrow_down";
+  }
   updateClient() {
     let reward_all: any, reward_type: any
     if (this.editclientForm.invalid) {
@@ -360,9 +515,11 @@ export class ClientEditComponent implements OnInit {
   }
 
 
+  url = 'https://staging.enrichedacademy.com/img/enriched-logo.png';
 
 
   selectFile(event) {
+    this.hide = 1
 
     /*  this.files = value
       console.log(this.files)*/

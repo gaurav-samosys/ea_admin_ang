@@ -54,11 +54,22 @@ export class AddclientComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(
     private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer, private datePipe: DatePipe, private _snackBar: MatSnackBar, private rt: Router, private _formBuilder: FormBuilder, public addclient_service: AddclientService) { }
-  seasons: string[] = ['Credit Link', 'Free Link', 'Link from user'];
+  // TransunionArray = [
+  //   { id: 1, value: 'CreditView' },
+  //   { id: 2, value: 'Free Consumer Disclosure',},
+  //   { id: 3, value: 'Allow User' }
+    
+  // ];
+  TransunionArray = [
+    'CreditView' ,
+    'Free Consumer Disclosure',
+    'Allow User' 
+    
+  ];
+  setValue: string = 'Free Consumer Disclosure';
   transform(image) {
     return this.sanitizer.bypassSecurityTrustHtml(image);
   }
-
   ngOnInit() {
     this.hide1 = 1
     this.id = window.location.href.split('client-mangement/addclient/')[1]
@@ -111,14 +122,47 @@ export class AddclientComponent implements OnInit {
       allow_unlock_bonus: [''],
       allow_unlock_user: [''],
       Video: [''],
-      default_client: ''
+      // default_client: '',
+      // transunion_group:''
     })
     this.addclientForm.patchValue({
       free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
     })
 
   }
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
 
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
+  public show1: boolean = true;
+  public buttonName1: any = 'keyboard_arrow_down';
+
+  buttontoggle1() {
+    this.show1 = !this.show1;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show1)
+      this.buttonName1 = "keyboard_arrow_up";
+    else
+      this.buttonName1 = "keyboard_arrow_down";
+  }
+  public show2: boolean = true;
+  public buttonName2: any = 'keyboard_arrow_down';
+
+  buttontoggle2() {
+    this.show2 = !this.show2;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show2)
+      this.buttonName2 = "keyboard_arrow_up";
+    else
+      this.buttonName2 = "keyboard_arrow_down";
+  }
   dataArray
   company_name
   indexValue
@@ -202,7 +246,7 @@ export class AddclientComponent implements OnInit {
 
   addClient() {
     let reward_all: any, reward_type: any
-    console.log(this.addclientForm.value)
+    console.log("form value=====================",this.addclientForm.value)
     if (this.addclientForm.invalid) {
       return false;
     }

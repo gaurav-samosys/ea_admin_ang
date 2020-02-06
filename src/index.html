@@ -13,63 +13,17 @@
     <meta name="author" content="Withinpixels">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://staging.enrichedacademy.com//img/wp-img/enriched_logo1.png">
     <link href="assets/icons/meteocons/style.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="../src/assets/Font-Awesome-master/css/fontawesome.min.css"> -->
     <link href="assets/icons/material-icons/outline/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="https://www.enrichedacademy.com/app/webroot/css/Admin/themecss/fonts/css/font-awesome.min.css"/>
- 
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://www.enrichedacademy.com/app/webroot/css/Admin/themecss/fonts/css/font-awesome.min.css" />
+
     <script src="https://cdn.ckeditor.com/4.9.2/full-all/ckeditor.js"></script>
     <script> CKEDITOR.config.forcePasteAsPlainText = true; </script>
- 
-    <!-- o true mean show
-    1 false hide -->
- 
- 
- 
- 
- 
-
-    <!-- mobile app link -->
-	<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
-   
-    <!-- <link rel="stylesheet" type="text/css" href="./assets/css/swiper.min.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
-<link rel="stylesheet" type="text/css" href="./assets/css/flexboxgrid.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    <link rel="stylesheet" type="text/css" href="./assets/css/main.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="./assets/css/flexboxgrid.min.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/swiper.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <script type="text/javascript" src="./assets/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./assets/js/swiper.min.js"></script>
-    <script type="text/javascript" src="./assets/js/main.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script type="text/javascript" src="./assets/js/swiper.min.js"></script>
-    <script type="text/javascript" src="./assets/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./assets/js/main.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> -->
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -82,7 +36,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #2D323D;
+            /* 06/02 */
+            width: 100%;
+            background: url(bg_login.jpg) no-repeat;
+            background-size: cover;
+            
+
+            /* background-color: #2D323D; */
             z-index: 99999;
             pointer-events: none;
         }
@@ -98,7 +58,7 @@
         #fuse-splash-screen .logo {
             width: 128px;
             margin: 0 auto;
-            background-color: white;
+            /* background-color: white; */
             /* color: white; */
             /* // */
         }
@@ -254,13 +214,17 @@
     <!-- / FUSE Splash Screen CSS -->
 
 
-  
-
-
 </head>
 
 <body>
 
+
+    <!-- style="flex-direction: column;
+box-sizing: border-box; 
+display: flex; 
+width: 100%; 
+background: url(bg_login.jpg) no-repeat;
+background-size: cover;"  -->
     <!-- FUSE Splash Screen -->
     <fuse-splash-screen id="fuse-splash-screen">
 
@@ -269,7 +233,8 @@
             <div class="logo">
                 <!-- src="https://staging.enrichedacademy.com//img/wp-img/enriched_logo1.png" -->
                 <!-- <img width="128" src="assets/images/logos/fuse.svg"> -->
-                <img width="128" style="color: white;" src="https://staging.enrichedacademy.com//img/wp-img/enriched_logo1.png">
+                <img width="150"
+                    src="https://staging.enrichedacademy.com//img/wp-img/enriched_logo1.png">
 
             </div>
 
@@ -295,31 +260,7 @@
     <!-- / FUSE Splash Screen -->
 
     <app></app>
-    <!-- <script type="text/javascript" >
-        (function (d, w, c) {
-            (w[c] = w[c] || []).push(function() {
-                try {
-                    w.yaCounter49157458 = new Ya.Metrika2({
-                        id:49157458,
-                        clickmap:true,
-                        trackLinks:true,
-                        accurateTrackBounce:true
-                    });
-                } catch(e) { }
-            });
-      
-            var n = d.getElementsByTagName("script")[0],
-                s = d.createElement("script"),
-                f = function () { n.parentNode.insertBefore(s, n); };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://mc.yandex.ru/metrika/tag.js";
-      
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else { f(); }
-        })(document, window, "yandex_metrika_callbacks2");
-      </script> -->
+
 </body>
 
 </html>

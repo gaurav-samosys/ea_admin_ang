@@ -143,7 +143,7 @@
               <mat-form-field appearance="outline" class="example-full-width" fxFlex="100">
                 <mat-label>Start Date</mat-label>
                 <input matInput [matDatepicker]="picker" placeholder="Start date" [ngModel]="startDate"
-                  (ngModelChange)="MyDate($event,'start')" >
+                  (ngModelChange)="MyDate($event,'start')" id="input1">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>

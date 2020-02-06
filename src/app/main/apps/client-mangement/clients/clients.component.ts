@@ -22,7 +22,7 @@ export interface PeriodicElement {
   client_name: any,
   company_name: any,
   client_vertical: any,
-  portal_name: any, 
+  portal_name: any,
   created_on: any,
   totalUsers: any
 }
@@ -72,7 +72,7 @@ export class ClientsComponent implements OnInit {
   name: any;
   // pager object
   pager: any = {};
-  showloader=false
+  showloader = false
   // paged items
   pagedItems: any[];
   getClients = myGlobals.getClients;
@@ -82,6 +82,7 @@ export class ClientsComponent implements OnInit {
   getClientVertical = myGlobals.getClientVertical;
   statusChangeApiUser = myGlobals.statusChangeApiUser;
   clientActive = myGlobals.clientActive;
+  deleteClient = myGlobals.deleteClient
 
   displayedColumns: string[] = ['client_name', 'company_name', 'client_vertical', 'portal_name', 'created_on', 'totalUsers', 'status', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
@@ -118,7 +119,7 @@ export class ClientsComponent implements OnInit {
     }
   }
 
-  
+
   ngOnInit() {
 
     this.fetchCountry();
@@ -136,17 +137,17 @@ export class ClientsComponent implements OnInit {
   clientName
   client_Name
   FetchClient() {
-    this.showloader=true;
+    this.showloader = true;
 
     this.client_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-    this.showloader=false;
-     
+      this.showloader = false;
+
       this.response = res
       // console.log(this.response)
       this.data = this.response.data;
-      this.clientName=this.data[0]['client_name']
-      this.id=this.data[0]['id']
-      this.client_Name =this.data[0]['client_name'].replace(/ /g,"_");
+      this.clientName = this.data[0]['client_name']
+      this.id = this.data[0]['id']
+      this.client_Name = this.data[0]['client_name'].replace(/ /g, "_");
       console.log(this.client_Name);
       // console.log(this.data[0]['client_name'])
       this.dataSource = this.data;
@@ -185,10 +186,10 @@ export class ClientsComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.showloader=true;
+    this.showloader = true;
     this.client_service.Post(this.getClients, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      this.showloader=false;
+      this.showloader = false;
       this.data = this.response.data;
       this.dataSource = this.data;
 
@@ -199,15 +200,15 @@ export class ClientsComponent implements OnInit {
   sort_order = "DESC";
 
   updateSortingOrderClient(sort_column, sort_order) {
-    this.showloader=true;
+    this.showloader = true;
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.client_service.Post(this.getClients, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-    this.showloader=false;
-     
+    this.client_service.Post(this.getClients, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader = false;
+
       this.response = res
-      this.dataSource=this.response.data
+      this.dataSource = this.response.data
     });
   }
 
@@ -220,18 +221,29 @@ export class ClientsComponent implements OnInit {
   }
 
   confirmDialog(value): void {
-    const message = `Are you sure you want to delete this client detail?`;
-    let id = value
-    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
 
-    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
-      maxWidth: "400px",
-      data: dialogData
-    });
+    this.client_service.Post(this.deleteClient, { id: value, token: 'LIVESITE' }).subscribe(res => {
+      this.common = res
+      if (this.common['success'] == true) {
+        this.toastr.success("delete client successfully")
+      } else {
+        this.toastr.warning("there are some issue")
 
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      this.result = dialogResult;
-    });
+      }
+      this.FetchClient();
+    })
+    // const message = `Are you sure you want to delete this client detail?`;
+    // let id = value
+    // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+
+    // const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    //   maxWidth: "400px",
+    //   data: dialogData
+    // });
+
+    // dialogRef.afterClosed().subscribe(dialogResult => {
+    //   this.result = dialogResult;
+    // });
   }
 
   openclientaddedSnackBar() {
@@ -455,11 +467,11 @@ export class ClientsComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.showloader=true
+    this.showloader = true
 
     this.client_service.Post(this.getClients, { company_name: this.companyname, client_name: this.clientname, first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal, city: this.city, start_date: this.sdate, end_date: this.edate, status: this.status, country: this.country1, state: this.state, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
       .subscribe(res => {
-        this.showloader=false
+        this.showloader = false
 
         this.response = res
         this.allItems = this.response.total_data;
@@ -492,7 +504,7 @@ export class ClientsComponent implements OnInit {
   }
 
 
-  
+
   exportData() {
     this.client_service.Post(this.exportManageClient, {
       company_id: '',

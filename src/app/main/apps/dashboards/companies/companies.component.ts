@@ -86,6 +86,7 @@ export class CompaniesComponent implements OnInit {
   getStates = myGlobals.getState;
   getIndustry = myGlobals.getIndustry;
   companyActive = myGlobals.companyActive;
+  deleteCompany =myGlobals.deleteCompany
   public pageSize = 10;
   public currentPage = 0;
   public totalSize = 0;
@@ -128,6 +129,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.dataSource.paginator = this.paginator;
     this.fetchCountry();
     this.getIndustries();
@@ -240,19 +242,32 @@ export class CompaniesComponent implements OnInit {
   ===========================================================*/
   confirmDialog(value): void {
     console.log(value)
-    const message = `Are you sure you want to delete this company detail?`;
     let id = value
-    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
-    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
-      maxWidth: "400px",
-      data: dialogData
-    });
+    this.companyService.Post(this.deleteCompany, {id:id, token: 'LIVESITE' }).subscribe(res => {
+      console.log('=res=======>', res);
+      if(res['success']==true){
+        this.toastr.success("Company deleted successfully")
+      }else[
+        this.toastr.warning("There are some issue")
+      ]
+      this.getCompany();
+    })
+    // const message = `Are you sure you want to delete this company detail?`;
+    // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+    // const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    //   maxWidth: "400px",
+    //   data: dialogData
+    // });
 
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      this.result = dialogResult;
-      console.log(this.result)
-      if(this.result){
-        // Swal.fire({
+    // dialogRef.afterClosed().subscribe(dialogResult => {
+    //   this.result = dialogResult;
+    //   console.log(this.result)
+    //   if(this.result){
+     
+    //   }
+    // });
+  }
+     // Swal.fire({
         //   title: 'Success!',
         //   text: ' File successfully deleted!',
         //   icon: 'success',
@@ -260,9 +275,6 @@ export class CompaniesComponent implements OnInit {
         //   confirmButtonText: 'Ok',
         //   // cancelButtonText: 'No, keep it'
         // })
-      }
-    });
-  }
   /**===========================================================
           edit dialog
     ===========================================================*/

@@ -24,7 +24,7 @@
       align-items: center;  background-color: #039be5 !important;
       color: white !important;">
       <div class="row" fxLayoutAlign="space-between center">
-        <div class="" style="color: white;margin-top:40px;padding: 15px;">
+        <div class="" style="color: white;margin-top:26px;padding: 15px;">
           <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white;">
             <img style="margin-left: 10px;" width="20px" height="20px"
               src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
@@ -36,7 +36,7 @@
             <!-- <a routerLink="/apps/dashboards/company-detail/{{id}}/"
             style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a> -->
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 28px;;
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 17px;;
           margin-right: 40px;
       ">
           <button mat-raised-button routerLink="/apps/client-mangement/addclient/{{id}}" *ngIf="division == 1 || division == 2">
@@ -52,10 +52,10 @@
            <div class="row" style="float: right;">
            	 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 
-              <button mat-raised-button style="margin-right: 21px;" color="primary" class="button" (click)="SwitchButton(1)" *ngIf="division == 1">Company Detail</button>
+              <button mat-raised-button style="margin-right: 21px; background-color: #039be5 ;color: white;"  class="button" (click)="SwitchButton(1)" *ngIf="division == 1">Company Detail</button>
 
               <button mat-raised-button  style="margin-right: 21px;"   (click)="SwitchButton(1)" *ngIf="division == 2">Company Detail</button>
-               <button mat-raised-button  style="margin-right: 21px;"color="primary"   class="button" (click)="SwitchButton(2)" *ngIf="division == 2">Client Search</button>
+               <button mat-raised-button  style="margin-right: 21px;  background-color: #039be5 ;color: white;"  class="button" (click)="SwitchButton(2)" *ngIf="division == 2">Client Search</button>
 
                <button mat-raised-button   style="margin-right: 21px;"  (click)="SwitchButton(2)" *ngIf="division == 1">Client Search</button>
           </div>

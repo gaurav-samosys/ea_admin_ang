@@ -13,7 +13,10 @@ export const downloadAccessCodesFile=" http://192.168.0.45/enrichedacademy_live/
 export const downloadUserReport=" http://192.168.0.45/enrichedacademy_live/api/admin/downloadUserReport"
 export const getCompanyList = " http://192.168.0.45/enrichedacademy_live/api/admin/getCompanyList"
 
-export const getAccessCode=" http://192.168.0.45/enrichedacademy_live/api/admin/getAccessCode";
+// export const getAccessCode=" http://192.168.0.45/enrichedacademy_live/api/admin/getAccessCode";
+export const getCompanies=" http://192.168.0.45/enrichedacademy_live/api/admin/getCompanies";
+ export const deleteClient=" http://192.168.0.45/enrichedacademy_live/api/admin/deleteClient"
+export const deleteUserRecord=" http://192.168.0.45/enrichedacademy_live/api/admin/deleteUserRecord";
 export const getCountry=" http://192.168.0.45/enrichedacademy_live/api/admin/getCountry";
 export const getIndustry=" http://192.168.0.45/enrichedacademy_live/api/admin/getIndustries";
 export const getState=" http://192.168.0.45/enrichedacademy_live/api/admin/getStates";
@@ -26,7 +29,6 @@ export const getClientsWithData=" http://192.168.0.45/enrichedacademy_live/api/a
 export const getUsersWithData=" http://192.168.0.45/enrichedacademy_live/api/admin/getUsersWithDataApi";
 export const getVerticalsWithData=" http://192.168.0.45/enrichedacademy_live/api/admin/getVerticalsAPi";
 
-export const getCompanies=" http://192.168.0.45/enrichedacademy_live/api/admin/getCompanies";
 export const getClients=" http://192.168.0.45/enrichedacademy_live/api/admin/getClients";
 export const getAdminUsers=" http://192.168.0.45/enrichedacademy_live/api/admin/getAdminUsers";
 export const getUsers=" http://192.168.0.45/enrichedacademy_live/api/admin/getUsers";
@@ -35,8 +37,8 @@ export const getDeveloperApiListing=" http://192.168.0.45/enrichedacademy_live/a
 
 export const getCommentWithDataApi=" http://192.168.0.45/enrichedacademy_live/api/admin/getCommentWithDataApi"
 
-
-
+export const deleteAdminAccess="http://192.168.0.45/enrichedacademy_live/api/admin/deleteAdminAccess"
+export const deleteCompany="http://192.168.0.45/enrichedacademy_live/api/admin/deleteCompany"
 export const getBlogWithDataApi=" http://192.168.0.45/enrichedacademy_live/api/admin/getBlogWithDataApi"
 export const addEditBlogApi=" http://192.168.0.45/enrichedacademy_live/api/admin/addEditBlogApi"
 export const deleteBlogApi=" http://192.168.0.45/enrichedacademy_live/api/admin/deleteBlogApi"

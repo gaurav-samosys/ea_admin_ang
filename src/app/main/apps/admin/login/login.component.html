@@ -21,12 +21,12 @@
                     </mat-error>
                     <mat-error
                         *ngIf="!loginForm.get('email').hasError('required') &&
-                                loginForm.get('email').hasError('email')">
+                                loginForm.get('email').hasError('pattern')">
                         Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" style="margin-top: 25px;">
+                <mat-form-field appearance="outline" style="margin-top: 10px;">
                     <mat-label>Password</mat-label>
                     <!-- [type]="_pwdType" -->
                     <input matInput  [type]="show ? 'text' : 'password'" formControlName="password">
@@ -45,7 +45,7 @@
                     <!-- <a class="forgot-password" [routerLink]="'/apps/admin/forgot'">
                         Forgot Password?
                     </a> -->
-                    <a class="forgot-password" [routerLink]="'/pages/auth/forgot-password'">
+                    <a class="forgot-password" style="text-decoration: none;" [routerLink]="'/pages/auth/forgot-password'">
                         Forgot Password?
                     </a>
                 </div>

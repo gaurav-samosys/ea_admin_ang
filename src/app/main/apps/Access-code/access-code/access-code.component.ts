@@ -24,12 +24,13 @@ export class AccessCodeComponent implements OnInit {
   name: any;
   form: FormGroup;
   pager: any = {};
+  
   getClients = myGlobals.getClients;
   getCompanies = myGlobals.getCompanies;
-  getAccessCode = myGlobals.getAccessCode;
-  generateAccessCodes = myGlobals.generateAccessCodes;
-  downloadAccessCodes = myGlobals.downloadAccessCodes;
-  downloadAccessCodesFile=myGlobals.downloadAccessCodesFile
+  // getAccessCode = myGlobals.getAccessCode;
+  // generateAccessCodes = myGlobals.generateAccessCodes;
+  // downloadAccessCodes = myGlobals.downloadAccessCodes;
+  // downloadAccessCodesFile=myGlobals.downloadAccessCodesFile
   companiesData = [];
   common: any;
   clientData = [];
@@ -158,34 +159,34 @@ export class AccessCodeComponent implements OnInit {
     let item = {
 
     }
-    this.service.Post(this.generateAccessCodes, {
-      user_id: this.form.value.client,
-      company_id: this.form.value.company,
-      limit: this.form.value.limit,
-      token: 'LIVESITE'
-    })
-      .subscribe(res => {
-        this.common = res;
-        this.generate_data = this.common.randomcode;
-        this.downloadAccessData(this.form.value.client, this.generate_data);
-      })
+    // this.service.Post(this.generateAccessCodes, {
+    //   user_id: this.form.value.client,
+    //   company_id: this.form.value.company,
+    //   limit: this.form.value.limit,
+    //   token: 'LIVESITE'
+    // })
+    //   .subscribe(res => {
+    //     this.common = res;
+    //     this.generate_data = this.common.randomcode;
+    //     this.downloadAccessData(this.form.value.client, this.generate_data);
+    //   })
   }
 
 
 
 
   getAccessCodedata() {
-    this.service.Post(this.getAccessCode, { token: 'LIVESITE', offset: this.pageNumber, limit: this.pageSize }).subscribe(res => {
-      this.common = res;
-      // console.log(this.common)
-      this.access_data = this.common.data;
-      // console.log(this.access_dat                                                                                                                                                                                                                                                                              a)
-      this.allItems = this.common.total_data;
+    // this.service.Post(this.getAccessCode, { token: 'LIVESITE', offset: this.pageNumber, limit: this.pageSize }).subscribe(res => {
+    //   this.common = res;
+    //   console.log(this.common)
+    //   this.access_data = this.common.data;
+    //   console.log(this.access_data)                                                                                                                                                                                                                                                                              a)
+    //   this.allItems = this.common.total_data;
 
-      this.dataSource = new MatTableDataSource(this.access_data);
-      this.dataSource.paginator = this.paginator;
-      //this.setPage(1);
-    });
+    //   this.dataSource = new MatTableDataSource(this.access_data);
+    //   this.dataSource.paginator = this.paginator;
+    //   this.setPage(1);
+    // });
 
   }
 
@@ -212,15 +213,15 @@ export class AccessCodeComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    /* this.showloader=true;*/
-    this.service.Post(this.getAccessCode, { token: 'LIVESITE', offset: this.pageNumber, limit: this.pageSize }).subscribe(res => {
-      this.common = res
-      //this.showloader=false;
-      this.allItems = this.common.total_data;
-      this.access_data = this.common.data;
-      this.dataSource = this.access_data;
+    //  this.showloader=true;
+    // this.service.Post(this.getAccessCode, { token: 'LIVESITE', offset: this.pageNumber, limit: this.pageSize }).subscribe(res => {
+    //   this.common = res
+    //   this.showloader=false;
+    //   this.allItems = this.common.total_data;
+    //   this.access_data = this.common.data;
+    //   this.dataSource = this.access_data;
 
-    })
+    // })
   }/*
     setPage(page: number) {
         // get pager object from service
@@ -251,20 +252,20 @@ export class AccessCodeComponent implements OnInit {
 
   downloadAccessData(client_id, random_code) {
     // fields: 'companies.company_name,users.client_name,client_access_codes.code' 
-    this.service.Post(this.downloadAccessCodes, { client_id: client_id, random_code: random_code, token: 'LIVESITE',
-    }).subscribe(res => {
-      this.common = res;
-      console.log(this.common)
-      this.xldata = this.common.data;
+    // this.service.Post(this.downloadAccessCodes, { client_id: client_id, random_code: random_code, token: 'LIVESITE',
+    // }).subscribe(res => {
+    //   this.common = res;
+    //   console.log(this.common)
+    //   this.xldata = this.common.data;
 
-      if (res['success'] == true) {
-        // console.log(this.data)
-        this.excelService.exportAsExcelFile(this.xldata, 'sample');
+    //   if (res['success'] == true) {
+    //     console.log(this.data)
+    //     this.excelService.exportAsExcelFile(this.xldata, 'sample');
 
-      }
-      // this.xldata = this.common.data;
-      // this.exportAsXLSX(this.xldata)
-    })
+    //   }
+    //   // this.xldata = this.common.data;
+    //   // this.exportAsXLSX(this.xldata)
+    // })
   }
 
   // exportAsXLSX(data) {

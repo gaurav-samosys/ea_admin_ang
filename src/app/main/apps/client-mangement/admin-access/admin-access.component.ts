@@ -65,6 +65,7 @@ export class AdminAccessComponent implements OnInit {
   getCountry = myGlobals.getCountry;
   getStates = myGlobals.getState;
   getAdminUsers = myGlobals.getAdminUsers;
+  deleteAdminAccess =myGlobals.deleteAdminAccess;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = ['id', 'email', 'first_name', 'last_name', 'client_name', 'company_name', 'action'];
@@ -240,18 +241,29 @@ export class AdminAccessComponent implements OnInit {
     * =========================================
     */
   confirmDialog(value): void {
-    const message = `Are you sure you want to delete this user detail?`;
-    let id = value
-    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+    
+    this.admin_service.Post(this.deleteAdminAccess, { id: value, token: 'LIVESITE' }).subscribe(res => {
+      this.common = res
+     if(this.common['success']==true){
+           this.toastr.success("Admin user deleted successfully")
+     }else{
+      this.toastr.success("There are some Issue")
+     }
+     this.fetchAdminaccess();
 
-    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
-      maxWidth: "400px",
-      data: dialogData
-    });
+    })
+    // const message = `Are you sure you want to delete this user detail?`;
+    // let id = value
+    // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
 
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      this.result = dialogResult;
-    });
+    // const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    //   maxWidth: "400px",
+    //   data: dialogData
+    // });
+
+    // dialogRef.afterClosed().subscribe(dialogResult => {
+    //   this.result = dialogResult;
+    // });
   }
   /**
     * =========================================

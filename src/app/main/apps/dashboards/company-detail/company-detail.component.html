@@ -34,7 +34,7 @@
             style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a>
 
             <!-- <a routerLink="/apps/dashboards/company-detail/{{id}}/"
-            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a> -->
+            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{client_name}}</a> -->
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 17px;;
           margin-right: 40px;
@@ -62,6 +62,8 @@
            </div>
        </div>
 
+
+
     <div class="mat__box mt-20 mr-28" *ngIf="division == 1">
       <div class="row" style="background-color: white; padding:10px">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -81,7 +83,7 @@
 
               <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
                 <mat-label>First Name</mat-label>
-                <input matInput [ngModel]="first_name" placeholder="Search full name"
+                 <input matInput [ngModel]="first_name" placeholder="Search full name"
                   (keyup)="Search($event.target.value,'fullname')" readonly="readonly" class="disable">
               </mat-form-field>
             </div>
@@ -340,8 +342,10 @@
                       </i>
                     </span>
                   </th>
+                  <!-- {{id}} -->
+                  <!-- routerLink="/apps/client-mangement/client-detail/{{client_Name}}/{{id}}" -->
                   <td class="style" mat-cell *matCellDef="let element"
-                    [routerLink]="['/apps/dashboards/company-detail', element.id]"> {{element.client_name}} </td>
+                    routerLink="/apps/dashboards/user/{{client_Name}}/{{id}}/{{detail_id}}"> {{element.client_name}} </td>
                 </ng-container>
 
                 <!-- Weight Column -->
@@ -424,9 +428,18 @@
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="action">
-                  <th mat-header-cell *matHeaderCellDef> Action </th>
-                  <td mat-cell *matCellDef="let element"> {{element.action}} </td>
-                </ng-container>
+                    <th mat-header-cell *matHeaderCellDef>Action</th>
+                    <td *matCellDef="let element">
+                      <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn">Actions</button>
+
+                      <mat-menu #belowMenu="matMenu" yPosition="below">
+                          <!-- /apps/client-mangement/addclient -->
+                        <button mat-menu-item matTooltip="Edit"
+                          [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">Edit</button>
+                        <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
+                      </mat-menu>
+                    </td>
+                  </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -434,7 +447,7 @@
               <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
                 [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
                 (page)="handlePage($event)"></mat-paginator>
-              <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+              <div *ngIf="data == '' " style="text-align: center;margin-top: 10px;margin-bottom: 10px;">No data available in table</div>
               <mat-card *ngIf="showloader==true"
               style="display: flex; justify-content: center; align-items: center">
               <mat-progress-spinner mode="indeterminate">

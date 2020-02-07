@@ -10,14 +10,14 @@ import { LoginGuard } from '../../login.guard';
 // import { WebinarListComponent } from './webinar/webinar-list/webinar-list.component';
 // import { AddWebinarComponent } from './webinar/add-webinar/add-webinar.component';
 const routes = [
-    {
-        path: 'dashboards/analytics',
-        loadChildren: './dashboards/analytics/analytics.module#AnalyticsDashboardModule',
-    },
-    {
-        path: 'dashboards/project',
-        loadChildren: './dashboards/project/project.module#ProjectDashboardModule'
-    },
+    // {
+    //     path: 'dashboards/analytics',
+    //     loadChildren: './dashboards/analytics/analytics.module#AnalyticsDashboardModule',
+    // },
+    // {
+    //     path: 'dashboards/project',
+    //     loadChildren: './dashboards/project/project.module#ProjectDashboardModule'
+    // },
     {
         path: 'dashboards/users',
         loadChildren: './dashboards/users/users.module#UsersModule'
@@ -30,6 +30,14 @@ const routes = [
         path: 'dashboards/company-detail/:id',
         loadChildren: './dashboards/company-detail/company-detail.module#CompanyDetailModule', canActivate: [LoginGuard]
     },
+
+    {
+        path: 'dashboards/user',
+        loadChildren: './dashboards/users/users.module#UsersModule',
+    },
+
+
+
     {
         path: 'dashboards/clients',
         loadChildren: './dashboards/clients/clients.module#ClientsModule'
@@ -74,6 +82,10 @@ const routes = [
         path: 'user-mangement/user',
         loadChildren: './user-mangement/user/user.module#UserModule', canActivate: [LoginGuard]
     },
+    //  {
+    //     path: 'user-detail',
+    //     loadChildren: './home-dashboard/version3/user-detail/user-detail.module#UserDetailModule', canActivate: [LoginGuard]
+    // },
     {
         path: 'developer-app/developer-apis',
         loadChildren: './developer-app/developer-apis/developer-apis.module#DeveloperApisModule', canActivate: [LoginGuard]

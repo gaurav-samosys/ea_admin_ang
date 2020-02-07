@@ -6,7 +6,7 @@ import { EditClientService } from './edit-client.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
-import { ToastrService } from 'ngx-toastr'; 
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,10 +18,10 @@ import { ToastrService } from 'ngx-toastr';
           <app-client-edit (notifyParent)="getNotification($event)"></app-client-edit> `*/
 })
 export class ClientEditComponent implements OnInit {
-  // seasons: string[] = ['Credit Link', 'Free Link', 'Link from user',''];
   seasons: string[] = ['CreditView', 'Free Consumer Disclosure', 'Allow User'];
+  // seasons= [{id:1,value:'CreditView'},{id:2,value: 'Free Consumer Disclosure'},{id:3,value: 'Allow User'}];
 
-  rewards: string[]=['Yes','Specific Completions Only']
+  rewards: string[] = ['Yes', 'Specific Completions Only']
   // CreditView  Free Consumer Disclosure  Allow User
   /* getNotification(evt) {
  
@@ -31,11 +31,11 @@ export class ClientEditComponent implements OnInit {
      console.log(evt)
          // Do something with the notification (evt) sent by the child!
      }*/
-     public buttonName: any = 'keyboard_arrow_down';
-     public buttonName1: any = 'keyboard_arrow_down';
+  public buttonName: any = 'keyboard_arrow_down';
+  public buttonName1: any = 'keyboard_arrow_down';
 
-     public show: boolean = true;
-     public show1: boolean = true;
+  public show: boolean = true;
+  public show1: boolean = true;
 
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
   editclientForm: FormGroup;
@@ -80,16 +80,22 @@ export class ClientEditComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(
     private toastr: ToastrService,
-    
+
     private datePipe: DatePipe, private _snackBar: MatSnackBar,
-     private _Activatedroute: ActivatedRoute, private rt: Router, 
-     private _formBuilder: FormBuilder, public edit_service: EditClientService,
-      private route: ActivatedRoute) {
+    private _Activatedroute: ActivatedRoute, private rt: Router,
+    private _formBuilder: FormBuilder, public edit_service: EditClientService,
+    private route: ActivatedRoute) {
 
     /*this.route.queryParams.subscribe(params => {
         this.data = JSON.parse(params["data"]);
         console.log(this.data)
         });*/
+  }
+  show_transunion
+  radioChange(value) {
+    if (value) {
+      this.show_transunion = value
+    }
   }
 
   ngOnInit() {
@@ -123,7 +129,7 @@ export class ClientEditComponent implements OnInit {
       email: ['', Validators.required],
       clientcity: ['', Validators.required],
       phone: ['', Validators.required],
-      useraccess: [''],
+      user_access: [''],
       min_passing_score: [''],
       allow_create_api: [''],
       credit_link: [''],
@@ -139,15 +145,18 @@ export class ClientEditComponent implements OnInit {
       reward_type1: [''],
       reward_completion1: [''],
       email_remainder: [''],
-      upload_file:[''],
-      allow_unlock_bonus:'',emai_domain:'',
-       allow_unlock:'' , allow_unlock_user:'', default_client_vertical:'' ,
-       intro_video:'',
-        portalviewdefault:'',
-        //  defaultclientvertical:''
+      upload_file: [''],
+      add_user_restrict: '',
+      emai_domain: '',
+      allow_unlock_user: '',
+      intro_video: '',
+      portalviewdefault: '',
+      unlock_bonus_course: '',
+      unlock_mandatory_course: '',
+      user_level_unlock: '',
+      // show_transunion_button: ''
 
     })
-
 
 
 
@@ -234,12 +243,12 @@ export class ClientEditComponent implements OnInit {
     // terms_condition: null
     // unlock_bonus_course: null
     // unlock_mandatory_course: null
+    // user_level_unlock: 0
     // updated_on: "2015-05-18"
     // user_access: null
     // user_budget: null
     // user_debt: null
     // user_id: null
-    // user_level_unlock: 0
     // user_name: "Jeanette.Laird"
     // vertical_id: null
     // viewed_intro_video: null
@@ -271,10 +280,10 @@ export class ClientEditComponent implements OnInit {
     this.edit_service.Post(this.getClients, { id: this.client_id, company_id: this.company_id, token: "LIVESITE", fields: '*' }).subscribe(res => {
       this.common = res;
       console.log(this.common)
-      var city=this.common.data[0].city
+      var city = this.common.data[0].city
       console.log(city)
       this.editclientForm.controls['city'].setValue(city)
-      this.clientName=this.common.data[0].client_name
+      this.clientName = this.common.data[0].client_name
       // console.log(this.common.data[0].client_name,"=====================")
       this.client_data = this.common.data;
       this.portal_data = this.common.portalData
@@ -288,14 +297,22 @@ export class ClientEditComponent implements OnInit {
       }
 
 
-
-
+   
       if (this.client_data[0].portal_view == 1) {
         this.division = 1;
         this.editclientForm.patchValue({
           username: this.client_data[0].user_name,
+
           intro_video: this.client_data[0].intro_video,
-          city:this.client_data[0].city,
+          city: this.client_data[0].city,
+          phone: this.client_data[0].phone,
+          password: this.client_data[0].password,
+          add_user_restrict: this.client_data[0].add_user_restrict == 0 || this.client_data[0].add_user_restrict == null ? false : true,
+          allow_create_api: this.client_data[0].allow_create_api == 0 || this.client_data[0].allow_create_api == null ? false : true,
+          unlock_bonus_course: this.client_data[0].unlock_bonus_course == 0 || this.client_data[0].unlock_bonus_course == null ? false : true,
+          unlock_mandatory_course: this.client_data[0].unlock_mandatory_course == 0 || this.client_data[0].unlock_mandatory_course == null ? false : true,
+          user_level_unlock: this.client_data[0].user_level_unlock == 0 || this.client_data[0].user_level_unlock == null ? false : true,
+          // show_transunion_button: this.client_data[0].show_transunion_button,
 
           companyname: this.client_data[0].company_name,
           clientname: this.client_data[0].client_name,
@@ -303,10 +320,10 @@ export class ClientEditComponent implements OnInit {
           lastname: this.client_data[0].last_name,
           email: this.client_data[0].email,
           clientcity: this.data,
-          phone: this.client_data[0].phone_no,
-          useraccess: this.client_data[0].user_access,
+
+          // phone: this.client_data[0].phone_no,
+          user_access: this.client_data[0].user_access,
           min_passing_score: this.client_data[0].min_passing_score,
-          allow_create_api: this.client_data[0].allow_create_api,
           credit_link: this.client_data[0].credit_link,
           free_link: this.client_data[0].free_link,
         })
@@ -344,16 +361,28 @@ export class ClientEditComponent implements OnInit {
           companyname: this.client_data[0].company_name,
           clientname: this.client_data[0].client_name,
           firstname: this.client_data[0].first_name,
+
           intro_video: this.client_data[0].intro_video,
+          city: this.client_data[0].city,
+          phone: this.client_data[0].phone,
+          password: this.client_data[0].password,
 
           lastname: this.client_data[0].last_name,
           email: this.client_data[0].email,
           clientcity: this.data,
-          city:this.client_data[0].city,
-          phone: this.client_data[0].phone_no,
-          useraccess: this.client_data[0].user_access,
+
+          // phone: this.client_data[0].phone_no,
+          user_access: this.client_data[0].user_access,
           min_passing_score: this.client_data[0].min_passing_score,
-          allow_create_api: this.client_data[0].allow_create_api,
+          // add_user_restrict: this.client_data[0].add_user_restrict == 0 ? false : true,
+          // allow_create_api: this.client_data[0].allow_create_api == 0 ? false : true,
+          add_user_restrict: this.client_data[0].add_user_restrict == 0 || this.client_data[0].add_user_restrict == null ? false : true,
+          allow_create_api: this.client_data[0].allow_create_api == 0 || this.client_data[0].allow_create_api == null ? false : true,
+          unlock_bonus_course: this.client_data[0].unlock_bonus_course == 0 || this.client_data[0].unlock_bonus_course == null ? false : true,
+          unlock_mandatory_course: this.client_data[0].unlock_mandatory_course == 0 || this.client_data[0].unlock_mandatory_course == null ? false : true,
+          user_level_unlock: this.client_data[0].user_level_unlock == 0 || this.client_data[0].user_level_unlock == null ? false : true,
+          // show_transunion_button: this.client_data[0].show_transunion_button,
+
           credit_link: this.client_data[0].credit_link,
           free_link: this.client_data[0].free_link,
 
@@ -406,15 +435,27 @@ export class ClientEditComponent implements OnInit {
           firstname: this.client_data[0].first_name,
           lastname: this.client_data[0].last_name,
           email: this.client_data[0].email,
+
           city: this.client_data[0].city,
           intro_video: this.client_data[0].intro_video,
+          phone: this.client_data[0].phone,
+          password: this.client_data[0].password,
 
 
           clientcity: this.data,
-          phone: this.client_data[0].phone_no,
-          useraccess: this.client_data[0].user_access,
+          // phone: this.client_data[0].phone_no,
+
+          user_access: this.client_data[0].user_access,
           min_passing_score: this.client_data[0].min_passing_score,
-          allow_create_api: this.client_data[0].allow_create_api,
+          // add_user_restrict: this.client_data[0].add_user_restrict == 0 ? false : true,
+          // allow_create_api: this.client_data[0].allow_create_api == 0 ? false : true,
+          add_user_restrict: this.client_data[0].add_user_restrict == 0 || this.client_data[0].add_user_restrict == null ? false : true,
+          allow_create_api: this.client_data[0].allow_create_api == 0 || this.client_data[0].allow_create_api == null ? false : true,
+          unlock_bonus_course: this.client_data[0].unlock_bonus_course == 0 || this.client_data[0].unlock_bonus_course == null ? false : true,
+          unlock_mandatory_course: this.client_data[0].unlock_mandatory_course == 0 || this.client_data[0].unlock_mandatory_course == null ? false : true,
+          user_level_unlock: this.client_data[0].user_level_unlock == 0 || this.client_data[0].user_level_unlock == null ? false : true,
+          // show_transunion_button: this.client_data[0].show_transunion_button,
+
           credit_link: this.client_data[0].credit_link,
           free_link: this.client_data[0].free_link,
 
@@ -444,7 +485,7 @@ export class ClientEditComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) => {
     return this.editclientForm.controls[controlName].hasError(errorName);
   }
-  
+
   public show2: boolean = true;
   public buttonName2: any = 'keyboard_arrow_down';
 
@@ -470,18 +511,25 @@ export class ClientEditComponent implements OnInit {
         reward_type = this.editclientForm.value.reward_type
     }
     this.formdata = {
+      add_user_restrict: this.editclientForm.value.add_user_restrict,
+      unlock_bonus_course: this.editclientForm.value.unlock_bonus_course,
+      unlock_mandatory_course: this.editclientForm.value.unlock_mandatory_course,
+      user_level_unlock: this.editclientForm.value.user_level_unlock,
+      city: this.editclientForm.value.city,
+      show_transunion_button: this.show_transunion,
+      user_access: this.editclientForm.value.user_access,
+
+
       id: this.client_id,
       client_vertical: this.editclientForm.value.clientvertical,
       company_name: this.editclientForm.value.companyname,
       first_name: this.editclientForm.value.firstname,
       last_name: this.editclientForm.value.lastname,
       portal_view: this.editclientForm.value.portalview,
-      user_access: this.editclientForm.value.useraccess,
       min_passing_score: this.editclientForm.value.min_passing_score,
       email: this.editclientForm.value.email,
       client_name: this.editclientForm.value.clientname,
       phone_no: this.editclientForm.value.phone,
-      city: this.editclientForm.value.city,
       subdomain: this.editclientForm.value.companyname,
       allow_create_api: this.editclientForm.value.allow_create_api,
       credit_link: this.editclientForm.value.credit_link,
@@ -490,10 +538,8 @@ export class ClientEditComponent implements OnInit {
       logo: this.editclientForm.value.logo,
       upload_file: this.editclientForm.value.upload_file,
 
-
-
+      password: this.editclientForm.value.password,
       reward_type: reward_type,
-
       duration_of_drip: this.editclientForm.value.duration_drip,
       reward_cycle_runs: this.editclientForm.value.reward_cycle,
       reward_all: reward_all,
@@ -504,7 +550,9 @@ export class ClientEditComponent implements OnInit {
       reward_end_date: this.editclientForm.value.reward_end,
       email_reminder_cycle: this.editclientForm.value.email_remainder
     }
-    this.edit_service.Post("http://192.168.0.126/enrichedacademy_live/api/admin/editClient", this.formdata).subscribe(res => {
+
+    console.log(this.formdata)
+    this.edit_service.Post(this.editClient, this.formdata).subscribe(res => {
       console.log(res)
       this.clientedit_status = this.common.success;
       this.toastr.success('Client update Successfully');
@@ -578,14 +626,14 @@ export class ClientEditComponent implements OnInit {
     this.edit_service.Post(this.getCompanies, { company_id: value, token: 'LIVESITE' })
       .subscribe(res => {
         this.common = res;
-        console.log("this common===========",this.common)
+        console.log("this common===========", this.common)
         this.data = this.common.data
-        console.log("this data===========",this.data)
-        this.companyName=this.data[0]['company_name']
-        console.log("this data===========",this.companyName)
+        console.log("this data===========", this.data)
+        this.companyName = this.data[0]['company_name']
+        console.log("this data===========", this.companyName)
 
         this.editclientForm.patchValue({
-          companyname:this.data[0].company_name,
+          companyname: this.data[0].company_name,
           country: this.data[0].countries_name,
           state: this.data[0].state_name,
           city: this.data[0].city,
@@ -706,7 +754,7 @@ export class ClientEditComponent implements OnInit {
 
 
 
-  
+
   rewardData(value) {
     this.editclientForm.patchValue({
       reward_type: value

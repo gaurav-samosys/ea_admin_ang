@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { UiSwitchModule } from 'ngx-toggle-switch';
+
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -13,7 +15,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule } from '@fuse/components';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { UsersComponent } from 'app/main/apps/dashboards/users/users.component';
-import { UsersService } from 'app/main/apps/dashboards/users/users.service';
+// import { UsersService } from 'app/main/apps/dashboards/users/users.service';
 import { PagerService } from 'app/main/apps/dashboards/pager.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -46,15 +48,17 @@ import { ModalComponent } from './modal/modal.component';
 import { UserConfirmboxComponent } from './user-confirmbox/user-confirmbox.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { EditdialogComponent } from './user-edit/editdialog/editdialog.component';
+import { AdduserComponent } from '../../user-mangement/user/adduser/adduser.component';
+import { UserService } from '../../user-mangement/user/user.service';
 
 
 const routes: Routes = [
     {
         path     : '**',
         component: UsersComponent,
-        resolve  : {
-            data: UsersService
-        }
+        // resolve  : {
+        //     data: UsersService
+        // }
     }
 ];
 
@@ -65,6 +69,7 @@ const routes: Routes = [
         UserConfirmboxComponent,
         UserEditComponent,
         EditdialogComponent,
+        AdduserComponent
 
     ],
     imports     : [
@@ -78,15 +83,13 @@ const routes: Routes = [
         MatSelectModule,
         MatTableModule,
         MatTabsModule,
-
+        UiSwitchModule,
         NgxChartsModule,
 
         FuseSharedModule,
         FuseSidebarModule,
         FuseWidgetModule,
-
-
-           MatAutocompleteModule,
+        MatAutocompleteModule,
         MatBadgeModule,
         MatBottomSheetModule,
         MatButtonModule,
@@ -160,10 +163,11 @@ const routes: Routes = [
         MatTooltipModule,
         MatTreeModule,
     ],
+    // UsersService
     providers   : [
-        UsersService,PagerService
+        PagerService,UserService
     ],
-      entryComponents: [ModalComponent,UserConfirmboxComponent,UserEditComponent,EditdialogComponent]
+      entryComponents: [AdduserComponent,ModalComponent,UserConfirmboxComponent,UserEditComponent,EditdialogComponent]
 })
 export class UsersModule
 {

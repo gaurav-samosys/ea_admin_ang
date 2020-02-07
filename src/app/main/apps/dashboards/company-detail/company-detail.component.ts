@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
 
-
+ 
 @Component({
   selector: 'app-company-detail',
   templateUrl: './company-detail.component.html',
@@ -97,6 +97,9 @@ public totalSize = 0;
    horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  client_name: any;
+  client_Name: any;
+  detail_id: any;
    constructor(private _Activatedroute:ActivatedRoute,
     private datePipe: DatePipe,
     public route:ActivatedRoute,
@@ -158,7 +161,12 @@ console.log(this.id)
      this.allItems = this.common.total_data;
      this.data=this.common.data;
      console.log(this.data)
+     this.client_name=this.data[0].client_name;
      this.company_name=this.data[0].company_name;
+     console.log(this.company_name)
+     this.detail_id = this.data[0]['id']
+      this.client_Name = this.data[0]['client_name'].replace(/ /g, "_");
+      console.log(this.client_Name,this.detail_id,"================");
       this.first_name=this.data[0].first_name;
       this.last_name=this.data[0].last_name;
       this.emails=this.data[0].email;

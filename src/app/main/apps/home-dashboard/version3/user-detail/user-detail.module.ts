@@ -11,10 +11,23 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RouterModule, Routes } from '@angular/router';
+import { UserDetailComponent } from './user-detail.component';
+const routes: Routes = [
+  {
+      path: '**',
+      component: UserDetailComponent,
+      // resolve: {
+      //     data: Version3Service
+      // }
+  }
+];
+
 @NgModule({
-  declarations: [],
+  declarations: [UserDetailComponent],
   imports: [
-     FlexLayoutModule,MatSlideToggleModule,
+        RouterModule.forChild(routes),
+        FlexLayoutModule,MatSlideToggleModule,
     CommonModule, ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatIconModule, MatCardModule, MatDialogModule, ScrollingModule, MatProgressBarModule
   ]
 })

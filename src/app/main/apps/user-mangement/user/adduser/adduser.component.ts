@@ -21,8 +21,15 @@ res_data:any;
     added_status:any;
     formData:any;
   constructor(public dialogRef: MatDialogRef<AdduserComponent>,private rt:Router,public _formBuilder: FormBuilder,private user:UserService) { }
-
+  TransunionArray = [
+    'CreditView' ,
+    'Free Consumer Disclosure',
+  ];
   ngOnInit() {
+    // this.adduserForm.patchValue({
+    //   free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
+    // })
+
   	this.getCompany();
   	   this.adduserForm = this._formBuilder.group({
             company : ['', Validators.required],
@@ -31,14 +38,16 @@ res_data:any;
             last_name  : ['', Validators.required],
             email     : ['', [Validators.required,Validators.email]],
             phone   : ['', Validators.required],
-            
+            clientvertical:'',
+            clientvertical1:'',
+            free_link:'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
         });
   }
 
            public hasError = (controlName: string, errorName: string) =>{
               return this.adduserForm.controls[controlName].hasError(errorName);
             }
-
+         
   addUser(){
     if(this.adduserForm.invalid){
       return false;
@@ -59,6 +68,13 @@ res_data:any;
                           this.rt.navigate(["/apps/user-mangement/user"]));
     this.dialogRef.close();
         })
+  }
+
+  show_transunion
+  radioChange(value) {
+    if (value) {
+      this.show_transunion = value
+    }
   }
 
     onClose() {

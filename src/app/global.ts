@@ -53,7 +53,7 @@ export const deleteFileApi=" http://192.168.0.45/enrichedacademy_live/api/admin/
 export const uploadFile=" http://192.168.0.45/enrichedacademy_live/api/admin/uploadFile";
 
 export const client_color2=" http://192.168.0.45/enrichedacademy_live/api/admin/client_color2";
-export const save_client_color_v2=" http://192.168.0.45/enrichedacademy_live/api/admin/save_client_color_v2";
+export const save_client_color_v2="http://192.168.0.45/enrichedacademy_live/api/admin/save_client_color_v2";
 export const editUsers=" http://192.168.0.45/enrichedacademy_live/api/admin/editUsers";
 
 export const getVideoChart=" http://192.168.0.45/enrichedacademy_live/api/admin/getVideoChart"

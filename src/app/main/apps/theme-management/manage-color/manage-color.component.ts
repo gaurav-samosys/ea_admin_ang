@@ -87,7 +87,7 @@ export class ManageColorComponent implements OnInit {
 
 
   getClient() {
-    this.http.get('http://192.168.0.18/enrichedacademy_live/api/admin/client_color2?token=LIVESITE').subscribe(res => {
+    this.http.get('http://192.168.0.45/enrichedacademy_live/api/admin/client_color2?token=LIVESITE').subscribe(res => {
       console.log(res)
       this.common = res
       this.clientArray = this.common.data;
@@ -145,7 +145,7 @@ export class ManageColorComponent implements OnInit {
 
       })
     } else {
-      this.service.Post('http://192.168.0.18/enrichedacademy_live/api/admin/save_client_color_v2', {
+      this.service.Post(this.save_client_color_v2, {
         type: this.type, client: this.idsArray, token: 'LIVESITE', primary_color: this.primary,
         secondary_color: this.secondary, another_color: this.ternary
       }).subscribe(res => {

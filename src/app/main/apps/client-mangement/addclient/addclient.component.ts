@@ -130,6 +130,12 @@ export class AddclientComponent implements OnInit {
     })
 
   }
+  show_transunion
+  radioChange(value) {
+    if (value) {
+      this.show_transunion = value
+    }
+  }
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
 

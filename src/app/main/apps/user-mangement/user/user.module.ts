@@ -56,9 +56,9 @@ const routes: Routes = [
     {
         path     : '**',
         component: UserComponent,
-        resolve  : {
-            data: UserService
-        }
+        // resolve  : {
+        //     data: UserService
+        // }
     }
 ];
 
@@ -133,6 +133,7 @@ const routes: Routes = [
        
     ],
     exports: [
+        AdduserComponent,
         MatAutocompleteModule,
         MatBadgeModule,
         MatBottomSheetModule,
@@ -169,8 +170,9 @@ const routes: Routes = [
         MatTooltipModule,
         MatTreeModule,
     ],
+    // UserService
     providers   : [
-        UserService,PagerService,ExcelService
+        PagerService,ExcelService
     ],
       entryComponents: [AdduserComponent,UserPopupComponent,UserConfirmboxComponent,UserEditComponent,EditdialogComponent]
 })

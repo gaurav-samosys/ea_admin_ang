@@ -37,6 +37,12 @@
                         <mat-error *ngIf="hasError('title', 'required')">Please enter title! </mat-error>
                     </mat-form-field>
 
+                    <mat-label style=" width: 36%;margin-bottom: 10px">Title(French)</mat-label>
+                    <mat-form-field  fxFlex="100">
+                       <input matInput formControlName="title"  required>
+                        <!-- <mat-error *ngIf="hasError('title', 'required')">Please enter title! </mat-error> -->
+                    </mat-form-field>
+
                       <mat-label style=" width: 36%;margin-bottom: 10px">Order*</mat-label>
                     <mat-form-field  fxFlex="100">
                        <input matInput formControlName="order"  required>
@@ -54,12 +60,19 @@
                            <textarea matInput  formControlName="sort_desc" ></textarea>
                             <mat-error *ngIf="hasError('sort_desc', 'required')">This field is required!</mat-error>
                     </mat-form-field>
+
+                    <mat-label style=" width: 36%;margin-bottom: 10px">Description(French)</mat-label>
+                    <mat-form-field  rows="5" cols="10"  class="example-full-width" fxFlex="100">
+                      <textarea matInput  formControlName="sort_desc" ></textarea>
+                       <!-- <mat-error *ngIf="hasError('sort_desc', 'required')">This field is required!</mat-error> -->
+               </mat-form-field>
                      
 
                       <mat-label style=" width: 36%;margin-bottom: 10px">User Type</mat-label>
                       <input type="radio" value="1" name="user_type" formControlName="user_type" [checked]="check == 1" >&nbsp;&nbsp;&nbsp;
-                      <mat-label class="mr_radio">Student</mat-label>&nbsp;&nbsp;&nbsp;
-                      <input type="radio" value="2" name="user_type" formControlName="user_type" [checked]="check == 2"><mat-label>Teacher</mat-label>
+                      <mat-label class="mr_radio">Student(Short Video)</mat-label>&nbsp;&nbsp;&nbsp;
+                      <input type="radio" value="2" name="user_type" formControlName="user_type"
+                       [checked]="check == 2"><mat-label>Teacher(Long Video)</mat-label>
                 </div>
 
 

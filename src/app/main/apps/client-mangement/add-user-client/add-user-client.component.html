@@ -1,0 +1,146 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column">
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Add User</span>
+            <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <!-- <mat-toolbar>
+    <span> Add User </span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar> -->
+    <!-- CONTENT -->
+    <div class="content p-24" style="margin-top: 40px;">
+
+        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+            <!-- REACTIVE FORM EXAMPLE -->
+            <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="adduserForm" 
+            [formGroup]="adduserForm"
+                (ngSubmit)="addUser()">
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                        <mat-label>Select Company</mat-label>
+                        <mat-select formControlName="company" (selectionChange)="getClient($event.value)" required>
+                            <mat-option selected="" disabled="" value="">
+                                Please select company
+                            </mat-option>
+                            <mat-option *ngFor="let data of companiesData" value="{{data.id}}">
+                                {{data.company_name}}
+                            </mat-option>
+
+                        </mat-select>
+                        <mat-error *ngIf="hasError('company', 'required')">Please select company! </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                        <mat-label>Select Client </mat-label>
+                        <mat-select formControlName="client" required>
+                            <mat-option selected="" disabled="" value="">
+                                Please select client
+                            </mat-option>
+                            <mat-option *ngFor="let data of clientData" value="{{data.id}}">
+                                {{data.client_name}}
+                            </mat-option>
+
+                        </mat-select>
+                        <mat-error *ngIf="hasError('client', 'required')">Please select client! </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="first_name" placeholder="First Name" required>
+                        <mat-error *ngIf="hasError('first_name', 'required')">First Name is required!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="last_name" placeholder="Last Name" required>
+                        <mat-error *ngIf="hasError('last_name', 'required')">Last Name is required!</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <!-- <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" placeholder="Email" required>
+                        <mat-error *ngIf="hasError('email', 'required')">Email is required!</mat-error>
+                    </mat-form-field> -->
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email">
+                            <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                            <mat-error *ngIf="adduserForm.get('email').hasError('required')">
+                                Email is required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="!adduserForm.get('email').hasError('required') &&
+                                        adduserForm.get('email').hasError('pattern')">
+                                Please enter a valid email address
+                            </mat-error>
+                        </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="phone" minlength=10 maxlength=15 placeholder="Phone number" required>
+                        <mat-error *ngIf="hasError('phone', 'required')">Phone number is required!</mat-error>
+                    </mat-form-field>
+
+
+                </div>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="100" fxLayoutGap="10px" style="margin-top: 10px;">
+                        <mat-label>Default Vertical</mat-label>
+                        <mat-select formControlName="clientvertical" required>
+                            <mat-option value="" selected="">Select Default Vertical</mat-option>
+                            <mat-option *ngFor="let data of vertical" value="{{data.id}}">{{data.name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="hasError('clientvertical', 'required')">Default Vertical is required!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <h4 style="margin-top: -5px;">Disable Verticals *</h4>
+                <h4 style="margin-top: -10px;"> Note: Please select the verticals you want to disable for this user. By
+                    default, all client verticals will be displayed to the user.</h4>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" fxFlex="100" fxLayoutGap="10px">
+                        <!-- <mat-label>Default Vertical</mat-label> -->
+                        <mat-select multiple formControlName="clientvertical1">
+                            <mat-option value="" selected="">Select a Vertical</mat-option>
+                            <mat-option *ngFor="let data of vertical" value="{{data.id}}">{{data.name}}</mat-option>
+                        </mat-select>
+                        <!-- <mat-error *ngIf="hasError('clientvertical', 'required')">Default Vertical is required!</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <h3 style="margin-top: -10px;">Transunion Link</h3>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                        <!-- (change)="onValChange(group.value)" formControlName="transunion_group"-->
+                        <mat-radio-button [checked]="season === 'Free Consumer Disclosure'" class="example-radio-button"
+                           (change)="radioChange($event.value)"  style="margin-right:10px" *ngFor="let season of TransunionArray"
+                            [value]="season">
+                            {{season}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <mat-form-field appearance="outline" fxFlex="100"fxLayoutGap="10px" >
+                        <input matInput formControlName="free_link" placeholder="free_link" >
+                    </mat-form-field>
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <button mat-raised-button type="submit" class="mat-accent button">Submit</button>
+                    <button mat-raised-button mat-button mat-dialog-close
+                        class="button cancel mat-accent">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

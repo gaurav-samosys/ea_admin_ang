@@ -176,4 +176,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
     // openDialog(){
         // this.dialog.open(DialogElementsExampleDialog);
     // }
+    toggleSidebarFolded(): void {
+        console.log("close===========")
+        this._fuseSidebarService.getSidebar('navbar').toggleFold();
+    }
 }

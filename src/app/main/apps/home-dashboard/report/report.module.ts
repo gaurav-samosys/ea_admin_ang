@@ -10,6 +10,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatButtonModule } from '@angular/material/button';
 import { ReportServiceService } from './report-service.service';
 import {ReactiveFormsModule} from '@angular/forms'
+import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 // import {ReportServiceService} from 'app/main/apps/home-dashboard/report/report-service-service'
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [ReportComponent],
-  imports: [MatSelectModule,ReactiveFormsModule, NgxDaterangepickerMd.forRoot(), MatFormFieldModule, MatInputModule, FlexLayoutModule,
+  imports: [MatSelectModule,ReactiveFormsModule,DateRangePickerModule, NgxDaterangepickerMd.forRoot(), MatFormFieldModule, MatInputModule, FlexLayoutModule,
     CommonModule, RouterModule.forChild(routes), MatButtonModule
   ],
   providers: [

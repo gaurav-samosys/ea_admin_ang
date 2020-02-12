@@ -1,18 +1,125 @@
  import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import * as Highcharts from 'highcharts';
 
 // scatter,column,line
 @Injectable()
 export class GraphService 
 {
 // total users
+myMethod$: Observable<any>;
+private myMethodSubject = new Subject<any>();
+
+constructor() {
+    this.myMethod$ = this.myMethodSubject.asObservable();
+}
+dataGraph0;dataGraph1;dataGraph2;pyear;year;Average;name0;name1;name2;
+myMethod(data) {
+    console.log(data); // I have data! Let's return it so subscribers can use it!
+    // we can do stuff with data if we want
+    this.myMethodSubject.next(data);
+
+for (let index = 0; index < data.length; index++) {
+    const element = data[index];
+    console.log(element)
+}
+
+
+
+
+
+    this.name0 =data[0].name;
+    this.name1 = data[1].name;
+    this.name2 =data[2].name;
+    console.log(this.name0,this.name1,this.name2,
+      )
+    console.log(data[0]['data'])
+    console.log(data[1]['data'])
+    console.log(data[2]['data']),
+  this.dataGraph0=data[0]['data']
+  this.dataGraph1=data[1]['data']
+  this.dataGraph2=data[2]['data']
+}
+
+
+
+
+comparision:any={
+    chart: {height:300, zoomType: 'x',type: 'column',resetZoomButton: {position: {x: 0,y: -30}}},
+
+    credits: {
+        enabled: false
+      },
+                        navigation: {buttonOptions: {enabled: false}},
+
+                        title: {text: ''},
+                        xAxis: {
+                            categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                            min: 0,
+                            scrollbar: {
+                                enabled: false,
+                                barBackgroundColor: 'gray',
+                                barBorderRadius: 7,
+                                barBorderWidth: 0,
+                                buttonBackgroundColor: 'gray',
+                                buttonBorderWidth: 0,
+                                buttonBorderRadius: 7,
+                                trackBackgroundColor: 'none',
+                                trackBorderWidth: 1,
+                                trackBorderRadius: 8,
+                                trackBorderColor: '#CCC'
+                            },
+                            tickLength: 0
+                        }, 
+                        yAxis: {min: 0,title: {text: ''},},
+                        legend: {
+                            enabled: false
+                        },
+                        tooltip: {useHTML: true, shared: true},
+                // tooltip: {
+                //     pointFormat: '<span style="display: inline-block; width: 90px;"><span style="color:{series.color};float: left;">{series.name}</span>: <span style="float: left;"><b>{point.y}</b></span><br/></span>',
+                //     shared: true
+                // },
+              plotOptions: {column: ''},              
+                series:[
+                    {
+                        name:''
+                    //     data: [
+                    //       [1373228000, 40],
+                    //       [1373928000, 32],
+                    //       [1374228000, 30]
+                    //     ],
+                    //     color: 'black',
+                    //     tooltip: {valueSuffix: '°C'}
+                      },
+                ]   
+                // series: [{
+                //       name: this.name0 ,
+                //       data:[this.dataGraph0],
+                //       color: 'black',
+                //     },{
+                //       name: this.name1,
+                //       data:[this.dataGraph1], color: 'black',
+                        
+                //     },{
+                //         name:this.name2,
+                //         data:[this.dataGraph2], color: 'black',
+
+                //     }]
+}
+
+
+
+
+
+
 
  public users: any =  {
     chart: {
        height:300,
-       width:470,
+    //    width:470,
         type: 'column',zoomType: 'xy', panning: true, panKey: 'shift',
                         resetZoomButton: {
                             position: {
@@ -67,7 +174,8 @@ export class GraphService
 
 // total downloads
  public downloads: any = {
-    chart: {showInLegend: false,zoomType: 'x',height:300,width:460,
+    chart: {showInLegend: false,zoomType: 'x',height:300,
+    // width:460,
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
@@ -136,7 +244,8 @@ credits: {enabled: false},
 
  public video: any =  {
     chart: {
-        type: 'column',zoomType: 'x',height:300,width:470,
+        type: 'column',zoomType: 'x',height:300,
+        // width:470,
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
@@ -184,6 +293,7 @@ credits: {enabled: false},
         }
     }]
 }
+
 
 
 public videochartGraph: any =  {
@@ -244,7 +354,8 @@ public videochartGraph: any =  {
 
 certificate:any={
     chart: {
-        type: 'column',zoomType: 'x',height:300,width:470,
+        type: 'column',zoomType: 'x',height:300,
+        // width:470,
                         resetZoomButton: {
                             position: {
                                     // align: 'right', // by default
@@ -305,7 +416,8 @@ certificate:any={
 
 completion:any={
     chart: {
-        type: 'column',height:300,width:470,
+        type: 'column',height:300,
+        // width:470,
         zoomType: 'x',
 
                         resetZoomButton: {
@@ -381,7 +493,8 @@ completion:any={
 
 access_code:any={
     chart: {
-        type: 'column',height:300,width:460,
+        type: 'column',height:300,
+        // width:460,
         zoomType: 'x',
                         resetZoomButton: {
                             position: {
@@ -440,56 +553,25 @@ access_code:any={
 
 
 
-comparision:any={
-    chart: {height:300, zoomType: 'x',type: 'column',resetZoomButton: {position: {x: 0,y: -30}}},
 
-    credits: {
-        enabled: false
-      },
-                        navigation: {buttonOptions: {enabled: false}},
 
-                        title: {text: ''},
-                        xAxis: {
-                            categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-                            min: 0,
-                            scrollbar: {
-                                enabled: false,
-                                barBackgroundColor: 'gray',
-                                barBorderRadius: 7,
-                                barBorderWidth: 0,
-                                buttonBackgroundColor: 'gray',
-                                buttonBorderWidth: 0,
-                                buttonBorderRadius: 7,
-                                trackBackgroundColor: 'none',
-                                trackBorderWidth: 1,
-                                trackBorderRadius: 8,
-                                trackBorderColor: '#CCC'
-                            },
-                            tickLength: 0
-                        }, 
-                        yAxis: {min: 0,title: {text: ''},},
-                        legend: {
-                            enabled: false
-                        },
-                        tooltip: {useHTML: true, shared: true},
-                // tooltip: {
-                //     pointFormat: '<span style="display: inline-block; width: 90px;"><span style="color:{series.color};float: left;">{series.name}</span>: <span style="float: left;"><b>{point.y}</b></span><br/></span>',
-                //     shared: true
-                // },
-              plotOptions: {column: ''},              
-                series:[
-                    {
-                        name: 'Average',
-                        data: [
-                          [1373228000, 40],
-                          [1373928000, 32],
-                          [1374228000, 30]
-                        ],
-                        color: 'black',
-                        tooltip: {valueSuffix: '°C'}
-                      },
-                ]   
-}
+createChart(el, cfg) {
+    Highcharts.chart(el, cfg);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

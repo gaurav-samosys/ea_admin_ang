@@ -122,6 +122,16 @@ export class LoginComponent implements OnInit {
 
                 }
 
+            })
+    }
+
+
+
+    toggleShow() {
+        this.show = !this.show;
+    }
+}
+
                 // this.common=res;
                 // this.login_data=this.common.data
                 // console.log(this.common)
@@ -133,12 +143,3 @@ export class LoginComponent implements OnInit {
 
                 //   this.myRoute.navigate(["apps/home-dashboard/version3"]);
                 // }
-            })
-    }
-
-
-
-    toggleShow() {
-        this.show = !this.show;
-    }
-}

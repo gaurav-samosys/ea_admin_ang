@@ -4,7 +4,7 @@
 		<div class="mat__box mt-20 mr-28">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+					<div class="p-4 selectable_boxes openClose" fxLayoutAlign="space-between start" fxFlex="20">
 						<!-- <mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
 								<input matInput placeholder="All Industries">
 								<span (click)="show_li('industries')" (clickElsewhere)="hide('industries')" class="drop-down-arrow-custom">
@@ -22,7 +22,7 @@
 						<!-- END OF MAT-FORM-FIELD -->
 					</div>
 					<!-- END OF P-4 SELECTABLE_BOXES -->
-					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+					<div class="p-4 selectable_boxes openClose" fxLayoutAlign="space-between start" fxFlex="20">
 						<!-- 	<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
 								<input matInput placeholder="All Companies">
 								<span (click)="show_li('companies')" (clickElsewhere)="hide('companies')" class="drop-down-arrow-custom">
@@ -41,7 +41,7 @@
 						</ng-multiselect-dropdown>
 					</div>
 					<!-- END OF P-4 SELECTABLE_BOXES -->
-					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+					<div class="p-4 selectable_boxes openClose" fxLayoutAlign="space-between start" fxFlex="20">
 						<!-- <mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
 								<input matInput placeholder="All Clients">
 									<span (click)="show_li('clients')" (clickElsewhere)="hide('clients')" class="drop-down-arrow-custom">
@@ -59,7 +59,7 @@
 						<!-- END OF MAT-FORM-FIELD -->
 					</div>
 					<!-- END OF P-4 SELECTABLE_BOXES -->
-					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+					<div class="p-4 selectable_boxes openClose" fxLayoutAlign="space-between start" fxFlex="20">
 						<!-- 	<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
 								<input matInput placeholder="All Verticals"><span (click)="show_li('vertical')" (clickElsewhere)="hide('vertical')" class="drop-down-arrow-custom"><mat-icon style="cursor: pointer;">arrow_drop_down</mat-icon></span>
 							
@@ -75,7 +75,7 @@
 						<!-- END OF MAT-FORM-FIELD -->
 					</div>
 					<!-- END OF P-4 SELECTABLE_BOXES -->
-					<div class="p-4 selectable_boxes" fxLayoutAlign="space-between start" fxFlex="20">
+					<div class="p-4 selectable_boxes openClose" fxLayoutAlign="space-between start" fxFlex="20">
 						<!-- <mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
 								<input matInput placeholder="All Locations"><span (click)="show_li('location')" (clickElsewhere)="hide('location')" class="drop-down-arrow-custom"><mat-icon style="cursor: pointer;">arrow_drop_down</mat-icon></span>
 								<mat-list class="displayNone" id="show_location">
@@ -124,34 +124,34 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="tabbing_container">
 						<ul class="tabs dash_main_tabs">
-							<li class="{{industry_disable == 1 ? 'disabled' : ''}}" (click)=getData(1)>
+							<li  [ngClass]="{'active': tab==='tab1'}" class="{{industry_disable == 1 ? 'disabled' : ''}}" (click)=getData(1)>
 								<p>Industries</p>
 								<span class="accent">{{industry_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li class="{{company_disable == 1 ? 'disabled' : ''}}" (click)=getData(2)>
+							<li  [ngClass]="{'active': tab==='tab2'}" class="{{company_disable == 1 ? 'disabled' : ''}}" (click)=getData(2)>
 								<p>Companies</p>
 								<span class="accent">{{company_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li class="tab-link" (click)=getData(3)>
+							<li  [ngClass]="{'active': tab==='tab3'}" class="tab-link" (click)=getData(3)>
 								<p>Clients</p>
 								<span class="accent">{{client_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li class="tab-link" (click)=getData(4)>
+							<li [ngClass]="{'active': tab==='tab4'}"  class="tab-link" (click)=getData(4)>
 								<p>Users</p>
 								<span class="accent">{{user_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li class="tab-link" (click)=getData(5)>
+							<li  [ngClass]="{'active': tab==='tab5'}" class="tab-link" (click)=getData(5)>
 								<p>Verticals</p>
 								<span class="accent">{{vertical_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li class="tab-link" (click)=getData(6)>
+							<li  [ngClass]="{'active': tab==='tab6'}" class="tab-link" (click)=getData(6)>
 								<p>Tools</p>
-								<span class="accent">{{Tools}}</span>
+								<span class="accent">{{Tools?Tools:'0'}}</span>
 							</li>
 							<!-- END OF LI -->
 						</ul>
@@ -1160,7 +1160,7 @@
 			<div *ngIf="table == 6" class="table__Companies">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Verticals
+							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value"> Tools Users 
 									{{tools}}</span></p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
@@ -1210,9 +1210,9 @@
 													</i>
 												</span>
 											</mat-header-cell>
-											<mat-cell style="    padding-right: 10px;" class="style" *matCellDef="let element"
-												(click)="openDialog()">
-												<div [innerHtml]="element[0]"></div>
+											<mat-cell style="padding-right: 10px;" class="style" *matCellDef="let element"
+												>
+												<!-- {{element.name}} -->
 											</mat-cell>
 										</ng-container>
 										<!-- Weight Column -->
@@ -1229,7 +1229,8 @@
 													</i>
 												</span>
 											</mat-header-cell>
-											<mat-cell *matCellDef="let element" style="padding-right: 125px;">{{element.email}}
+											<mat-cell *matCellDef="let element" style="padding-right: 125px;">
+												{{element.email}}
 												<!-- <span [innerHtml]="element[1]"></span> -->
 											</mat-cell>
 										</ng-container>
@@ -1278,7 +1279,7 @@
 													</i>
 												</span>
 											</mat-header-cell>
-											<mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
+											<mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
 										</ng-container>
 										<ng-container matColumnDef="dept_free_date">
 											<mat-header-cell style="padding-right:  15px;" *matHeaderCellDef>dept_free_date
@@ -1354,36 +1355,40 @@
 
 
 
-		<div class="row mt-20 mr-28" style="display: flex; width: 98% !important;">
+		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
 
 			<!-- total_users -->
 			<!-- <div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;width: 42% !important;"> -->
 				<div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="box-sizing: border-box;">
-				<div class="mat__box graph_dive">
+				<div class="mat__box graph_dive" style="width:595px">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							<p>Total Users <span class="color_value">{{usergraph_total}}</span></p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-							<mat-form-field appearance="outline">
+							<!-- <mat-form-field appearance="outline">
 
-								<!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
+								<!-- [alwaysShowCalendars]="true" [showCancel]="true"
 								<input matInput readonly type="text" ngxDaterangepickerMd
 									placeholder="Select Date range" [(ngModel)]="usergraph"
 									class="cursor-pointer input_date" [opens]="'left'"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									startKey="start" endKey="end" [ranges]="ranges" [showCustomRangeLabel]="true"
 									(datesUpdated)="datesUpdated($event,'usergraph')">
+								</mat-form-field> -->
+								<!-- <ejs-daterangepicker [firstDayOfWeek]='startDay'  placeholder='Select a range'></ejs-daterangepicker>` -->
 
-								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="usergraph"
-										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'usergraph')"
-										readonly=""> -->
-							</mat-form-field>
+									<ejs-daterangepicker placeholder='Select a range' (datesUpdated)="datesUpdated($event,'usergraph')">
+										<e-presets style="color: black;">
+											<e-preset label="This Week"  style="color: black;" [start]='weekStart' [end]='weekEnd'>   This Week</e-preset>  
+											<e-preset label="This Month" style="color: black;" [start]='monthStart' [end]='monthEnd'>This Month</e-preset> 
+											<e-preset label="Last Month" style="color: black;" [start]='lastStart' [end]='lastEnd'>  Last Month</e-preset> 
+											<e-preset label="Last Year"  style="color: black;" [start]='yearStart' [end]='yearEnd'>   Last Year</e-preset>  
+										</e-presets>
+									  </ejs-daterangepicker>
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
@@ -1406,7 +1411,7 @@
 			<!-- total downloads -->
 			<div class="total_download col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="box-sizing: border-box;margin-left: 20px">
-				<div class="mat__box graph_dive">
+				<div class="mat__box graph_dive" style="width:595px">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							<p>Total Downloads <span class="color_value">{{totaldownloadgraph}}</span></p>
@@ -1476,11 +1481,11 @@
 
 
 		<!-- total video -->
-		<div class="row mt-20 mr-28" style="display: flex; width: 98% !important;">
+		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
 
 			<div class="total_video col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="box-sizing: border-box;">
-				<div class="mat__box graph_dive">
+				<div class="mat__box graph_dive" style="width:595px">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							<p>Total Video Views <span class="color_value">{{totalvideograph}}</span></p>
@@ -1523,7 +1528,7 @@
 			<!-- Certificates claimed -->
 			<div class="total_certificates col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="box-sizing: border-box;margin-left: 20px;">
-				<div class="mat__box graph_dive">
+				<div class="mat__box graph_dive" style="width:595px">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							<p>Certificates Claimed <span
@@ -1580,10 +1585,10 @@
 
 
 		<!-- course status -->
-		<div class="row mt-20 mr-28" style="display: flex; width: 98% !important;">
+		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
 			<div class="total_course col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="box-sizing: border-box;">
-				<div class="mat__box graph_dive">
+				<div class="mat__box graph_dive" style="width:595px">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							<p>Course Status <span
@@ -1633,7 +1638,7 @@
 			<!-- Access Code -->
 			<div class="total_access_code col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="box-sizing: border-box;margin-left: 20px">
-				<div class="mat__box graph_dive">
+				<div class="mat__box graph_dive" style="width:595px">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							<p>Access Codes <span class="color_value">{{unused}}/{{used}}</span></p>
@@ -1674,7 +1679,7 @@
 
 
 
-		<!-- year of year -->
+		<!-- year of year old-->
 		<div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
 			<div class="mat__box graph_dive">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1724,9 +1729,9 @@
 					</div>
 					<!-- END OF ROW -->
 				</div>
-				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 comparison_graph-->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comparison_graph">
-					<div class="graph_section" id="comparison"></div>
+					<div class="graph_section" id="comparision"></div>
 
 					<ul class="course_status_ul" *ngIf="user_status == 'false' ">
 						<li><span class="orange_status"></span> {{full_2019}}</li>
@@ -1745,6 +1750,77 @@
 			</div>
 		</div>
 		<!-- END OF ROW MT-20 MR-28 -->
+
+
+
+
+
+
+
+
+
+
+<!-- year of year new -->
+<!-- <div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
+	<div class="mat__box graph_dive">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="row" fxLayoutAlign="space-between">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+					<p>Year Over Year Comparison<br>
+						<span class="color_value">{{comparisiongraph_total}}</span></p>
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex;">
+
+					<select (change)="comparision_type($event.target.value)" class="mt_cls total_user_dd">
+						<option selected="" value="total_users">Total Users</option>
+						<option value="total_companies">Total Companies</option>
+						<option value="total_clients">Total Clients</option>
+						<option value="total_video_views">Total Video Views</option>
+						<option value="total_downloads">Total Downloads</option>
+						<option value="total_course_completions">Total Course Completions</option>
+						<option value="total_certificates">Total Certificates</option>
+					</select>
+					
+					<mat-form-field appearance="outline">
+						<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+							[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
+							[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
+							(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly=""
+							class="input_date cursor-pointer">
+					</mat-form-field>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comparison_graph">
+			<div [chart]="chart"></div>
+
+
+
+		</div>
+	</div>
+</div> -->
+<!-- END OF ROW MT-20 MR-28 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1856,7 +1932,7 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_graph">
 					<div class="graph_section" id="surveychartGraph"></div>
 					<ul class="course_status_ul">
-						<li><span class="black_status" style="color: black;"> surveys</span></li>
+						<li><span class="black_status" style="color: rgb(149,206,255);"> surveys</span></li>
 						<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li> -->
 					</ul>
 				</div>

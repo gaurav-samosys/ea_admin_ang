@@ -10,8 +10,15 @@
 @import "~font-awesome/css/font-awesome.css";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 /* ////////////////////////////////////////////////////////////// */
-
-
+// date range
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-calendars/styles/material.css';
 // text.highcharts-credits { display: none; }
 // .mat-form-field-appearance-outline .mat-form-field-outline {
 //     display: flex;
@@ -73,15 +80,20 @@
     top: 10px;
     width: 0;
     height: 0;
-    border-top: 10px solid #3195c2 !important;
+    border-top: 10px solid #139edf !important;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
+
+html body .select2-search__field .multiselect-dropdown:hover .dropdown-btn .dropdown-down{border-top: 10px solid #fff !important;}
+
 .select2-search__field .multiselect-dropdown .dropdown-btn .dropdown-down:hover
 {border-top: 10px solid #fff !important;}
 
 .course_status_ul
  { text-align: right; padding-top: 8px; }
+
+body .ng-multiselect-dropdown .multiselect-dropdown:hover{background-color:#039be5 !important; color:#fff !important;}
 
 .course_status_ul li
 {color: #1976a1 !important; margin-right: 12px;}
@@ -93,14 +105,12 @@
 .course_status_ul li:nth-child(4)
 {color: rgb(255, 188, 117) !important; margin-right: 12px;}
 
-    
+
+.multiselect-dropdown .dropdown-btn .selected-item{font-size: 12px !important;}
+body .select2-search__field:hover .dropdown-down{border-top: 10px solid #ffffff !important;}
+.dropdown-btn .dropdown-down{border-top: 10px solid #039be5;}
 
 
-
-
-// .blue_status_icon_pending{color:  #1976a1 !important; margin-right: 12px;}
-// .black_status_icon_download{color: rgb(92, 92, 97) !important; margin-right: 12px;}
-// body .mat__box .color_chang .material-icons{color: rgb(92, 92, 97) !important; margin-right: 12px;}
 
 .text.highcharts-credits{display:none !important;}
 .mat-form-field-appearance-outline .mat-form-field-outline {
@@ -130,9 +140,6 @@
   i, .icomoon-liga, .material-icons {
     font-family: 'material-outline-icons' !important;
   }
-
-//   td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
-//     padding: 28px;
-//     border-bottom-width: 1px;
-//     border-bottom-style: solid;
-// }
+  .hover-button-loginpage:hover{background-color:#0677ad !important;}
+  body fuse-sidebar.folded{position: fixed !important;}
+  body fuse-sidebar.locked-open{position: fixed !important;}

@@ -59,7 +59,8 @@
                 </div>
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right" style="margin-top: -84px;">
-                  <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button" style="  background-color: #7da843 !important;
+                  <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button" 
+                  style="background-color: #039be5 !important;
                     color: #ffffff !important;"><span> Show/Hide Column</span></button>
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item>
@@ -211,7 +212,7 @@
                       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                       <mat-cell *matCellDef="let element">
                         <button mat-raised-button [matMenuTriggerFor]="belowMenu"
-                          style="background-color: #1D4A69 !important; color: #ffffff !important;">Actions</button>
+                          style="background-color: #039be5 !important; color: #ffffff !important;">Actions</button>
 
                         <mat-menu #belowMenu="matMenu" yPosition="below">
                           <button mat-menu-item matTooltip="Edit"

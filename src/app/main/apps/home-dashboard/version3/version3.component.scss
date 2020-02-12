@@ -3,7 +3,7 @@
   width: 200px;
   border: 1px solid black;
 }
-
+ 
 // html,
 // body {
 //     display: block;
@@ -203,6 +203,8 @@ li.average_label:after
   .green_status {color: rgb(144, 237, 125);}
   .orange_status{color:rgb(255, 188, 117);}
 
+
+
 // .sort_column_active {
 //   font-weight: 600;
 //   font-size: 14px !important;
@@ -238,11 +240,12 @@ li.average_label:after
 }
 .tabbing_container .tabs li p {
   margin: 0;
+  color: #323759;
   display: inline-block;
   line-height: 36px;
   vertical-align: middle;
   /* width: 70px; */
-  color: rgba(0, 0, 0, 0.87);
+  // color: rgba(0, 0, 0, 0.87);
 }
 .tabbing_container .tabs li span {
     margin-left: 5px;
@@ -303,11 +306,13 @@ li.average_label:after
 // .graph_section{width: 100%;}
 .graph_section .highcharts-container{width:100%;height:300px;}
 
-.reload { background-color: #3195c2; border-radius: 10px; box-shadow: 0 0 10px rgba(32, 176, 242, 0.40); font-size: 18px; padding: 12px; color: #fff; display: inline-block; vertical-align: middle; width: 250px; height: 49px; text-align: center; margin-top: 5px; }
-.reload .mat-icon{margin-left:10px;margin-top:8px;}
+.reload { background-color: #3195c2; border-radius: 10px; box-shadow: 0 0 10px rgba(32, 176, 242, 0.40); font-size: 18px; padding: 12px; color: #fff; display: inline-block; vertical-align: middle; width: 242px; height: 41px; text-align: center; margin-top: 5px; }
+.reload .mat-icon{margin-left:9px;margin-top:6px;}
 .industries_datatable_search {padding:2px 0px;}
-.graph_dive { background-color: #fff;border: 1px solid #efefef; border-radius: 15px;
-  box-shadow: 0 0 6px rgba(32, 176, 242, 0.25);margin-top: 30px; padding: 20px 15px; height: 435px;}
+.graph_dive { background-color: #fff;
+  border: 1px solid #efefef; border-radius: 15px;
+  box-shadow: 0 0 6px rgba(32, 176, 242, 0.25);margin-top: 30px;
+   padding: 20px 15px; height: 435px;}
 .graph_dive .total-us p{display:inline-block;
   font-size:17px;color:#323759;margin:0;margin-right:10px;line-height:24px;
   margin-bottom:5px;font-weight:600;}
@@ -344,3 +349,70 @@ li.average_label:after
 //   border-bottom-style: solid;
 // }
 
+.tabbing_container .tabs li.active{
+  position: relative;
+}
+
+.e-list-parent.e-ul {display: block;}
+.e-list-parent.e-ul .e-list-item{color: #000;}
+.e-calendar .e-content td.e-selected span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected span.e-day{background-color: #039be5 !important;}
+.e-calendar td.e-selected span.e-day{background-color: #039be5 !important;}
+.e-list-parent.e-ul .e-list-item.e-active{color: #039be5;}
+.tabbing_container .tabs li.active::before {
+  content: "";
+  width: 90px;
+  height: 4px;
+  position: absolute;
+  bottom: 0;
+  background-color: #2f96c3;
+  display: inline-block;
+  left: 0;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: all ease 0.3s;
+}
+
+#container {
+  visibility: hidden;
+}
+
+#loader {
+color: #008cff;
+height: 40px;
+width: 30%;
+position: absolute;
+top: 45%;
+left: 45%;
+}
+
+#element {
+  display: block;
+  height: 350px;
+}
+
+#wrapper {
+  width: 250px;
+  margin: 0 auto;
+}
+.customCSS .e-calendar .e-content .e-selected span.e-day, /* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-selected span.e-day:hover, /* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-today.e-selected:hover span.e-day, /* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-today.e-selected span.e-day, /* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-selected:hover span.e-day /* csslint allow: adjoining-classes*/
+{
+background-color: #35b86b;
+}
+.customCSS .e-calendar .e-content .e-today span.e-day, /* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-focused-date.e-today span.e-day { /* csslint allow: adjoining-classes*/
+border: 1px solid #35b86b;
+color: #ff3337;
+
+}
+.customCSS .e-calendar .e-content .e-weekend span { /* csslint allow: adjoining-classes*/
+color: #ff3337;
+}
+.customCSS.e-date-range-wrapper .e-input-group-icon.e-icons.e-active, /* csslint allow: adjoining-classes*/
+.customCSS .e-btn.e-flat, /* csslint allow: adjoining-classes*/
+.customCSS .e-btn.e-flat:hover { /* csslint allow: adjoining-classes*/
+color: #35b86b;
+}

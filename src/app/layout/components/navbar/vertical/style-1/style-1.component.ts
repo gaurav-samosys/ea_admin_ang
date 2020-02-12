@@ -100,7 +100,7 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
                 if (this._fuseSidebarService.getSidebar('navbar')) {
                     this._fuseSidebarService.getSidebar('navbar').close();
                     //navbar close
-                    // this._fuseSidebarService.getSidebar('navbar').toggleFold();
+                    this._fuseSidebarService.getSidebar('navbar').toggleFold();
 
                 }
             }

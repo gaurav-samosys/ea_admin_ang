@@ -10,8 +10,8 @@ import { ClientDetailService } from './client-detail.service'
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AdduserComponent } from 'app/main/apps/user-mangement/user/adduser/adduser.component';
-import { UserEditComponent } from 'app/main/apps/user-mangement/user/user-edit/user-edit.component';
+import { AddUserClientComponent } from '../add-user-client/add-user-client.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @Component({
   selector: 'app-client-detail',
@@ -96,23 +96,29 @@ export class ClientDetailComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
 
-  constructor(private _Activatedroute: ActivatedRoute, private datePipe: DatePipe, private http: HttpClient, public dialog: MatDialog, public client_service: ClientDetailService) {
+  constructor(private _Activatedroute: ActivatedRoute, 
+    private datePipe: DatePipe,
+     private http: HttpClient, 
+     public dialog: MatDialog,
+      public client_service: ClientDetailService) {
 
   }
   clientName
   ngOnInit() {
     this.id = this._Activatedroute.snapshot.paramMap.get("id");
-    this._Activatedroute.queryParamMap.subscribe(params => {
-      console.log(params)
-    });
-    console.log(this.id, this.clientName)
+    this.id = window.location.href.split('apps/client-mangement')[1]
+    // console.log(this.id)
+    // console.log(this.id, this.clientName)
     this.fetchCountry();
     this.getClient();
     this.ClientVertical();
     this.getIndustries();
     this.getUserData();
   }
-
+  client_name
+  company_name
+  detail_id
+  client_Name
   getClient() {
     this.showloader=true
 
@@ -124,7 +130,16 @@ export class ClientDetailComponent implements OnInit {
       console.log(this.client_data)
       //this.setPage(1);
 
-      this.company = this.client_data[0].company_name;
+      // ======================================08/02 only apply
+      // this.client_name=this.data[0].client_name;
+      // this.company_name=this.data[0].company_name;
+      // localStorage.setItem('comp_name', this.data[0].company_name.replace(/ /g, "_"));
+      // this.detail_id = this.data[0]['id']
+      //  this.client_Name = this.data[0]['client_name'].replace(/ /g, "_");
+    //  ====================================
+
+
+      this.company = this.client_data[0].company_name?this.client_data[0].company_name:'';
       this.client = this.client_data[0].client_name;
       this.emails = this.client_data[0].email;
       this.first = this.client_data[0].first_name;
@@ -151,7 +166,7 @@ export class ClientDetailComponent implements OnInit {
 
       this.data = this.common.data;
       this.allItems = this.common.total_data;
-      console.log(this.data)
+      console.log(this.data,"get data from client============")
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
 
@@ -162,13 +177,13 @@ export class ClientDetailComponent implements OnInit {
 
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
     this.endIndex = this.startIndex < e.length ? Math.min(this.startIndex + e.pageSize, e.length) : this.startIndex;
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
       this.Search(this.value, this.name)
     }
     else {
@@ -245,7 +260,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   addUser() {
-    let dialog = this.dialog.open(AdduserComponent, {
+    let dialog = this.dialog.open(AddUserClientComponent, {
       width: '600px', height: '400px'
     });
   }
@@ -257,9 +272,12 @@ export class ClientDetailComponent implements OnInit {
     });
   }
 
+  confirmDialog(id){
+ console.log(id)
+  }
 
   onChange(value, id) {
-    console.log(value, id)
+    // console.log(value, id)
     let status;
     if (value == false) {
       status = 0;
@@ -268,7 +286,7 @@ export class ClientDetailComponent implements OnInit {
       status = 1;
     }
     this.client_service.Post(this.clientActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
     })
   }
 

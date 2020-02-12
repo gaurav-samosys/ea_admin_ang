@@ -56,10 +56,10 @@ const routes: Routes = [
     {
         path     : '**',
         component: UserComponent,
-        // resolve  : {
-        //     data: UserService
-        // }
-    }
+        resolve  : {
+            data: UserService
+        }
+    },
 ];
 
 @NgModule({
@@ -70,7 +70,7 @@ const routes: Routes = [
         UserPopupComponent,
         EditdialogComponent,
         AdduserComponent,
- /*       ModalComponent,
+ /*ModalComponent,
         UserConfirmboxComponent,
         UserEditComponent,
         EditdialogComponent,*/
@@ -172,7 +172,7 @@ const routes: Routes = [
     ],
     // UserService
     providers   : [
-        PagerService,ExcelService
+        PagerService,ExcelService,UserService
     ],
       entryComponents: [AdduserComponent,UserPopupComponent,UserConfirmboxComponent,UserEditComponent,EditdialogComponent]
 })

@@ -319,7 +319,7 @@
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
-              <button  mat-raised-button matTooltip="Download Excel File" (click)="exportData()">Export Data to Excel</button>
+              <button  mat-raised-button matTooltip="Download Excel File" (click)="exportData()" style="background-color: #039be5 !important;color: white !important;">Export Data to Excel</button>
             </div>
 
           </div>
@@ -345,7 +345,7 @@
                   <!-- {{id}} -->
                   <!-- routerLink="/apps/client-mangement/client-detail/{{client_Name}}/{{id}}" -->
                   <td class="style" mat-cell *matCellDef="let element"
-                    routerLink="/apps/dashboards/user/{{client_Name}}/{{id}}/{{detail_id}}"> {{element.client_name}} </td>
+                    routerLink="/apps/users/{{client_Name}}/{{id}}/{{detail_id}}"> {{element.client_name}} </td>
                 </ng-container>
 
                 <!-- Weight Column -->
@@ -430,7 +430,7 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef>Action</th>
                     <td *matCellDef="let element">
-                      <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn">Actions</button>
+                      <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn" style="background-color: #039be5 !important;color: white !important;">Actions</button>
 
                       <mat-menu #belowMenu="matMenu" yPosition="below">
                           <!-- /apps/client-mangement/addclient -->

@@ -115,11 +115,12 @@ public totalSize = 0;
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
-console.log(this.id)
+// console.log(this.id)
       // In a real app: dispatch action to load the details here.
    });
+   
     this.id=this._Activatedroute.snapshot.paramMap.get("id");
-    console.log(this.id)
+    // console.log(this.id)
   	this.getIndustries();
   	this.getData();
     this.ClientVertical();
@@ -147,7 +148,9 @@ console.log(this.id)
       // console.log(this.common,this.states)
     });
   }
-
+  confirmDialog(){
+    
+  }
   /**
    * get data based on company
    */
@@ -160,13 +163,15 @@ console.log(this.id)
 
      this.allItems = this.common.total_data;
      this.data=this.common.data;
-     console.log(this.data)
+     console.log(this.data,"table=============data")
      this.client_name=this.data[0].client_name;
      this.company_name=this.data[0].company_name;
-     console.log(this.company_name)
+    //  console.log(this.company_name)
+     localStorage.setItem('comp_name', this.data[0].company_name.replace(/ /g, "_"));
+    
      this.detail_id = this.data[0]['id']
       this.client_Name = this.data[0]['client_name'].replace(/ /g, "_");
-      console.log(this.client_Name,this.detail_id,"================");
+      // console.log(this.client_Name,this.detail_id,"================");
       this.first_name=this.data[0].first_name;
       this.last_name=this.data[0].last_name;
       this.emails=this.data[0].email;
@@ -178,7 +183,7 @@ console.log(this.id)
   }
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
   this.currentPage = e.pageIndex;
   this.pageSize = e.pageSize;
     this.startIndex =(this.currentPage * e.pageSize)+1; 
@@ -234,7 +239,7 @@ let part;
            on selction change status 
      ===========================================================*/
      onChange(value, id) {
-      console.log(value, id)
+      // console.log(value, id)
       let status;
       if (value == false) {
         status = 0;
@@ -246,7 +251,7 @@ let part;
   
       }
       this.companyService.Post(this.companyActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-        console.log(res)
+        // console.log(res)
       })
     }
  /**===========================================================

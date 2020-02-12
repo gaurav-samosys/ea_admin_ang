@@ -143,13 +143,29 @@ export class ClientsComponent implements OnInit {
       this.showloader = false;
 
       this.response = res
-      // console.log(this.response)
+      console.log(this.response)
       this.data = this.response.data;
-      this.clientName = this.data[0]['client_name']
-      this.id = this.data[0]['id']
+
+    
       this.client_Name = this.data[0]['client_name'].replace(/ /g, "_");
-      console.log(this.client_Name);
-      // console.log(this.data[0]['client_name'])
+      console.log( this.id,this.client_Name);
+    
+
+
+
+for(let i=0; i< this.data.length ; i++){
+  this.client_Name=this.data[i]['client_name']
+  this.id=this.data[i]['id']
+
+  console.log(this.client_Name,this.id)
+}
+
+
+
+
+
+
+
       this.dataSource = this.data;
       this.allItems = this.response.total_data;
       this.dataSource = new MatTableDataSource(this.data);

@@ -62,6 +62,9 @@ clientData:any;
       public hasError = (controlName: string, errorName: string) =>{
     return this.form.controls[controlName].hasError(errorName);
   }
+  onClose() {
+    this.dialogRef.close();
+  }
 
     updateForm(){
     	if(this.form.invalid){

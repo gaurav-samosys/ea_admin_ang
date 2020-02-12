@@ -76,7 +76,8 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes),
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot({timeOut: 1000, positionClass: 'toast-top-right', preventDuplicates: true}),
+        // imports: [ToastrModule.forRoot({timeOut: 10000, positionClass: 'toast-bottom-right', preventDuplicates: true})]
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
             delay: 0,

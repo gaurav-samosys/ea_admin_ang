@@ -36,8 +36,11 @@ res_data:any;
             client  : ['', Validators.required],
             first_name  : ['', Validators.required],
             last_name  : ['', Validators.required],
-            email     : ['', [Validators.required,Validators.email]],
-            phone   : ['', Validators.required],
+            email: ['', [Validators.required, Validators.email, Validators.pattern(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,6})$/)]],
+
+            // email     : ['', [Validators.required,Validators.email]],
+            // phone   : ['', Validators.required],
+            phone: ['',  [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
             clientvertical:'',
             clientvertical1:'',
             free_link:'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
@@ -94,6 +97,8 @@ res_data:any;
     getClient(value) {
         this.user.POST(this.getClients, { company_id: value, token: 'LIVESITE' }).subscribe(res => {
             this.common = res;
+            console.log(res)
+
             this.clientData = this.common.data
         })
 

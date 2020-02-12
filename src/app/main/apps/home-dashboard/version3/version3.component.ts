@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -18,6 +18,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { Sort } from '@angular/material/sort';
 import { MatSelect } from '@angular/material';
 declare var require: any;
+import { Chart } from 'angular-highcharts';
+
 let Boost = require('highcharts/modules/boost');
 let noData = require('highcharts/modules/no-data-to-display');
 let More = require('highcharts/highcharts-more');
@@ -75,7 +77,6 @@ export interface Dessert {
   create_date: number,
 
 }
-
 
 
 @Component({
@@ -233,11 +234,12 @@ export class Version3Component implements OnInit {
   displayedColumns2: string[] = ['name', 'industry', 'company', 'vertical', 'user', 'status', 'register'];
   displayedColumns3: string[] = ['name', 'email', 'vedio', 'cloud', 'certificate', 'progress', 'percent', 'status', 'register'];
   displayedColumns4: string[] = ['name', 'total_vedio', 'total_quiz', 'total_question', 'create_date', 'action'];
-  displayedColumns6: string[] = ['name',	'email'	,'total_dept',	'total_dept_amount'	,'status' ,'dept_free_date']
-                   
+  displayedColumns6: string[] = ['name', 'email', 'total_dept', 'total_dept_amount', 'status', 'dept_free_date']
+
   dataSource = new MatTableDataSource<any>(this.data);
   @ViewChild('matSelect', { static: true }) matSelect: MatSelect;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   sort_column_active: boolean = false;
   sort_column
   sort_order = "DESC";
@@ -252,22 +254,24 @@ export class Version3Component implements OnInit {
   industry_disable = 0;
   company_disable = 0;
   private _unsubscribeAll: Subject<any>;
-  ranges: any = {
-    'Default': [moment().subtract(1, 'year'), moment()],
-    'Today': [moment(), moment()],
-    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+  // ranges: any = {
+    
+  //   'Default': [moment().subtract(1, 'year'), moment()],
+  //   'Today': [moment(), moment()],
+  //   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+  //   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
 
-    'Current Month': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
-    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+  //   'Current Month': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
+  //   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
 
-    'Last 3 Month': [moment().subtract(2, 'month'), moment()],
-    'Last 6 Month': [moment().subtract(5, 'month'), moment()],
+  //   'Last 3 Month': [moment().subtract(2, 'month'), moment()],
+  //   'Last 6 Month': [moment().subtract(5, 'month'), moment()],
+  //   'Year To Date': [moment().subtract('month').startOf('days'), moment().subtract('days').endOf('days')],
 
-    'Year To Date': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
+  //   'Current Day': [moment().subtract('month').startOf('days'), moment().subtract('days').endOf('days')],
 
-    'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
-  }
+  //   'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+  // }
 
   ranges1: any = {
     'Default': [moment().subtract(1, 'year'), moment()],
@@ -293,10 +297,12 @@ export class Version3Component implements OnInit {
   Average: any;
 
   getToggle
-
+  @ViewChild('charts',{static:true}) public chartEl: ElementRef;
+  chart: Chart;
   constructor(public dialog: MatDialog,
     private _snackBar: MatSnackBar
-    , private _router: Router, private _fuseSidebarService: FuseSidebarService, private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
+    ,private _router: Router, private _fuseSidebarService: FuseSidebarService,
+     private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
     /*    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     
         // Assign the data to the data source for the table to render
@@ -324,29 +330,41 @@ export class Version3Component implements OnInit {
   //     }
   //   });
   // };
+  public today: Date = new Date(new Date().toDateString());
+  public weekStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 7) % 7)).toDateString());
+  public weekEnd: Date = new Date(new Date(new Date().setDate(new Date(new Date().setDate((new Date().getDate()
+      - (new Date().getDay() + 7) % 7))).getDate() + 6)).toDateString())
+      ;
+  public monthStart: Date = new Date(new Date(new Date().setDate(1)).toDateString());
+  public monthEnd: Date = this.today;
+  public lastStart: Date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - 1)).setDate(1)).toDateString());
+  public lastEnd: Date = this.today;
+  public yearStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - 365)).toDateString());
+  public yearEnd: Date = this.today;
 
 
+  ranges: any = {
+  //  this.today= new Date(new Date().toDateString());
+
+  }
   ngOnInit() {
-    // this._router.events
-    // .pipe(
-    //     filter((event) => event instanceof NavigationEnd),
-    //     takeUntil(this._unsubscribeAll)
-    // )
-    // .subscribe(() => {
-    //     if (this._fuseSidebarService.getSidebar('navbar')) {
-    //         this._fuseSidebarService.getSidebar('navbar').close();
-    //     }
-    // }
-    // );
 
 
-    // this.getToggle = this._fuseSidebarService.getSidebar('navbar');
-    // console.log("getToggle===============#############",this.getToggle)
-    //   this.matSelect.valueChange.subscribe(value => {
-    //     console.log(value);
-    // });
-    // this.dataSource.sort = this.sort;
-    // document.getElementById('vedio').style.display = "none";
+
+
+
+
+
+
+
+
+
+
+    this.tab = 'tab1';
+
+    this.AllCompanyChartFunctionInit();
+
+  
 
     var abc = document.getElementsByClassName('highcharts-credits');
     console.log(abc)
@@ -417,7 +435,10 @@ export class Version3Component implements OnInit {
     this.getSurveyListDropdown();
 
     this.getSurveyChartGraph(this.select_client, this.select_grade, this.date_range)
+
   }
+
+
 
   catName = []
   getVideoListDropdown() {
@@ -644,8 +665,6 @@ export class Version3Component implements OnInit {
     this.table = 3;
     this.industry_disable = 1;
     this.company_disable = 1;
-
-
 
     this.client_id.push(parseInt(event.id))
     /*    if(event.checked == true){
@@ -929,10 +948,6 @@ export class Version3Component implements OnInit {
         this.locationData = this.common.data.location;
         this.location = this.locationData.data;
         this.location_total = this.locationData.total;
-
-
-
-
 
 
         this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
@@ -1409,7 +1424,7 @@ export class Version3Component implements OnInit {
 
 
   getUserwithData(date_range, search_data, id_vertical, location_data, searchtype) {
-    this.showloader=true;
+    this.showloader = true;
 
     let vid;
     if (id_vertical.length > 0 || location_data.length > 0) {
@@ -1429,8 +1444,8 @@ export class Version3Component implements OnInit {
         */
 
     this.v3Service.POST(this.getUsersWithData, { clients_ids: this.clients_data.toString(), verticals: id_vertical.toString(), location: location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search_type: searchtype, search: search_data, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
-      this.showloader=false;
-    
+      this.showloader = false;
+
       this.common = res
       console.log("user data=================", this.common)
       this.date_range = '';
@@ -1509,12 +1524,12 @@ export class Version3Component implements OnInit {
 
 
   updateSortingOrderUser(sort_column, sort_order) {
-    this.showloader=true;
+    this.showloader = true;
     this.sort_column = sort_column
     this.ASC = sort_order
     this.v3Service.POST(this.getUsersWithData, { column: this.sort_column, dir: this.ASC, clients_ids: this.clients_data, verticals: this.vid, location: this.location_data, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
-    this.showloader=false;
-     
+      this.showloader = false;
+
       this.common = res
       this.dataSource = this.common.data
     });
@@ -1524,9 +1539,9 @@ export class Version3Component implements OnInit {
 
 
   getVerticalwithData(date_range, search_data) {
-    this.showloader=true
+    this.showloader = true
     this.v3Service.POST(this.getVerticalsWithData, { start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data }).subscribe(res => {
-    this.showloader=false
+      this.showloader = false
       this.common = res
       //this.date_range='';
       this.data = this.common.data
@@ -1584,12 +1599,12 @@ export class Version3Component implements OnInit {
 
 
   updateSortingOrderVertical(sort_column, sort_order) {
-    this.showloader=true
+    this.showloader = true
     this.sort_column = sort_column
     this.ASC = sort_order
     this.v3Service.POST(this.getVerticalsWithData, { column: this.sort_column, dir: this.ASC, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
-    this.showloader=false
-     
+      this.showloader = false
+
       this.common = res
       this.dataSource = this.common.data
     });
@@ -1751,6 +1766,16 @@ export class Version3Component implements OnInit {
     })
   }
 
+
+
+  dataGraph;
+  name0 :string;name1:string;name2:string
+  names:any=[]
+  data0;data1;data2;
+  names0=[]
+  names1=[]
+  names2=[]
+
   getComparisionGraph(date_range, client_id, vertical_id, location_data, company_id, data_selected) {
     var company_ids = [];
     if (this.industry_id.length == 0 && this.selected == 'industries_selected') {
@@ -1812,13 +1837,11 @@ export class Version3Component implements OnInit {
       this.pyear = this.comparision_data[0].name;
       this.year = this.comparision_data[1].name;
       this.Average = this.comparision_data[2].name;
-
-      // this.pyear = this.comparision_data.name;
-      // this.year =  this.comparision_data.name;
-
       this.vertical_id = [];
       this.clients_id = [];
 
+      // this.pyear = this.comparision_data.name;
+      // this.year =  this.comparision_data.name;
       //this.graph.comparision.title.text= this.graph.access_code.comparision.text + " " +  this.common.total_used+"/"+this.common.total_unused
 
       /*         this.dataSelect =2;
@@ -1830,14 +1853,218 @@ export class Version3Component implements OnInit {
       this.dataSelect = 1;
       this.graph.comparision.plotOptions.column = this.common.dataStackTye
       this.comparisiongraph_total = this.common.total_users;
-
       this.graph.comparision.series = this.common.data;
+      console.log(this.common.data,this.common.dataStackTye)
 
-      Highcharts.chart('comparison', this.graph.comparision);
 
+
+      this.name0 =this.common.data[0].name;
+      this.name1 =this.common.data[1].name;
+      this.name2 =this.common.data[2].name;
+      console.log(this.name0,this.name1,this.name2,
+        )
+
+
+        this.data0 =this.common.data[0].data;
+      this.data1 =this.common.data[1].data;
+      this.data2 =this.common.data[2].data;
+      console.log(this.data0,this.data1,this.data2)
+        
+
+        this.names0.push(this.name0)
+        this.names1.push(this.name1)
+        this.names2.push(this.name2)
+
+        console.log(this.names0,this.names1,this.names2)
+
+      this.graph.comparision.series['name']=this.common.data[0].name0
+      this.graph.comparision.series['name']=this.common.data[1].name1
+      this.graph.comparision.series['name']=this.common.data[2].name2
+      // this.graph.comparision = this.common.data;
+      // this.graph.myMethod( this.common.data);
+   
+      Highcharts.chart('comparision', this.graph.comparision);
+   
+      this.AllCompanyChartFunctionInit()
+      // this.highcharts.createChart(this.chartEl.nativeElement, this.myOptions);
 
     })
   }
+
+
+  AllCompanyChartFunctionInit() {
+    console.log("gfdsgdfgdfg===========")
+    // if (this.chart) {
+    //   this.chart.destroy()
+    // }
+      this.chart = new Chart({
+        
+              chart: {height:300, zoomType: 'x',type: 'column',resetZoomButton: {position: {x: 0,y: -30}}},
+
+                  credits: {
+                      enabled: false
+                    },
+              title: {
+                text: ''
+              },
+              xAxis: {
+                categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                }
+              },
+              legend: {
+                reversed: true
+              },
+              plotOptions: {
+                series: {
+                  stacking: 'normal'
+                }
+              },
+              // series:  [{name:this.name0,data:this.data0},{data:this.data1},{data:this.data2}]
+      });
+
+    }
+
+
+
+
+
+//   myOptions = {
+//     chart: {
+//       type: 'bar'
+//     },
+//     title: {
+//       text: 'Stacked bar chart'
+//     },
+//     xAxis: {
+//       categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+//     },
+//     yAxis: {
+//       min: 0,
+//       title: {
+//         text: 'Total fruit consumption'
+//       }
+//     },
+//     legend: {
+//       reversed: true
+//     },
+//     plotOptions: {
+//       series: {
+//         stacking: 'normal'
+//       }
+//     },
+//     series: [{
+//       name: 'John',
+//       data: [5, 3, 4, 7, 2]
+//     }, {
+//       name: 'Jane',
+//       data: [2, 2, 3, 2, 1]
+//     }, {
+//       name: 'Joe',
+//       data: [3, 4, 4, 2, 5]
+//     }]
+//   };
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   setPage(page: number, date_range, search_data, industry_id, company_id, client_id, id_vertical, location_data) {
@@ -1887,28 +2114,46 @@ export class Version3Component implements OnInit {
       });
 
   }
+  tab
   getData(value) {
     console.log("get id user==========", value)
     this.table = value;
+
     if (this.table == 1) {
+      this.tab = 'tab1';
+      
       this.getIndustrywithData(this.search_data, this.industry_id);
     }
     else if (this.table == 2) {
+      this.tab = 'tab2';
+
       this.getCompanywithData(this.date_range, this.search_data, this.industry_id, this.company_id);
     }
     else if (this.table == 3) {
+      this.tab = 'tab3';
+
       this.getClientwithData(this.date_range, this.search_data, this.client_id);
     }
     else if (this.table == 4) {
+      this.tab = 'tab4';
+
       this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
     }
     else if (this.table == 5) {
+      this.tab = 'tab5';
+
       this.getVerticalwithData(this.date_range, this.search_data);
+    }
+    else if (this.table == 6) {
+      this.tab = 'tab6';
+
+      // this.getVerticalwithData(this.date_range, this.search_data);
     }
   }
 
 
   datesUpdated(value, type) {
+    console.log(value,type)
     if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'company') {
 
       this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
@@ -2171,3 +2416,24 @@ export class Version3Component implements OnInit {
   //     enabled: false
   //   },
   // };
+
+    // this._router.events
+    // .pipe(
+    //     filter((event) => event instanceof NavigationEnd),
+    //     takeUntil(this._unsubscribeAll)
+    // )
+    // .subscribe(() => {
+    //     if (this._fuseSidebarService.getSidebar('navbar')) {
+    //         this._fuseSidebarService.getSidebar('navbar').close();
+    //     }
+    // }
+    // );
+
+
+    // this.getToggle = this._fuseSidebarService.getSidebar('navbar');
+    // console.log("getToggle===============#############",this.getToggle)
+    //   this.matSelect.valueChange.subscribe(value => {
+    //     console.log(value);
+    // });
+    // this.dataSource.sort = this.sort;
+    // document.getElementById('vedio').style.display = "none";

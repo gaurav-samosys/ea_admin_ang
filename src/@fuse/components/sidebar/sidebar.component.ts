@@ -648,7 +648,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
      */
     toggleOpen(): void
     {
-        if ( this.opened )
+        if (this.opened )
         {
             this.close();
         }

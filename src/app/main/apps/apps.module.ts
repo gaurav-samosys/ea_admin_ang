@@ -4,11 +4,8 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { AuthService } from './auth.service';
 import { LoginGuard } from '../../login.guard';
-// import { NotificationComponent } from './notification/notification/notification.component';
-// import { ExpertInterviewComponent } from './expert-interview/expert-interview/expert-interview.component';
-// import { AddInterviewComponent } from './expert-interview/add-interview/add-interview.component';
-// import { WebinarListComponent } from './webinar/webinar-list/webinar-list.component';
-// import { AddWebinarComponent } from './webinar/add-webinar/add-webinar.component';
+// import { NewAddUserComponent } from './new-add-user/new-add-user.component';
+
 const routes = [
     // {
     //     path: 'dashboards/analytics',
@@ -18,10 +15,17 @@ const routes = [
     //     path: 'dashboards/project',
     //     loadChildren: './dashboards/project/project.module#ProjectDashboardModule'
     // },
-    {
-        path: 'dashboards/users',
-        loadChildren: './dashboards/users/users.module#UsersModule'
-    },
+    // {
+    //     path: 'dashboards/users',
+    //     loadChildren: './dashboards/users/users.module#UsersModule'
+    // },
+   
+    //   {
+    //     path: 'new-add-user',
+    //     loadChildren: './new-add-user/new-add-user.module#NewAddUserModule'
+    // },
+
+    
     {
         path: 'dashboards/companies',
         loadChildren: './dashboards/companies/companies.module#CompaniesModule', canActivate: [LoginGuard]
@@ -31,9 +35,10 @@ const routes = [
         loadChildren: './dashboards/company-detail/company-detail.module#CompanyDetailModule', canActivate: [LoginGuard]
     },
 
+
     {
-        path: 'dashboards/user',
-        loadChildren: './dashboards/users/users.module#UsersModule',
+        path: 'users',
+        loadChildren: './user-mangement/users/users.module#UsersModule',
     },
 
 
@@ -58,14 +63,14 @@ const routes = [
         path: 'client-mangement/clients',
         loadChildren: './client-mangement/clients/clients.module#ClientsModule', canActivate: [LoginGuard]
     },
+    {
+        path: 'client-mangement/client-detail/:id',
+        loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule',
+    },
     // {
     //     path: 'client-mangement/client-detail/:id/:id1',
-    //     loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule', canActivate: [LoginGuard]
+    //     loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule',
     // },
-    {
-        path: 'client-mangement/client-detail/:id/:id1',
-        loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule', 
-    },
     {
         path: 'client-mangement/client-edit/:id/:id1',
         loadChildren: './client-mangement/client-edit/client-edit.module#ClientEditModule', canActivate: [LoginGuard]
@@ -144,10 +149,10 @@ const routes = [
         path: 'blog-post',
         loadChildren: './blogs/add-post/add-post.module#AddPostModule'
     },
-     {
-         path: 'comment',
-         loadChildren: './blogs/comment/comment.module#CommentModule'
-     },
+    {
+        path: 'comment',
+        loadChildren: './blogs/comment/comment.module#CommentModule'
+    },
     {
         path: 'blog-post/:id',
         loadChildren: './blogs/add-post/add-post.module#AddPostModule'

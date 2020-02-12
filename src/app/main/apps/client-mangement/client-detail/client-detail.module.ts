@@ -44,10 +44,11 @@ import { ClientDetailComponent } from 'app/main/apps/client-mangement/client-det
 import { ClientDetailService } from 'app/main/apps/client-mangement/client-detail/client-detail.service';
 import { PagerService } from 'app/main/apps/dashboards/pager.service';
 import { UiSwitchModule } from 'ngx-toggle-switch';
-/*import { AdduserComponent } from 'app/main/apps/user-mangement/user/adduser/adduser.component';
-import { UserEditComponent } from 'app/main/apps/user-mangement/user/user-edit/user-edit.component';*/
-// import { UserModule } from 'app/main/apps/user-mangement/user/user.module';
-// import { UserService } from 'app/main/apps/user-mangement/user/user.service';
+import { AdduserComponent } from '../../user-mangement/user/adduser/adduser.component';
+import { AddUserClientComponent } from '../add-user-client/add-user-client.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const routes: Routes = [
     {
@@ -64,12 +65,14 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         ClientDetailComponent,
+        AddUserClientComponent,
+         UserEditComponent
 
     ],
     imports     : [
         RouterModule.forChild(routes),
         UiSwitchModule,
-        MatButtonModule,
+        MatButtonModule,FormsModule,ReactiveFormsModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
@@ -123,6 +126,8 @@ const routes: Routes = [
        
     ],
     exports: [
+        AddUserClientComponent,
+        UserEditComponent,
         MatAutocompleteModule,
         MatBadgeModule,
         MatBottomSheetModule,
@@ -163,6 +168,6 @@ const routes: Routes = [
     providers   : [
         ClientDetailService,
     ],
-     entryComponents: []
+     entryComponents: [UserEditComponent,AddUserClientComponent]
 })
 export class ClientDetailModule { }

@@ -1,11 +1,18 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column">
 
         <div class="h1">
-            {{res_data.first_name}} Edit Form
+        <mat-toolbar class="mat-accent m-0">
+                <!-- {{res_data.first_name}} -->
+                <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+                    <span class="title dialog-title">  Update Admin User</span>
+                    <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-toolbar-row>
+            </mat-toolbar>
         </div>
-
     <!-- CONTENT -->
-    <div class="content p-24">
+    <div class="content p-0">
 
 
 
@@ -92,9 +99,9 @@
 
                  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-top: 28px;">
 
-                       <button mat-raised-button color="primary" type="submit" class="button">Update  </button>
+                       <button mat-raised-button style="background-color: #039be5 !important ; color: white;" type="submit" class="button">Update  </button>
 
-                        <button mat-raised-button mat-button mat-dialog-close color="primary"  class="button cancel">Cancel</button>
+                        <button mat-raised-button mat-button mat-dialog-close style="background-color: #039be5 !important ; color: white;"  class="button cancel">Cancel</button>
                  </div>
 
 

@@ -163,7 +163,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'Developer Api',
                 title: 'Developer APP Listing',
-                translate: 'Devloper',
+                translate: 'Developer',
                 type: 'collapsable',
                 icon: 'account_circle',
                 children: [

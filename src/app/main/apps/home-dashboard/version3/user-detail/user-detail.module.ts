@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UserDetailComponent],
+  declarations: [],
   imports: [
         RouterModule.forChild(routes),
         FlexLayoutModule,MatSlideToggleModule,

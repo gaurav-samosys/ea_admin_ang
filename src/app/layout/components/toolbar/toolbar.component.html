@@ -1,4 +1,10 @@
 <mat-toolbar class="p-0 mat-elevation-z1">
+    <!-- 12/02 -->
+<button mat-icon-button class="toggle-sidebar-folded"
+(click)="toggleSidebarFolded()" fxHide.lt-lg>
+<mat-icon class="secondary-text">menu</mat-icon>
+</button>
+<!-- 12/02 -->
     <div class="" fxFlex="0 1 auto" fxLayout="row" style="width: 100% !important;         
         text-align: right !important;">
         <div class="" style="float: right;
@@ -10,12 +16,13 @@ margin-top: 13px;">
 
 
 
+
             <button mat-button [matMenuTriggerFor]="menu">
                 <mat-icon>mail</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item>Item 1</button>
-                <button mat-menu-item>Item 2</button>
+                <!-- <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button> -->
             </mat-menu>
         </div>
 

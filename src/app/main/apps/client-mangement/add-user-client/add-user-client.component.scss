@@ -1,0 +1,42 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  
+  .cancel{
+          margin-left: 21px;
+  }
+  
+    .fill-remaining-space {
+      /* This fills the remaining space, by using flexbox. 
+         Every toolbar row uses a flexbox row layout. */
+      flex: 1 1 auto;
+    }
+  
+  :host {
+  
+      .content {
+  
+          form {
+              width: 100%;
+              max-width: 800px !important;
+          }
+  
+          .form-errors-model {
+              flex: 1;
+  
+              code {
+                  background: none !important;
+              }
+          }
+  
+          .horizontal-stepper-wrapper,
+          .vertical-stepper-wrapper {
+              max-width: 800px;
+          }
+      }
+  }

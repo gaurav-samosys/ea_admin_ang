@@ -17,7 +17,7 @@ import { ConfirmboxComponent, ConfirmDialogModel } from './confirmbox/confirmbox
 import { Location } from '@angular/common';
 
 
-@Component({
+@Component({ 
   selector: 'app-quizzeslist',
   templateUrl: './quizzeslist.component.html',
   styleUrls: ['./quizzeslist.component.scss']

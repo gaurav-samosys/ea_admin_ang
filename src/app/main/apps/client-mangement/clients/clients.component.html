@@ -239,7 +239,7 @@
 
                 <!-- <button mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> -->
                 <button mat-raised-button class="export_data" matTooltip="Download Excel File"
-                  (click)="exportData()">Export Data to
+                  (click)="exportData()" style="background-color: #039be5 !important;color: white !important;">Export Data to
                   Excel</button>
               </div>
             </div>
@@ -261,9 +261,9 @@
                         </i>
                       </span>
                     </mat-header-cell>
-                    <!-- routerLink="/apps/client-mangement/clients" -->
+                    <!--  routerLink="/apps/client-mangement/client-detail/{{id}}" routerLink="/apps/client-mangement/client-detail/{{client_Name}}/{{id}}" -->
                     <mat-cell class="style" *matCellDef="let element"
-                      routerLink="/apps/client-mangement/client-detail/{{client_Name}}/{{id}}"> {{element.client_name}}
+                      [routerLink]="['/apps/client-mangement/client-detail', element.id]"> {{element.client_name}}
                     </mat-cell>
                   </ng-container>
 
@@ -370,7 +370,7 @@
                   <ng-container matColumnDef="action">
                     <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                      <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn">Actions</button>
+                      <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn" >Actions</button>
 
                       <mat-menu #belowMenu="matMenu" yPosition="below">
                           <!-- /apps/client-mangement/addclient -->

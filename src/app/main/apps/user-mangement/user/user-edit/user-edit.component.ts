@@ -21,14 +21,23 @@ export class UserEditComponent implements OnInit {
   common: any;
   status: any;
 
+  ActiveUser=['No' , 'Yes']
   constructor(
     private toastr: ToastrService,
 
     private http: HttpClient, private rt: Router, public dialogRef: MatDialogRef<UserEditComponent>, private _formBuilder: FormBuilder, private user: UserService, @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog) {
 
   }
-
-
+  TransunionArray = [
+    'CreditView' ,
+    'Free Consumer Disclosure',
+  ];
+  show_transunion
+  radioChange(value) {
+    if (value) {
+      this.show_transunion = value
+    }
+  }
 
   ngOnInit(): void {
     this.res_data = this.data;
@@ -48,6 +57,9 @@ export class UserEditComponent implements OnInit {
       user_name: ['', Validators.required],
       activate_user: [''],
       password: [''],
+      clientvertical:'',
+      clientvertical1:'',
+      free_link:'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
 
 
     });

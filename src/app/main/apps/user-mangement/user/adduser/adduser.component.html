@@ -22,7 +22,7 @@
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
                     <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-                        <mat-label>Select Company </mat-label>
+                        <mat-label>Select Company</mat-label>
                         <mat-select formControlName="company" (selectionChange)="getClient($event.value)" required>
                             <mat-option selected="" disabled="" value="">
                                 Please select company
@@ -64,15 +64,28 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                    <!-- <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
                         <mat-label>Email</mat-label>
                         <input matInput formControlName="email" placeholder="Email" required>
                         <mat-error *ngIf="hasError('email', 'required')">Email is required!</mat-error>
-                    </mat-form-field>
+                    </mat-form-field> -->
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email">
+                            <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                            <mat-error *ngIf="adduserForm.get('email').hasError('required')">
+                                Email is required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="!adduserForm.get('email').hasError('required') &&
+                                        adduserForm.get('email').hasError('pattern')">
+                                Please enter a valid email address
+                            </mat-error>
+                        </mat-form-field>
 
                     <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
                         <mat-label>Phone</mat-label>
-                        <input matInput formControlName="phone" placeholder="Phone number" required>
+                        <input matInput formControlName="phone" minlength=10 maxlength=15 placeholder="Phone number" required>
                         <mat-error *ngIf="hasError('phone', 'required')">Phone number is required!</mat-error>
                     </mat-form-field>
 
@@ -80,7 +93,7 @@
                 </div>
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-                    <mat-form-field appearance="outline" fxFlex="100" fxLayoutGap="10px">
+                    <mat-form-field appearance="outline" fxFlex="100" fxLayoutGap="10px" style="margin-top: 10px;">
                         <mat-label>Default Vertical</mat-label>
                         <mat-select formControlName="clientvertical" required>
                             <mat-option value="" selected="">Select Default Vertical</mat-option>

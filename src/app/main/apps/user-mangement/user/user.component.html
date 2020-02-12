@@ -185,14 +185,17 @@
                 </div> -->
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
 
-              <button mat-raised-button class="export_data" matTooltip="Download Excel File" (click)="exportData()">Export Data to
+              <span style="margin: 58px;" >
+              <button style="background-color: #039be5 !important;color: white !important;" mat-raised-button class="export_data" matTooltip="Download Excel File" 
+              (click)="exportData()">Export Data to
                 Excel</button>
-
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+              
                 <!-- 'first_name', 'email', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action' -->
-                  <button mat-button [matMenuTriggerFor]="menu" matTooltip="Show Hide Column" class="export_data" mat-raised-button type="button"
+                  <button mat-button style="background-color: #039be5 !important;color: white !important;" [matMenuTriggerFor]="menu" matTooltip="Show Hide Column" 
+                  class="export_data" mat-raised-button type="button"
                >
-                  <span> Show / Hide Column</span>
+                   <span> Show / Hide Column</span>
                 </button>
                 <mat-menu #menu="matMenu">
                   <button mat-menu-item>
@@ -227,6 +230,7 @@
                         checked><span class="ml">Action</span></label>
                   </button>
                 </mat-menu>
+              </span>
               <!-- <button  mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> -->
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
@@ -270,7 +274,7 @@
                           </i>
                         </span> 
                   </mat-header-cell>
-                  <mat-cell style="padding-right: 70px;" *matCellDef="let element"> {{element.email}}    </mat-cell>
+                  <mat-cell style="padding-right: 70px;" *matCellDef="let element"> {{element.email}} </mat-cell>
                 </ng-container>
 
                 <!-- Symbol Column -->
@@ -286,7 +290,7 @@
                             arrow_downward
                           </i>
                         </span>  </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.client_name}}    </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{element.client_name}}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="created_on">
@@ -342,13 +346,7 @@
                 <ng-container matColumnDef="action">
                   <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <!-- <button mat-icon-button>
-                                            <mat-icon matTooltip="Edit" (click)="editDialog(element)">edit</mat-icon>
-                                        </button>
-                                        <button mat-icon-button>
-
-                                            <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon>
-                                        </button> -->
+                
                         <button mat-raised-button class="action_btn" [matMenuTriggerFor]="belowMenu">Actions</button>
 
                         <mat-menu #belowMenu="matMenu" yPosition="below">

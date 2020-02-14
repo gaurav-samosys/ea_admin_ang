@@ -48,7 +48,7 @@ import { AuthService } from '../../auth.service';
 
 const routes: Routes = [
     {
-        path     : '**',
+        path     : 'admin/forgot',
         component: ForgotComponent,
         
     }

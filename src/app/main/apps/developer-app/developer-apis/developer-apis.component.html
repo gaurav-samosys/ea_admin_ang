@@ -16,30 +16,38 @@
 
 
 
-
+<!-- 
     <div class="" style="flex-direction: row;
         box-sizing: border-box;
        height: 100px;
         place-content: center space-between;
         align-items: center;  background-color: #039be5 !important;
-        color: white !important;">
+        color: white !important;"> -->
         <div class="row" fxLayoutAlign="space-between center">
-          <div class="" style="color: white;margin-top:40px">
+          <!-- <div class="" style="color: white;margin-top:40px">
               <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white;">
                 <img style="margin-left: 10px;" width="20px" height="20px" src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
-               <a routerLink="/apps/developer-app/developer-apis"
+              
+                <a routerLink="/apps/developer-app/developer-apis"
                 style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Manage User</a>
 
-          </div>
-          <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 28px;;
-            margin-right: 40px;
-        ">
-            <button mat-raised-button (click)="addQuestion()">
-                    <mat-icon>add_circle_outline</mat-icon>Add more
-                </button>
           </div> -->
+
+          <div class="" style="margin-top:20px; position: relative; margin-left: 25px;">
+
+              <span class="speedometer_icon  report_top_hover"> <a routerLink="/apps/home-dashboard/version3" 
+               style="text-decoration: none;">
+               &nbsp;  &nbsp;Dashboard </a></span>
+               <span style="color: #ccc;">/
+               <a  routerLink="/apps/developer-app/developer-apis"
+                 style="text-decoration: none;" class="report_top_hover">
+                 &nbsp;Manage User</a>
+               </span>
+           
+             </div>
+         
         </div>
-     </div>
+     <!-- </div> -->
 
 
 
@@ -49,32 +57,10 @@
         <mat-icon (click)="buttontoggle()" style="cursor: pointer;">{{buttonName}}</mat-icon>Developer App Listing
       </div>
       <ng-container *ngIf="show">
-        <!--<div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-             <div class="row" style="display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;"> -->
-
-              <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  mb-12" style="flex-basis: 420px;
-              max-width: 420px; display: block;">
-                <mat-form-field appearance="outline" style="max-width: 55%;
-                display: block;
-                flex: 1 1 100%;
-                box-sizing: border-box;">
-                  <mat-label>Show Entries</mat-label>
-                  <mat-select matNativeControl (change)="changelimit($event.target.value)">
-                    <mat-option value="10">10</mat-option>
-                    <mat-option value="25">25</mat-option>
-                    <mat-option value="50">50</mat-option>
-                    <mat-option value="100">100</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div> -->
+       
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="    margin-top: -30px;">
-                    <!-- style="flex-basis: 400px;
-                    max-width: 400px;" -->
+                  
                       <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
                         class="ColVis_Button ColVis_MasterButton" style="color: white; background-color: #039be5 !important;"><span> Show/Hide Column</span></button>
                       <mat-menu #menu="matMenu">
@@ -104,10 +90,10 @@
             <div class="row mt-20">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <mat-table [dataSource]="dataSource" class="table">
+                <table mat-table [dataSource]="dataSource" class="table">
                   <!-- Name Column -->
                   <ng-container matColumnDef="full_name">
-                    <mat-header-cell *matHeaderCellDef> Full Name
+                    <th mat-header-cell *matHeaderCellDef> Full Name
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('full_name','ASC')"
                           [class]='(this.sort_column=="full_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -118,14 +104,14 @@
                           arrow_downward
                         </i>
                       </span>
-                    </mat-header-cell>
-                    <mat-cell class="style"  *matCellDef="let element" (click)="openDialog(element)">
-                      {{element.first_name}} {{element.last_name}}</mat-cell>
+                    </th>
+                    <td mat-cell class="style"  *matCellDef="let element" (click)="openDialog(element)">
+                      {{element.first_name}} {{element.last_name}}</td>
                   </ng-container>
 
                   <!-- Weight Column -->
                   <ng-container matColumnDef="email">
-                    <mat-header-cell style="padding-right: 80px;
+                    <th mat-header-cell style="padding-right: 80px;
                     " *matHeaderCellDef> Email
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('email','ASC')"
@@ -136,14 +122,14 @@
                           [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </mat-header-cell>
-                    <mat-cell style="padding-right: 80px;
-                    " *matCellDef="let element"> {{element.email}} </mat-cell>
+                      </span> </th>
+                    <td mat-cell style="padding-right: 80px;
+                    " *matCellDef="let element"> {{element.email}} </td>
                   </ng-container>
 
                   <!-- Symbol Column -->
                   <ng-container matColumnDef="app_id">
-                    <mat-header-cell *matHeaderCellDef> App_Id
+                    <th mat-header-cell *matHeaderCellDef> App_Id
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('app_id','ASC')"
                           [class]='(this.sort_column=="app_id" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -153,12 +139,13 @@
                           [class]='(this.sort_column=="app_id" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.app_id}} </mat-cell>
+                      </span> </th>
+                    <td mat-cell *matCellDef="let element"> 
+                      {{element.app_id}} </td>
                   </ng-container>
 
                   <ng-container matColumnDef="app_secret">
-                    <mat-header-cell style="padding-right: 80px;
+                    <th mat-header-cell style="padding-right: 80px;
                     " *matHeaderCellDef> App_Secret
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('app_secret','ASC')"
@@ -169,13 +156,14 @@
                           [class]='(this.sort_column=="app_secret" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </mat-header-cell>
-                    <mat-cell style="padding-right: 80px;
-                    " *matCellDef="let element"> {{element.app_secret}} </mat-cell>
+                      </span> </th>
+                    <td mat-cell style="padding-right: 80px;
+                    " *matCellDef="let element"> {{element.app_secret}} 
+                    </td>
                   </ng-container>
 
                   <ng-container matColumnDef="website">
-                    <mat-header-cell style="padding-right: 80px;
+                    <th mat-header-cell style="padding-right: 80px;
                     "
                      *matHeaderCellDef> Domain
                       <span class="pointer">
@@ -187,14 +175,14 @@
                           [class]='(this.sort_column=="website" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </mat-header-cell>
-                    <mat-cell style="padding-right: 80px;
+                      </span> </th>
+                    <td mat-cell style="padding-right: 80px;
                     "
-                     *matCellDef="let element"> {{element.website}} </mat-cell>
+                     *matCellDef="let element"> {{element.website}} </td>
                   </ng-container>
 
                   <ng-container matColumnDef="status">
-                    <mat-header-cell *matHeaderCellDef> Status
+                    <th mat-header-cell *matHeaderCellDef> Status
                       <span class="pointer">
                         <i (click)="updateSortingOrderDevloperApi('status','ASC')"
                           [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -204,16 +192,16 @@
                           [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
                           arrow_downward
                         </i>
-                      </span> </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                      </span> </th>
+                    <td mat-cell *matCellDef="let element">
                       <ui-switch [checked]="element.status == '1' ? true : false"
                         (change)="onChange($event,element.id)"></ui-switch>
-                    </mat-cell>
+                    </td>
                   </ng-container>
 
-                  <mat-header-row style="width: 1041px;" *matHeaderRowDef="displayedColumns"></mat-header-row>
-                  <mat-row style="width: 1041px;" *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                </mat-table>
+                  <tr mat-header-row style="width: 1041px;" *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row style="width: 1041px;" *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
                 <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
                     [pageSize]="pageSize" [pageSizeOptions]="[1,2,3,10, 25, 50,100]" showFirstLastButtons
                     (page)="handlePage($event)"></mat-paginator>

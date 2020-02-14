@@ -100,7 +100,7 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
                 if (this._fuseSidebarService.getSidebar('navbar')) {
                     this._fuseSidebarService.getSidebar('navbar').close();
                     //navbar close
-                    this._fuseSidebarService.getSidebar('navbar').toggleFold();
+                    // this._fuseSidebarService.getSidebar('navbar').toggleFold();
 
                 }
             }
@@ -146,15 +146,15 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
     /**
      * Toggle sidebar opened status
      */
-    toggleSidebarOpened(): void {
-        this._fuseSidebarService.getSidebar('navbar').toggleOpen();
-    }
+    // toggleSidebarOpened(): void {
+    //     this._fuseSidebarService.getSidebar('navbar').toggleOpen();
+    // }
 
     /**
      * Toggle sidebar folded status
      */
-    toggleSidebarFolded(): void {
-        console.log("close===========")
-        this._fuseSidebarService.getSidebar('navbar').toggleFold();
-    }
+    // toggleSidebarFolded(): void {
+    //     console.log("close===========")
+    //     this._fuseSidebarService.getSidebar('navbar').toggleFold();
+    // }
 }

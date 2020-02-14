@@ -5,6 +5,7 @@ import { ForgotService } from './forgot.service';
 import { AuthService } from '../../auth.service';
 import * as myGlobals from '../../../../global';
 import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
@@ -29,9 +30,13 @@ export class ForgotComponent implements OnInit {
      * @param {FormBuilder} _formBuilder
      */
     constructor(
+        private toastr: ToastrService,
+
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
         private service: ForgotService,
+        private myRoute:Router
+
     )
     {
         // Configure the layout
@@ -67,14 +72,33 @@ export class ForgotComponent implements OnInit {
         });
     }
 
+    // updatePassword()
+    // {
+    // 	console.log(this.forgotPasswordForm.value.email)
+    //      this.service.Post(this.forgetPassword,{email:this.forgotPasswordForm.value.email,token:'LIVESITE'})
+    //         .subscribe(res => {
+    //             this.common=res;
+    //             console.log(this.common)
+
+    //     })
+    // }
     updatePassword()
     {
-    	console.log(this.forgotPasswordForm.value.email)
-         this.service.Post(this.forgetPassword,{email:this.forgotPasswordForm.value.email,token:'LIVESITE'})
+        console.log(this.forgotPasswordForm.value.email)
+        var type="admin"
+         this.service.Post(this.forgetPassword,{username:this.forgotPasswordForm.value.email,token:'LIVESITE' ,
+         type:type})
             .subscribe(res => {
                 this.common=res;
                 console.log(this.common)
+           if(res['status']==true){
+            this.myRoute.navigate(["/apps/admin/login"]);
 
+            this.toastr.success('password Reset Successfully');
+            
+           }else{
+            this.toastr.warning("We can't find a password with that username");
+           }
         })
     }
 }

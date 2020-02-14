@@ -17,30 +17,24 @@ constructor() {
 }
 dataGraph0;dataGraph1;dataGraph2;pyear;year;Average;name0;name1;name2;
 myMethod(data) {
-    console.log(data); // I have data! Let's return it so subscribers can use it!
-    // we can do stuff with data if we want
-    this.myMethodSubject.next(data);
+//     console.log(data); 
+//     this.myMethodSubject.next(data);
 
-for (let index = 0; index < data.length; index++) {
-    const element = data[index];
-    console.log(element)
-}
-
-
-
-
-
-    this.name0 =data[0].name;
-    this.name1 = data[1].name;
-    this.name2 =data[2].name;
-    console.log(this.name0,this.name1,this.name2,
-      )
-    console.log(data[0]['data'])
-    console.log(data[1]['data'])
-    console.log(data[2]['data']),
-  this.dataGraph0=data[0]['data']
-  this.dataGraph1=data[1]['data']
-  this.dataGraph2=data[2]['data']
+// for (let index = 0; index < data.length; index++) {
+//     const element = data[index];
+//     console.log(element)
+// }
+//     this.name0 =data[0].name;
+//     this.name1 = data[1].name;
+//     this.name2 =data[2].name;
+//     console.log(this.name0,this.name1,this.name2,
+//       )
+//     console.log(data[0]['data'])
+//     console.log(data[1]['data'])
+//     console.log(data[2]['data']),
+//   this.dataGraph0=data[0]['data']
+//   this.dataGraph1=data[1]['data']
+//   this.dataGraph2=data[2]['data']
 }
 
 
@@ -95,19 +89,7 @@ comparision:any={
                     //     tooltip: {valueSuffix: '°C'}
                       },
                 ]   
-                // series: [{
-                //       name: this.name0 ,
-                //       data:[this.dataGraph0],
-                //       color: 'black',
-                //     },{
-                //       name: this.name1,
-                //       data:[this.dataGraph1], color: 'black',
-                        
-                //     },{
-                //         name:this.name2,
-                //         data:[this.dataGraph2], color: 'black',
-
-                //     }]
+              
 }
 
 
@@ -554,10 +536,6 @@ access_code:any={
 
 
 
-
-createChart(el, cfg) {
-    Highcharts.chart(el, cfg);
-  }
 
 
 

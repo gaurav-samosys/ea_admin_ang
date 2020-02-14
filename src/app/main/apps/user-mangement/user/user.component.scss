@@ -251,3 +251,17 @@ table {
 .action_btn{background-color: #039be5 !important; color: #ffffff !important;}
 .company_heading{width:190px;color:#fff;background-color:#3195C2;border:1px solid #3195c2!important;text-align:center;padding-top:6px;padding-bottom:6px;border-radius:4px 4px 0 0;font-size:20px;margin-bottom:25px!important;}
 .table { background: white; border: 1px solid #e0e0e0; }
+
+
+.speedometer_icon a:before{font-family: FontAwesome;
+    content: "\f0e4";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    position: absolute;
+    left: -8px;
+    top: -1px;}
+  
+    .report_top_hover:hover{color:#0677ad !important;}
+    .report_top_hover a:hover{color:#0677ad !important;}
+  

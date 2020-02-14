@@ -111,3 +111,16 @@ ul {
 
   // color: #1a73e8;
 }
+
+
+.speedometer_icon a:before{font-family: FontAwesome;
+  content: "\f0e4";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  position: absolute;
+  left: -8px;
+  top: -1px;}
+
+  .report_top_hover:hover{color:#0677ad !important;}
+  .report_top_hover a:hover{color:#0677ad !important;}

@@ -25,6 +25,7 @@ const routes = [
     //     loadChildren: './new-add-user/new-add-user.module#NewAddUserModule'
     // },
 
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     
     {
         path: 'dashboards/companies',
@@ -38,14 +39,14 @@ const routes = [
 
     {
         path: 'users',
-        loadChildren: './user-mangement/users/users.module#UsersModule',
+        loadChildren: './user-mangement/users/users.module#UsersModule', canActivate: [LoginGuard]
     },
 
 
 
     {
         path: 'dashboards/clients',
-        loadChildren: './dashboards/clients/clients.module#ClientsModule'
+        loadChildren: './dashboards/clients/clients.module#ClientsModule', canActivate: [LoginGuard]
     },
     {
         path: 'Access-code/access',
@@ -65,7 +66,7 @@ const routes = [
     },
     {
         path: 'client-mangement/client-detail/:id',
-        loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule',
+        loadChildren: './client-mangement/client-detail/client-detail.module#ClientDetailModule', canActivate: [LoginGuard]
     },
     // {
     //     path: 'client-mangement/client-detail/:id/:id1',
@@ -135,51 +136,51 @@ const routes = [
 
     {
         path: 'theme-management/manage-color',
-        loadChildren: './theme-management/manage-color/manage-color.module#ManageColorModule'
+        loadChildren: './theme-management/manage-color/manage-color.module#ManageColorModule', canActivate: [LoginGuard]
     },
     {
         path: 'theme-management/mobile-color',
-        loadChildren: './theme-management/mobile-color/mobile-color.module#MobileColorModule'
+        loadChildren: './theme-management/mobile-color/mobile-color.module#MobileColorModule', canActivate: [LoginGuard]
     },
     {
         path: 'blogs',
-        loadChildren: './blogs/blog/blog.module#BlogModule'
+        loadChildren: './blogs/blog/blog.module#BlogModule', canActivate: [LoginGuard]
     },
     {
         path: 'blog-post',
-        loadChildren: './blogs/add-post/add-post.module#AddPostModule'
+        loadChildren: './blogs/add-post/add-post.module#AddPostModule', canActivate: [LoginGuard]
     },
     {
         path: 'comment',
-        loadChildren: './blogs/comment/comment.module#CommentModule'
+        loadChildren: './blogs/comment/comment.module#CommentModule', canActivate: [LoginGuard]
     },
     {
         path: 'blog-post/:id',
-        loadChildren: './blogs/add-post/add-post.module#AddPostModule'
+        loadChildren: './blogs/add-post/add-post.module#AddPostModule', canActivate: [LoginGuard]
     },
     {
         path: 'expert_interview',
-        loadChildren: './expert-interview/expert-interview/expert-interview.module#ExpertInterviewModule'
+        loadChildren: './expert-interview/expert-interview/expert-interview.module#ExpertInterviewModule', canActivate: [LoginGuard]
     },
 
     {
         path: 'add_expert_interview',
-        loadChildren: './expert-interview/add-interview/add-interview.module#AddInterviewModule'
+        loadChildren: './expert-interview/add-interview/add-interview.module#AddInterviewModule', canActivate: [LoginGuard]
     },
 
     {
         path: 'add_expert_interview/:id',
-        loadChildren: './expert-interview/add-interview/add-interview.module#AddInterviewModule'
+        loadChildren: './expert-interview/add-interview/add-interview.module#AddInterviewModule', canActivate: [LoginGuard]
     },
 
     {
         path: 'add_webinar',
-        loadChildren: './webinar/add-webinar/add-webinar.module#AddWebinarModule'
+        loadChildren: './webinar/add-webinar/add-webinar.module#AddWebinarModule', canActivate: [LoginGuard]
     },
 
     {
         path: 'webinars',
-        loadChildren: './webinar/webinar-list/webinar-list.module#WebinarListModule'
+        loadChildren: './webinar/webinar-list/webinar-list.module#WebinarListModule', canActivate: [LoginGuard]
     },
 
 
@@ -195,54 +196,62 @@ const routes = [
         path: 'admin/login',
         loadChildren: './admin/login/login.module#LoginModule', canLoad: [LoginGuard]
     },
+    // {
+    //     path: 'admin/forgot',
+    //     loadChildren: './admin/forgot/forgot.module#ForgotModule'
+    // },
     {
         path: 'admin/forgot',
-        loadChildren: './admin/forgot/forgot.module#ForgotModule'
+        loadChildren: './admin/forgot-password/forgot-password.module#ForgotPasswordModule',canLoad: [LoginGuard]
     },
 
-    {
-        path: 'mail',
-        loadChildren: './mail/mail.module#MailModule'
-    },
-    {
-        path: 'mail-ngrx',
-        loadChildren: './mail-ngrx/mail.module#MailNgrxModule'
-    },
-    {
-        path: 'chat',
-        loadChildren: './chat/chat.module#ChatModule'
-    },
-    {
-        path: 'calendar',
-        loadChildren: './calendar/calendar.module#CalendarModule'
-    },
-    {
-        path: 'e-commerce',
-        loadChildren: './e-commerce/e-commerce.module#EcommerceModule'
-    },
-    {
-        path: 'academy',
-        loadChildren: './academy/academy.module#AcademyModule'
-    },
-    {
-        path: 'todo',
-        loadChildren: './todo/todo.module#TodoModule'
-    },
-    {
-        path: 'file-manager',
-        loadChildren: './file-manager/file-manager.module#FileManagerModule'
-    },
-    {
-        path: 'contacts',
-        loadChildren: './contacts/contacts.module#ContactsModule'
-    },
-    {
-        path: 'scrumboard',
-        loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
-    },
+    // {
+    //     path: 'mail',
+    //     loadChildren: './mail/mail.module#MailModule'
+    // },
+    // {
+    //     path: 'mail-ngrx',
+    //     loadChildren: './mail-ngrx/mail.module#MailNgrxModule'
+    // },
+    // {
+    //     path: 'chat',
+    //     loadChildren: './chat/chat.module#ChatModule'
+    // },
+    // {
+    //     path: 'calendar',
+    //     loadChildren: './calendar/calendar.module#CalendarModule'
+    // },
+    // {
+    //     path: 'e-commerce',
+    //     loadChildren: './e-commerce/e-commerce.module#EcommerceModule'
+    // },
+    // {
+    //     path: 'academy',
+    //     loadChildren: './academy/academy.module#AcademyModule'
+    // },
+    // {
+    //     path: 'todo',
+    //     loadChildren: './todo/todo.module#TodoModule'
+    // },
+    // {
+    //     path: 'file-manager',
+    //     loadChildren: './file-manager/file-manager.module#FileManagerModule'
+    // },
+    // {
+    //     path: 'contacts',
+    //     loadChildren: './contacts/contacts.module#ContactsModule'
+    // },
+    // {
+    //     path: 'scrumboard',
+    //     loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
+    // },
 
 
-    { path: '** ', redirectTo: '/apps/admin/login' }
+    { path: '** ', redirectTo: '/apps/admin/login',pathMatch: 'full' },
+
+    { path: '', redirectTo: '/apps/admin/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/error', pathMatch: 'full' },
+//   { path: 'error', component: PageNotFoundComponent },
 ];
 
 @NgModule({

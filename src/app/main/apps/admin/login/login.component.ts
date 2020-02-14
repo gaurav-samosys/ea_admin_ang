@@ -87,6 +87,9 @@ export class LoginComponent implements OnInit {
         });
     }
 
+    goback(){
+        this.myRoute.navigate(['/apps/admin/forgot'])
+    }
 
     openaddSnackBar() {
         this._snackBar.open('Either email or password is incorrect. !!', 'End now', {

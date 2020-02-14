@@ -434,8 +434,9 @@
 
                       <mat-menu #belowMenu="matMenu" yPosition="below">
                           <!-- /apps/client-mangement/addclient -->
+                          <!-- [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]" -->
                         <button mat-menu-item matTooltip="Edit"
-                          [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">Edit</button>
+                          (click)="editClient( element)">Edit</button>
                         <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
                       </mat-menu>
                     </td>

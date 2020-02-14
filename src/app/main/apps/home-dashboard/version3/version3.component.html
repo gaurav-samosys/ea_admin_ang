@@ -1358,6 +1358,7 @@
 		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
 
 			<!-- total_users -->
+
 			<!-- <div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;width: 42% !important;"> -->
 				<div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12"
@@ -1369,18 +1370,21 @@
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-							<!-- <mat-form-field appearance="outline">
+							<mat-form-field appearance="outline">
 
-								<!-- [alwaysShowCalendars]="true" [showCancel]="true"
+								 <!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
 								<input matInput readonly type="text" ngxDaterangepickerMd
 									placeholder="Select Date range" [(ngModel)]="usergraph"
-									class="cursor-pointer input_date" [opens]="'left'"
+									class="cursor-pointer input_date" [opens]="'center'" [showDropdowns]="true"
+
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									startKey="start" endKey="end" [ranges]="ranges" [showCustomRangeLabel]="true"
 									(datesUpdated)="datesUpdated($event,'usergraph')">
-								</mat-form-field> -->
-								<!-- <ejs-daterangepicker [firstDayOfWeek]='startDay'  placeholder='Select a range'></ejs-daterangepicker>` -->
+								</mat-form-field>
 
+
+								<!-- <ejs-daterangepicker [firstDayOfWeek]='startDay'  placeholder='Select a range'></ejs-daterangepicker>` -->
+<!-- 
 									<ejs-daterangepicker placeholder='Select a range' (datesUpdated)="datesUpdated($event,'usergraph')">
 										<e-presets style="color: black;">
 											<e-preset label="This Week"  style="color: black;" [start]='weekStart' [end]='weekEnd'>   This Week</e-preset>  
@@ -1388,7 +1392,7 @@
 											<e-preset label="Last Month" style="color: black;" [start]='lastStart' [end]='lastEnd'>  Last Month</e-preset> 
 											<e-preset label="Last Year"  style="color: black;" [start]='yearStart' [end]='yearEnd'>   Last Year</e-preset>  
 										</e-presets>
-									  </ejs-daterangepicker>
+									  </ejs-daterangepicker> -->
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
@@ -1423,7 +1427,7 @@
 
 								<!-- [showCancel]="true" [alwaysShowCalendars]="true" -->
 								<input matInput class="daterange" type="text" placeholder="Select Date range"
-									ngxDaterangepickerMd
+									ngxDaterangepickerMd [showDropdowns]="true"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									[opens]="'left'" class="cursor-pointer input_date" startKey="start" endKey="end"
 									[ranges]="ranges" [(ngModel)]="downloadgraph" [showCustomRangeLabel]="true"
@@ -1495,7 +1499,7 @@
 							<mat-form-field appearance="outline">
 								<!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-									[opens]="'left'" class="cursor-pointer input_date"
+									[opens]="'left'" class="cursor-pointer input_date" [showDropdowns]="true"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="videograph"
 									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'videograph')"
@@ -1543,7 +1547,7 @@
 
 								<!--[showCancel]="true" 	[alwaysShowCalendars]="true"-->
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-									class="cursor-pointer input_date" [opens]="'left'"
+									class="cursor-pointer input_date" [opens]="'left'" [showDropdowns]="true"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="claimedgraph"
 									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'claimedgraph')"
@@ -1600,7 +1604,7 @@
 							<mat-form-field appearance="outline">
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="coursegraph"
+									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="coursegraph" [showDropdowns]="true"
 									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'coursegraph')"
 									readonly="" class="cursor-pointer input_date">
 							</mat-form-field>
@@ -1648,7 +1652,7 @@
 							<mat-form-field appearance="outline">
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="accessgraph"
+									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="accessgraph" [showDropdowns]="true"
 									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'accessgraph')"
 									readonly="" class="cursor-pointer input_date">
 							</mat-form-field>
@@ -1680,7 +1684,7 @@
 
 
 		<!-- year of year old-->
-		<div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
+		<!-- <div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
 			<div class="mat__box graph_dive">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
@@ -1688,20 +1692,6 @@
 							<p>Year Over Year Comparison<br>
 								<span class="color_value">{{comparisiongraph_total}}</span></p>
 						</div>
-
-						<!-- <mat-form-field appearance="outline">
-								<mat-label>Total Users</mat-label>
-								<mat-select (selectionChange)="comparision_type($event)" class="mt_cls">
-									<option value="total_companies">Total Companies</option>
-									<option value="total_clients">Total Clients</option>
-									<option value="total_video_views">Total Video Views</option>
-									<option value="total_downloads">Total Downloads</option>
-									<option value="total_course_completions">Total Course Completions</option>
-									<option value="total_certificates">Total Certificates</option>
-	
-	
-								</mat-select>
-							  </mat-form-field> -->
 
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex;">
 
@@ -1714,22 +1704,17 @@
 								<option value="total_course_completions">Total Course Completions</option>
 								<option value="total_certificates">Total Certificates</option>
 							</select>
-							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 
-							<!-- [alwaysShowCalendars]="true" -->
 							<mat-form-field appearance="outline">
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
 									[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
-									(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly=""
+									(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly="" [showDropdowns]="true"
 									class="input_date cursor-pointer">
 							</mat-form-field>
 						</div>
-						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
 					</div>
-					<!-- END OF ROW -->
 				</div>
-				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 comparison_graph-->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comparison_graph">
 					<div class="graph_section" id="comparision"></div>
 
@@ -1746,9 +1731,8 @@
 						<li class="average_label"><span class="green_status"> {{Average}}</span></li>
 					</ul>
 				</div>
-				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 			</div>
-		</div>
+		</div> -->
 		<!-- END OF ROW MT-20 MR-28 -->
 
 
@@ -1760,8 +1744,10 @@
 
 
 
+
+
 <!-- year of year new -->
-<!-- <div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
+<div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
 	<div class="mat__box graph_dive">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="row" fxLayoutAlign="space-between">
@@ -1783,23 +1769,32 @@
 					</select>
 					
 					<mat-form-field appearance="outline">
-						<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-							[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
-							[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
-							(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly=""
-							class="input_date cursor-pointer">
-					</mat-form-field>
+							<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+								[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
+								[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
+								(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly="" [showDropdowns]="true"
+								class="input_date cursor-pointer">
+						</mat-form-field>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comparison_graph">
-			<div [chart]="chart"></div>
-
-
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div [chart]="comparisiongraph"></div>
+			<ul class="course_status_ul" *ngIf="user_status == 'false' ">
+					<li><span class="orange_status"></span> {{full_2019}}</li>
+					<li><span class="green_status"></span> {{mandatory_2019}}</li>
+					<li><span class="black_status"></span> {{full_2018}}</li>
+					<li><span class="blue_status"></span> {{mandatory_2018}}</li>
+				</ul>
+				<ul class="course_status_ul" *ngIf="user_status == 'true'">
+						<li><span class="black_status">{{pyear}}</span> </li>
+						<li><span class="blue_status"> {{year}}</span></li>
+						<li class="average_label"><span class="green_status"> {{Average}}</span></li>
+					</ul>
 
 		</div>
 	</div>
-</div> -->
+</div>
 <!-- END OF ROW MT-20 MR-28 -->
 
 
@@ -1923,18 +1918,20 @@
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
 									[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
-									(datesUpdated)="datesUpdated($event,'surveychartGraph')" readonly=""
+									(datesUpdated)="datesUpdated($event,'surveychartGraph')" readonly="" [showDropdowns]="true"
 									class="input_date cursor-pointer">
 							</mat-form-field>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_graph">
-					<div class="graph_section" id="surveychartGraph"></div>
-					<ul class="course_status_ul">
+						<div [chart]="surveychartGraph"></div>
+
+				<!-- <div class="graph_section" id="surveychartGraph"></div>  -->
+						<!--  <ul class="course_status_ul">
 						<li><span class="black_status" style="color: rgb(149,206,255);"> surveys</span></li>
-						<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li> -->
-					</ul>
+						<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li> 
+					</ul> -->
 				</div>
 			</div>
 		</div>

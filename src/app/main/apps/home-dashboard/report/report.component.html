@@ -11,14 +11,14 @@
   <h1 style="color: #455c67">&nbsp;&nbsp;&nbsp;Report</h1>
   <div class="" >
 <div class="row" fxLayoutAlign="space-between center">
-  <div class="" style="margin-top:0px; position: relative;">
+  <div class="" style="margin-top:0px; position: relative; margin-left: 25px;">
 
    <span class="speedometer_icon  report_top_hover"> <a routerLink="/apps/home-dashboard/version3" 
     style="text-decoration: none;">
     &nbsp;  &nbsp;Dashboard </a></span>
     <span style="color: #ccc;">/
     <a routerLink="/apps/home-dashboard/report"
-      style="text-decoration: none;" class="report_top_hover">&nbsp;&nbsp;Report</a>
+      style="text-decoration: none;" class="report_top_hover">&nbsp;Report</a>
     </span>
 
   </div>
@@ -34,7 +34,7 @@
 
   <div class="row second_row report_div">
       <div class="h2">
-        <h2>Reports</h2>
+        <h2 style="font-size: 13px;">Reports</h2>
       </div>
       <div class="" style="margin-top: 50px;margin-bottom: 10px;">
         <a routerLink="" class="more_info"> More Info </a>
@@ -60,7 +60,7 @@
 
     <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
-        <mat-form-field appearance="outline"  style="width:439px;">
+        <mat-form-field appearance="outline"  style="width:550px;">
           <mat-label>Please select Client</mat-label>
           <mat-select formControlName="client_id" (selectionChange)="onSelection($event.value)">
             <mat-option *ngFor="let item of companyListArray" [value]="item.id">
@@ -68,10 +68,17 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-     
-        <mat-form-field appearance="outline" style="width:559px;">
+        <!-- <mat-form-field floatLabel="never" class="input-full-width" style="width:50%;">
+          <input matInput readonly class="cursor-pointer" type="text"
+              ngxDaterangepickerMd
+              [alwaysShowCalendars]="true" [locale]="daterangePickerOptions"
+              [showCancel]="true" [ranges]="ranges" [opens]="'right'"
+              placeholder="Select date range" (change)="dateRangeChanged($event)">
+      </mat-form-field> -->
+        <mat-form-field appearance="outline" style="width:600px;">
           <mat-label>Please select Date Range:</mat-label>
-          <input  formControlName="dateRange" style="left: -11px; width: 600px;" type="text"  matInput ngxDaterangepickerMd
+          <input  formControlName="dateRange" style="left: -11px; width: 600px;" type="text" 
+           matInput ngxDaterangepickerMd [showCancel]="true"
           [locale]="{applyLabel: 'Apply', format: 'DD-MM-YYYY'}" startKey="start" endKey="end"
             name="daterange" (datesUpdated)="datesUpdated($event)" />
         </mat-form-field>

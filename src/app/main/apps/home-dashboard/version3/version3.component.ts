@@ -19,7 +19,7 @@ import { Sort } from '@angular/material/sort';
 import { MatSelect } from '@angular/material';
 declare var require: any;
 import { Chart } from 'angular-highcharts';
-
+import { Options } from 'highcharts';
 let Boost = require('highcharts/modules/boost');
 let noData = require('highcharts/modules/no-data-to-display');
 let More = require('highcharts/highcharts-more');
@@ -254,24 +254,23 @@ export class Version3Component implements OnInit {
   industry_disable = 0;
   company_disable = 0;
   private _unsubscribeAll: Subject<any>;
-  // ranges: any = {
-    
-  //   'Default': [moment().subtract(1, 'year'), moment()],
-  //   'Today': [moment(), moment()],
-  //   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-  //   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+  ranges: any = {
 
-  //   'Current Month': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
-  //   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'Default': [moment().subtract(1, 'year'), moment()],
+    'Today': [moment(), moment()],
+    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
 
-  //   'Last 3 Month': [moment().subtract(2, 'month'), moment()],
-  //   'Last 6 Month': [moment().subtract(5, 'month'), moment()],
-  //   'Year To Date': [moment().subtract('month').startOf('days'), moment().subtract('days').endOf('days')],
+    'Current Month': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
 
-  //   'Current Day': [moment().subtract('month').startOf('days'), moment().subtract('days').endOf('days')],
+    'Last 3 Month': [moment().subtract(2, 'month'), moment()],
+    'Last 6 Month': [moment().subtract(5, 'month'), moment()],
+    // 'Year To Date': [moment().subtract('month').startOf('days'), moment().subtract('days').endOf('days')],
+    // 'Current Day': [moment().subtract('month').startOf('days'), moment().subtract('days').endOf('days')],
 
-  //   'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
-  // }
+    'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+  }
 
   ranges1: any = {
     'Default': [moment().subtract(1, 'year'), moment()],
@@ -297,12 +296,15 @@ export class Version3Component implements OnInit {
   Average: any;
 
   getToggle
-  @ViewChild('charts',{static:true}) public chartEl: ElementRef;
-  chart: Chart;
+  options: Options;
+
+  comparisiongraph: Chart;
+  surveychartGraph: Chart;
+
   constructor(public dialog: MatDialog,
     private _snackBar: MatSnackBar
-    ,private _router: Router, private _fuseSidebarService: FuseSidebarService,
-     private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
+    , private _router: Router, private _fuseSidebarService: FuseSidebarService,
+    private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
     /*    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     
         // Assign the data to the data source for the table to render
@@ -330,50 +332,31 @@ export class Version3Component implements OnInit {
   //     }
   //   });
   // };
-  public today: Date = new Date(new Date().toDateString());
-  public weekStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 7) % 7)).toDateString());
-  public weekEnd: Date = new Date(new Date(new Date().setDate(new Date(new Date().setDate((new Date().getDate()
-      - (new Date().getDay() + 7) % 7))).getDate() + 6)).toDateString())
-      ;
-  public monthStart: Date = new Date(new Date(new Date().setDate(1)).toDateString());
-  public monthEnd: Date = this.today;
-  public lastStart: Date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - 1)).setDate(1)).toDateString());
-  public lastEnd: Date = this.today;
-  public yearStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - 365)).toDateString());
-  public yearEnd: Date = this.today;
+  // public today: Date = new Date(new Date().toDateString());
+  // public weekStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 7) % 7)).toDateString());
+  // public weekEnd: Date = new Date(new Date(new Date().setDate(new Date(new Date().setDate((new Date().getDate()
+  //     - (new Date().getDay() + 7) % 7))).getDate() + 6)).toDateString())
+  //     ;
+  // public monthStart: Date = new Date(new Date(new Date().setDate(1)).toDateString());
+  // public monthEnd: Date = this.today;
+  // public lastStart: Date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - 1)).setDate(1)).toDateString());
+  // public lastEnd: Date = this.today;
+  // public yearStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - 365)).toDateString());
+  // public yearEnd: Date = this.today;
 
 
-  ranges: any = {
-  //  this.today= new Date(new Date().toDateString());
+  // ranges: any = {
+  // //  this.today= new Date(new Date().toDateString());
 
-  }
+  // }
   ngOnInit() {
-
-
-
-
-
-
-
-
-
-
-
 
     this.tab = 'tab1';
 
-    this.AllCompanyChartFunctionInit();
+    this.comparisionChart();
+    this.surweyChart();
 
-  
-
-    var abc = document.getElementsByClassName('highcharts-credits');
-    console.log(abc)
-    for (let index = 0; index < abc.length; index++) {
-      // abc[index].classList.add('displayNone')
-      // document.getElementById('innerHTML').style.display = "none";
-    }
-
-    this.getClientwithData(this.date_range, this.search_data, this.client_id);
+    // this.getClientwithData(this.date_range, this.search_data, this.client_id);
     this.industrydropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -524,7 +507,8 @@ export class Version3Component implements OnInit {
 
   }
   // getSurveyChart
-
+  columns
+  element
   getSurveyChartGraph(select_grade, select_client, date_range) {
     this.v3Service.POST(this.getSurveyChart, {
       token: 'LIVESITE',
@@ -534,24 +518,89 @@ export class Version3Component implements OnInit {
       dateRange: date_range,
     }).subscribe(res => {
       this.totalSurways = res['totals']
-      var columns = res['columns']
+      this. columns = res['columns']
 
-      console.log(columns)
+      console.log(this.columns)
 
       var data = res['data']
       for (let index = 0; index < data.length; index++) {
-        var element = data[index].data;
-        console.log("data inside data=====", element)
+        this.element = data[index].data;
+        console.log("data inside data=====", this.element)
       }
-      this.graph.survey.xAxis.categories = columns
-      // this.graph.survey.yAxis.categories = element
-      this.graph.survey.series[0].data = element
-      // this.graph.survey.series[1].data = element
+      // Highcharts.chart('surveychartGraph', this.graph.survey);
 
-      Highcharts.chart('surveychartGraph', this.graph.survey);
+      // this.graph.survey.xAxis.categories = this.columns
+      // this.graph.survey.series[0].data = element
 
+      this.surweyChart();
     })
   }
+
+
+
+  surweyChart() {
+    console.log("gfdsgdfgdfg===========")
+    // if (this.chart) {
+    //   this.chart.destroy()
+    // }
+    this.options = ({
+
+      chart: { height: 300, zoomType: 'x', type: 'column', resetZoomButton: { position: { x: 0, y: -30 } } },
+
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: ['10%', '20%', '30%', '40%', '50%','60%', '70%', '80%', '90%','100%']
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        }
+      },
+      legend: {
+        enabled: true
+      },
+      plotOptions: {
+        series: {
+          stacking: 'normal'
+        }
+      },
+
+
+      series: [
+        {
+          name: 'Surveys',
+          color: "rgb(124,181,236)",
+          enableMouseTracking: false,
+          type: undefined,
+          data: this.element
+
+        },
+       
+      ]
+
+    });
+    let surveychartGraph = new Chart(this.options);
+    this.surveychartGraph = surveychartGraph;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -581,6 +630,7 @@ export class Version3Component implements OnInit {
     this.location_data = [];
     this.resetCompany();
     this.industry_id.push(parseInt(event.id))
+    console.log("  this.industry_id=============",  this.industry_id)
     /*    if(event.checked == true){
         }
         else{
@@ -621,6 +671,8 @@ export class Version3Component implements OnInit {
     this.industry_disable = 1;
 
     this.company_id.push(parseInt(event.id))
+
+    console.log("company_id=============",this.company_id)
     /*          if(event.checked == true && this.industry_id.length == 0){
 
     }
@@ -667,6 +719,7 @@ export class Version3Component implements OnInit {
     this.company_disable = 1;
 
     this.client_id.push(parseInt(event.id))
+    console.log( 'this.client_id===============', this.client_id)
     /*    if(event.checked == true){
     
         }
@@ -680,7 +733,7 @@ export class Version3Component implements OnInit {
         }*/
     this.selected = 'clients_selected';
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getClientwithData(this.date_range, this.search_data, this.client_id);
+    this.getClientwithData(this.date_range, this.search_data, this.industry_id, this.company_id, this.client_id);
 
   }
 
@@ -697,7 +750,7 @@ export class Version3Component implements OnInit {
     }
     this.selected = 'clients_selected';
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getClientwithData(this.date_range, this.search_data, this.client_id);
+    this.getClientwithData(this.date_range, this.search_data,this.industry_id, this.company_id, this.client_id);
   }
 
   onVerticalclick(event) {
@@ -710,6 +763,8 @@ export class Version3Component implements OnInit {
     this.company_disable = 1;
     this.table = 4;
     this.id_vertical.push(event.id)
+    console.log("id_vertical=============##########",this.id_vertical)
+
    /* if(event.checked == true){
     }
     else{
@@ -742,6 +797,7 @@ export class Version3Component implements OnInit {
     this.company_disable = 1;
     this.table = 4;
     this.location_data.push(event.id)
+    console.log("this.location_data=============================",this.location_data)
     /*  if(event.checked == true){
   
   
@@ -921,7 +977,9 @@ export class Version3Component implements OnInit {
 
 
 
-    this.v3Service.POST(this.getEaAllUsersList, { industries: industries_id.toString(), companies: companies_id.toString(), clients: client_id.toString(), verticals: id_vertical.toString(), location: location_data.toString(), selected: this.selected, token: 'LIVESITE' }).subscribe(res => {
+    this.v3Service.POST(this.getEaAllUsersList, 
+      { industries: industries_id.toString(), companies: companies_id.toString(), 
+        clients: client_id.toString(), verticals: id_vertical.toString(), location: location_data.toString(), selected: this.selected, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
 
       if (industry_id.length == 0 && companies_id.length == 0 && client_id.length == 0 && id_vertical.length == 0 && location_data.length == 0) {
@@ -1254,7 +1312,9 @@ export class Version3Component implements OnInit {
       }
     }
     //this.company_id=company_id
-    this.v3Service.POST(this.getCompaniesWithData, { industries_ids: industry_id.toString(), id: company_ids.toString(), start: this.pageNumber, length: this.size, token: 'LIVESITE', dateRange: date_range, search: search_data }).subscribe(res => {
+    this.v3Service.POST(this.getCompaniesWithData, { industries_ids: industry_id.toString(), 
+      id: company_ids.toString(), start: this.pageNumber, length: this.size, token: 'LIVESITE',
+       dateRange: date_range, search: search_data }).subscribe(res => {
       this.showloader = false
 
       this.common = res
@@ -1321,7 +1381,8 @@ export class Version3Component implements OnInit {
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.v3Service.POST(this.getCompaniesWithData, { column: this.sort_column, dir: this.ASC, industries_ids: this.industry_id.toString(), id: this.company_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
+    this.v3Service.POST(this.getCompaniesWithData,
+       { column: this.sort_column, dir: this.ASC, industries_ids: this.industry_id.toString(), id: this.company_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
       this.showloader = false
 
       this.common = res
@@ -1330,15 +1391,36 @@ export class Version3Component implements OnInit {
   }
 
 
-
-
-
-
-
-  getClientwithData(date_range, search_data, client_id) {
+  // industry_id;
+  getClientwithData(date_range, search_data, client_id,industry_id,company_ids) {
     var a = []
     this.showloader = true
-    this.v3Service.POST(this.getClientsWithData, { id: client_id.toString(), verticals_ids: client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data, location: this.location_data.toString() }).subscribe(res => {
+
+    if (client_id == '' && company_ids != '') {
+      for (var i = 0; i < this.company.length; i++) {
+        client_id.push(this.company[i].id)
+      }
+    }
+
+//     $id
+// $companies_id
+// $verticalsIds
+// $location
+    // industries_ids: industry_id.toString(),
+    // this.v3Service.POST(this.getClientsWithData, { 
+    //   companies_id: company_ids.toString(), id: client_id.toString(), verticals_ids: client_id.toString(),
+    //    start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data, location: this.location_data.toString() }).subscribe(res => {
+    //   this.showloader = false
+    //   this.common = res;
+    //   this.date_range = '';
+    //   this.data = this.common.data
+    //   this.dataSource = this.data;
+    this.v3Service.POST(this.getClientsWithData, { 
+      companies_id: company_ids.toString(), 
+      id: client_id.toString(),
+       verticalsIds: this.id_vertical.toString(),  
+       start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data,
+        location: this.location_data.toString() }).subscribe(res => {
       this.showloader = false
       this.common = res;
       this.date_range = '';
@@ -1442,8 +1524,18 @@ export class Version3Component implements OnInit {
        vid=id_vertical
      }
         */
-
-    this.v3Service.POST(this.getUsersWithData, { clients_ids: this.clients_data.toString(), verticals: id_vertical.toString(), location: location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search_type: searchtype, search: search_data, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
+      //  id
+      //  clients_ids
+      //  verticals
+      //  location
+    this.v3Service.POST(this.getUsersWithData, {
+       clients_ids: this.clients_data.toString(),
+       verticals: id_vertical.toString(),
+       id: id_vertical.toString(),
+        location: location_data.toString(),
+        start: this.pageNumber, length: this.pageSize, token: 'LIVESITE',
+         dateRange: date_range, search_type: searchtype, search: search_data, status: this.status,
+          certificates: this.certificates, course: this.course }).subscribe(res => {
       this.showloader = false;
 
       this.common = res
@@ -1540,7 +1632,8 @@ export class Version3Component implements OnInit {
 
   getVerticalwithData(date_range, search_data) {
     this.showloader = true
-    this.v3Service.POST(this.getVerticalsWithData, { start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data }).subscribe(res => {
+    this.v3Service.POST(this.getVerticalsWithData, {
+       start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data }).subscribe(res => {
       this.showloader = false
       this.common = res
       //this.date_range='';
@@ -1769,14 +1862,15 @@ export class Version3Component implements OnInit {
 
 
   dataGraph;
-  name0 :string;name1:string;name2:string
-  names:any=[]
-  data0;data1;data2;
-  names0=[]
-  names1=[]
-  names2=[]
+  name0: string; name1: string; name2: string
+  names: any = []
+  data0; data1; data2;
+  names0 = []
+  names1 = []
+  names2 = []
 
   getComparisionGraph(date_range, client_id, vertical_id, location_data, company_id, data_selected) {
+    console.log("date range======",date_range,"data_selected=======",data_selected)
     var company_ids = [];
     if (this.industry_id.length == 0 && this.selected == 'industries_selected') {
       company_ids = [];
@@ -1818,25 +1912,48 @@ export class Version3Component implements OnInit {
     else {
       company_ids = company_id
     }
-    this.v3Service.POST(this.getComparisonGraphData, { industries_ids: this.industry_id.toString(), companies_ids: company_ids.toString(), dataSelected: data_selected, clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
+    this.v3Service.POST(this.getComparisonGraphData,
+       { industries_ids: this.industry_id.toString(), companies_ids: company_ids.toString(),
+         dataSelected: data_selected, clients_ids: client_id.toString(), 
+         verticals_ids: vertical_id.toString(),
+          location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res
+      console.log("gfdgdfgdfgdfgdfgdfgdfgdfgdfgdfgdf",  this.common )
+  
+
+
+
+  this.name1=this.common.data[1].name
+  this.name0=this.common.data[0].name
+
+  this.data1=this.common.data[1]
+  this.data0=this.common.data[0]
+ 
       if (data_selected == 'total_course_completions') {
         this.user_status = 'false';
 
-        this.full_2018 = this.common.data[1].name
+             this.full_2018 = this.common.data[1].name
         this.mandatory_2018 = this.common.data[0].name
         this.full_2019 = this.common.data[3].name
         this.mandatory_2019 = this.common.data[2].name
+
+        this.name1=this.common.data[1].name
+        this.name0=this.common.data[0].name
+      
+        this.data1=this.common.data[1]
+        this.data0=this.common.data[0]
+        console.log(this.name1, this.name0 ,this.data1,
+          this.data0)
       }
       else {
         this.user_status = 'true';
       }
       console.log("comparision", this.common)
       this.comparision_data = this.common.data
-      console.log(this.comparision_data)
-      this.pyear = this.comparision_data[0].name;
-      this.year = this.comparision_data[1].name;
-      this.Average = this.comparision_data[2].name;
+      // console.log(this.comparision_data)
+      // this.pyear = this.comparision_data[0].name;
+      // this.year = this.comparision_data[1].name;
+      // this.Average = this.comparision_data[2].name;
       this.vertical_id = [];
       this.clients_id = [];
 
@@ -1853,122 +1970,107 @@ export class Version3Component implements OnInit {
       this.dataSelect = 1;
       this.graph.comparision.plotOptions.column = this.common.dataStackTye
       this.comparisiongraph_total = this.common.total_users;
-      this.graph.comparision.series = this.common.data;
-      console.log(this.common.data,this.common.dataStackTye)
+      // this.graph.comparision.series = this.common.data;
+      // console.log(this.common.data, this.common.dataStackTye)
 
 
 
-      this.name0 =this.common.data[0].name;
-      this.name1 =this.common.data[1].name;
-      this.name2 =this.common.data[2].name;
-      console.log(this.name0,this.name1,this.name2,
-        )
+      this.name0 = this.common.data[0].name?this.common.data[0].name:'';
+      this.name1 = this.common.data[1].name?this.common.data[1].name:'';
+      this.name2 = this.common.data[2].name?this.common.data[2].name:'';
+      console.log(this.name0, this.name1, this.name2),
 
 
-        this.data0 =this.common.data[0].data;
-      this.data1 =this.common.data[1].data;
-      this.data2 =this.common.data[2].data;
-      console.log(this.data0,this.data1,this.data2)
-        
-
-        this.names0.push(this.name0)
-        this.names1.push(this.name1)
-        this.names2.push(this.name2)
-
-        console.log(this.names0,this.names1,this.names2)
-
-      this.graph.comparision.series['name']=this.common.data[0].name0
-      this.graph.comparision.series['name']=this.common.data[1].name1
-      this.graph.comparision.series['name']=this.common.data[2].name2
+      this.data0 = this.common.data[0].data;
+      this.data1 = this.common.data[1].data;
+      this.data2 = this.common.data[2].data;
+      // console.log(this.data0, this.data1, this.data2)
+    
       // this.graph.comparision = this.common.data;
       // this.graph.myMethod( this.common.data);
-   
-      Highcharts.chart('comparision', this.graph.comparision);
-   
-      this.AllCompanyChartFunctionInit()
-      // this.highcharts.createChart(this.chartEl.nativeElement, this.myOptions);
+      // Highcharts.chart('comparision', this.graph.comparision);
+
+
+      this.comparisionChart()
 
     })
   }
 
 
-  AllCompanyChartFunctionInit() {
+  comparisionChart() {
     console.log("gfdsgdfgdfg===========")
     // if (this.chart) {
     //   this.chart.destroy()
     // }
-      this.chart = new Chart({
-        
-              chart: {height:300, zoomType: 'x',type: 'column',resetZoomButton: {position: {x: 0,y: -30}}},
+    this.options = ({
 
-                  credits: {
-                      enabled: false
-                    },
-              title: {
-                text: ''
-              },
-              xAxis: {
-                categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-              },
-              yAxis: {
-                min: 0,
-                title: {
-                  text: ''
-                }
-              },
-              legend: {
-                reversed: true
-              },
-              plotOptions: {
-                series: {
-                  stacking: 'normal'
-                }
-              },
-              // series:  [{name:this.name0,data:this.data0},{data:this.data1},{data:this.data2}]
-      });
+      chart: { height: 300, zoomType: 'x', type: 'column', resetZoomButton: { position: { x: 0, y: -30 } } },
 
-    }
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        }
+      },
+      legend: {
+        enabled: true
+    },
+
+      plotOptions: {
+        series: {
+          stacking: 'normal'
+        }
+      },
 
 
+      series: [
+        {
+          //avrage
+          name: this.name2,
+          color: "rgb(124,181,236)",
+          enableMouseTracking: false,
+          type: "spline",
+          data: this.data2
+
+        },
+        {
+          //2020
+          name: this.name1,
+          color: "#90ed7d",
+          enableMouseTracking: false,
+          type: 'column',
+          // data: [this.data1]
+          data: this.data1
+
+
+        },
+        {
+          // 2019
+          name: this.name0,
+          color: "#90ed7d",
+          enableMouseTracking: false,
+          type: 'column',
+          data: this.data0
+
+        },
+      ]
+    });
+    let comparisiongraph = new Chart(this.options);
+    this.comparisiongraph = comparisiongraph;
+  }
 
 
 
-//   myOptions = {
-//     chart: {
-//       type: 'bar'
-//     },
-//     title: {
-//       text: 'Stacked bar chart'
-//     },
-//     xAxis: {
-//       categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-//     },
-//     yAxis: {
-//       min: 0,
-//       title: {
-//         text: 'Total fruit consumption'
-//       }
-//     },
-//     legend: {
-//       reversed: true
-//     },
-//     plotOptions: {
-//       series: {
-//         stacking: 'normal'
-//       }
-//     },
-//     series: [{
-//       name: 'John',
-//       data: [5, 3, 4, 7, 2]
-//     }, {
-//       name: 'Jane',
-//       data: [2, 2, 3, 2, 1]
-//     }, {
-//       name: 'Joe',
-//       data: [3, 4, 4, 2, 5]
-//     }]
-//   };
-// }
+
 
 
 
@@ -2121,7 +2223,7 @@ export class Version3Component implements OnInit {
 
     if (this.table == 1) {
       this.tab = 'tab1';
-      
+
       this.getIndustrywithData(this.search_data, this.industry_id);
     }
     else if (this.table == 2) {
@@ -2132,7 +2234,7 @@ export class Version3Component implements OnInit {
     else if (this.table == 3) {
       this.tab = 'tab3';
 
-      this.getClientwithData(this.date_range, this.search_data, this.client_id);
+      this.getClientwithData(this.date_range, this.search_data,this.industry_id, this.company_id, this.client_id);
     }
     else if (this.table == 4) {
       this.tab = 'tab4';
@@ -2153,7 +2255,7 @@ export class Version3Component implements OnInit {
 
 
   datesUpdated(value, type) {
-    console.log(value,type)
+    console.log(value, type)
     if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'company') {
 
       this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
@@ -2162,7 +2264,7 @@ export class Version3Component implements OnInit {
     else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'client') {
 
       this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
-      this.getClientwithData(this.date_range, this.search_data, this.client_id)
+      this.getClientwithData(this.date_range, this.search_data, this.industry_id, this.company_id, this.client_id)
     }
     else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'user') {
 
@@ -2242,7 +2344,7 @@ export class Version3Component implements OnInit {
 
     else if (type == 'client') {
       this.search_data = value;
-      this.getClientwithData(this.date_range, this.search_data, this.client_id)
+      this.getClientwithData(this.date_range, this.search_data, this.industry_id, this.company_id, this.client_id)
     }
 
     else if (type == 'user') {

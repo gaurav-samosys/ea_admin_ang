@@ -94,9 +94,9 @@
 
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" style="margin-right: 20px; margin-left:20px;width: 90%" >
                 <h2>Post Description *</h2>
-                <!-- <ckeditor [config]="config" debounce="500"></ckeditor> -->
-                <ckeditor  [config]="ckeConfig" formControlName="description" debounce="500" (change)="onChange($event)">
-                  </ckeditor>
+                <ckeditor [config]="config" formControlName="description" (change)="onChange($event)" debounce="500"></ckeditor>
+                <!-- <ckeditor  [config]="ckeConfig" formControlName="description" debounce="500" (change)="onChange($event)">
+                  </ckeditor> -->
               </div>
 
               <button type="submit" mat-raised-button color="accent" matTooltip="save blog"

@@ -1,8 +1,8 @@
-import { Component, OnInit,Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService }    from '../user.service';
+import { UserService } from '../user.service';
 import * as myGlobals from '../../../../../global';
 @Component({
   selector: 'app-adduser',
@@ -10,19 +10,22 @@ import * as myGlobals from '../../../../../global';
   styleUrls: ['./adduser.component.scss']
 })
 export class AdduserComponent implements OnInit {
-adduserForm: FormGroup;
-res_data:any;
- getClients = myGlobals.getClients;
- getCompanies = myGlobals.getCompanies;
- addUsers = myGlobals.addUser;
-    common:any;
-    companiesData:any;
-    clientData:any;
-    added_status:any;
-    formData:any;
-  constructor(public dialogRef: MatDialogRef<AdduserComponent>,private rt:Router,public _formBuilder: FormBuilder,private user:UserService) { }
+  adduserForm: FormGroup;
+  res_data: any;
+  getClients = myGlobals.getClients;
+  getCompanies = myGlobals.getCompanies;
+  addUsers = myGlobals.addUser;
+  common: any;
+  companiesData: any;
+  clientData: any;
+  added_status: any;
+  client_vertical_id;
+  formData: any;
+  client_vertical: any;
+  client_vertical_name=[];
+  constructor(public dialogRef: MatDialogRef<AdduserComponent>, private rt: Router, public _formBuilder: FormBuilder, private user: UserService) { }
   TransunionArray = [
-    'CreditView' ,
+    'CreditView',
     'Free Consumer Disclosure',
   ];
   ngOnInit() {
@@ -30,47 +33,48 @@ res_data:any;
     //   free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
     // })
 
-  	this.getCompany();
-  	   this.adduserForm = this._formBuilder.group({
-            company : ['', Validators.required],
-            client  : ['', Validators.required],
-            first_name  : ['', Validators.required],
-            last_name  : ['', Validators.required],
-            email: ['', [Validators.required, Validators.email, Validators.pattern(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,6})$/)]],
+    this.getCompany();
+    this.adduserForm = this._formBuilder.group({
+      company: ['', Validators.required],
+      client: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,6})$/)]],
 
-            // email     : ['', [Validators.required,Validators.email]],
-            // phone   : ['', Validators.required],
-            phone: ['',  [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
-            clientvertical:'',
-            clientvertical1:'',
-            free_link:'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
-        });
+      // email     : ['', [Validators.required,Validators.email]],
+      // phone   : ['', Validators.required],
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
+      clientvertical: '',
+      clientvertical1: '',
+      free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html',
+      show_transunion_button: ''
+    });
   }
 
-           public hasError = (controlName: string, errorName: string) =>{
-              return this.adduserForm.controls[controlName].hasError(errorName);
-            }
-         
-  addUser(){
-    if(this.adduserForm.invalid){
+  public hasError = (controlName: string, errorName: string) => {
+    return this.adduserForm.controls[controlName].hasError(errorName);
+  }
+
+  addUser() {
+    if (this.adduserForm.invalid) {
       return false;
     }
-   console.log(this.adduserForm.value)
+    console.log(this.adduserForm.value)
 
-         this.adduserForm.value.token="LIVESITE";
-         console.log(this.adduserForm.value)
-        this.user.POST(this.addUsers,this.adduserForm.value).subscribe(res => {
-            this.common = res
-            console.log(this.common)
+    this.adduserForm.value.token = "LIVESITE";
+    console.log(this.adduserForm.value)
+    this.user.POST(this.addUsers, this.adduserForm.value).subscribe(res => {
+      this.common = res
+      console.log(this.common)
 
-                this.common=res
-    this.added_status=this.common.success;
-   
-     localStorage.setItem('useradded_status',this.added_status)
-          this.rt.navigateByUrl('/apps/dashboards/users', {skipLocationChange: true}).then(()=>
-                          this.rt.navigate(["/apps/user-mangement/user"]));
-    this.dialogRef.close();
-        })
+      this.common = res
+      this.added_status = this.common.success;
+
+      localStorage.setItem('useradded_status', this.added_status)
+      this.rt.navigateByUrl('/apps/dashboards/users', { skipLocationChange: true }).then(() =>
+        this.rt.navigate(["/apps/user-mangement/user"]));
+      this.dialogRef.close();
+    })
   }
 
   show_transunion
@@ -80,27 +84,39 @@ res_data:any;
     }
   }
 
-    onClose() {
+  onClose() {
     this.dialogRef.close();
   }
-  
-   getCompany() {
 
-        this.user.POST(this.getCompanies, {token: 'LIVESITE' }).subscribe(res => {
-            this.common = res
-            this.companiesData = this.common.data
-        })
-        }
+  getCompany() {
+
+    this.user.POST(this.getCompanies, { token: 'LIVESITE' }).subscribe(res => {
+      this.common = res
+      this.companiesData = this.common.data
+    })
+  }
 
 
 
-    getClient(value) {
-        this.user.POST(this.getClients, { company_id: value, token: 'LIVESITE' }).subscribe(res => {
-            this.common = res;
-            console.log(res)
+  getClient(value) {
+    this.user.POST(this.getClients, { company_id: value, token: 'LIVESITE' }).subscribe(res => {
+      this.common = res;
+      console.log(res)
 
-            this.clientData = this.common.data
-        })
+      this.clientData = this.common.data
+      console.log(this.clientData[0].id,this.clientData[0].client_vertical)
+      if (this.clientData[0].id == this.client_vertical_id) {
+        this.client_vertical = this.clientData[0].client_vertical
+        console.log(this.client_vertical)
+      } else {
 
-    }
+      }
+    })
+
+  }
+  change(client_vertical) {
+    console.log(client_vertical)
+    this.client_vertical_name.push( client_vertical.client_vertical)
+    console.log(this.client_vertical_name)
+  }
 }

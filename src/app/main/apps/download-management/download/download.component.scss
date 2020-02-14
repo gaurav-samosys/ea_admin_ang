@@ -91,3 +91,17 @@ ul {
 
  .mat__box{padding:10px 17px;background-color:#fff;border:1px solid #efefef;border-radius:15px;box-shadow:0 0 6px rgba(32,176,242,0.25);}
 .table{border: 1px solid rgba(0, 0, 0, 0.12)}
+
+
+
+.speedometer_icon a:before{font-family: FontAwesome;
+  content: "\f0e4";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  position: absolute;
+  left: -8px;
+  top: -1px;}
+
+  .report_top_hover:hover{color:#0677ad !important;}
+  .report_top_hover a:hover{color:#0677ad !important;}

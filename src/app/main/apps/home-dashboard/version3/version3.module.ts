@@ -52,7 +52,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { CommonModule } from '@angular/common';
 // import { HighchartsChartModule } from "highcharts-angular";
-import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
+// import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 import { ChartModule } from 'angular-highcharts';
 const routes: Routes = [
@@ -80,7 +80,7 @@ const routes: Routes = [
         NgxDaterangepickerMd.forRoot(),
         MatButtonModule,
         MatDividerModule,
-        DateRangePickerModule,
+        // DateRangePickerModule,
         MatFormFieldModule,
         MatIconModule,
         MatMenuModule,

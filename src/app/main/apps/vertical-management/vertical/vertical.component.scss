@@ -109,3 +109,15 @@ ul {
 .manage_vertical_btn{margin-left: 16px;margin-bottom: 16px;color: #7DA843;}
 /*.manage_vertical_btn .mat-button-wrapper{color: #7DA843;}*/
 .btn_bxs_vertical{position: absolute;right: 13px;top: 50px;border: 1px solid #c5c7cb;background: #f7f7f7;}
+
+.speedometer_icon a:before{font-family: FontAwesome;
+  content: "\f0e4";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  position: absolute;
+  left: -8px;
+  top: -1px;}
+
+  .report_top_hover:hover{color:#0677ad !important;}
+  .report_top_hover a:hover{color:#0677ad !important;}

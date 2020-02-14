@@ -45,9 +45,9 @@
                     <!-- <a class="forgot-password" [routerLink]="'/apps/admin/forgot'">
                         Forgot Password?
                     </a> -->
-                    <a class="forgot-password" style="text-decoration: none;" [routerLink]="'/pages/auth/forgot-password'">
+                    <!-- <a class="forgot-password" style="text-decoration: none;" [routerLink]="'/pages/auth/forgot-password'">
                         Forgot Password?
-                    </a>
+                    </a> -->
                 </div>
 
                 <button  mat-raised-button color="accent" class="submit-button hover-button-loginpage" aria-label="LOG IN">
@@ -55,26 +55,27 @@
                 </button>
 
             </form>
-
-          <!--   <div class="separator">
-                <span class="text">OR</span>
+          
+            <!-- .login_content a, .login_content p {
+                color: #888;
+            } [routerLink]="apps/admin/forgot"-->
+            
+            <div class="Lost_password">
+                <span class="a" style="color: #888;" (click)="goback()"> Lost your password?
+                </span>
+            </div>
+            <div class="back_home" style="margin-top: 20px;">
+               <span class="a" style="color: #888;"> Back to Home</span>
+            </div>
+            <div mat-raised-button class="" style="margin-top: 20px;">
+                <span  style="color: #888;">©2020 All Rights Reserved.</span>
             </div>
 
-            <button mat-raised-button class="google">
-                Log in with Google
-            </button>
-
-            <button mat-raised-button class="facebook">
-                Log in with Facebook
-            </button> -->
-
-           <!--  <div class="register" fxLayout="column" fxLayoutAlign="center center">
-                <span class="text">Don't have an account?</span>
-                <a class="link" [routerLink]="'/pages/auth/register'">Create an account</a>
-            </div> -->
+          
 
         </div>
 
     </div>
 
 </div>
+

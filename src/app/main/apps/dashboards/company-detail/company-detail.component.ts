@@ -148,17 +148,26 @@ public totalSize = 0;
       // console.log(this.common,this.states)
     });
   }
-  confirmDialog(){
-    
+  confirmDialog(id){
+    console.log(id)
   }
+  /**
+     * Edit client
+     */
+    // [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]" 
+    editClient(id){
+      console.log(id)
+   }
   /**
    * get data based on company
    */
   getData()
   {
     this.showloader=true
-  	 this.companyService.Post(this.getClients,{company_id:this.id,fields:'*',token:'LIVESITE'}).subscribe(res=>{
+     this.companyService.Post(this.getClients,
+      {company_id:this.id,fields:'*',token:'LIVESITE'}).subscribe(res=>{
      this.common=res
+console.log( this.common)
      this.showloader=false
 
      this.allItems = this.common.total_data;
@@ -254,6 +263,8 @@ let part;
         // console.log(res)
       })
     }
+
+    
  /**===========================================================
           Export data and download
   ===========================================================*/

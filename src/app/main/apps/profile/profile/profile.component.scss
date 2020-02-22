@@ -17,7 +17,7 @@ $active-list-background-color: #9AB87A;
 $border-radius: 5px;
 
 * {
-  font-family: 'Poppins';
+  // font-family: 'Poppins';
 }
 body {
   background-color: $background-color;
@@ -26,3 +26,15 @@ body {
 a:hover {
   cursor: pointer;
 }
+
+.speedometer_icon a:before{font-family: FontAwesome;
+  content: "\f0e4";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  position: absolute;
+  left: -8px;
+  top: -1px;}
+
+  .report_top_hover:hover{color:#0677ad !important;}
+  .report_top_hover a:hover{color:#0677ad !important;}

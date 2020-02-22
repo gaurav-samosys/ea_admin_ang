@@ -1,26 +1,38 @@
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
   <div class="center" fusePerfectScrollbar>
 
-      <div class="mat__box mat__box2" style="flex-direction: row;
+      <!-- <div class="mat__box mat__box2" style="flex-direction: row;
       box-sizing: border-box;
      height: 100px;
       place-content: center space-between;
       align-items: center;    background-color: #039be5 !important;
-      color: white !important;">
+      color: white !important;"> -->
         <div class="row" fxLayoutAlign="space-between center">
-          <div class="" style="color: white;margin-top:40px">
+          <!-- <div class="" style="color: white;margin-top:40px">
           <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white">
             <img style="margin-left: 10px;" width="20px" height="20px" src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
           <a routerLink="/apps/expert_interview"
             style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Manage Expert Interview</a>
-        </div>
+        </div> -->
+        <div class="" style="margin-top:20px; position: relative; margin-left: 25px;">
+
+            <span class="speedometer_icon  report_top_hover"> <a routerLink="/apps/home-dashboard/version3" 
+             style="text-decoration: none;">
+             &nbsp;  &nbsp;Dashboard </a></span>
+             <span style="color: #ccc;">/
+             <a  routerLink="/apps/expert_interview"
+               style="text-decoration: none;" class="report_top_hover">&nbsp;Manage Expert Interview</a>
+             </span>
+         
+           </div>
+
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top:-30px;margin-right: 40px">
           <button mat-raised-button routerLink="/apps/add_expert_interview">
             <mat-icon>add_circle_outline</mat-icon>Add Expert Interview
           </button>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
 
 
@@ -59,9 +71,9 @@
                 </div>
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right" style="margin-top: -84px;">
-                  <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
-                  style="  background-color: #039be5 !important;
-                  color: #ffffff !important;"><span> Show/Hide Column</span></button>
+                  <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button" class="hover-button-loginpage"
+                  style="  background-color: #039be5 ;
+                  color: #ffffff ;"><span> Show/Hide Column</span></button>
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item>
                       <label>
@@ -134,9 +146,22 @@
                       </mat-cell>
                     </ng-container>
 
-                  
                     <!-- <iframe class="slide_content" src="https://www.youtube.com/embed/bQ8wdgXTDU0" width="100%" -->
                     <!-- frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
+                    <ng-container matColumnDef="users_count">
+                        <mat-header-cell *matHeaderCellDef> Users Count
+                          <span class="pointer">
+                            <i (click)="updateSortingOrderInterview('users_count','ASC')"
+                              [class]='(this.sort_column=="users_count" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                              arrow_upward
+                            </i>
+                            <i (click)="updateSortingOrderInterview('users_count','DESC')"
+                              [class]='(this.sort_column=="users_count" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                              arrow_downward
+                            </i>
+                          </span> </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.users_count}} </mat-cell>
+                      </ng-container>
 
                     <ng-container matColumnDef="create_date">
                       <mat-header-cell *matHeaderCellDef> Create Date
@@ -157,7 +182,7 @@
                     <ng-container matColumnDef="action">
                       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                       <mat-cell *matCellDef="let element">
-                        <button mat-raised-button [matMenuTriggerFor]="belowMenu" style="background-color: #039be5 !important; color: #ffffff !important;">Actions</button>
+                        <button mat-raised-button [matMenuTriggerFor]="belowMenu" style="background-color: #039be5 ; color: #ffffff ;" class="hover-button-loginpage">Actions</button>
 
                         <!-- [routerLink]="['/apps/add_expert_interview', element.id]"  (click)="EditExpertInterview(element)" -->
 
@@ -179,11 +204,11 @@
                   <div *ngIf="data == '' " style="margin-bottom: 20px;
                     text-align: center;
                     margin-top: 20px;">No data available in table</div>
-                       <mat-card *ngIf="showloader==true"
-                       style="display: flex; justify-content: center; align-items: center">
-                       <mat-progress-spinner mode="indeterminate">
+                       <div class="center_align" *ngIf="showloader==true"
+                      >
+                       <mat-progress-spinner mode="indeterminate" strokeWidth="3"  [diameter]="50">
                        </mat-progress-spinner>
-                     </mat-card>
+                      </div>
                 </div>
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
               </div>

@@ -91,10 +91,12 @@ export class ManagementComponent implements OnInit {
       localStorage.removeItem('deletetopic_status');
     }
   }
-
+  vartical
   ngOnInit() {
     this.name = localStorage.getItem('name')
     localStorage.setItem('vertical_id',this.vertical_id)
+    // this.vartical = window.location.href.split('home-dashboard/version3')[1]
+    // console.log(this.vartical)
     this.vertical_id = this._Activatedroute.snapshot.paramMap.get("id");
   //  console.log(this.vertical_id)
     this.getVerticalList(this.vertical_id);
@@ -123,24 +125,28 @@ export class ManagementComponent implements OnInit {
       this.common = res
       this.showloader=false;
 
-      this.data = this.common.data
-      this.dataSource = this.data;
+   
 
-      this.allItems = this.common.total_data;
-      this.dataSource = new MatTableDataSource(this.data);
-      this.dataSource.paginator = this.paginator;
+        this.data = this.common.data
+        this.dataSource = this.data;
+  
+        this.allItems = this.common.total_data;
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+      
+    
       //this.setPage(1,id);
     })
   }
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
     this.endIndex = this.startIndex < e.length ? Math.min(this.startIndex + e.pageSize, e.length) : this.startIndex;
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
       this.Search(this.value, this.name1)
     }
     else {
@@ -174,7 +180,8 @@ export class ManagementComponent implements OnInit {
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.manage_service.Post(this.getVerticalDataList, {column:this.sort_column,dir:this.ASC, vertical_id:this.id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.manage_service.Post(this.getVerticalDataList, { 
+      cat_name: this.title, description: this.description, column:this.sort_column,dir:this.ASC, vertical_id:this.id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.showloader=false;
 
@@ -311,7 +318,7 @@ export class ManagementComponent implements OnInit {
    * @param value 
    */
   change(type, value) {
-    console.log(type, value)
+    // console.log(type, value)
     localStorage.setItem('names', value.cat_name )
 
     if (type == 'video') {
@@ -379,7 +386,7 @@ export class ManagementComponent implements OnInit {
  * @param id 
  */
   onChange(value, id) {
-    console.log(value, id)
+    // console.log(value, id)
     let status;
     if (value == false) {
       status = 0;
@@ -394,7 +401,7 @@ export class ManagementComponent implements OnInit {
 
     }
     this.manage_service.Post(this.topicActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
     })
   }
 

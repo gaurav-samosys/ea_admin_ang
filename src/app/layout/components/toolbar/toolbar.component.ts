@@ -177,18 +177,18 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     table
     tab
     toggleSidebarFolded(value): void {
-      
+        var elem = document.getElementById("addClassNavDev1");
+        // elem.style.minWidth = "62%";
+        elem.classList.toggle('mW62')
+
         document.getElementById('addClassNavDev').classList.toggle('active')
         console.log("close===========",value.getAttribute("class"))
-        // this.table = value;
-        // console.log(this.table)
-        // if (this.table == 1) {
-        //     this.tab = 'tab1';
-        //     console.log(this.tab)
-        // }
+        
         this._fuseSidebarService.getSidebar('navbar').toggleFold();
       
     }
+
+  
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------

@@ -87,7 +87,7 @@ export class ManageColorComponent implements OnInit {
 
 
   getClient() {
-    this.http.get('http://192.168.0.45/enrichedacademy_live/api/admin/client_color2?token=LIVESITE').subscribe(res => {
+    this.http.get('https://staging.enrichedacademy.com/api/admin/client_color2?token=LIVESITE').subscribe(res => {
       console.log(res)
       this.common = res
       this.clientArray = this.common.data;

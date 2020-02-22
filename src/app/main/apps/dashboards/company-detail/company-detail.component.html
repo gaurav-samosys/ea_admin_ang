@@ -17,14 +17,14 @@
 
 
 
-    <div class="" style="flex-direction: row;
+    <!-- <div class="" style="flex-direction: row;
       box-sizing: border-box;
      height: 100px;
       place-content: center space-between;
       align-items: center;  background-color: #039be5 !important;
-      color: white !important;">
+      color: white !important;"> -->
       <div class="row" fxLayoutAlign="space-between center">
-        <div class="" style="color: white;margin-top:26px;padding: 15px;">
+        <!-- <div class="" style="color: white;margin-top:26px;padding: 15px;">
           <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white;">
             <img style="margin-left: 10px;" width="20px" height="20px"
               src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
@@ -33,8 +33,21 @@
           <a routerLink="/apps/dashboards/company-detail/{{id}}"
             style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{company_name}}</a>
 
-            <!-- <a routerLink="/apps/dashboards/company-detail/{{id}}/"
-            style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;{{client_name}}</a> -->
+          
+        </div> --> 
+         <div class="" style="margin-top:20px; position: relative; margin-left: 25px;">
+
+        <span class="speedometer_icon  report_top_hover"> <a routerLink="/apps/home-dashboard/version3" 
+          style="text-decoration: none;">
+          &nbsp;  &nbsp;Dashboard </a></span>
+          <span style="color: #ccc;">/
+          <a  routerLink="/apps/dashboards/companies"
+            style="text-decoration: none;" class="report_top_hover">&nbsp;Company</a>
+          </span>
+          <span style="color: #ccc;">/
+              <a  routerLink="/apps/dashboards/company-detail/{{id}}"
+                style="text-decoration: none;" class="report_top_hover">&nbsp;{{company_name}}</a>
+              </span>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 17px;;
           margin-right: 40px;
@@ -44,18 +57,19 @@
           </button>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
 
 
     <div class="mat__box mat__box2 mt-20 mr-28">
-           <div class="row" style="float: right;">
+        <!-- style="float: right;" -->
+           <div class="row" >
            	 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 
-              <button mat-raised-button style="margin-right: 21px; background-color: #039be5 ;color: white;"  class="button" (click)="SwitchButton(1)" *ngIf="division == 1">Company Detail</button>
+              <button mat-raised-button style="margin-right: 21px; background-color: #039be5 ;color: white;"  class="hover-button-loginpage button" (click)="SwitchButton(1)" *ngIf="division == 1">Company Detail</button>
 
               <button mat-raised-button  style="margin-right: 21px;"   (click)="SwitchButton(1)" *ngIf="division == 2">Company Detail</button>
-               <button mat-raised-button  style="margin-right: 21px;  background-color: #039be5 ;color: white;"  class="button" (click)="SwitchButton(2)" *ngIf="division == 2">Client Search</button>
+               <button mat-raised-button  style="margin-right: 21px;  background-color: #039be5 ;color: white;"  class="hover-button-loginpage button" (click)="SwitchButton(2)" *ngIf="division == 2">Client Search</button>
 
                <button mat-raised-button   style="margin-right: 21px;"  (click)="SwitchButton(2)" *ngIf="division == 1">Client Search</button>
           </div>
@@ -64,7 +78,7 @@
 
 
 
-    <div class="mat__box mt-20 mr-28" *ngIf="division == 1">
+    <div class="mat__box  mr-28" *ngIf="division == 1">
       <div class="row" style="background-color: white; padding:10px">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <!--   <div class="h2 mb-8">Company Search</div> -->
@@ -112,7 +126,7 @@
               </mat-form-field>
 
               <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;"> 
-                <mat-label>Industry</mat-label>
+                <mat-label>Industry Name</mat-label>
                 <mat-select matNativeControl [ngModel]="industrys" (selectionChange)="Search($event.value,'industry')"
                   readonly="readonly" disabled="disabled" class="disable">
                   <mat-option selected="" value="">Please select industry</mat-option>
@@ -161,7 +175,7 @@
 
 
 
-    <div class="mat__box mt-20 mr-28" *ngIf="division == 2">
+    <div class="mat__box  mr-28" *ngIf="division == 2">
       <div class="row" style="background-color: white;">
           <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100"  style="margin-top: 25px; padding:10px">
 
@@ -319,7 +333,7 @@
             </div>
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
-              <button  mat-raised-button matTooltip="Download Excel File" (click)="exportData()" style="background-color: #039be5 !important;color: white !important;">Export Data to Excel</button>
+              <button  mat-raised-button matTooltip="Download Excel File" (click)="exportData()" class="hover-button-loginpage" style="background-color: #039be5 ;color: white ;">Export Data to Excel</button>
             </div>
 
           </div>
@@ -430,13 +444,14 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef>Action</th>
                     <td *matCellDef="let element">
-                      <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="action_btn" style="background-color: #039be5 !important;color: white !important;">Actions</button>
+                      <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="hover-button-loginpage action_btn" style="background-color: #039be5 ;color: white ;">Actions</button>
 
                       <mat-menu #belowMenu="matMenu" yPosition="below">
                           <!-- /apps/client-mangement/addclient -->
+                          <!-- (click)="editClient(element)" -->
                           <!-- [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]" -->
                         <button mat-menu-item matTooltip="Edit"
-                          (click)="editClient( element)">Edit</button>
+                        [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">Edit</button>
                         <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
                       </mat-menu>
                     </td>

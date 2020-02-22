@@ -99,10 +99,10 @@ export class QuizzeslistComponent implements OnInit {
     this.vertical_id = localStorage.getItem('vertical_id')
 
     // this.vertical_id = this._Activatedroute.snapshot.paramMap.get("id");
-     console.log(this.vertical_id)
+    //  console.log(this.vertical_id)
     this.names = localStorage.getItem('names')
     this.topic_id = this._Activatedroute.snapshot.paramMap.get("id");
-    console.log(this.topic_id)
+    // console.log(this.topic_id)
     this.getQuizeList(this.topic_id)
   }
 
@@ -115,7 +115,7 @@ export class QuizzeslistComponent implements OnInit {
  * @param evt 
  */
   columnClick(value,colName: string, evt) {
-    console.log('-0-----', evt.target.checked)
+    // console.log('-0-----', evt.target.checked)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);
     if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
@@ -135,7 +135,9 @@ export class QuizzeslistComponent implements OnInit {
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.quize_service.Post(this.getQuizzesListbyTopic, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.quize_service.Post(this.getQuizzesListbyTopic, { 
+      topic_id: this.topic_id,
+      quiz_name: this.value,column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
       this.showloader=false
 
@@ -166,17 +168,18 @@ export class QuizzeslistComponent implements OnInit {
     this.quize_service.Post(this.getQuizzesListbyTopic, { topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.showloader=false
-
-      this.allItems = this.common.total_data;
-      this.data = this.common.data
-      this.dataSource = new MatTableDataSource(this.data);
-      this.dataSource.paginator = this.paginator;
+  
+        this.allItems = this.common.total_data;
+        this.data = this.common.data
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+     
       //this.setPage(1,id);
     })
   }
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
@@ -196,13 +199,36 @@ export class QuizzeslistComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
      this.showloader=true;
-    this.quize_service.Post(this.getQuizzesListbyTopic, { topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      
+      this.quize_service.Post(this.getQuizzesListbyTopic, {quiz_name: this.value, topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.allItems = this.common.total_data;
       this.data = this.common.data
       this.showloader=false;
       this.dataSource = this.data;
 
+    })
+  }
+    /**
+    * Search value in input field
+    */
+   Search(value) {
+    this.value = value;
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    this.pageNumber = start
+    this.quize_service.Post(this.getQuizzesListbyTopic, {
+      topic_id: this.topic_id,
+      quiz_name: value,
+      offset: this.pageNumber,
+      limit: this.pageSize,
+      token: 'LIVESITE'
+    }).subscribe(res => {
+      this.common = res
+      this.allItems = this.common.total_data;
+      this.rows = this.common.data
+      this.data = this.rows.slice(0, this.size);
+      this.dataSource = this.data
     })
   }
   /*
@@ -333,35 +359,14 @@ export class QuizzeslistComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
-  /**
-    * Search value in input field
-    */
-  Search(value) {
-    this.value = value;
-    const end = (this.currentPage + 1) * this.pageSize;
-    const start = this.currentPage * this.pageSize;
-    this.pageNumber = start
-    this.quize_service.Post(this.getQuizzesListbyTopic, {
-      topic_id: this.topic_id,
-      quiz_name: value,
-      offset: this.pageNumber,
-      limit: this.pageSize,
-      token: 'LIVESITE'
-    }).subscribe(res => {
-      this.common = res
-      this.allItems = this.common.total_data;
-      this.rows = this.common.data
-      this.data = this.rows.slice(0, this.size);
-      this.dataSource = this.data
-    })
-  }
+
   /**
    * Status change Event
    * @param value 
    * @param id 
    */
   onChange(value, id) {
-    console.log(value, id)
+    // console.log(value, id)
     let status;
     if (value == false) {
       status = 0;
@@ -370,7 +375,7 @@ export class QuizzeslistComponent implements OnInit {
       status = 1;
     }
     this.quize_service.Post(this.quizActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
     })
   }
 

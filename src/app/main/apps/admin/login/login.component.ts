@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
             verticalPosition: this.verticalPosition,
         });
     }
-
+ 
 
     Login() {
         this.login_service.Post(this.login, {

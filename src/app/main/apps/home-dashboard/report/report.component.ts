@@ -32,27 +32,31 @@ export class ReportComponent implements OnInit {
     public yearStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - 365)).toDateString());
     public yearEnd: Date = this.today;
 
-
+    selectedItem:string
+    client_id ;
+    startDate1
+    endDate1
+    dateRange
   selected = ''
   data: any
   reportForm: FormGroup
   downloadUserReport = myGlobals.downloadUserReport
   getCompanyList = myGlobals.getCompanyList
   selected1 = { startDate: moment, endDate: moment };
+  
   constructor(
     private toastr: ToastrService,
     public fb: FormBuilder,
     public report_Service: ReportServiceService
   ) {
     this.reportForm = this.fb.group({
-      client_id: '',
+      client_id: new FormControl(''),
       dateRange: new FormControl('date')
     })
   }
-
   ngOnInit() {
     var date = new Date();
-    console.log(date)
+    // console.log(date)
     this.getReportListWithClient();
   }
   companyListArray = []
@@ -61,26 +65,25 @@ export class ReportComponent implements OnInit {
       this.companyListArray = res['data']
       if (res['success'] == true) {
         this.companyListArray = res['data']
-
+       this.selectedItem = this.companyListArray[0].company_name
+// console.log(this.companyListArray[0].company_name, this.selectedItem)
       }
     })
   }
-  client_id
+  
   onSelection(value) {
-    console.log(value)
+    // console.log(value)
     this.client_id = value
   }
-  startDate1
-  endDate1
-  dateRange
+ 
   datesUpdated(value) {
-    console.log(value['startDate']['_d'], value['endDate']['_d'])
+    // console.log(value['startDate']['_d'], value['endDate']['_d'])
     var startDate = value['startDate']['_d']
     var endDate = value['endDate']['_d']
     this.startDate1 = moment(startDate).format('MM/DD/YYYY');
-    console.log(this.startDate1)
+    // console.log(this.startDate1)
     this.endDate1 = moment(endDate).format('MM/DD/YYYY');
-    console.log(this.endDate1)
+    // console.log(this.endDate1)
     this.dateRange = this.startDate1 + '-' + this.endDate1
 
   }
@@ -89,9 +92,9 @@ export class ReportComponent implements OnInit {
       token: 'LIVESITE',
       client_report: this.client_id, date_range: this.dateRange
     }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.data = res['data']
-      console.log(this.data)
+      // console.log(this.data)
       if (res['success'] == true) {
         this.toastr.success('Report Download Successfully');
         this.report_Service.downloadFile(this.data, 'jsontocsv');

@@ -62,7 +62,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="    margin-top: -30px;">
                   
                       <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button"
-                        class="ColVis_Button ColVis_MasterButton" style="color: white; background-color: #039be5 !important;"><span> Show/Hide Column</span></button>
+                        class="hover-button-loginpage ColVis_Button ColVis_MasterButton" style="color: white; background-color: #039be5 ;"><span> Show/Hide Column</span></button>
                       <mat-menu #menu="matMenu">
                         <button mat-menu-item >
                           
@@ -194,7 +194,7 @@
                         </i>
                       </span> </th>
                     <td mat-cell *matCellDef="let element">
-                      <ui-switch [checked]="element.status == '1' ? true : false"
+                      <ui-switch size="small" [checked]="element.status == '1' ? true : false"
                         (change)="onChange($event,element.id)"></ui-switch>
                     </td>
                   </ng-container>
@@ -207,11 +207,11 @@
                     (page)="handlePage($event)"></mat-paginator>
                   <div *ngIf="data == '' " style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
                     No data available in table</div>
-                    <mat-card *ngIf="showloader==true"
+                    <div class="center_align" *ngIf="showloader==true"
                     style="display: flex; justify-content: center; align-items: center">
-                    <mat-progress-spinner mode="indeterminate">
+                    <mat-progress-spinner mode="indeterminate" strokeWidth="3"  [diameter]="50">
                     </mat-progress-spinner>
-                  </mat-card>
+                  </div>
               </div>
               <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             </div>

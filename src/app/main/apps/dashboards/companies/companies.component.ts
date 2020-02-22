@@ -159,26 +159,23 @@ export class CompaniesComponent implements OnInit {
   getCompany() {
     this.showloader = true;
     this.companyService.Post(this.getCompanies, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      console.log('=res=======>', res);
-
+      // console.log('=res=======>', res);
       this.response = res
       this.showloader = false;
+  
       this.allItems = this.response.total_data;
       this.data = this.response.data;
-      // console.log(this.data)
       this.dataSource = this.data;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.MatSort;
-      //console.log(this.paginator.getRangeLabel)
-      //this.dataSource.data=this.data;
+  
+    
       //this.setPage(1);
     });
   }
 
   public handlePage(e: any) {
-    console.log(e)
-    this.currentPage = e.pageIndex;
+    // console.log(e)
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
     this.endIndex = this.startIndex < e.length ? Math.min(this.startIndex + e.pageSize, e.length) : this.startIndex;
@@ -186,7 +183,7 @@ export class CompaniesComponent implements OnInit {
       if (this.value != this.value) {
         this.currentPage = 0;
       }
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
       this.Search(this.value, this.name)
     }
     else {
@@ -217,11 +214,11 @@ export class CompaniesComponent implements OnInit {
     this.showloader=true
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.companyService.Post(this.getCompanies, {column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.companyService.Post(this.getCompanies, { company_name: this.company, full_name: this.fullname, email: this.email, city: this.city, start_date: this.sdate, end_date: this.edate, industry: this.industry1, status: this.status1, country: this.country1, state: this.state1,column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
     this.showloader=false
      
       this.response = res
-      console.log(this.response.data)
+      // console.log(this.response.data)
       this.dataSource=this.response.data
     })
   }
@@ -241,10 +238,10 @@ export class CompaniesComponent implements OnInit {
         confirm dialog
   ===========================================================*/
   confirmDialog(value): void {
-    console.log(value)
+    // console.log(value)
     let id = value
     this.companyService.Post(this.deleteCompany, {id:id, token: 'LIVESITE' }).subscribe(res => {
-      console.log('=res=======>', res);
+      // console.log('=res=======>', res);
       if(res['success']==true){
         this.toastr.success("Company deleted successfully")
       }else[
@@ -282,6 +279,11 @@ export class CompaniesComponent implements OnInit {
     const dialogRef = this.dialog.open(CompanyEditComponent, {
       width: '800px', height: '500px',
       data: value
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed',result);
+      this.getCompany();
+
     });
   }
 
@@ -336,7 +338,7 @@ export class CompaniesComponent implements OnInit {
            on selction change status 
      ===========================================================*/
   onChange(value, id) {
-    console.log(value, id)
+    // console.log(value, id)
     let status;
     if (value == false) {
       status = 0;
@@ -348,7 +350,7 @@ export class CompaniesComponent implements OnInit {
 
     }
     this.companyService.Post(this.companyActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
     })
   }
 
@@ -533,9 +535,9 @@ export class CompaniesComponent implements OnInit {
       token: 'LIVESITE'
     })
       .subscribe(res => {
-        console.log(res)
+        // console.log(res)
         if (res['success'] == true) {
-          console.log(this.data)
+          // console.log(this.data)
           // this.companyService.exportAsExcelFile(res['data'], 'sample');
           this.companyService.exportAsExcelFile(this.data, 'sample');
         }

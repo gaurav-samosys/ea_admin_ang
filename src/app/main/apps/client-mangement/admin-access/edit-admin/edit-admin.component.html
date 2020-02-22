@@ -38,13 +38,17 @@
                     
                     <mat-label style=" width: 36%;margin-bottom: 10px">Client name*</mat-label>
                     <mat-form-field appearance="outline" fxFlex="100" class="pl-4">
-                          <select matNativeControl formControlName="client"  >
-                            <option value="" selected="">Select client</option>
+                          <!-- <select matNativeControl formControlName="client"  (change)="setClient($event.target.value)">
                              <option *ngFor="let data of clientData" value="{{data.id}}" >
                                 {{data.client_name}}
                             </option>
                             
-                        </select>
+                        </select> -->
+                        <mat-select formControlName="client" placeholder="{{client_name}}"  (selectionChange)="setClient($event.value)">
+                                <mat-option *ngFor="let item of clientData" [value]="item.id">
+                                  {{item.client_name}}
+                                </mat-option>
+                              </mat-select>
                         <mat-error *ngIf="hasError('client', 'required')">Client Name is required!</mat-error>
                     </mat-form-field>
 
@@ -99,9 +103,9 @@
 
                  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-top: 28px;">
 
-                       <button mat-raised-button style="background-color: #039be5 !important ; color: white;" type="submit" class="button">Update  </button>
+                       <button mat-raised-button style="background-color: #039be5 ; color: white;" type="submit" class="hover-button-loginpage button">Update  </button>
 
-                        <button mat-raised-button mat-button mat-dialog-close style="background-color: #039be5 !important ; color: white;"  class="button cancel">Cancel</button>
+                        <button mat-raised-button mat-button mat-dialog-close style="background-color: #039be5 ; color: white;"  class="hover-button-loginpage button cancel">Cancel</button>
                  </div>
 
 

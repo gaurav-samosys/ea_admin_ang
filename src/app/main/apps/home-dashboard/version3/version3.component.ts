@@ -20,6 +20,7 @@ import { MatSelect } from '@angular/material';
 declare var require: any;
 import { Chart } from 'angular-highcharts';
 import { Options } from 'highcharts';
+import { LocaleConfig } from 'ngx-daterangepicker-material';
 let Boost = require('highcharts/modules/boost');
 let noData = require('highcharts/modules/no-data-to-display');
 let More = require('highcharts/highcharts-more');
@@ -157,7 +158,6 @@ export class Version3Component implements OnInit {
   clientmodel: any;
   usermodel: any;
   verticalmodel: any;
-  model: any;
   industryData: any;
   companyData: any;
   clientData: any;
@@ -196,16 +196,16 @@ export class Version3Component implements OnInit {
   clients_grapgdata: any;
   location_data = [];
   clients_data = [];
+  clients_id = [];
+  client_id = [];
   industry_id = [];
   company_id = [];
-  client_id = [];
   id_vertical = [];
   location_id = [];
   selected: any;
-  clients_id = [];
   vertical_id = [];
   cat_name;
-
+  color="blue"
 
   ClientsList = myGlobals.ClientsList
   topicsMaster = myGlobals.topicsMaster
@@ -254,21 +254,26 @@ export class Version3Component implements OnInit {
   industry_disable = 0;
   company_disable = 0;
   private _unsubscribeAll: Subject<any>;
-  ranges: any = {
+  previousYear
+  usergraph1: any;
+  // locale: LocaleConfig = {
+  //   applyLabel: 'Appliquer',
+  //   customRangeLabel: 'fdfdf',
+  //   daysOfWeek: moment.weekdaysMin(),
+  //   monthNames: moment.monthsShort(),
+  //   firstDay: moment.localeData().firstDayOfWeek(),
+  // }
 
+
+  ranges: any = {
     'Default': [moment().subtract(1, 'year'), moment()],
     'Today': [moment(), moment()],
     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-
     'Current Month': [moment().subtract('days').startOf('month'), moment().subtract('days').endOf('days')],
     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-
     'Last 3 Month': [moment().subtract(2, 'month'), moment()],
     'Last 6 Month': [moment().subtract(5, 'month'), moment()],
-    // 'Year To Date': [moment().subtract('month').startOf('days'), moment().subtract('days').endOf('days')],
-    // 'Current Day': [moment().subtract('month').startOf('days'), moment().subtract('days').endOf('days')],
-
     'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
   }
 
@@ -279,9 +284,8 @@ export class Version3Component implements OnInit {
     'Last 3 Year': [moment().subtract(3, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
     'Last 5 Year': [moment().subtract(5, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
     'Last 10 Year': [moment().subtract(10, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
-
-
   }
+
   topicList: any;
   topic_id: any;
   total_users_video: any;
@@ -294,63 +298,100 @@ export class Version3Component implements OnInit {
   select_client = ''
   date_range = ''
   Average: any;
-
+  DefaultUser: any
   getToggle
   options: Options;
 
   comparisiongraph: Chart;
   surveychartGraph: Chart;
-
+  myDate = new Date()
+  currDate
+  // month_names_short:string
+  month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   constructor(public dialog: MatDialog,
     private _snackBar: MatSnackBar
     , private _router: Router, private _fuseSidebarService: FuseSidebarService,
-    private datePipe: DatePipe, public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
-    /*    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-    
-        // Assign the data to the data source for the table to render
-        this.dataSource = new MatTableDataSource(users);*/
+    private datePipe: DatePipe,
+    public v3Service: Version3Service, public graph: GraphService, private pagerService: PagerService) {
     this._unsubscribeAll = new Subject();
-    // this.sortedData = this.desserts.slice();
+    this.currDate = this.datePipe.transform(this.myDate, 'MM-dd-yyyy');
+    var preyr = new Date();
+    var pastYear = preyr.getFullYear() - 1;
+    preyr.setFullYear(pastYear);
+
+    this.dateFormat2()
   }
-  // records: Array<any>;
-  // isDesc: boolean = false;
-  // column: string = 'CategoryName';
-  // sort(property) {
-  //   this.isDesc = !this.isDesc; //change the direction    
-  //   this.column = property;
-  //   let direction = this.isDesc ? 1 : -1;
+  range
+  rangeSurvey
+  yearRange
+  rangeAccessCode
+  rangeCourse
+  videoRange
+  claimedgraphRange
+  userRange	
+  downloadRange
+  dateFormat2() {
+    var t = new Date();
+    var curr = this.month_names_short[t.getMonth()] + ' ' + t.getDate() + ',' + t.getFullYear()
+    var past = this.month_names_short[t.getMonth()] + ' ' + t.getDate() + ',' + (new Date().getFullYear() - 1)
+    this.previousYear = past + '-' + curr
+    //  console.log( this. previousYear)
+    //    this.range = {
+    //     start:      past,
+    //     end:        curr
 
-  //   this.records.sort(function (a, b) {
-  //     if (a[property] < b[property]) {
-  //       return -1 * direction;
-  //     }
-  //     else if (a[property] > b[property]) {
-  //       return 1 * direction;
-  //     }
-  //     else {
-  //       return 0;
-  //     }
-  //   });
-  // };
-  // public today: Date = new Date(new Date().toDateString());
-  // public weekStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 7) % 7)).toDateString());
-  // public weekEnd: Date = new Date(new Date(new Date().setDate(new Date(new Date().setDate((new Date().getDate()
-  //     - (new Date().getDay() + 7) % 7))).getDate() + 6)).toDateString())
-  //     ;
-  // public monthStart: Date = new Date(new Date(new Date().setDate(1)).toDateString());
-  // public monthEnd: Date = this.today;
-  // public lastStart: Date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - 1)).setDate(1)).toDateString());
-  // public lastEnd: Date = this.today;
-  // public yearStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - 365)).toDateString());
-  // public yearEnd: Date = this.today;
+    // };
+    // console.log( this.range)
 
-
-  // ranges: any = {
-  // //  this.today= new Date(new Date().toDateString());
-
-  // }
+  }
   ngOnInit() {
 
+
+    var newDateTest = {}
+    newDateTest['startDate'] = [moment().subtract(1, 'year'), moment()][1]
+    newDateTest['endDate'] = [moment().subtract(1, 'year'), moment()][0]
+    this.usergraph1 = newDateTest
+    var defoult = this.usergraph1['startDate']['_d']
+    var defoult1 = this.usergraph1['endDate']['_d']
+    console.log(defoult, defoult1)
+    this.range = {
+      start: defoult1,
+      end: defoult
+    };
+
+    this.rangeSurvey={
+      start: defoult1,
+      end: defoult
+    }
+    this.yearRange={
+      start: defoult1,
+      end: defoult
+    }
+    this.rangeAccessCode={
+      start: defoult1,
+      end: defoult
+    }
+    this.rangeCourse={
+      start: defoult1,
+      end: defoult
+    }
+    this.videoRange={
+      start: defoult1,
+      end: defoult
+    }
+    this.claimedgraphRange={
+      start: defoult1,
+      end: defoult
+    }
+    this. userRange	={
+      start: defoult1,
+      end: defoult
+    }
+    this.downloadRange={
+      start: defoult1,
+      end: defoult
+    }
+    console.log(this.range)
     this.tab = 'tab1';
 
     this.comparisionChart();
@@ -361,7 +402,7 @@ export class Version3Component implements OnInit {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
-      itemsShowLimit: 2,
+      itemsShowLimit: 1,
       allowSearchFilter: true,
       enableCheckAll: false
     };
@@ -370,7 +411,7 @@ export class Version3Component implements OnInit {
       singleSelection: false,
       idField: 'id',
       textField: 'company_name',
-      itemsShowLimit: 3,
+      itemsShowLimit: 1,
       allowSearchFilter: true,
       enableCheckAll: false
     };
@@ -379,7 +420,7 @@ export class Version3Component implements OnInit {
       singleSelection: false,
       idField: 'id',
       textField: 'client_name',
-      itemsShowLimit: 3,
+      itemsShowLimit: 1,
       allowSearchFilter: true,
       enableCheckAll: false
     };
@@ -388,7 +429,7 @@ export class Version3Component implements OnInit {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
-      itemsShowLimit: 3,
+      itemsShowLimit: 1,
       allowSearchFilter: true,
       enableCheckAll: false
     };
@@ -397,7 +438,7 @@ export class Version3Component implements OnInit {
       singleSelection: false,
       idField: 'id',
       textField: 'locationName',
-      itemsShowLimit: 3,
+      itemsShowLimit: 1,
       allowSearchFilter: true,
       enableCheckAll: false
     };
@@ -445,12 +486,14 @@ export class Version3Component implements OnInit {
 
 
   getVideoChartGraph(client_id, vertical_id, location_data, ) {
+    this.showloader = true
+
     // console.log("client id================", client_id, "ver id============", vertical_id, "location id===============", location_data)
     this.v3Service.POST(this.getVideoChart, {
       topic_id: this.topic_id, clients_ids: client_id,
       verticals_ids: vertical_id, location: location_data, dateRange: '', token: 'LIVESITE'
     }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.getVideoGraphSuccessHandler(res)
     })
   }
@@ -459,10 +502,11 @@ export class Version3Component implements OnInit {
 
 
   getVideoGraphSuccessHandler(res) {
+    this.showloader = false
     this.minVideo = res.minVideo
     this.maxVideo = res.maxVideo
 
-    console.log(res, this.maxVideo, this.minVideo)
+    // console.log(res, this.maxVideo, this.minVideo)
     this.vertical_id = [];
     this.clients_id = [];
     var data = res.data
@@ -490,18 +534,18 @@ export class Version3Component implements OnInit {
   getSurveyListDropdown() {
     this.v3Service.POST(this.ClientsList, { token: 'LIVESITE' }).subscribe(res => {
       this.surwayArray = res['data']
-      console.log("surwey=====", this.surwayArray)
+      // console.log("surwey=====", this.surwayArray)
     })
   }
 
   changeGrades(value) {
-    console.log(value)
+    // console.log(value)
     this.select_grade = value
     this.getSurveyChartGraph(this.select_grade, this.select_client, this.date_range)
   }
 
   changeClient(value) {
-    console.log(value)
+    // console.log(value)
     this.select_client = value
     this.getSurveyChartGraph(this.select_grade, this.select_client, this.date_range)
 
@@ -510,6 +554,7 @@ export class Version3Component implements OnInit {
   columns
   element
   getSurveyChartGraph(select_grade, select_client, date_range) {
+    this.showloader = true
     this.v3Service.POST(this.getSurveyChart, {
       token: 'LIVESITE',
 
@@ -517,21 +562,22 @@ export class Version3Component implements OnInit {
       select_client: select_client,
       dateRange: date_range,
     }).subscribe(res => {
+      this.showloader = false
       this.totalSurways = res['totals']
-      this. columns = res['columns']
+      this.columns = res['columns']
 
-      console.log(this.columns)
+      // console.log(this.columns)
 
       var data = res['data']
       for (let index = 0; index < data.length; index++) {
         this.element = data[index].data;
-        console.log("data inside data=====", this.element)
+        // console.log("data inside data=====", this.element)
       }
-      // Highcharts.chart('surveychartGraph', this.graph.survey);
 
       // this.graph.survey.xAxis.categories = this.columns
-      // this.graph.survey.series[0].data = element
+      // this.graph.survey.series[0].data = this.element
 
+      // Highcharts.chart('surveychartGraph', this.graph.survey);
       this.surweyChart();
     })
   }
@@ -539,13 +585,25 @@ export class Version3Component implements OnInit {
 
 
   surweyChart() {
-    console.log("gfdsgdfgdfg===========")
+    // console.log("gfdsgdfgdfg===========")
     // if (this.chart) {
     //   this.chart.destroy()
     // }
     this.options = ({
 
-      chart: { height: 300, zoomType: 'x', type: 'column', resetZoomButton: { position: { x: 0, y: -30 } } },
+      chart: {
+        height: 300, zoomType: 'x', type: 'column',
+        // resetZoomButton: { position: { x: 0, y: -30 } } 
+        resetZoomButton: {
+          position: {
+            // align: 'right', // by default
+            // verticalAlign: 'top', // by default
+            x: -10,
+            y: 10
+          },
+          // relativeTo: 'chart'
+        }
+      },
 
       credits: {
         enabled: false
@@ -554,7 +612,7 @@ export class Version3Component implements OnInit {
         text: ''
       },
       xAxis: {
-        categories: ['10%', '20%', '30%', '40%', '50%','60%', '70%', '80%', '90%','100%']
+        categories: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%']
       },
       yAxis: {
         min: 0,
@@ -572,16 +630,27 @@ export class Version3Component implements OnInit {
       },
 
 
-      series: [
-        {
-          name: 'Surveys',
-          color: "rgb(124,181,236)",
-          enableMouseTracking: false,
-          type: undefined,
-          data: this.element
+      // series: [
+      //   {
+      //     name: 'Surveys',
+      //     color: "rgb(124,181,236)",
+      //     enableMouseTracking: false,
+      //     type: undefined,
+      //     data: this.element
+      //   },
+      // ]
+      tooltip: {
+        pointFormat: 'Serveys: <b>{point.y:.1f}</b>'
+      },
+      series: [{
+        name: 'Surveys',
+        color: "rgb(124,181,236)",
+        enableMouseTracking: true,
+        type: undefined,
+        data: this.element
 
-        },
-       
+      },
+
       ]
 
     });
@@ -607,17 +676,7 @@ export class Version3Component implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+  // hideIndustryList:number=0
 
   onIndustryclick(event) {
     // this.showloader = true;
@@ -630,7 +689,11 @@ export class Version3Component implements OnInit {
     this.location_data = [];
     this.resetCompany();
     this.industry_id.push(parseInt(event.id))
-    console.log("  this.industry_id=============",  this.industry_id)
+
+    // if(this.industry_id.length>=10){
+    //  this.hideIndustryList=1
+    // }
+    // console.log("this.industry_id=============", this.industry_id)
     /*    if(event.checked == true){
         }
         else{
@@ -650,7 +713,7 @@ export class Version3Component implements OnInit {
   onIndustrydelselect(event) {
     // this.showloader = true;
     this.table = 1;
-    this.company_id = [];
+    // this.company_id = [];
     for (var obj in this.industry_id) {
       if (this.industry_id[obj] == event.id) {
         this.industry_id.splice(parseInt(obj), 1)
@@ -664,7 +727,8 @@ export class Version3Component implements OnInit {
 
 
   onCompanyclick(event) {
-    this.client_id = []
+
+    this.clients_id = [];
     this.resetClient();
     this.table = 2
     this.company_disable = 0;
@@ -672,7 +736,7 @@ export class Version3Component implements OnInit {
 
     this.company_id.push(parseInt(event.id))
 
-    console.log("company_id=============",this.company_id)
+    // console.log("company_id=============", this.company_id)
     /*          if(event.checked == true && this.industry_id.length == 0){
 
     }
@@ -695,6 +759,8 @@ export class Version3Component implements OnInit {
   }
 
   onCompanydeselect(event) {
+    // this.clients_id = [];
+
     this.table = 2
     for (var obj in this.company_id) {
       if (this.company_id[obj] == event.id) {
@@ -710,16 +776,16 @@ export class Version3Component implements OnInit {
   }
 
   onClientclick(event) {
-    this.id_vertical = [];
+    // this.id_vertical = [];
 
+    // this.clients_data = [];
+    // this.location_data = [];
     this.resetVertical();
-
     this.table = 3;
     this.industry_disable = 1;
     this.company_disable = 1;
-
     this.client_id.push(parseInt(event.id))
-    console.log( 'this.client_id===============', this.client_id)
+    // console.log('this.client_id===============', this.client_id)
     /*    if(event.checked == true){
     
         }
@@ -733,7 +799,7 @@ export class Version3Component implements OnInit {
         }*/
     this.selected = 'clients_selected';
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getClientwithData(this.date_range, this.search_data, this.industry_id, this.company_id, this.client_id);
+    this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id);
 
   }
 
@@ -750,20 +816,22 @@ export class Version3Component implements OnInit {
     }
     this.selected = 'clients_selected';
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getClientwithData(this.date_range, this.search_data,this.industry_id, this.company_id, this.client_id);
+    this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id);
   }
 
   onVerticalclick(event) {
+    console.log(event)
     // this.showloader=true
-    this.location_data = []
-
+    // this.client_id = []
+    // this.clients_data = [];
+    this.table = 4;
+    this.location_data = [];
     this.resetLocation();
 
     this.industry_disable = 1;
     this.company_disable = 1;
-    this.table = 4;
-    this.id_vertical.push(event.id)
-    console.log("id_vertical=============##########",this.id_vertical)
+    this.id_vertical.push(parseInt(event.id))
+    // console.log("id_vertical=============##########", this.id_vertical)
 
    /* if(event.checked == true){
     }
@@ -777,27 +845,68 @@ export class Version3Component implements OnInit {
     }
       */ this.selected = 'verticals_selected';
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
+    this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical)
+
+    // this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
   }
 
   onVerticaldeselect(event) {
+    console.log(event.name, event.id)
     this.table = 4;
-    for (var obj in this.id_vertical) {
-      if (this.id_vertical[obj] == event.id) {
-        this.id_vertical.splice(parseInt(obj), 1)
-      }
+
+    this.client_id = []
+
+    // if(event.id){
+    //   this.id_vertical.splice(event.id, 1)
+    // }else{
+
+    // }
+
+
+
+
+
+
+
+    // for (var obj in this.id_vertical) {
+    //   if (this.id_vertical[obj] == event.id) {
+    //     this.id_vertical.splice(parseInt(obj), 1)
+    //   }
+    // }
+
+    var index = this.id_vertical.indexOf(event.id);
+    if (index !== -1) this.id_vertical.splice(index, 1);
+
+
+    console.log('this.id_vertical', this.id_vertical)
+
+
+    return
+
+
+
+
+    if (this.id_vertical.length == 0) {
+      this.industry_disable = 0;
+      this.company_disable = 0;
     }
     this.selected = 'verticals_selected';
+
+
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
+    this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical)
+
+    // this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
   }
 
   onLocationclick(event) {
     this.industry_disable = 1;
     this.company_disable = 1;
+    // this.clients_data = [];
+
     this.table = 4;
-    this.location_data.push(event.id)
-    console.log("this.location_data=============================",this.location_data)
+    this.location_data.push(parseInt(event.id))
+    // console.log("this.location_data=============================", this.location_data)
     /*  if(event.checked == true){
   
   
@@ -817,6 +926,8 @@ export class Version3Component implements OnInit {
 
   onLocationdeselect(event) {
     this.table = 4;
+    this.clients_data = [];
+
     for (var obj in this.location_data) {
       if (this.location_data[obj] == event.id) {
         this.location_data.splice(parseInt(obj), 1)
@@ -924,6 +1035,7 @@ export class Version3Component implements OnInit {
       companies_id = '';
       client_id = '';
     }
+
     else if (id_vertical.length > 0) {
       industries_id = '';
       companies_id = '';
@@ -977,237 +1089,252 @@ export class Version3Component implements OnInit {
 
 
 
-    this.v3Service.POST(this.getEaAllUsersList, 
-      { industries: industries_id.toString(), companies: companies_id.toString(), 
-        clients: client_id.toString(), verticals: id_vertical.toString(), location: location_data.toString(), selected: this.selected, token: 'LIVESITE' }).subscribe(res => {
-      this.common = res
+    this.v3Service.POST(this.getEaAllUsersList,
+      {
+        industries: industries_id.toString(), companies: companies_id.toString(),
+        clients: client_id.toString(), verticals: id_vertical.toString(), location: location_data.toString(),
+        selected: this.selected, token: 'LIVESITE'
+      }).subscribe(res => {
+        this.common = res
 
-      if (industry_id.length == 0 && companies_id.length == 0 && client_id.length == 0 && id_vertical.length == 0 && location_data.length == 0) {
+        if (industry_id.length == 0 && companies_id.length == 0 && client_id.length == 0 && id_vertical.length == 0 && location_data.length == 0) {
 
-        this.industryData = this.common.data.industries;
-        this.industry = this.industryData.data;
-        this.industry_total = this.industryData.total;
+          this.industryData = this.common.data.industries;
+          this.industry = this.industryData.data;
+          this.industry_total = this.industryData.total;
 
-        this.companyData = this.common.data.companies;
-        this.company = this.companyData.data;
-        this.company_total = this.companyData.total;
+          this.companyData = this.common.data.companies;
+          this.company = this.companyData.data;
+          this.company_total = this.companyData.total;
 
-        this.clientData = this.common.data.clients;
-        this.client = this.clientData.data;
-        this.client_total = this.clientData.total;
-
-
-
-        this.verticalData = this.common.data.verticals;
-        this.vertical = this.verticalData.data;
-        this.vertical_total = this.verticalData.total
-
-
-        this.locationData = this.common.data.location;
-        this.location = this.locationData.data;
-        this.location_total = this.locationData.total;
-
-
-        this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data, this.company_id, this.dataselected);
-
-
-      }
-
-      else if (companies_id.length == 0 && client_id.length == 0 && id_vertical.length == 0 && location_data.length == 0) {
-        this.companyData = this.common.data.companies;
-        this.company = this.companyData.data;
-        this.company_total = this.companyData.total;
+          this.clientData = this.common.data.clients;
+          this.client = this.clientData.data;
+          this.client_total = this.clientData.total;
 
 
 
-        this.clientData = this.common.data.clients;
-        this.client = this.clientData.data;
-        this.client_total = this.clientData.total;
+          this.verticalData = this.common.data.verticals;
+          this.vertical = this.verticalData.data;
+          this.vertical_total = this.verticalData.total
 
 
-        this.verticalData = this.common.data.verticals;
-        this.vertical = this.verticalData.data;
-        this.vertical_total = this.verticalData.total
-
-        this.locationData = this.common.data.location;
-        this.location = this.locationData.data;
-        this.location_total = this.locationData.total;
+          this.locationData = this.common.data.location;
+          this.location = this.locationData.data;
+          this.location_total = this.locationData.total;
 
 
-        this.clients_grapgdata = this.common.data.clients;
-        this.vertical_graphdata = this.common.data.verticals
+          this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data,
+            this.company_id, this.dataselected);
 
-        for (var i = this.clients_grapgdata.data.length - 1; i >= 0; i--) {
-          this.clients_id.push(this.clients_grapgdata.data[i].id)
-        }
-        for (var i = this.vertical_graphdata.data.length - 1; i >= 0; i--) {
 
-          this.vertical_id.push(this.vertical_graphdata.data[i].id)
         }
 
-        console.log("client", this.clients_id)
-        console.log("vertical", this.vertical_id)
+        else if (companies_id.length == 0 && client_id.length == 0 && id_vertical.length == 0 && location_data.length == 0) {
+          this.companyData = this.common.data.companies;
+          this.company = this.companyData.data;
+          this.company_total = this.companyData.total;
 
 
-        this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data, this.company_id, this.dataselected);
-      }
+
+          this.clientData = this.common.data.clients;
+          this.client = this.clientData.data;
+          this.client_total = this.clientData.total;
 
 
-      else if (client_id.length == 0 && id_vertical.length == 0 && location_data.length == 0) {
+          this.verticalData = this.common.data.verticals;
+          this.vertical = this.verticalData.data;
+          this.vertical_total = this.verticalData.total
+
+          this.locationData = this.common.data.location;
+          this.location = this.locationData.data;
+          this.location_total = this.locationData.total;
 
 
-        this.clientData = this.common.data.clients;
-        this.client = this.clientData.data;
-        this.client_total = this.clientData.total;
+          this.clients_grapgdata = this.common.data.clients;
+          this.vertical_graphdata = this.common.data.verticals
+
+          for (var i = this.clients_grapgdata.data.length - 1; i >= 0; i--) {
+            this.clients_id.push(this.clients_grapgdata.data[i].id)
+          }
+          for (var i = this.vertical_graphdata.data.length - 1; i >= 0; i--) {
+
+            this.vertical_id.push(this.vertical_graphdata.data[i].id)
+          }
+
+          // console.log("client", this.clients_id)
+          // console.log("vertical", this.vertical_id)
 
 
-        this.verticalData = this.common.data.verticals;
-        this.vertical = this.verticalData.data;
-        this.vertical_total = this.verticalData.total
-
-        this.locationData = this.common.data.location;
-        this.location = this.locationData.data;
-        this.location_total = this.locationData.total;
-
-
-        this.clients_grapgdata = this.common.data.clients;
-        this.vertical_graphdata = this.common.data.verticals
-
-        for (var i = this.clients_grapgdata.data.length - 1; i >= 0; i--) {
-          this.clients_id.push(this.clients_grapgdata.data[i].id)
-        }
-        for (var i = this.vertical_graphdata.data.length - 1; i >= 0; i--) {
-          this.vertical_id.push(this.vertical_graphdata.data[i].id)
+          this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data,
+            this.company_id, this.dataselected);
         }
 
 
-        this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data, this.company_id, this.dataselected);
-      }
+        else if (client_id.length == 0 && id_vertical.length == 0 && location_data.length == 0) {
 
 
-      else if (id_vertical.length == 0 && location_data.length == 0) {
+          this.clientData = this.common.data.clients;
+          this.client = this.clientData.data;
+          this.client_total = this.clientData.total;
 
 
+          this.verticalData = this.common.data.verticals;
+          this.vertical = this.verticalData.data;
+          this.vertical_total = this.verticalData.total
+
+          this.locationData = this.common.data.location;
+          this.location = this.locationData.data;
+          this.location_total = this.locationData.total;
 
 
-        this.verticalData = this.common.data.verticals;
-        this.vertical = this.verticalData.data;
-        this.vertical_total = this.verticalData.total
+          this.clients_grapgdata = this.common.data.clients;
+          this.vertical_graphdata = this.common.data.verticals
 
-        this.locationData = this.common.data.location;
-        this.location = this.locationData.data;
-        this.location_total = this.locationData.total;
-
-
-        this.clients_grapgdata = this.common.data.clients;
-        this.vertical_graphdata = this.common.data.verticals
-
-        for (var i = this.clients_grapgdata.data.length - 1; i >= 0; i--) {
-          this.clients_id.push(this.clients_grapgdata.data[i].id)
-        }
-        for (var i = this.vertical_graphdata.data.length - 1; i >= 0; i--) {
-          this.vertical_id.push(this.vertical_graphdata.data[i].id)
-        }
+          for (var i = this.clients_grapgdata.data.length - 1; i >= 0; i--) {
+            this.clients_id.push(this.clients_grapgdata.data[i].id)
+          }
+          for (var i = this.vertical_graphdata.data.length - 1; i >= 0; i--) {
+            this.vertical_id.push(this.vertical_graphdata.data[i].id)
+          }
 
 
-        this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data, this.company_id, this.dataselected);
-      }
-
-      else if (location_data.length == 0) {
-
-
-
-        this.locationData = this.common.data.location;
-        this.location = this.locationData.data;
-        this.location_total = this.locationData.total;
-
-
-        this.vertical_graphdata = this.common.data.verticals
-
-        for (var i = this.client.length - 1; i >= 0; i--) {
-          this.clients_id.push(this.client[i].id)
-        }
-        for (var i = this.vertical_graphdata.data.length - 1; i >= 0; i--) {
-          this.vertical_id.push(this.vertical_graphdata.data[i].id)
+          this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data,
+            this.company_id, this.dataselected);
         }
 
 
-        this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data, this.company_id, this.dataselected);
-      }
+        else if (id_vertical.length == 0 && location_data.length == 0) {
 
 
-      else {
-        this.industry_total = this.common.data.industries.total;
-        this.company_total = this.common.data.companies.total;
-        this.client_total = this.common.data.clients.total;
-        this.vertical_total = this.common.data.verticals.total;
-        this.location_total = this.locationData.total;
 
 
-        for (var i = this.client.length - 1; i >= 0; i--) {
-          this.clients_id.push(this.client[i].id)
+          this.verticalData = this.common.data.verticals;
+          this.vertical = this.verticalData.data;
+          this.vertical_total = this.verticalData.total
+
+          this.locationData = this.common.data.location;
+          this.location = this.locationData.data;
+          this.location_total = this.locationData.total;
+
+
+          this.clients_grapgdata = this.common.data.clients;
+          this.vertical_graphdata = this.common.data.verticals
+
+          for (var i = this.clients_grapgdata.data.length - 1; i >= 0; i--) {
+            this.clients_id.push(this.clients_grapgdata.data[i].id)
+          }
+          for (var i = this.vertical_graphdata.data.length - 1; i >= 0; i--) {
+            this.vertical_id.push(this.vertical_graphdata.data[i].id)
+          }
+
+
+          this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data,
+            this.company_id, this.dataselected);
         }
-        for (var i = this.vertical.length - 1; i >= 0; i--) {
-          this.vertical_id.push(this.vertical[i].id)
+
+        else if (location_data.length == 0) {
+
+
+
+          this.locationData = this.common.data.location;
+          this.location = this.locationData.data;
+          this.location_total = this.locationData.total;
+
+
+          this.vertical_graphdata = this.common.data.verticals
+
+          for (var i = this.client.length - 1; i >= 0; i--) {
+            this.clients_id.push(this.client[i].id)
+          }
+          for (var i = this.vertical_graphdata.data.length - 1; i >= 0; i--) {
+            this.vertical_id.push(this.vertical_graphdata.data[i].id)
+          }
+
+
+          this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data,
+            this.company_id, this.dataselected);
         }
 
 
-        this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
-        this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data, this.company_id, this.dataselected);
-      }
+        else {
+          this.industry_total = this.common.data.industries.total;
+          this.company_total = this.common.data.companies.total;
+          this.client_total = this.common.data.clients.total;
+          this.vertical_total = this.common.data.verticals.total;
+          this.location_total = this.locationData.total;
+
+
+          for (var i = this.client.length - 1; i >= 0; i--) {
+            this.clients_id.push(this.client[i].id)
+          }
+          for (var i = this.vertical.length - 1; i >= 0; i--) {
+            this.vertical_id.push(this.vertical[i].id)
+          }
+
+
+          this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getDownloadGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getVideoGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCertificateGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getCompletionGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getAccessGraph(this.date_range, this.clients_id, this.vertical_id, location_data);
+          this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, location_data,
+            this.company_id, this.dataselected);
+        }
 
 
 
-      /*  this.verticalData=this.common.data.verticals;
-         this.vertical=this.verticalData.data;
-        this.vertical_total=this.verticalData.total;*/
-      /* this.locationData=this.common.data.location;
-        this.location=this.locationData.data;*/
+        /*  this.verticalData=this.common.data.verticals;
+           this.vertical=this.verticalData.data;
+          this.vertical_total=this.verticalData.total;*/
+        /* this.locationData=this.common.data.location;
+          this.location=this.locationData.data;*/
 
-      this.user_total = this.common.data.customers.total
-      this.industrydropdownList = this.industry
-      this.companydropdownList = this.company
-      this.clientsdropdownList = this.client
-      this.verticalsdropdownList = this.vertical
-      this.locationdropdownList = this.location
-    })
+        this.user_total = this.common.data.customers.total
+        this.industrydropdownList = this.industry
+        this.companydropdownList = this.company
+        this.clientsdropdownList = this.client
+        this.verticalsdropdownList = this.vertical
+        this.locationdropdownList = this.location
+      })
   }
 
+
+  // ===========================================================
+  // 
+  // Industry
+  // 
+  // ==========================================================
 
   getIndustrywithData(search_data, industry_id) {
     this.showloader = true;
@@ -1217,12 +1344,19 @@ export class Version3Component implements OnInit {
       this.search_data = '';
       this.common = res
       this.data = this.common.data
-
+      
       // this.desserts = this.data;
       // console.log(this.desserts)
       // this.sortedData = this.desserts.slice();
-
+      
       this.allItems = this.common.recordsTotal;
+      // if(this.allItems = 10){
+      //   document.getElementById('industryPaginate').classList.add('none')
+      // }else{
+      //   document.getElementById('industryPaginate').classList.remove('none')
+      // }
+
+      console.log('devtst', this.allItems)
       this.industry_total = this.allItems
       this.dataSource = this.data;
       this.URL = this.getIndustriesWithData;
@@ -1233,7 +1367,7 @@ export class Version3Component implements OnInit {
 
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.endindex = (this.currentPage + 1) * e.pageSize
@@ -1247,7 +1381,7 @@ export class Version3Component implements OnInit {
     }
 
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
     }
     else {
       this.iterator();
@@ -1289,6 +1423,11 @@ export class Version3Component implements OnInit {
 
 
 
+  // ===========================================================
+  // 
+  // End Industry
+  // 
+  // ==========================================================
 
 
 
@@ -1300,6 +1439,11 @@ export class Version3Component implements OnInit {
 
 
 
+  // ===========================================================
+  // 
+  // COmpany
+  // 
+  // ==========================================================
 
 
 
@@ -1312,20 +1456,23 @@ export class Version3Component implements OnInit {
       }
     }
     //this.company_id=company_id
-    this.v3Service.POST(this.getCompaniesWithData, { industries_ids: industry_id.toString(), 
+    this.v3Service.POST(this.getCompaniesWithData, {
+      industries_ids: industry_id.toString(),
       id: company_ids.toString(), start: this.pageNumber, length: this.size, token: 'LIVESITE',
-       dateRange: date_range, search: search_data }).subscribe(res => {
+      dateRange: date_range, search: search_data
+    }).subscribe(res => {
       this.showloader = false
 
       this.common = res
       this.date_range = '';
       this.data = this.common.data
-      console.log(this.data)
-      // this.desserts = this.data;
-      // console.log(this.desserts)
-      // this.sortedData = this.desserts.slice();
-
+    
       this.allItems = this.common.recordsTotal;
+      // if(this.allItems < 10){
+      //   document.getElementById('companyPaginate').classList.add('none')
+      // }else{
+      //   document.getElementById('companyPaginate').classList.remove('none')
+      // }
       this.dataSource = this.data;
       this.URL = this.getCompaniesWithData;
       this.company_total = this.allItems;
@@ -1334,7 +1481,7 @@ export class Version3Component implements OnInit {
   }
 
   public handlePage1(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.endindex = (this.currentPage + 1) * e.pageSize
@@ -1348,7 +1495,7 @@ export class Version3Component implements OnInit {
     }
 
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
     }
     else {
       this.iterator1();
@@ -1382,68 +1529,83 @@ export class Version3Component implements OnInit {
     this.sort_column = sort_column
     this.ASC = sort_order
     this.v3Service.POST(this.getCompaniesWithData,
-       { column: this.sort_column, dir: this.ASC, industries_ids: this.industry_id.toString(), id: this.company_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
-      this.showloader = false
+      { column: this.sort_column, dir: this.ASC, industries_ids: this.industry_id.toString(), id: this.company_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
+        this.showloader = false
 
-      this.common = res
-      this.dataSource = this.common.data
-    });
+        this.common = res
+        this.dataSource = this.common.data
+      });
   }
 
 
+  // ===========================================================
+  // 
+  // CLIENT START
+  // 
+  // ==========================================================
+
+
   // industry_id;
-  getClientwithData(date_range, search_data, client_id,industry_id,company_ids) {
+  getClientwithData(date_range, search_data, client_id, company_ids) {
+    // console.log(client_id, company_ids)
     var a = []
     this.showloader = true
 
     if (client_id == '' && company_ids != '') {
-      for (var i = 0; i < this.company.length; i++) {
-        client_id.push(this.company[i].id)
+      for (var i = 0; i < this.client_id.length; i++) {
+        client_id.push(this.client_id[i].id)
+        // console.log(client_id)
       }
     }
 
-//     $id
-// $companies_id
-// $verticalsIds
-// $location
+    //     $id
+    // $companies_id
+    // $verticalsIds
+    // $location
     // industries_ids: industry_id.toString(),
     // this.v3Service.POST(this.getClientsWithData, { 
-    //   companies_id: company_ids.toString(), id: client_id.toString(), verticals_ids: client_id.toString(),
-    //    start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data, location: this.location_data.toString() }).subscribe(res => {
+    //   companies_id: company_ids.toString(), 
+    // id: client_id.toString(), verticals_ids: client_id.toString(),
+    //    start: this.pageNumber, length: this.pageSize,
+    //  token: 'LIVESITE', dateRange: date_range, search: search_data, 
+    // location: this.location_data.toString() }).subscribe(res => {
     //   this.showloader = false
     //   this.common = res;
     //   this.date_range = '';
     //   this.data = this.common.data
     //   this.dataSource = this.data;
-    this.v3Service.POST(this.getClientsWithData, { 
-      companies_id: company_ids.toString(), 
-      id: client_id.toString(),
-       verticalsIds: this.id_vertical.toString(),  
-       start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data,
-        location: this.location_data.toString() }).subscribe(res => {
+    this.v3Service.POST(this.getClientsWithData, {
+      id: company_ids.toString(),
+      companies_id: client_id.toString(),
+      industries_ids: this.industry_id.toString(),
+      verticalsIds: this.id_vertical.toString(),
+      start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data,
+      location: this.location_data.toString()
+    }).subscribe(res => {
       this.showloader = false
       this.common = res;
+      // console.log("client data================", this.common)
       this.date_range = '';
       this.data = this.common.data
       this.dataSource = this.data;
 
-      // this.dataSource.sort = this.sort;
-
-      // this.desserts = this.data;
-      // console.log(this.desserts)
-      // this.sortedData = this.desserts.slice();
-
       this.dataSource = new MatTableDataSource(this.data);
 
       this.allItems = this.common.recordsTotal;
+      // if(this.allItems < 10){
+      //   document.getElementById('clientPaginate').classList.add('none')
+      // }else{
+      //   document.getElementById('clientPaginate').classList.remove('none')
+      // }
       this.client_total = this.allItems;
+      // console.log(this.client_total)
       this.URL = this.getClientsWithData;
       //this.setPage(1,date_range,search_data,this.company_id,this.industry_id,client_id,this.id_vertical,this.location_data);
     })
   }
 
   public handlePage2(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.endindex = (this.currentPage + 1) * e.pageSize
@@ -1457,7 +1619,7 @@ export class Version3Component implements OnInit {
     }
 
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
     }
     else {
       this.iterator2();
@@ -1471,15 +1633,21 @@ export class Version3Component implements OnInit {
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
     this.showloader = true;
-    this.v3Service.POST(this.getClientsWithData, { id: this.client_id.toString(), verticals_ids: this.client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, location: this.location_id }).subscribe(res => {
-      this.common = res
-      this.allItems = this.common.recordsTotal;
-      this.client_total = this.allItems;
-      this.showloader = false;
-      this.data = this.common.data;
-      this.dataSource = this.data;
+    this.v3Service.POST(this.getClientsWithData,
+      {
+        id: this.client_id.toString(),
+        companies_id: this.company_id.toString(),
+        verticals_ids: this.client_id.toString(),
+        start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, location: this.location_id
+      }).subscribe(res => {
+        this.common = res
+        this.allItems = this.common.recordsTotal;
+        this.client_total = this.allItems;
+        this.showloader = false;
+        this.data = this.common.data;
+        this.dataSource = this.data;
 
-    })
+      })
   }
 
 
@@ -1496,6 +1664,9 @@ export class Version3Component implements OnInit {
   }
 
 
+  // ===========================================================
+  //       END OF CLIENT
+  // ==========================================================
 
 
 
@@ -1504,6 +1675,10 @@ export class Version3Component implements OnInit {
 
 
 
+
+  // ===========================================================
+  //      START OF USER
+  // ==========================================================
 
   getUserwithData(date_range, search_data, id_vertical, location_data, searchtype) {
     this.showloader = true;
@@ -1524,32 +1699,35 @@ export class Version3Component implements OnInit {
        vid=id_vertical
      }
         */
-      //  id
-      //  clients_ids
-      //  verticals
-      //  location
+    //  id
+    //  clients_ids
+    //  verticals
+    //  location
     this.v3Service.POST(this.getUsersWithData, {
-       clients_ids: this.clients_data.toString(),
-       verticals: id_vertical.toString(),
-       id: id_vertical.toString(),
-        location: location_data.toString(),
-        start: this.pageNumber, length: this.pageSize, token: 'LIVESITE',
-         dateRange: date_range, search_type: searchtype, search: search_data, status: this.status,
-          certificates: this.certificates, course: this.course }).subscribe(res => {
+      clients_ids: this.clients_data.toString(),
+      verticals: id_vertical.toString(),
+      id: id_vertical.toString(),
+      location: location_data.toString(),
+      start: this.pageNumber, length: this.pageSize, token: 'LIVESITE',
+      dateRange: date_range, search_type: searchtype, search: search_data, status: this.status,
+      certificates: this.certificates, course: this.course
+    }).subscribe(res => {
       this.showloader = false;
 
       this.common = res
-      console.log("user data=================", this.common)
+      // console.log("user data=================", this.common)
       this.date_range = '';
       this.data = this.common.data
-      // this.desserts = this.data;
-      // console.log(this.desserts)
-      // this.sortedData = this.desserts.slice();
+    
       this.name = this.data[0]
       this.allItems = this.common.recordsTotal;
+      // if(this.allItems < 10){
+      //   document.getElementById('userPaginate').classList.add('none')
+      // }else{
+      //   document.getElementById('userPaginate').classList.remove('none')
+      // }
       this.user_total = this.allItems;
-      console.log("userTotal==============", this.allItems)
-      //this.client_total=this.allItems;
+      // console.log("userTotal==============", this.allItems)
       this.dataSource = this.data;
       this.URL = this.getUsersWithData;
       this.clients_data = []
@@ -1559,7 +1737,7 @@ export class Version3Component implements OnInit {
 
 
   public handlePage3(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.endindex = (this.currentPage + 1) * e.pageSize
@@ -1573,7 +1751,7 @@ export class Version3Component implements OnInit {
     }
 
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
     }
     else {
       this.iterator3();
@@ -1605,7 +1783,7 @@ export class Version3Component implements OnInit {
         this.common = res
         this.allItems = this.common.recordsTotal;
         this.user_total = this.allItems;
-        //this.client_total=this.allItems;
+
         this.showloader = false;
         this.data = this.common.data;
         this.dataSource = this.data;
@@ -1628,21 +1806,36 @@ export class Version3Component implements OnInit {
   }
 
 
+// ===========================================================
+  //      END OF USER
+  // ==========================================================
 
-
-  getVerticalwithData(date_range, search_data) {
+// ===========================================================
+  //      STARt OF VERTICAL
+  // ==========================================================
+  getVerticalwithData(date_range, search_data, client_ids, id_vertical) {
+    // console.log("vertical data==================", client_ids, id_vertical)
+    this.client_id = []
     this.showloader = true
     this.v3Service.POST(this.getVerticalsWithData, {
-       start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data }).subscribe(res => {
+      clients_ids: client_ids.toString(),
+      id: id_vertical.toString(),
+      start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data
+    }).subscribe(res => {
       this.showloader = false
       this.common = res
-      //this.date_range='';
+ 
       this.data = this.common.data
-      // this.desserts = this.data;
-      // console.log(this.desserts)
-      // this.sortedData = this.desserts.slice();
+
 
       this.allItems = this.common.recordsTotal;
+      // if(this.allItems < 10){
+      //   document.getElementById('verticalPaginate').classList.add('none')
+      // }else{
+      //   document.getElementById('verticalPaginate').classList.remove('none')
+      // }
+      this.vertical_total = this.allItems;
+
       this.dataSource = this.data;
       this.URL = this.getVerticalsWithData;
       //this.setPage(1,date_range,search_data);
@@ -1650,7 +1843,7 @@ export class Version3Component implements OnInit {
   }
 
   public handlePage4(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.endindex = (this.currentPage + 1) * e.pageSize
@@ -1664,7 +1857,7 @@ export class Version3Component implements OnInit {
     }
 
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
     }
     else {
       this.iterator4();
@@ -1679,14 +1872,22 @@ export class Version3Component implements OnInit {
     this.pageNumber = start
     this.showloader = true;
 
-    this.v3Service.POST(this.getVerticalsWithData, { start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data }).subscribe(res => {
-      this.common = res
-      this.allItems = this.common.recordsTotal;
-      this.showloader = false;
-      this.data = this.common.data;
-      this.dataSource = this.data;
+    this.v3Service.POST(this.getVerticalsWithData,
+      {
+        start: this.pageNumber, length: this.pageSize, token: 'LIVESITE',
+        dateRange: this.date_range, search: this.search_data
+      }).subscribe(res => {
+        this.common = res
+        // console.log("vertical ######################", this.common)
 
-    })
+        this.allItems = this.common.recordsTotal;
+        this.vertical_total = this.allItems;
+
+        this.showloader = false;
+        this.data = this.common.data;
+        this.dataSource = this.data;
+
+      })
   }
 
 
@@ -1704,7 +1905,9 @@ export class Version3Component implements OnInit {
   }
 
 
-
+  // ===========================================================
+  //      END OF VERTICAL
+  // ==========================================================
 
 
 
@@ -1717,27 +1920,39 @@ export class Version3Component implements OnInit {
 
 
   getUserGraph(date_range, client_id, vertical_id, location_data) {
+    this.showloader = true
     this.v3Service.POST(this.getUserGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res
-      this.date_range = '';
-      this.vertical_id = [];
-      this.clients_id = [];
-      console.log("this.common.labelName=======>", this.common.labelName)
+      // console.log(  this.common)
+      this.showloader = false
+
+    
+        this.date_range = '';
+        this.vertical_id = [];
+        this.clients_id = [];
+        // console.log("this.common.labelName=======>", this.common.labelName)
+  
+  
+        this.graph.users.xAxis.categories = this.common.labelName;
+        this.usergraph_total = this.common.total_users;
+        //this.graph.users.title.text= this.graph.users.title.text + " " +  this.common.total_users
+        this.graph.users.series[0].data = this.common.data
+        // console.log("user graph==========", this.common.data)
+        Highcharts.chart('users', this.graph.users);
+     
+  
 
 
-      this.graph.users.xAxis.categories = this.common.labelName;
-      this.usergraph_total = this.common.total_users;
-      //this.graph.users.title.text= this.graph.users.title.text + " " +  this.common.total_users
-      this.graph.users.series[0].data = this.common.data
-      console.log("user graph==========", this.common.data)
-      Highcharts.chart('users', this.graph.users);
 
     })
   }
 
   getDownloadGraph(date_range, client_id, vertical_id, location_data) {
+    this.showloader = true
     this.v3Service.POST(this.getDownloadsGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res;
+      this.showloader = false
+
       this.vertical_id = [];
       this.clients_id = [];
       this.graph.downloads.xAxis.categories = this.common.labelName;
@@ -1762,7 +1977,7 @@ export class Version3Component implements OnInit {
     // }
     // document.getElementById('vedio').style.display = "none";
     this.v3Service.POST(this.getVideoViewsGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.common = res
       this.vertical_id = [];
       this.clients_id = [];
@@ -1781,9 +1996,12 @@ export class Version3Component implements OnInit {
 
 
   getCertificateGraph(date_range, client_id, vertical_id, location_data) {
+    this.showloader = true
     this.v3Service.POST(this.getCertificationGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res
-      console.log(this.common)
+      this.showloader = false
+
+      // console.log(this.common)
       this.vertical_id = [];
       this.clients_id = [];
       this.graph.certificate.xAxis.categories = this.common.labelName;
@@ -1799,9 +2017,6 @@ export class Version3Component implements OnInit {
       Highcharts.chart('certificate', this.graph.certificate), {
 
 
-        credits: {
-          enabled: false
-        },
 
 
 
@@ -1812,8 +2027,11 @@ export class Version3Component implements OnInit {
   }
 
   getCompletionGraph(date_range, client_id, vertical_id, location_data) {
+    this.showloader = true
     this.v3Service.POST(this.getCompletionGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res
+      this.showloader = false
+
       this.vertical_id = [];
       this.clients_id = [];
       this.graph.completion.xAxis.categories = this.common.labelName;
@@ -1842,8 +2060,10 @@ export class Version3Component implements OnInit {
   }
 
   getAccessGraph(date_range, client_id, vertical_id, location_data) {
+    this.showloader = true
     this.v3Service.POST(this.getAccessCodeGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res
+      this.showloader = false
       this.vertical_id = [];
       this.clients_id = [];
       this.graph.access_code.xAxis.categories = this.common.labelName;
@@ -1870,7 +2090,9 @@ export class Version3Component implements OnInit {
   names2 = []
 
   getComparisionGraph(date_range, client_id, vertical_id, location_data, company_id, data_selected) {
-    console.log("date range======",date_range,"data_selected=======",data_selected)
+    this.showloader = true
+
+    // console.log("date range======", date_range, "data_selected=======", data_selected)
     var company_ids = [];
     if (this.industry_id.length == 0 && this.selected == 'industries_selected') {
       company_ids = [];
@@ -1912,99 +2134,110 @@ export class Version3Component implements OnInit {
     else {
       company_ids = company_id
     }
+    this.showloader = true
     this.v3Service.POST(this.getComparisonGraphData,
-       { industries_ids: this.industry_id.toString(), companies_ids: company_ids.toString(),
-         dataSelected: data_selected, clients_ids: client_id.toString(), 
-         verticals_ids: vertical_id.toString(),
-          location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
-      this.common = res
-      console.log("gfdgdfgdfgdfgdfgdfgdfgdfgdfgdfgdf",  this.common )
-  
+      {
+        industries_ids: this.industry_id.toString(), companies_ids: company_ids.toString(),
+        dataSelected: data_selected, clients_ids: client_id.toString(),
+        verticals_ids: vertical_id.toString(),
+        location: location_data.toString(), token: 'LIVESITE', dateRange: date_range
+      }).subscribe(res => {
+        this.common = res
+        this.showloader = false
+
+        // console.log("gfdgdfgdfgdfgdfgdfgdfgdfgdfgdfgdf", this.common)
 
 
 
-  this.name1=this.common.data[1].name
-  this.name0=this.common.data[0].name
 
-  this.data1=this.common.data[1]
-  this.data0=this.common.data[0]
- 
-      if (data_selected == 'total_course_completions') {
-        this.user_status = 'false';
+        this.name1 = this.common.data[1].name
+        this.name0 = this.common.data[0].name
 
-             this.full_2018 = this.common.data[1].name
-        this.mandatory_2018 = this.common.data[0].name
-        this.full_2019 = this.common.data[3].name
-        this.mandatory_2019 = this.common.data[2].name
+        this.data1 = this.common.data[1].data
+        this.data0 = this.common.data[0].data
+        // console.log(this.name1, this.name0, this.data1,
+        // this.data0)
+        if (data_selected == 'total_course_completions') {
+          // this.user_status = 'false';
 
-        this.name1=this.common.data[1].name
-        this.name0=this.common.data[0].name
-      
-        this.data1=this.common.data[1]
-        this.data0=this.common.data[0]
-        console.log(this.name1, this.name0 ,this.data1,
-          this.data0)
-      }
-      else {
-        this.user_status = 'true';
-      }
-      console.log("comparision", this.common)
-      this.comparision_data = this.common.data
-      // console.log(this.comparision_data)
-      // this.pyear = this.comparision_data[0].name;
-      // this.year = this.comparision_data[1].name;
-      // this.Average = this.comparision_data[2].name;
-      this.vertical_id = [];
-      this.clients_id = [];
-
-      // this.pyear = this.comparision_data.name;
-      // this.year =  this.comparision_data.name;
-      //this.graph.comparision.title.text= this.graph.access_code.comparision.text + " " +  this.common.total_used+"/"+this.common.total_unused
-
-      /*         this.dataSelect =2;
-            this.graph.comparision_course.plotOptions.column=this.common.dataStackTye
-            this.comparisiongraph_total=this.common.total_users;
-           this.graph.comparision_course.series=this.common.data;
-           Highcharts.chart('comparison_course',this.graph.comparision_course);*/
-
-      this.dataSelect = 1;
-      this.graph.comparision.plotOptions.column = this.common.dataStackTye
-      this.comparisiongraph_total = this.common.total_users;
-      // this.graph.comparision.series = this.common.data;
-      // console.log(this.common.data, this.common.dataStackTye)
+          this.fullCourseChart()
+          this.mandatory_2018 = this.common.data[0].name
+          this.full_2018 = this.common.data[1].name
+          this.mandatory_2019 = this.common.data[2].name
+          this.full_2019 = this.common.data[3].name
 
 
+        }
+        else {
+          this.user_status = 'true';
 
-      this.name0 = this.common.data[0].name?this.common.data[0].name:'';
-      this.name1 = this.common.data[1].name?this.common.data[1].name:'';
-      this.name2 = this.common.data[2].name?this.common.data[2].name:'';
-      console.log(this.name0, this.name1, this.name2),
+          // console.log("comparision", this.common)
+          this.comparision_data = this.common.data
+          // console.log(this.comparision_data)
+          // this.pyear = this.comparision_data[0].name;
+          // this.year = this.comparision_data[1].name;
+          // this.Average = this.comparision_data[2].name;
+          this.vertical_id = [];
+          this.clients_id = [];
+
+          // this.pyear = this.comparision_data.name;
+          // this.year =  this.comparision_data.name;
+          //this.graph.comparision.title.text= this.graph.access_code.comparision.text + " " +  this.common.total_used+"/"+this.common.total_unused
+
+          /*  this.dataSelect =2;
+                this.graph.comparision_course.plotOptions.column=this.common.dataStackTye
+                this.comparisiongraph_total=this.common.total_users;
+               this.graph.comparision_course.series=this.common.data;
+               Highcharts.chart('comparison_course',this.graph.comparision_course);*/
+
+          this.dataSelect = 1;
+          this.graph.comparision.plotOptions.column = this.common.dataStackTye
+          this.comparisiongraph_total = this.common.total_users;
+          // this.graph.comparision.series = this.common.data;
+          // console.log(this.common.data, this.common.dataStackTye)
+
+          this.name0 = this.common.data[0].name ? this.common.data[0].name : '';
+          this.name1 = this.common.data[1].name ? this.common.data[1].name : '';
+          this.name2 = this.common.data[2].name ? this.common.data[2].name : '';
+          // console.log(this.name0, this.name1, this.name2),
 
 
-      this.data0 = this.common.data[0].data;
-      this.data1 = this.common.data[1].data;
-      this.data2 = this.common.data[2].data;
-      // console.log(this.data0, this.data1, this.data2)
-    
-      // this.graph.comparision = this.common.data;
-      // this.graph.myMethod( this.common.data);
-      // Highcharts.chart('comparision', this.graph.comparision);
+          this.data0 = this.common.data[0].data;
+          this.data1 = this.common.data[1].data;
+          this.data2 = this.common.data[2].data;
+          // console.log("2019=================", this.data0, "2020==========", this.data1, "Avrage=================", this.data2)
 
-
-      this.comparisionChart()
-
-    })
+          // this.graph.comparision = this.common.data;
+          // this.graph.myMethod( this.common.data);
+          // Highcharts.chart('comparision', this.graph.comparision);
+          this.comparisionChart()
+        }
+      })
   }
 
 
   comparisionChart() {
-    console.log("gfdsgdfgdfg===========")
+    this.showloader = false
+    // console.log("gfdsgdfgdfg===========")
     // if (this.chart) {
     //   this.chart.destroy()
     // }
     this.options = ({
 
-      chart: { height: 300, zoomType: 'x', type: 'column', resetZoomButton: { position: { x: 0, y: -30 } } },
+      chart: {
+        height: 300, zoomType: 'x', type: 'column',
+        //   resetZoomButton: { position: { x: 0, y: -30 }
+        resetZoomButton: {
+          position: {
+            // align: 'right', // by default
+            // verticalAlign: 'top', // by default
+            x: -10,
+            y: 10
+          },
+          // relativeTo: 'chart'
+        }
+        //  } 
+      },
 
       credits: {
         enabled: false
@@ -2023,21 +2256,28 @@ export class Version3Component implements OnInit {
       },
       legend: {
         enabled: true
-    },
+      },
 
       plotOptions: {
         series: {
           stacking: 'normal'
-        }
+        },
+        // column:this.common.dataStackTye
       },
 
-
+      //   tooltip: {
+      //     pointFormat: 'name: <b>{point.y:.1f}</b>'
+      // },
+      tooltip: {
+        pointFormat: '<span style="display: inline-block; width: 90px;"><span style="color:{series.color};float: left;">{series.name}</span>: <span style="float: left;"><b>{point.y}</b></span><br/></span>',
+        shared: true
+      },
       series: [
         {
           //avrage
           name: this.name2,
           color: "rgb(124,181,236)",
-          enableMouseTracking: false,
+          enableMouseTracking: true,
           type: "spline",
           data: this.data2
 
@@ -2045,8 +2285,8 @@ export class Version3Component implements OnInit {
         {
           //2020
           name: this.name1,
-          color: "#90ed7d",
-          enableMouseTracking: false,
+          color: "black",
+          enableMouseTracking: true,
           type: 'column',
           // data: [this.data1]
           data: this.data1
@@ -2057,7 +2297,82 @@ export class Version3Component implements OnInit {
           // 2019
           name: this.name0,
           color: "#90ed7d",
-          enableMouseTracking: false,
+          enableMouseTracking: true,
+          type: 'column',
+          data: this.data0
+
+        },
+      ]
+    });
+    let comparisiongraph = new Chart(this.options);
+    this.comparisiongraph = comparisiongraph;
+  }
+
+
+  fullCourseChart() {
+    this.options = ({
+
+      chart: {
+        height: 300, zoomType: 'x', type: 'column',
+        // resetZoomButton: { position: { x: 0, y: -30 } } },
+        resetZoomButton: {
+          position: {
+            // align: 'right', // by default
+            // verticalAlign: 'top', // by default
+            x: -10,
+            y: 10
+          },
+          // relativeTo: 'chart'
+        },
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        }
+      },
+      legend: {
+        enabled: true
+      },
+
+      plotOptions: {
+        series: {
+          stacking: 'normal'
+        },
+      },
+
+
+      tooltip: {
+        pointFormat: '<span style="display: inline-block; width: 90px;"><span style="color:{series.color};float: left;">{series.name}</span>: <span style="float: left;"><b>{point.y}</b></span><br/></span>',
+        shared: true
+      },
+      series: [
+
+        {
+          //2020
+          name: this.name1,
+          color: "black",
+          enableMouseTracking: true,
+          type: 'column',
+          // data: [this.data1]
+          data: this.data1
+
+
+        },
+        {
+          // 2019
+          name: this.name0,
+          color: "#90ed7d",
+          enableMouseTracking: true,
           type: 'column',
           data: this.data0
 
@@ -2084,141 +2399,9 @@ export class Version3Component implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  setPage(page: number, date_range, search_data, industry_id, company_id, client_id, id_vertical, location_data) {
-    let id, cid, vid;
-    if (company_id.length != 0) {
-      id = company_id;
-    }
-    else if (company_id.length == 0) {
-      id = industry_id
-    }
-    else if (company_id.length == 0 && industry_id.length == 0) {
-      id = client_id;
-    }
-
-    if (client_id.length == 0 && id_vertical.length != 0) {
-      cid = this.clients_data.toString();
-    }
-    else if (client_id.length != 0) {
-      cid = client_id.toString();
-    }
-
-
-    if (id_vertical.length == 0) {
-      vid = this.location_id
-    }
-    else {
-      vid = id_vertical
-    }
-    this.showloader = true;
-    // get pager object from service
-    this.pager = this.pagerService.getPager(this.allItems, page, this.size);
-    // get current page of items
-    this.start = this.pager.startIndex + 1;
-    this.end = this.pager.endIndex + 1;
-    this.pageNumber = this.pager.startIndex;
-
-    this.v3Service.POST(this.URL, { id: id.toString(), industries_ids: industry_id.toString(), verticals_ids: cid, clients_ids: cid, verticals: vid.toString(), location: location_data.toString(), start: this.pageNumber, length: this.size, token: 'LIVESITE', dateRange: date_range, search: search_data, dataSelected: '' })
-      .subscribe(res => {
-        this.showloader = false;
-        this.common = res
-        this.search_data = ''
-        //this.allItems = this.common.recordsTotal;
-        this.rows = this.common.data
-        this.data = this.rows.slice(0, this.size);
-        this.dataSource.data = this.data;
-
-      });
-
-  }
   tab
   getData(value) {
-    console.log("get id user==========", value)
+    // console.log("get id user==========", value)
     this.table = value;
 
     if (this.table == 1) {
@@ -2234,7 +2417,7 @@ export class Version3Component implements OnInit {
     else if (this.table == 3) {
       this.tab = 'tab3';
 
-      this.getClientwithData(this.date_range, this.search_data,this.industry_id, this.company_id, this.client_id);
+      this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id);
     }
     else if (this.table == 4) {
       this.tab = 'tab4';
@@ -2244,27 +2427,28 @@ export class Version3Component implements OnInit {
     else if (this.table == 5) {
       this.tab = 'tab5';
 
-      this.getVerticalwithData(this.date_range, this.search_data);
+      this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical);
     }
     else if (this.table == 6) {
       this.tab = 'tab6';
 
-      // this.getVerticalwithData(this.date_range, this.search_data);
     }
   }
 
 
   datesUpdated(value, type) {
-    console.log(value, type)
+    // console.log(value, type)
     if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'company') {
 
-      this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
+      this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" +
+        this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
       this.getCompanywithData(this.date_range, this.search_data, this.industry_id, this.company_id)
     }
     else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'client') {
 
-      this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
-      this.getClientwithData(this.date_range, this.search_data, this.industry_id, this.company_id, this.client_id)
+      this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" +
+        this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
+      this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id)
     }
     else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'user') {
 
@@ -2273,8 +2457,10 @@ export class Version3Component implements OnInit {
     }
     else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'vertical') {
 
-      this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
-      this.getVerticalwithData(this.date_range, this.search_data)
+      this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" +
+        this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
+      this.getVerticalwithData(this.date_range, this.search_data, this.clients_id, this.id_vertical)
+      // this.location_data
     }
 
     else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'usergraph') {
@@ -2288,11 +2474,10 @@ export class Version3Component implements OnInit {
       this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
       this.getComparisionGraph(this.date_range, this.clients_id, this.vertical_id, this.location_data, this.company_id, this.dataselected)
     }
-    else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'usergraph') {
-
-      this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
-      this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, this.location_data)
-    }
+    // else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'usergraph') {
+    //   this.date_range = this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") + "_" + this.datePipe.transform(value.endDate, "yyyy-MM-dd HH-mm-ss")
+    //   this.getUserGraph(this.date_range, this.clients_id, this.vertical_id, this.location_data)
+    // }
 
     else if (this.datePipe.transform(value.startDate, "yyyy-MM-dd 00-00-00") != null && type == 'downloadgraph') {
 
@@ -2344,7 +2529,7 @@ export class Version3Component implements OnInit {
 
     else if (type == 'client') {
       this.search_data = value;
-      this.getClientwithData(this.date_range, this.search_data, this.industry_id, this.company_id, this.client_id)
+      this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id)
     }
 
     else if (type == 'user') {
@@ -2354,7 +2539,7 @@ export class Version3Component implements OnInit {
 
     else if (type == 'vertical') {
       this.search_data = value;
-      this.getVerticalwithData(this.date_range, this.search_data)
+      this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical)
     }
   }
 
@@ -2381,26 +2566,7 @@ export class Version3Component implements OnInit {
     this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype)
   }
 
-  /*    toggleSidebarFolded()
-   {
-      alert("hi")
-       console.log(this._fuseSidebarService.getSidebar('navbar'))
-       this._fuseSidebarService.getSidebar('navbar').close();
-         this._router.events
-           .pipe(
-               filter((event) => event instanceof NavigationEnd),
-               takeUntil(this._unsubscribeAll)
-           )
-           .subscribe(() => {
-             alert("hi")
-                   if ( this._fuseSidebarService.getSidebar('navbar') )
-                   {
-                       this._fuseSidebarService.getSidebar('navbar').close();
-                   }
-               }
-           );
-   }
-*/
+
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
@@ -2443,12 +2609,111 @@ export class Version3Component implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      // console.log('The dialog was closed', result);
       // this.animal = result;
     });
   }
 
 }
+
+//////////////////////////////////////////////////////////////////////////////
+
+
+
+
+// setPage(page: number, date_range, search_data, industry_id, company_id, client_id, id_vertical, location_data) {
+//   let id, cid, vid;
+//   if (company_id.length != 0) {
+//     id = company_id;
+//   }
+//   else if (company_id.length == 0) {
+//     id = industry_id
+//   }
+//   else if (company_id.length == 0 && industry_id.length == 0) {
+//     id = client_id;
+//   }
+
+//   if (client_id.length == 0 && id_vertical.length != 0) {
+//     cid = this.clients_data.toString();
+//   }
+//   else if (client_id.length != 0) {
+//     cid = client_id.toString();
+//   }
+
+
+//   if (id_vertical.length == 0) {
+//     vid = this.location_id
+//   }
+//   else {
+//     vid = id_vertical
+//   }
+//   this.showloader = true;
+//   this.pager = this.pagerService.getPager(this.allItems, page, this.size);
+//   this.start = this.pager.startIndex + 1;
+//   this.end = this.pager.endIndex + 1;
+//   this.pageNumber = this.pager.startIndex;
+
+//   this.v3Service.POST(this.URL, { id: id.toString(), industries_ids: industry_id.toString(), verticals_ids: cid, clients_ids: cid, verticals: vid.toString(), location: location_data.toString(), start: this.pageNumber, length: this.size, token: 'LIVESITE', dateRange: date_range, search: search_data, dataSelected: '' })
+//     .subscribe(res => {
+//       this.showloader = false;
+//       this.common = res
+//       this.search_data = ''
+//       //this.allItems = this.common.recordsTotal;
+//       this.rows = this.common.data
+//       this.data = this.rows.slice(0, this.size);
+//       this.dataSource.data = this.data;
+
+//     });
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+
+
+
+/*    toggleSidebarFolded()
+  {
+     alert("hi")
+      console.log(this._fuseSidebarService.getSidebar('navbar'))
+      this._fuseSidebarService.getSidebar('navbar').close();
+        this._router.events
+          .pipe(
+              filter((event) => event instanceof NavigationEnd),
+              takeUntil(this._unsubscribeAll)
+          )
+          .subscribe(() => {
+            alert("hi")
+                  if ( this._fuseSidebarService.getSidebar('navbar') )
+                  {
+                      this._fuseSidebarService.getSidebar('navbar').close();
+                  }
+              }
+          );
+  }
+*/
+
+
+
+
+
+
+
+
+
+
 
 // function compare(a: number | string, b: number | string, isAsc: boolean) {
 //   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
@@ -2539,3 +2804,48 @@ export class Version3Component implements OnInit {
     // });
     // this.dataSource.sort = this.sort;
     // document.getElementById('vedio').style.display = "none";
+
+
+
+
+
+
+  // var d = new Date(2012, 7, 25);
+  // d.setFullYear(d.getFullYear() - 1);
+  // records: Array<any>;
+  // isDesc: boolean = false;
+  // column: string = 'CategoryName';
+  // sort(property) {
+    //   this.isDesc = !this.isDesc; //change the direction    
+    //   this.column = property;
+    //   let direction = this.isDesc ? 1 : -1;
+
+    //   this.records.sort(function (a, b) {
+      //     if (a[property] < b[property]) {
+        //       return -1 * direction;
+        //     }
+        //     else if (a[property] > b[property]) {
+          //       return 1 * direction;
+          //     }
+          //     else {
+            //       return 0;
+            //     }
+            //   });
+            // };
+            // public today: Date = new Date(new Date().toDateString());
+            // public weekStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 7) % 7)).toDateString());
+            // public weekEnd: Date = new Date(new Date(new Date().setDate(new Date(new Date().setDate((new Date().getDate()
+            //     - (new Date().getDay() + 7) % 7))).getDate() + 6)).toDateString())
+            //     ;
+            // public monthStart: Date = new Date(new Date(new Date().setDate(1)).toDateString());
+            // public monthEnd: Date = this.today;
+            // public lastStart: Date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - 1)).setDate(1)).toDateString());
+            // public lastEnd: Date = this.today;
+            // public yearStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - 365)).toDateString());
+            // public yearEnd: Date = this.today;
+
+
+            // ranges: any = {
+              // //  this.today= new Date(new Date().toDateString());
+
+              // }

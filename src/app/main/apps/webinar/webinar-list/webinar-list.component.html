@@ -1,20 +1,36 @@
 <div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
   <div class="center" fusePerfectScrollbar>
 
-    <div class="mat__box mat__box2" style="flex-direction: row;
+    <!-- <div class="mat__box mat__box2" style="flex-direction: row;
     box-sizing: border-box;
    height: 100px;
     place-content: center space-between;
     align-items: center;    background-color: #039be5 !important;
-    color: white !important;">
+    color: white !important;"> -->
       <div class="row" fxLayoutAlign="space-between center">
-        <div class="" style="color: white;margin-top:40px">
+        <!-- <div class="" style="color: white;margin-top:40px">
           <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white">
             <img style="margin-left: 10px;" width="20px" height="20px" src="../../../../../assets/sp1.svg">
             &nbsp;&nbsp;Dashboard </a>
-          <a routerLink="/apps/webinars" style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Manage
+          <a routerLink="/apps/webinars"
+           style="text-decoration: none;color: white">
+           &nbsp;&nbsp;/&nbsp;&nbsp;Manage
             Webinars</a>
-        </div>
+        </div> -->
+
+        <div class="" style="margin-top:20px; position: relative; margin-left: 25px;">
+
+            <span class="speedometer_icon  report_top_hover"> <a routerLink="/apps/home-dashboard/version3" 
+             style="text-decoration: none;">
+             &nbsp;  &nbsp;Dashboard </a></span>
+             <span style="color: #ccc;">/
+             <a  routerLink="/apps/webinars"
+               style="text-decoration: none;"
+                class="report_top_hover">&nbsp;Manage
+                Webinars</a>
+             </span>
+         
+           </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: -30px;
         margin-right: 40px; ">
 
@@ -23,7 +39,7 @@
           </button>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
 
 
@@ -60,8 +76,8 @@
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right" style="margin-top: -84px;">
                   <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button" 
-                  style="background-color: #039be5 !important;
-                    color: #ffffff !important;"><span> Show/Hide Column</span></button>
+                  style="background-color: #039be5 ;
+                    color: #ffffff ;" class="hover-button-loginpage"><span> Show/Hide Column</span></button>
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item>
                       <label>
@@ -211,8 +227,8 @@
                     <ng-container matColumnDef="action">
                       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                       <mat-cell *matCellDef="let element">
-                        <button mat-raised-button [matMenuTriggerFor]="belowMenu"
-                          style="background-color: #039be5 !important; color: #ffffff !important;">Actions</button>
+                        <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="hover-button-loginpage"
+                          style="background-color: #039be5 ; color: #ffffff ;">Actions</button>
 
                         <mat-menu #belowMenu="matMenu" yPosition="below">
                           <button mat-menu-item matTooltip="Edit"
@@ -238,11 +254,11 @@
                   <div *ngIf="data == '' " style="margin-bottom: 20px;
                       text-align: center;
                       margin-top: 20px;">No data available in table</div>
-                  <mat-card *ngIf="showloader==true"
-                    style="display: flex; justify-content: center; align-items: center">
-                    <mat-progress-spinner mode="indeterminate">
+                  <div class="center_align" *ngIf="showloader==true"
+                  >
+                    <mat-progress-spinner mode="indeterminate" strokeWidth="3"  [diameter]="50">
                     </mat-progress-spinner>
-                  </mat-card>
+                  </div>
                 </div>
                 <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
               </div>

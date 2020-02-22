@@ -3,13 +3,13 @@
   <!-- <ng-container *ngIf="show"></ng-container> -->
   <!-- CENTER -->
   <div class="center" fusePerfectScrollbar>
-      <div class="mat__box mat__box2" style="flex-direction: row;
+      <!-- <div class="mat__box mat__box2" style="flex-direction: row;
       box-sizing: border-box;
      height: 100px;
       place-content: center space-between;
       align-items: center;    background-color: #039be5 !important;
-      color: white !important;">
-      <div class="row" fxLayoutAlign="space-between center">
+      color: white !important;"> -->
+      <!-- <div class="row" fxLayoutAlign="space-between center">
         <div class="" style="    margin-top: 40px;
         margin-left: 10px;
         font-size: 30px;">
@@ -17,8 +17,8 @@
         </div>
       
   
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
 
 
 
@@ -161,11 +161,11 @@
                   [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
                   (page)="handlePage($event)"></mat-paginator>
                 <div *ngIf="data == '' " style="text-align: center;margin-top: 10px; margin-bottom: 10px;">No data available in table</div>
-                <mat-card *ngIf="showloader==true"
-                style="display: flex; justify-content: center; align-items: center">
-                <mat-progress-spinner mode="indeterminate">
+                <div *ngIf="showloader==true"
+                style="display: flex; justify-content: center; align-items: center;top: 50%; left: 0;right: 0; position: absolute;">
+                <mat-progress-spinner mode="indeterminate" strokeWidth="3"  [diameter]="50">
                 </mat-progress-spinner>
-              </mat-card>
+              </div>
               </div>
               <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             </div>

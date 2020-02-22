@@ -39,16 +39,16 @@ table {
   width: 100%;
 }
 
-td, th {
-  // width: 25%;
-}
+// td, th {
+//   width: 25%;
+// }
 
-#container {
-  min-width: 310px;
-  max-width: 800px;
-  height: 400px;
-  margin: 0 auto
-}
+// #container {
+//   min-width: 310px;
+//   max-width: 800px;
+//   height: 400px;
+//   margin: 0 auto
+// }
 
          a {
     cursor: pointer;
@@ -303,8 +303,38 @@ li.average_label:after
     color: unset;
 }
 .select2-search__field:hover{background: #3195c2;}
-// .graph_section{width: 100%;}
 .graph_section .highcharts-container{width:100%;height:300px;}
+
+
+.graph_section{position: relative;}
+.loader{position: absolute;
+  display: flex;
+  left: 0;
+  align-items: center;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  justify-content: center;}
+ 
+
+// body.theme-default .mat-progress-spinner circle, body.theme-default .mat-spinner circle {
+//   stroke: #ff0000;
+// }
+body.theme-default .mat-progress-spinner circle, body.theme-default .mat-spinner circle {
+  stroke: #4285f4 !important;
+}
+
+.table__Companies{
+  position: relative;
+}
+
+.center_align{    display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;}
 
 .reload { background-color: #3195c2; border-radius: 10px; box-shadow: 0 0 10px rgba(32, 176, 242, 0.40); font-size: 18px; padding: 12px; color: #fff; display: inline-block; vertical-align: middle; width: 242px; height: 41px; text-align: center; margin-top: 5px; }
 .reload .mat-icon{margin-left:9px;margin-top:6px;}
@@ -317,7 +347,13 @@ li.average_label:after
   font-size:17px;color:#323759;margin:0;margin-right:10px;line-height:24px;
   margin-bottom:5px;font-weight:600;}
 .graph_dive .total-us p span{color: #039be5;}
-.input_date { background-color: #fff; width: 215px; outline: none; background-size: 18px; display: inline-block; color: #989bac; text-align: left; cursor: pointer; margin-top: 0px; }
+.input_date { 
+  background-color: #fff;
+   width: 175px; outline: none;
+    background-size: 18px;
+    display: inline-block;
+     color: #989bac; text-align: left;
+      cursor: pointer; margin-top: 0px; }
 .total_user_dd { height: 35px !important; background-color: #fff; width: 220px; outline: none; border: 1px solid #e6e7ee; padding: 6px 15px; border-radius: 4px; color: #989bac; margin-right: 9px; margin-top: 4px; }
 
 #data_export_btn {
@@ -341,8 +377,21 @@ li.average_label:after
 .right_sec {
   width: calc(100% - 410px);
 }
-.md-drppicker.double{width: 630px !important;}
-
+// .md-drppicker.double{width: 630px !important;}
+// .md-drppicker {
+//     position: absolute;
+//     font-family: Roboto,sans-serif;
+//     color: inherit;
+//     border-radius: 4px;
+//     width: 635px !important;
+//     padding: 4px;
+//     margin-top: 10px;
+//     overflow: hidden;
+//     z-index: 1000;
+//     font-size: 14px;
+//     background-color: #fff;
+//     box-shadow: 0 2px 4px 0 rgba(0,0,0,.16), 0 2px 8px 0 rgba(0,0,0,.12);
+// }
 // td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 //   padding: 28px;
 //   border-bottom-width: 1px;
@@ -372,6 +421,23 @@ li.average_label:after
   transition: all ease 0.3s;
 }
 
+.calender{
+  background: url(../../../../../assets/img/calender.png) no-repeat 193px 11px;
+  background-color: #fff;
+  width: 220px;
+  background-size: 9%;
+    padding: 1px;
+ 
+  cursor: pointer;
+}
+
+// border: 1px solid #e6e7ee;
+// box-shadow: 0 0 6px rgba(32, 176, 242, 0.25);
+// border-radius: 10px;
+// background-size: 18px;
+// display: inline-block;
+// color: #989bac;
+// text-align: left;
 // #container {
 //   visibility: hidden;
 // }

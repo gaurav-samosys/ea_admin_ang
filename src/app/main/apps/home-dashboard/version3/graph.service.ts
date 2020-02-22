@@ -103,13 +103,22 @@ comparision:any={
        height:300,
     //    width:470,
         type: 'column',zoomType: 'xy', panning: true, panKey: 'shift',
-                        resetZoomButton: {
-                            position: {
+                    //     resetZoomButton: {
+                    //         position: {
+                    //         // align: 'right', // by default
+                    //         // verticalAlign: 'top', // by default
+                    //         x: 0,
+                    //         y: -30
+                    //     }
+                    // }
+                    resetZoomButton: {
+                        position: {
                             // align: 'right', // by default
                             // verticalAlign: 'top', // by default
-                            x: 0,
-                            y: -30
-                        }
+                            x: -10,
+                            y: 10
+                        },
+                        relativeTo: 'chart'
                     }
     },
     credits: {
@@ -158,14 +167,24 @@ comparision:any={
  public downloads: any = {
     chart: {showInLegend: false,zoomType: 'x',height:300,
     // width:460,
+                        // resetZoomButton: {
+                        //     position: {
+                        //         // align: 'right', // by default
+                        //         // verticalAlign: 'top', // by default
+                        //         x: 0,
+                        //         y: -30
+                        //     }
+                        // }
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
                                 // verticalAlign: 'top', // by default
-                                x: 0,
-                                y: -30
-                            }
-                        }},
+                                x: -10,
+                                y: 10
+                            },
+                            relativeTo: 'chart'
+                        }
+                    },
     navigation: {buttonOptions: {enabled: false}},
     title: {
         text: ''
@@ -228,13 +247,22 @@ credits: {enabled: false},
     chart: {
         type: 'column',zoomType: 'x',height:300,
         // width:470,
+                        // resetZoomButton: {
+                        //     position: {
+                        //         // align: 'right', // by default
+                        //         // verticalAlign: 'top', // by default
+                        //         x: 0,
+                        //         y: -30
+                        //     }
+                        // }
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
                                 // verticalAlign: 'top', // by default
-                                x: 0,
-                                y: -30
-                            }
+                                x: -10,
+                                y: 10
+                            },
+                            relativeTo: 'chart'
                         }
     },  credits: {
         enabled: false
@@ -281,13 +309,22 @@ credits: {enabled: false},
 public videochartGraph: any =  {
     chart: {
         type: 'column',zoomType: 'x',height:300,
+                        // resetZoomButton: {
+                        //     position: {
+                        //         // align: 'right', // by default
+                        //         // verticalAlign: 'top', // by default
+                        //         x: 0,
+                        //         y: -30
+                        //     }
+                        // }
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
                                 // verticalAlign: 'top', // by default
-                                x: 0,
-                                y: -30
-                            }
+                                x: -10,
+                                y: 10
+                            },
+                            relativeTo: 'chart'
                         }
     },  credits: {
         enabled: false
@@ -338,14 +375,23 @@ certificate:any={
     chart: {
         type: 'column',zoomType: 'x',height:300,
         // width:470,
+                        // resetZoomButton: {
+                        //     position: {
+                        //             // align: 'right', // by default
+                        //             // verticalAlign: 'top', // by default
+                        //             x: 0,
+                        //             y: -30
+                        //         }
+                        //     }
                         resetZoomButton: {
                             position: {
-                                    // align: 'right', // by default
-                                    // verticalAlign: 'top', // by default
-                                    x: 0,
-                                    y: -30
-                                }
-                            }
+                                // align: 'right', // by default
+                                // verticalAlign: 'top', // by default
+                                x: -10,
+                                y: 10
+                            },
+                            relativeTo: 'chart'
+                        }
     },  credits: {
         enabled: false
       },
@@ -402,14 +448,23 @@ completion:any={
         // width:470,
         zoomType: 'x',
 
+                        // resetZoomButton: {
+                        //     position: {
+                        //             // align: 'right', // by default
+                        //             // verticalAlign: 'top', // by default
+                        //             x: 0,
+                        //             y: -30
+                        //         }
+                        //     }
                         resetZoomButton: {
                             position: {
-                                    // align: 'right', // by default
-                                    // verticalAlign: 'top', // by default
-                                    x: 0,
-                                    y: -30
-                                }
-                            }
+                                // align: 'right', // by default
+                                // verticalAlign: 'top', // by default
+                                x: -10,
+                                y: 10
+                            },
+                            relativeTo: 'chart'
+                        }
     },  credits: {
         enabled: false
       },
@@ -475,17 +530,26 @@ completion:any={
 
 access_code:any={
     chart: {
-        type: 'column',height:300,
+        type: 'column',height:300, zoomType: 'x',
         // width:460,
-        zoomType: 'x',
-                        resetZoomButton: {
-                            position: {
-                                // align: 'right', // by default
-                                // verticalAlign: 'top', // by default
-                                x: 0,
-                                y: -30
-                            }
-                        }
+        // zoomType: 'x',
+        //                 resetZoomButton: {
+        //                     position: {
+        //                         // align: 'right', // by default
+        //                         // verticalAlign: 'top', // by default
+        //                         x: 0,
+        //                         y: -30
+        //                     }
+        //                 }
+        resetZoomButton: {
+            position: {
+                // align: 'right', // by default
+                // verticalAlign: 'top', // by default
+                x: -10,
+                y: 10
+            },
+            relativeTo: 'chart'
+        }
     },  credits: {
         enabled: false
       },
@@ -558,13 +622,22 @@ access_code:any={
 public survey: any =  {
     chart: { height:300,
         type: 'column',zoomType: 'x',
+                        // resetZoomButton: {
+                        //     position: {
+                        //         // align: 'right', // by default
+                        //         // verticalAlign: 'top', // by default
+                        //         x: 0,
+                        //         y: -30
+                        //     }
+                        // }
                         resetZoomButton: {
                             position: {
                                 // align: 'right', // by default
                                 // verticalAlign: 'top', // by default
-                                x: 0,
-                                y: -30
-                            }
+                                x: -10,
+                                y: 10
+                            },
+                            relativeTo: 'chart'
                         }
     },  credits: {
         enabled: false

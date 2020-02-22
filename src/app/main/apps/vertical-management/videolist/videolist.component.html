@@ -190,7 +190,7 @@
                                             </span>  -->
                                     </th>
                                     <td mat-cell *matCellDef="let element">
-                                        <ui-switch [checked]="element.status == 'Active' ? true : false"
+                                        <ui-switch size="small" [checked]="element.status == 'Active' ? true : false"
                                             (change)="onChange($event,element.id)"></ui-switch>
                                     </td>
                                 </ng-container>
@@ -215,8 +215,8 @@
                                             </mat-icon>
                                         </button> -->
                                         <button style="margin: 15px;
-                                            background: #039be5 !important;
-    color: #ffffff !important;" mat-raised-button [matMenuTriggerFor]="belowMenu">Actions</button>
+                                            background: #039be5 ;
+    color: #ffffff ;" mat-raised-button [matMenuTriggerFor]="belowMenu" class="hover-button-loginpage">Actions</button>
 
                                         <mat-menu #belowMenu="matMenu" yPosition="below">
                                             <button mat-menu-item matTooltip="Edit"
@@ -271,11 +271,14 @@
                                 (page)="handlePage($event)"></mat-paginator>
                             <div *ngIf="data == '' " style="text-align: center;margin-top:20px;margin-bottom: 20px;">No
                                 data available in table</div>
-                                <mat-card *ngIf="showloader==true"
-                                style="display: flex; justify-content: center; align-items: center">
-                                <mat-progress-spinner mode="indeterminate">
+                                <div class="center_allign" *ngIf="showloader==true"
+                                style="display: flex; justify-content: center; align-items: center; top: 50%;
+                                left: 0;
+                                right: 0;
+                                position: absolute;">
+                                <mat-progress-spinner mode="indeterminate" strokeWidth="3"  [diameter]="50">
                                 </mat-progress-spinner>
-                              </mat-card>
+                            </div>
 
                             <!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
 

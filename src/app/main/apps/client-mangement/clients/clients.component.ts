@@ -84,7 +84,8 @@ export class ClientsComponent implements OnInit {
   clientActive = myGlobals.clientActive;
   deleteClient = myGlobals.deleteClient
 
-  displayedColumns: string[] = ['client_name', 'company_name', 'client_vertical', 'portal_name', 'created_on', 'totalUsers', 'status', 'action'];
+  displayedColumns: string[] = ['client_name', 'company_name',
+   'client_vertical', 'portal_name', 'created_on', 'totalUsers', 'status', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -143,12 +144,12 @@ export class ClientsComponent implements OnInit {
       this.showloader = false;
 
       this.response = res
-      console.log(this.response)
+      // console.log(this.response)
       this.data = this.response.data;
 
     
       this.client_Name = this.data[0]['client_name'].replace(/ /g, "_");
-      console.log( this.id,this.client_Name);
+      // console.log( this.id,this.client_Name);
     
 
 
@@ -157,10 +158,8 @@ for(let i=0; i< this.data.length ; i++){
   this.client_Name=this.data[i]['client_name']
   this.id=this.data[i]['id']
 
-  console.log(this.client_Name,this.id)
+  // console.log(this.client_Name,this.id)
 }
-
-
 
 
 
@@ -178,7 +177,7 @@ for(let i=0; i< this.data.length ; i++){
   }
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
@@ -187,7 +186,7 @@ for(let i=0; i< this.data.length ; i++){
       if (this.value != this.value) {
         this.currentPage = 0;
       }
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
       this.Search(this.value, this.name)
     }
     else {
@@ -220,7 +219,10 @@ for(let i=0; i< this.data.length ; i++){
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.client_service.Post(this.getClients, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.client_service.Post(this.getClients, {  company_name: this.companyname, client_name: this.clientname,
+      first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal, 
+      city: this.city,
+       column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showloader = false;
 
       this.response = res
@@ -329,8 +331,6 @@ for(let i=0; i< this.data.length ; i++){
   }
 
   fetchCountry() {
-
-
     this.client_service.Post(this.getCountry, { token: 'LIVESITE' })
       .subscribe(res => {
         this.common = res
@@ -349,7 +349,7 @@ for(let i=0; i< this.data.length ; i++){
   }
 
   Edit(value) {
-    console.log(value)
+    // console.log(value)
     this.client_service.editData(value)
   }
   ClientVertical() {
@@ -360,7 +360,7 @@ for(let i=0; i< this.data.length ; i++){
   }
 
   onChange(value, id) {
-    console.log(value, id)
+    // console.log(value, id)
     let status;
     if (value == false) {
       status = 0;
@@ -373,7 +373,7 @@ for(let i=0; i< this.data.length ; i++){
 
     }
     this.client_service.Post(this.clientActive, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
     })
   }
   Search(value, name) {
@@ -485,7 +485,10 @@ for(let i=0; i< this.data.length ; i++){
     this.pageNumber = start
     this.showloader = true
 
-    this.client_service.Post(this.getClients, { company_name: this.companyname, client_name: this.clientname, first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal, city: this.city, start_date: this.sdate, end_date: this.edate, status: this.status, country: this.country1, state: this.state, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
+    this.client_service.Post(this.getClients, { 
+      company_name: this.companyname, client_name: this.clientname,
+       first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal, 
+       city: this.city, start_date: this.sdate, end_date: this.edate, status: this.status, country: this.country1, state: this.state, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
       .subscribe(res => {
         this.showloader = false
 
@@ -545,9 +548,9 @@ for(let i=0; i< this.data.length ; i++){
       token: 'LIVESITE'
     })
       .subscribe(res => {
-        console.log(res)
+        // console.log(res)
         if (res['success'] == true) {
-          console.log(this.data)
+          // console.log(this.data)
           this.client_service.exportAsExcelFile(this.data, 'sample');
 
         }

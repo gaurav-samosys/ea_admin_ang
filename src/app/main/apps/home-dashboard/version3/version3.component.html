@@ -124,32 +124,34 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="tabbing_container">
 						<ul class="tabs dash_main_tabs">
-							<li  [ngClass]="{'active': tab==='tab1'}" class="{{industry_disable == 1 ? 'disabled' : ''}}" (click)=getData(1)>
+							<li [ngClass]="{'active': tab==='tab1'}" class="{{industry_disable == 1 ? 'disabled' : ''}}"
+								(click)=getData(1)>
 								<p>Industries</p>
 								<span class="accent">{{industry_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li  [ngClass]="{'active': tab==='tab2'}" class="{{company_disable == 1 ? 'disabled' : ''}}" (click)=getData(2)>
+							<li [ngClass]="{'active': tab==='tab2'}" class="{{company_disable == 1 ? 'disabled' : ''}}"
+								(click)=getData(2)>
 								<p>Companies</p>
 								<span class="accent">{{company_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li  [ngClass]="{'active': tab==='tab3'}" class="tab-link" (click)=getData(3)>
+							<li [ngClass]="{'active': tab==='tab3'}" class="tab-link" (click)=getData(3)>
 								<p>Clients</p>
 								<span class="accent">{{client_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li [ngClass]="{'active': tab==='tab4'}"  class="tab-link" (click)=getData(4)>
+							<li [ngClass]="{'active': tab==='tab4'}" class="tab-link" (click)=getData(4)>
 								<p>Users</p>
 								<span class="accent">{{user_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li  [ngClass]="{'active': tab==='tab5'}" class="tab-link" (click)=getData(5)>
+							<li [ngClass]="{'active': tab==='tab5'}" class="tab-link" (click)=getData(5)>
 								<p>Verticals</p>
 								<span class="accent">{{vertical_total}}</span>
 							</li>
 							<!-- END OF LI -->
-							<li  [ngClass]="{'active': tab==='tab6'}" class="tab-link" (click)=getData(6)>
+							<li [ngClass]="{'active': tab==='tab6'}" class="tab-link" (click)=getData(6)>
 								<p>Tools</p>
 								<span class="accent">{{Tools?Tools:'0'}}</span>
 							</li>
@@ -186,7 +188,7 @@
 					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 					<div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
 						<mat-form-field appearance="outline" style="margin-top:15px;">
-								<mat-icon matSuffix>search</mat-icon>
+							<mat-icon matSuffix>search</mat-icon>
 							<input matInput (keyup)="Search($event.target.value,'industry')" placeholder="Search here"
 								class="search industries_datatable_search">
 						</mat-form-field>
@@ -263,16 +265,18 @@
 							<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 							<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 						</table>
-						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+						<!-- id="industryPaginate" -->
+						<mat-paginator  *ngIf="allItems > 0 " #paginator [length]="allItems" [pageIndex]="currentPage"
 							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
 							(page)="handlePage($event)"></mat-paginator>
-						<div *ngIf="data == '' " style="text-align: center;margin-top: 10px;margin-bottom: 10px;">No
+						<div *ngIf="data == '' " style="text-align: center;
+						margin-top: 10px;margin-bottom: 10px;">No
 							data available in table</div>
-						<mat-card *ngIf="showloader==true"
+						<div class="center_align" *ngIf="showloader==true"
 							style="display: flex; justify-content: center; align-items: center">
-							<mat-progress-spinner mode="indeterminate">
+							<mat-progress-spinner mode="indeterminate" strokeWidth="3" [diameter]="50">
 							</mat-progress-spinner>
-						</mat-card>
+						</div>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 				</div>
@@ -321,7 +325,6 @@
 
 
 
-
 			<div *ngIf="table == 2" class="table__Companies">
 				<div class="row table_heading" fxLayoutAlign="space-between">
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -343,7 +346,7 @@
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 							<div class="mt-20">
 								<mat-form-field appearance="outline">
-										<mat-icon matSuffix>search</mat-icon>
+									<mat-icon matSuffix>search</mat-icon>
 									<input matInput (keyup)="Search($event.target.value,'company')"
 										placeholder="Search here">
 								</mat-form-field>
@@ -423,7 +426,8 @@
 											arrow_downward
 										</i>
 									</span></th>
-								<td mat-cell *matCellDef="let row"> {{row.status}} </td>
+									<!-- style="padding-right: 150px;" -->
+								<td mat-cell *matCellDef="let row" > {{row.status}} </td>
 							</ng-container>
 
 							<!-- Weight Column -->
@@ -465,6 +469,7 @@
 							<tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
 							<tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
 						</table>
+						<!-- id="companyPaginate" -->
 						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
 							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
 							(page)="handlePage1($event)"></mat-paginator>
@@ -472,11 +477,11 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
 						available in table</div>
 
-					<mat-card *ngIf="showloader==true"
+					<div class="center_align" *ngIf="showloader==true"
 						style="display: flex; justify-content: center; align-items: center">
-						<mat-progress-spinner mode="indeterminate">
+						<mat-progress-spinner mode="indeterminate" strokeWidth="3" [diameter]="50">
 						</mat-progress-spinner>
-					</mat-card>
+					</div>
 
 					<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
 
@@ -536,7 +541,8 @@
 
 			<div *ngIf="table == 3" class="table__Companies">
 				<div class="row" fxLayoutAlign="space-between">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="    padding-left: 20px;
+					padding-right: 20px;">
 						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Clients
 								{{client_total}}</span></p>
 					</div>
@@ -686,18 +692,20 @@
 							<mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
 							<mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
 						</mat-table>
-						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+						<!-- id="clientPaginate" -->
+						<mat-paginator  *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
 							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
 							(page)="handlePage2($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
+						style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
 						available in table</div>
-						<mat-card *ngIf="showloader==true"
+					<div class="center_align" *ngIf="showloader==true"
 						style="display: flex; justify-content: center; align-items: center">
-						<mat-progress-spinner mode="indeterminate">
+						<mat-progress-spinner mode="indeterminate" strokeWidth="3" [diameter]="50">
 						</mat-progress-spinner>
-					</mat-card>
+					</div>
 				</div>
 				<!-- END OF ROW -->
 				<div class="row">
@@ -742,7 +750,8 @@
 
 			<div *ngIf="table == 4" class="table__Companies">
 				<div class="row table_heading" fxLayoutAlign="space-between">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left: 0px;
+					padding-right: 20px;">
 						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Users
 								{{user_total}}</span></p>
 					</div>
@@ -760,18 +769,18 @@
 									<option value="certificates">Certificates</option>
 								</select> -->
 								<mat-form-field appearance="outline">
-										<!-- <mat-label>Cars</mat-label> -->
-										<select matNativeControl required (change)="searchType($event.target.value)" class="user_name_select"
-										style="margin-top: 5px;">
+									<!-- <mat-label>Cars</mat-label> -->
+									<select matNativeControl required (change)="searchType($event.target.value)"
+										class="user_name_select" style="margin-top: 5px;">
 										<option selected="" value="name">Name</option>
-										  <option value="email">Email</option>
-										  <option value="access_code">Access Code</option>
-										  <option value="status">Status</option>
-										  <option value="course">Course</option>
-										  <option value="certificates">Certificates</option>
+										<option value="email">Email</option>
+										<option value="access_code">Access Code</option>
+										<option value="status">Status</option>
+										<option value="course">Course</option>
+										<option value="certificates">Certificates</option>
 
-										</select>
-									  </mat-form-field>
+									</select>
+								</mat-form-field>
 							</div>
 							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
@@ -967,18 +976,20 @@
 							<mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
 							<mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
 						</mat-table>
-						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+						<!-- id="userPaginate" -->
+						<mat-paginator  *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
 							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
 							(page)="handlePage3($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
+						style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
 						available in table</div>
-						<mat-card *ngIf="showloader==true"
+					<div class="center_align" *ngIf="showloader==true"
 						style="display: flex; justify-content: center; align-items: center">
-						<mat-progress-spinner mode="indeterminate">
+						<mat-progress-spinner mode="indeterminate" strokeWidth="3" [diameter]="50">
 						</mat-progress-spinner>
-					</mat-card>
+					</div>
 				</div>
 				<!-- END OF ROW -->
 				<div class="row">
@@ -1017,13 +1028,10 @@
 
 
 
-
-
-
-
 			<div *ngIf="table == 5" class="table__Companies">
 				<div class="row" fxLayoutAlign="space-between">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left: 20px;
+					padding-right: 20px;">
 						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value">Verticals
 								{{vertical_total}}</span></p>
 					</div>
@@ -1090,33 +1098,36 @@
 							</ng-container>
 							<ng-container matColumnDef="create_date">
 								<th mat-header-cell *matHeaderCellDef>Created Date</th>
-								<td mat-cell *matCellDef="let element"> {{element[4]}} </td>
+								<!-- style="padding-right: 150px;" -->
+								<td mat-cell *matCellDef="let element" > {{element[4]}} </td>
 							</ng-container>
 							<ng-container matColumnDef="action">
 								<th mat-header-cell *matHeaderCellDef>Action</th>
 								<!-- /apps/vertical-management/vertical/{{element[0]}} -->
 
 								<td mat-cell *matCellDef="let element"> <button mat-raised-button type="submit"
-										class="button"
-										routerLink="/apps/vertical-management/management/{{element[0]}}">Manage
+										class="hover-button-loginpage button" style=" background: #039be5 ;
+										color: #ffffff ;" routerLink="/apps/vertical-management/management/{{element[0]}}">Manage
 									</button>
 								</td>
 							</ng-container>
 							<tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
 							<tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
 						</table>
+						<!-- id="verticalPaginate" -->
 						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
 							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
 							(page)="handlePage4($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
+						style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
 						available in table</div>
-						<mat-card *ngIf="showloader==true"
+					<div class="center_align" *ngIf="showloader==true"
 						style="display: flex; justify-content: center; align-items: center">
-						<mat-progress-spinner mode="indeterminate">
+						<mat-progress-spinner mode="indeterminate" strokeWidth="3" [diameter]="50">
 						</mat-progress-spinner>
-					</mat-card>
+					</div>
 				</div>
 				<!-- END OF ROW -->
 				<div class="row">
@@ -1158,168 +1169,171 @@
 
 
 			<div *ngIf="table == 6" class="table__Companies">
-					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value"> Tools Users 
-									{{tools}}</span></p>
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<div class="row" style="display: flex;">
-								<div class="mt-20 mr-20">
-										<mat-form-field appearance="outline">
-												<!-- <mat-label>Cars</mat-label> (change)="searchType($event.target.value)"-->
-												<select matNativeControl required  class="user_name_select"
-												style="margin-top: 5px;">
-												<option selected="" value="name">Name</option>
-												  <option value="email">Email</option>
-		
-												</select>
-											  </mat-form-field>
-								</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-								<div class="mt-20">
-									<mat-form-field appearance="outline">
-										<mat-icon matSuffix>search</mat-icon>
-										<input matInput (keyup)="Search($event.target.value,'vertical')"
-											placeholder="Search here">
-									</mat-form-field>
-								</div>
-								<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							</div>
-							<!-- END OF ROW -->
-						</div>
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				<div class="row" fxLayoutAlign="space-between">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value"> Tools
+								Users
+								{{tools}}</span></p>
 					</div>
-					<!-- END OF ROW -->
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<mat-table [dataSource]="dataSource">
-										<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
-										<ng-container matColumnDef="name">
-											<mat-header-cell *matHeaderCellDef style="padding-right:  10px;"> Name
-												<span class="pointer" style="margin-left: 11px !important;">
-			
-													<i (click)="updateSortingOrderTools('name','ASC')" [class.sort]='(this.sort_column=="name" && this.sort_order=="ASC") ?
-													"sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_upward
-													</i>
-													<i (click)="updateSortingOrderTools('name','DESC')"
-														[class.sort]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_downward
-													</i>
-												</span>
-											</mat-header-cell>
-											<mat-cell style="padding-right: 10px;" class="style" *matCellDef="let element"
-												>
-												<!-- {{element.name}} -->
-											</mat-cell>
-										</ng-container>
-										<!-- Weight Column -->
-										<ng-container matColumnDef="email">
-											<mat-header-cell *matHeaderCellDef style="padding-right: 125px;"> Email
-												<span class="pointer" style="margin-left: 11px !important;">
-													<i (click)="updateSortingOrderTools('email','ASC')"
-														[class.sort]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_upward
-													</i>
-													<i (click)="updateSortingOrderTools('email','DESC')"
-														[class.sort]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_downward
-													</i>
-												</span>
-											</mat-header-cell>
-											<mat-cell *matCellDef="let element" style="padding-right: 125px;">
-												{{element.email}}
-												<!-- <span [innerHtml]="element[1]"></span> -->
-											</mat-cell>
-										</ng-container>
-										<!-- Symbol Column -->
-										<ng-container matColumnDef="total_dept">
-											<mat-header-cell *matHeaderCellDef> total_dept<span class="pointer" style="margin-left: 11px !important;">
-													<i (click)="updateSortingOrderTools('total_dept','ASC')"
-														[class.sort]='(this.sort_column=="total_dept" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_upward
-													</i>
-													<i (click)="updateSortingOrderTools('total_dept','DESC')"
-														[class.sort]='(this.sort_column=="total_dept" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_downward
-													</i>
-												</span> </mat-header-cell>
-											<mat-cell *matCellDef="let element"> {{element.total_dept}} </mat-cell>
-										</ng-container>
-										<ng-container matColumnDef="total_dept_amount">
-											<mat-header-cell *matHeaderCellDef>
-													total_dept Amount
-													<span class="pointer" style="margin-left: 11px !important;">
-															<i (click)="updateSortingOrderTools('total_dept_amount','ASC')"
-																[class.sort]='(this.sort_column=="total_dept_amount" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-																arrow_upward
-															</i>
-															<i (click)="updateSortingOrderTools('total_dept_amount','DESC')"
-																[class.sort]='(this.sort_column=="total_dept_amount" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-																arrow_downward
-															</i>
-														</span>
-											</mat-header-cell>
-											<mat-cell *matCellDef="let element"> {{element.total_dept}} </mat-cell>
-										</ng-container>
-								
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="row" style="display: flex;">
+							<div class="mt-20 mr-20">
+								<mat-form-field appearance="outline">
+									<!-- <mat-label>Cars</mat-label> (change)="searchType($event.target.value)"-->
+									<select matNativeControl required class="user_name_select" style="margin-top: 5px;">
+										<option selected="" value="name">Name</option>
+										<option value="email">Email</option>
 
-										<ng-container matColumnDef="status">
-											<mat-header-cell *matHeaderCellDef> Status
-												<span class="pointer" style="margin-left: 11px !important;">
-													<i (click)="updateSortingOrderTools('status','ASC')"
-														[class.sort]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_upward
-													</i>
-													<i (click)="updateSortingOrderTools('status','DESC')"
-														[class.sort]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_downward
-													</i>
-												</span>
-											</mat-header-cell>
-											<mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
-										</ng-container>
-										<ng-container matColumnDef="dept_free_date">
-											<mat-header-cell style="padding-right:  15px;" *matHeaderCellDef>dept_free_date
-												<span class="pointer" style="margin-left: 11px !important;">
-									 				<i (click)="updateSortingOrderTools('dept_free_date','ASC')"
-														[class.sort]='(this.sort_column=="dept_free_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_upward
-													</i>
-													<i (click)="updateSortingOrderTools('dept_free_date','DESC')"
-														[class.sort]='(this.sort_column=="dept_free_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-														arrow_downward
-													</i>
-												</span>
-											</mat-header-cell>
-											<mat-cell *matCellDef="let element" style="padding-right:  10px;">{{element.dept_free_date}}
-											</mat-cell>
-										</ng-container>
-										<mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
-										<mat-row *matRowDef="let row; columns: displayedColumns6;"></mat-row>
-									</mat-table>
-							<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-								[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-								(page)="handlePage4($event)"></mat-paginator>
+									</select>
+								</mat-form-field>
+							</div>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+							<div class="mt-20">
+								<mat-form-field appearance="outline">
+									<mat-icon matSuffix>search</mat-icon>
+									<input matInput (keyup)="Search($event.target.value,'vertical')"
+										placeholder="Search here">
+								</mat-form-field>
+							</div>
+							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						</div>
-						<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
-							available in table</div>
-							<mat-card *ngIf="showloader==true"
-							style="display: flex; justify-content: center; align-items: center">
-							<mat-progress-spinner mode="indeterminate">
-							</mat-progress-spinner>
-						</mat-card>
+						<!-- END OF ROW -->
 					</div>
-					<!-- END OF ROW -->
-					<div class="row">
-						<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+				</div>
+				<!-- END OF ROW -->
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<mat-table [dataSource]="dataSource">
+							<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
+							<ng-container matColumnDef="name">
+								<mat-header-cell *matHeaderCellDef style="padding-right:  10px;"> Name
+									<span class="pointer" style="margin-left: 11px !important;">
+
+										<i (click)="updateSortingOrderTools('name','ASC')" [class.sort]='(this.sort_column=="name" && this.sort_order=="ASC") ?
+													"sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderTools('name','DESC')"
+											[class.sort]='(this.sort_column=="name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell style="padding-right: 10px;" class="style" *matCellDef="let element">
+									<!-- {{element.name}} -->
+								</mat-cell>
+							</ng-container>
+							<!-- Weight Column -->
+							<ng-container matColumnDef="email">
+								<mat-header-cell *matHeaderCellDef style="padding-right: 125px;"> Email
+									<span class="pointer" style="margin-left: 11px !important;">
+										<i (click)="updateSortingOrderTools('email','ASC')"
+											[class.sort]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderTools('email','DESC')"
+											[class.sort]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element" style="padding-right: 125px;">
+									{{element.email}}
+									<!-- <span [innerHtml]="element[1]"></span> -->
+								</mat-cell>
+							</ng-container>
+							<!-- Symbol Column -->
+							<ng-container matColumnDef="total_dept">
+								<mat-header-cell *matHeaderCellDef> total_dept<span class="pointer"
+										style="margin-left: 11px !important;">
+										<i (click)="updateSortingOrderTools('total_dept','ASC')"
+											[class.sort]='(this.sort_column=="total_dept" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderTools('total_dept','DESC')"
+											[class.sort]='(this.sort_column=="total_dept" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span> </mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element.total_dept}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="total_dept_amount">
+								<mat-header-cell *matHeaderCellDef>
+									total_dept Amount
+									<span class="pointer" style="margin-left: 11px !important;">
+										<i (click)="updateSortingOrderTools('total_dept_amount','ASC')"
+											[class.sort]='(this.sort_column=="total_dept_amount" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderTools('total_dept_amount','DESC')"
+											[class.sort]='(this.sort_column=="total_dept_amount" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element.total_dept}} </mat-cell>
+							</ng-container>
+
+
+							<ng-container matColumnDef="status">
+								<mat-header-cell *matHeaderCellDef> Status
+									<span class="pointer" style="margin-left: 11px !important;">
+										<i (click)="updateSortingOrderTools('status','ASC')"
+											[class.sort]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderTools('status','DESC')"
+											[class.sort]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+							</ng-container>
+							<ng-container matColumnDef="dept_free_date">
+								<mat-header-cell style="padding-right:  15px;" *matHeaderCellDef>dept_free_date
+									<span class="pointer" style="margin-left: 11px !important;">
+										<i (click)="updateSortingOrderTools('dept_free_date','ASC')"
+											[class.sort]='(this.sort_column=="dept_free_date" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_upward
+										</i>
+										<i (click)="updateSortingOrderTools('dept_free_date','DESC')"
+											[class.sort]='(this.sort_column=="dept_free_date" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+											arrow_downward
+										</i>
+									</span>
+								</mat-header-cell>
+								<mat-cell *matCellDef="let element" style="padding-right:  10px;">
+									{{element.dept_free_date}}
+								</mat-cell>
+							</ng-container>
+							<mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
+							<mat-row *matRowDef="let row; columns: displayedColumns6;"></mat-row>
+						</mat-table>
+						<!-- id="toolsPaginate" -->
+						<mat-paginator  *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							(page)="handlePage4($event)"></mat-paginator>
+					</div>
+					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
+						style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
+						available in table</div>
+					<div class="center_align" *ngIf="showloader==true"
+						style="display: flex; justify-content: center; align-items: center">
+						<mat-progress-spinner mode="indeterminate" strokeWidth="3" [diameter]="50">
+						</mat-progress-spinner>
+					</div>
+				</div>
+				<!-- END OF ROW -->
+				<div class="row">
+					<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 								<p>Showing {{start}} to {{end}} of {{allItems}} entries</p>
 							</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
+					<!-- 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
 								<ul *ngIf="pager.pages && pager.pages.length" class="pagination inline_list">
 									<li [ngClass]="{disabled:pager.currentPage === 1}">
 										<a (click)="setPage(1)">First</a>
@@ -1338,10 +1352,10 @@
 									</li>
 								</ul>
 							</div> -->
-						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-					</div>
-					<!-- END OF ROW -->
+					<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 				</div>
+				<!-- END OF ROW -->
+			</div>
 
 
 
@@ -1361,42 +1375,42 @@
 
 			<!-- <div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;width: 42% !important;"> -->
-				<div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12"
-				style="box-sizing: border-box;">
-				<div class="mat__box graph_dive" style="width:595px">
+			<div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12" style="box-sizing: border-box;">
+				<div class="mat__box graph_dive" style="width:595px ;position: relative;">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
 							<p>Total Users <span class="color_value">{{usergraph_total}}</span></p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-							<mat-form-field appearance="outline">
+							<mat-form-field appearance="outline" class="calender">
 
-								 <!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
-								<input matInput readonly type="text" ngxDaterangepickerMd
-									placeholder="Select Date range" [(ngModel)]="usergraph"
+								<!-- [alwaysShowCalendars]="true" id="dev12" [(ngModel)]="defoult" [showCancel]="true" -->
+								<!-- <input matInput readonly type="text" ngxDaterangepickerMd
+									placeholder="Select Date range" [(ngModel)]="range"
 									class="cursor-pointer input_date" [opens]="'center'" [showDropdowns]="true"
-
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									startKey="start" endKey="end" [ranges]="ranges" [showCustomRangeLabel]="true"
-									(datesUpdated)="datesUpdated($event,'usergraph')">
-								</mat-form-field>
+									(datesUpdated)="datesUpdated($event,'usergraph')"> -->
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									startKey="start" endKey="end" [opens]="'right'" [ranges]="ranges"
+									[(ngModel)]="userRange" (datesUpdated)="datesUpdated($event,'usergraph')"
+									readonly="" [autoApply]="true" [showDropdowns]="true"
+									class="input_date cursor-pointer" [alwaysShowCalendars]="true">
+							</mat-form-field>
 
 
-								<!-- <ejs-daterangepicker [firstDayOfWeek]='startDay'  placeholder='Select a range'></ejs-daterangepicker>` -->
-<!-- 
-									<ejs-daterangepicker placeholder='Select a range' (datesUpdated)="datesUpdated($event,'usergraph')">
-										<e-presets style="color: black;">
-											<e-preset label="This Week"  style="color: black;" [start]='weekStart' [end]='weekEnd'>   This Week</e-preset>  
-											<e-preset label="This Month" style="color: black;" [start]='monthStart' [end]='monthEnd'>This Month</e-preset> 
-											<e-preset label="Last Month" style="color: black;" [start]='lastStart' [end]='lastEnd'>  Last Month</e-preset> 
-											<e-preset label="Last Year"  style="color: black;" [start]='yearStart' [end]='yearEnd'>   Last Year</e-preset>  
-										</e-presets>
-									  </ejs-daterangepicker> -->
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+
+					</div>
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
 					</div>
 					<div class="graph_section" id="users"></div>
+
+
+
 				</div>
 				<!-- END OF MAT__BOX -->
 			</div>
@@ -1422,19 +1436,28 @@
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-							<mat-form-field appearance="outline">
+							<mat-form-field appearance="outline" class="calender">
 
 
-								<!-- [showCancel]="true" [alwaysShowCalendars]="true" -->
-								<input matInput class="daterange" type="text" placeholder="Select Date range"
+								<!-- [showCancel]="true"  [showCustomRangeLabel]="true" [alwaysShowCalendars]="true" -->
+								<!-- <input matInput class="daterange" type="text" placeholder="Select Date range"
 									ngxDaterangepickerMd [showDropdowns]="true"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-									[opens]="'left'" class="cursor-pointer input_date" startKey="start" endKey="end"
-									[ranges]="ranges" [(ngModel)]="downloadgraph" [showCustomRangeLabel]="true"
-									(datesUpdated)="datesUpdated($event,'downloadgraph')" readonly="">
+									[(ngModel)]="range" class="cursor-pointer input_date" startKey="start" endKey="end"
+									[ranges]="ranges" [(ngModel)]="downloadgraph"
+									(datesUpdated)="datesUpdated($event,'downloadgraph')" [opens]="'left'"
+									[alwaysShowCalendars]="true" readonly=""> -->
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									startKey="start" endKey="end" [opens]="'left'" [ranges]="ranges"
+									[(ngModel)]="downloadRange" (datesUpdated)="datesUpdated($event,'downloadgraph')"
+									readonly="" [autoApply]="true" [showDropdowns]="true"
+									class="input_date cursor-pointer" [alwaysShowCalendars]="true">
 							</mat-form-field>
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
 					</div>
 					<div class="graph_section" id="download"></div>
 					<ul class="course_status_ul">
@@ -1487,8 +1510,7 @@
 		<!-- total video -->
 		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
 
-			<div class="total_video col-lg-6 col-md-6 col-sm-12 col-xs-12"
-				style="box-sizing: border-box;">
+			<div class="total_video col-lg-6 col-md-6 col-sm-12 col-xs-12" style="box-sizing: border-box;">
 				<div class="mat__box graph_dive" style="width:595px">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
@@ -1496,17 +1518,27 @@
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-							<mat-form-field appearance="outline">
+							<mat-form-field appearance="outline" class="calender">
 								<!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
-								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-									[opens]="'left'" class="cursor-pointer input_date" [showDropdowns]="true"
+								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[opens]="'center'" class="cursor-pointer input_date" [showDropdowns]="true"
+									[(ngModel)]="range"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="videograph"
 									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'videograph')"
-									readonly="">
+									readonly=""> -->
+
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									startKey="start" endKey="end" [opens]="'right'" [ranges]="ranges"
+									[(ngModel)]="videoRange" (datesUpdated)="datesUpdated($event,'videograph')"
+									readonly="" [autoApply]="true" [showDropdowns]="true"
+									class="input_date cursor-pointer" [alwaysShowCalendars]="true">
 							</mat-form-field>
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
 					</div>
 					<div class="graph_section" id="video"></div>
 				</div>
@@ -1540,21 +1572,31 @@
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-							<mat-form-field appearance="outline">
+							<mat-form-field appearance="outline" class="calender">
 
 
 
 
 								<!--[showCancel]="true" 	[alwaysShowCalendars]="true"-->
-								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									class="cursor-pointer input_date" [opens]="'left'" [showDropdowns]="true"
+									[(ngModel)]="range"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
 									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="claimedgraph"
 									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'claimedgraph')"
-									readonly="">
+									readonly=""> -->
+
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									startKey="start" endKey="end" [opens]="'left'" [ranges]="ranges"
+									[(ngModel)]="claimedgraphRange" (datesUpdated)="datesUpdated($event,'claimedgraph')"
+									readonly="" [autoApply]="true" [showDropdowns]="true"
+									class="input_date cursor-pointer" [alwaysShowCalendars]="true">
 							</mat-form-field>
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
 					</div>
 					<div class="graph_section" id="certificate"></div>
 
@@ -1590,8 +1632,7 @@
 
 		<!-- course status -->
 		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
-			<div class="total_course col-lg-6 col-md-6 col-sm-12 col-xs-12"
-				style="box-sizing: border-box;">
+			<div class="total_course col-lg-6 col-md-6 col-sm-12 col-xs-12" style="box-sizing: border-box;">
 				<div class="mat__box graph_dive" style="width:595px">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
@@ -1601,15 +1642,27 @@
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-							<mat-form-field appearance="outline">
-								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+							<mat-form-field appearance="outline" class="calender">
+								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="coursegraph" [showDropdowns]="true"
+									[(ngModel)]="range" startKey="start" endKey="end" [ranges]="ranges"
+									[(ngModel)]="coursegraph" [opens]="'center'" [showDropdowns]="true"
 									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'coursegraph')"
-									readonly="" class="cursor-pointer input_date">
+									readonly="" class="cursor-pointer input_date"> -->
+
+									
+
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									startKey="start" endKey="end" [opens]="'right'" [ranges]="ranges"
+									[(ngModel)]="rangeCourse" (datesUpdated)="datesUpdated($event,'coursegraph')"
+									readonly="" [autoApply]="true" [showDropdowns]="true"
+									class="input_date cursor-pointer" [alwaysShowCalendars]="true">
 							</mat-form-field>
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
 					</div>
 					<div class="graph_section" id="completion"></div>
 
@@ -1649,15 +1702,29 @@
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-							<mat-form-field appearance="outline">
-								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+							<mat-form-field appearance="outline" class="calender">
+								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[opens]="'left'"
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-									startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="accessgraph" [showDropdowns]="true"
-									[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'accessgraph')"
-									readonly="" class="cursor-pointer input_date">
+									[(ngModel)]="range" startKey="start" endKey="end" [ranges]="ranges"
+									[(ngModel)]="accessgraph" [showDropdowns]="true" [showCustomRangeLabel]="true"
+									(datesUpdated)="datesUpdated($event,'accessgraph')" readonly=""
+									class="cursor-pointer input_date"> -->
+									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[opens]="'left'"
+									[alwaysShowCalendars]="true"
+									[(ngModel)]="rangeAccessCode" startKey="start" endKey="end" [ranges]="ranges"
+								    [showDropdowns]="true" [autoApply]="true"
+									(datesUpdated)="datesUpdated($event,'accessgraph')" readonly=""
+									class="cursor-pointer input_date">
+
+									
 							</mat-form-field>
 						</div>
 						<!-- END OF COL-LG-4 COL-MD-5 COL-SM-12 COL-XS-12 -->
+					</div>
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
 					</div>
 					<div class="graph_section" id="access"></div>
 					<ul class="course_status_ul">
@@ -1746,56 +1813,82 @@
 
 
 
-<!-- year of year new -->
-<div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
-	<div class="mat__box graph_dive">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<div class="row" fxLayoutAlign="space-between">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
-					<p>Year Over Year Comparison<br>
-						<span class="color_value">{{comparisiongraph_total}}</span></p>
-				</div>
+		<!-- year of year new -->
+		<div class="year_of_year row mt-20 mr-28 mb-28" *ngIf="dataSelect == 1">
+			<div class="mat__box graph_dive">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="row" fxLayoutAlign="space-between">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+							<p>Year Over Year Comparison<br>
+								<span class="color_value">{{comparisiongraph_total}}</span></p>
+						</div>
 
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex;">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 460px">
 
-					<select (change)="comparision_type($event.target.value)" class="mt_cls total_user_dd">
-						<option selected="" value="total_users">Total Users</option>
-						<option value="total_companies">Total Companies</option>
-						<option value="total_clients">Total Clients</option>
-						<option value="total_video_views">Total Video Views</option>
-						<option value="total_downloads">Total Downloads</option>
-						<option value="total_course_completions">Total Course Completions</option>
-						<option value="total_certificates">Total Certificates</option>
-					</select>
-					
-					<mat-form-field appearance="outline">
-							<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-								[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
-								[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
-								(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly="" [showDropdowns]="true"
-								class="input_date cursor-pointer">
-						</mat-form-field>
+							<select (change)="comparision_type($event.target.value)" class="mt_cls total_user_dd">
+								<option selected="" value="total_users">Total Users</option>
+								<option value="total_companies">Total Companies</option>
+								<option value="total_clients">Total Clients</option>
+								<option value="total_video_views">Total Video Views</option>
+								<option value="total_downloads">Total Downloads</option>
+								<option value="total_course_completions">Total Course Completions</option>
+								<option value="total_certificates">Total Certificates</option>
+							</select>
+
+							<!-- <mat-form-field appearance="outline" class="calender">
+								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges1"
+									[(ngModel)]="range" startKey="start" endKey="end" [alwaysShowCalendars]="true"
+									[showCustomRangeLabel]="true"
+									(datesUpdated)="datesUpdated($event,'comparisiongraph')" readonly=""
+									[showDropdowns]="true" class="input_date cursor-pointer">
+							</mat-form-field> -->
+							<mat-form-field floatLabel="never" appearance="outline" class="calender">
+								<input matInput class="cursor-pointer" type="text" [(ngModel)]="yearRange"
+									ngxDaterangepickerMd  readonly=""  [autoApply]="true" 
+									[ranges]="ranges1" [opens]="'left'" placeholder="Select date range"
+									[showDropdowns]="true" startKey="start" endKey="end"  [alwaysShowCalendars]="true"
+									(datesUpdated)="datesUpdated($event,'comparisiongraph')">
+
+									
+							</mat-form-field>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<div [chart]="comparisiongraph"></div>
-			<ul class="course_status_ul" *ngIf="user_status == 'false' ">
-					<li><span class="orange_status"></span> {{full_2019}}</li>
-					<li><span class="green_status"></span> {{mandatory_2019}}</li>
-					<li><span class="black_status"></span> {{full_2018}}</li>
-					<li><span class="blue_status"></span> {{mandatory_2018}}</li>
-				</ul>
-				<ul class="course_status_ul" *ngIf="user_status == 'true'">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
+					</div>
+					<div [chart]="comparisiongraph"></div>
+					<!-- <ul class="course_status_ul" *ngIf="user_status == 'false' ">
+						<li><span class="orange_status"></span> {{full_2019}}</li>
+						<li><span class="green_status"></span> {{mandatory_2019}}</li>
+						<li><span class="black_status"></span> {{full_2018}}</li>
+						<li><span class="blue_status"></span> {{mandatory_2018}}</li>
+					</ul>
+					<ul class="course_status_ul" *ngIf="user_status == 'true'">
 						<li><span class="black_status">{{pyear}}</span> </li>
 						<li><span class="blue_status"> {{year}}</span></li>
 						<li class="average_label"><span class="green_status"> {{Average}}</span></li>
-					</ul>
+					</ul> -->
 
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
-<!-- END OF ROW MT-20 MR-28 -->
+		<!-- END OF ROW MT-20 MR-28 -->
 
 
 
@@ -1853,6 +1946,9 @@
 				</div>
 				<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
+					</div>
 					<div class="graph_section" id="videochartGraph"></div>
 					<ul class="course_status_ul" style="float: right;">
 						<li><span class="black_status">
@@ -1881,7 +1977,7 @@
 
 		<!-- surway -->
 		<div class="total_survey row mt-10 mr-28 mb-28">
-			<div class="mat__box graph_dive" >
+			<div class="mat__box graph_dive">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
@@ -1912,25 +2008,40 @@
 							</mat-form-field>
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
 						</div>
+						<!-- [alwaysShowCalendars]="true" [locale]="locale"  [showCancel]="true"
+							 [showCustomRangeLabel]="true"   -->
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="display: flex; width: 250px">
-							<!-- [alwaysShowCalendars]="true" -->
-							<mat-form-field appearance="outline">
+							<mat-form-field appearance="outline" class="calender">
 								<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-									[showCancel]="true" class="cursor-pointer" [opens]="'left'" [ranges]="ranges"
-									[(ngModel)]="model" startKey="start" endKey="end" [showCustomRangeLabel]="true"
-									(datesUpdated)="datesUpdated($event,'surveychartGraph')" readonly="" [showDropdowns]="true"
-									class="input_date cursor-pointer">
+									startKey="start" endKey="end" [opens]="'left'" [ranges]="ranges"
+									[(ngModel)]="rangeSurvey" (datesUpdated)="datesUpdated($event,'surveychartGraph')"
+									readonly="" [autoApply]="true" [showDropdowns]="true"
+									class="input_date cursor-pointer" [alwaysShowCalendars]="true">
+
 							</mat-form-field>
 						</div>
+
+						<!-- <div class="col-xl-3 col-md-12 date_range">
+							<mat-form-field floatLabel="never" appearance="outline" class="calender">
+								<input matInput readonly class="cursor-pointer" type="text" [(ngModel)]="range"
+									ngxDaterangepickerMd [locale]="daterangePickerOptions" [showCancel]="true"
+									[ranges]="ranges" [opens]="'left'" placeholder="Select date range"
+									[showDropdowns]="true" [alwaysShowCalendars]="true" [showCustomRangeLabel]="true"
+									(datesUpdated)="datesUpdated($event,'surveychartGraph')">
+							</mat-form-field>
+						</div> -->
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_graph">
-						<div [chart]="surveychartGraph"></div>
+					<div class="loader" *ngIf="showloader==true">
+						<mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
+					</div>
+					<div [chart]="surveychartGraph"></div>
 
-				<!-- <div class="graph_section" id="surveychartGraph"></div>  -->
-						<!--  <ul class="course_status_ul">
+					<!-- <div class="graph_section" id="surveychartGraph"></div> -->
+					<!-- <ul class="course_status_ul">
 						<li><span class="black_status" style="color: rgb(149,206,255);"> surveys</span></li>
-						<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li> 
+						<!-- <li><span class="blue_status"></span>  Least Viewed Video :{{minVideo}}</li>  
 					</ul> -->
 				</div>
 			</div>
@@ -1948,7 +2059,9 @@
 	.displayNone {
 		display: none;
 	}
-
+	.none{
+	display: none !important;
+}
 	.inline_list {
 		list-style-type: none;
 	}

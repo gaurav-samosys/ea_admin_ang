@@ -91,7 +91,7 @@ export class UserComponent implements OnInit {
   pagedItems: any[];
   @ViewChild(MatSort, { static: true }) MatSort: MatSort;
 
-  displayedColumns: string[] = ['first_name', 'email', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action'];
+  displayedColumns: string[] = ['full_name', 'email', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -152,7 +152,7 @@ export class UserComponent implements OnInit {
    */
 
   columnClick(value, colName: string, evt) {
-    console.log('-0-----', evt.target.checked)
+    // console.log('-0-----', evt.target.checked)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);
     if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
@@ -185,7 +185,7 @@ export class UserComponent implements OnInit {
   confirmDialog(value): void {
     this.user.POST(this.deleteUserRecord, { id: value, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
-      console.log(this.common,"===============delete record")
+      // console.log(this.common,"===============delete record")
       if(this.common['success']==true){
             this.toastr.success("User Deleted Successfully")
       }else{
@@ -228,28 +228,32 @@ export class UserComponent implements OnInit {
   FetchUser() {
     this.showLoader = true
     this.user.POST(this.getUsers, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      this.showLoader = false;
+      // this.showLoader = false;
       this.response = res
-      this.data = this.response.data
-      this.dataSource = this.data;
 
-      this.allItems = this.response.total_data;
-      this.dataSource = new MatTableDataSource(this.data);
-      this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.MatSort;
+      // console.log(this.response)
+      this.showloader = false
+
+
+  this.data = this.response.data
+  this.dataSource = this.data;
+
+  this.allItems = this.response.total_data;
+  this.dataSource = new MatTableDataSource(this.data);
+  this.dataSource.paginator = this.paginator;
 
       //this.setPage(1);
     })
   }
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
     this.endIndex = this.startIndex < e.length ? Math.min(this.startIndex + e.pageSize, e.length) : this.startIndex;
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
       this.Search(this.value, this.name)
     }
     else {
@@ -283,7 +287,15 @@ export class UserComponent implements OnInit {
     this.showloader = true
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.user.POST(this.getUsers, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.user.POST(this.getUsers, { full_name: this.fullname,
+      email: this.email,
+      client_name: this.clientname,
+      company_name: this.companyname,
+      country: this.country1, state: this.state,
+      city: this.city, status: this.status,
+      access_code: this.access_code,
+      start_date: this.sdate,
+      end_date: this.edate,column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showloader = false
       this.response = res
       this.dataSource = this.response.data
@@ -365,7 +377,7 @@ export class UserComponent implements OnInit {
     */
 
   onChange(value, id) {
-    console.log(value, id)
+    // console.log(value, id)
     let status;
     if (value == false) {
       status = 0;
@@ -378,7 +390,7 @@ export class UserComponent implements OnInit {
 
     }
     this.user.POST(this.changeUserStatus, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
     })
   }
   /**
@@ -415,7 +427,7 @@ export class UserComponent implements OnInit {
     */
 
   Search(value, name) {
-    console.log(value, name)
+    // console.log(value, name)
     if (this.value != value) {
       this.currentPage = 0;
     }
@@ -527,7 +539,8 @@ export class UserComponent implements OnInit {
     })
       .subscribe(res => {
         this.response = res
-        this.showloader = false
+ 
+  
 
         this.allItems = this.response.total_data;
         this.rows = this.response.data

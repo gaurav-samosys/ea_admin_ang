@@ -32,8 +32,8 @@
 
                 <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style="margin-right: 20px;
                  margin-left:20px;width:43%">
-                  <mat-label>Categary*</mat-label>
-                  <mat-select formControlName="category" placeholder="Categary"
+                 <!-- <mat-label>Categary*</mat-label> -->
+                  <mat-select formControlName="category" placeholder="{{categary}}"
                     (selectionChange)="categoryChange($event.value)" [value]='value'>
                     <mat-option *ngFor="let item of CategoryArray" [value]="item.value">
                       {{item.value}}
@@ -45,10 +45,10 @@
               </div>
 
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style=" width: 43%   ;
+                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style=" width: 43% ;
               margin-right: 20px; margin-left:20px">
-                  <mat-label>Author*</mat-label>
-                  <mat-select formControlName="author" placeholder="Author"
+                  <!-- <mat-label>Author*</mat-label> -->
+                  <mat-select formControlName="author"  placeholder="{{Author}}"
                     (selectionChange)="authorChange($event.value)">
                     <mat-option *ngFor="let item of authorArray" [value]="item.value">
                       {{item.value}}
@@ -99,10 +99,10 @@
                   </ckeditor> -->
               </div>
 
-              <button type="submit" mat-raised-button color="accent" matTooltip="save blog"
+              <button type="submit" class="hover-button-loginpage" mat-raised-button color="accent" matTooltip="save blog"
                 *ngIf="add_button == 0 " style="margin-top: 25px;margin-left: 20px;">Upload</button>
             </form>
-            <button type="submit " matTooltip="update blog" mat-raised-button color="accent" 
+            <button type="submit " class="hover-button-loginpage" matTooltip="update blog" mat-raised-button color="accent" 
             *ngIf="add_button == 1" style="margin-left: 20px ;margin-top: 25px"
               (click)="update(prodId)">Update</button>
           </div>

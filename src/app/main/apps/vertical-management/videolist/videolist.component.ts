@@ -91,7 +91,7 @@ export class VideolistComponent implements OnInit {
     this.name = localStorage.getItem('name')
     this.names = localStorage.getItem('names')
     this.topic_id = this._Activatedroute.snapshot.paramMap.get("id");
-    console.log(this.topic_id)
+    // console.log(this.topic_id)
     this.getVideoList(this.topic_id)
   }
   // verticalManageId(){
@@ -117,20 +117,24 @@ export class VideolistComponent implements OnInit {
   getVideoList(id) {
     this.showloader = true
 
-    this.video_service.Post(this.getVideoListbyTopic, { topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      this.showloader = false
-
+    this.video_service.Post(this.getVideoListbyTopic, {
+       topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader = true
       this.common = res
-      this.data = this.common.data
-      this.dataSource = new MatTableDataSource(this.data);
-      this.dataSource.paginator = this.paginator;
-      this.allItems = this.common.total_data;
+
+  
+        this.data = this.common.data
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+        this.allItems = this.common.total_data;
+
+   
       //this.setPage(1,id);
     })
   }
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
@@ -289,14 +293,16 @@ export class VideolistComponent implements OnInit {
 
       this.rows = this.common.data
       this.data = this.rows.slice(0, this.size);
-      console.log(this.data)
+      // console.log(this.data)
       this.dataSource = this.data
       this.allItems = this.common.total_data;
     })
   }
+  updateSortingOrderVerical(){
 
+  }
   onChange(value, id) {
-    console.log(value, id)
+    // console.log(value, id)
     let status;
     if (value == false) {
       status = 0;
@@ -304,9 +310,9 @@ export class VideolistComponent implements OnInit {
     else {
       status = 1;
     }
-    console.log(status)
+    // console.log(status)
     this.video_service.Post(this.statusChangeVideo, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
     })
   }
 

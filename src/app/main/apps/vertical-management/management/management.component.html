@@ -47,7 +47,7 @@
             margin-right: 40px;
         ">
                     <button style="margin-top: -22px;" mat-raised-button (click)="addTopic()">
-                        <mat-icon>add_circle_outline</mat-icon>Add more
+                        <mat-icon>add_circle_outline</mat-icon>Add Topic
                     </button>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                             <ng-container matColumnDef="status">
                                 <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
-                                    <ui-switch [checked]="element.status == 'Active' ? true : false"
+                                    <ui-switch size="small" [checked]="element.status == 'Active' ? true : false"
                                         (change)="onChange($event,element.id)"></ui-switch>
                                 </mat-cell>
                             </ng-container>
@@ -196,10 +196,10 @@
                                             </select>
                                         </mat-form-field>
                                         
-                                        <button mat-raised-button style="padding: 0px;    background: #039be5 !important;
-                                            color: #ffffff !important;
+                                        <button mat-raised-button style="padding: 0px; background: #039be5 ;
+                                            color: #ffffff ;
                                             height: 33px;
-                                            margin-top: 5px;" [matMenuTriggerFor]="belowMenu">Actions</button>
+                                            margin-top: 5px;" [matMenuTriggerFor]="belowMenu" class="hover-button-loginpage">Actions</button>
 
                                         <mat-menu #belowMenu="matMenu" yPosition="below">
                                             <button mat-menu-item matTooltip="Edit"
@@ -248,11 +248,11 @@
                             (page)="handlePage($event)"></mat-paginator>
                         <div *ngIf="data == '' " style="text-align: center;margin-top: 20px; margin-bottom:20px;">No
                             data available in table</div>
-                            <mat-card *ngIf="showloader==true"
+                            <div class="center_align" *ngIf="showloader==true"
                             style="display: flex; justify-content: center; align-items: center">
-                            <mat-progress-spinner mode="indeterminate">
+                            <mat-progress-spinner mode="indeterminate" strokeWidth="3"  [diameter]="50">
                             </mat-progress-spinner>
-                          </mat-card>
+                        </div>
 
                         <!--    <div>
                                 <div class="container">

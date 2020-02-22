@@ -26,10 +26,10 @@
                    <mat-label>Webinar Date</mat-label>
                   <input matInput [matDatepicker]="picker" (click)="picker.open()" placeholder="Start date"
                     [ngModel]="startDate" formControlName="webinar_date" (dateChange)="startDateChange()" (ngModelChange)="MyDate($event,'start')"
-                    required>
+                    >
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
-                  <mat-error>Webinar Date is required</mat-error>
+                  <!-- <mat-error>Webinar Date is required</mat-error> -->
                 </mat-form-field>
               </div>
               <!-- -->
@@ -57,13 +57,28 @@
                 </mat-form-field>
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-                <h2>Attach Image</h2>
-                <span>
-                  <input type="file" (change)="onSelectFile($event)" name="file" accept="image/*" >
+                  <mat-form-field appearance="outline" fxFlex="49" style="width: 345px;
+                ">
+                  <mat-label>Webinar Link</mat-label>
+                  <input matInput formControlName="webinar_link" placeholder="Webinar link" required>
+                  <mat-error>Webinar Link is required</mat-error>
+                </mat-form-field>
+
+                <!-- <h2>Attach Image</h2> -->
+                <span class="image">
+                    <label>Attach Image</label>
+                  <input type="file" (change)="onSelectFile($event)" name="file" accept="image/*" > 
                   <span class="" *ngIf="message == 0" style="color:red;">
                     <span >{{message1}}</span>
-                  </span>
-                </span>
+                  </span></span>
+                  <!-- <div class="logo">
+                      <label>Attach Image</label>
+                    <input type="file" (change)="onSelectFile($event)" name="file" accept="image/*" > 
+                  </div>
+                    <div class="" *ngIf="message == 0" style="margin-top: 58px;">
+                      <span style="color:red;    margin-top: 54px;
+                      margin-left: -391px;" >{{message1}}</span>
+                    </div> -->
                 <!-- bydefault image-->
                 <img class="file_upload_image" 
                   [src]="url" >
@@ -71,13 +86,14 @@
               </div>
 
               <button type="submit" mat-raised-button color="accent" matTooltip="save Webinar"
-                *ngIf="add_button == 0">Upload</button>
+                *ngIf="add_button == 0" class="hover-button-loginpage">Upload</button>
 
+              </form>
            
             <button type="submit " matTooltip="update Webinar" mat-raised-button color="accent" 
             *ngIf="add_button == 1"
-              (click)="update(prodId)">Update</button>
-            </form>
+              (click)="update()" class="
+              hover-button-loginpage">Update</button>
           </div>
 
 

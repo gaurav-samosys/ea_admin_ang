@@ -19,7 +19,7 @@ export class AddWebinarComponent implements OnInit {
   hide: number = 0
   message: number = 1
   currentDate
-  message1 = 'this is field required'
+  message1 = 'this is a required field '
   prodId
   imageSelected:number =0
   // update_webinar = myGlobals.update_webinar
@@ -34,10 +34,11 @@ export class AddWebinarComponent implements OnInit {
     private interview_service: AddWebinarService, public toastr: ToastrService) {
     this.AddWebinarForm = this.fb.group({
       name: new FormControl('', [Validators.required]),
-      webinar_date: new FormControl('', [Validators.required]),
+      webinar_date: new FormControl(''),
       start_time: new FormControl('', [Validators.required]),
       end_time: new FormControl('', [Validators.required]),
-      image_upload: ''
+      image_upload: '',
+      webinar_link:''
 
     })
   }
@@ -53,7 +54,7 @@ export class AddWebinarComponent implements OnInit {
       this.editPostWebinar();
     }
     this.currentDate = new Date()
-    console.log(this.currentDate)
+    // console.log(this.currentDate)
   }
 
 
@@ -91,6 +92,7 @@ export class AddWebinarComponent implements OnInit {
       start_time: this.AddWebinarForm.controls['start_time'].value,
       end_time: this.AddWebinarForm.controls['end_time'].value,
       img_url: this.AddWebinarForm.controls['image_upload'].value,
+      webinar_link:this.AddWebinarForm.controls['webinar_link'].value
       // image: this.url
       // image:this.enriched_image
 
@@ -100,14 +102,14 @@ export class AddWebinarComponent implements OnInit {
       return false;
     }
 
-    console.log(this.AddWebinarForm.value, item);
+    // console.log(this.AddWebinarForm.value, item);
     this.interview_service.Post(this.add_webinar, {
       name: item.name, webinar_date: item.webinar_date, start_time: item.start_time, end_time: item.end_time,
       // img_url: item.image,
       img_url: this.url,
       token: 'LIVESITE'
     }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.AddSubmitForm(res)
     });
   }
@@ -131,19 +133,19 @@ export class AddWebinarComponent implements OnInit {
   editPostWebinar() {
     this.interview_service.Post(this.getwebinarById, { webinar_id: this.prodId, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      console.log(this.response)
+      // console.log(this.response)
       this.name = 1
       this.add_button = 1
       if (this.response['status'] == 1) {
         this.response = this.response['data']
         for (let index = 0; index < this.response.length; index++) {
           var element = this.response[index];
-          console.log(element)
-          console.log(element['end_time'], element['webinar_time']);
+          // console.log(element)
+          // console.log(element['end_time'], element['webinar_time']);
           this.start_time = element['webinar_time']
           this.end_time = element['end_time']
           this.webinar_img=element['webinar_img']
-          console.log(this.webinar_img)
+          // console.log(this.webinar_img)
         }
         this.AddWebinarForm.controls['name'].setValue(element['webinar_name']),
           this.AddWebinarForm.controls['webinar_date'].setValue(element['webinar_date'])
@@ -160,15 +162,16 @@ export class AddWebinarComponent implements OnInit {
    * update form webinar
    * @param prodId 
    */
-  update(prodId) {
-    console.log(prodId)
+  update() {
+    // console.log()
     let item = {
       name: this.AddWebinarForm.controls['name'].value,
       // webinar_date: moment(this.AddWebinarForm.controls['webinar_date'].value).local().format('YYYY-MM-DD HH:mm:ss'),
       webinar_date: this.AddWebinarForm.controls['webinar_date'].value,
       start_time: this.AddWebinarForm.controls['start_time'].value,
       end_time: this.AddWebinarForm.controls['end_time'].value,
-      // img_url: this.AddWebinarForm.controls['image_upload'].value
+      img_url: this.AddWebinarForm.controls['image_upload'].value,
+      webinar_link:this.AddWebinarForm.controls['webinar_link'].value
     }
 
     this.interview_service.Post(this.add_webinar, {
@@ -176,12 +179,12 @@ export class AddWebinarComponent implements OnInit {
       img_url: this.url, webinar_id: this.prodId,
       token: 'LIVESITE'
     }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
       if (res['status'] == 1) {
         this.toastr.success('Webinar Update Successfully')
         this.router.navigate(['/apps/webinars'])
       } else {
-        this.toastr.warning('There Are some Issue')
+        this.toastr.warning('There Are Some Issue')
       }
     });
   }
@@ -221,7 +224,7 @@ export class AddWebinarComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]); // read file as data url
       reader.onload = (event: any) => { // called once readAsDataURL is completed
-        console.log(event);
+        // console.log(event);
         this.url = event.target.result;
       }
     }

@@ -106,8 +106,9 @@ export class ClientDetailComponent implements OnInit {
   clientName
   ngOnInit() {
     this.id = this._Activatedroute.snapshot.paramMap.get("id");
-    this.id = window.location.href.split('apps/client-mangement')[1]
-    // console.log(this.id)
+    this.id = window.location.href.split('apps/client-mangement/client-detail/')[1]
+    console.log(this.id)
+
     // console.log(this.id, this.clientName)
     this.fetchCountry();
     this.getClient();
@@ -160,7 +161,8 @@ export class ClientDetailComponent implements OnInit {
   getUserData() {
     this.showloader=true
 
-    this.client_service.Post(this.getUsers, { clients: this.id, token: 'LIVESITE', limit: this.pageSize, offset: this.pageNumber }).subscribe(res => {
+    this.client_service.Post(this.getUsers, {
+       clients: this.id, token: 'LIVESITE', limit: this.pageSize, offset: this.pageNumber }).subscribe(res => {
       this.common = res
       this.showloader=false
 

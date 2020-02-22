@@ -121,13 +121,16 @@ add_user_restrict1
     this.company.Post(this.editCompany, this.form.value).subscribe(res => {
       console.log(res);
       this.common = res;
+      if(res['status']==true){
+
+        this.dialogRef.close(res['status']);
+      }
       this.status = this.common.status;
       console.log(this.status)
       if (this.status == true) {
 
         localStorage.setItem("status", this.status);
       }
-      this.dialogRef.close();
       console.log(this.status)
       localStorage.setItem("status", this.status);
       this.rt.navigateByUrl('/apps/dashboards/users', { skipLocationChange: true }).then(() =>

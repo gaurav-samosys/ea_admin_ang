@@ -2,33 +2,16 @@
     <!-- 12/02 -->
     <div class="menu_buttons">
 
-        <!-- <button mat-icon-button class="sidebar_open toggle-sidebar-folded" 
-            [ngClass]="{'active': tab==='tab1'}"    (click)="toggleSidebarFolded(1)" fxHide.lt-lg>
-                <mat-icon class="secondary-text">menu</mat-icon>
-            </button>  -->
-        <!-- <button mat-icon-button class="sidebar_open toggle-sidebar-folded" 
-            [ngClass]="{'active': tab==='tab1'}"    (click)="toggleSidebarFolded()" fxHide.lt-lg>
-                <mat-icon class="secondary-text">menu</mat-icon>
-            </button>  -->
-
+    
         <button id="addClassNavDev" mat-icon-button class="sidebar_open toggle-sidebar-folded"
             (click)="toggleSidebarFolded($event.target)" fxHide.lt-lg>
             <mat-icon class="secondary-text">menu</mat-icon>
         </button>
 
 
-        <!-- <button mat-icon-button class="sidebar_close toggle-sidebar-opened"
-                    (click)="toggleSidebarOpened()" fxHide.gt-md>
-                <mat-icon class="secondary-text">arrow_back</mat-icon>
-            </button> -->
 
     </div>
-    <div class="notification_popup" style="float: right;
-    text-align: right;
-    min-width: 85%;
-    max-width: 100%;
-   cursor: pointer;
-   margin-top: 0px;">
+    <div class="notification_popup" id="addClassNavDev1">
 
         <button mat-button [matMenuTriggerFor]="menu" style="padding-right: 0;">
             <mat-icon>mail</mat-icon>
@@ -39,7 +22,7 @@
         </mat-menu>
     </div>
     <!-- 12/02 -->
-    <div class="notification_popup" fxFlex="0 1 auto" fxLayout="row" style="width: 100% !important;         
+    <div class="notification_popup11" fxFlex="0 1 auto" fxLayout="row" style="width: 100% !important;         
         text-align: right !important;">
       
 
@@ -75,6 +58,28 @@
 
 
 </mat-toolbar>
+
+
+        <!-- <button mat-icon-button class="sidebar_close toggle-sidebar-opened"
+                    (click)="toggleSidebarOpened()" fxHide.gt-md>
+                <mat-icon class="secondary-text">arrow_back</mat-icon>
+            </button> -->
+
+    <!-- <button mat-icon-button class="sidebar_open toggle-sidebar-folded" 
+            [ngClass]="{'active': tab==='tab1'}"    (click)="toggleSidebarFolded(1)" fxHide.lt-lg>
+                <mat-icon class="secondary-text">menu</mat-icon>
+            </button>  -->
+        <!-- <button mat-icon-button class="sidebar_open toggle-sidebar-folded" 
+            [ngClass]="{'active': tab==='tab1'}"    (click)="toggleSidebarFolded()" fxHide.lt-lg>
+                <mat-icon class="secondary-text">menu</mat-icon>
+            </button>  -->
+
+
+
+
+
+
+
 
 
 

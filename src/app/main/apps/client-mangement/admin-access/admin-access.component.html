@@ -5,7 +5,7 @@
   <div class="center" fusePerfectScrollbar>
   
 
-
+ 
     <!-- <div class="" style="flex-direction: row;
         box-sizing: border-box;
        height: 100px;
@@ -17,7 +17,7 @@
           <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white;">
             <img style="margin-left: 10px;" width="20px" height="20px"
               src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
-          <a routerLink="/apps/client-mangement/admin-access"
+          < a routerLink="/apps/client-mangement/admin-access"
             style="text-decoration: none;color: white">&nbsp;&nbsp;/&nbsp;&nbsp;Admin Users</a>
 
         </div> -->
@@ -295,12 +295,12 @@
                             <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon> 
                           </button> -->
 
-                    <button mat-raised-button  class="action_btn" [matMenuTriggerFor]="belowMenu">Actions</button>
+                    <button mat-raised-button  class="hover-button-loginpage" style="background-color: #039be5; color: #ffffff" [matMenuTriggerFor]="belowMenu">Actions</button>
 
                     <mat-menu #belowMenu="matMenu" yPosition="below">
-                      <button mat-menu-item matTooltip="Edit" (click)="editDialog(element)">Edit</button>
+                      <button mat-menu-item  (click)="editDialog(element)">Edit</button>
 
-                      <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
+                      <button mat-menu-item  (click)="confirmDialog(element.id)">delete</button>
                     </mat-menu>
                   </mat-cell>
                 </ng-container>

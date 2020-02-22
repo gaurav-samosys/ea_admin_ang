@@ -45,37 +45,20 @@
     <h2>Download User Report</h2>
     <form [formGroup]="reportForm">
 
-    <!-- <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
-      <ejs-daterangepicker [firstDayOfWeek]='startDay'  placeholder='Select a range'></ejs-daterangepicker>`
-      <ejs-daterangepicker placeholder='Select a range'>
-        <e-presets>
-            <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
-            <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>
-            <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
-            <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
-        </e-presets>
-      </ejs-daterangepicker>
-    </div> -->
-
 
     <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
-        <mat-form-field appearance="outline"  style="width:550px;">
-          <mat-label>Please select Client</mat-label>
-          <mat-select formControlName="client_id" (selectionChange)="onSelection($event.value)">
+      <mat-form-field appearance="outline"  style="width:550px;">
+          <!-- <mat-label>Please select Client:</mat-label> -->
+          <!-- placeholder="{{selectedItem}}"  -->
+          <mat-select formControlName="client_id" placeholder="{{selectedItem}}"  (selectionChange)="onSelection($event.value)">
             <mat-option *ngFor="let item of companyListArray" [value]="item.id">
               {{item.company_name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <!-- <mat-form-field floatLabel="never" class="input-full-width" style="width:50%;">
-          <input matInput readonly class="cursor-pointer" type="text"
-              ngxDaterangepickerMd
-              [alwaysShowCalendars]="true" [locale]="daterangePickerOptions"
-              [showCancel]="true" [ranges]="ranges" [opens]="'right'"
-              placeholder="Select date range" (change)="dateRangeChanged($event)">
-      </mat-form-field> -->
-        <mat-form-field appearance="outline" style="width:600px;">
+     
+      <mat-form-field appearance="outline" style="width:600px;">
           <mat-label>Please select Date Range:</mat-label>
           <input  formControlName="dateRange" style="left: -11px; width: 600px;" type="text" 
            matInput ngxDaterangepickerMd [showCancel]="true"
@@ -98,3 +81,22 @@
 
 
 
+
+    <!-- <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+      <ejs-daterangepicker [firstDayOfWeek]='startDay'  placeholder='Select a range'></ejs-daterangepicker>`
+      <ejs-daterangepicker placeholder='Select a range'>
+        <e-presets>
+            <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+            <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>
+            <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+            <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+        </e-presets>
+      </ejs-daterangepicker>
+    </div> -->
+   <!-- <mat-form-field floatLabel="never" class="input-full-width" style="width:50%;">
+          <input matInput readonly class="cursor-pointer" type="text"
+              ngxDaterangepickerMd
+              [alwaysShowCalendars]="true" [locale]="daterangePickerOptions"
+              [showCancel]="true" [ranges]="ranges" [opens]="'right'"
+              placeholder="Select date range" (change)="dateRangeChanged($event)">
+      </mat-form-field> -->

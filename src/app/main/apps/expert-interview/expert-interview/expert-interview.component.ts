@@ -28,7 +28,7 @@ export class ExpertInterviewComponent implements OnInit {
   showloader = false
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
-  displayedColumns: string[] = ['title', 'video', 'create_date', 'action'];
+  displayedColumns: string[] = ['title', 'video','users_count', 'create_date', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -72,18 +72,14 @@ export class ExpertInterviewComponent implements OnInit {
     this.showloader = true
     this.expert_service.Post(this.expert_interview, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showloader = false
-
+    
       this.response = res
-      console.log(this.response)
       var video = res['data']
       for (let index = 0; index < video.length; index++) {
         const video_id = video[index].video_id;
-        console.log(video_id)
-
         // this.vimeoUrl = "https://vimeo.com/197933516";
       }
       this.data = this.response.data;
-      console.log(this.data)
       this.dataSource = this.data;
       this.allItems = this.response.total_data;
       this.dataSource = new MatTableDataSource(this.data);
@@ -98,7 +94,7 @@ export class ExpertInterviewComponent implements OnInit {
    * @param e pagination
    */
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
@@ -173,6 +169,9 @@ export class ExpertInterviewComponent implements OnInit {
         this.data = this.rows.slice(0, this.size);
         this.dataSource = this.data
       });
+      if (value.length == 0) {
+        this.getExpertInterView()
+      }
   }
   /**
    * sorting order
@@ -186,7 +185,7 @@ export class ExpertInterviewComponent implements OnInit {
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.expert_service.Post(this.expert_interview, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.expert_service.Post(this.expert_interview, {title: this.titleName, column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showloader = false
 
       this.response = res
@@ -199,7 +198,7 @@ export class ExpertInterviewComponent implements OnInit {
     * @param evt 
     */
   columnClick(value, colName: string, evt) {
-    console.log('-0-----', evt.target.checked)
+    // console.log('-0-----', evt.target.checked)
     const colIndex = this.displayedColumns.findIndex(col => col === colName);
     if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
@@ -216,7 +215,7 @@ export class ExpertInterviewComponent implements OnInit {
    */
   confirmDialog(id) {
     this.expert_service.Post(this.delete_expert_interview_video, { id: id, token: 'LIVESITE' }).subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.getExpertInterView()
       if (res['status'] == '1') {
         this.toastr.success('Expert Record Delete Successfully')
@@ -233,9 +232,9 @@ export class ExpertInterviewComponent implements OnInit {
    * @param element edit expert interview 
    */
   EditExpertInterview(element) {
-    console.log(element)
+    // console.log(element)
     var id = element.id
-    console.log(id)
+    // console.log(id)
     this.router.navigate(['/apps/add_expert_interview', id]);
 
   }

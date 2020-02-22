@@ -71,12 +71,16 @@ export class ForgotPasswordComponent implements OnInit {
     updatePassword() {
         console.log(this.forgotPasswordForm.value.email)
         var type = "admin"
+        // if (this.forgotPasswordForm.invalid) {
+        //     // return false
+        //     this.msgShow = 1
+        //     this.bottomMsg = true
+        //     this.showloader = true
+        // } else { }
+
         if (this.forgotPasswordForm.invalid) {
-            // return false
-            this.msgShow = 1
-            this.bottomMsg = true
-            this.showloader = true
-        } else { }
+                return false
+        }
 
         this.service.Post(this.forgetPassword, {
             username: this.forgotPasswordForm.value.email, token: 'LIVESITE',
@@ -93,12 +97,18 @@ export class ForgotPasswordComponent implements OnInit {
                     this.toastr.success('password Reset Successfully');
                     this.myRoute.navigate(["/apps/admin/login"]);
                 } else {
+                    
+                    this.bottomMsg = true
+                    this.showloader = true
+                    setTimeout(() => {
+                        this.msgShow = 1
+                    }, 500);
                     setTimeout(() => {
                         this.bottomMsg = false
                         this.showloader = false
                     }, 3000);
                     // this.toastr.warning("We could not find an account with that information. Please try searching again, or simply contact us at support@enrichedacademy.com and we’ll be happy to help!");
-                
+
                 }
             })
     }

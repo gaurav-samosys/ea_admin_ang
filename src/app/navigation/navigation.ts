@@ -49,38 +49,38 @@ export const navigation: FuseNavigation[] = [
                     },
                 ]
             },
-            {
-                id: 'AccessCodes',
-                title: 'Generate Access Codes',
-                translate: 'Generate Access Codes',
-                type: 'collapsable',
-                icon: 'inbox',
-                children: [
+            // {
+            //     id: 'AccessCodes',
+            //     title: 'Generate Access Codes',
+            //     translate: 'Generate Access Codes',
+            //     type: 'collapsable',
+            //     icon: 'inbox',
+            //     children: [
 
-                    {
-                        id: 'access-code',
-                        title: 'Access-code',
-                        type: 'item',
-                        url: '/apps/Access-code/access'
-                    },
-                ]
-            },
-            {
-                id: 'Download',
-                title: 'Download Management',
-                translate: 'Downloads Management',
-                type: 'collapsable',
-                icon: 'inbox',
-                children: [
+            //         {
+            //             id: 'access-code',
+            //             title: 'Access-code',
+            //             type: 'item',
+            //             url: '/apps/Access-code/access'
+            //         },
+            //     ]
+            // },
+            // {
+            //     id: 'Download',
+            //     title: 'Download Management',
+            //     translate: 'Downloads Management',
+            //     type: 'collapsable',
+            //     icon: 'inbox',
+            //     children: [
 
-                    {
-                        id: 'Download',
-                        title: 'Downloads',
-                        type: 'item',
-                        url: '/apps/download-management/download'
-                    },
-                ]
-            },
+            //         {
+            //             id: 'Download',
+            //             title: 'Downloads',
+            //             type: 'item',
+            //             url: '/apps/download-management/download'
+            //         },
+            //     ]
+            // },
             {
                 id: 'comapanies',
                 title: 'Company Management',

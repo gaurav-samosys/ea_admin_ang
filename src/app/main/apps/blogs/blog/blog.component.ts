@@ -160,15 +160,15 @@ export class BlogComponent implements OnInit {
     this.blog_service.Post(this.getBlogWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
       this.showloader=false
+    
+        this.data = this.response['data']
+        this.dataSource = this.data
+        this.dataSource = new MatTableDataSource(this.data);
+        this.allItems = this.response['recordsTotal'];
+        this.dataSource.paginator = this.paginator;
 
-      // console.log(res)
-      this.data = this.response['data']
-      // console.log(this.data)
-      this.dataSource = this.data
-      this.dataSource = new MatTableDataSource(this.data);
-      this.allItems = this.response['recordsTotal'];
-      console.log(this.allItems)
-      this.dataSource.paginator = this.paginator;
+
+      
       // draw: 1
       // recordsFiltered: 21
       // recordsTotal: 21
@@ -250,7 +250,8 @@ export class BlogComponent implements OnInit {
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.blog_service.Post(this.getBlogWithDataApi, { column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.blog_service.Post(this.getBlogWithDataApi, { post_title: this.titleName, category: this.categaryName,
+      start_date: this.startDate, end_date: this.endDate, column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
       this.showloader=false
 

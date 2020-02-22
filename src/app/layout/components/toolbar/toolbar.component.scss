@@ -59,3 +59,12 @@ toolbar {
 .menu_buttons .active{margin-left: 279px;}
 .menu_buttons {margin-left: 0px;}
 
+.notification_popup{float: right;
+    text-align: right;
+    min-width: 84%;
+    max-width: 100%;
+   cursor: pointer;}
+
+   .notification_popup.mW62{
+    min-width: 62% !important;
+   }

@@ -56,28 +56,28 @@ export class CommentComponent implements OnInit {
   
   this.showloader=true
     this.comment_service.Post(this.getCommentWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      this.showloader=false
+      this.showloader=true
       this.response = res
+     
 
-      console.log(res)
-      this.allItems= this.response['recordsTotal']
+        this.allItems= this.response['recordsTotal']
+        this.data=this.response.data
+        this.dataSource=this.data
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
 
-      this.data=this.response.data
-      this.dataSource=this.data
-      this.dataSource = new MatTableDataSource(this.data);
-      this.dataSource.paginator = this.paginator;
      
     });
   }
 
   public handlePage(e: any) {
-    console.log(e)
+    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
     this.endIndex = this.startIndex < e.length ? Math.min(this.startIndex + e.pageSize, e.length) : this.startIndex;
     if (this.value != '') {
-      console.log(this.value, this.name)
+      // console.log(this.value, this.name)
       // this.Search(this.value, this.name)
     }
     else {
@@ -141,20 +141,20 @@ export class CommentComponent implements OnInit {
    * @param id 
    */
   onChange(value, id) {
-    console.log(value, id)
+    // console.log(value, id)
     let status;
     if (value.checked == true) {
       status = 1;
       this.toastr.success('Status Active Successfully');
       this.comment_service.Post(this.changeCommentStatusApi, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-        console.log(res)
+        // console.log(res)
       })
     }
     else {
       status = 0;
       this.toastr.success('Status Inactive Successfully');
       this.comment_service.Post(this.changeCommentStatusApi, { token: "LIVESITE", id: id, status: status }).subscribe(res => {
-        console.log(res)
+        // console.log(res)
       })
     }
   
@@ -175,7 +175,7 @@ export class CommentComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
-      console.log(this.result)
+      // console.log(this.result)
       if(this.result == true){
         // this.comment_service.Post(this.deleteCommentApi,{id:this.res_data.id,token:"LIVESITE"}).subscribe(res=>{
         // })

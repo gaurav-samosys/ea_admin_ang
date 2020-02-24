@@ -51,31 +51,34 @@
       Manage post
     </div>
     <mat-divider></mat-divider>
-    <div class="mat__box mt-10 mr-10">
-      <form [formGroup]="blogForm">
+
+    <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+      <div class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+            fxFlex="1 0 auto">
+            <div class="content">
+    <div class="mat__box mt-10 mr-10" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+      <form [formGroup]="blogForm" style="width:100%" class="pt-50 mr-24" fxLayout="column" fxLayoutAlign="start"
+      fxFlex="1 0 auto" name="form" >
         <ng-container *ngIf="show">
 
 
           <div class="row mat__box1 mt-10 ">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-5 mt-10" fxLayoutGap="25px">
-              <mat-form-field appearance="outline"
-                style="margin-right: 25px; width: 450px; margin-top: 30px;padding-left: 15px;">
+            <div fxLayout="row wrap" fxLayoutAlign="column" fxFlex="100" class="row wrap">
+              <mat-form-field appearance="outline" fxFlex="50" class="pr-4 flex-50" fxLayoutGap="10">
                 <mat-label>Post Title</mat-label>
                 <input formControlName="post_title" matInput placeholder="Search post title"
                   (keyup)="Search($event.target.value,'title')">
               </mat-form-field>
 
-              <mat-form-field appearance="outline"
-                style="margin-right: 25px; width: 450px; margin-top: 30px;padding-left: 15px;">
+              <mat-form-field appearance="outline" fxFlex="50" class="pl-4 flex-50" fxLayoutGap="10">
                 <mat-label>Categary</mat-label>
                 <input matInput formControlName="category" placeholder="Search categary"
                   (keyup)="Search($event.target.value,'categary')">
               </mat-form-field>
             </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-8" fxLayoutGap="25px">
-              <mat-form-field class="example-full-width"
-                style="margin-right: 25px; width: 450px;margin-top:15px;padding-left: 15px;" appearance="outline">
+            <div fxLayout="row wrap" class="row wrap" fxLayoutAlign="column" fxFlex="100">
+              <mat-form-field appearance="outline" fxFlex="50" class="pr-4 flex-50 mat-datepicker" fxLayoutGap="10">
                 <mat-label>Start Date</mat-label>
                 <!-- [max]="maxDate" -->
                 <input matInput [min]="myDate" [max]="blogForm.controls['end_date'].value" formControlName="start_date"
@@ -84,13 +87,12 @@
                 <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
 
-              <mat-form-field class="example-full-width"
-                style="margin-right: 25px; width: 450px;margin-top: 15px;    padding-left: 15px;" appearance="outline">
+              <mat-form-field appearance="outline" fxFlex="50" class="pl-4 flex-50 mat-datepicker" fxLayoutGap="10">
                 <mat-label>End Date</mat-label>
                 <input matInput formControlName="end_date" readonly [min]="blogForm.controls['start_date'].value"
                   [matDatepicker]="picker2">
+                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2 color="primary"></mat-datepicker>
               </mat-form-field>
             </div>
 
@@ -107,7 +109,7 @@
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right ">
                 <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button" 
                 style="background-color: #039be5  ;
-                    color: #ffffff ;margin-right: 35px;" class="hover-button-loginpage">
+                    color: #ffffff ;margin-right: 25px;" class="hover-button-loginpage">
                   <span> Show/Hide Column</span>
                 </button>
                 <mat-menu #menu="matMenu">
@@ -227,13 +229,7 @@
                         <button mat-menu-item matTooltip="Delete"
                           (click)="confirmDialogDelete(element.id)">delete</button>
                       </mat-menu>
-                      <!-- <button mat-icon-button>
-                              <mat-icon matTooltip="Edit" [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">edit</mat-icon>
-                            </button>
-                    <button mat-icon-button>
-  
-                              <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon> 
-                            </button> -->
+                 
                     </mat-cell>
                   </ng-container>
 
@@ -292,6 +288,9 @@
       </form>
 
     </div>
+    </div>
+    </div>
+  </div>
   
   <!-- END OF ROW -->
 
@@ -402,3 +401,11 @@
                   <mat-error>Banner End date is required!</mat-error>
 
                </mat-form-field> -->
+
+                    <!-- <button mat-icon-button>
+                              <mat-icon matTooltip="Edit" [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">edit</mat-icon>
+                            </button>
+                    <button mat-icon-button>
+  
+                              <mat-icon matTooltip="Delete" (click)="confirmDialog(element.id)">delete</mat-icon> 
+                            </button> -->

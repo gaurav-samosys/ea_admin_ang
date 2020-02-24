@@ -242,16 +242,16 @@ export class AdminAccessComponent implements OnInit {
     */
   confirmDialog(value): void {
     
-    this.admin_service.Post(this.deleteAdminAccess, { id: value, token: 'LIVESITE' }).subscribe(res => {
-      this.common = res
-     if(this.common['success']==true){
-           this.toastr.success("Admin user deleted successfully")
-     }else{
-      this.toastr.success("There are some Issue")
-     }
-     this.fetchAdminaccess();
+    // this.admin_service.Post(this.deleteAdminAccess, { id: value, token: 'LIVESITE' }).subscribe(res => {
+    //   this.common = res
+    //  if(this.common['success']==true){
+    //        this.toastr.success("Admin user deleted successfully")
+    //  }else{
+    //   this.toastr.success("There are some Issue")
+    //  }
+    //  this.fetchAdminaccess();
 
-    })
+    // })
     // const message = `Are you sure you want to delete this user detail?`;
     // let id = value
     // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);

@@ -68,7 +68,19 @@ verticalPosition: MatSnackBarVerticalPosition = 'top';
         return this.profileForm.controls[controlName].hasError(errorName);
 
   }
-
+  /**
+   * button toggle
+   */
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show)
+      this.buttonName = "keyboard_arrow_up";
+    else
+      this.buttonName = "keyboard_arrow_down";
+  }
   cencel(){
     this.route.navigate(["/apps/home-dashboard/version3"])
   }

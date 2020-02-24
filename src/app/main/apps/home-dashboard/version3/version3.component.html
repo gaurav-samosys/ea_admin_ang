@@ -1,4 +1,4 @@
-<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 10px;">
+<div id="dashboard-companies" class="page-layout simple right-sidebar dashbaord_page" fxLayout="row" style="margin-left: 10px;">
 	<div class="center mat-bax-verson3" fusePerfectScrollbar>
 
 		<div class="mat__box mt-20 mr-28">
@@ -177,7 +177,7 @@
 
 
 
-		<div class="mat__box mt-20 mr-28 main_box">
+		<div id="scroling_top" class="mat__box mt-20 mr-28 main_box">
 
 			<div *ngIf="table == 1" class="table__Companies">
 				<div class="row table_heading" fxLayoutAlign="space-between">
@@ -1369,20 +1369,20 @@
 
 
 
-		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
+		<div class="row mt-20" style="display: flex; width: 100% !important;">
 
 			<!-- total_users -->
 
 			<!-- <div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12"
 				style="flex: 1 1 100%;box-sizing: border-box;width: 42% !important;"> -->
 			<div class="total_users col-lg-6 col-md-6 col-sm-12 col-xs-12" style="box-sizing: border-box;">
-				<div class="mat__box graph_dive" style="width:595px ;position: relative;">
+				<div class="mat__box graph_dive" style="width:100% ;position: relative;">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec">
 							<p>Total Users <span class="color_value">{{usergraph_total}}</span></p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 right_sec text-right">
 							<mat-form-field appearance="outline" class="calender">
 
 								<!-- [alwaysShowCalendars]="true" id="dev12" [(ngModel)]="defoult" [showCancel]="true" -->
@@ -1428,14 +1428,14 @@
 
 			<!-- total downloads -->
 			<div class="total_download col-lg-6 col-md-6 col-sm-12 col-xs-12"
-				style="box-sizing: border-box;margin-left: 20px">
-				<div class="mat__box graph_dive" style="width:595px">
+				style="box-sizing: border-box;">
+				<div class="mat__box graph_dive" style="width:100%">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec">
 							<p>Total Downloads <span class="color_value">{{totaldownloadgraph}}</span></p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 right_sec text-right">
 							<mat-form-field appearance="outline" class="calender">
 
 
@@ -1508,16 +1508,16 @@
 
 
 		<!-- total video -->
-		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
+		<div class="row mt-20" style="display: flex; width: 100% !important;">
 
 			<div class="total_video col-lg-6 col-md-6 col-sm-12 col-xs-12" style="box-sizing: border-box;">
-				<div class="mat__box graph_dive" style="width:595px">
+				<div class="mat__box graph_dive" style="width:100%">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec">
 							<p>Total Video Views <span class="color_value">{{totalvideograph}}</span></p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 right_sec text-right">
 							<mat-form-field appearance="outline" class="calender">
 								<!-- [alwaysShowCalendars]="true" [showCancel]="true" -->
 								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
@@ -1563,15 +1563,15 @@
 
 			<!-- Certificates claimed -->
 			<div class="total_certificates col-lg-6 col-md-6 col-sm-12 col-xs-12"
-				style="box-sizing: border-box;margin-left: 20px;">
-				<div class="mat__box graph_dive" style="width:595px">
+				style="box-sizing: border-box;">
+				<div class="mat__box graph_dive" style="width:100%">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec">
 							<p>Certificates Claimed <span
 									class="color_value">{{totalcertificategraph}}/{{totalpendinggraph}}</span></p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 right_sec text-right">
 							<mat-form-field appearance="outline" class="calender">
 
 
@@ -1631,17 +1631,17 @@
 
 
 		<!-- course status -->
-		<div class="row mt-20 mr-28" style="display: flex; width: 99% !important;">
+		<div class="row mt-20" style="display: flex; width: 100% !important;">
 			<div class="total_course col-lg-6 col-md-6 col-sm-12 col-xs-12" style="box-sizing: border-box;">
-				<div class="mat__box graph_dive" style="width:595px">
+				<div class="mat__box graph_dive" style="width:100%">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec">
 							<p>Course Status <span
 									class="color_value">{{fullCourse}}/{{mandatory}}/{{pending}}/{{notstarted}}</span>
 							</p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 right_sec text-right">
 							<mat-form-field appearance="outline" class="calender">
 								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
@@ -1694,14 +1694,14 @@
 
 			<!-- Access Code -->
 			<div class="total_access_code col-lg-6 col-md-6 col-sm-12 col-xs-12"
-				style="box-sizing: border-box;margin-left: 20px">
-				<div class="mat__box graph_dive" style="width:595px">
+				style="box-sizing: border-box;">
+				<div class="mat__box graph_dive" style="width:100%">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec">
 							<p>Access Codes <span class="color_value">{{unused}}/{{used}}</span></p>
 						</div>
 						<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 right_sec text-right">
 							<mat-form-field appearance="outline" class="calender">
 								<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 									[opens]="'left'"
@@ -1755,7 +1755,7 @@
 			<div class="mat__box graph_dive">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec mt_cls heading_part_comparison">
 							<p>Year Over Year Comparison<br>
 								<span class="color_value">{{comparisiongraph_total}}</span></p>
 						</div>
@@ -1818,7 +1818,7 @@
 			<div class="mat__box graph_dive">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec mt_cls heading_part_comparison">
 							<p>Year Over Year Comparison<br>
 								<span class="color_value">{{comparisiongraph_total}}</span></p>
 						</div>
@@ -1925,7 +1925,7 @@
 			<div class="mat__box graph_dive">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec mt_cls heading_part_comparison">
 							<p>Total Video Views<br>
 								<span class="color_value">{{total_users_video}}</span></p>
 						</div>
@@ -1980,7 +1980,7 @@
 			<div class="mat__box graph_dive">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="row" fxLayoutAlign="space-between">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us mt_cls heading_part_comparison">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 total-us left_sec mt_cls heading_part_comparison">
 							<p>Survey Responses
 								<br>
 								<span class="color_value">{{totalSurways}}</span></p>

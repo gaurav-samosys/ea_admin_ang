@@ -22,16 +22,15 @@
             <form [formGroup]="AddPostForm" (ngSubmit)="submit()">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
 
-                <mat-form-field appearance="outline" fxFlex="100" fxLayoutGap="20px" style="margin-right: 20px; 
-                margin-left:20px;width: 43%;">
+                <mat-form-field appearance="outline" fxFlex="100" fxLayoutGap="20px" style="margin-right: 10px;width: calc(50% - 10px);">
                   <mat-label>Post Title</mat-label>
                   <input matInput formControlName="post_title" placeholder="post title" required>
                   <mat-error>Title is required</mat-error>
                 </mat-form-field>
 
 
-                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style="margin-right: 20px;
-                 margin-left:20px;width:43%">
+                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style="margin-right: 10px;
+                 width: calc(50% - 10px);">
                  <!-- <mat-label>Categary*</mat-label> -->
                   <mat-select formControlName="category" placeholder="{{categary}}"
                     (selectionChange)="categoryChange($event.value)" [value]='value'>
@@ -45,8 +44,8 @@
               </div>
 
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
-                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style=" width: 43% ;
-              margin-right: 20px; margin-left:20px">
+                <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style="width: calc(50% - 10px);
+             ">
                   <!-- <mat-label>Author*</mat-label> -->
                   <mat-select formControlName="author"  placeholder="{{Author}}"
                     (selectionChange)="authorChange($event.value)">
@@ -59,7 +58,7 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" 
-                style="margin-right: 20px; margin-left:20px;width: 43%">
+                style="margin-left:10px;width: calc(50% - 10px);">
 
                   <mat-label>Video Id</mat-label>
                   <input matInput formControlName="video_id" placeholder="Video Id">
@@ -68,7 +67,7 @@
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
 
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mb-8" fxLayoutGap="20px" style="margin-right: 20px; margin-left:20px;width: 43%" >
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mb-8" fxLayoutGap="20px" style="margin-left:10px;width: calc(50% - 10px)" >
                     <h3>Post Cover Image *</h3>
                     <input type="file" (change)="image_upload($event)" name="file" accept="image/*" style="padding:0">
                     <input type="hidden" formControlName="cover_img">
@@ -77,7 +76,7 @@
                     </span>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mb-8" fxLayoutGap="20px"
-                 style="float: right;margin-right: 20px;width: 50%;
+                 style="float: right;margin-right: 10px;width: calc(50% - 10px);
                 margin-top: -85px;">
                 <h3>Select Blog Image</h3>
                 <span>
@@ -92,7 +91,7 @@
               </div>
               </div>
 
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" style="margin-right: 20px; margin-left:20px;width: 90%" >
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" style="margin-left:10px;width: 100%" >
                 <h2>Post Description *</h2>
                 <ckeditor [config]="config" formControlName="description" (change)="onChange($event)" debounce="500"></ckeditor>
                 <!-- <ckeditor  [config]="ckeConfig" formControlName="description" debounce="500" (change)="onChange($event)">
@@ -100,7 +99,7 @@
               </div>
 
               <button type="submit" class="hover-button-loginpage" mat-raised-button color="accent" matTooltip="save blog"
-                *ngIf="add_button == 0 " style="margin-top: 25px;margin-left: 20px;">Upload</button>
+                *ngIf="add_button == 0 " style="margin-top: 25px;margin-left: 10px;">Upload</button>
             </form>
             <button type="submit " class="hover-button-loginpage" matTooltip="update blog" mat-raised-button color="accent" 
             *ngIf="add_button == 1" style="margin-left: 20px ;margin-top: 25px"

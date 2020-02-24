@@ -56,7 +56,7 @@ export class CommentComponent implements OnInit {
   
   this.showloader=true
     this.comment_service.Post(this.getCommentWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      this.showloader=true
+      this.showloader=false
       this.response = res
      
 

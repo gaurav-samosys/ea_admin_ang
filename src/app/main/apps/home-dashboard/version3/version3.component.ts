@@ -759,7 +759,7 @@ export class Version3Component implements OnInit {
   }
 
   onCompanydeselect(event) {
-    // this.clients_id = [];
+    this.clients_id = [];
 
     this.table = 2
     for (var obj in this.company_id) {
@@ -776,16 +776,18 @@ export class Version3Component implements OnInit {
   }
 
   onClientclick(event) {
-    // this.id_vertical = [];
+    this.id_vertical = [];
 
-    // this.clients_data = [];
-    // this.location_data = [];
+    this.clients_data = [];
+    this.location_data = [];
     this.resetVertical();
     this.table = 3;
     this.industry_disable = 1;
     this.company_disable = 1;
     this.client_id.push(parseInt(event.id))
-    // console.log('this.client_id===============', this.client_id)
+    console.log('this.client_id===============', this.client_id)
+    // alert("select api");
+
     /*    if(event.checked == true){
     
         }
@@ -804,12 +806,17 @@ export class Version3Component implements OnInit {
   }
 
   onClientdeselect(event) {
+    this.id_vertical = [];
+
     this.table = 3;
     for (var obj in this.client_id) {
       if (this.client_id[obj] == event.id) {
         this.client_id.splice(parseInt(obj), 1)
       }
     }
+    // alert("deselect api");
+
+    console.log("client_id deselect========",this.client_id)
     if (this.client_id.length == 0) {
       this.industry_disable = 0;
       this.company_disable = 0;
@@ -820,7 +827,7 @@ export class Version3Component implements OnInit {
   }
 
   onVerticalclick(event) {
-    console.log(event)
+    // console.log(event)
     // this.showloader=true
     // this.client_id = []
     // this.clients_data = [];
@@ -853,46 +860,23 @@ export class Version3Component implements OnInit {
   onVerticaldeselect(event) {
     console.log(event.name, event.id)
     this.table = 4;
-
-    this.client_id = []
-
-    // if(event.id){
-    //   this.id_vertical.splice(event.id, 1)
-    // }else{
-
-    // }
+    this.location_data = [];
 
 
+    for (var obj in this.id_vertical) {
+      if (this.id_vertical[obj] == event.id) {
+        this.id_vertical.splice(parseInt(obj), 1)
+      }
+    }
 
-
-
-
-
-    // for (var obj in this.id_vertical) {
-    //   if (this.id_vertical[obj] == event.id) {
-    //     this.id_vertical.splice(parseInt(obj), 1)
-    //   }
-    // }
-
-    var index = this.id_vertical.indexOf(event.id);
-    if (index !== -1) this.id_vertical.splice(index, 1);
-
-
-    console.log('this.id_vertical', this.id_vertical)
-
-
-    return
-
-
-
-
+    // var index = this.id_vertical.indexOf(event.id);
+    // if (index !== -1) this.id_vertical.splice(index, 1);
+    // console.log('this.id_vertical', this.id_vertical)
     if (this.id_vertical.length == 0) {
       this.industry_disable = 0;
       this.company_disable = 0;
     }
     this.selected = 'verticals_selected';
-
-
     this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
     this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical)
 
@@ -1020,6 +1004,15 @@ export class Version3Component implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  /**
+   * get All USER
+   * @param industry_id 
+   * @param company_id 
+   * @param client_id 
+   * @param id_vertical 
+   * @param location_data 
+   */
   getAllUser(industry_id, company_id, client_id, id_vertical, location_data) {
     let industries_id, companies_id, vid = [];
     industries_id = industry_id;
@@ -1086,14 +1079,34 @@ export class Version3Component implements OnInit {
        vid=id_vertical;
      }*/
 
+// loccccccal
+    //  industriesIds
+    //  companiesIds
+    //  clientsIds
+    //  verticalsIds
+    //  location
+    //  selected
 
-
-
+//staging
+    // industries: 
+    // companies: 
+    // clients: 327,547,661,333,118,321,284
+    // verticals: 
+    // location: 
+    // selected: clients_selected
     this.v3Service.POST(this.getEaAllUsersList,
       {
-        industries: industries_id.toString(), companies: companies_id.toString(),
-        clients: client_id.toString(), verticals: id_vertical.toString(), location: location_data.toString(),
-        selected: this.selected, token: 'LIVESITE'
+        // industries: industries_id.toString(),
+        // companies: companies_id.toString(),
+        // clients: client_id.toString(), 
+        // verticals: id_vertical.toString(),
+        industriesIds: industries_id.toString(),
+        companiesIds: companies_id.toString(),
+        clientsIds: client_id.toString(), 
+        verticalsIds: id_vertical.toString(),
+        location: location_data.toString(),
+        selected: this.selected, 
+        token: 'LIVESITE'
       }).subscribe(res => {
         this.common = res
 
@@ -1103,20 +1116,35 @@ export class Version3Component implements OnInit {
           this.industry = this.industryData.data;
           this.industry_total = this.industryData.total;
 
+          // console.log("=========industry data",this.industryData,
+          // "=========industry ",  this.industry,
+          // "=========industry total",this.industry_total)
+
+
           this.companyData = this.common.data.companies;
           this.company = this.companyData.data;
           this.company_total = this.companyData.total;
+
+          // console.log("=========companyData",this.companyData,
+          // "=========company ",  this.company,
+          // "=========company_total",this.company_total)
+
 
           this.clientData = this.common.data.clients;
           this.client = this.clientData.data;
           this.client_total = this.clientData.total;
 
-
+          // console.log("=========clientData",this.clientData,
+          // "=========client ",  this.client,
+          // "=========client_total",this.client_total)
 
           this.verticalData = this.common.data.verticals;
           this.vertical = this.verticalData.data;
           this.vertical_total = this.verticalData.total
 
+          // console.log("=========verticalData",this.clientData,
+          // "=========vertical ",  this.vertical,
+          // "=========vertical_total",this.vertical_total)
 
           this.locationData = this.common.data.location;
           this.location = this.locationData.data;
@@ -1326,6 +1354,12 @@ export class Version3Component implements OnInit {
         this.clientsdropdownList = this.client
         this.verticalsdropdownList = this.vertical
         this.locationdropdownList = this.location
+
+        // console.log("this.industrydropdownList",this.industrydropdownList,
+        //             "this.companydropdownList",this.companydropdownList,
+        //             "this.clientsdropdownList",this.clientsdropdownList,
+        //             "this.verticalsdropdownList",this.verticalsdropdownList,
+        //             "this.locationdropdownList",this.locationdropdownList)
       })
   }
 
@@ -1338,7 +1372,9 @@ export class Version3Component implements OnInit {
 
   getIndustrywithData(search_data, industry_id) {
     this.showloader = true;
-    this.v3Service.POST(this.getIndustriesWithData, { id: industry_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', search: search_data }).subscribe(res => {
+    this.v3Service.POST(this.getIndustriesWithData, { id: industry_id.toString(), 
+      start: this.pageNumber, length: this.pageSize, token: 'LIVESITE',
+      search: search_data }).subscribe(res => {
       this.check = false;
       this.showloader = false;
       this.search_data = '';
@@ -1356,7 +1392,7 @@ export class Version3Component implements OnInit {
       //   document.getElementById('industryPaginate').classList.remove('none')
       // }
 
-      console.log('devtst', this.allItems)
+      console.log('industry', this.allItems)
       this.industry_total = this.allItems
       this.dataSource = this.data;
       this.URL = this.getIndustriesWithData;
@@ -1395,7 +1431,9 @@ export class Version3Component implements OnInit {
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
     this.showloader = true;
-    this.v3Service.POST(this.getIndustriesWithData, { id: this.industry_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', search: this.search_data }).subscribe(res => {
+    this.v3Service.POST(this.getIndustriesWithData, { id: this.industry_id.toString(),
+       start: this.pageNumber, length: this.pageSize, token: 'LIVESITE',
+        search: this.search_data }).subscribe(res => {
       this.common = res
       this.allItems = this.common.recordsTotal;
       this.industry_total = this.allItems
@@ -1404,6 +1442,8 @@ export class Version3Component implements OnInit {
       this.dataSource = this.data;
 
     })
+    this.getIndustrywithData(this.search_data, this.industry_id);
+
   }
 
 
@@ -1458,7 +1498,9 @@ export class Version3Component implements OnInit {
     //this.company_id=company_id
     this.v3Service.POST(this.getCompaniesWithData, {
       industries_ids: industry_id.toString(),
-      id: company_ids.toString(), start: this.pageNumber, length: this.size, token: 'LIVESITE',
+      id: company_ids.toString(), 
+      start: this.pageNumber, 
+      length: this.size, token: 'LIVESITE',
       dateRange: date_range, search: search_data
     }).subscribe(res => {
       this.showloader = false
@@ -1468,6 +1510,8 @@ export class Version3Component implements OnInit {
       this.data = this.common.data
     
       this.allItems = this.common.recordsTotal;
+      console.log('company', this.allItems)
+
       // if(this.allItems < 10){
       //   document.getElementById('companyPaginate').classList.add('none')
       // }else{
@@ -1551,12 +1595,12 @@ export class Version3Component implements OnInit {
     var a = []
     this.showloader = true
 
-    if (client_id == '' && company_ids != '') {
-      for (var i = 0; i < this.client_id.length; i++) {
-        client_id.push(this.client_id[i].id)
-        // console.log(client_id)
-      }
-    }
+    // if (client_id == '' && company_ids != '') {
+    //   for (var i = 0; i < this.client_id.length; i++) {
+    //     client_id.push(this.client_id[i].id)
+    //     // console.log(client_id)
+    //   }
+    // }
 
     //     $id
     // $companies_id
@@ -1575,13 +1619,19 @@ export class Version3Component implements OnInit {
     //   this.data = this.common.data
     //   this.dataSource = this.data;
     this.v3Service.POST(this.getClientsWithData, {
-      id: company_ids.toString(),
-      companies_id: client_id.toString(),
-      industries_ids: this.industry_id.toString(),
-      verticalsIds: this.id_vertical.toString(),
+      // id: company_ids.toString(),
+      // companies_id: client_id.toString(),
+      
+      // id: client_id.toString(),
+      // companies_id: company_ids.toString(),
+      // industries_ids: this.industry_id.toString(),
+      // verticalsIds: this.id_vertical.toString(),
+      companies_id: company_ids.toString(), 
+      id: client_id.toString(), verticals_ids: client_id.toString(),
       start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data,
       location: this.location_data.toString()
     }).subscribe(res => {
+      // alert("main api");
       this.showloader = false
       this.common = res;
       // console.log("client data================", this.common)
@@ -1589,9 +1639,11 @@ export class Version3Component implements OnInit {
       this.data = this.common.data
       this.dataSource = this.data;
 
-      this.dataSource = new MatTableDataSource(this.data);
+      // this.dataSource = new MatTableDataSource(this.data);
 
       this.allItems = this.common.recordsTotal;
+      console.log('client', this.allItems)
+
       // if(this.allItems < 10){
       //   document.getElementById('clientPaginate').classList.add('none')
       // }else{
@@ -1656,9 +1708,11 @@ export class Version3Component implements OnInit {
     this.showloader = true
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.v3Service.POST(this.getClientsWithData, { column: this.sort_column, dir: this.ASC, id: this.client_id.toString(), verticals_ids: this.client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, location: this.location_id }).subscribe(res => {
+    this.v3Service.POST(this.getClientsWithData, { column: this.sort_column, dir: this.ASC,
+       id: this.client_id.toString(), verticals_ids: this.client_id.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, location: this.location_id }).subscribe(res => {
       this.showloader = false
       this.common = res
+      // alert("sorting")
       this.dataSource = this.common.data
     });
   }
@@ -1703,14 +1757,29 @@ export class Version3Component implements OnInit {
     //  clients_ids
     //  verticals
     //  location
+
+
     this.v3Service.POST(this.getUsersWithData, {
+      // clients_ids: this.clients_data.toString(),
+      // verticals: id_vertical.toString(),
+      // id: id_vertical.toString(),
+      // location: location_data.toString(),
+      // start: this.pageNumber, 
+      // length: this.pageSize, 
+
+      // id: id_vertical.toString(),
       clients_ids: this.clients_data.toString(),
       verticals: id_vertical.toString(),
-      id: id_vertical.toString(),
       location: location_data.toString(),
-      start: this.pageNumber, length: this.pageSize, token: 'LIVESITE',
-      dateRange: date_range, search_type: searchtype, search: search_data, status: this.status,
-      certificates: this.certificates, course: this.course
+      start: this.pageNumber, 
+      length: this.pageSize, 
+      token: 'LIVESITE',
+      dateRange: date_range,
+       search_type: searchtype,
+        search: search_data,
+         status: this.status,
+      certificates: this.certificates, 
+      course: this.course
     }).subscribe(res => {
       this.showloader = false;
 
@@ -1721,6 +1790,8 @@ export class Version3Component implements OnInit {
     
       this.name = this.data[0]
       this.allItems = this.common.recordsTotal;
+      console.log('user', this.allItems)
+
       // if(this.allItems < 10){
       //   document.getElementById('userPaginate').classList.add('none')
       // }else{
@@ -1789,6 +1860,8 @@ export class Version3Component implements OnInit {
         this.dataSource = this.data;
         this.clients_data = []
       })
+      // this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
+
   }
 
 
@@ -1797,7 +1870,10 @@ export class Version3Component implements OnInit {
     this.showloader = true;
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.v3Service.POST(this.getUsersWithData, { column: this.sort_column, dir: this.ASC, clients_ids: this.clients_data, verticals: this.vid, location: this.location_data, start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
+    this.v3Service.POST(this.getUsersWithData, { column: this.sort_column,
+       dir: this.ASC, clients_ids: this.clients_data, 
+       verticals: this.vid, location: this.location_data,
+        start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
       this.showloader = false;
 
       this.common = res
@@ -1829,6 +1905,8 @@ export class Version3Component implements OnInit {
 
 
       this.allItems = this.common.recordsTotal;
+      console.log('vertical', this.allItems)
+
       // if(this.allItems < 10){
       //   document.getElementById('verticalPaginate').classList.add('none')
       // }else{

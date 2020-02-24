@@ -240,16 +240,16 @@ for(let i=0; i< this.data.length ; i++){
 
   confirmDialog(value): void {
 
-    this.client_service.Post(this.deleteClient, { id: value, token: 'LIVESITE' }).subscribe(res => {
-      this.common = res
-      if (this.common['success'] == true) {
-        this.toastr.success("delete client successfully")
-      } else {
-        this.toastr.warning("there are some issue")
+    // this.client_service.Post(this.deleteClient, { id: value, token: 'LIVESITE' }).subscribe(res => {
+    //   this.common = res
+    //   if (this.common['success'] == true) {
+    //     this.toastr.success("delete client successfully")
+    //   } else {
+    //     this.toastr.warning("there are some issue")
 
-      }
-      this.FetchClient();
-    })
+    //   }
+    //   this.FetchClient();
+    // })
     // const message = `Are you sure you want to delete this client detail?`;
     // let id = value
     // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);

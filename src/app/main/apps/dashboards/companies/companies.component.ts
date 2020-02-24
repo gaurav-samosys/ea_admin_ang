@@ -240,15 +240,14 @@ export class CompaniesComponent implements OnInit {
   confirmDialog(value): void {
     // console.log(value)
     let id = value
-    this.companyService.Post(this.deleteCompany, {id:id, token: 'LIVESITE' }).subscribe(res => {
-      // console.log('=res=======>', res);
-      if(res['success']==true){
-        this.toastr.success("Company deleted successfully")
-      }else[
-        this.toastr.warning("There are some issue")
-      ]
-      this.getCompany();
-    })
+    // this.companyService.Post(this.deleteCompany, {id:id, token: 'LIVESITE' }).subscribe(res => {
+    //   if(res['success']==true){
+    //     this.toastr.success("Company deleted successfully")
+    //   }else[
+    //     this.toastr.warning("There are some issue")
+    //   ]
+    //   this.getCompany();
+    // })
     // const message = `Are you sure you want to delete this company detail?`;
     // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
     // const dialogRef = this.dialog.open(ConfirmBoxComponent, {

@@ -183,17 +183,16 @@ export class UserComponent implements OnInit {
     */
 
   confirmDialog(value): void {
-    this.user.POST(this.deleteUserRecord, { id: value, token: 'LIVESITE' }).subscribe(res => {
-      this.common = res
-      // console.log(this.common,"===============delete record")
-      if(this.common['success']==true){
-            this.toastr.success("User Deleted Successfully")
-      }else{
-        this.toastr.warning("There Are some issue")
+    // this.user.POST(this.deleteUserRecord, { id: value, token: 'LIVESITE' }).subscribe(res => {
+    //   this.common = res
+    //   if(this.common['success']==true){
+    //         this.toastr.success("User Deleted Successfully")
+    //   }else{
+    //     this.toastr.warning("There Are some issue")
 
-      }
-      this.FetchUser();
-    })
+    //   }
+    //   this.FetchUser();
+    // })
     // const message = `Are you sure you want to delete this user detail?`;
     // let id = value
     // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);

@@ -21,7 +21,10 @@ import { LoginGuard } from './login.guard';
 import { AuthService } from './main/apps/auth.service';
 import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from 'ng2-ckeditor';
-
+import { PerfectScrollbarModule, PerfectScrollbarConfigInterface,PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+    const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+        suppressScrollX: true //only if u want to supress scrolling in x
+      };
 // import { AddverticalComponent } from './main/apps/vertical-management/vertical/addvertical/addvertical.component';
 // import { AdminComponent } from './admin/admin.component';
 // import { AuthGuard } from './auth.guard';
@@ -72,6 +75,7 @@ const appRoutes: Routes = [
         // UserPanelComponent
     ],
     imports: [
+        PerfectScrollbarModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -105,7 +109,10 @@ const appRoutes: Routes = [
     bootstrap: [
         AppComponent
     ],
-    providers: [LoginGuard,AuthService],
+    providers: [LoginGuard,AuthService, {
+        provide: PERFECT_SCROLLBAR_CONFIG,
+        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+}],
     // AuthService
 })
 export class AppModule {

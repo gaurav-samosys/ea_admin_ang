@@ -98,6 +98,7 @@ export class UserComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
+  displayedColumn:number=0
   constructor(
     private toastr: ToastrService,
 
@@ -147,10 +148,9 @@ export class UserComponent implements OnInit {
   }
 
   /**
-   * show hide column
+   * show hide c olumn
    * @param value 
    */
-
   columnClick(value, colName: string, evt) {
     // console.log('-0-----', evt.target.checked)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);
@@ -161,6 +161,13 @@ export class UserComponent implements OnInit {
       this.displayedColumns.splice(value, 0, colName)
 
     }
+    if(this.displayedColumns.length==0){
+      this. displayedColumn=1
+    }else{
+      this. displayedColumn=0
+
+    }
+    // console.log(colIndex,this.displayedColumns)
   }
 
   /**

@@ -42,6 +42,7 @@ export class UsersComponent implements OnInit {
   endDate1: Date;
 
   startDate1: Date;
+  displayedColumn:number=0
 
   full_name;
   email;
@@ -140,6 +141,13 @@ export class UsersComponent implements OnInit {
       this.displayedColumns.splice(value, 0, colName)
 
     }
+    if(this.displayedColumns.length==0){
+      this. displayedColumn=1
+    }else{
+      this. displayedColumn=0
+
+    }
+    // console.log(colIndex,this.displayedColumns)
   }
   /**===========================================================
             on selction change status 

@@ -108,6 +108,8 @@ export class BlogComponent implements OnInit {
    * @param colName Show hide column
    * @param evt 
    */
+  displayedColumn:number=0
+
   columnClick(value,colName: string, evt,index) {
     console.log('dev------',event)
     console.log('------colName', colName, evt, evt.target.checked,"index===",index)
@@ -119,6 +121,12 @@ export class BlogComponent implements OnInit {
     } else
     {
       this.displayedColumns.splice(value,0,colName)
+    }
+    if(this.displayedColumns.length==0){
+      this. displayedColumn=1
+    }else{
+      this. displayedColumn=0
+
     }
   
   }

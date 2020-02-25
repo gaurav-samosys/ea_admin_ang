@@ -153,7 +153,7 @@
                                                 checked><span class="ml">Created</span></label>
                                     </button>
                                     <button mat-menu-item><label><input type="checkbox"
-                                                (change)="columnClick('action',$event)" checked><span
+                                                (change)="columnClick(6,'action',$event)" checked><span
                                                 class="ml">Action</span></label>
                                     </button>
                                 </mat-menu>
@@ -166,7 +166,7 @@
 
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <table mat-table [dataSource]="dataSource">
+                                <table mat-table [dataSource]="dataSource" *ngIf="displayedColumn==0">
 
                                     <!-- Weight Column -->
                                     <ng-container matColumnDef="quiz_name">

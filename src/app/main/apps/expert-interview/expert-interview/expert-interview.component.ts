@@ -197,6 +197,8 @@ export class ExpertInterviewComponent implements OnInit {
     * @param colName 
     * @param evt 
     */
+   displayedColumn:number=0
+
   columnClick(value, colName: string, evt) {
     // console.log('-0-----', evt.target.checked)
     const colIndex = this.displayedColumns.findIndex(col => col === colName);
@@ -205,6 +207,12 @@ export class ExpertInterviewComponent implements OnInit {
     } else {
       // this.displayedColumns.push(colName);
       this.displayedColumns.splice(value, 0, colName)
+
+    }
+    if(this.displayedColumns.length==0){
+      this. displayedColumn=1
+    }else{
+      this. displayedColumn=0
 
     }
   }

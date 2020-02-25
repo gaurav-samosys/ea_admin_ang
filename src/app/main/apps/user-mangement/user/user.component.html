@@ -176,7 +176,8 @@
           &nbsp;&nbsp;&nbsp;
               
                 <!-- 'first_name', 'email', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action' -->
-                  <button mat-button style="background-color: #039be5 ;color: white;" [matMenuTriggerFor]="menu" matTooltip="Show Hide Column" 
+                  <button mat-button style="background-color: #039be5 ;color: white;" 
+                  [matMenuTriggerFor]="menu" matTooltip="Show Hide Column" 
                   class="hover-button-loginpage export_data" mat-raised-button type="button"
                >
                    <span> Show / Hide Column</span>
@@ -225,7 +226,7 @@
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-              <table mat-table [dataSource]="dataSource"  class="table">
+              <table mat-table [dataSource]="dataSource"  class="table" *ngIf="displayedColumn==0">
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="full_name">

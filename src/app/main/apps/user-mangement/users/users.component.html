@@ -1,17 +1,10 @@
-         
-         
-         
-         
-         
-         
-      <div id="dashboard-companies" class="page-layout simple right-sidebar" 
-      fxLayout="row" style="margin-left: 0px;">
+<div id="dashboard-companies" class="page-layout simple right-sidebar" fxLayout="row" style="margin-left: 0px;">
 
 
-        <!-- CENTER -->
-        <div class="center" fusePerfectScrollbar>
-      
-          <!-- 
+  <!-- CENTER -->
+  <div class="center" fusePerfectScrollbar>
+
+    <!-- 
             <div class="mat__box mat__box2 mt-20 mr-28">
               <div class="row" fxLayoutAlign="space-between center">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -21,20 +14,20 @@
               </div>
               
             </div> -->
-      
-      
-<!--       
+
+
+    <!--       
           <div class="" style="flex-direction: row;
             box-sizing: border-box;
            height: 100px;
             place-content: center space-between;
             align-items: center;  background-color: #039be5 !important;
             color: white !important;"> -->
-             <!-- clientname
+    <!-- clientname
                   clientId
                   detail_id -->
-            <div class="row" fxLayoutAlign="space-between center"> 
-              <!-- <div class="" style="color: white;margin-top:26px;padding: 15px;">
+    <div class="row" fxLayoutAlign="space-between center">
+      <!-- <div class="" style="color: white;margin-top:26px;padding: 15px;">
                 <a routerLink="/apps/home-dashboard/version3" style="text-decoration: none;color: white;">
                   <img style="margin-left: 10px;" width="20px" height="20px"
                     src="../../../../../assets/sp1.svg">&nbsp;&nbsp;Dashboard </a>
@@ -51,625 +44,634 @@
                   &nbsp;&nbsp;/&nbsp;&nbsp;{{clientname}}</a>
                 </div> -->
 
-    <div class="" style="margin-top:20px; position: relative; margin-left: 25px;">
+      <div class="" style="margin-top:20px; position: relative; margin-left: 25px;">
 
-        <span class="speedometer_icon  report_top_hover"> <a routerLink="/apps/home-dashboard/version3" 
-         style="text-decoration: none;">
-         &nbsp;  &nbsp;Dashboard </a></span>
+        <span class="speedometer_icon  report_top_hover"> <a routerLink="/apps/home-dashboard/version3"
+            style="text-decoration: none;">
+            &nbsp; &nbsp;Dashboard </a></span>
 
-         <span style="color: #ccc;">/
-         <a  routerLink="/apps/dashboards/companies"
-           style="text-decoration: none;" class="report_top_hover">
-           &nbsp;Company</a>
-         </span>
+        <span style="color: #ccc;">/
+          <a routerLink="/apps/dashboards/companies" style="text-decoration: none;" class="report_top_hover">
+            &nbsp;Company</a>
+        </span>
 
-         <span style="color: #ccc;">/
-            <a  (click)="back()"
-              style="text-decoration: none;"
-               class="report_top_hover">&nbsp; {{compName}} </a>
-            </span>
-            <span style="color: #ccc;">/
-                <a  routerLink="/apps/users/{{clientname}}/{{clientId}}/{{detail_id}}"
-                  style="text-decoration: none;" class="report_top_hover">&nbsp;{{clientname}}</a>
-                </span>
-     
-       </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 17px;;
+        <span style="color: #ccc;">/
+          <a (click)="back()" style="text-decoration: none;" class="report_top_hover">&nbsp; {{compName}} </a>
+        </span>
+        <span style="color: #ccc;">/
+          <a routerLink="/apps/users/{{clientname}}/{{detail_id}}/{{clientId}}" style="text-decoration: none;"
+            class="report_top_hover">&nbsp;{{clientname}}</a>
+        </span>
+
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 17px;;
                 margin-right: 40px;
             ">
-                <button mat-raised-button (click)="addUser()" *ngIf="division == 1 || division == 2 ">
-                  <mat-icon>add_circle_outline</mat-icon>Add User
-                </button>
-                        
+        <button mat-raised-button (click)="addUser()" *ngIf="division == 1 || division == 2 ">
+          <mat-icon>add_circle_outline</mat-icon>Add User
+        </button>
+      </div>
+    </div>
+    <!-- </div> -->
+
+
+    <!-- style="float: right;" -->
+    <div class="mat__box mat__box2 mt-20  mr-28">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+          <button mat-raised-button
+            style="margin-left: 10px; margin-right: 21px; background-color: #039be5 ;color: white;"
+            class="hover-button-loginpage button" (click)="SwitchButton(1)" *ngIf="division == 1">Client Detail</button>
+
+          <button mat-raised-button style="margin-right: 21px;" (click)="SwitchButton(1)" *ngIf="division == 2">Client
+            Detail</button>
+          <button mat-raised-button style="margin-right: 21px;  background-color: #039be5 ;color: white;"
+            class="hover-button-loginpage button" (click)="SwitchButton(2)" *ngIf="division == 2">User Search</button>
+
+          <button mat-raised-button style="margin-right: 21px;" (click)="SwitchButton(2)" *ngIf="division == 1">User
+            Search</button>
+        </div>
+      </div>
+    </div>
 
 
 
-              </div>
-            </div>
-          <!-- </div> -->
-      
-      
-          <!-- style="float: right;" -->
-          <div class="mat__box mat__box2 mt-20  mr-28">
-                 <div class="row" >
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                      
-                    <button mat-raised-button style="margin-left: 10px; margin-right: 21px; background-color: #039be5 ;color: white;"  class="hover-button-loginpage button" (click)="SwitchButton(1)" *ngIf="division == 1">Client Detail</button>
-      
-                    <button mat-raised-button  style="margin-right: 21px;"   (click)="SwitchButton(1)" *ngIf="division == 2">Client Detail</button>
-                     <button mat-raised-button  style="margin-right: 21px;  background-color: #039be5 ;color: white;"  class="hover-button-loginpage button" (click)="SwitchButton(2)" *ngIf="division == 2">User Search</button>
-      
-                     <button mat-raised-button   style="margin-right: 21px;"  (click)="SwitchButton(2)" *ngIf="division == 1">User Search</button>
-                </div>
-                 </div>
-             </div>
-      
+    <div class="mat__box  mr-28" *ngIf="division == 1">
+      <div class="row" style="background-color: white;">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="margin-top: 25px; padding:10px">
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Company Name</mat-label>
+              <input matInput placeholder="Search company name" (keyup)="Search($event.target.value,'company')"
+                disabled="disabled" readonly="readonly">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label required>Client Name</mat-label>
+              <input matInput placeholder="Search client name" (keyup)="Search($event.target.value,'client')"
+                disabled="disabled" readonly="readonly">
+            </mat-form-field>
 
 
-             <div class="mat__box  mr-28" *ngIf="division == 1">
-              <div class="row" style="background-color: white;">
-                  <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100"  style="margin-top: 25px; padding:10px">
-        
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                  
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                      <mat-label>Company Name</mat-label>
-                      <input matInput placeholder="Search company name"   (keyup)="Search($event.target.value,'company')" disabled="disabled" readonly="readonly">
-                    </mat-form-field>
-  
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label required>Client Name</mat-label>
-                    <input matInput placeholder="Search client name"   (keyup)="Search($event.target.value,'client')" disabled="disabled" readonly="readonly">
-                  </mat-form-field>
-               
-                
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>First Name</mat-label>
-                    <input matInput placeholder="Search first name"   (keyup)="Search($event.target.value,'fname')" disabled="disabled" readonly="readonly">
-                  </mat-form-field>
-              
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>Email</mat-label>
-                    <input matInput placeholder="Search email"  (keyup)="Search($event.target.value,'email')" disabled="disabled" readonly="readonly">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                  
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="Search last name"  readonly="readonly" disabled="disabled" (keyup)="Search($event.target.value,'lname')">
-                  </mat-form-field>
-                  
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>Client Vertical</mat-label>
-                    <mat-select  matNativeControl (selectionChange)="Search($event.value,'vertical')" disabled="disabled" readonly="readonly" disabled="disabled" class="disable">
-                      <mat-option selected="" value=""> Please select Vertical </mat-option>
-                      <mat-option *ngFor="let data of vertical" value="{{data.id}}">{{data.name}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                
-         
-                </div>
-             
-  
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                  
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>Phone Number</mat-label>
-                    <input matInput placeholder="Search phone Number"  readonly="readonly" disabled="disabled" (keyup)="Search($event.target.value,'phone_no')">
-                  </mat-form-field>
-                
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>Portal View</mat-label>
-                    <mat-select   readonly="readonly" disabled="disabled" class="disable" matNativeControl (selectionChange)="Search($event.value,'portal')"  readonly>
-                      <mat-option selected="" value="">Select portal view</mat-option>
-                      <mat-option value="1">Standard Portal</mat-option>
-                      <mat-option value="2">Drip Compaign</mat-option>
-                      <mat-option value="3">Challenge View</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-  
-  
-  
-  
-        
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>Country</mat-label>
-                    <input matInput placeholder="Search Country" readonly  disabled="disabled" (keyup)="Search($event.target.value,'country')">
-  
-                    <!-- <mat-select matNativeControl (selectionChange)="getState($event.value,'country')">
+          </div>
+          <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>First Name</mat-label>
+              <input matInput placeholder="Search first name" (keyup)="Search($event.target.value,'fname')"
+                disabled="disabled" readonly="readonly">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Search email" (keyup)="Search($event.target.value,'email')"
+                disabled="disabled" readonly="readonly">
+            </mat-form-field>
+          </div>
+          <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="Search last name" readonly="readonly" disabled="disabled"
+                (keyup)="Search($event.target.value,'lname')">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Client Vertical</mat-label>
+              <mat-select matNativeControl (selectionChange)="Search($event.value,'vertical')" disabled="disabled"
+                readonly="readonly" disabled="disabled" class="disable">
+                <mat-option selected="" value=""> Please select Vertical </mat-option>
+                <mat-option *ngFor="let data of vertical" value="{{data.id}}">{{data.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+          </div>
+
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Phone Number</mat-label>
+              <input matInput placeholder="Search phone Number" readonly="readonly" disabled="disabled"
+                (keyup)="Search($event.target.value,'phone_no')">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Portal View</mat-label>
+              <mat-select readonly="readonly" disabled="disabled" class="disable" matNativeControl
+                (selectionChange)="Search($event.value,'portal')" readonly>
+                <mat-option selected="" value="">Select portal view</mat-option>
+                <mat-option value="1">Standard Portal</mat-option>
+                <mat-option value="2">Drip Compaign</mat-option>
+                <mat-option value="3">Challenge View</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+
+
+
+          <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Country</mat-label>
+              <input matInput placeholder="Search Country" readonly disabled="disabled"
+                (keyup)="Search($event.target.value,'country')">
+
+              <!-- <mat-select matNativeControl (selectionChange)="getState($event.value,'country')">
                       <mat-option selected="" value="">Please select country</mat-option>
                       <mat-option *ngFor="let data of country" value="{{data.id}}">{{data.name}}</mat-option>
                     </mat-select> -->
-                  </mat-form-field>
-            
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>State</mat-label>
-                    <input matInput placeholder="Search state" readonly disabled="disabled" (keyup)="Search($event.target.value,'state')">
-  
-                    <!-- <mat-select matNativeControl (selectionChange)="Search($event.value,'state')">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>State</mat-label>
+              <input matInput placeholder="Search state" readonly disabled="disabled"
+                (keyup)="Search($event.target.value,'state')">
+
+              <!-- <mat-select matNativeControl (selectionChange)="Search($event.value,'state')">
                       <mat-option selected="" value="">Please select state</mat-option>
                       <mat-option *ngFor="let data of states" value="{{data.id}}">{{data.state_name}}</mat-option>
                     </mat-select> -->
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>City</mat-label>
-                    <input matInput placeholder="Search city" disabled="disabled" readonly (keyup)="Search($event.target.value,'city')">
-                  </mat-form-field>
-              
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>Industry</mat-label>
-                    <input matInput placeholder="Search industry" disabled="disabled" readonly (keyup)="Search($event.target.value,'industry')">
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>Start Date</mat-label>
-                    <input matInput [matDatepicker]="picker" readonly disabled="disabled" (click)="picker.open()" placeholder="Start date"
-                      [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-             
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-label>End Date</mat-label>
-                    <input matInput [matDatepicker]="picker1" readonly disabled="disabled" (click)="picker1.open()" placeholder="End date"
-                      [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                <!-- </div> -->
-                <!-- END OF ROW -->
-              </div>
-              <!-- END OF ROW -->
+            </mat-form-field>
+          </div>
+          <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>City</mat-label>
+              <input matInput placeholder="Search city" disabled="disabled" readonly
+                (keyup)="Search($event.target.value,'city')">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Industry</mat-label>
+              <input matInput placeholder="Search industry" disabled="disabled" readonly
+                (keyup)="Search($event.target.value,'industry')">
+            </mat-form-field>
+          </div>
+          <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>Start Date</mat-label>
+              <input matInput [matDatepicker]="picker" readonly disabled="disabled" (click)="picker.open()"
+                placeholder="Start date" [ngModel]="startDate" (ngModelChange)="MyDate($event,'start')">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+              <mat-label>End Date</mat-label>
+              <input matInput [matDatepicker]="picker1" readonly disabled="disabled" (click)="picker1.open()"
+                placeholder="End date" [ngModel]="endDate" (ngModelChange)="MyDate($event,'end')">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+          <!-- </div> -->
+          <!-- END OF ROW -->
+        </div>
+        <!-- END OF ROW -->
+      </div>
+      <!-- END OF MAT__BOX2 MT-20 MR-28 -->
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="mat__box  mr-28" *ngIf="division == 2">
+      <div class="row" style="background-color: white; padding:10px">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <!--   <div class="h2 mb-8">Company Search</div> -->
+          <!-- <div class="row"> -->
+
+
+          <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="margin-top: 25px; padding:10px">
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Full Name ( ID: 157 )</mat-label>
+                <input matInput [ngModel]="full_name" placeholder="Search full name"
+                  (keyup)="Search($event.target.value,'full_name')" class="disable">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>E-mail</mat-label>
+                <input matInput [ngModel]="email" placeholder="Search Email"
+                  (keyup)="Search($event.target.value,'email')" class="disable">
+              </mat-form-field>
             </div>
-            <!-- END OF MAT__BOX2 MT-20 MR-28 -->
-        
-            </div>
-      
-            
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-          <div class="mat__box  mr-28" *ngIf="division == 2">
-            <div class="row" style="background-color: white; padding:10px">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <!--   <div class="h2 mb-8">Company Search</div> -->
-                <!-- <div class="row"> -->
-      
-      
-                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100"  style="margin-top: 25px; padding:10px">
-      
-      
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                      <mat-label>Full Name ( ID: 157 )</mat-label>
-                      <input matInput [ngModel]="full_name" placeholder="Search full name"
-                        (keyup)="Search($event.target.value,'full_name')" 
-                         class="disable">
-                    </mat-form-field>
-      
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                      <mat-label>E-mail</mat-label>
-                      <input matInput [ngModel]="email" placeholder="Search Email"
-                        (keyup)="Search($event.target.value,'email')" 
-                         class="disable">
-                    </mat-form-field>
-                  </div>
-
-      
-
-
-
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                      <mat-label>Client Name </mat-label>
-                      <input matInput [ngModel]="client_name" placeholder="Search client_name"
-                        (keyup)="Search($event.target.value,'client_name')" class="disable">
-                    </mat-form-field>
-                    <!-- </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Client Name </mat-label>
+                <input matInput [ngModel]="client_name" placeholder="Search client_name"
+                  (keyup)="Search($event.target.value,'client_name')" class="disable">
+              </mat-form-field>
+              <!-- </div>
                
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8"> -->
-                      <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                        <mat-label>Comapny Name</mat-label>
-                        <input matInput [ngModel]="company_name" placeholder="Search company name"
-                          (keyup)="Search($event.target.value,'company_name')"  class="disable">
-                      </mat-form-field>
-                  </div>
-      
-
-
-
-
-
-
-
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-             
-                    <!-- readonly="readonly" disabled="disabled" -->
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;"> 
-                      <mat-label>Country</mat-label>
-                      <mat-select matNativeControl [ngModel]="country" (selectionChange)="Search($event.value,'country')"
-                       class="disable">
-                        <mat-option selected="" value="">Please select Country</mat-option>
-                        <mat-option *ngFor="let data of CountryArray" value="{{data.id}}">{{data.name}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;"> 
-                      <mat-label>State</mat-label>
-                      <mat-select matNativeControl [ngModel]="state" (selectionChange)="Search($event.value,'state')"
-                         class="disable">
-                        <mat-option selected="" value="">Please select state</mat-option>
-                        <mat-option *ngFor="let data of stateArray" value="{{data.id}}">{{data.name}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-
-
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
-                    <!-- readonly="readonly" -->
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                      <mat-label>City</mat-label>
-                      <input matInput [ngModel]="city" placeholder="Search city" (keyup)="Search($event.target.value,'city')"
-                        class="disable">
-                    </mat-form-field>
-      
-
-                  <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;"> 
-                    <mat-label>status</mat-label>
-                    <mat-select matNativeControl [ngModel]="status" (selectionChange)="Search($event.value,'status')"
-                       disabled="disabled" class="disable">
-                      <mat-option selected="" value="">Please select status</mat-option>
-                      <mat-option *ngFor="let data of statusArray" value="{{data.id}}">{{data.name}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-      
-
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 34px;">
-                      <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                        <mat-label>Access Code</mat-label>
-                        <input matInput [ngModel]="access_code" placeholder="Search access code" (keyup)="Search($event.target.value,'access_code')"
-                         class="disable">
-                      </mat-form-field>
-                    
-                    <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
-                      <mat-label>Start Date</mat-label>
-                      <input matInput [matDatepicker]="picker2" placeholder="Start date" [ngModel]="startDate1"
-                        (ngModelChange)="MyDate1($event,'start')" >
-                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                      <mat-datepicker #picker2></mat-datepicker>
-                    </mat-form-field>
-      
-                    <mat-form-field appearance="outline" fxFlex="100">
-                      <mat-label>End Date</mat-label>
-                      <input matInput [matDatepicker]="picker3" placeholder="End date" [ngModel]="endDate1"
-                        (ngModelChange)="MyDate1($event,'end')" >
-                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                      <mat-datepicker #picker3></mat-datepicker>
-                    </mat-form-field>
-                  </div>
-      
-                </div>
-              </div>
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Comapny Name</mat-label>
+                <input matInput [ngModel]="company_name" placeholder="Search company name"
+                  (keyup)="Search($event.target.value,'company_name')" class="disable">
+              </mat-form-field>
             </div>
+
+
+
+
+
+
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+
+              <!-- readonly="readonly" disabled="disabled" -->
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Country</mat-label>
+                <mat-select matNativeControl [ngModel]="country" (selectionChange)="Search($event.value,'country')"
+                  class="disable">
+                  <mat-option selected="" value="">Please select Country</mat-option>
+                  <mat-option *ngFor="let data of CountryArray" value="{{data.id}}">{{data.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>State</mat-label>
+                <mat-select matNativeControl [ngModel]="state" (selectionChange)="Search($event.value,'state')"
+                  class="disable">
+                  <mat-option selected="" value="">Please select state</mat-option>
+                  <mat-option *ngFor="let data of stateArray" value="{{data.id}}">{{data.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 20px;">
+              <!-- readonly="readonly" -->
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>City</mat-label>
+                <input matInput [ngModel]="city" placeholder="Search city" (keyup)="Search($event.target.value,'city')"
+                  class="disable">
+              </mat-form-field>
+
+
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>status</mat-label>
+                <mat-select matNativeControl [ngModel]="status" (selectionChange)="Search($event.value,'status')"
+                  disabled="disabled" class="disable">
+                  <mat-option selected="" value="">Please select status</mat-option>
+                  <mat-option *ngFor="let data of statusArray" value="{{data.id}}">{{data.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxFlex="100" style=" margin-right: 34px;">
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Access Code</mat-label>
+                <input matInput [ngModel]="access_code" placeholder="Search access code"
+                  (keyup)="Search($event.target.value,'access_code')" class="disable">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" fxFlex="100" style=" margin-right: 20px;">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="picker2" placeholder="Start date" [ngModel]="startDate1"
+                  (ngModelChange)="MyDate1($event,'start')">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="picker3" placeholder="End date" [ngModel]="endDate1"
+                  (ngModelChange)="MyDate1($event,'end')">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
+            </div>
+
           </div>
-          <!-- END OF MAT__BOX MT-20 MR-28 -->
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-          <div class="mat__box mt-20 mr-28">
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
-                   
-                  </div>
-                  <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                  <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
-                    <button  mat-raised-button matTooltip="Download Excel File" class="hover-button-loginpage" (click)="exportData()" style="background-color: #039be5;color: white ;">Export Data to Excel</button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <!-- 'first_name', 'email', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action' -->
-                  <button  style="background-color: #039be5 ;color: white ;" 
-                  mat-button [matMenuTriggerFor]="menu" matTooltip="Show Hide Column" class="hover-button-loginpage export_data" mat-raised-button type="button"
-               >
-                  <span> Show / Hide Column</span>
+        </div>
+      </div>
+    </div>
+    <!-- END OF MAT__BOX MT-20 MR-28 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="mat__box mt-20 mr-28">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+
+            </div>
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
+              <button mat-raised-button matTooltip="Download Excel File" class="hover-button-loginpage"
+                (click)="exportData()" style="background-color: #039be5;color: white ;">Export Data to Excel</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <!-- 'first_name', 'email', 'client_name', 'created_on', 'certificate_downloaded', 'status', 'action' -->
+              <button style="background-color: #039be5 ;color: white ;" mat-button [matMenuTriggerFor]="menu"
+                matTooltip="Show Hide Column" class="hover-button-loginpage export_data" mat-raised-button
+                type="button">
+                <span> Show / Hide Column</span>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <label>
+                    <input type="checkbox" (change)="columnClick(0,'full_name',$event)" checked><span class="ml ">Full
+                      Name</span>
+                  </label>
                 </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
-                    <label>
-                    <input type="checkbox" (change)="columnClick(0,'full_name',$event)" 
-                        checked><span class="ml ">Full Name</span>
-                      </label>
-                  </button>
-                  <button mat-menu-item>
-                    <label><input type="checkbox" (change)="columnClick(1,'email',$event)" 
-                        checked>
-                        <span class="ml">Email</span>
-                      </label>
-                  </button>
-                  <button mat-menu-item><label>
-                    <input type="checkbox" (change)="columnClick(2,'client',$event)"
-                        checked><span class="ml">Client</span></label>
-                  </button>
-                  <button mat-menu-item><label>
-                    <input type="checkbox" (change)="columnClick(3,'created_on',$event)"
-                        checked><span class="ml">Created Date</span></label>
-                  </button>
-                
-                    <button mat-menu-item><label>
-                        <input type="checkbox" (change)="columnClick(4,'status',$event)"
-                            checked><span class="ml">status</span></label>
-                      </button>
-                  <button mat-menu-item><label><input  type="checkbox" (change)="columnClick(5,'action',$event)"
-                        checked><span class="ml">Action</span></label>
-                  </button>
-                </mat-menu>
-                
-                  </div>
-      
-                </div>
-                <!-- END OF ROW -->
-                <div class="row">
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <table mat-table [dataSource]="dataSource">
-      
-                      <ng-container matColumnDef="full_name">
-                        <th mat-header-cell *matHeaderCellDef> Full Name 
-                          <span class="pointer">
-                            <i (click)="updateSortingOrderUser('full_name','ASC')"
-                              [class]='(this.sort_column=="full_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                              arrow_upward
-                            </i>
-                            <i (click)="updateSortingOrderUser('full_name','DESC')"
-                              [class]='(this.sort_column=="full_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                              arrow_downward
-                            </i>
-                          </span>
-                        </th>
-                        <td  mat-cell *matCellDef="let element" (click)="detailUser()">
-                            <!-- [routerLink]="['/apps/dashboards/user', element.id]">  -->
-                          {{element.full_name}}
-                         </td>
-                      </ng-container>
-      
-                      <ng-container matColumnDef="email">
-                        <th mat-header-cell *matHeaderCellDef>Email <span class="pointer">
-                                <i (click)="updateSortingOrderUser('email','ASC')"
-                                  [class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                                </i>
-                                <i (click)="updateSortingOrderUser('email','DESC')"
-                                  [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                                </i>
-                              </span> </th>
-                        <td mat-cell *matCellDef="let element"> 
-                          {{element.email}} 
-                        </td>
-                      </ng-container>
-      
-                      <ng-container matColumnDef="client">
-                        <th mat-header-cell *matHeaderCellDef>Client
-                            <span class="pointer">
-                                <i (click)="updateSortingOrderUser('client','ASC')"
-                                  [class]='(this.sort_column=="client" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                                </i>
-                                <i (click)="updateSortingOrderUser('client','DESC')"
-                                  [class]='(this.sort_column=="client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                                </i>
-                              </span> </th>
-                        <td mat-cell *matCellDef="let element">
-                           {{element.client}} 
-                          </td>
-                      </ng-container>
-      
-                      <ng-container matColumnDef="created_on">
-                        <th mat-header-cell *matHeaderCellDef> SignUp Date <span class="pointer">
-                            <i (click)="updateSortingOrderUser('created_on','ASC')"
-                              [class]='(this.sort_column=="created_on" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                              arrow_upward
-                            </i>
-                            <i (click)="updateSortingOrderUser('created_on','DESC')"
-                              [class]='(this.sort_column=="created_on" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                              arrow_downward
-                            </i>
-                          </span></th>
-                        <td mat-cell *matCellDef="let element">
-                           {{element.created_on}} 
-                          </td>
-                      </ng-container>
-      
-                      
-                          <ng-container matColumnDef="course_progress">
-                            <th mat-header-cell *matHeaderCellDef> Course_progress
-                                <span class="pointer">
-                                    <i (click)="updateSortingOrderUser('course_progress','ASC')"
-                                      [class]='(this.sort_column=="course_progress" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                      arrow_upward
-                                    </i>
-                                    <i (click)="updateSortingOrderUser('course_progress','DESC')"
-                                      [class]='(this.sort_column=="course_progress" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                      arrow_downward
-                                    </i>
-                                  </span> </th>
-                            <td mat-cell *matCellDef="let element"> 
-                              {{element.course_progress}} 
-                            </td>
-                          </ng-container>
-                      
+                <button mat-menu-item>
+                  <label><input type="checkbox" (change)="columnClick(1,'email',$event)" checked>
+                    <span class="ml">Email</span>
+                  </label>
+                </button>
+                <button mat-menu-item><label>
+                    <input type="checkbox" (change)="columnClick(2,'client',$event)" checked><span
+                      class="ml">Client</span></label>
+                </button>
+                <button mat-menu-item><label>
+                    <input type="checkbox" (change)="columnClick(3,'created_on',$event)" checked><span
+                      class="ml">Created Date</span></label>
+                </button>
 
-                      <ng-container matColumnDef="status">
-                        <th mat-header-cell *matHeaderCellDef> Status
-                            <span class="pointer">
-                                <i (click)="updateSortingOrderUser('status','ASC')"
-                                  [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_upward
-                                </i>
-                                <i (click)="updateSortingOrderUser('status','DESC')"
-                                  [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
-                                  arrow_downward
-                                </i>
-                              </span> </th>
-                        <td mat-cell *matCellDef="let element">
-                          <ui-switch [checked]="element.status == 'Active' ? true : false"
-                            (change)="onChange($event,element.id)"></ui-switch>
-                        </td>
-                      </ng-container>
-                      
-                      <ng-container matColumnDef="action">
-                          <th mat-header-cell *matHeaderCellDef>Action</th>
-                          <td mat-cell *matCellDef="let element">
-                            <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="hover-button-loginpage action_btn" style="background-color: #039be5 ;color: white ;">Actions</button>
-      
-                            <mat-menu #belowMenu="matMenu" yPosition="below">
-                                <!-- /apps/client-mangement/addclient -->
-      
-                              <button mat-menu-item matTooltip="Edit"
-                                [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">Edit</button>
-                              <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
-                            </mat-menu>
-                           
-                          </td>
-                        </ng-container>
-      
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
+                <button mat-menu-item><label>
+                    <input type="checkbox" (change)="columnClick(4,'status',$event)" checked><span
+                      class="ml">status</span></label>
+                </button>
+                <button mat-menu-item><label><input type="checkbox" (change)="columnClick(5,'action',$event)"
+                      checked><span class="ml">Action</span></label>
+                </button>
+              </mat-menu>
 
-                    <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-                      [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-                      (page)="handlePage($event)"></mat-paginator>
-                    <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
-                    <!-- <mat-card *ngIf="showloader==true"
+            </div>
+
+          </div>
+          <!-- END OF ROW -->
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <table mat-table [dataSource]="dataSource" *ngIf="displayedColumn==0">
+
+                <ng-container matColumnDef="full_name">
+                  <th mat-header-cell *matHeaderCellDef> Full Name
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderUser('full_name','ASC')"
+                        [class]='(this.sort_column=="full_name" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderUser('full_name','DESC')"
+                        [class]='(this.sort_column=="full_name" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span>
+                  </th>
+                  <td mat-cell *matCellDef="let element" (click)="detailUser()">
+                    <!-- [routerLink]="['/apps/dashboards/user', element.id]">  -->
+                    {{element.full_name}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef>Email <span class="pointer">
+                      <i (click)="updateSortingOrderUser('email','ASC')"
+                        [class]='(this.sort_column=="email" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderUser('email','DESC')"
+                        [class]='(this.sort_column=="email" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span> </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.email}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="client">
+                  <th mat-header-cell *matHeaderCellDef>Client
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderUser('client','ASC')"
+                        [class]='(this.sort_column=="client" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderUser('client','DESC')"
+                        [class]='(this.sort_column=="client" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span> </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.client}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="created_on">
+                  <th mat-header-cell *matHeaderCellDef> SignUp Date <span class="pointer">
+                      <i (click)="updateSortingOrderUser('created_on','ASC')"
+                        [class]='(this.sort_column=="created_on" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderUser('created_on','DESC')"
+                        [class]='(this.sort_column=="created_on" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span></th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.created_on}}
+                  </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="course_progress">
+                  <th mat-header-cell *matHeaderCellDef> Course_progress
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderUser('course_progress','ASC')"
+                        [class]='(this.sort_column=="course_progress" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderUser('course_progress','DESC')"
+                        [class]='(this.sort_column=="course_progress" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span> </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.course_progress}}
+                  </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Status
+                    <span class="pointer">
+                      <i (click)="updateSortingOrderUser('status','ASC')"
+                        [class]='(this.sort_column=="status" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_upward
+                      </i>
+                      <i (click)="updateSortingOrderUser('status','DESC')"
+                        [class]='(this.sort_column=="status" && this.sort_order=="DESC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
+                        arrow_downward
+                      </i>
+                    </span> </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ui-switch [checked]="element.status == 'Active' ? true : false"
+                      (change)="onChange($event,element.id)"></ui-switch>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef>Action</th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button [matMenuTriggerFor]="belowMenu" class="hover-button-loginpage action_btn"
+                      style="background-color: #039be5 ;color: white ;">Actions</button>
+
+                    <mat-menu #belowMenu="matMenu" yPosition="below">
+                      <!-- /apps/client-mangement/addclient -->
+
+                      <button mat-menu-item matTooltip="Edit"
+                        [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]">Edit</button>
+                      <button mat-menu-item matTooltip="Delete" (click)="confirmDialog(element.id)">delete</button>
+                    </mat-menu>
+
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+                [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+                (page)="handlePage($event)"></mat-paginator>
+              <div *ngIf="data == '' " style="text-align: center">No data available in table</div>
+              <!-- <mat-card *ngIf="showloader==true"
                     style="display: flex; justify-content: center; align-items: center">
                     <mat-progress-spinner mode="indeterminate">
                     </mat-progress-spinner>
                   </mat-card> -->
-                  </div>
-                  <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
-                </div>
-                <!-- END OF ROW -->
-              </div>
-              <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
             </div>
-            <!-- END OF ROW -->
+            <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
           </div>
-      
-      
-      
-         
-          <!-- END OF MAT__BOX MT-20 MR-28 -->
-      
-      
+          <!-- END OF ROW -->
         </div>
-
-
+        <!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
       </div>
-      
-      
-      
-      <style type="text/css">
-        .inline_list {
-          list-style-type: none;
-        }
-      
-        .inline_list li {
-          display: inline-block;
-        }
-      
-        .inline_list li a {
-          position: relative;
-          float: left;
-          padding: 6px 12px;
-          margin-left: -1px;
-          line-height: 1.42857143;
-          color: #337ab7;
-          text-decoration: none;
-          background-color: #fff;
-          border: 1px solid #ddd;
-        }
-      </style>   
-         
-         
-         
-         
-         
-         
-         
-                 
+      <!-- END OF ROW -->
+    </div>
 
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         <!-- <div id="fuse-splash-screen" *ngIf="showLoader == true">
+
+
+
+    <!-- END OF MAT__BOX MT-20 MR-28 -->
+
+
+  </div>
+
+
+</div>
+
+
+
+<style type="text/css">
+  .inline_list {
+    list-style-type: none;
+  }
+
+  .inline_list li {
+    display: inline-block;
+  }
+
+  .inline_list li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="fuse-splash-screen" *ngIf="showLoader == true">
             <div class="center">
 
                 <div class="logo">

@@ -430,6 +430,9 @@ body.theme-default .mat-progress-spinner circle, body.theme-default .mat-spinner
  
   cursor: pointer;
 }
+#field {
+  scroll-behavior: smooth;
+}
 
 // border: 1px solid #e6e7ee;
 // box-shadow: 0 0 6px rgba(32, 176, 242, 0.25);

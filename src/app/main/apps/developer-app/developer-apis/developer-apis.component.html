@@ -79,7 +79,8 @@
                               type="checkbox" (change)="columnClick(3,'app_secret',$event)" checked><span class="ml">App Secret</span></label></button>
                         <button mat-menu-item ><label><input (change)="columnClick(4,'status',$event)" type="checkbox"
                               checked><span class="ml">Status</span></label> </button>
-                      </mat-menu>
+                              <button mat-menu-item ><label><input (change)="columnClick(5,'website',$event)" type="checkbox"
+                                checked><span class="ml">Domain</span></label> </button>  </mat-menu>
                 </div>
 
                 <!-- END OF MAT-FORM-FIELD-WRAPPER PB-0 MT-0 MB-0 -->
@@ -90,7 +91,7 @@
             <div class="row mt-20">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <table mat-table [dataSource]="dataSource" class="table">
+                <table mat-table [dataSource]="dataSource" *ngIf="displayedColumn==0" class="table">
                   <!-- Name Column -->
                   <ng-container matColumnDef="full_name">
                     <th mat-header-cell *matHeaderCellDef> Full Name

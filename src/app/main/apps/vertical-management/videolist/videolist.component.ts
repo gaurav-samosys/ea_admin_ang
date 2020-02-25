@@ -119,7 +119,7 @@ export class VideolistComponent implements OnInit {
 
     this.video_service.Post(this.getVideoListbyTopic, {
        topic_id: id, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-      this.showloader = true
+      this.showloader = false
       this.common = res
 
   
@@ -163,6 +163,29 @@ export class VideolistComponent implements OnInit {
       this.dataSource = this.data;
 
     })
+  }
+/**
+   * show hide c olumn
+   * @param value 
+   */
+  displayedColumn:number=0
+  columnClick(value, colName: string, evt) {
+    // console.log('-0-----', evt.target.checked)
+    var colIndex = this.displayedColumns.findIndex(col => col === colName);
+    if (evt.target.checked == false) {
+      this.displayedColumns.splice(colIndex, 1);
+    } else {
+      // this.displayedColumns.push(colName);
+      this.displayedColumns.splice(value, 0, colName)
+
+    }
+    if(this.displayedColumns.length==0){
+      this. displayedColumn=1
+    }else{
+      this. displayedColumn=0
+
+    }
+    // console.log(colIndex,this.displayedColumns)
   }
 
   /*  setPage(page: number,id) {

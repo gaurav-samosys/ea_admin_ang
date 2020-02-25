@@ -123,10 +123,65 @@
 
                 <!-- CONTENT -->
                 <div class="content">
-                    <div class="p10 " style="    margin-top: 50px;">
+                        <!-- ['s_no', 'title', 'sort_desc', 'status', 'action', 'user_type', 'created'] -->
+                  
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right" style="margin-right: 20px;
+                        margin-top: 10px;">
+
+                                <!-- <span style="margin: 7px; margin-right: 15px;" > -->
+                                <!-- <button style="background-color: #039be5 ;color: white ;" mat-raised-button class="hover-button-loginpage export_data" matTooltip="Download Excel File" 
+                                (click)="exportData()">Export Data to
+                                  Excel</button>
+                            &nbsp;&nbsp;&nbsp; -->
+                                
+                                    <button mat-button style="background-color: #039be5 ;color: white;" 
+                                    [matMenuTriggerFor]="menu" matTooltip="Show Hide Column" 
+                                    class="hover-button-loginpage export_data" mat-raised-button type="button"
+                                 >
+                                     <span> Show / Hide Column</span>
+                                  </button>
+                                  <mat-menu #menu="matMenu">
+                                    <button mat-menu-item>
+                                      <label>
+                                      <input type="checkbox" (change)="columnClick(0,'s_no',$event)" 
+                                          checked><span class="ml ">S No</span>
+                                        </label>
+                                    </button>
+                                    <button mat-menu-item>
+                                      <label><input type="checkbox" (change)="columnClick(1,'title',$event)" 
+                                          checked>
+                                          <span class="ml">Title</span>
+                                        </label>
+                                    </button>
+                                    <button mat-menu-item><label>
+                                      <input type="checkbox" (change)="columnClick(2,'sort_desc',$event)"
+                                          checked><span class="ml">Sort_desc</span></label>
+                                    </button>
+                                    <button mat-menu-item><label>
+                                            <input type="checkbox" (change)="columnClick(3,'status',$event)"
+                                                checked><span class="ml">status</span></label>
+                                          </button>
+                                      <button mat-menu-item><label><input  type="checkbox" (change)="columnClick(4,'action',$event)"
+                                            checked><span class="ml">Action</span></label>
+                                      </button>
+                                      <button mat-menu-item><label>
+                                            <input type="checkbox" (change)="columnClick(5,'user_type',$event)"
+                                                checked><span class="ml"> user_type</span></label>
+                                          </button>
+                                    <button mat-menu-item><label>
+                                      <input type="checkbox" (change)="columnClick(6,'created',$event)"
+                                          checked><span class="ml">Created Date</span></label>
+                                    </button>
+                                   
+                                   
+                                  </mat-menu>
+                                <!-- </span> -->
+                                <!-- <button  mat-stroked-button color="primary" (click)="exportData()">Export Data to Excel</button> -->
+                              </div>
+                        <div class="p10 " style="margin-top: 10px;">
 
                         <div>
-                            <table mat-table [dataSource]="dataSource">
+                            <table mat-table *ngIf="displayedColumn==0" [dataSource]="dataSource">
                                 <ng-container matColumnDef="s_no">
                                     <th mat-header-cell *matHeaderCellDef>S No
                                         <span class="pointer">

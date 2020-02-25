@@ -109,20 +109,20 @@ export class QuizzeslistComponent implements OnInit {
   back(){
     this.location.back();
   }
-  /**
- * 
- * @param colName Show hide column
- * @param evt 
- */
-  columnClick(value,colName: string, evt) {
-    // console.log('-0-----', evt.target.checked)
-    var colIndex = this.displayedColumns.findIndex(col => col === colName);
-    if (evt.target.checked == false) {
-      this.displayedColumns.splice(colIndex, 1);
-    } else {
-      this.displayedColumns.splice(value,0,colName);
-    }
-  }
+//   /**
+//  * 
+//  * @param colName Show hide column
+//  * @param evt 
+//  */
+//   columnClick(value,colName: string, evt) {
+//     // console.log('-0-----', evt.target.checked)
+//     var colIndex = this.displayedColumns.findIndex(col => col === colName);
+//     if (evt.target.checked == false) {
+//       this.displayedColumns.splice(colIndex, 1);
+//     } else {
+//       this.displayedColumns.splice(value,0,colName);
+//     }
+//   }
 
   /**
       * =========================================
@@ -231,6 +231,30 @@ export class QuizzeslistComponent implements OnInit {
       this.dataSource = this.data
     })
   }
+    /**
+   * show hide c olumn
+   * @param value 
+   */
+  displayedColumn:number=0
+  columnClick(value, colName: string, evt) {
+    // console.log('-0-----', evt.target.checked)
+    var colIndex = this.displayedColumns.findIndex(col => col === colName);
+    if (evt.target.checked == false) {
+      this.displayedColumns.splice(colIndex, 1);
+    } else {
+      // this.displayedColumns.push(colName);
+      this.displayedColumns.splice(value, 0, colName)
+
+    }
+    if(this.displayedColumns.length==0){
+      this. displayedColumn=1
+    }else{
+      this. displayedColumn=0
+
+    }
+    // console.log(colIndex,this.displayedColumns)
+  }
+
   /*
     setPage(page: number,id) {
           // get pager object from service

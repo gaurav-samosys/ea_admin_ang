@@ -267,8 +267,9 @@
 						</table>
 						<!-- id="industryPaginate" -->
 						<mat-paginator  *ngIf="allItems > 0 " #paginator [length]="allItems" [pageIndex]="currentPage"
-							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-							(page)="handlePage($event)"></mat-paginator>
+							[pageSize]="pageSize" [pageSizeOptions]="allItems > 10?[10, 25, 50,100]:''" showFirstLastButtons
+							(page)="handlePage($event)">
+						</mat-paginator>
 						<div *ngIf="data == '' " style="text-align: center;
 						margin-top: 10px;margin-bottom: 10px;">No
 							data available in table</div>
@@ -471,7 +472,7 @@
 						</table>
 						<!-- id="companyPaginate" -->
 						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							[pageSize]="pageSize" [pageSizeOptions]="allItems > 10?[10, 25, 50,100]:''" showFirstLastButtons
 							(page)="handlePage1($event)"></mat-paginator>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
@@ -483,7 +484,7 @@
 						</mat-progress-spinner>
 					</div>
 
-					<!-- <mat-paginator   [pageSizeOptions]="[10, 25, 50,100]"  showFirstLastButtons></mat-paginator> -->
+					<!-- <mat-paginator   [pageSizeOptions]="allItems > 10?[10, 25, 50,100]:''"  showFirstLastButtons></mat-paginator> -->
 
 				</div>
 				<!-- END OF ROW -->
@@ -694,7 +695,7 @@
 						</mat-table>
 						<!-- id="clientPaginate" -->
 						<mat-paginator  *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							[pageSize]="pageSize" [pageSizeOptions]="allItems > 10?[10, 25, 50,100]:''" showFirstLastButtons
 							(page)="handlePage2($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
@@ -845,7 +846,7 @@
 
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<mat-table [dataSource]="dataSource">
+						<mat-table [dataSource]="dataSource"  id ="matTable" >
 							<!-- Name Column  [routerLink]="['/apps/client-mangement/client-detail', element.id]"-->
 							<ng-container matColumnDef="name">
 								<mat-header-cell *matHeaderCellDef style="padding-right:  10px;"> Name
@@ -889,12 +890,14 @@
 								<mat-header-cell *matHeaderCellDef> Video </mat-header-cell>
 								<mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
 							</ng-container>
+
 							<ng-container matColumnDef="cloud">
 								<mat-header-cell *matHeaderCellDef>
 									<mat-icon>cloud_download</mat-icon>
 								</mat-header-cell>
 								<mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
 							</ng-container>
+
 							<ng-container matColumnDef="certificate">
 								<mat-header-cell style="    padding-right:  10px;" *matHeaderCellDef>Certificate
 									<span class="pointer" style="margin-left: 11px !important;">
@@ -911,6 +914,7 @@
 								<mat-cell style="    padding-right:  10px;" *matCellDef="let element"> {{element[4]}}
 								</mat-cell>
 							</ng-container>
+
 							<ng-container matColumnDef="progress">
 								<mat-header-cell style="    padding-right:  10px;" *matHeaderCellDef>Progress
 									<span class="pointer" style="margin-left: 11px !important;">
@@ -927,6 +931,7 @@
 								<mat-cell style="    padding-right:  10px;" *matCellDef="let element"> {{element[5]}}
 								</mat-cell>
 							</ng-container>
+
 							<ng-container matColumnDef="percent">
 								<mat-header-cell *matHeaderCellDef> %
 									<span class="pointer" style="margin-left: 11px !important;">
@@ -942,6 +947,7 @@
 								</mat-header-cell>
 								<mat-cell *matCellDef="let element"> {{element[6]}} </mat-cell>
 							</ng-container>
+
 							<ng-container matColumnDef="status">
 								<mat-header-cell *matHeaderCellDef> Status
 									<span class="pointer" style="margin-left: 11px !important;">
@@ -957,6 +963,7 @@
 								</mat-header-cell>
 								<mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
 							</ng-container>
+
 							<ng-container matColumnDef="register">
 								<mat-header-cell style="    padding-right:  15px;" *matHeaderCellDef>Registered
 									<span class="pointer" style="margin-left: 11px !important;">
@@ -973,13 +980,17 @@
 								<mat-cell *matCellDef="let element" style="  padding-right:  10px;">{{element[8]}}
 								</mat-cell>
 							</ng-container>
+
 							<mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
 							<mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
 						</mat-table>
 						<!-- id="userPaginate" -->
-						<mat-paginator  *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
-							(page)="handlePage3($event)"></mat-paginator>
+						<!-- <div (click)="gotoTop()"> -->
+						<mat-paginator  #demo *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
+							[pageSize]="pageSize" [pageSizeOptions]="allItems > 10?[10, 25, 50,100]:''" showFirstLastButtons
+							(page)="handlePage3($event)">
+						</mat-paginator>
+						<!-- </div> -->
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
@@ -1116,7 +1127,7 @@
 						</table>
 						<!-- id="verticalPaginate" -->
 						<mat-paginator *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							[pageSize]="pageSize" [pageSizeOptions]="allItems > 10?[10, 25, 50,100]:''" showFirstLastButtons
 							(page)="handlePage4($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
@@ -1314,7 +1325,7 @@
 						</mat-table>
 						<!-- id="toolsPaginate" -->
 						<mat-paginator  *ngIf="allItems > 0" #paginator [length]="allItems" [pageIndex]="currentPage"
-							[pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]" showFirstLastButtons
+							[pageSize]="pageSize" [pageSizeOptions]="allItems > 10?[10, 25, 50,100]:''" showFirstLastButtons
 							(page)="handlePage4($event)"></mat-paginator>
 					</div>
 					<!-- END OF COL-LG-12 COL-MD-12 COL-SM-12 COL-XS-12 -->
@@ -1855,17 +1866,6 @@
 						</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -2049,7 +2049,7 @@
 
 
 
-
+<!-- <a (click)="aa()">fffffffffff</a> -->
 
 
 

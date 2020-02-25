@@ -109,7 +109,7 @@
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right ">
                 <button mat-button [matMenuTriggerFor]="menu" mat-raised-button type="button" 
                 style="background-color: #039be5  ;
-                    color: #ffffff ;margin-right: 25px;" class="hover-button-loginpage">
+                    color: #ffffff ;margin-right: 0px;" class="hover-button-loginpage">
                   <span> Show/Hide Column</span>
                 </button>
                 <mat-menu #menu="matMenu">
@@ -147,7 +147,7 @@
 
               <!-- *ngIf="Post_Title ? hide_column == 1:  *ngIf="index == 0"  hide_column == 0"  -->
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <mat-table [dataSource]="dataSource">
+                <mat-table [dataSource]="dataSource" *ngIf="displayedColumn==0">
                   <ng-container matColumnDef="post_title">
                     <mat-header-cell *matHeaderCellDef> Post_Title
                       <span class="pointer">

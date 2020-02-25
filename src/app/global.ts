@@ -27,7 +27,7 @@ export const getIndustriesWithData="http://192.168.0.45/enrichedacademy_live/api
 export const getCompaniesWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getCompaniesWithDataApi";
 export const getClientsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getClientsWithDataApi";
 export const getUsersWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getUsersWithDataApi";
-export const getVerticalsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getVerticalsAPi";
+// export const getVerticalsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getVerticalsAPi";
 
 export const getClients="http://192.168.0.45/enrichedacademy_live/api/admin/getClients";
 export const getAdminUsers="http://192.168.0.45/enrichedacademy_live/api/admin/getAdminUsers";
@@ -81,6 +81,7 @@ export const downloadAccessCodes="http://192.168.0.45/enrichedacademy_live/api/a
 export const subAccessCodeListShow="http://192.168.0.45/enrichedacademy_live/api/admin/subAccessCodeListShow";
 export const editCompany="http://192.168.0.45/enrichedacademy_live/api/admin/editCompany";
 export const accessCodeStatus="http://192.168.0.45/enrichedacademy_live/api/admin/accessCodeStatus";
+export const getVerticalsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getVerticalsWithData";
 export const getClientVertical="http://192.168.0.45/enrichedacademy_live/api/admin/getClientVertical";
 //export const getEaAllUsersList="http://192.168.0.21/enrichedacademy_live/api/admin/getEaAllUsersList";
 
@@ -164,7 +165,6 @@ export const delete_Users="http://192.168.0.45/enrichedacademy_live/api/admin/de
 // export const getCompaniesWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getCompaniesWithData";
 // export const getClientsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getClientsWithData";
 // export const getUsersWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getUsersWithData";
-// export const getVerticalsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getVerticalsWithData";
 
 
 
@@ -186,7 +186,6 @@ export const delete_Users="http://192.168.0.45/enrichedacademy_live/api/admin/de
 // export const getCompaniesWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getCompaniesWithDataApi";
 // export const getClientsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getClientsWithDataApi";
 // export const getUsersWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getUsersWithDataApi";
-// export const getVerticalsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getVerticalsAPi";
 
 
 
@@ -229,7 +228,6 @@ export const delete_Users="http://192.168.0.45/enrichedacademy_live/api/admin/de
 // // export const getCompaniesWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getCompaniesWithData";
 // // export const getClientsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getClientsWithData";
 // // export const getUsersWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getUsersWithData";
-// // export const getVerticalsWithData="http://192.168.0.45/enrichedacademy_live/api/admin/getVerticalsWithData";
 
 // export const getUserGraphData="http://192.168.0.45/enrichedacademy_live/api/admin/getUserGraphData";
 // export const getDownloadsGraphData="http://192.168.0.45/enrichedacademy_live/api/admin/getDownloadsGraphData";

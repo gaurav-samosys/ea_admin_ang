@@ -20,6 +20,7 @@ export class WebinarListComponent implements OnInit {
   value = '';
   get_webinars = myGlobals.get_webinars
   delete_webinar = myGlobals.delete_webinar
+  displayedColumn:number=0
 
   pageNumber: number = 0;
   size: number = 10;
@@ -157,13 +158,12 @@ export class WebinarListComponent implements OnInit {
       this.displayedColumns.splice(value, 0, colName)
 
     }
-    // if (colIndex > 0) {
-    //   // column is currently shown in the table, so we remove it
-    //   this.displayedColumns.splice(colIndex, 1);
-    // } else {
-    //   // column is not in the table, so we add it
-    //   this.displayedColumns.push(colName);
-    // }
+    if(this.displayedColumns.length==0){
+      this. displayedColumn=1
+    }else{
+      this. displayedColumn=0
+
+    }
   }
 
   confirmDialog(id) {

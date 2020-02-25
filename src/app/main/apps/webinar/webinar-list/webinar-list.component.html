@@ -121,7 +121,7 @@
               <!-- webinar_name', 'image', 'day ', 'date','webinar_time','end_time','action' -->
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <mat-table [dataSource]="dataSource">
+                  <mat-table [dataSource]="dataSource" *ngIf="displayedColumn==0">
                     <!-- Name Column -->
                     <ng-container matColumnDef="webinar_name">
                       <mat-header-cell *matHeaderCellDef> Webinar Name

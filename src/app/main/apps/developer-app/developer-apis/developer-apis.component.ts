@@ -98,6 +98,8 @@ export class DeveloperApisComponent implements OnInit {
    * @param colName 
    * @param evt 
    */
+   displayedColumn:number=0
+
   columnClick(value,colName: string, evt) {
     console.log('-0-----', evt.target.checked)
     const colIndex = this.displayedColumns.findIndex(col => col === colName);
@@ -108,13 +110,12 @@ export class DeveloperApisComponent implements OnInit {
       this.displayedColumns.splice(value,0,colName)
 
     }
-    // if (colIndex > 0) {
-    //   // column is currently shown in the table, so we remove it
-    //   this.displayedColumns.splice(colIndex, 1);
-    // } else {
-    //   // column is not in the table, so we add it
-    //   this.displayedColumns.push(colName);
-    // }
+    if(this.displayedColumns.length==0){
+      this. displayedColumn=1
+    }else{
+      this. displayedColumn=0
+
+    }
   }
 
   /**

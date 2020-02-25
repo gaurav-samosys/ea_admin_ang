@@ -676,255 +676,6 @@ export class Version3Component implements OnInit {
 
 
 
-  // hideIndustryList:number=0
-
-  onIndustryclick(event) {
-    // this.showloader = true;
-    this.industry_disable = 0;
-    this.table = 1;
-    this.company_id = [];
-    this.clients_id = [];
-    this.id_vertical = [];
-    this.clients_data = [];
-    this.location_data = [];
-    this.resetCompany();
-    this.industry_id.push(parseInt(event.id))
-
-    // if(this.industry_id.length>=10){
-    //  this.hideIndustryList=1
-    // }
-    // console.log("this.industry_id=============", this.industry_id)
-    /*    if(event.checked == true){
-        }
-        else{
-           for(var obj in this.industry_id){
-             if(this.industry_id[obj] == event.source.value ){
-                this.industry_id.splice(parseInt(obj),1)
-             }
-           }
-        }*/
-    this.selected = 'industries_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getIndustrywithData(this.search_data, this.industry_id);
-
-  }
-
-
-  onIndustrydelselect(event) {
-    // this.showloader = true;
-    this.table = 1;
-    // this.company_id = [];
-    for (var obj in this.industry_id) {
-      if (this.industry_id[obj] == event.id) {
-        this.industry_id.splice(parseInt(obj), 1)
-      }
-    }
-    this.selected = 'industries_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getIndustrywithData(this.search_data, this.industry_id);
-  }
-
-
-
-  onCompanyclick(event) {
-
-    this.clients_id = [];
-    this.resetClient();
-    this.table = 2
-    this.company_disable = 0;
-    this.industry_disable = 1;
-
-    this.company_id.push(parseInt(event.id))
-
-    // console.log("company_id=============", this.company_id)
-    /*          if(event.checked == true && this.industry_id.length == 0){
-
-    }
-    else if(event.checked == false && this.industry_id.length == 0){
-       for(var obj in this.company_id){
-         if(this.company_id[obj] == event.source.value ){
-            this.company_id.splice(parseInt(obj),1)
-         }
-       }
-    
-    }
-    else if(event.checked == true && this.industry_id.length != 0)
-    {
-       this.company_id.push(parseInt(event.source.value))
-    }*/
-
-    this.selected = 'companies_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getCompanywithData(this.date_range, this.search_data, this.industry_id, this.company_id);
-  }
-
-  onCompanydeselect(event) {
-    this.clients_id = [];
-
-    this.table = 2
-    for (var obj in this.company_id) {
-      if (this.company_id[obj] == event.id) {
-        this.company_id.splice(parseInt(obj), 1)
-      }
-    }
-    if (this.company_id.length == 0) {
-      this.industry_disable = 0;
-    }
-    this.selected = 'companies_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getCompanywithData(this.date_range, this.search_data, this.industry_id, this.company_id);
-  }
-
-  onClientclick(event) {
-    this.id_vertical = [];
-
-    this.clients_data = [];
-    this.location_data = [];
-    this.resetVertical();
-    this.table = 3;
-    this.industry_disable = 1;
-    this.company_disable = 1;
-    this.client_id.push(parseInt(event.id))
-    console.log('this.client_id===============', this.client_id)
-    // alert("select api");
-
-    /*    if(event.checked == true){
-    
-        }
-        else{
-           for(var obj in this.client_id){
-             if(this.client_id[obj] == event.source.value ){
-                this.client_id.splice(parseInt(obj),1)
-             }
-           }
-        
-        }*/
-    this.selected = 'clients_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id);
-
-  }
-
-  onClientdeselect(event) {
-    this.id_vertical = [];
-
-    this.table = 3;
-    for (var obj in this.client_id) {
-      if (this.client_id[obj] == event.id) {
-        this.client_id.splice(parseInt(obj), 1)
-      }
-    }
-    // alert("deselect api");
-
-    console.log("client_id deselect========",this.client_id)
-    if (this.client_id.length == 0) {
-      this.industry_disable = 0;
-      this.company_disable = 0;
-    }
-    this.selected = 'clients_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id);
-  }
-
-  onVerticalclick(event) {
-    // console.log(event)
-    // this.showloader=true
-    // this.client_id = []
-    // this.clients_data = [];
-    this.table = 4;
-    this.location_data = [];
-    this.resetLocation();
-
-    this.industry_disable = 1;
-    this.company_disable = 1;
-    this.id_vertical.push(parseInt(event.id))
-    // console.log("id_vertical=============##########", this.id_vertical)
-
-   /* if(event.checked == true){
-    }
-    else{
-       for(var obj in this.id_vertical){
-         if(this.id_vertical[obj] == event.source.value ){
-            this.id_vertical.splice(parseInt(obj),1)
-         }
-       }
-    
-    }
-      */ this.selected = 'verticals_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical)
-
-    // this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
-  }
-
-  onVerticaldeselect(event) {
-    console.log(event.name, event.id)
-    this.table = 4;
-    this.location_data = [];
-
-
-    for (var obj in this.id_vertical) {
-      if (this.id_vertical[obj] == event.id) {
-        this.id_vertical.splice(parseInt(obj), 1)
-      }
-    }
-
-    // var index = this.id_vertical.indexOf(event.id);
-    // if (index !== -1) this.id_vertical.splice(index, 1);
-    // console.log('this.id_vertical', this.id_vertical)
-    if (this.id_vertical.length == 0) {
-      this.industry_disable = 0;
-      this.company_disable = 0;
-    }
-    this.selected = 'verticals_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
-    this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical)
-
-    // this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
-  }
-
-  onLocationclick(event) {
-    this.industry_disable = 1;
-    this.company_disable = 1;
-    // this.clients_data = [];
-
-    this.table = 4;
-    this.location_data.push(parseInt(event.id))
-    // console.log("this.location_data=============================", this.location_data)
-    /*  if(event.checked == true){
-  
-  
-      }
-      else{
-         for(var obj in this.location_data){
-           if(this.location_data[obj] == event.source.value ){
-              this.location_data.splice(parseInt(obj),1)
-           }
-         }
-      
-      }*/
-    this.selected = 'location_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.clients_id, this.id_vertical, this.location_data);
-    this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
-  }
-
-  onLocationdeselect(event) {
-    this.table = 4;
-    this.clients_data = [];
-
-    for (var obj in this.location_data) {
-      if (this.location_data[obj] == event.id) {
-        this.location_data.splice(parseInt(obj), 1)
-      }
-    }
-    if (this.id_vertical.length == 0) {
-      this.industry_disable = 0;
-      this.company_disable = 0;
-    }
-    this.selected = 'location_selected';
-    this.getAllUser(this.industry_id, this.company_id, this.clients_id, this.id_vertical, this.location_data);
-    this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
-  }
 
   resetLocation() {
     this.locationselectedItems = [];
@@ -945,17 +696,7 @@ export class Version3Component implements OnInit {
     this.industryselectedItems = [];
   }
 
-  openSnackBar(message: string, action: string) {
-    // if (this.search_status_value == '' ) {
-    //   this._snackBar.open('Nothing to clear.', 'Warning', {
-    //     duration: 2000,
-    //   });
-    // } else {
-    //   this._snackBar.open(message, action, {
-    //     duration: 2000,
-    //   });
-    // }
-  }
+
   refreshFilter() {
     this.resetLocation();
     this.resetVertical();
@@ -1116,35 +857,18 @@ export class Version3Component implements OnInit {
           this.industry = this.industryData.data;
           this.industry_total = this.industryData.total;
 
-          // console.log("=========industry data",this.industryData,
-          // "=========industry ",  this.industry,
-          // "=========industry total",this.industry_total)
-
-
           this.companyData = this.common.data.companies;
           this.company = this.companyData.data;
           this.company_total = this.companyData.total;
-
-          // console.log("=========companyData",this.companyData,
-          // "=========company ",  this.company,
-          // "=========company_total",this.company_total)
-
 
           this.clientData = this.common.data.clients;
           this.client = this.clientData.data;
           this.client_total = this.clientData.total;
 
-          // console.log("=========clientData",this.clientData,
-          // "=========client ",  this.client,
-          // "=========client_total",this.client_total)
-
           this.verticalData = this.common.data.verticals;
           this.vertical = this.verticalData.data;
           this.vertical_total = this.verticalData.total
 
-          // console.log("=========verticalData",this.clientData,
-          // "=========vertical ",  this.vertical,
-          // "=========vertical_total",this.vertical_total)
 
           this.locationData = this.common.data.location;
           this.location = this.locationData.data;
@@ -1355,14 +1079,250 @@ export class Version3Component implements OnInit {
         this.verticalsdropdownList = this.vertical
         this.locationdropdownList = this.location
 
-        // console.log("this.industrydropdownList",this.industrydropdownList,
-        //             "this.companydropdownList",this.companydropdownList,
-        //             "this.clientsdropdownList",this.clientsdropdownList,
-        //             "this.verticalsdropdownList",this.verticalsdropdownList,
-        //             "this.locationdropdownList",this.locationdropdownList)
       })
   }
 
+  // hideIndustryList:number=0
+
+  onIndustryclick(event) {
+    // this.showloader = true;
+    this.industry_disable = 0;
+    this.table = 1;
+    this.company_id = [];
+    this.clients_id = [];
+    this.id_vertical = [];
+    this.clients_data = [];
+    this.location_data = [];
+    this.resetCompany();
+    this.industry_id.push(parseInt(event.id))
+
+    // if(this.industry_id.length>=10){
+    //  this.hideIndustryList=1
+    // }
+    // console.log("this.industry_id=============", this.industry_id)
+    /*    if(event.checked == true){
+        }
+        else{
+           for(var obj in this.industry_id){
+             if(this.industry_id[obj] == event.source.value ){
+                this.industry_id.splice(parseInt(obj),1)
+             }
+           }
+        }*/
+    this.selected = 'industries_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
+    this.getIndustrywithData(this.search_data, this.industry_id);
+
+  }
+
+
+  onIndustrydelselect(event) {
+    // this.showloader = true;
+    this.table = 1;
+    // this.company_id = [];
+    for (var obj in this.industry_id) {
+      if (this.industry_id[obj] == event.id) {
+        this.industry_id.splice(parseInt(obj), 1)
+      }
+    }
+    this.selected = 'industries_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
+    this.getIndustrywithData(this.search_data, this.industry_id);
+  }
+
+
+
+  onCompanyclick(event) {
+
+    this.clients_id = [];
+    this.resetClient();
+    this.table = 2
+    this.company_disable = 0;
+    this.industry_disable = 1;
+
+    this.company_id.push(parseInt(event.id))
+
+    // console.log("company_id=============", this.company_id)
+    /*          if(event.checked == true && this.industry_id.length == 0){
+
+    }
+    else if(event.checked == false && this.industry_id.length == 0){
+       for(var obj in this.company_id){
+         if(this.company_id[obj] == event.source.value ){
+            this.company_id.splice(parseInt(obj),1)
+         }
+       }
+    
+    }
+    else if(event.checked == true && this.industry_id.length != 0)
+    {
+       this.company_id.push(parseInt(event.source.value))
+    }*/
+
+    this.selected = 'companies_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
+    this.getCompanywithData(this.date_range, this.search_data, this.industry_id, this.company_id);
+  }
+
+  onCompanydeselect(event) {
+    this.clients_id = [];
+
+    this.table = 2
+    for (var obj in this.company_id) {
+      if (this.company_id[obj] == event.id) {
+        this.company_id.splice(parseInt(obj), 1)
+      }
+    }
+    if (this.company_id.length == 0) {
+      this.industry_disable = 0;
+    }
+    this.selected = 'companies_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
+    this.getCompanywithData(this.date_range, this.search_data, this.industry_id, this.company_id);
+  }
+
+  onClientclick(event) {
+    this.id_vertical = [];
+    this.clients_data = [];
+    // this.location_data = [];
+    this.resetVertical();
+    this.table = 3;
+    this.industry_disable = 1;
+    this.company_disable = 1;
+    this.client_id.push(parseInt(event.id))
+    // console.log('this.client_id===============', this.client_id)
+
+    /*    if(event.checked == true){
+    
+        }
+        else{
+           for(var obj in this.client_id){
+             if(this.client_id[obj] == event.source.value ){
+                this.client_id.splice(parseInt(obj),1)
+             }
+           }
+        
+        }*/
+    this.selected = 'clients_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
+    this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id);
+
+  }
+
+  onClientdeselect(event) {
+    this.id_vertical = [];
+
+    this.table = 3;
+    for (var obj in this.client_id) {
+      if (this.client_id[obj] == event.id) {
+        this.client_id.splice(parseInt(obj), 1)
+      }
+    }
+
+    // console.log("client_id deselect========",this.client_id)
+    if (this.client_id.length == 0) {
+      this.industry_disable = 0;
+      this.company_disable = 0;
+    }
+    this.selected = 'clients_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
+    this.getClientwithData(this.date_range, this.search_data, this.company_id, this.client_id);
+  }
+
+  onVerticalclick(event) {
+    
+    this.table = 4;
+    this.location_data = [];
+    this.resetLocation();
+
+    this.industry_disable = 1;
+    this.company_disable = 1;
+    this.id_vertical.push(parseInt(event.id))
+    console.log("id_vertical select=============##########", this.id_vertical)
+
+   /* if(event.checked == true){
+    }
+    else{
+       for(var obj in this.id_vertical){
+         if(this.id_vertical[obj] == event.source.value ){
+            this.id_vertical.splice(parseInt(obj),1)
+         }
+       }
+    
+    }
+      */ this.selected = 'verticals_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
+    this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical)
+
+    // this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
+  }
+
+  onVerticaldeselect(event) {
+    this.table = 4;
+    this.location_data = [];
+console.log( this.id_vertical)
+
+    for (var obj in this.id_vertical) {
+      if (this.id_vertical[obj] == event.id) {
+        this.id_vertical.splice(parseInt(obj), 1)
+        console.log("id_vertical deselect=============##########", this.id_vertical)
+      }
+    }
+
+
+    if (this.id_vertical.length == 0) {
+      this.industry_disable = 0;
+      this.company_disable = 0;
+    }
+    this.selected = 'verticals_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.client_id, this.id_vertical, this.location_data);
+    this.getVerticalwithData(this.date_range, this.search_data, this.client_id, this.id_vertical)
+
+    // this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
+  }
+
+  onLocationclick(event) {
+    this.industry_disable = 1;
+    this.company_disable = 1;
+    // this.clients_data = [];
+
+    this.table = 4;
+    this.location_data.push(parseInt(event.id))
+    // console.log("this.location_data=============================", this.location_data)
+    /*  if(event.checked == true){
+  
+  
+      }
+      else{
+         for(var obj in this.location_data){
+           if(this.location_data[obj] == event.source.value ){
+              this.location_data.splice(parseInt(obj),1)
+           }
+         }
+      
+      }*/
+    this.selected = 'location_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.clients_id, this.id_vertical, this.location_data);
+    this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
+  }
+
+  onLocationdeselect(event) {
+    this.table = 4;
+    this.clients_data = [];
+
+    for (var obj in this.location_data) {
+      if (this.location_data[obj] == event.id) {
+        this.location_data.splice(parseInt(obj), 1)
+      }
+    }
+    if (this.id_vertical.length == 0) {
+      this.industry_disable = 0;
+      this.company_disable = 0;
+    }
+    this.selected = 'location_selected';
+    this.getAllUser(this.industry_id, this.company_id, this.clients_id, this.id_vertical, this.location_data);
+    this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
+  }
 
   // ===========================================================
   // 
@@ -1381,9 +1341,7 @@ export class Version3Component implements OnInit {
       this.common = res
       this.data = this.common.data
       
-      // this.desserts = this.data;
-      // console.log(this.desserts)
-      // this.sortedData = this.desserts.slice();
+
       
       this.allItems = this.common.recordsTotal;
       // if(this.allItems = 10){
@@ -1480,9 +1438,7 @@ export class Version3Component implements OnInit {
 
 
   // ===========================================================
-  // 
-  // COmpany
-  // 
+                              // COmpany
   // ==========================================================
 
 
@@ -1510,7 +1466,7 @@ export class Version3Component implements OnInit {
       this.data = this.common.data
     
       this.allItems = this.common.recordsTotal;
-      console.log('company', this.allItems)
+      // console.log('company', this.allItems)
 
       // if(this.allItems < 10){
       //   document.getElementById('companyPaginate').classList.add('none')
@@ -1582,54 +1538,34 @@ export class Version3Component implements OnInit {
   }
 
 
+
   // ===========================================================
-  // 
-  // CLIENT START
-  // 
+                        // CLIENT START
   // ==========================================================
 
 
   // industry_id;
   getClientwithData(date_range, search_data, client_id, company_ids) {
     // console.log(client_id, company_ids)
+    // console.log(client_id, company_ids, this.client)
+
     var a = []
     this.showloader = true
 
     // if (client_id == '' && company_ids != '') {
-    //   for (var i = 0; i < this.client_id.length; i++) {
-    //     client_id.push(this.client_id[i].id)
-    //     // console.log(client_id)
+    //   for (var i = 0; i < this.client.length; i++) {
+    //     client_id.push(this.client[i].id)
     //   }
     // }
 
-    //     $id
-    // $companies_id
-    // $verticalsIds
-    // $location
-    // industries_ids: industry_id.toString(),
-    // this.v3Service.POST(this.getClientsWithData, { 
-    //   companies_id: company_ids.toString(), 
-    // id: client_id.toString(), verticals_ids: client_id.toString(),
-    //    start: this.pageNumber, length: this.pageSize,
-    //  token: 'LIVESITE', dateRange: date_range, search: search_data, 
-    // location: this.location_data.toString() }).subscribe(res => {
-    //   this.showloader = false
-    //   this.common = res;
-    //   this.date_range = '';
-    //   this.data = this.common.data
-    //   this.dataSource = this.data;
+    
     this.v3Service.POST(this.getClientsWithData, {
-      // id: company_ids.toString(),
-      // companies_id: client_id.toString(),
-      
-      // id: client_id.toString(),
+      id: company_ids.toString(),
       // companies_id: company_ids.toString(),
       // industries_ids: this.industry_id.toString(),
-      // verticalsIds: this.id_vertical.toString(),
-      companies_id: company_ids.toString(), 
-      id: client_id.toString(), verticals_ids: client_id.toString(),
+      verticalsIds: this.id_vertical.toString(),
+      location: this.location_data.toString(),
       start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data,
-      location: this.location_data.toString()
     }).subscribe(res => {
       // alert("main api");
       this.showloader = false
@@ -1808,7 +1744,7 @@ export class Version3Component implements OnInit {
 
 
   public handlePage3(e: any) {
-    // console.log(e)
+    console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.endindex = (this.currentPage + 1) * e.pageSize
@@ -1829,6 +1765,7 @@ export class Version3Component implements OnInit {
 
     }
   }
+
   vid
   private iterator3() {
     let part;
@@ -1852,6 +1789,10 @@ export class Version3Component implements OnInit {
     this.v3Service.POST(this.getUsersWithData,
       { clients_ids: this.clients_data.toString(), verticals: this.vid.toString(), location: this.location_data.toString(), start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: this.date_range, search: this.search_data, search_type: this.searchtype, status: this.status, certificates: this.certificates, course: this.course }).subscribe(res => {
         this.common = res
+        // alert('dev')
+        // const matTable= document.getElementById('matTable');
+        // console.log('mat-----------------',matTable)
+        // matTable.scrollTop = 0;
         this.allItems = this.common.recordsTotal;
         this.user_total = this.allItems;
 
@@ -1859,12 +1800,15 @@ export class Version3Component implements OnInit {
         this.data = this.common.data;
         this.dataSource = this.data;
         this.clients_data = []
+        
       })
       // this.getUserwithData(this.date_range, this.search_data, this.id_vertical, this.location_data, this.searchtype);
 
   }
 
-
+aa(){
+  window.scroll(0,0)
+}
 
   updateSortingOrderUser(sort_column, sort_order) {
     this.showloader = true;
@@ -1889,12 +1833,12 @@ export class Version3Component implements OnInit {
 // ===========================================================
   //      STARt OF VERTICAL
   // ==========================================================
-  getVerticalwithData(date_range, search_data, client_ids, id_vertical) {
-    // console.log("vertical data==================", client_ids, id_vertical)
-    this.client_id = []
+  getVerticalwithData(date_range, search_data, client_id, id_vertical) {
+    // client_ids
+    console.log("vertical data==================", client_id, id_vertical)
     this.showloader = true
     this.v3Service.POST(this.getVerticalsWithData, {
-      clients_ids: client_ids.toString(),
+      clients_ids: client_id.toString(),
       id: id_vertical.toString(),
       start: this.pageNumber, length: this.pageSize, token: 'LIVESITE', dateRange: date_range, search: search_data
     }).subscribe(res => {
@@ -1905,7 +1849,7 @@ export class Version3Component implements OnInit {
 
 
       this.allItems = this.common.recordsTotal;
-      console.log('vertical', this.allItems)
+      console.log('vertical total records', this.allItems)
 
       // if(this.allItems < 10){
       //   document.getElementById('verticalPaginate').classList.add('none')
@@ -2679,17 +2623,15 @@ export class Version3Component implements OnInit {
 
 
   openDialog(): void {
-    // console.log(id)
-    const dialogRef = this.dialog.open(UserDetailComponent, {
-      width: '99%',
-      height: '99%',
-      // data: id,
-    });
+  //   const dialogRef = this.dialog.open(UserDetailComponent, {
+  //     width: '99%',
+  //     height: '99%',
+  //     // data: id,
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed', result);
-      // this.animal = result;
-    });
+  //   dialogRef.afterClosed().subscribe(result => {
+    
+  //   });
   }
 
 }
@@ -2926,4 +2868,16 @@ export class Version3Component implements OnInit {
             // ranges: any = {
               // //  this.today= new Date(new Date().toDateString());
 
+              // }
+
+              // openSnackBar(message: string, action: string) {
+                // if (this.search_status_value == '' ) {
+                //   this._snackBar.open('Nothing to clear.', 'Warning', {
+                //     duration: 2000,
+                //   });
+                // } else {
+                //   this._snackBar.open(message, action, {
+                //     duration: 2000,
+                //   });
+                // }
               // }

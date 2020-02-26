@@ -1971,26 +1971,37 @@ aa(){
 
   getDownloadGraph(date_range, client_id, vertical_id, location_data) {
     this.showloader = true
-    this.v3Service.POST(this.getDownloadsGraphData, { clients_ids: client_id.toString(), verticals_ids: vertical_id.toString(), location: location_data.toString(), token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
+    this.v3Service.POST(this.getDownloadsGraphData, { clients_ids: client_id.toString(),
+       verticals_ids: vertical_id.toString(),
+        location: location_data.toString(), 
+        token: 'LIVESITE', dateRange: date_range }).subscribe(res => {
       this.common = res;
+      console.log( this.common,"========================================")
       this.showloader = false
 
-      this.vertical_id = [];
-      this.clients_id = [];
-      this.graph.downloads.xAxis.categories = this.common.labelName;
-      this.totaldownloadgraph = this.common.totalDownloads;
-      //this.graph.downloads.title.text= this.graph.downloads.title.text + " " +  this.common.totalDownloads;
-      this.graph.downloads.plotOptions.series.label = this.common.labelName;
-      this.graph.downloads.series[0].data = this.common.certData;
-      this.graph.downloads.series[1].data = this.common.workData;
-      this.graph.downloads.series[2].data = this.common.spredData;
+      // if(this.common){
+      //   setTimeout(function(){
+      //     this.showloader = false
 
-      this.certificate = this.common.total_cert;
-      this.workbook = this.common.total_work;
-      this.tool = this.common.total_spred;
-      Highcharts.chart('download', this.graph.downloads);
-
-    })
+      //   },13000);
+    
+      // }
+        this.vertical_id = [];
+        this.clients_id = [];
+        this.graph.downloads.xAxis.categories = this.common.labelName;
+        this.totaldownloadgraph = this.common.totalDownloads;
+        //this.graph.downloads.title.text= this.graph.downloads.title.text + " " +  this.common.totalDownloads;
+        this.graph.downloads.plotOptions.series.label = this.common.labelName;
+        this.graph.downloads.series[0].data = this.common.certData;
+        this.graph.downloads.series[1].data = this.common.workData;
+        this.graph.downloads.series[2].data = this.common.spredData;
+        
+        this.certificate = this.common.total_cert;
+        this.workbook = this.common.total_work;
+        this.tool = this.common.total_spred;
+        Highcharts.chart('download', this.graph.downloads);
+        
+      })
   }
 
 

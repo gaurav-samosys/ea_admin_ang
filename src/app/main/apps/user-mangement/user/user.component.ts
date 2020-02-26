@@ -58,8 +58,8 @@ export class UserComponent implements OnInit {
   getCountry = myGlobals.getCountry;
   getStates = myGlobals.getState;
   changeUserStatus = myGlobals.changeUserStatus;
-  delete_Users=myGlobals.delete_Users;
-  deleteUserRecord=myGlobals.deleteUserRecord
+  delete_Users = myGlobals.delete_Users;
+  deleteUserRecord = myGlobals.deleteUserRecord
   // https://staging.enrichedacademy.com/customers/
 
   rows: any;
@@ -98,7 +98,7 @@ export class UserComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumn:number=0
+  displayedColumn: number = 0
   constructor(
     private toastr: ToastrService,
 
@@ -161,10 +161,10 @@ export class UserComponent implements OnInit {
       this.displayedColumns.splice(value, 0, colName)
 
     }
-    if(this.displayedColumns.length==0){
-      this. displayedColumn=1
-    }else{
-      this. displayedColumn=0
+    if (this.displayedColumns.length == 0) {
+      this.displayedColumn = 1
+    } else {
+      this.displayedColumn = 0
 
     }
     // console.log(colIndex,this.displayedColumns)
@@ -200,18 +200,31 @@ export class UserComponent implements OnInit {
     //   }
     //   this.FetchUser();
     // })
-    // const message = `Are you sure you want to delete this user detail?`;
-    // let id = value
-    // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+    const message = `Are you sure you want to delete this user detail?`;
+    let id = value
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
 
-    // const dialogRef = this.dialog.open(UserConfirmboxComponent, {
-    //   maxWidth: "400px",
-    //   data: dialogData
-    // });
+    const dialogRef = this.dialog.open(UserConfirmboxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
 
-    // dialogRef.afterClosed().subscribe(dialogResult => {
-    //   this.result = dialogResult;
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      // this.result = dialogResult;
+      if (result == true) {
+        this.user.POST(this.deleteUserRecord, { id: value, token: 'LIVESITE' }).subscribe(res => {
+          this.common = res
+          if (this.common['success'] == true) {
+            this.toastr.success("User Deleted Successfully")
+          } else {
+            this.toastr.warning("There Are some issue")
+          }
+          this.FetchUser();
+        })
+      } else {
+
+      }
+    });
   }
   /**
     * =========================================
@@ -241,12 +254,12 @@ export class UserComponent implements OnInit {
       this.showloader = false
 
 
-  this.data = this.response.data
-  this.dataSource = this.data;
+      this.data = this.response.data
+      this.dataSource = this.data;
 
-  this.allItems = this.response.total_data;
-  this.dataSource = new MatTableDataSource(this.data);
-  this.dataSource.paginator = this.paginator;
+      this.allItems = this.response.total_data;
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
 
       //this.setPage(1);
     })
@@ -293,7 +306,8 @@ export class UserComponent implements OnInit {
     this.showloader = true
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.user.POST(this.getUsers, { full_name: this.fullname,
+    this.user.POST(this.getUsers, {
+      full_name: this.fullname,
       email: this.email,
       client_name: this.clientname,
       company_name: this.companyname,
@@ -301,7 +315,8 @@ export class UserComponent implements OnInit {
       city: this.city, status: this.status,
       access_code: this.access_code,
       start_date: this.sdate,
-      end_date: this.edate,column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      end_date: this.edate, column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
+    }).subscribe(res => {
       this.showloader = false
       this.response = res
       this.dataSource = this.response.data
@@ -535,8 +550,10 @@ export class UserComponent implements OnInit {
       email: this.email,
       client_name: this.clientname,
       company_name: this.companyname,
-      country: this.country1, state: this.state,
-      city: this.city, status: this.status,
+      country: this.country1, 
+      state: this.state,
+      city: this.city,
+      status: this.status,
       access_code: this.access_code,
       start_date: this.sdate,
       end_date: this.edate,
@@ -545,8 +562,8 @@ export class UserComponent implements OnInit {
     })
       .subscribe(res => {
         this.response = res
- 
-  
+
+
 
         this.allItems = this.response.total_data;
         this.rows = this.response.data
@@ -599,7 +616,7 @@ export class UserComponent implements OnInit {
   exportData() {
     this.user.exportAsExcelFile(this.data, 'sample');
 
-    // this.user.Post(this.exportManageCompanies, {
+    //   this.user.Post(this.exportManageCompanies, {
     //   company_name: this.company ? this.company : '',
     //   full_name: this.fullname ? this.fullname : '',
     //   user_email: this.email ? this.email : '',

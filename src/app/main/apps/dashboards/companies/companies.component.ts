@@ -26,13 +26,13 @@ export interface PeriodicElement {
   first_name: string;
   last_name: string;
   email: string;
-  company_name:string;
-  countries_name:string;
-  state_name:string;
-  city:string;
-  industries_name:string;
-  totalClients:number;
-  status:string;
+  company_name: string;
+  countries_name: string;
+  state_name: string;
+  city: string;
+  industries_name: string;
+  totalClients: number;
+  status: string;
 }
 
 @Component({
@@ -86,7 +86,7 @@ export class CompaniesComponent implements OnInit {
   getStates = myGlobals.getState;
   getIndustry = myGlobals.getIndustry;
   companyActive = myGlobals.companyActive;
-  deleteCompany =myGlobals.deleteCompany
+  deleteCompany = myGlobals.deleteCompany
   public pageSize = 10;
   public currentPage = 0;
   public totalSize = 0;
@@ -102,7 +102,7 @@ export class CompaniesComponent implements OnInit {
   // "Active"totalClients: 0
 
 
-  displayedColumns: string[] = ['company_name', 'countries_name', 'state_name','city', 'industries_name', 'totalClients', 'status', 'action'];
+  displayedColumns: string[] = ['company_name', 'countries_name', 'state_name', 'city', 'industries_name', 'totalClients', 'status', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -129,7 +129,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.dataSource.paginator = this.paginator;
     this.fetchCountry();
     this.getIndustries();
@@ -162,14 +162,14 @@ export class CompaniesComponent implements OnInit {
       // console.log('=res=======>', res);
       this.response = res
       this.showloader = false;
-  
+
       this.allItems = this.response.total_data;
       this.data = this.response.data;
       this.dataSource = this.data;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
-  
-    
+
+
       //this.setPage(1);
     });
   }
@@ -211,15 +211,15 @@ export class CompaniesComponent implements OnInit {
   ===========================================================*/
 
   updateSortingOrderCompany(sort_column, sort_order) {
-    this.showloader=true
+    this.showloader = true
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.companyService.Post(this.getCompanies, { company_name: this.company, full_name: this.fullname, email: this.email, city: this.city, start_date: this.sdate, end_date: this.edate, industry: this.industry1, status: this.status1, country: this.country1, state: this.state1,column:this.sort_column,dir:this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
-    this.showloader=false
-     
+    this.companyService.Post(this.getCompanies, { company_name: this.company, full_name: this.fullname, email: this.email, city: this.city, start_date: this.sdate, end_date: this.edate, industry: this.industry1, status: this.status1, country: this.country1, state: this.state1, column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      this.showloader = false
+
       this.response = res
       // console.log(this.response.data)
-      this.dataSource=this.response.data
+      this.dataSource = this.response.data
     })
   }
 
@@ -240,37 +240,39 @@ export class CompaniesComponent implements OnInit {
   confirmDialog(value): void {
     // console.log(value)
     let id = value
-    // this.companyService.Post(this.deleteCompany, {id:id, token: 'LIVESITE' }).subscribe(res => {
-    //   if(res['success']==true){
-    //     this.toastr.success("Company deleted successfully")
-    //   }else[
-    //     this.toastr.warning("There are some issue")
-    //   ]
-    //   this.getCompany();
-    // })
-    // const message = `Are you sure you want to delete this company detail?`;
-    // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
-    // const dialogRef = this.dialog.open(ConfirmBoxComponent, {
-    //   maxWidth: "400px",
-    //   data: dialogData
-    // });
 
-    // dialogRef.afterClosed().subscribe(dialogResult => {
-    //   this.result = dialogResult;
-    //   console.log(this.result)
-    //   if(this.result){
-     
-    //   }
-    // });
+    const message = `Are you sure you want to delete this company detail?`;
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      console.log(this.result)
+      if (this.result == true) {
+        this.companyService.Post(this.deleteCompany, { id: id, token: 'LIVESITE' }).subscribe(res => {
+          if (res['success'] == true) {
+            this.toastr.success("Company deleted successfully")
+          } else[
+            this.toastr.warning("There are some issue")
+          ]
+          this.getCompany();
+        })
+      } else {
+
+      }
+    });
   }
-     // Swal.fire({
-        //   title: 'Success!',
-        //   text: ' File successfully deleted!',
-        //   icon: 'success',
-        //   // showCancelButton: true,
-        //   confirmButtonText: 'Ok',
-        //   // cancelButtonText: 'No, keep it'
-        // })
+  // Swal.fire({
+  //   title: 'Success!',
+  //   text: ' File successfully deleted!',
+  //   icon: 'success',
+  //   // showCancelButton: true,
+  //   confirmButtonText: 'Ok',
+  //   // cancelButtonText: 'No, keep it'
+  // })
   /**===========================================================
           edit dialog
     ===========================================================*/
@@ -467,11 +469,11 @@ export class CompaniesComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.showloader=true
+    this.showloader = true
 
     this.companyService.Post(this.getCompanies, { company_name: this.company, full_name: this.fullname, email: this.email, city: this.city, start_date: this.sdate, end_date: this.edate, industry: this.industry1, status: this.status1, country: this.country1, state: this.state1, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
       .subscribe(res => {
-        this.showloader=false
+        this.showloader = false
 
         this.response = res
         this.allItems = this.response.total_data;
@@ -578,20 +580,20 @@ export class CompaniesComponent implements OnInit {
   // status: "Active"
   // totalClients: 0
 
-    /*     setPage(page: number) {
-          this.showloader=true;
-          this.pager = this.pagerService.getPager(this.allItems, page,this.size);
-             this.start=this.pager.startIndex + 1;
-          this.end=this.pager.endIndex + 1;
-                    this.pageNumber=this.pager.startIndex;
-     this.companyService.Post(this.getCompanies,{ offset:this.pageNumber,limit : this.size ,token:'LIVESITE'})
-              .subscribe(res => {
-                this.showloader=false;
-                  this.response=res
-                 this.rows=this.response.data
-                 this.data=this.rows.slice(0, this.size);
-                 console.log(this.data)
-               this.dataSource.data=this.data
-              });
-            }
-  */
+/*     setPage(page: number) {
+      this.showloader=true;
+      this.pager = this.pagerService.getPager(this.allItems, page,this.size);
+         this.start=this.pager.startIndex + 1;
+      this.end=this.pager.endIndex + 1;
+                this.pageNumber=this.pager.startIndex;
+ this.companyService.Post(this.getCompanies,{ offset:this.pageNumber,limit : this.size ,token:'LIVESITE'})
+          .subscribe(res => {
+            this.showloader=false;
+              this.response=res
+             this.rows=this.response.data
+             this.data=this.rows.slice(0, this.size);
+             console.log(this.data)
+           this.dataSource.data=this.data
+          });
+        }
+*/

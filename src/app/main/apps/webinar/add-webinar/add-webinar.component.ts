@@ -5,12 +5,15 @@ import { AddWebinarService } from './add-webinar.service';
 import { ToastrService } from 'ngx-toastr';
 declare var moment: any
 import * as myGlobals from '../../../../global';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-webinar',
   templateUrl: './add-webinar.component.html',
   styleUrls: ['./add-webinar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DatePipe]
+
 })
 export class AddWebinarComponent implements OnInit {
   AddWebinarForm: FormGroup
@@ -30,6 +33,7 @@ export class AddWebinarComponent implements OnInit {
   public dateTime2: Date;
   response;
   constructor(public router: Router, private fb: FormBuilder,
+    private datePipe: DatePipe,
     public rout: ActivatedRoute,
     private interview_service: AddWebinarService, public toastr: ToastrService) {
     this.AddWebinarForm = this.fb.group({
@@ -104,7 +108,10 @@ export class AddWebinarComponent implements OnInit {
 
     // console.log(this.AddWebinarForm.value, item);
     this.interview_service.Post(this.add_webinar, {
-      name: item.name, webinar_date: item.webinar_date, start_time: item.start_time, end_time: item.end_time,
+      name: item.name, 
+      webinar_date: item.webinar_date,
+       webinar_time: item.start_time, 
+       end_time: item.end_time,
       // img_url: item.image,
       img_url: this.url,
       token: 'LIVESITE'
@@ -163,20 +170,25 @@ export class AddWebinarComponent implements OnInit {
    * @param prodId 
    */
   update() {
-    // console.log()
+    // console.log() 
     let item = {
       name: this.AddWebinarForm.controls['name'].value,
       // webinar_date: moment(this.AddWebinarForm.controls['webinar_date'].value).local().format('YYYY-MM-DD HH:mm:ss'),
       webinar_date: this.AddWebinarForm.controls['webinar_date'].value,
-      start_time: this.AddWebinarForm.controls['start_time'].value,
+      webinar_time: this.AddWebinarForm.controls['start_time'].value,
       end_time: this.AddWebinarForm.controls['end_time'].value,
       img_url: this.AddWebinarForm.controls['image_upload'].value,
       webinar_link:this.AddWebinarForm.controls['webinar_link'].value
     }
 
     this.interview_service.Post(this.add_webinar, {
-      name: item.name, webinar_date: item.webinar_date, start_time: item.start_time, end_time: item.end_time,
-      img_url: this.url, webinar_id: this.prodId,
+      name: item.name, 
+      webinar_date: item.webinar_date,
+      webinar_time: item.webinar_time,
+      
+       end_time: item.end_time,
+      img_url: this.url,
+       webinar_id: this.prodId,
       token: 'LIVESITE'
     }).subscribe(res => {
       // console.log(res)
@@ -188,25 +200,27 @@ export class AddWebinarComponent implements OnInit {
       }
     });
   }
+  startDate: Date;
+
   MyDate(newDate, name) {
-    //   let date;
-    //   if (name == 'start') {
+      let date;
+      if (name == 'start') {
 
-    //     this.startDate = newDate;
-    //     date = this.startDate
-    //   }
-    //   else if (name == 'end') {
+        this.startDate = newDate;
+        date = this.startDate
+      }
+      // else if (name == 'end') {
 
-    //     this.endDate = newDate;
-    //     date = this.endDate
-    //   }
-    //   if (date != null) {
+      //   this.endDate = newDate;
+      //   date = this.endDate
+      // }
+      if (date != null) {
 
-    //     this.Search(this.datePipe.transform(date, "yyyy-MM-dd"), name);
-    //   }
-    //   else {
-    //     this.Search(date = '', name)
-    //   }
+        // this.Search(this.datePipe.transform(date, "yyyy-MM-dd"), name);
+      }
+      else {
+        // this.Search(date = '', name)
+      }
   }
 
 

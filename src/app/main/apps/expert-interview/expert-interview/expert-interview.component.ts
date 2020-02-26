@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatPaginator, MatDialog } from '@angular/material';
 import { ExpertInterviewService } from '../expert-interview.service';
 import * as myGlobals from '../../../../global';
 import { EmbedVideoService } from 'ngx-embed-video';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ConfirmDialogModel, ConfirmBoxComponent } from '../confirm-box/confirm-box.component';
 @Component({
   selector: 'app-expert-interview',
   templateUrl: './expert-interview.component.html',
@@ -28,7 +29,7 @@ export class ExpertInterviewComponent implements OnInit {
   showloader = false
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
-  displayedColumns: string[] = ['title', 'video','users_count', 'create_date', 'action'];
+  displayedColumns: string[] = ['title', 'video', 'users_count', 'create_date', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -37,14 +38,14 @@ export class ExpertInterviewComponent implements OnInit {
   allItems: any;
   expert_interview = myGlobals.expert_interview
   delete_expert_interview_video = myGlobals.delete_expert_interview_video
-  expertInterview:FormGroup
-  constructor(public toastr: ToastrService,
+  expertInterview: FormGroup
+  constructor(public toastr: ToastrService, public dialog: MatDialog,
     private embedService: EmbedVideoService,
-    public expert_service: ExpertInterviewService,private fb:FormBuilder,
+    public expert_service: ExpertInterviewService, private fb: FormBuilder,
     public router: Router) {
-      this.expertInterview=this.fb.group({
-  title:['']
-      })
+    this.expertInterview = this.fb.group({
+      title: ['']
+    })
   }
 
   ngOnInit() {
@@ -72,7 +73,7 @@ export class ExpertInterviewComponent implements OnInit {
     this.showloader = true
     this.expert_service.Post(this.expert_interview, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showloader = false
-    
+
       this.response = res
       var video = res['data']
       for (let index = 0; index < video.length; index++) {
@@ -94,7 +95,6 @@ export class ExpertInterviewComponent implements OnInit {
    * @param e pagination
    */
   public handlePage(e: any) {
-    // console.log(e)
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.startIndex = (this.currentPage * e.pageSize) + 1;
@@ -103,7 +103,6 @@ export class ExpertInterviewComponent implements OnInit {
       if (this.value != this.value) {
         this.currentPage = 0;
       }
-      // console.log(this.value, this.name)
       this.Search(this.value, this.name)
     }
     else {
@@ -127,11 +126,10 @@ export class ExpertInterviewComponent implements OnInit {
 
     })
   }
-  
+
   titleName: string;
   name
   Search(value, name) {
-    //  console.log(value,name)
     if (this.value != value) {
       this.currentPage = 0;
     }
@@ -153,25 +151,25 @@ export class ExpertInterviewComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
 
-    this.showloader=true
+    this.showloader = true
 
     this.expert_service.Post(this.expert_interview, {
-      title: this.titleName, 
-  
+      title: this.titleName,
+
       offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
     })
       .subscribe(res => {
-    this.showloader=false
-    // console.log(res)
+        this.showloader = false
+        // console.log(res)
         this.response = res
         this.allItems = this.response['recordsTotal'];
         this.rows = this.response['data']
         this.data = this.rows.slice(0, this.size);
         this.dataSource = this.data
       });
-      if (value.length == 0) {
-        this.getExpertInterView()
-      }
+    if (value.length == 0) {
+      this.getExpertInterView()
+    }
   }
   /**
    * sorting order
@@ -185,7 +183,7 @@ export class ExpertInterviewComponent implements OnInit {
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.expert_service.Post(this.expert_interview, {title: this.titleName, column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.expert_service.Post(this.expert_interview, { title: this.titleName, column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.showloader = false
 
       this.response = res
@@ -197,7 +195,7 @@ export class ExpertInterviewComponent implements OnInit {
     * @param colName 
     * @param evt 
     */
-   displayedColumn:number=0
+  displayedColumn: number = 0
 
   columnClick(value, colName: string, evt) {
     // console.log('-0-----', evt.target.checked)
@@ -209,10 +207,10 @@ export class ExpertInterviewComponent implements OnInit {
       this.displayedColumns.splice(value, 0, colName)
 
     }
-    if(this.displayedColumns.length==0){
-      this. displayedColumn=1
-    }else{
-      this. displayedColumn=0
+    if (this.displayedColumns.length == 0) {
+      this.displayedColumn = 1
+    } else {
+      this.displayedColumn = 0
 
     }
   }
@@ -222,16 +220,36 @@ export class ExpertInterviewComponent implements OnInit {
    * @param id confirm dialog box
    */
   confirmDialog(id) {
-    this.expert_service.Post(this.delete_expert_interview_video, { id: id, token: 'LIVESITE' }).subscribe(res => {
-      // console.log(res)
-      this.getExpertInterView()
-      if (res['status'] == '1') {
-        this.toastr.success('Expert Record Delete Successfully')
-        // this.router.navigate(['/apps/expert_interview'])
+
+    var id = id
+
+    const message = `Are you sure you want to delete this Expert Interview?`;
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+
+    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if (result == true) {
+        this.expert_service.Post(this.delete_expert_interview_video, { id: id, token: 'LIVESITE' }).subscribe(res => {
+          this.response = res
+          console.log(this.response)
+          if (this.response['status'] == 1) {
+            this.toastr.success('Expert Record Delete Successfully')
+
+          } else {
+            this.toastr.warning('There Are some Issue')
+
+          }
+          this.getExpertInterView()
+        });
       } else {
-        this.toastr.warning('There Are some Issue')
+
       }
-    })
+    });
   }
 
 
@@ -240,9 +258,7 @@ export class ExpertInterviewComponent implements OnInit {
    * @param element edit expert interview 
    */
   EditExpertInterview(element) {
-    // console.log(element)
     var id = element.id
-    // console.log(id)
     this.router.navigate(['/apps/add_expert_interview', id]);
 
   }
@@ -256,3 +272,14 @@ export class ExpertInterviewComponent implements OnInit {
     //   // column is not in the table, so we add it
     //   this.displayedColumns.push(colName);
     // }
+
+        // this.expert_service.Post(this.delete_expert_interview_video, { id: id, token: 'LIVESITE' }).subscribe(res => {
+    //   // console.log(res)
+    //   this.getExpertInterView()
+    //   if (res['status'] == '1') {
+    //     this.toastr.success('Expert Record Delete Successfully')
+    //     // this.router.navigate(['/apps/expert_interview'])
+    //   } else {
+    //     this.toastr.warning('There Are some Issue')
+    //   }
+    // })

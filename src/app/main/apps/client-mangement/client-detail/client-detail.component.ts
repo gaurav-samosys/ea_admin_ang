@@ -12,6 +12,8 @@ import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddUserClientComponent } from '../add-user-client/add-user-client.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { ConfirmBoxComponent, ConfirmDialogModel } from '../clients/confirm-box/confirm-box.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-client-detail',
@@ -99,7 +101,7 @@ export class ClientDetailComponent implements OnInit {
   constructor(private _Activatedroute: ActivatedRoute, 
     private datePipe: DatePipe,
      private http: HttpClient, 
-     public dialog: MatDialog,
+     public dialog: MatDialog,  private toastr: ToastrService,
       public client_service: ClientDetailService) {
 
   }
@@ -128,7 +130,7 @@ export class ClientDetailComponent implements OnInit {
       this.showloader=false
 
       this.client_data = this.common.data;
-      console.log(this.client_data)
+      // console.log(this.client_data)
       //this.setPage(1);
 
       // ======================================08/02 only apply
@@ -190,7 +192,7 @@ columnClick(value, colName: string, evt) {
 
       this.data = this.common.data;
       this.allItems = this.common.total_data;
-      console.log(this.data,"get data from client============")
+      // console.log(this.data,"get data from client============")
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
 
@@ -297,7 +299,35 @@ columnClick(value, colName: string, evt) {
   }
 
   confirmDialog(id){
- console.log(id)
+    var id = id
+
+    const message = `You will not be able to recover this user!`;
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+
+    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if (result == true) {
+        // this.client_service.Post(this.deleteBlogApi, { id: id, token: 'LIVESITE' }).subscribe(res => {
+        //   this.response = res
+        
+        //   if (this.response['status_code'] == 200) {
+        //     this.toastr.success('user Deleted Successfully')
+
+        //   } else {
+        //     this.toastr.warning('There Are some Issue')
+
+        //   }
+        //   this.getUserData()
+        // });
+      } else {
+
+      }
+    });
   }
 
   onChange(value, id) {

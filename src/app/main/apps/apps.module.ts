@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { AuthService } from './auth.service';
 import { LoginGuard } from '../../login.guard';
-// import { NewAddUserComponent } from './new-add-user/new-add-user.component';
 
 const routes = [
     // {

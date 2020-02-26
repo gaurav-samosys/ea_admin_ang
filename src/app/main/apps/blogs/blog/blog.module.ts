@@ -27,6 +27,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ConfirmBoxComponent } from '../confirm-box/confirm-box.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  declarations: [BlogComponent],
+
+declarations: [BlogComponent,ConfirmBoxComponent],
   imports: [
     CommonModule,RouterModule.forChild(routes),
     MatFormFieldModule,MatSnackBarModule,MatIconModule,MatDatepickerModule,MatInputModule,
@@ -74,6 +76,6 @@ const routes: Routes = [
         MatTabsModule,
         MatTooltipModule,
         MatTreeModule,
-  ]
+  ],entryComponents:[ConfirmBoxComponent]
 })
 export class BlogModule { }

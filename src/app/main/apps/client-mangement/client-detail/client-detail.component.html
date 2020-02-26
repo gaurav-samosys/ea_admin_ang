@@ -51,8 +51,8 @@
                 </span>
          
            </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 28px;;
-          margin-right: 40px;
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" style="margin-top: 20px;
+        margin-right: 29px;
       ">
           <button mat-raised-button (click)="addUser()" *ngIf="division == 1">
             <mat-icon>add_circle_outline</mat-icon>Add User
@@ -84,7 +84,7 @@
 
 
 
-    <div class="mat__box mt-20 mr-28" *ngIf="division == 1">
+    <div class="mat__box mt-0 mr-28" *ngIf="division == 1">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <!-- <div class="h2 mb-8">Company Search</div> -->
@@ -340,11 +340,11 @@
 
     <mat-divider></mat-divider>
 
-    <div class="mat__box mt-20 mr-28">
+    <div class="mat__box mt-10 mr-28">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12">
+          <!-- <div class="row"> -->
+            <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-12"> -->
               <!--   <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Show Entries</mat-label>
                      <mat-select matNativeControl  (change)="changelimit($event.target.value)">
@@ -355,11 +355,12 @@
                       </mat-select>
                   </mat-form-field> -->
 
-            </div>
+            <!-- </div> -->
             <!-- END OF COL-LG-4 COL-MD-4 COL-SM-12 COL-XS-12 -->
             <!-- ['first_name', 'email', 'client_name', 'created_on', 'status', 'action'] -->
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mb-12 text-right">
-              <span style="margin: 7px;"> <button mat-raised-button (click)="exportData()" mat-tooltip="Export data" style=" background-color: #039be5 ;color: white;">Export Data to Excel</button>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-right" style="margin-top: 10px;
+            margin-bottom: 10px;">
+               <button mat-raised-button (click)="exportData()" mat-tooltip="Export data" style=" background-color: #039be5 ;color: white;">Export Data to Excel</button>
                 &nbsp;&nbsp;&nbsp;<button mat-button style="background-color: #039be5 ;color: white;" 
               [matMenuTriggerFor]="menu" matTooltip="Show Hide Column" 
               class="hover-button-loginpage export_data" mat-raised-button type="button"
@@ -396,9 +397,8 @@
                     checked><span class="ml">Action</span></label>
               </button>
             </mat-menu>
-          </span>
             </div>
-          </div>
+          <!-- </div> -->
           <!-- END OF ROW -->
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

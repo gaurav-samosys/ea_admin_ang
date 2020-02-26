@@ -14,6 +14,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { DatePipe } from '@angular/common';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmBoxComponent, ConfirmDialogModel } from '../companies/confirm-box/confirm-box.component';
 
 
 @Component({
@@ -149,19 +150,47 @@ export class CompanyDetailComponent implements OnInit {
     });
   }
   confirmDialog(id) {
-    console.log(id)
+    var id = id
+
+    const message = `You will not be able to recover this client!`;
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+
+    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(result)
+      if (result == true) {
+        //       this.companyService.Post(this.deleteBlogApi, { id: id, token: 'LIVESITE' }).subscribe(res => {
+        // this.response = res
+
+        // if (this.response['status_code'] == 200) {
+        //   this.toastr.success(' Deleted Successfully')
+
+        // } else {
+        //   this.toastr.warning('There Are some Issue')
+
+        // }
+        // this.getData()
+        // });
+      } else {
+
+      }
+    });
   }
   /**
      * Edit client
      */
   // [routerLink]="['/apps/client-mangement/client-edit', element.id,element.company_id]" 
   editClient(id) {
-    console.log(id)
+    // console.log(id)
   }
   /**
    * show hide column
    */
-  displayedColumn:number=0
+  displayedColumn: number = 0
 
   columnClick(value, colName: string, evt) {
     // console.log('-0-----', evt.target.checked)
@@ -173,10 +202,10 @@ export class CompanyDetailComponent implements OnInit {
       this.displayedColumns.splice(value, 0, colName)
 
     }
-    if(this.displayedColumns.length==0){
-      this. displayedColumn=1
-    }else{
-      this. displayedColumn=0
+    if (this.displayedColumns.length == 0) {
+      this.displayedColumn = 1
+    } else {
+      this.displayedColumn = 0
 
     }
     // console.log(colIndex,this.displayedColumns)
@@ -190,12 +219,12 @@ export class CompanyDetailComponent implements OnInit {
     this.companyService.Post(this.getClients,
       { company_id: this.id, fields: '*', token: 'LIVESITE' }).subscribe(res => {
         this.common = res
-        console.log(this.common)
+        // console.log(this.common)
         this.showloader = false
 
         this.allItems = this.common.total_data;
         this.data = this.common.data;
-        console.log(this.data, "table=============data")
+        // console.log(this.data, "table=============data")
         this.client_name = this.data[0].client_name;
         this.company_name = this.data[0].company_name;
         //  console.log(this.company_name)

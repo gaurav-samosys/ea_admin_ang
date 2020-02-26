@@ -87,15 +87,11 @@ const routes: Routes = [
         MatSelectModule,
         MatTableModule,
         MatTabsModule,
-
         NgxChartsModule,
-
         FuseSharedModule,
         FuseSidebarModule,
         FuseWidgetModule,
-
-
-           MatAutocompleteModule,
+        MatAutocompleteModule,
         MatBadgeModule,
         MatBottomSheetModule,
         MatButtonModule,

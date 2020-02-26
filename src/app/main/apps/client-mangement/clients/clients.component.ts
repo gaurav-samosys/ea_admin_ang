@@ -85,7 +85,7 @@ export class ClientsComponent implements OnInit {
   deleteClient = myGlobals.deleteClient
 
   displayedColumns: string[] = ['client_name', 'company_name',
-   'client_vertical', 'portal_name', 'created_on', 'totalUsers', 'status', 'action'];
+    'client_vertical', 'portal_name', 'created_on', 'totalUsers', 'status', 'action'];
   dataSource = new MatTableDataSource<any>(this.data);
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -100,7 +100,10 @@ export class ClientsComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
 
-    private _snackBar: MatSnackBar, private datePipe: DatePipe, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public client_service: ClientsService) {
+    private _snackBar: MatSnackBar,
+    private datePipe: DatePipe,
+    private http: HttpClient,
+    public dialog: MatDialog, private pagerService: PagerService, public client_service: ClientsService) {
     if (localStorage.getItem('clientadded_status') == 'true') {
       this.openclientaddedSnackBar();
       localStorage.removeItem('clientadded_status');
@@ -147,19 +150,19 @@ export class ClientsComponent implements OnInit {
       // console.log(this.response)
       this.data = this.response.data;
 
-    
+
       this.client_Name = this.data[0]['client_name'].replace(/ /g, "_");
       // console.log( this.id,this.client_Name);
-    
 
 
 
-for(let i=0; i< this.data.length ; i++){
-  this.client_Name=this.data[i]['client_name']
-  this.id=this.data[i]['id']
 
-  // console.log(this.client_Name,this.id)
-}
+      for (let i = 0; i < this.data.length; i++) {
+        this.client_Name = this.data[i]['client_name']
+        this.id = this.data[i]['id']
+
+        // console.log(this.client_Name,this.id)
+      }
 
 
 
@@ -219,10 +222,12 @@ for(let i=0; i< this.data.length ; i++){
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.client_service.Post(this.getClients, {  company_name: this.companyname, client_name: this.clientname,
-      first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal, 
+    this.client_service.Post(this.getClients, {
+      company_name: this.companyname, client_name: this.clientname,
+      first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal,
       city: this.city,
-       column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+      column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
+    }).subscribe(res => {
       this.showloader = false;
 
       this.response = res
@@ -250,18 +255,32 @@ for(let i=0; i< this.data.length ; i++){
     //   }
     //   this.FetchClient();
     // })
-    // const message = `Are you sure you want to delete this client detail?`;
-    // let id = value
-    // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+    const message = `Are you sure you want to delete this client detail?`;
+    let id = value
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
 
-    // const dialogRef = this.dialog.open(ConfirmBoxComponent, {
-    //   maxWidth: "400px",
-    //   data: dialogData
-    // });
+    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
 
-    // dialogRef.afterClosed().subscribe(dialogResult => {
-    //   this.result = dialogResult;
-    // });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if (this.result == true) {
+        this.client_service.Post(this.deleteClient, { id: value, token: 'LIVESITE' }).subscribe(res => {
+          this.common = res
+          if (this.common['success'] == true) {
+            this.toastr.success("delete client successfully")
+          } else {
+            this.toastr.warning("there are some issue")
+
+          }
+          this.FetchClient();
+        })
+      } else {
+
+      }
+    });
   }
 
   openclientaddedSnackBar() {
@@ -485,10 +504,11 @@ for(let i=0; i< this.data.length ; i++){
     this.pageNumber = start
     this.showloader = true
 
-    this.client_service.Post(this.getClients, { 
+    this.client_service.Post(this.getClients, {
       company_name: this.companyname, client_name: this.clientname,
-       first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal, 
-       city: this.city, start_date: this.sdate, end_date: this.edate, status: this.status, country: this.country1, state: this.state, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' })
+      first_name: this.first_name, email: this.email, client_vertical: this.vertical1, portal_name: this.portal,
+      city: this.city, start_date: this.sdate, end_date: this.edate, status: this.status, country: this.country1, state: this.state, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
+    })
       .subscribe(res => {
         this.showloader = false
 

@@ -14,6 +14,7 @@ import { BlogService } from './blog.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ConfirmDialogModel, ConfirmBoxComponent } from '../confirm-box/confirm-box.component';
 
 export interface blog {
   post_title: string;
@@ -49,7 +50,7 @@ export class BlogComponent implements OnInit {
 
   public show: boolean = true;
   public buttonName: any = 'keyboard_arrow_down';
-  column:number
+  column: number
   name: any;
   titleName: string;
   categaryName: string;
@@ -68,7 +69,7 @@ export class BlogComponent implements OnInit {
   startDate: string;
   endDate: string;
   myDate;
-  showloader=false
+  showloader = false
   blogForm: FormGroup
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -92,49 +93,48 @@ export class BlogComponent implements OnInit {
     this.getBlogList()
   }
 
-// showHideColumn:boolean;
-//   columnClick1(evt){
-//     console.log(evt)
-//     if (evt.target.checked == false) {
-//       this.showHideColumn=false
-//     }else{
-//       this.showHideColumn= true
+  // showHideColumn:boolean;
+  //   columnClick1(evt){
+  //     console.log(evt)
+  //     if (evt.target.checked == false) {
+  //       this.showHideColumn=false
+  //     }else{
+  //       this.showHideColumn= true
 
 
-//     }
-//   }
+  //     }
+  //   }
   /**
    * 
    * @param colName Show hide column
    * @param evt 
    */
-  displayedColumn:number=0
+  displayedColumn: number = 0
 
-  columnClick(value,colName: string, evt,index) {
-    console.log('dev------',event)
-    console.log('------colName', colName, evt, evt.target.checked,"index===",index)
+  columnClick(value, colName: string, evt, index) {
+    console.log('dev------', event)
+    console.log('------colName', colName, evt, evt.target.checked, "index===", index)
     var colIndex = this.displayedColumns.findIndex(col => col === colName);
     console.log(colIndex)
- 
+
     if (evt.target.checked == false) {
       this.displayedColumns.splice(colIndex, 1);
-    } else
-    {
-      this.displayedColumns.splice(value,0,colName)
+    } else {
+      this.displayedColumns.splice(value, 0, colName)
     }
-    if(this.displayedColumns.length==0){
-      this. displayedColumn=1
-    }else{
-      this. displayedColumn=0
+    if (this.displayedColumns.length == 0) {
+      this.displayedColumn = 1
+    } else {
+      this.displayedColumn = 0
 
     }
-  
+
   }
 
   // if (evt.target.checked == false) {
-    // this.displayedColumns.splice(colIndex, 1);
+  // this.displayedColumns.splice(colIndex, 1);
   // } else {
-    // this.displayedColumns.push(colName);
+  // this.displayedColumns.push(colName);
   // }
 
   // if (colIndex > 0) {
@@ -145,38 +145,38 @@ export class BlogComponent implements OnInit {
   //   this.displayedColumns.push(colName);
   // }
 
-   //false 1 true -1
+  //false 1 true -1
 
-    // if(index == 'index0'){
-    //       this.index =1
-    // }else if(index == 'index1'){
-    //   this.index =1
+  // if(index == 'index0'){
+  //       this.index =1
+  // }else if(index == 'index1'){
+  //   this.index =1
 
-    // }else if(index == 'index2'){
+  // }else if(index == 'index2'){
 
-    // }else if(index == 'index3'){
+  // }else if(index == 'index3'){
 
-    // }else if(index == 'index4'){
+  // }else if(index == 'index4'){
 
-    // }
+  // }
   /**
    * get blog list
    */
 
   getBlogList() {
-    this.showloader=true
+    this.showloader = true
     this.blog_service.Post(this.getBlogWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      this.showloader=false
-    
-        this.data = this.response['data']
-        this.dataSource = this.data
-        this.dataSource = new MatTableDataSource(this.data);
-        this.allItems = this.response['recordsTotal'];
-        this.dataSource.paginator = this.paginator;
+      this.showloader = false
+
+      this.data = this.response['data']
+      this.dataSource = this.data
+      this.dataSource = new MatTableDataSource(this.data);
+      this.allItems = this.response['recordsTotal'];
+      this.dataSource.paginator = this.paginator;
 
 
-      
+
       // draw: 1
       // recordsFiltered: 21
       // recordsTotal: 21
@@ -209,10 +209,10 @@ export class BlogComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-     this.showloader=true;
+    this.showloader = true;
     this.blog_service.Post(this.getBlogWithDataApi, { offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      this.showloader=false;
+      this.showloader = false;
       this.data = this.response['data'];
       this.dataSource = this.data;
 
@@ -254,14 +254,16 @@ export class BlogComponent implements OnInit {
     */
 
   updateSortingOrderBlog(sort_column, sort_order) {
-    this.showloader=true
+    this.showloader = true
 
     this.sort_column = sort_column
     this.ASC = sort_order
-    this.blog_service.Post(this.getBlogWithDataApi, { post_title: this.titleName, category: this.categaryName,
-      start_date: this.startDate, end_date: this.endDate, column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE' }).subscribe(res => {
+    this.blog_service.Post(this.getBlogWithDataApi, {
+      post_title: this.titleName, category: this.categaryName,
+      start_date: this.startDate, end_date: this.endDate, column: this.sort_column, dir: this.ASC, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
+    }).subscribe(res => {
       this.response = res
-      this.showloader=false
+      this.showloader = false
 
       this.dataSource = this.response['data']
     });
@@ -318,7 +320,7 @@ export class BlogComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
 
-    this.showloader=true
+    this.showloader = true
 
     this.blog_service.Post(this.getBlogWithDataApi, {
       post_title: this.titleName, category: this.categaryName,
@@ -326,8 +328,8 @@ export class BlogComponent implements OnInit {
       offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
     })
       .subscribe(res => {
-    this.showloader=false
-    // console.log(res)
+        this.showloader = false
+        // console.log(res)
         this.response = res
         this.allItems = this.response['recordsTotal'];
         this.rows = this.response['data']
@@ -363,25 +365,55 @@ export class BlogComponent implements OnInit {
    * @param id confirm dialog box and open delete dialog 
    */
   confirmDialogDelete(id) {
-    this.blog_service.Post(this.deleteBlogApi, { id: id, token: 'LIVESITE' }).subscribe(res => {
-      this.response = res
-      console.log(this.response)
-      if (this.response['success'] == true && this.response['status_code'] == 200) {
-        Swal.fire({
-          title: 'Success',
-          text: 'Record delete successfully',
-          icon: 'success'
-        })
-      } else {
-        Swal.fire({
-          title: 'Warning',
-          text: 'There Are some issue',
-          icon: 'warning',
-        })
-      }
-      this.getBlogList();
+    // this.blog_service.Post(this.deleteBlogApi, { id: id, token: 'LIVESITE' }).subscribe(res => {
+    //   this.response = res
+    //   console.log(this.response)
+    //   if (this.response['success'] == true && this.response['status_code'] == 200) {
+    //     Swal.fire({
+    //       title: 'Success',
+    //       text: 'Record delete successfully',
+    //       icon: 'success'
+    //     })
+    //   } else {
+    //     Swal.fire({
+    //       title: 'Warning',
+    //       text: 'There Are some issue',
+    //       icon: 'warning',
+    //     })
+    //   }
+    //   this.getBlogList();
 
-    })
+    // })
+    var id = id
+
+    const message = `Are you sure you want to delete this webinar?`;
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+
+    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if (result == true) {
+        this.blog_service.Post(this.deleteBlogApi, { id: id, token: 'LIVESITE' }).subscribe(res => {
+          this.response = res
+          //       status_code: 200
+          // success: true
+          if (this.response['status_code'] == 200) {
+            this.toastr.success('Blog Deleted Successfully')
+
+          } else {
+            this.toastr.warning('There Are some Issue')
+
+          }
+          this.getBlogList()
+        });
+      } else {
+
+      }
+    });
   }
 
 

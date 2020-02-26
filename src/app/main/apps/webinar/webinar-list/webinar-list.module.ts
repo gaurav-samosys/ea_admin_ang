@@ -9,6 +9,8 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmBoxComponentComponent } from '../confirm-box-component/confirm-box-component.component';
 const routes: Routes = [
   {
       path     : '**',
@@ -22,11 +24,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [WebinarListComponent],
+  declarations: [WebinarListComponent,ConfirmBoxComponentComponent],
   imports: [
+    MatDialogModule,
     CommonModule, RouterModule.forChild(routes),
     MatIconModule,MatButtonModule,MatProgressSpinnerModule, MatCardModule,MatFormFieldModule,MatInputModule,FormsModule,
     MatTableModule,UiSwitchModule,MatPaginatorModule,MatSlideToggleModule,MatMenuModule,ReactiveFormsModule
-  ]
+  ],entryComponents:[ConfirmBoxComponentComponent]
 })
 export class WebinarListModule { }

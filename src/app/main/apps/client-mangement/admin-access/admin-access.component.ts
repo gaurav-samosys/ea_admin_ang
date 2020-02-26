@@ -65,7 +65,7 @@ export class AdminAccessComponent implements OnInit {
   getCountry = myGlobals.getCountry;
   getStates = myGlobals.getState;
   getAdminUsers = myGlobals.getAdminUsers;
-  deleteAdminAccess =myGlobals.deleteAdminAccess;
+  deleteAdminAccess = myGlobals.deleteAdminAccess;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   displayedColumns: string[] = ['id', 'email', 'first_name', 'last_name', 'client_name', 'company_name', 'action'];
@@ -241,29 +241,34 @@ export class AdminAccessComponent implements OnInit {
     * =========================================
     */
   confirmDialog(value): void {
-    
-    // this.admin_service.Post(this.deleteAdminAccess, { id: value, token: 'LIVESITE' }).subscribe(res => {
-    //   this.common = res
-    //  if(this.common['success']==true){
-    //        this.toastr.success("Admin user deleted successfully")
-    //  }else{
-    //   this.toastr.success("There are some Issue")
-    //  }
-    //  this.fetchAdminaccess();
 
-    // })
-    // const message = `Are you sure you want to delete this user detail?`;
-    // let id = value
-    // const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
 
-    // const dialogRef = this.dialog.open(ConfirmBoxComponent, {
-    //   maxWidth: "400px",
-    //   data: dialogData
-    // });
+    const message = `Are you sure you want to delete this user detail?`;
+    let id = value
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
 
-    // dialogRef.afterClosed().subscribe(dialogResult => {
-    //   this.result = dialogResult;
-    // });
+    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if (this.result == true) {
+        this.admin_service.Post(this.deleteAdminAccess, { id: value, token: 'LIVESITE' }).subscribe(res => {
+          this.common = res
+          if (this.common['success'] == true) {
+            this.toastr.success("Admin user deleted successfully")
+          } else {
+            this.toastr.success("There are some Issue")
+          }
+          this.fetchAdminaccess();
+
+        })
+      } else {
+
+      }
+    });
   }
   /**
     * =========================================
@@ -405,7 +410,7 @@ export class AdminAccessComponent implements OnInit {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
     this.pageNumber = start
-    this.showloader=true
+    this.showloader = true
 
     this.admin_service.Post(this.getAdminUsers, {
       company_name: this.companyname,
@@ -417,7 +422,7 @@ export class AdminAccessComponent implements OnInit {
       start_date: this.sdate, end_date: this.edate, offset: this.pageNumber, limit: this.pageSize, token: 'LIVESITE'
     })
       .subscribe(res => {
-        this.showloader=false
+        this.showloader = false
 
         this.common = res
         this.allItems = this.common.total_data;

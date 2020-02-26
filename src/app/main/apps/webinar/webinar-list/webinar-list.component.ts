@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatPaginator, MatDialog } from '@angular/material';
 import { WebinarListService } from './webinar-list.service';
 import * as myGlobals from '../../../../global';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ConfirmBoxComponentComponent, ConfirmDialogModel} from '../confirm-box-component/confirm-box-component.component';
+// import { ConfirmBoxComponent, ConfirmDialogModel } from './confirm-box/confirm-box.component';
 
 @Component({
   selector: 'app-webinar-list',
@@ -37,7 +39,8 @@ export class WebinarListComponent implements OnInit {
   allItems: any;
   showloader = false
   webinarListForm: FormGroup
-  constructor(public toastr: ToastrService, public webinar_service: WebinarListService, private fb: FormBuilder) {
+  constructor(public toastr: ToastrService,
+    public dialog: MatDialog, public webinar_service: WebinarListService, private fb: FormBuilder) {
     this.webinarListForm = this.fb.group({
       webinar_name: ''
     })
@@ -167,11 +170,21 @@ export class WebinarListComponent implements OnInit {
   }
 
   confirmDialog(id) {
-    var id = id
-    // console.log(id)
-    this.webinar_service.Post(this.delete_webinar, { webinar_id: id, token: 'LIVESITE' }).subscribe(res => {
+    var id=id
+
+       const message = `Are you sure you want to delete this webinar?`;
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+
+    const dialogRef = this.dialog.open(ConfirmBoxComponentComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if(result==true){
+            this.webinar_service.Post(this.delete_webinar, { webinar_id: id, token: 'LIVESITE' }).subscribe(res => {
       this.response = res
-      // console.log(this.response)
       if (this.response['status'] == 1) {
         this.toastr.success('Webinar Deleted Successfully')
 
@@ -180,6 +193,10 @@ export class WebinarListComponent implements OnInit {
 
       }
       this.getWebinarList()
+    });
+      }else{
+
+      }
     });
   }
 
@@ -236,3 +253,22 @@ export class WebinarListComponent implements OnInit {
 
   }
 }
+
+  //  var item={
+  //   webinar_id : id,
+  //    message : `Are you sure you want to delete this webinar?`
+
+  //   }
+    // console.log(id)
+    // this.webinar_service.Post(this.delete_webinar, { webinar_id: id, token: 'LIVESITE' }).subscribe(res => {
+    //   this.response = res
+    //   // console.log(this.response)
+    //   if (this.response['status'] == 1) {
+    //     this.toastr.success('Webinar Deleted Successfully')
+
+    //   } else {
+    //     this.toastr.warning('There Are some Issue')
+
+    //   }
+    //   this.getWebinarList()
+    // });

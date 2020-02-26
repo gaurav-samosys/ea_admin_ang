@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ExpertInterviewComponent } from './expert-interview.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import {MatInputModule, MatDialogModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule, MatPaginatorModule, MatSlideToggleModule, MatMenuModule, MatButtonModule, MatProgressSpinnerModule, MatCardModule } from '@angular/material';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { EmbedVideo } from 'ngx-embed-video';
+import { ConfirmBoxComponent } from '../confirm-box/confirm-box.component';
 const routes: Routes = [
   {
       path     : '**',
@@ -21,14 +22,14 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  declarations: [ExpertInterviewComponent],
+  declarations: [ExpertInterviewComponent,ConfirmBoxComponent],
   imports: [
     CommonModule,  RouterModule.forChild(routes),
-    EmbedVideo.forRoot(),
+    EmbedVideo.forRoot(),MatDialogModule,
         MatProgressSpinnerModule,MatCardModule,MatFormFieldModule,ReactiveFormsModule,FormsModule,MatInputModule,
         MatIconModule,MatButtonModule,
         MatTableModule,UiSwitchModule,
         MatPaginatorModule,MatSlideToggleModule,MatMenuModule
-  ]
+  ],entryComponents:[ConfirmBoxComponent]
 })
 export class ExpertInterviewModule { }

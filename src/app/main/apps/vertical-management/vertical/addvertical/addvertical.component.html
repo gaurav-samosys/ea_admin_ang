@@ -34,11 +34,14 @@
                     </mat-form-field>
 
                           <mat-label style=" width: 36%;margin-bottom: 10px">Description</mat-label>
-                         <mat-form-field appearance="outline" fxFlex="100">
-                           <textarea matInput  formControlName="description" ></textarea>
-                    </mat-form-field>
+                         <!-- <mat-form-field appearance="outline" fxFlex="100"> -->
+                             <div class="" style="border: 1px solid rgba(0, 0, 0, 0.6); width:100%;border-radius:5px">
+
+                                 <textarea matInput rows="10" cols="10" formControlName="description" ></textarea>
+                             </div>
+                    <!-- </mat-form-field> -->
                      
-                     <mat-label style=" width: 36%;margin-bottom: 10px">Image*</mat-label>
+                     <mat-label style=" width: 36%;margin-bottom: 10px;margin-top: 15px;">Image*</mat-label>
 
                      <!--  <input   type="file" formControlName="upload_file" #fileInput id="avatar" class="hidden-input" accept="image/*" ngf-max-size="3MB" (change)="selectFile($event)" required> -->
                      <input type="file" id="avatar" accept="image/*" required ngf-max-size="3MB" (change)="selectFile($event)" #fileInput>

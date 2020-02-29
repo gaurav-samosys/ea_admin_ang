@@ -124,12 +124,12 @@ export class AddPostComponent implements OnInit {
         this.response = this.response['data']
         console.log(this.response)
         this.AddPostForm.controls['post_title'].setValue(this.response['post_title']),
-        this.categary=this.response['category']
-        this.AddPostForm.controls['category'].setValue( this.categary)
-        this.Author=this.response['author']
-          this.AddPostForm.controls['author'].setValue( this.Author)
-       this.video_id=this.response['video_id']
-        this.AddPostForm.controls['video_id'].setValue(this.video_id)
+        // this.categary=this.response['category']
+        this.AddPostForm.controls['category'].setValue( this.response['category'])
+        // this.Author=this.response['author']
+          this.AddPostForm.controls['author'].setValue( this.response['author'])
+      //  this.video_id=this.response['video_id']
+        this.AddPostForm.controls['video_id'].setValue(this.response['video_id'])
         // console.log( this.categary,video_id, this.Author)
         this.AddPostForm.controls['cover_img'].setValue(this.response['cover_img'])
         this.AddPostForm.controls['description'].setValue(this.response['description'])

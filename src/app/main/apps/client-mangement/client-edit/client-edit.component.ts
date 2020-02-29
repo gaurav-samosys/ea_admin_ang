@@ -163,98 +163,6 @@ export class ClientEditComponent implements OnInit {
 
 
 
-    // TUCITOKEN: null
-    // access_code: null
-    // add_user_restrict: 1
-    // address_format_id: 1
-    // allow_create_api: null
-    // api_user_table_id: null
-    // auth_key: null
-    // auth_secret_key: null
-    // campus: null
-    // certificate_download_count: null
-    // certificate_downloaded: null
-    // city: "Vancover"
-    // client_email_domain: "medix"
-    // client_name: "Westervelt London"
-    // client_vertical: null
-    // client_vertical_id: null
-    // client_verticals: null
-    // client_website: "http://www.medixcollege.ca"
-    // company: null
-    // company_logo: "15654357.png"
-    // company_name: "Westervelt College22222"
-    // countries_iso_code_2: "CA"
-    // countries_iso_code_3: "CAN"
-    // country: "38"
-    // country_id: 38
-    // course_completion: null
-    // course_completion_type: null
-    // course_progress_status: null
-    // created_on: "2015-05-18"
-    // credit_link: null
-    // default_language: null
-    // default_vertical: null
-    // device_token: null
-    // device_type: null
-    // disable_vertical_ids: null
-    // email: "jlaird@medixcollege.ca"
-    // enable_refresh_theme: 0
-    // event_id: null
-    // first_name: "Jeanette"
-    // forget_pass: null
-    // forget_pass_status: null
-    // free_link: null
-    // id: 1
-    // indicator: null
-    // industry: "4"
-    // intro_video: null
-    // is_deleted: null
-    // is_quiz_status: 1
-    // last_login: null
-    // last_name: "Laird"
-    // login_code: null
-    // login_type: null
-    // min_passing_score: 0
-    // name: "Standard Portal"
-    // partner_code: ""
-    // password: "81dc9bdb52d04dc20036dbd8313ed055"
-    // phone: "519-668-2000"
-    // phone_no: null
-    // portal_type: "s"
-    // portal_view: "1"
-    // pro_customer: null
-    // profile_image: null
-    // progress_status: null
-    // registered_by: null
-    // registered_via: null
-    // role: "1"
-    // role_id: null
-    // show_transunion_button: null
-    // social_id: null
-    // state: "80"
-    // state_code: "ON"
-    // state_name: "Ontario"
-    // status: "Active"
-    // student_code: "medixcollegelondon"
-    // student_id: null
-    // subdomain: null
-    // survey_attempt: null
-    // terms_condition: null
-    // unlock_bonus_course: null
-    // unlock_mandatory_course: null
-    // user_level_unlock: 0
-    // updated_on: "2015-05-18"
-    // user_access: null
-    // user_budget: null
-    // user_debt: null
-    // user_id: null
-    // user_name: "Jeanette.Laird"
-    // vertical_id: null
-    // viewed_intro_video: null
-    // workbook_downloaded: null
-
-
 
 
 
@@ -497,6 +405,7 @@ export class ClientEditComponent implements OnInit {
     else
       this.buttonName2 = "keyboard_arrow_down";
   }
+  
   updateClient() {
     let reward_all: any, reward_type: any
     if (this.editclientForm.invalid) {
@@ -852,4 +761,96 @@ export class ClientEditComponent implements OnInit {
   }
 
 }
+
+
+    // TUCITOKEN: null
+    // access_code: null
+    // add_user_restrict: 1
+    // address_format_id: 1
+    // allow_create_api: null
+    // api_user_table_id: null
+    // auth_key: null
+    // auth_secret_key: null
+    // campus: null
+    // certificate_download_count: null
+    // certificate_downloaded: null
+    // city: "Vancover"
+    // client_email_domain: "medix"
+    // client_name: "Westervelt London"
+    // client_vertical: null
+    // client_vertical_id: null
+    // client_verticals: null
+    // client_website: "http://www.medixcollege.ca"
+    // company: null
+    // company_logo: "15654357.png"
+    // company_name: "Westervelt College22222"
+    // countries_iso_code_2: "CA"
+    // countries_iso_code_3: "CAN"
+    // country: "38"
+    // country_id: 38
+    // course_completion: null
+    // course_completion_type: null
+    // course_progress_status: null
+    // created_on: "2015-05-18"
+    // credit_link: null
+    // default_language: null
+    // default_vertical: null
+    // device_token: null
+    // device_type: null
+    // disable_vertical_ids: null
+    // email: "jlaird@medixcollege.ca"
+    // enable_refresh_theme: 0
+    // event_id: null
+    // first_name: "Jeanette"
+    // forget_pass: null
+    // forget_pass_status: null
+    // free_link: null
+    // id: 1
+    // indicator: null
+    // industry: "4"
+    // intro_video: null
+    // is_deleted: null
+    // is_quiz_status: 1
+    // last_login: null
+    // last_name: "Laird"
+    // login_code: null
+    // login_type: null
+    // min_passing_score: 0
+    // name: "Standard Portal"
+    // partner_code: ""
+    // password: "81dc9bdb52d04dc20036dbd8313ed055"
+    // phone: "519-668-2000"
+    // phone_no: null
+    // portal_type: "s"
+    // portal_view: "1"
+    // pro_customer: null
+    // profile_image: null
+    // progress_status: null
+    // registered_by: null
+    // registered_via: null
+    // role: "1"
+    // role_id: null
+    // show_transunion_button: null
+    // social_id: null
+    // state: "80"
+    // state_code: "ON"
+    // state_name: "Ontario"
+    // status: "Active"
+    // student_code: "medixcollegelondon"
+    // student_id: null
+    // subdomain: null
+    // survey_attempt: null
+    // terms_condition: null
+    // unlock_bonus_course: null
+    // unlock_mandatory_course: null
+    // user_level_unlock: 0
+    // updated_on: "2015-05-18"
+    // user_access: null
+    // user_budget: null
+    // user_debt: null
+    // user_id: null
+    // user_name: "Jeanette.Laird"
+    // vertical_id: null
+    // viewed_intro_video: null
+    // workbook_downloaded: null
 

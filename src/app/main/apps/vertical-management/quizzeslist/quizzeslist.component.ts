@@ -15,6 +15,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ConfirmboxComponent, ConfirmDialogModel } from './confirmbox/confirmbox.component';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({ 
@@ -65,33 +66,33 @@ export class QuizzeslistComponent implements OnInit {
     private _snackBar: MatSnackBar,
      private _Activatedroute: ActivatedRoute,
       private http: HttpClient, public dialog: MatDialog,
-       private pagerService: PagerService, 
+       private pagerService: PagerService, public toastr:ToastrService,
        public quize_service: QuizzeslistService) {
-    if (localStorage.getItem('addquiz_status') == 'true') {
-      this.openaddSnackBar();
-      localStorage.removeItem('addquiz_status');
-    }
-    else if (localStorage.getItem('addquiz_status') == 'false') {
-      this.openadderrorSnackBar();
-      localStorage.removeItem('addquiz_status');
-    }
-    else if (localStorage.getItem('editquiz_status') == 'true') {
-      this.openeditSnackBar();
-      localStorage.removeItem('editquiz_status');
-    }
-    else if (localStorage.getItem('editquiz_status') == 'false') {
-      this.openediterrorSnackBar();
-      localStorage.removeItem('editquiz_status');
-    }
+    // if (localStorage.getItem('addquiz_status') == 'true') {
+    //   this.openaddSnackBar();
+    //   localStorage.removeItem('addquiz_status');
+    // }
+    // else if (localStorage.getItem('addquiz_status') == 'false') {
+    //   this.openadderrorSnackBar();
+    //   localStorage.removeItem('addquiz_status');
+    // }
+    // else if (localStorage.getItem('editquiz_status') == 'true') {
+    //   this.openeditSnackBar();
+    //   localStorage.removeItem('editquiz_status');
+    // }
+    // else if (localStorage.getItem('editquiz_status') == 'false') {
+    //   this.openediterrorSnackBar();
+    //   localStorage.removeItem('editquiz_status');
+    // }
 
-    else if (localStorage.getItem('deletequiz_status') == 'true') {
-      this.opendeleteSnackBar();
-      localStorage.removeItem('deletequiz_status');
-    }
-    else if (localStorage.getItem('deletequiz_status') == 'false') {
-      this.opendeleteerrorSnackBar();
-      localStorage.removeItem('deletequiz_status');
-    }
+    // else if (localStorage.getItem('deletequiz_status') == 'true') {
+    //   this.opendeleteSnackBar();
+    //   localStorage.removeItem('deletequiz_status');
+    // }
+    // else if (localStorage.getItem('deletequiz_status') == 'false') {
+    //   this.opendeleteerrorSnackBar();
+    //   localStorage.removeItem('deletequiz_status');
+    // }
   }
 
   ngOnInit() {
@@ -290,16 +291,44 @@ export class QuizzeslistComponent implements OnInit {
    * add Quiz
    */
   addQuiz() {
-    let dialog = this.dialog.open(AddquizComponent, {
+   const dialogRef = this.dialog.open(AddquizComponent, {
       data: this.topic_id,
       width: '650px', height: '500px'
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if(this.result){
+      if(this.result == true){
+        this.toastr.success("Quiz added successfully")
+
+        this.getQuizeList(this.topic_id)
+
+      }else{
+        this.toastr.warning("There Are Some Issue, Please Try Again")
+
+      }
+    }
     });
   }
 
   openDialog(value) {
-    let dialog = this.dialog.open(EditquizComponent, {
+  const dialogRef = this.dialog.open(EditquizComponent, {
       data: value,
       width: '650px', height: '500px'
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if(this.result){
+      if(this.result == true){
+        this.toastr.success("Quiz updated successfully")
+
+        this.getQuizeList(this.topic_id)
+
+      }else{
+        this.toastr.warning("There Are Some Issue, Please Try Again")
+
+      }
+    }
     });
 
   }

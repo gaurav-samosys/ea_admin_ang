@@ -1,10 +1,13 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column">
-    <mat-toolbar style="background-color: #039be5 !important">
+    <mat-toolbar class="mb-24 mat-accent">
         <mat-toolbar-row>
             <span style="color: white;"> {{res_data.first_name}} Edit Form</span>
             <span class="example-spacer"></span>
-            <mat-icon (click)="onClose()" tabIndex="-1" class="example-icon" aria-hidden="false"
-                aria-label="Example delete icon">clear</mat-icon>
+            <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+            <!-- <mat-icon (click)="onClose()" tabIndex="-1" class="example-icon" aria-hidden="false"
+                aria-label="Example delete icon">clear</mat-icon> -->
         </mat-toolbar-row>
     </mat-toolbar>
 
@@ -21,7 +24,7 @@
 
             <!-- REACTIVE FORM EXAMPLE -->
 
-            <form class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto"
+            <form class="p-24 mr-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto"
                 name="form" [formGroup]="form" (ngSubmit)="updateForm()">
 
                 <div fxLayout="row " fxLayoutAlign="start center" fxFlex="1 0 auto">
@@ -114,17 +117,28 @@
                     </mat-form-field>
 
                    
+                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                        <mat-label>State</mat-label>
+                        <select matNativeControl formControlName="state_name" (change)="submitState($event.target.value)">
+                            <option selected="" value="">
+                                Please select state
+                            </option>
+                            <option *ngFor="let data of states" value="{{data.id}}">
+                                {{data.state_name}}
+                            </option>
 
-                    <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
-                        <!-- <mat-label>State</mat-label> -->
-                        <mat-select  formControlName="state" placeholder="{{state_name}}" (change)="submitState($event.target.value)">
+                        </select>
+                        <mat-error *ngIf="hasError('state_name', 'required')">state is required!</mat-error>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                        <mat-select  formControlName="state" placeholder="select State" (change)="submitState($event.target.value)">
                           <mat-option *ngFor="let data of states" value="{{data.id}}">
                             {{data.state_name}}
                           </mat-option>
                         </mat-select>
                         <mat-error *ngIf="hasError('state', 'required')">State is required!</mat-error>
-
-                      </mat-form-field>
+                      </mat-form-field> -->
 
 
                 </div>
@@ -180,7 +194,6 @@
 
                     <button mat-raised-button style="background-color: #039be5;color: white;" type="submit" class="button">Update
                     </button>
-
                     <button mat-raised-button mat-button mat-dialog-close style="color: white;background-color   : #039be5"
                         class="button cancel">Cancel</button>
                 </div>

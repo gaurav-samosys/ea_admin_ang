@@ -147,7 +147,7 @@ export class ClientsComponent implements OnInit {
       this.showloader = false;
 
       this.response = res
-      // console.log(this.response)
+      console.log(this.response)
       this.data = this.response.data;
 
 

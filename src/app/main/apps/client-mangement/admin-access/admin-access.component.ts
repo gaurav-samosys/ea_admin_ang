@@ -78,22 +78,22 @@ export class AdminAccessComponent implements OnInit {
     private toastr: ToastrService,
 
     private datePipe: DatePipe, private _snackBar: MatSnackBar, private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public admin_service: AdminAccessService) {
-    if (localStorage.getItem('adminadded_status') == 'true') {
-      this.openSnackBar();
-      localStorage.removeItem('adminadded_status');
-    }
-    else if (localStorage.getItem('adminadded_status') == 'false') {
-      this.openaddederrorSnackBar();
-      localStorage.removeItem('adminadded_status');
-    }
-    else if (localStorage.getItem('admin_updatestatus') == 'true') {
-      this.openupdateSnackBar();
-      localStorage.removeItem('admin_updatestatus');
-    }
-    else if (localStorage.getItem('admin_updatestatus') == 'false') {
-      this.openupdateerrorSnackBar();
-      localStorage.removeItem('admin_updatestatus');
-    }
+    // if (localStorage.getItem('adminadded_status') == 'true') {
+    //   this.openSnackBar();
+    //   localStorage.removeItem('adminadded_status');
+    // }
+    // else if (localStorage.getItem('adminadded_status') == 'false') {
+    //   this.openaddederrorSnackBar();
+    //   localStorage.removeItem('adminadded_status');
+    // }
+    // else if (localStorage.getItem('admin_updatestatus') == 'true') {
+    //   this.openupdateSnackBar();
+    //   localStorage.removeItem('admin_updatestatus');
+    // }
+    // else if (localStorage.getItem('admin_updatestatus') == 'false') {
+    //   this.openupdateerrorSnackBar();
+    //   localStorage.removeItem('admin_updatestatus');
+    // }
   }
 
   ngOnInit() {
@@ -196,45 +196,55 @@ export class AdminAccessComponent implements OnInit {
   * =========================================
   */
   openDialog() {
-    let dialog = this.dialog.open(AddadminComponent, {
-      width: '600px', height: '600px'
-    });
+    // let dialog = this.dialog.open(AddadminComponent, {
+    //   width: '600px', height: '600px'
+    // });
 
+    const dialogRef = this.dialog.open(AddadminComponent, {
+      width: '600px', height: '600px'
+      // data: dialogData
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if(result ==true){
+        this.fetchAdminaccess();
+      }
+    })
   }
   /**
     * =========================================
     *        Open snackbar
     * =========================================
     */
-  openSnackBar() {
-    this._snackBar.open('Admin User added successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-  openaddederrorSnackBar() {
-    this._snackBar.open('Admin User not added successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-  openupdateSnackBar() {
-    this._snackBar.open('Admin User detail updated successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  // openSnackBar() {
+  //   this._snackBar.open('Admin User added successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
+  // openaddederrorSnackBar() {
+  //   this._snackBar.open('Admin User not added successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
+  // openupdateSnackBar() {
+  //   this._snackBar.open('Admin User detail updated successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
 
-  openupdateerrorSnackBar() {
-    this._snackBar.open('Admin User detail not updated successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  // openupdateerrorSnackBar() {
+  //   this._snackBar.open('Admin User detail not updated successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
   /**
     * =========================================
     *        Confirm Dialog Box
@@ -280,6 +290,12 @@ export class AdminAccessComponent implements OnInit {
       width: '600px', height: '500px',
       data: value
     });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if(dialogResult['success']==true){
+        this.fetchAdminaccess();
+
+      }
+    })
   }
 
   /* setPage(page: number) {

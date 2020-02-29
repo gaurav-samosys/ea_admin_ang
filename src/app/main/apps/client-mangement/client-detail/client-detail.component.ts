@@ -118,6 +118,21 @@ export class ClientDetailComponent implements OnInit {
     this.getIndustries();
     this.getUserData();
   }
+  public show: boolean = true;
+  public buttonName: any = 'keyboard_arrow_down';
+  buttontoggle() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show){
+
+      this.buttonName = "keyboard_arrow_up";
+    }
+    else{
+
+      this.buttonName = "keyboard_arrow_down";
+    }
+  }
+  // client
   client_name
   company_name
   detail_id
@@ -275,7 +290,7 @@ columnClick(value, colName: string, evt) {
   }
 
   Edit(value) {
-    console.log(value)
+    // console.log(value)
     this.client_service.editData(value)
   }
   ClientVertical() {
@@ -287,7 +302,7 @@ columnClick(value, colName: string, evt) {
 
   addUser() {
     let dialog = this.dialog.open(AddUserClientComponent, {
-      width: '600px', height: '400px'
+      width: '600px', height: '600px'
     });
   }
 
@@ -310,7 +325,7 @@ columnClick(value, colName: string, evt) {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
+      // console.log(result)
       if (result == true) {
         // this.client_service.Post(this.deleteBlogApi, { id: id, token: 'LIVESITE' }).subscribe(res => {
         //   this.response = res

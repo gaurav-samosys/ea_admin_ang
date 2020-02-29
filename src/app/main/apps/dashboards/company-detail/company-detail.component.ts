@@ -219,7 +219,7 @@ export class CompanyDetailComponent implements OnInit {
     this.companyService.Post(this.getClients,
       { company_id: this.id, fields: '*', token: 'LIVESITE' }).subscribe(res => {
         this.common = res
-        // console.log(this.common)
+        console.log(this.common)
         this.showloader = false
 
         this.allItems = this.common.total_data;

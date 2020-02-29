@@ -61,11 +61,11 @@ editvertical_status:any;
         console.log(this.editvertical_status)
              
           
+        this.dialogRef.close(true);
         localStorage.setItem("editvertical_status",this.editvertical_status);
       
         this.rt.navigateByUrl('/apps/dashboards/users', {skipLocationChange: true}).then(()=>
                           this.rt.navigate(["/apps/vertical-management/vertical"]));
-        this.dialogRef.close();
       })
     }
 

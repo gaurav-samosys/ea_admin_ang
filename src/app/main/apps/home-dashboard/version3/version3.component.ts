@@ -154,10 +154,10 @@ export class Version3Component implements OnInit {
   rows: any;
   data: any;
   searchtype: any;
-  companymodel: any;
-  clientmodel: any;
-  usermodel: any;
-  verticalmodel: any;
+  // companymodel: any;
+  // clientmodel: any;
+  // usermodel: any;
+  // verticalmodel: any;
   industryData: any;
   companyData: any;
   clientData: any;
@@ -263,7 +263,16 @@ export class Version3Component implements OnInit {
   //   monthNames: moment.monthsShort(),
   //   firstDay: moment.localeData().firstDayOfWeek(),
   // }
+  rangesTable:any={
+    'Default': [moment().subtract(1, 'year'), moment()],
+    'Today': [moment(), moment()],
+    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'Last 3 Month': [moment().subtract(2, 'month'), moment()],
 
+    'Last 6 Month': [moment().subtract(5, 'month'), moment()],
+    'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+  }
 
   ranges: any = {
     'Default': [moment().subtract(1, 'year'), moment()],
@@ -837,14 +846,14 @@ export class Version3Component implements OnInit {
     // selected: clients_selected
     this.v3Service.POST(this.getEaAllUsersList,
       {
-        // industries: industries_id.toString(),
-        // companies: companies_id.toString(),
-        // clients: client_id.toString(), 
-        // verticals: id_vertical.toString(),
-        industriesIds: industries_id.toString(),
-        companiesIds: companies_id.toString(),
-        clientsIds: client_id.toString(), 
-        verticalsIds: id_vertical.toString(),
+        industries: industries_id.toString(),
+        companies: companies_id.toString(),
+        clients: client_id.toString(), 
+        verticals: id_vertical.toString(),
+        // industriesIds: industries_id.toString(),
+        // companiesIds: companies_id.toString(),
+        // clientsIds: client_id.toString(), 
+        // verticalsIds: id_vertical.toString(),
         location: location_data.toString(),
         selected: this.selected, 
         token: 'LIVESITE'

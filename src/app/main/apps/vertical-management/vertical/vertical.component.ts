@@ -32,32 +32,32 @@ export class VerticalComponent implements OnInit {
  constructor(
   private toastr: ToastrService,
   private _snackBar: MatSnackBar,private rt:Router,private http: HttpClient,public dialog: MatDialog,private pagerService: PagerService,public vertical_service:VerticalService) {
-   if( localStorage.getItem('addvertical_status') == 'true'){
-      this.openaddSnackBar();
-      localStorage.removeItem('addvertical_status');
-     }
-     else if( localStorage.getItem('addvertical_status') == 'false'){
-      this.openadderrorSnackBar();
-      localStorage.removeItem('addvertical_status');
-     }
+  //  if( localStorage.getItem('addvertical_status') == 'true'){
+  //     this.openaddSnackBar();
+  //     localStorage.removeItem('addvertical_status');
+  //    }
+  //    else if( localStorage.getItem('addvertical_status') == 'false'){
+  //     this.openadderrorSnackBar();
+  //     localStorage.removeItem('addvertical_status');
+  //    }
 
-     else if( localStorage.getItem('deletevertical_status') == 'true'){
-      this.opendeleteSnackBar();
-      localStorage.removeItem('deletevertical_status');
-     }
-     else if( localStorage.getItem('deletevertical_status') == 'false'){
-      this.openadddeleteerrorSnackBar();
-      localStorage.removeItem('deletevertical_status');
-     }
+  //    else if( localStorage.getItem('deletevertical_status') == 'true'){
+  //     this.opendeleteSnackBar();
+  //     localStorage.removeItem('deletevertical_status');
+  //    }
+  //    else if( localStorage.getItem('deletevertical_status') == 'false'){
+  //     this.openadddeleteerrorSnackBar();
+  //     localStorage.removeItem('deletevertical_status');
+  //    }
 
-     else if( localStorage.getItem('editvertical_status') == 'true'){
-      this.openeditSnackBar();
-      localStorage.removeItem('editvertical_status');
-     }
-     else if( localStorage.getItem('editvertical_status') == 'false'){
-      this.openediterrorSnackBar();
-      localStorage.removeItem('editvertical_status');
-     }
+  //    else if( localStorage.getItem('editvertical_status') == 'true'){
+  //     this.openeditSnackBar();
+  //     localStorage.removeItem('editvertical_status');
+  //    }
+  //    else if( localStorage.getItem('editvertical_status') == 'false'){
+  //     this.openediterrorSnackBar();
+  //     localStorage.removeItem('editvertical_status');
+  //    }
    }
 
   ngOnInit() {
@@ -76,16 +76,39 @@ export class VerticalComponent implements OnInit {
   }
 addVertical()
 {
-        let dialog= this.dialog.open(AddverticalComponent, {
+  const dialogRef= this.dialog.open(AddverticalComponent, {
       width: '500px',height:'550px'
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if(this.result){
+      if(this.result == true){
+        this.toastr.success("Vertical Added successFully")
+        this.getVertical();
+      }else{
+        this.toastr.warning("There Are Some Issue, Please Try Again")
+      }
+      }
     });
 }
 
 editVertical(value)
 {
-        let dialog= this.dialog.open(EditverticalComponent, {
+  const dialogRef= this.dialog.open(EditverticalComponent, {
        data:value,
       width: '600px',height:'500px'
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if( this.result){
+      if(this.result == true){
+        this.toastr.success("Vertical Update successFully")
+
+        this.getVertical();
+      }else{
+        this.toastr.warning("There Are Some Issue, Please Try Again")
+      }
+      }
     });
 }
 
@@ -103,50 +126,50 @@ editVertical(value)
       this.rt.navigate(['/apps/vertical-management/management',id])
   }
 
-      openaddSnackBar() {
-    this._snackBar.open('Vertical added successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  } 
-    openadderrorSnackBar() {
-    this._snackBar.open('Vertical not added successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  //     openaddSnackBar() {
+  //   this._snackBar.open('Vertical added successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // } 
+  //   openadderrorSnackBar() {
+  //   this._snackBar.open('Vertical not added successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
 
-     opendeleteSnackBar() {
-    this._snackBar.open('Vertical deleted successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  } 
-    openadddeleteerrorSnackBar() {
-    this._snackBar.open('Vertical not deleted successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  } 
+  //    opendeleteSnackBar() {
+  //   this._snackBar.open('Vertical deleted successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // } 
+  //   openadddeleteerrorSnackBar() {
+  //   this._snackBar.open('Vertical not deleted successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // } 
 
-      openeditSnackBar() {
-    this._snackBar.open('Vertical updated successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  } 
-    openediterrorSnackBar() {
-    this._snackBar.open('Vertical not updated successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  //     openeditSnackBar() {
+  //   this._snackBar.open('Vertical updated successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // } 
+  //   openediterrorSnackBar() {
+  //   this._snackBar.open('Vertical not updated successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
 
 
 

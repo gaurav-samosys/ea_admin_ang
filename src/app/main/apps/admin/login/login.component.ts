@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     show: boolean;
     login_data: any;
 
+    @ViewChild('filterName', { static: true }) input: ElementRef
     /**
      * Constructor
      *
@@ -71,8 +72,17 @@ export class LoginComponent implements OnInit {
     /**
      * On init
      */
+    msg
+    spaceKeyPress: number = 0
     ngOnInit(): void {
-
+        this.msg = "Space is not allow"
+        var number = document.getElementById('number');
+        number.onkeydown = function (e) {
+          if (e.keyCode == 32) {
+            return false;
+          }
+        }
+    
         if (this.auth.isLoggedIn() == true) {
             this.rt.navigate(['apps/home-dashboard/version3'])
         }
@@ -81,13 +91,32 @@ export class LoginComponent implements OnInit {
         }
         this.loginForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email, Validators.pattern(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,6})$/)]],
-
-            // email   : ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
     }
 
-    goback(){
+    spaceKey;
+
+    eventHandler(keyCode) {
+        console.log(keyCode);
+       this. spaceKey =keyCode
+        if( this. spaceKey == 32){
+            
+            this.toastr.warning('Space is not allow');
+            }
+            // if (keyCode == 32) {
+            // this.input.nativeElement.value = null;
+            // this.spaceKeyPress = 1 //show msg
+        // }
+        // else if(keyCode == 8){
+        //     this.spaceKeyPress = 0 //hide msg
+
+        // }
+        // else {
+        //     this.spaceKeyPress = 0 //hide msg
+        // }
+    }
+    goback() {
         this.myRoute.navigate(['/apps/admin/forgot'])
     }
 
@@ -98,12 +127,28 @@ export class LoginComponent implements OnInit {
             verticalPosition: this.verticalPosition,
         });
     }
- 
+
 
     Login() {
+        // if(this.spaceKey == 32){
+            
+        //     this.toastr.warning('Space is not allow');
+        //     }else{
+        // }
+
+        // console.log(this.loginForm.value)
+        // this.spaceKeyPress = 0
+
+        // const text = this.loginForm.value.password;
+        // const newPassword = text.split(/\s/).join('');
+        // console.log(newPassword);
+
         this.login_service.Post(this.login, {
             email: this.loginForm.value.email,
-            password: this.loginForm.value.password, role: 0, token: 'LIVESITE'
+            password: this.loginForm.value.password,
+            // password: newPassword,
+
+             role: 0, token: 'LIVESITE'
         })
             .subscribe(res => {
                 console.log(res)
@@ -126,6 +171,7 @@ export class LoginComponent implements OnInit {
                 }
 
             })
+
     }
 
 

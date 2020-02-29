@@ -55,15 +55,17 @@ addQuiz()
 	console.log(this.addquizForm.value)
     this.quiz_service.Post(this.addQuize,this.addquizForm.value).subscribe(res=>{
     	this.common=res;
-    	   this.addquiz_status=this.common.status;
-        console.log(this.addquiz_status)
+    	  //  this.addquiz_status=this.common.status;
+        // console.log(this.addquiz_status)
              
+          if(this.common['status']==true){
+            this.dialogRef.close(true);
+
+            // localStorage.setItem("addquiz_status",this.addquiz_status);
           
-        localStorage.setItem("addquiz_status",this.addquiz_status);
-      
-        this.rt.navigateByUrl('/apps/dashboards/users', {skipLocationChange: true}).then(()=>
-                          this.rt.navigate(["/apps/vertical-management/quizzeslist/"+this.topic_id]));
-        this.dialogRef.close();
+            this.rt.navigateByUrl('/apps/dashboards/users', {skipLocationChange: true}).then(()=>
+                              this.rt.navigate(["/apps/vertical-management/quizzeslist/"+this.topic_id]));
+          }
     })
 
 }

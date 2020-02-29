@@ -55,7 +55,7 @@
             <mat-icon>add_circle_outline</mat-icon>Add Client
           </button>
         </div> -->
-      </div>
+      </div> 
     <!-- </div> -->
 
 
@@ -80,9 +80,9 @@
 
 
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="100" fxLayoutGap="20px"
-              style=" margin-right: 20px;margin-top: 15px;">
+              style="margin-top: 15px;">
 
-              <!-- <mat-form-field appearance="outline" fxFlex="30" style=" margin-right: 20px;">
+              <!-- <mat-form-field appearance="outline" fxFlex="33" >
           <mat-label >Company Name</mat-label>
           <mat-select  formControlName="company_name"  (change)="getData($event.target.value)" required>
             <!-- <option selected="" value=""  >
@@ -95,22 +95,22 @@
           <mat-error *ngIf="hasError('company_name', 'required')">Company Name is required!</mat-error>
           </mat-form-field> -->
 
-              <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px" fxLayoutGap="10px"
-                style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="33" 
+                >
                 <mat-label>company_name</mat-label>
                 <input matInput formControlName="company_name" required>
                 <mat-error *ngIf="hasError('company_name', 'required')">company_name is required!</mat-error>
               </mat-form-field>
 
 
-              <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px" fxLayoutGap="10px"
-                style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="33" 
+                >
                 <mat-label>Country</mat-label>
                 <input matInput formControlName="country" readonly="readonly" required>
                 <mat-error *ngIf="hasError('country', 'required')">Country is required!</mat-error>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px" style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="33"  >
                 <mat-label>State</mat-label>
                 <input matInput formControlName="state" readonly="readonly" required>
                 <mat-error *ngIf="hasError('state', 'required')">State is required!</mat-error>
@@ -119,15 +119,15 @@
 
 
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="100" fxLayoutGap="20px"
-              style=" margin-right: 20px;">
-              <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px" style=" margin-right: 20px;">
+              >
+              <mat-form-field appearance="outline" fxFlex="32"  >
                 <mat-label>City</mat-label>
                 <input matInput formControlName="city" readonly="readonly" required>
                 <mat-error *ngIf="hasError('city', 'required')">City is required!</mat-error>
               </mat-form-field>
 
 
-              <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px" style=" margin-right: 20px;">
+              <mat-form-field appearance="outline" fxFlex="32"  >
                 <mat-label>Industry</mat-label>
                 <input matInput formControlName="industry" readonly="readonly" required>
                 <mat-error *ngIf="hasError('industry', 'required')">industry is required!</mat-error>
@@ -143,15 +143,15 @@
 
         <h2 class="example-h2">Client Details</h2>
 
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="30" fxLayoutGap="10px">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="100" fxLayoutGap="20px">
 
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>Client Name </mat-label>
             <input matInput placeholder="Client name" formControlName="clientname" required>
             <mat-error *ngIf="hasError('clientname', 'required')">Client Name is required!</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>Client Vertical</mat-label>
             <mat-select formControlName="clientvertical" required>
               <mat-option value="" selected="">Select Vertical</mat-option>
@@ -161,7 +161,7 @@
             <mat-error *ngIf="hasError('clientvertical', 'required')">Client Vertical is required!</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>Person First Name</mat-label>
             <input matInput placeholder="Client's first name" formControlName="firstname" required>
             <mat-error *ngIf="hasError('firstname', 'required')">First Name is required!</mat-error>
@@ -171,14 +171,14 @@
 
 
 
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="30" fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="100" fxLayoutGap="20px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>Person Last Name</mat-label>
             <input matInput placeholder="Client's last name" formControlName="lastname" required>
             <mat-error *ngIf="hasError('lastname', 'required')">Last Name is required!</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>Portal View</mat-label>
             <select matNativeControl formControlName="portalview" (change)="portalChange($event.target.value)" required>
               <option value="" selected="">
@@ -191,7 +191,7 @@
             <mat-error *ngIf="hasError('portalview', 'required')">Portal View is required!</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>Email</mat-label>
             <input matInput placeholder="Client's email" formControlName="email" required>
             <mat-error *ngIf="hasError('email', 'required')">Email is required!</mat-error>
@@ -200,20 +200,20 @@
         </div>
 
 
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="30" fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="100" fxLayoutGap="20px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>City </mat-label>
             <input matInput placeholder="Client's city" formControlName="clientcity" required>
             <mat-error *ngIf="hasError('city', 'required')">City is required!</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>Phone</mat-label>
             <input matInput placeholder="Ex-9825361478" formControlName="phone" required>
             <mat-error *ngIf="hasError('phone', 'required')">Phone is required!</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="33" >
             <mat-label>Intro Video Vimeo ID</mat-label>
             <input matInput placeholder="Ex-9825361478" formControlName="Video" required>
             <mat-error *ngIf="hasError('Video', 'required')">Intro Video Vimeo ID is requires</mat-error>
@@ -221,63 +221,53 @@
 
 
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="30" fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex="30" fxLayoutGap="10px">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="100" fxLayoutGap="20px">
+          <mat-form-field appearance="outline" fxFlex="32" >
             <mat-label>Default Client Vertical </mat-label>
             <!-- formControlName="default_client" -->
             <input readonly="" matInput placeholder="Default Client Vertical" >
             <!-- <mat-error *ngIf="hasError('city', 'required')">Default Client is required!</mat-error> -->
           </mat-form-field>
-        </div>
+        
 
-
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="30" fxLayoutGap="10px">
-
-          <mat-form-field appearance="outline" fxFlex="41" class="pr-4 margin_cls_cli">
+          <mat-form-field appearance="outline" fxFlex="33">
             <mat-hint>Enter passing score for each course or leave blank if you don't want to keep any criteria
             </mat-hint>
             <mat-label>Min. passing score for each course (%)</mat-label>
             <input matInput formControlName="min_passing_score">
           </mat-form-field>
-          <mat-label style="max-width: 10%;
-            margin-left: 94px;" fxFlex="10">Attach Logo</mat-label>
-          <input fxFlex="30" fxLayoutGap="10px" type="file" id="avatar" accept="image/*" ngf-max-size="3MB"
-            (change)="selectFile($event)" #fileInput>
+          
+          <div appearance="outline" fxFlex="33" layout="row">
+            <mat-label  fxFlex="100">Attach Logo</mat-label>
+            <input fxFlex="100"  type="file" id="avatar" accept="image/*" ngf-max-size="3MB"
+              (change)="selectFile($event)" #fileInput>
 
-          <span *ngIf="hide==0">
-            <img class="file_upload_image" [src]="url">
-          </span>
+            <mat-label class="mt-12" fxFlex="100" *ngIf="hide==0"><img class="file_upload_image" [src]="url"></mat-label>
+          </div>
 
-          <!--
-            <div fxFlex="50" fxLayoutGap="10px">
-              <p>Taken from wikpedia</p>
-              <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
-              AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
-              9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
-            </div> -->
 
         </div>
 
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="30" fxLayoutGap="10px"
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="33" 
           style="margin-top: 15px;">
           <mat-label style="max-width: 10%;
             margin-left: 95px;
-            " fxFlex="10" fxLayoutGap="10px">User Access</mat-label>
-          <mat-radio-group aria-label="Select an option" fxFlex="40" fxLayoutGap="10px" formControlName="useraccess">
+            " fxFlex="10" >User Access</mat-label>
+          <mat-radio-group aria-label="Select an option" fxFlex="40"  formControlName="useraccess">
             <mat-radio-button class="example-margin" value="1">Company email authentication</mat-radio-button>
             <mat-radio-button class="example-margin" value="2">Company import users</mat-radio-button>
           </mat-radio-group>
         </div>
 
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="30" style="margin-top: 15px;"
-          fxLayoutGap="10px">
-          <section class="example-section" fxFlex="70" fxLayoutGap="10px">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-8" fxFlex="33" style="margin-top: 15px;"
+          >
+          <section class="example-section" fxFlex="70" >
             <h3>Client IT Access</h3>
 
             <mat-checkbox class="example-margin" value="1" formControlName="allow_create_api">Allow To Create API
             </mat-checkbox><br>
           </section>
-          <section class="example-section" fxFlex="70" fxLayoutGap="10px">
+          <section class="example-section" fxFlex="70" >
             <h3>Restrict Add User</h3>
 
             <mat-checkbox class="example-margin" value="1" (change)="credit_view($event)">Restrict To Add User
@@ -285,27 +275,27 @@
 
           </section>
 
-          <div fxFlex="30" fxLayoutGap="10px">
+          <div fxFlex="33" >
             <img [src]="imgURL" height="200" *ngIf="imgURL">
             <!--  -->
           </div>
         </div>
 
         <h3>Unlock Mandatory Course</h3>
-        <section class="example-section" fxFlex="70" fxLayoutGap="10px">
+        <section class="example-section" fxFlex="70" >
           <mat-checkbox class="example-margin" value="1" formControlName="allow_unlock">Allow To Unlock Mandatory Course
           </mat-checkbox><br>
         </section>
 
         <h3>Unlock Bonus Course</h3>
-        <section class="example-section" fxFlex="70" fxLayoutGap="10px">
+        <section class="example-section" fxFlex="70" >
 
           <mat-checkbox class="example-margin" value="2" formControlName="allow_unlock_bonus">Allow To Unlock Bonus
             Course
           </mat-checkbox>
         </section>
         <h3>User Level Unlock</h3>
-        <section class="example-section" fxFlex="70" fxLayoutGap="10px">
+        <section class="example-section" fxFlex="70" >
           <mat-checkbox class="example-margin" value="3" formControlName="allow_unlock_user"> Allow To User level Unlock
           </mat-checkbox>
         </section>
@@ -324,16 +314,16 @@
           </mat-radio-group>
         </div>
 
-        <div *ngIf="status == false" style=" margin-top: 15px;" fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px">
+        <div *ngIf="status == false" style=" margin-top: 15px;" >
+          <mat-form-field appearance="outline" fxFlex="50" >
             <mat-label>Free Link </mat-label>
             <input matInput formControlName="free_link">
           </mat-form-field>
         </div>
 
 
-        <div *ngIf="status == true" fxLayoutGap="10px">
-          <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px">
+        <div *ngIf="status == true" >
+          <mat-form-field appearance="outline" fxFlex="50" >
             <mat-label>Credit Link </mat-label>
             <input matInput formControlName="credit_link">
           </mat-form-field>
@@ -348,9 +338,9 @@
 
         <ng-container *ngIf="show2">
 
-          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 2" fxLayoutGap="10px">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 2" >
 
-            <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px">
+            <mat-form-field appearance="outline" fxFlex="50" >
               <mat-label>Reward Type</mat-label>
               <select matNativeControl formControlName="reward_type" (change)="rewardData($event.target.value)">
                 <option selected value="single_reward_program">
@@ -365,7 +355,7 @@
               </select>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px">
+            <mat-form-field appearance="outline" fxFlex="50" >
               <mat-label>Duration of Drip completion</mat-label>
               <select matNativeControl formControlName="duration_drip" (change)="durationData($event.target.value)">
                 <option value="3" selected="3">3 Months</option>
@@ -378,14 +368,14 @@
 
 
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 2">
-            <mat-label fxFlex="30" fxLayoutGap="10px">Reward Cycle Runs From User Sign Up Date</mat-label>
-            <mat-radio-group aria-label="Select an option" fxFlex="30" fxLayoutGap="10px"
+            <mat-label fxFlex="33" >Reward Cycle Runs From User Sign Up Date</mat-label>
+            <mat-radio-group aria-label="Select an option" fxFlex="33" 
               formControlName="reward_cycle">
               <mat-radio-button class="example-margin" value="1">Yes</mat-radio-button>
               <mat-radio-button class="example-margin" value="2">No</mat-radio-button>
             </mat-radio-group>
-            <mat-label fxFlex="20" fxLayoutGap="10px">Reward All Completions ?</mat-label>
-            <mat-radio-group aria-label="Select an option" fxFlex="40" fxLayoutGap="10px"
+            <mat-label fxFlex="20" >Reward All Completions ?</mat-label>
+            <mat-radio-group aria-label="Select an option" fxFlex="40" 
               formControlName="reward_completion">
               <mat-radio-button class="example-margin" value="1">Yes</mat-radio-button>
               <mat-radio-button class="example-margin" value="2">Specific Completions Only</mat-radio-button>
@@ -393,9 +383,9 @@
           </div>
 
 
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="1 0 auto" *ngIf="division == 2">
+          <div fxLayout="row" fxLayoutAlign="start center"  fxFlex="1 0 auto" *ngIf="division == 2">
 
-            <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px">
+            <mat-form-field appearance="outline" fxFlex="50" >
               <mat-label>Drip Campaign Cycle</mat-label>
               <select matNativeControl formControlName="compaign_cycle" (change)="compaignData($event.target.value)">
                 <option selected value="weekly">
@@ -412,15 +402,15 @@
 
 
 
-            <mat-label fxFlex="10" fxLayoutGap="10px">Attach Reward Offer(s)[may select multiple files]</mat-label>
-            <input fxFlex="30" fxLayoutGap="10px" type="file" accept="image/*" ngf-max-size="3MB"
+            <mat-label fxFlex="10" >Attach Reward Offer(s)[may select multiple files]</mat-label>
+            <input fxFlex="33"  type="file" accept="image/*" ngf-max-size="3MB"
               (change)="selectFile1($event)" #fileInput multiple>
           </div>
 
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 2">
-            <div fxFlex="70" fxLayoutGap="10px">
+            <div fxFlex="70" >
             </div>
-            <div fxFlex="30" fxLayoutGap="10px">
+            <div fxFlex="33" >
               <img [src]="imgURLdrip" height="200" *ngIf="imgURLdrip">
 
             </div>
@@ -438,7 +428,7 @@
         <ng-container *ngIf="show1">
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
 
-            <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px" style="margin-right: 10px;">
+            <mat-form-field appearance="outline" fxFlex="50"  style="margin-right: 10px;">
               <mat-label>Reward Start - End Date</mat-label>
               <!-- <input matInput  type="text" formControlName="reward_start" placeholder="Select Date range" ngxDaterangepickerMd [locale]="{applyLabel: 'ok', format: 'DD/MM/YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}" startKey="start" endKey="end"  [showCustomRangeLabel]="true"  (datesUpdated)="datesUpdated($event)" readonly=""> -->
               <input matInput type="text" ngxDaterangepickerMd [(ngModel)]="selected" placeholder="Choose date"
@@ -446,7 +436,7 @@
               <!-- <mat-error *ngIf="hasError('reward_start', 'required')">This field is required!</mat-error> -->
             </mat-form-field>
 
-            <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px">
+            <mat-form-field appearance="outline" fxFlex="50" >
               <mat-label>Reward Type</mat-label>
               <select matNativeControl formControlName="reward_type1" (change)="rewardData1($event.target.value)">
                 <option value="single_reward_program" selected>
@@ -463,13 +453,13 @@
           </div>
 
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
-            <!--                                       <mat-label fxFlex="30" fxLayoutGap="10px">Reward Cycle Runs From User Sign Up Date</mat-label>
-            <mat-radio-group aria-label="Select an option" fxFlex="30" fxLayoutGap="10px" formControlName="reward_cycle">
+            <!--                                       <mat-label fxFlex="33" >Reward Cycle Runs From User Sign Up Date</mat-label>
+            <mat-radio-group aria-label="Select an option" fxFlex="33"  formControlName="reward_cycle">
             <mat-radio-button class="example-margin" value="1" >Yes</mat-radio-button>
             <mat-radio-button class="example-margin" value="2" >No</mat-radio-button>
             </mat-radio-group> -->
-            <mat-label fxFlex="20" fxLayoutGap="10px">Reward All Completions ?</mat-label>
-            <mat-radio-group aria-label="Select an option" fxFlex="40" fxLayoutGap="10px"
+            <mat-label fxFlex="20" >Reward All Completions ?</mat-label>
+            <mat-radio-group aria-label="Select an option" fxFlex="40" 
               formControlName="reward_completion1">
               <mat-radio-button class="example-margin" value="1" (click)="Showreward('yes')">Yes</mat-radio-button>
               <mat-radio-button class="example-margin" value="2" (click)="Showreward('specific')">Specific Completions
@@ -478,9 +468,9 @@
           </div>
 
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
-            <div fxFlex="50" fxLayoutGap="10px" *ngIf="showreward == 2"></div>
+            <div fxFlex="50"  *ngIf="showreward == 2"></div>
 
-            <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px" style="margin-right: 10px;" *ngIf="showreward == 1">
+            <mat-form-field appearance="outline" fxFlex="50"  style="margin-right: 10px;" *ngIf="showreward == 1">
               <mat-label>Specific Reward</mat-label>
               <select matNativeControl formControlName="specific_reward" (change)="specificData($event.target.value)">
                 <option value="" selected="">Select</option>
@@ -492,12 +482,12 @@
             </mat-form-field>
 
             <mat-label fxFlex="10">Attach Reward Offer(s)[may select multiple files]</mat-label>
-            <input fxFlex="30" fxLayoutGap="10px" type="file" accept="image/*" ngf-max-size="3MB"
+            <input fxFlex="33"  type="file" accept="image/*" ngf-max-size="3MB"
               (change)="selectFile2($event)" #fileInput multiple>
           </div>
 
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="division == 3">
-            <mat-form-field appearance="outline" fxFlex="50" fxLayoutGap="10px" style="margin-right: 10px;">
+            <mat-form-field appearance="outline" fxFlex="50"  style="margin-right: 10px;">
               <mat-label>Email Reminder Cycle</mat-label>
               <select matNativeControl formControlName="email_remainder" (change)="remainderData($event.target.value)">
                 <option value="weekly" selected="weekly">Weekly</option>
@@ -505,7 +495,7 @@
                 <option value="off">off</option>
               </select>
             </mat-form-field>
-            <div fxFlex="30" fxLayoutGap="10px">
+            <div fxFlex="33" >
               <img [src]="imgURLchallenge" height="100" *ngIf="imgURLchallenge">
 
             </div>

@@ -16,6 +16,7 @@ import { ConfirmboxComponent, ConfirmDialogModel } from './confirmbox/confirmbox
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-videolist',
   templateUrl: './videolist.component.html',
@@ -56,35 +57,35 @@ export class VideolistComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private _snackBar: MatSnackBar,
+  constructor(private _snackBar: MatSnackBar, public toastr:ToastrService,
     private location: Location, private _Activatedroute: ActivatedRoute,
     private http: HttpClient, public dialog: MatDialog, private router: Router,
     private pagerService: PagerService, public video_service: VideolistService) {
-    if (localStorage.getItem('addvideo_status') == 'true') {
-      this.openaddSnackBar();
-      localStorage.removeItem('addvideo_status');
-    }
-    else if (localStorage.getItem('addvideo_status') == 'false') {
-      this.openadderrorSnackBar();
-      localStorage.removeItem('addvideo_status');
-    }
-    else if (localStorage.getItem('editvideo_status') == 'true') {
-      this.openeditSnackBar();
-      localStorage.removeItem('editvideo_status');
-    }
-    else if (localStorage.getItem('editvideo_status') == 'false') {
-      this.openediterrorSnackBar();
-      localStorage.removeItem('editvideo_status');
-    }
+    // if (localStorage.getItem('addvideo_status') == 'true') {
+    //   this.openaddSnackBar();
+    //   localStorage.removeItem('addvideo_status');
+    // }
+    // else if (localStorage.getItem('addvideo_status') == 'false') {
+    //   this.openadderrorSnackBar();
+    //   localStorage.removeItem('addvideo_status');
+    // }
+    // else if (localStorage.getItem('editvideo_status') == 'true') {
+    //   this.openeditSnackBar();
+    //   localStorage.removeItem('editvideo_status');
+    // }
+    // else if (localStorage.getItem('editvideo_status') == 'false') {
+    //   this.openediterrorSnackBar();
+    //   localStorage.removeItem('editvideo_status');
+    // }
 
-    else if (localStorage.getItem('deletevideo_status') == 'true') {
-      this.opendeleteSnackBar();
-      localStorage.removeItem('deletevideo_status');
-    }
-    else if (localStorage.getItem('deletevideo_status') == 'false') {
-      this.opendeleteerrorSnackBar();
-      localStorage.removeItem('deletevideo_status');
-    }
+    // else if (localStorage.getItem('deletevideo_status') == 'true') {
+    //   this.opendeleteSnackBar();
+    //   localStorage.removeItem('deletevideo_status');
+    // }
+    // else if (localStorage.getItem('deletevideo_status') == 'false') {
+    //   this.opendeleteerrorSnackBar();
+    //   localStorage.removeItem('deletevideo_status');
+    // }
   }
 
   ngOnInit() {
@@ -218,18 +219,44 @@ export class VideolistComponent implements OnInit {
   }
 
   addVideo() {
-    let dialog = this.dialog.open(AddvideoComponent, {
+    const dialogRef = this.dialog.open(AddvideoComponent, {
       data: this.topic_id,
       width: '650px', height: '500px'
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if(this.result){
+      if(this.result == true){
+        this.toastr.success("Video Added successfully")
+        this.getVideoList(this.topic_id)
+
+      }else{
+        this.toastr.warning("There Are Some Issue, Please Try Again")
+
+      }
+    }
     });
   }
 
   openDialog(value) {
-    let dialog = this.dialog.open(EditvideoComponent, {
+   const dialogRef= this.dialog.open(EditvideoComponent, {
       data: value,
       width: '650px', height: '500px'
     });
-
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        if(result == true){
+          this.toastr.success("Video Detail Update successfully")
+  
+          
+        }else{
+          this.toastr.warning("There Are Some Issue, Please Try Again")
+          
+        }
+        this.getVideoList(this.topic_id)
+      }
+     
+    });
   }
 
   watch(value) {

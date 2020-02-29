@@ -60,15 +60,16 @@ UpdateQuiz()
 
     this.quiz_service.Post(this.editQuiz,this.editquizForm.value).subscribe(res=>{
     	this.common=res;
-    	   this.editquiz_status=this.common.status;
-             
-          
-        localStorage.setItem("editquiz_status",this.editquiz_status);
+      
+      if(this.common['status'] == true){
+        //  this.editquiz_status=this.common.status;
+        // localStorage.setItem("editquiz_status",this.editquiz_status);
+        this.dialogRef.close(true);
       
         this.rt.navigateByUrl('/apps/dashboards/users', {skipLocationChange: true}).then(()=>
                           this.rt.navigate(["/apps/vertical-management/quizzeslist/"+this.topic_id]));
-        this.dialogRef.close();
-    })
+          }
+                        })
 
 }
 

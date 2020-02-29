@@ -47,12 +47,23 @@
         <textarea matInput  formControlName="video_composer" ></textarea>
         <mat-error *ngIf="hasError('video_composer', 'required')">This field is required! </mat-error>
       </mat-form-field>
+      <!-- <mat-label style=" width: 36%;margin-bottom: 10px">Embed Code / Video ID *</mat-label>
+      <div class="" style="border: 1px solid rgba(0, 0, 0, 0.6); width:100%;border-radius:5px">
+          <textarea matInput rows="5" cols="10" formControlName="video_composer" ></textarea>
+        </div>
+        <mat-error *ngIf="hasError('video_composer', 'required')">This field is required! </mat-error> -->
 
       <mat-label style=" width: 36%;margin-bottom: 10px">Description*</mat-label>
       <mat-form-field appearance="outline" fxFlex="100">
         <textarea matInput  formControlName="sort_desc" ></textarea>
         <mat-error *ngIf="hasError('sort_desc', 'required')">This field is required!</mat-error>
       </mat-form-field>
+
+      <!-- <mat-label style=" width: 36%;margin-bottom: 10px">Description</mat-label>
+      <div class="" style="border: 1px solid rgba(0, 0, 0, 0.6); width:100%;border-radius:5px">
+          <textarea matInput rows="10" cols="10" formControlName="sort_desc" ></textarea>
+        </div>
+        <mat-error *ngIf="hasError('sort_desc', 'required')">This field is required!</mat-error> -->
 
 
       <mat-label style=" width: 36%;margin-bottom: 10px">User Type</mat-label>
@@ -65,7 +76,7 @@
 
       <button mat-raised-button type="submit" class="hover-button-loginpage mat-accent button">Add</button>
 
-      <button mat-raised-button mat-button mat-dialog-close  class=" hover-button-loginpage mat-accent button cancel">Close</button>
+      <button mat-raised-button mat-button mat-dialog-close  class="hover-button-loginpage mat-accent button cancel">Close</button>
     </div>
 
 

@@ -64,6 +64,7 @@ export class AccessCodeComponent implements OnInit {
         return false;
       }
     }
+    
     this.form = this._formBuilder.group({
       company: ['', Validators.required],
       client: ['', Validators.required],

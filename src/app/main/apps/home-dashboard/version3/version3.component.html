@@ -58,7 +58,7 @@
 						</ng-multiselect-dropdown>
 						<!-- END OF MAT-FORM-FIELD -->
 					</div>
-					<!-- END OF P-4 SELECTABLE_BOXES -->
+	 				<!-- END OF P-4 SELECTABLE_BOXES -->
 					<div class="p-4 selectable_boxes openClose" fxLayoutAlign="space-between start" fxFlex="20">
 						<!-- 	<mat-form-field appearance="outline" class="mat-form-field-wrapper pb-0 mt-0 mb-0">
 								<input matInput placeholder="All Verticals"><span (click)="show_li('vertical')" (clickElsewhere)="hide('vertical')" class="drop-down-arrow-custom"><mat-icon style="cursor: pointer;">arrow_drop_down</mat-icon></span>
@@ -337,11 +337,15 @@
 						<div class="row" style="display: flex;">
 							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
-										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="companymodel"
+										<!-- [(ngModel)]="companymodel" -->
+									<input matInput type="text" placeholder="Select Date range"
+									 ngxDaterangepickerMd
+										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 
+										'Custom range',customRangeDirection:true}"
+										startKey="start" endKey="end" [ranges]="rangesTable" [opens]="'left'"
 										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'company')"
-										readonly="">
+										readonly="" [autoApply]="true" [showDropdowns]="true"
+										class="input_date cursor-pointer" [alwaysShowCalendars]="true">
 								</mat-form-field>
 							</div>
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
@@ -475,7 +479,7 @@
 							[pageSize]="pageSize" [pageSizeOptions]="allItems > 10?[10, 25, 50,100]:''" showFirstLastButtons
 							(page)="handlePage1($event)"></mat-paginator>
 					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="data == '' ">No data
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"  style="margin-top: 10px; margin-bottom: 10px;" *ngIf="data == '' ">No data
 						available in table</div>
 
 					<div class="center_align" *ngIf="showloader==true"
@@ -552,11 +556,19 @@
 						<div class="row" style="display: flex;">
 							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										<!-- [(ngModel)]="clientmodel" -->
+									<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="clientmodel"
+										startKey="start" endKey="end"  [ranges]="rangesTable" [opens]="'center'"
 										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'client')"
-										readonly="">
+										readonly=""> -->
+										<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+										startKey="start" endKey="end"  [ranges]="rangesTable" [opens]="'left'"
+										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'client')"
+										readonly=""
+										[autoApply]="true" [showDropdowns]="true"
+										class="input_date cursor-pointer" [alwaysShowCalendars]="true">
 								</mat-form-field>
 							</div>
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
@@ -772,7 +784,7 @@
 								<mat-form-field appearance="outline">
 									<!-- <mat-label>Cars</mat-label> -->
 									<select matNativeControl required (change)="searchType($event.target.value)"
-										class="user_name_select" style="margin-top: 5px;">
+										class="user_name_select">
 										<option selected="" value="name">Name</option>
 										<option value="email">Email</option>
 										<option value="access_code">Access Code</option>
@@ -784,12 +796,20 @@
 								</mat-form-field>
 							</div>
 							<div class="mt-20 mr-20">
+									<!-- [ranges]="ranges" [(ngModel)]="usermodel"  -->
 								<mat-form-field appearance="outline">
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+									<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="usermodel"
+										startKey="start" endKey="end"  [ranges]="rangesTable"  [opens]="'center'"
 										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'user')"
-										readonly="">
+										readonly=""> -->
+										<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+										startKey="start" endKey="end"  [ranges]="rangesTable"  [opens]="'left'"
+										[showCustomRangeLabel]="true" (datesUpdated)="datesUpdated($event,'user')"
+										readonly=""
+										[autoApply]="true" [showDropdowns]="true"
+										class="input_date cursor-pointer" [alwaysShowCalendars]="true">
 								</mat-form-field>
 							</div>
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
@@ -899,7 +919,7 @@
 							</ng-container>
 
 							<ng-container matColumnDef="certificate">
-								<mat-header-cell style="    padding-right:  10px;" *matHeaderCellDef>Certificate
+								<mat-header-cell style="padding-right:  10px;" *matHeaderCellDef>Certificate
 									<span class="pointer" style="margin-left: 11px !important;">
 										<i (click)="updateSortingOrderUser('certificate','ASC')"
 											[class.sort]='(this.sort_column=="certificate" && this.sort_order=="ASC") ? "sort_column_active material-icons" : "sort_column material-icons"'>
@@ -1051,16 +1071,23 @@
 						<div class="row" style="display: flex;">
 							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
-
-									<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										<!-- [ranges]="ranges" [(ngModel)]="verticalmodel" -->
+									<!-- <input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
 										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
-										startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="verticalmodel"
-										[showCustomRangeLabel]="true" [opens]="'right'"
-										(datesUpdated)="datesUpdated($event,'vertical')" readonly="">
+										startKey="start" endKey="end" [ranges]="rangesTable"   
+										[showCustomRangeLabel]="true" [opens]="'center'"
+										(datesUpdated)="datesUpdated($event,'vertical')" readonly=""> -->
+										<input matInput type="text" placeholder="Select Date range" ngxDaterangepickerMd
+										[locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY',customRangeLabel: 'Custom range',customRangeDirection:true}"
+										startKey="start" endKey="end" [ranges]="rangesTable"   
+										[showCustomRangeLabel]="true" [opens]="'left'"
+										(datesUpdated)="datesUpdated($event,'vertical')" readonly=""
+										[autoApply]="true" [showDropdowns]="true"
+										class="input_date cursor-pointer" [alwaysShowCalendars]="true">
 								</mat-form-field>
 							</div>
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							<div class="mt-20">
+							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
 									<mat-icon matSuffix>search</mat-icon>
 									<input matInput (keyup)="Search($event.target.value,'vertical')"
@@ -1181,7 +1208,7 @@
 
 			<div *ngIf="table == 6" class="table__Companies">
 				<div class="row" fxLayoutAlign="space-between">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-left:20px">
 						<p fxFlex="50" class="pr-4 heading_value">Data Showing For <span class="color_value"> Tools
 								Users
 								{{tools}}</span></p>
@@ -1192,7 +1219,7 @@
 							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
 									<!-- <mat-label>Cars</mat-label> (change)="searchType($event.target.value)"-->
-									<select matNativeControl required class="user_name_select" style="margin-top: 5px;">
+									<select matNativeControl required class="user_name_select">
 										<option selected="" value="name">Name</option>
 										<option value="email">Email</option>
 
@@ -1200,7 +1227,7 @@
 								</mat-form-field>
 							</div>
 							<!-- END OF COL-LG-6 COL-MD-6 COL-SM-12 COL-XS-12 -->
-							<div class="mt-20">
+							<div class="mt-20 mr-20">
 								<mat-form-field appearance="outline">
 									<mat-icon matSuffix>search</mat-icon>
 									<input matInput (keyup)="Search($event.target.value,'vertical')"

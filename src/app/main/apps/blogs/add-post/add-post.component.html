@@ -31,9 +31,10 @@
 
                 <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style="margin-right: 10px;
                  width: calc(50% - 10px);">
-                 <!-- <mat-label>Categary*</mat-label> -->
-                  <mat-select formControlName="category" placeholder="{{categary}}"
-                    (selectionChange)="categoryChange($event.value)" [value]='value'>
+                 <!-- placeholder="{{categary}}" [value]='value' -->
+                 <mat-label>Categary*</mat-label>
+                  <mat-select formControlName="category" 
+                    (selectionChange)="categoryChange($event.value)" >
                     <mat-option *ngFor="let item of CategoryArray" [value]="item.value">
                       {{item.value}}
                     </mat-option>
@@ -46,8 +47,8 @@
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-8" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex="100"  fxLayoutGap="20px" style="width: calc(50% - 10px);
              ">
-                  <!-- <mat-label>Author*</mat-label> -->
-                  <mat-select formControlName="author"  placeholder="{{Author}}"
+                  <mat-label>Author*</mat-label>
+                  <mat-select formControlName="author" 
                     (selectionChange)="authorChange($event.value)">
                     <mat-option *ngFor="let item of authorArray" [value]="item.value">
                       {{item.value}}

@@ -65,31 +65,31 @@ export class ManagementComponent implements OnInit {
      private rt: Router,
       private _Activatedroute: ActivatedRoute,
        private http: HttpClient, public dialog: MatDialog, private pagerService: PagerService, public manage_service: ManagementService) {
-    if (localStorage.getItem('addtopic_status') == 'true') {
-      this.openaddSnackBar();
-      localStorage.removeItem('addtopic_status');
-    }
-    else if (localStorage.getItem('addtopic_status') == 'false') {
-      this.openadderrorSnackBar();
-      localStorage.removeItem('addtopic_status');
-    }
-    else if (localStorage.getItem('edittopic_status') == 'true') {
-      this.openeditSnackBar();
-      localStorage.removeItem('edittopic_status');
-    }
-    else if (localStorage.getItem('edittopic_status') == 'false') {
-      this.openediterrorSnackBar();
-      localStorage.removeItem('edittopic_status');
-    }
+  //   if (localStorage.getItem('addtopic_status') == 'true') {
+  //     this.openaddSnackBar();
+  //     localStorage.removeItem('addtopic_status');
+  //   }
+  //   else if (localStorage.getItem('addtopic_status') == 'false') {
+  //     this.openadderrorSnackBar();
+  //     localStorage.removeItem('addtopic_status');
+  //   }
+  //   else if (localStorage.getItem('edittopic_status') == 'true') {
+  //     this.openeditSnackBar();
+  //     localStorage.removeItem('edittopic_status');
+  //   }
+  //   else if (localStorage.getItem('edittopic_status') == 'false') {
+  //     this.openediterrorSnackBar();
+  //     localStorage.removeItem('edittopic_status');
+  //   }
 
-    else if (localStorage.getItem('deletetopic_status') == 'true') {
-      this.opendeleteSnackBar();
-      localStorage.removeItem('deletetopic_status');
-    }
-    else if (localStorage.getItem('deletetopic_status') == 'false') {
-      this.opendeleteerrorSnackBar();
-      localStorage.removeItem('deletetopic_status');
-    }
+  //   else if (localStorage.getItem('deletetopic_status') == 'true') {
+  //     this.opendeleteSnackBar();
+  //     localStorage.removeItem('deletetopic_status');
+  //   }
+  //   else if (localStorage.getItem('deletetopic_status') == 'false') {
+  //     this.opendeleteerrorSnackBar();
+  //     localStorage.removeItem('deletetopic_status');
+  //   }
   }
   vartical
   ngOnInit() {
@@ -242,24 +242,50 @@ export class ManagementComponent implements OnInit {
 
   openDialog(value) {
     value.vertical_id = this.vertical_id
-    let dialog = this.dialog.open(EditrefreshComponent, {
+  const dialogRef = this.dialog.open(EditrefreshComponent, {
       data: value,
       width: '650px', height: '500px'
     });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if(   this.result ){
 
+      if(this.result == true){
+        this.toastr.success("Topic Updates successfully")
+
+        this.getVerticalList(this.vertical_id);
+      }else{
+        this.toastr.warning("There Are Some Issue, Please Try Again")
+
+      }
+    }
+
+    });
   }
 
   /**
    * open dialog
    */
   addTopic() {
-    let dialog = this.dialog.open(AddtopicComponent, {
+    const dialogRef = this.dialog.open(AddtopicComponent, {
       data: this.vertical_id,
       width: '450px', height: '670px'
     });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      if(this.result){
+      if(this.result == true){
+        this.toastr.success("Topic added successfully")
 
+        this.getVerticalList(this.vertical_id);
+      }else{
+        this.toastr.warning("There Are Some Issue, Please Try Again")
+
+      }
+    }
+    });
   }
-
+  
   /**
    * search bar 
    * @param value 
@@ -359,50 +385,50 @@ export class ManagementComponent implements OnInit {
 /**
  * open snackbar 
  */
-  openaddSnackBar() {
-    this._snackBar.open('Topic added successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-  openadderrorSnackBar() {
-    this._snackBar.open('Topic not added successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  // openaddSnackBar() {
+  //   this._snackBar.open('Topic added successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
+  // openadderrorSnackBar() {
+  //   this._snackBar.open('Topic not added successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
 
-  openeditSnackBar() {
-    this._snackBar.open('Topic updated successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-  openediterrorSnackBar() {
-    this._snackBar.open('Topic not updated successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  // openeditSnackBar() {
+  //   this._snackBar.open('Topic updated successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
+  // openediterrorSnackBar() {
+  //   this._snackBar.open('Topic not updated successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
 
-  opendeleteSnackBar() {
-    this._snackBar.open('Topic deleted successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-  opendeleteerrorSnackBar() {
-    this._snackBar.open('Topic not deleted successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  // opendeleteSnackBar() {
+  //   this._snackBar.open('Topic deleted successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
+  // opendeleteerrorSnackBar() {
+  //   this._snackBar.open('Topic not deleted successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
 /**
  *  status change
  * @param value

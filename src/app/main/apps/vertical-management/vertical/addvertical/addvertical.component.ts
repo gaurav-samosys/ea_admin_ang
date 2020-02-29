@@ -54,12 +54,12 @@ addvertical_status:any;
          this.addvertical_status=this.common.status;
         console.log(this.addvertical_status)
              
+        this.dialogRef.close(true);
           
-        localStorage.setItem("addvertical_status",this.addvertical_status);
+        // localStorage.setItem("addvertical_status",this.addvertical_status);
       
         this.rt.navigateByUrl('/apps/dashboards/users', {skipLocationChange: true}).then(()=>
                           this.rt.navigate(["/apps/vertical-management/vertical"]));
-        this.dialogRef.close();
           })
     }
 

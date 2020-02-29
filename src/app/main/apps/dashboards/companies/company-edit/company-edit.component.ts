@@ -35,7 +35,7 @@ export class CompanyEditComponent implements OnInit {
      private _formBuilder: FormBuilder, private company: CompaniesService,
       @Inject(MAT_DIALOG_DATA) public datas: any, public dialog: MatDialog) {
         this.res_data = this.datas;
-    console.log(this.res_data)
+    // console.log(this.res_data)
   }
 
   
@@ -56,7 +56,7 @@ add_user_restrict1
       phone: ['', Validators.required],
       city: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      state: ['', Validators.required],
+      state_name: ['', Validators.required],
       industry: ['', [Validators.required]],
       country: ['', Validators.required],
       add_user_restrict:'',
@@ -66,7 +66,7 @@ add_user_restrict1
     });
     this.company.Post(this.getCompanies, { token: 'LIVESITE', company_id: this.res_data.id, fields: '*' }).subscribe(res => {
       this.common = res;
-      console.log(this.common, "====================")
+      // console.log(this.common, "====================")
       this.data = this.common.data;
     //  this.add_user_restrict1= this.data[0].add_user_restrict
       // console.log("get company ============",  this.add_user_restrict1,   this.common," this.data Array==========", this.data )
@@ -81,13 +81,15 @@ add_user_restrict1
         email: this.data[0].email,
         // add_user_restrict:this.data[0].add_user_restrict
       });
-      this.state_name=this.data[0].state_name;
-      this.myModel=this.data[0].add_user_restrict == 0 ? true : false
-      console.log(this.data[0].state_name, this.state_name,this.data[0].add_user_restrict)
-      this.form.controls['add_user_restrict'].setValue(this.data[0].add_user_restrict, { onlySelf: true });
-      this.form.controls['state'].setValue(this.data[0].state_name);
+      this.state_name=this.data[0].state;
+      // console.log(this.data[0].state_name, this.state_name)
+      this.form.controls['state_name'].setValue( this.data[0].state,{ onlySelf: true });
 
+
+      this.myModel=this.data[0].add_user_restrict == 0 ? true : false
+      this.form.controls['add_user_restrict'].setValue(this.data[0].add_user_restrict, { onlySelf: true });
       this.form.controls['country'].setValue(this.data[0].country, { onlySelf: true });
+      // console.log(this.data[0].country)
       this.form.controls['industry'].setValue(this.data[0].industry, { onlySelf: true });
       this.getcountry(this.data[0].country_id)
     })
@@ -113,25 +115,25 @@ add_user_restrict1
       this.dialog.open(EditdialogComponent);
       return false;
     }
-    console.log(this.form.value,"==============form value")
+    // console.log(this.form.value,"==============form value")
     this.form.value.company_id = this.res_data.id;
     this.form.value.add_user_restrict = true?0:1
 
     this.form.value.token = "LIVESITE";
     this.company.Post(this.editCompany, this.form.value).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.common = res;
       if(res['status']==true){
 
         this.dialogRef.close(res['status']);
       }
       this.status = this.common.status;
-      console.log(this.status)
+      // console.log(this.status)
       if (this.status == true) {
 
         localStorage.setItem("status", this.status);
       }
-      console.log(this.status)
+      // console.log(this.status)
       localStorage.setItem("status", this.status);
       this.rt.navigateByUrl('/apps/dashboards/users', { skipLocationChange: true }).then(() =>
         this.rt.navigate(["/apps/dashboards/companies"]));
@@ -162,7 +164,7 @@ add_user_restrict1
     this.company.Post(this.getStates, { countries_id: value, token: 'LIVESITE' }).subscribe(res => {
       this.common = res
       this.states = this.common.data;
-      console.log(this.common)
+      // console.log(this.common)
     })
   }
 

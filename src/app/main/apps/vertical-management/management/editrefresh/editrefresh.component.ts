@@ -63,12 +63,12 @@ edittopic_status:any;
          this.edittopic_status=this.common.status;
         console.log(this.edittopic_status)
              
+        this.dialogRef.close(true);
           
-        localStorage.setItem("edittopic_status",this.edittopic_status);
+        // localStorage.setItem("edittopic_status",this.edittopic_status);
       
         this.rt.navigateByUrl('/apps/dashboards/users', {skipLocationChange: true}).then(()=>
                           this.rt.navigate(["/apps/vertical-management/management/"+this.res_data.vertical_id]));
-        this.dialogRef.close();
           })
     }
 

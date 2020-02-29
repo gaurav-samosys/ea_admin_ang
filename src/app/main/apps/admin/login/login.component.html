@@ -14,7 +14,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="email">
+                    <input matInput formControlName="email" required>
                     <mat-icon matSuffix class="secondary-text">mail</mat-icon>
                     <mat-error *ngIf="loginForm.get('email').hasError('required')">
                         Email is required
@@ -28,37 +28,29 @@
 
                 <mat-form-field appearance="outline" style="margin-top: 10px;">
                     <mat-label>Password</mat-label>
-                    <!-- [type]="_pwdType" -->
-                    <input matInput  [type]="show ? 'text' : 'password'" formControlName="password" required>
-                    <mat-icon matSuffix class="secondary-text" (click)="toggleShow()" style="cursor: pointer;">vpn_key</mat-icon>
-                    <mat-error>
+                    <input matInput  [type]="show ? 'text' : 'password'" (keypress)="eventHandler($event.keyCode)"
+                     formControlName="password" id="number" #filterName required>
+                     <mat-icon matSuffix class="secondary-text" (click)="toggleShow()" style="cursor: pointer;">vpn_key</mat-icon>
+                     <!-- <span *ngIf="spaceKeyPress==1"><h5 style="color: red;"> {{msg}}</h5></span> -->
+                    <mat-error *ngIf="loginForm.get('password').hasError('required')">
                         Password is required
                     </mat-error>
+
+                  
                 </mat-form-field>
 
                 <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
                      fxLayoutAlign="space-between center">
-                   <!--  <mat-checkbox class="remember-me" aria-label="Remember Me">
-                        Remember Me
-                    </mat-checkbox> -->
-                    <!-- /pages/auth/forgot-password -->
-                    <!-- <a class="forgot-password" [routerLink]="'/apps/admin/forgot'">
-                        Forgot Password?
-                    </a> -->
-                    <!-- <a class="forgot-password" style="text-decoration: none;" [routerLink]="'/pages/auth/forgot-password'">
-                        Forgot Password?
-                    </a> -->
-                </div>
+                  
+                    </div>
 
-                <button  mat-raised-button color="accent" class="submit-button hover-button-loginpage" aria-label="LOG IN">
+                    <button  mat-raised-button color="accent" class="submit-button hover-button-loginpage" aria-label="LOG IN">
                     Log in
                 </button>
-
+                
             </form>
+            
           
-            <!-- .login_content a, .login_content p {
-                color: #888;
-            } [routerLink]="apps/admin/forgot"-->
             
             <div class="Lost_password">
                 <span class="a" style="color: #888;" (click)="goback()"> Lost your password?
@@ -68,14 +60,32 @@
                <span class="a" style="color: #888;"> Back to Home</span>
             </div>
             <div mat-raised-button class="" style="margin-top: 20px;">
-                <span  style="color: #888;">©2020 Enriched Academy All Rights Reserved. </span>
+                    <span  style="color: #888;">©2020 Enriched Academy All Rights Reserved. </span>
+                </div>
+
+                
+                
             </div>
-
-          
-
-        </div>
-
+            
     </div>
-
+    
 </div>
-
+<!-- [type]="_pwdType"  pattern="[a-zA-Z0-9]"-->
+  <!-- .login_content a, .login_content p {
+                color: #888;
+            } [routerLink]="apps/admin/forgot"-->
+  <!-- <mat-error
+                    *ngIf="!loginForm.get('password').hasError('required') &&
+                            loginForm.get('password').hasError('pattern')">
+                    space not allow
+                </mat-error> -->
+                 <!--  <mat-checkbox class="remember-me" aria-label="Remember Me">
+                        Remember Me
+                    </mat-checkbox> -->
+                    <!-- /pages/auth/forgot-password -->
+                    <!-- <a class="forgot-password" [routerLink]="'/apps/admin/forgot'">
+                        Forgot Password?
+                    </a> -->
+                    <!-- <a class="forgot-password" style="text-decoration: none;" [routerLink]="'/pages/auth/forgot-password'">
+                        Forgot Password?
+                    </a> -->

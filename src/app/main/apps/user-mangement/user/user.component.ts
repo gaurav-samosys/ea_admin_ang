@@ -112,15 +112,15 @@ export class UserComponent implements OnInit {
       // this.openSnackBar();
       localStorage.removeItem('status');
     }
-    else if (localStorage.getItem('useradded_status') == 'true') {
-      this.openuserSnackBar();
-      localStorage.removeItem('useradded_status');
-    }
+    // else if (localStorage.getItem('useradded_status') == 'true') {
+    //   this.openuserSnackBar();
+    //   localStorage.removeItem('useradded_status');
+    // }
 
-    else if (localStorage.getItem('useradded_status') == 'false') {
-      this.openusererrorSnackBar();
-      localStorage.removeItem('useradded_status');
-    }
+    // else if (localStorage.getItem('useradded_status') == 'false') {
+    //   this.openusererrorSnackBar();
+    //   localStorage.removeItem('useradded_status');
+    // }
   }
 
   ngOnInit() {
@@ -250,7 +250,7 @@ export class UserComponent implements OnInit {
       // this.showLoader = false;
       this.response = res
 
-      // console.log(this.response)
+      console.log(this.response)
       this.showloader = false
 
 
@@ -356,10 +356,24 @@ export class UserComponent implements OnInit {
     */
 
   addUser() {
-    let dialog = this.dialog.open(AdduserComponent, {
+    const dialogRef = this.dialog.open(AdduserComponent, {
       width: '600px', height: '500px'
     });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      console.log(this.result)
+      if (this.result) {
+        if (this.result == true) {
+          this.toastr.success("User added successfully")
+        } else {
+          this.toastr.warning("There are some issue")
+        }
+      } else {
+
+      }
+    })
   }
+
   /**
     * =========================================
     *      fetch country
@@ -367,8 +381,6 @@ export class UserComponent implements OnInit {
     */
 
   fetchCountry() {
-
-
     this.user.POST(this.getCountry, { token: 'LIVESITE' })
       .subscribe(res => {
         this.common = res
@@ -420,27 +432,27 @@ export class UserComponent implements OnInit {
     * =========================================
     */
 
-  openSnackBar() {
-    this._snackBar.open('User details updated successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-  openuserSnackBar() {
-    this._snackBar.open('User added successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-  openusererrorSnackBar() {
-    this._snackBar.open('User not added successfully!!', 'End now', {
-      duration: 4000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  // openSnackBar() {
+  //   this._snackBar.open('User details updated successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
+  // openuserSnackBar() {
+  //   this._snackBar.open('User added successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
+  // openusererrorSnackBar() {
+  //   this._snackBar.open('User not added successfully!!', 'End now', {
+  //     duration: 4000,
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //   });
+  // }
   /**
     * =========================================
     *        Searching
@@ -550,7 +562,7 @@ export class UserComponent implements OnInit {
       email: this.email,
       client_name: this.clientname,
       company_name: this.companyname,
-      country: this.country1, 
+      country: this.country1,
       state: this.state,
       city: this.city,
       status: this.status,

@@ -221,7 +221,7 @@ export class VideolistComponent implements OnInit {
   addVideo() {
     const dialogRef = this.dialog.open(AddvideoComponent, {
       data: this.topic_id,
-      width: '650px', height: '500px'
+      width: '550px', height: '500px'
     });
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;

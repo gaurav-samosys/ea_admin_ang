@@ -140,8 +140,8 @@ export const delete_Users="https://staging.enrichedacademy.com/api/admin/delete_
 
 
 
-// ================================================================
-            
+//create api 2 march ================================================================
+ export const client_vertical_list="http://192.168.0.45/enrichedacademy_live/api/admin/client_vertical_list"    
 
 // ================================================================
 

@@ -32,17 +32,17 @@
             <form  fxLayout="column" fxLayoutAlign="start"
                   fxFlex="1 0 auto" name="adduserForm" [formGroup]="addtopicForm" (ngSubmit)="addTopic()">
 
-                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                <div fxLayout="row wrap" fxLayoutAlign="start center" class="setspacing" fxFlex="1 0 auto">
                     <mat-label style=" width: 36%;margin-bottom: 10px">Title*</mat-label>
                     <mat-form-field appearance="outline" fxFlex="100">
                        <input matInput formControlName="title"  required>
-                        <mat-error *ngIf="hasError('title', 'required')">Please enter title! </mat-error>
+                        <mat-error *ngIf="hasError('title', 'required')" class="setfield">Please enter title! </mat-error>
                     </mat-form-field>
 
                       <mat-label style=" width: 36%;margin-bottom: 10px">Order*</mat-label>
                     <mat-form-field appearance="outline" fxFlex="100">
                        <input matInput formControlName="order"  required>
-                        <mat-error *ngIf="hasError('order', 'required')">Please enter order! </mat-error>
+                        <mat-error *ngIf="hasError('order', 'required')" class="setfield">Please enter order! </mat-error>
                     </mat-form-field>
 
                           <!-- <mat-label style=" width: 36%;margin-bottom: 10px">Description</mat-label> -->
@@ -60,7 +60,7 @@
 
                       <input  type="file" id="avatar" accept="image/*" required ngf-max-size="3MB" (change)="selectFile($event)" #fileInput>
                      <div *ngIf="value == 0">
-                    <mat-error >This field is required! </mat-error>
+                    <mat-error class="setfield">This field is required! </mat-error>
 
                     </div>
                       <mat-hint>Image size must be less than 3MB and image type must be JPG,PNG,GIF</mat-hint>

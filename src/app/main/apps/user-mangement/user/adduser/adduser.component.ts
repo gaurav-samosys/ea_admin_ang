@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -15,14 +16,15 @@ export class AdduserComponent implements OnInit {
   getClients = myGlobals.getClients;
   getCompanies = myGlobals.getCompanies;
   addUsers = myGlobals.addUser;
+  client_vertical_list = myGlobals.client_vertical_list
   common: any;
   companiesData: any;
-  clientData: any;
+  clientData = [];
   added_status: any;
   client_vertical_id;
   formData: any;
   client_vertical: any;
-  client_vertical_name=[];
+  client_vertical_name = [];
   constructor(public dialogRef: MatDialogRef<AdduserComponent>, private rt: Router, public _formBuilder: FormBuilder, private user: UserService) { }
   TransunionArray = [
     'CreditView',
@@ -59,21 +61,22 @@ export class AdduserComponent implements OnInit {
     if (this.adduserForm.invalid) {
       return false;
     }
-    console.log(this.adduserForm.value)
+    // console.log(this.adduserForm.value)
 
     this.adduserForm.value.token = "LIVESITE";
-    console.log(this.adduserForm.value)
+    // console.log(this.adduserForm.value)
     this.user.POST(this.addUsers, this.adduserForm.value).subscribe(res => {
       this.common = res
-      console.log(this.common)
+      // console.log(this.common)
+      if (this.common['success'] == true) {
 
-      this.common = res
-      this.added_status = this.common.success;
+        // this.added_status = this.common.success;
 
-      localStorage.setItem('useradded_status', this.added_status)
-      this.rt.navigateByUrl('/apps/dashboards/users', { skipLocationChange: true }).then(() =>
-        this.rt.navigate(["/apps/user-mangement/user"]));
-      this.dialogRef.close();
+        // localStorage.setItem('useradded_status', this.added_status)
+        this.rt.navigateByUrl('/apps/dashboards/users', { skipLocationChange: true }).then(() =>
+          this.rt.navigate(["/apps/user-mangement/user"]));
+        this.dialogRef.close(true);
+      }
     })
   }
 
@@ -97,26 +100,49 @@ export class AdduserComponent implements OnInit {
   }
 
 
-
+  clientDataHidden: number = 0
   getClient(value) {
+    // console.log("comp id===========",value)
     this.user.POST(this.getClients, { company_id: value, token: 'LIVESITE' }).subscribe(res => {
       this.common = res;
-      console.log(res)
-
+      // console.log(res)
       this.clientData = this.common.data
-      console.log(this.clientData[0].id,this.clientData[0].client_vertical)
-      if (this.clientData[0].id == this.client_vertical_id) {
-        this.client_vertical = this.clientData[0].client_vertical
-        console.log(this.client_vertical)
-      } else {
-
+      // console.log  (this.clientData)
+      if (this.clientData.length == 1) {
+        this.clientDataHidden = 1
       }
+      // console.log(this.clientData[0].id,this.clientData[0].client_vertical, this.clientData.length)
+      // if (this.clientData[0].id == this.client_vertical_id) {
+      //   this.client_vertical = this.clientData[0].client_vertical
+      //   console.log(this.client_vertical)
+      // } else {
+      // }
     })
 
   }
-  change(client_vertical) {
-    console.log(client_vertical)
-    this.client_vertical_name.push( client_vertical.client_vertical)
-    console.log(this.client_vertical_name)
+  defaultVerticalArray = []
+  disabledArray = []
+  changeCLient(id) {
+    // console.log("client id===========",id)
+    // this.client_vertical_name.push( id)
+    // console.log(this.client_vertical_name)
+    this.defaultVertical(id)
+  }
+  hideVertical: number = 0
+  defaultVertical(id) {
+    this.user.POST(this.client_vertical_list, { client_id: id, token: 'LIVESITE' }).subscribe(res => {
+      this.common = res;
+      // console.log("client vertical====================",res)
+      this.defaultVerticalArray = this.common.data
+      // console.log("default vertical array=============",this.defaultVerticalArray)
+      this.disabledArray = this.common.disabled
+      // console.log("disabled array===========",this.disabledArray)
+      // if(this.defaultVerticalArray.length<=1){
+      //   this.hideVertical=1
+      // }else{
+      //   this.hideVertical=0
+
+      // }
+    })
   }
 }

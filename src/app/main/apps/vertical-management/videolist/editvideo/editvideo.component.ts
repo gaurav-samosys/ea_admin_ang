@@ -25,6 +25,9 @@ export class EditvideoComponent implements OnInit {
     this.check = this.res_data.user_type;
     this.topic_id = this.res_data.topic_id;
   }
+  onClose() {
+    this.dialogRef.close();
+  }
 
   ngOnInit() {
     this.editvideoForm = this._formBuilder.group({

@@ -38,7 +38,9 @@
                     <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
                         <mat-label>Select Client </mat-label>
                         <mat-select formControlName="client" required  [(value)]="selected"
-                         (selectionChange)="change(selected)" >
+                         (selectionChange)="changeCLient(selected)" >
+                         <!-- <mat-select formControlName="client" required  
+                         (selectionChange)="changeCLient($event.value)" > -->
                             <mat-option selected="" disabled="" value="">
                                 Please select client
                             </mat-option>
@@ -99,22 +101,22 @@
                         <mat-label>Default Vertical</mat-label>
                         <mat-select formControlName="clientvertical" required>
                             <mat-option value="" selected="">Select Defoult Vertical</mat-option>
-                            <mat-option [disabled]="" *ngFor="let data of client_vertical_name" value="{{data}}">{{data}}</mat-option>
+                            <mat-option [disabled]="" *ngFor="let data of defaultVerticalArray" value="{{data.id}}">{{data.name}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="hasError('clientvertical', 'required')">Default Vertical is required!
                         </mat-error>
                     </mat-form-field>
                 </div>
 
-                <h4 style="margin-top: -5px;">Disable Verticals *</h4>
+                <h4 style="margin-top: -5px;">Disable Verticals </h4>
                 <h4 style="margin-top: -10px;"> Note: Please select the verticals you want to disable for this user. By
                     default, all client verticals will be displayed to the user.</h4>
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex="100" fxLayoutGap="10px">
-                        <!-- <mat-label>Default Vertical</mat-label> -->
-                        <mat-select multiple formControlName="clientvertical1" placeholder="Select a Vertical">
-                            <!-- <mat-option value="" selected="">Select a Vertical</mat-option> -->
-                            <mat-option *ngFor="let data of clientData" value="{{data.id}}">{{data.client_vertical}}</mat-option>
+                        <!-- <mat-label>Default Vertical</mat-label> disabledArray -->
+                        <mat-select multiple formControlName="clientvertical1" placeholder="Select a Vertical" *ngIf="hideVertical == 0">
+                            <mat-option>Select Disable Vertical</mat-option>
+                            <mat-option *ngFor="let data of defaultVerticalArray " value="{{data.id}}">{{data.name}}</mat-option>
                         </mat-select>
                         <!-- <mat-error *ngIf="hasError('clientvertical', 'required')">Default Vertical is required!</mat-error> -->
                     </mat-form-field>

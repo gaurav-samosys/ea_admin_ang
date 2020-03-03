@@ -12,7 +12,7 @@
 <mat-toolbar class="mat-accent m-0">
   <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
     <span class="title dialog-title"> Edit Video</span>
-    <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+    <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
       <mat-icon>close</mat-icon>
     </button>
   </mat-toolbar-row>
@@ -32,25 +32,25 @@
 
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
                     <mat-label style=" width: 36%;margin-bottom: 10px">Title*</mat-label>
-                    <mat-form-field  fxFlex="100">
+                    <mat-form-field appearance="outline" fxFlex="100">
                        <input matInput formControlName="title"  required>
                         <mat-error *ngIf="hasError('title', 'required')">Please enter title! </mat-error>
                     </mat-form-field>
 
                     <mat-label style=" width: 36%;margin-bottom: 10px">Title(French)</mat-label>
-                    <mat-form-field  fxFlex="100">
+                    <mat-form-field appearance="outline" fxFlex="100">
                        <input matInput formControlName="title"  required>
                         <!-- <mat-error *ngIf="hasError('title', 'required')">Please enter title! </mat-error> -->
                     </mat-form-field>
 
                       <mat-label style=" width: 36%;margin-bottom: 10px">Order*</mat-label>
-                    <mat-form-field  fxFlex="100">
+                    <mat-form-field appearance="outline" fxFlex="100">
                        <input matInput formControlName="order"  required>
                         <mat-error *ngIf="hasError('order', 'required')">Please enter order! </mat-error>
                     </mat-form-field>
 
                             <mat-label style=" width: 36%;margin-bottom: 10px">Embed Code / Video ID *</mat-label>
-                         <mat-form-field fxFlex="100" class="example-full-width" >
+                         <mat-form-field appearance="outline" fxFlex="100" class="example-full-width" >
                            <textarea matInput  rows="5" cols="10" formControlName="video_composer" ></textarea>
                             <mat-error *ngIf="hasError('video_composer', 'required')">This field is required! </mat-error>
                           </mat-form-field>

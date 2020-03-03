@@ -28,16 +28,16 @@
 
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
                     <mat-label style=" width: 36%;margin-bottom: 10px">Title*</mat-label>
-                    <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-form-field appearance="outline" fxFlex="100" class="border_hover">
                        <input matInput formControlName="title"  required>
                         <mat-error *ngIf="hasError('title', 'required')">Please enter title! </mat-error>
                     </mat-form-field>
 
                           <mat-label style=" width: 36%;margin-bottom: 10px">Description</mat-label>
                          <!-- <mat-form-field appearance="outline" fxFlex="100"> -->
-                             <div class="" style="border: 1px solid rgba(0, 0, 0, 0.6); width:100%;border-radius:5px">
+                             <div class="border_hover" style="border: 1px solid rgba(0, 0, 0, 0.6); width:100%;border-radius:5px">
 
-                                 <textarea matInput rows="10" cols="10" formControlName="description" ></textarea>
+                                 <textarea matInput rows="5" cols="10" formControlName="description" ></textarea>
                              </div>
                     <!-- </mat-form-field> -->
                      

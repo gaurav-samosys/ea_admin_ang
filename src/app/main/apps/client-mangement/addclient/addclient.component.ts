@@ -128,12 +128,31 @@ export class AddclientComponent implements OnInit {
     this.addclientForm.patchValue({
       free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
     })
-
+     
   }
+  hideFieldRadio=1
   show_transunion
   radioChange(value) {
     if (value) {
       this.show_transunion = value
+    }
+    console.log(value)
+    if(value == 'CreditView'){
+      this.addclientForm.patchValue({
+        free_link: ''
+      })
+      this.hideFieldRadio=1
+
+    }else if(value == 'Free Consumer Disclosure'){
+      this.addclientForm.patchValue({
+        free_link: 'https://secure-ocs.transunion.ca/secureocs/credit-agree.html'
+      })
+      this.hideFieldRadio=1
+    }else{
+      this.addclientForm.patchValue({
+        free_link: ''
+      })
+        this.hideFieldRadio=0
     }
   }
   public show: boolean = true;
@@ -228,8 +247,12 @@ export class AddclientComponent implements OnInit {
 
 
 
-
-
+  defaultArray=[]
+changeClientVertical(event){
+console.log(event.value)
+ this.defaultArray=event.value
+console.log(this.defaultArray)
+}
 
 
 

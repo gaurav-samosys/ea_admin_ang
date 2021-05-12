@@ -58,7 +58,7 @@
         "angular2-csv": "^0.2.9",
         "angular5-csv": "^0.2.11",
         "angular7-csv": "^0.2.12",
-        "chart.js": "2.8.0",
+        "chart.js": "2.9.4",
         "classlist.js": "1.1.20150312",
         "d3": "5.9.2",
         "date-fns": "1.30.1",
